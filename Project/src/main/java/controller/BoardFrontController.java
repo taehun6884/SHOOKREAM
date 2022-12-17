@@ -88,19 +88,21 @@ public class BoardFrontController extends HttpServlet {
 			// BoardReplyFormAction 의 execute() 메서드 호출
 			action = new BoardReplyFormAction();
 			forward = action.execute(request, response);
-		} else if(command.equals("/BoardReplyPro.bo")) {
-			// 답글 작성 비즈니스 작업 요청
-			// BoardReplyProAction 의 execute() 메서드 호출
-			action = new BoardReplyProAction();
+		} else if(command.equals("/MemberReplyPro.bo")) {
+			action = new MemberReplyProAction();
 			forward = action.execute(request, response);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		} else () {
 			
 		}
 		
 =======
+>>>>>>> 191c4ef89dda2246556c976c433e76f7e8f5e2ec
+=======
 		} else if(command.equals("하이")) {
 			System.out.println("하이");
+>>>>>>> 075f22d50a8474ce4d12597c05154c917539795d
 		}
 >>>>>>> 075f22d50a8474ce4d12597c05154c917539795d
 		
