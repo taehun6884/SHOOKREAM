@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import action.Action;
+import vo.ActionForward;
+
 
 
 @WebServlet("*.bo") // xxx.bo 로 끝나는 모든 주소 매핑
@@ -42,58 +45,19 @@ public class BoardFrontController extends HttpServlet {
 			// 3. ActionForward 객체의 setRedirect() 메서드를 호출하여 포워딩 방식 지정
 			// => Dispatch 방식으로 포워딩하므로 false 값 전달
 			forward.setRedirect(false); // 생략도 가능
-		} else if(command.equals("/BoardWritePro.bo")) {
-//			System.out.println("글쓰기 작업!");
-			// 글쓰기 비즈니스 로직 요청
-			// 비즈니스 로직을 처리할 Action 클래스의 인스턴스 생성 후 execute() 메서드 호출
-			// => 파라미터 : HttpServletRequest 객체, HttpServletResponse 객체
-			// => 리턴타입 : ActionForward
-			// 1. BoardWriteProAction 클래스 인스턴스 생성
-			action = new BoardWriteProAction();
-			// 2. BoardWriteProAction 인스턴스의 execute() 메서드 호출
-			forward = action.execute(request, response);
-		} else if(command.equals("/BoardList.bo")) {
-//			System.out.println("글목록 작업!");
-			// 글목록 비즈니스 작업 요청
-			// BoardListAction 의 execute() 메서드 호출
-			action = new BoardListAction();
-			forward = action.execute(request, response);
-		} else if(command.equals("/BoardDetail.bo")) {
-			// 글 상세정보 조회 비즈니스 작업 요청
-			// BoardDetailAction 의 execute() 메서드 호출
-			action = new BoardDetailAction();
-			forward = action.execute(request, response);
-		} else if(command.equals("/BoardDeleteForm.bo")) {
-			// 글 삭제 폼 요청
+		}else if(command.equals("/BoardNum.bo")) {
+//			System.out.println("글쓰기 폼!");F
+			// 글쓰기 폼을 출력하는 뷰페이지(board/qna_board_write.jsp) 로 이동
+			// => 비즈니스 로직(= DB 작업) 불필요하므로 뷰페이지로 바로 이동
+			// => Dispatch 방식 포워딩(주소표시줄 URL 이 변경되지 않고, BoardWriteForm.bo 가 유지됨)
+			// 1. ActionForward 객체 생성
 			forward = new ActionForward();
-			forward.setPath("board/qna_board_delete.jsp");
+			// 2. ActionForward 객체의 setPath() 메서드를 호출하여 이동할 페이지 지정
+			forward.setPath("board/qna_board_write.jsp");
+			// 3. ActionForward 객체의 setRedirect() 메서드를 호출하여 포워딩 방식 지정
+			// => Dispatch 방식으로 포워딩하므로 false 값 전달
 			forward.setRedirect(false); // 생략도 가능
-		} else if(command.equals("/BoardDeletePro.bo")) {
-			// 글 삭제 비즈니스 작업 요청
-			// BoardDeleteProAction 의 execute() 메서드 호출
-			action = new BoardDeleteProAction();
-			forward = action.execute(request, response);
-		} else if(command.equals("/BoardModifyForm.bo")) {
-			// 글 수정 폼 비즈니스 작업 요청
-			// BoardModifyFormAction 의 execute() 메서드 호출
-			action = new BoardModifyFormAction();
-			forward = action.execute(request, response);
-		} else if(command.equals("/BoardModifyPro.bo")) {
-			// 글 수정 비즈니스 작업 요청
-			// BoardModifyProAction 의 execute() 메서드 호출
-			action = new BoardModifyProAction();
-			forward = action.execute(request, response);
-		} else if(command.equals("/BoardReplyForm.bo")) {
-			// 답글 작성 폼 비즈니스 작업 요청
-			// BoardReplyFormAction 의 execute() 메서드 호출
-			action = new BoardReplyFormAction();
-			forward = action.execute(request, response);
-		} else if(command.equals("/BoardReplyPro.bo")) {
-			// 답글 작성 비즈니스 작업 요청
-			// BoardReplyProAction 의 execute() 메서드 호출
-			action = new BoardReplyProAction();
-			forward = action.execute(request, response);
-		} 
+		}
 		
 		// ----------------------------------------------------------------------
 		// ActionForward 객체 내용에 따라 각각 다른 방식의 포워딩 작업 수행(공통)
