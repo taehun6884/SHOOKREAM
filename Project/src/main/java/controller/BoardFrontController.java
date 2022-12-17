@@ -91,6 +91,11 @@ public class BoardFrontController extends HttpServlet {
 		} else if(command.equals("/MemberReplyPro.bo")) {
 			action = new MemberReplyProAction();
 			forward = action.execute(request, response);
+<<<<<<< HEAD
+=======
+		} else if(command.equals("하이")) {
+			System.out.println("하이");
+>>>>>>> 075f22d50a8474ce4d12597c05154c917539795d
 		}
 		
 		// ----------------------------------------------------------------------
