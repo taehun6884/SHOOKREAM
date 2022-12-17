@@ -91,20 +91,7 @@ public class BoardFrontController extends HttpServlet {
 		} else if(command.equals("/MemberReplyPro.bo")) {
 			action = new MemberReplyProAction();
 			forward = action.execute(request, response);
-<<<<<<< HEAD
-<<<<<<< HEAD
-		} else () {
-			
-		}
-		
-=======
->>>>>>> 191c4ef89dda2246556c976c433e76f7e8f5e2ec
-=======
-		} else if(command.equals("하이")) {
-			System.out.println("하이");
->>>>>>> 075f22d50a8474ce4d12597c05154c917539795d
-		}
->>>>>>> 075f22d50a8474ce4d12597c05154c917539795d
+		} 수정하기..action..action..action..
 		
 		// ----------------------------------------------------------------------
 		// ActionForward 객체 내용에 따라 각각 다른 방식의 포워딩 작업 수행(공통)
