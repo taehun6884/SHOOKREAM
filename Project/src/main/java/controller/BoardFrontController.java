@@ -88,12 +88,10 @@ public class BoardFrontController extends HttpServlet {
 			// BoardReplyFormAction 의 execute() 메서드 호출
 			action = new BoardReplyFormAction();
 			forward = action.execute(request, response);
-		} else if(command.equals("/BoardReplyPro.bo")) {
-			// 답글 작성 비즈니스 작업 요청
-			// BoardReplyProAction 의 execute() 메서드 호출
-			action = new BoardReplyProAction();
+		} else if(command.equals("/MemberReplyPro.bo")) {
+			action = new MemberReplyProAction();
 			forward = action.execute(request, response);
-		} 
+		}
 		
 		// ----------------------------------------------------------------------
 		// ActionForward 객체 내용에 따라 각각 다른 방식의 포워딩 작업 수행(공통)
