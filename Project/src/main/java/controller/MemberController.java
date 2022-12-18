@@ -14,6 +14,8 @@ import action.Action;
 import action.MemberJoinProAction;
 import action.MemberDeleteMemberProAction;
 import action.MemberLoginMemberProAction;
+import action.MemberModifyFormAction;
+import action.MemberModifyProAction;
 import vo.ActionForward;
 
 @WebServlet("*.me")
@@ -50,9 +52,11 @@ public class MemberController extends HttpServlet{
 		}else if(command.equals("/MemberInfo.me")) { //회원 상세 정보
 		
 		}else if(command.equals("/MemberModifyForm.me")) { //회원 정보 수정 창
-		
+			action = new MemberModifyFormAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/MemberModifyPro.me")) { //회원 정보 수정 pro
-		
+			action = new MemberModifyProAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/MemberDeleteForm.me")) { //회원 삭제 창
 			forward = new ActionForward();
 			forward.setPath("member/MemberDeleteForm.jsp");
