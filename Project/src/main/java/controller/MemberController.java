@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.MemberDeleteMemberProAction;
 import action.MemberLoginMemberProAction;
 import vo.ActionForward;
 
@@ -50,9 +51,12 @@ public class MemberController extends HttpServlet{
 		}else if(command.equals("/MemberModifyPro.me")) { //회원 정보 수정 pro
 		
 		}else if(command.equals("/MemberDeleteForm.me")) { //회원 삭제 창
-		
+			forward = new ActionForward();
+			forward.setPath("member/MemberDeleteForm.jsp");
+			forward.setRedirect(false);
 		}else if(command.equals("/MemberDeletePro.me")) { //회원 삭제 pro
-			
+			action = new MemberDeleteMemberProAction(); 
+			forward = action.execute(request, response);
 		}
 	
 			

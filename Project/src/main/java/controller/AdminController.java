@@ -32,9 +32,9 @@ public class AdminController extends HttpServlet{
 		}else if(command.equals("/AdminModifyPro.me")) { //회원 정보 수정 pro
 		
 		}else if(command.equals("/AdminDeleteForm.me")) { //회원 삭제 창
-		
-		}else if(command.equals("/AdminDeletePro.me")) { //회원 삭제 pro
 			
+		}else if(command.equals("/AdminDeletePro.me")) { //회원 삭제 pro
+		
 		}
 	
 			
