@@ -101,5 +101,29 @@ private MemberDAO() {}
 	}
 	// 회원가입
 	
+	public boolean isDeleteUser(String pass) {
+		int deleteCount = 0;
+		boolean isDeleteSuccess = false;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			String sql = "DELETE FROM member WHERE member_pass=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pass);
+			deleteCount = pstmt.executeUpdate();
+			if(deleteCount>0) {
+				isDeleteSuccess =true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// DB 자원 반환
+			JdbcUtil.close(pstmt);
+		}
+		
+		return isDeleteSuccess;
+	} //회원삭제
+	
 	
 }
