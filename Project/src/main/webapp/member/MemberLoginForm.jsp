@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +13,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- 네이버아이디로그인 -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <style type="text/css">
 #sform {
           display: inline-block;
@@ -49,8 +55,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <i class="fa fa-search"></i>
     </p>
 </header>
-
-  
+   
   <!-- Footer -->
   <!-- 로그인 화면 폼 -->
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
@@ -68,6 +73,11 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           <tr>
           <td><button type="submit" class="w3-button w3-block w3-black">Send</button></td>
 		  </tr> 	        
+          <tr>
+          	<td>
+          		<div id="naver_id_login"></div>
+          	</td>
+          </tr>
         </table>
         </form>
     </div>
@@ -161,6 +171,17 @@ function w3_close() {
     "pluginKey": "552ea0bb-d4a5-4c70-8ba7-463b7682c434"
   });
 </script>
+ 
 <!-- End Channel Plugin -->
+ <!-- 네이버 아이디 로그인 -->
+ <script type="text/javascript">
+  	var naver_id_login = new naver_id_login("nSNLHIW18gDjrrJsFDeE", "http://localhost:8080/Project/index.jsp");
+  	var state = naver_id_login.getUniqState();
+  	naver_id_login.setButton("white", 2,40);
+  	naver_id_login.setDomain("http://localhost:8080/Project");
+//   	naver_id_login.setState(state);
+//   	naver_id_login.setPopup();
+  	naver_id_login.init_naver_id_login();
+  </script>
 </body>
 </html>

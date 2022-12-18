@@ -14,8 +14,10 @@ import action.Action;
 import action.MemberJoinProAction;
 import action.MemberDeleteMemberProAction;
 import action.MemberLoginMemberProAction;
+import action.MemberLogoutProAction;
 import action.MemberModifyFormAction;
 import action.MemberModifyProAction;
+
 import vo.ActionForward;
 
 @WebServlet("*.me")
@@ -46,10 +48,9 @@ public class MemberController extends HttpServlet{
 			action = new MemberLoginMemberProAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/MemberLogout.me")) { //로그아웃
-		
+			action = new MemberLogoutProAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/MemberList.me")) { //회원 목록
-		
-		}else if(command.equals("/MemberInfo.me")) { //회원 상세 정보
 		
 		}else if(command.equals("/MemberModifyForm.me")) { //회원 정보 수정 창
 			action = new MemberModifyFormAction();
