@@ -25,7 +25,7 @@
 		</i>
 		</c:when>
 		<c:otherwise>
-		<a href="LoginMember.me">login</a> | <a href="MemberInsertForm.me">join</a>
+		<a href="LoginMember.me">login</a> | <a href="MemberJoinForm.me">join</a>
 		</c:otherwise>
 	</c:choose>	
 	</p>
