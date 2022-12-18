@@ -54,6 +54,52 @@ private MemberDAO() {}
 		return isLogintUser;
 	}
 	// 로그인
+
+
+	
+	// 회원가입
+	public int insertMember(MemberBean member) {
+		int insertCount = 0;
+		
+		PreparedStatement pstmt = null, pstmt2 = null;
+		ResultSet rs = null;
+		
+		try {
+			int member_idx = 1; // 회원 idx 처리
+			String sql = "SELECT MAX(member_idx) FROM member";
+			pstmt= con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				member_idx = rs.getInt(1) + 1;
+			} 
+			
+			sql = "INSERT INTO member VALUES(?,?,?,?,?,now(),?,?,?,?)";
+			pstmt2= con.prepareStatement(sql);
+			
+			pstmt2.setInt(1, member_idx);
+			pstmt2.setString(2, member.getMember_id());
+			pstmt2.setString(3, member.getMember_name());
+			pstmt2.setString(4, member.getMember_pass());
+			pstmt2.setString(5, member.getMember_email());
+			pstmt2.setString(6, member.getMember_phone());
+			pstmt2.setInt(7, 0);
+			pstmt2.setInt(8, 0);
+			pstmt2.setString(9, member.getMember_address());
+		
+			insertCount = pstmt2.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류! - insertMember()");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(pstmt2);
+		}
+		return insertCount;
+	}
+	// 회원가입
 	
 	
 }

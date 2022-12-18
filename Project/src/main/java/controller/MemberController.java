@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.MemberJoinProAction;
 import action.MemberLoginMemberProAction;
 import vo.ActionForward;
 
@@ -26,12 +27,13 @@ public class MemberController extends HttpServlet{
 		ActionForward forward = null;
 		Action action = null;
 		
-		if(command.equals("/MemberInsertForm.me")) {//회원가입 폼화면
+		if(command.equals("/MemberJoinForm.me")) {//회원가입 폼화면
 			forward = new ActionForward();
-			forward.setPath("member/member_join_form_sample.jsp");
+			forward.setPath("member/MemberJoinForm.jsp");
 			forward.setRedirect(false);
 		}else if(command.equals("/MemberJoinPro.me")) {//회원가입 pro
-		
+			action = new MemberJoinProAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/LoginMember.me")) { //로그인 폼
 			forward = new ActionForward();
 			forward.setPath("member/MemberLoginForm.jsp");
