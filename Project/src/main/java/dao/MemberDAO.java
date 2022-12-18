@@ -55,5 +55,72 @@ private MemberDAO() {}
 	}
 	// 로그인
 	
-	
+	// 회원 정보 수정 updateMember()
+	public int updateMember(MemberBean member) {
+		int updateMember = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "UPDATE member "
+									+ "SET "
+									+ "member_name=?,"
+									+ "member_id=?,"
+									+ "member_pass=?,"
+									+ "member_address=?,"
+									+ "member_email=?,"
+									+ "member_phone=?"
+									+ "WHERE member_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member.getMember_name());
+			pstmt.setString(2, member.getMember_id());
+			pstmt.setString(3, member.getMember_pass());
+			pstmt.setString(4, member.getMember_address());
+			pstmt.setString(5, member.getMember_email());
+			pstmt.setString(6, member.getMember_phone());
+			pstmt.setString(7, member.getMember_id());
+			
+			updateMember = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("sql 구문 오류 - updateMember()");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+		return updateMember;
+		
+	} // 회원 정보 수정 끝
+
+
+	public MemberBean getInfo(String id) {
+		MemberBean vo = null;
+		ResultSet rs  = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "SELECT * FROM member WHERE member_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new MemberBean();
+				vo.setMember_name(rs.getString("member_name"));
+				vo.setMember_id(rs.getString("member_id"));
+				vo.setMember_pass(rs.getString("member_pass"));
+				vo.setMember_address(rs.getString("member_address"));
+				vo.setMember_email(rs.getString("member_email"));
+				vo.setMember_phone(rs.getString("member_phone"));
+				System.out.println(vo);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return vo; 
+	} // 회원 목록 끝
 }
