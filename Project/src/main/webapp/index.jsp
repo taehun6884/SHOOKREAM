@@ -10,9 +10,16 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+</style>
+
+<style type="text/css">
+#logintvar{
+	float: right;
+}
 </style>
 </head>
 <body class="w3-content" style="max-width:1200px">
@@ -207,6 +214,16 @@ function w3_close() {
   ChannelIO('boot', {
     "pluginKey": "552ea0bb-d4a5-4c70-8ba7-463b7682c434"
   });
+</script>
+<script>
+	function myFunction() {
+	  var x = document.getElementById("Demo");
+	  if (x.className.indexOf("w3-show") == -1) { 
+	    x.className += " w3-show";
+	  } else {
+	    x.className = x.className.replace(" w3-show", "");
+	  }
+	}
 </script>
 <!-- End Channel Plugin -->
 </body>
