@@ -10,8 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+
+import action.MemberJoinProAction;
+import action.MemberDeleteMemberProAction;
 import action.MemberLoginMemberProAction;
 import action.MemberLogoutProAction;
+import action.MemberModifyFormAction;
+import action.MemberModifyProAction;
+
 import vo.ActionForward;
 
 @WebServlet("*.me")
@@ -27,12 +33,13 @@ public class MemberController extends HttpServlet{
 		ActionForward forward = null;
 		Action action = null;
 		
-		if(command.equals("/MemberInsertForm.me")) {//회원가입 폼화면
+		if(command.equals("/MemberJoinForm.me")) {//회원가입 폼화면
 			forward = new ActionForward();
-			forward.setPath("member/member_join_form_sample.jsp");
+			forward.setPath("member/MemberJoinForm.jsp");
 			forward.setRedirect(false);
 		}else if(command.equals("/MemberJoinPro.me")) {//회원가입 pro
-		
+			action = new MemberJoinProAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/LoginMember.me")) { //로그인 폼
 			forward = new ActionForward();
 			forward.setPath("member/MemberLoginForm.jsp");
@@ -45,16 +52,19 @@ public class MemberController extends HttpServlet{
 			forward = action.execute(request, response);
 		}else if(command.equals("/MemberList.me")) { //회원 목록
 		
-		}else if(command.equals("/MemberInfo.me")) { //회원 상세 정보
-		
 		}else if(command.equals("/MemberModifyForm.me")) { //회원 정보 수정 창
-		
+			action = new MemberModifyFormAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/MemberModifyPro.me")) { //회원 정보 수정 pro
-		
+			action = new MemberModifyProAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/MemberDeleteForm.me")) { //회원 삭제 창
-		
+			forward = new ActionForward();
+			forward.setPath("member/MemberDeleteForm.jsp");
+			forward.setRedirect(false);
 		}else if(command.equals("/MemberDeletePro.me")) { //회원 삭제 pro
-			
+			action = new MemberDeleteMemberProAction(); 
+			forward = action.execute(request, response);
 		}
 	
 			

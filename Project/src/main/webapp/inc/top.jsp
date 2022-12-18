@@ -16,6 +16,7 @@
 		  	<img src="./images/login_image.png" width="20px" height="20px">
 		  </button>
 		  <div id="Demo" class="w3-dropdown-content w3-bar-block w3-border">
+
 		    <a href="MemberLogout.me" class="w3-bar-item w3-button">logout</a>
 		    <a href="MemberModifyForm.me?id=${sessionScope.sId }" class="w3-bar-item w3-button">정보수정</a>
 		    <a href="MemberDeleteForm.me" class="w3-bar-item w3-button">회원탈퇴</a>
