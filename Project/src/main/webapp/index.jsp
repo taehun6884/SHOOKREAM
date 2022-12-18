@@ -5,6 +5,9 @@
 <head>
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
+<!-- 네이버 아이디 로그인 -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
@@ -215,6 +218,8 @@ function w3_close() {
     "pluginKey": "552ea0bb-d4a5-4c70-8ba7-463b7682c434"
   });
 </script>
+
+<!-- 로그인 드롭다운 기능! -->
 <script>
 	function myFunction() {
 	  var x = document.getElementById("Demo");
@@ -224,6 +229,18 @@ function w3_close() {
 	    x.className = x.className.replace(" w3-show", "");
 	  }
 	}
+</script>
+<!-- 네이버 아이디 로그인 -->
+<script type="text/javascript">
+  var naver_id_login = new naver_id_login("nSNLHIW18gDjrrJsFDeE", "http://localhost:8080/Project/index.jsp");
+  // 접근 토큰 값 출력
+//   alert(naver_id_login.oauthParams.access_token);
+  // 네이버 사용자 프로필 조회
+  naver_id_login.get_naver_userprofile("naverSignInCallback()");
+  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+  function naverSignInCallback() {
+    alert(naver_id_login.getProfileData('email'));
+  }
 </script>
 <!-- End Channel Plugin -->
 </body>
