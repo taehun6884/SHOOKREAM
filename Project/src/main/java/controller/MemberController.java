@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.MemberLoginMemberProAction;
 import vo.ActionForward;
 
 @WebServlet("*.me")
@@ -32,9 +33,12 @@ public class MemberController extends HttpServlet{
 		}else if(command.equals("/MemberJoinPro.me")) {//회원가입 pro
 		
 		}else if(command.equals("/LoginMember.me")) { //로그인 폼
-		
-		}else if(command.equals("/LogintMemberPro.me")) {//로그인 pro
-			
+			forward = new ActionForward();
+			forward.setPath("member/MemberLoginForm.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/LoginMemberPro.me")) {//로그인 pro
+			action = new MemberLoginMemberProAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/MemberLogout.me")) { //로그아웃
 		
 		}else if(command.equals("/MemberList.me")) { //회원 목록
