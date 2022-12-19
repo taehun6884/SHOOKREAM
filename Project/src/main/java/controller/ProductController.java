@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-
+import action.ProductInsertAction;
 import vo.ActionForward;
 
 @WebServlet("*.po") // 상품 컨트롤러
@@ -18,7 +18,7 @@ public class ProductController extends HttpServlet{
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		System.out.println("pomberController()");
+		System.out.println("ProductController()");
 		
 		String command = request.getServletPath();
 		System.out.println("현재 주소 :"+command);
@@ -28,9 +28,14 @@ public class ProductController extends HttpServlet{
 		
 		
 		if(command.equals("/ProductInsertForm.po")) {//Product 폼화면
-
-		}else if(command.equals("/ProductInsertPro.po")) {//Product Pro
-
+			forward = new ActionForward();
+			forward.setPath("product/ProductInsertForm.jsp");
+			forward.setRedirect(false);
+			
+		}else if(command.equals("/ProductInsertPro.po")) {//Product 등록 작업
+			action = new ProductInsertAction();
+			forward = action.execute(request, response);
+			
 		}else if(command.equals("/ProductList.po")) { //Product 목록
 		
 		}else if(command.equals("/ProductInfoForm.po")) { //Product 상세 정보
