@@ -193,4 +193,50 @@ private MemberDAO() {}
 		
 		return vo; 
 	} // 회원 목록 끝
+	
+	//----------------------회원 조회(관리자)--------------------------
+			public List<MemberBean> selectMemberList() {
+				List<MemberBean> memberList = null;
+				
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+				
+				//전체 회원 조회 -> WHERE 절 넣지 않음.
+				String sql = "SELECT * FROM member";
+				
+				try {
+					pstmt = con.prepareStatement(sql);
+					rs = pstmt.executeQuery();
+					
+					memberList = new ArrayList<MemberBean>();
+					while(rs.next()) {
+						//있을 경우 member 객체에 저장
+						MemberBean member = new MemberBean();
+						member.setMember_idx(rs.getInt("member_idx")); // 회원번호
+						member.setMember_id(rs.getString("member_id")); // ID
+						member.setMember_pass(rs.getString("member_pass")); // 패스워드
+						member.setMember_name(rs.getString("member_name")); // 이름(성함)
+						member.setMember_email(rs.getString("member_email")); // 이메일
+						member.setMember_date(rs.getDate("member_date")); // 가입날짜
+						member.setMember_phone(rs.getString("member_phone")); // 휴대폰 번호
+						member.setMember_address(rs.getString("member_address")); // 주소
+						member.setMember_dec(rs.getInt("member_dec")); // 신고횟수
+						member.setMember_point(rs.getInt("member_point")); // 적립금
+						
+						memberList.add(member);
+						//확인작업
+						System.out.println(member);
+					}
+					
+				} catch (SQLException e) {
+					System.out.println("회원조회 실패 - 관리자");
+					e.printStackTrace();
+				} finally {
+					JdbcUtil.close(rs);
+					JdbcUtil.close(pstmt);
+				}
+				
+				return memberList;
+			}
+			
 }
