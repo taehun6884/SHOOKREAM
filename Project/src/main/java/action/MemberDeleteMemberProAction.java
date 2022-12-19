@@ -19,12 +19,12 @@ public class MemberDeleteMemberProAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
 		
-		
+		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
 		
 //비밀번호 일치 여부 확인 후 action으로 감 		
 		DeleteMemberProService service = new DeleteMemberProService();
-		boolean isDeleteSuccess = service.isDeleteSuccess(pass);
+		boolean isDeleteSuccess = service.isDeleteSuccess(id,pass);
 					if(!isDeleteSuccess) { // 삭제 권한 없음
 						try {
 							response.setContentType("text/html; charset=UTF-8");

@@ -7,7 +7,7 @@ import db.JdbcUtil;
 
 public class DeleteMemberProService {
 	
-	public boolean isDeleteSuccess(String pass) {
+	public boolean isDeleteSuccess(String id,String pass) {
 		boolean isDeleteUser = false;
 		
 		Connection con = JdbcUtil.getConnection();
@@ -16,7 +16,7 @@ public class DeleteMemberProService {
 		
 		dao.setConnection(con);
 		
-		isDeleteUser = dao.isDeleteUser(pass);
+		isDeleteUser = dao.isDeleteUser(id,pass);
 		if(isDeleteUser ==true) {
 			JdbcUtil.commit(con);
 		}else {

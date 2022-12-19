@@ -58,6 +58,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <h4>회원탈퇴</h4>
         <p>Questions? Go ahead.</p>
         <form action="MemberDeletePro.me" method="post">
+        <input type="hidden" value ="${param.id }" name="id">
           <table>
           <tr>
           <td width="300px"><input class="w3-input w3-border" type="password" placeholder="pass" name="pass" required></td>

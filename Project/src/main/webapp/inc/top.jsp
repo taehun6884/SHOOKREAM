@@ -19,7 +19,7 @@
 
 		    <a href="MemberLogout.me" class="w3-bar-item w3-button">logout</a>
 		    <a href="MemberModifyForm.me?id=${sessionScope.sId }" class="w3-bar-item w3-button">정보수정</a>
-		    <a href="MemberDeleteForm.me" class="w3-bar-item w3-button">회원탈퇴</a>
+		    <a href="MemberDeleteForm.me?id=${sessionScope.sId }" class="w3-bar-item w3-button">회원탈퇴</a>
 		  </div>
 		 </div> 
 		</i>
