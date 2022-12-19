@@ -33,7 +33,7 @@ private ProductDAO() {}
 		
 		try {
 			//----------------idx 작업------------------
-			String sql = "SELECT MAX(idx) FROM board";
+			String sql = "SELECT MAX(product_idx) FROM product";
 			int idx = 1; // 새 글 번호
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();

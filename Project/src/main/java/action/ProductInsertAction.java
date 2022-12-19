@@ -23,8 +23,8 @@ public class ProductInsertAction implements Action {
 		ProductInsertService service = new ProductInsertService();
 		
 		
-		String uploadPath = "upload"; // 업로드 가상 디렉토리(이클립스가 관리)
-		String realPath = request.getServletContext().getRealPath(uploadPath);// 업로드 실제 디렉토리(톰캣)
+		String uploadPath = "../upload"; // 업로드 가상 디렉토리(이클립스가 관리)
+		String realPath = request.getRealPath(uploadPath);
 		System.out.println("실제 업로드 경로 : " + realPath);
 		int filesize = 1024 * 1024 * 10;
 		//2. 크기 : 10MB (크기가 클수록 서버에는 부담)
@@ -44,7 +44,8 @@ public class ProductInsertAction implements Action {
 		product.setProduct_name(multi.getParameter("name")); // 상품명
 		product.setProduct_brand(multi.getParameter("brand")); // 상품 브랜드
 		product.setProduct_price(Integer.parseInt(multi.getParameter("price"))); // 상품 가격
-		product.setProduct_name(multi.getParameter("size")); //사이즈
+		product.setProduct_size(multi.getParameter("size")); //사이즈
+		product.setProduct_color(multi.getParameter("color")); //사이즈
 		product.setProduct_amount(Integer.parseInt(multi.getParameter("amount"))); //상품 재고량
 		product.setProduct_exp(multi.getParameter("exp")); // 상품 요약 설명
 		product.setProduct_detail_exp(multi.getParameter("detail_exp")); //상품 상세 설명

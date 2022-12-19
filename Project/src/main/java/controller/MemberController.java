@@ -68,6 +68,16 @@ public class MemberController extends HttpServlet{
 		}else if(command.equals("/MemberDeletePro.me")) { //회원 삭제 pro
 			action = new MemberDeleteMemberProAction(); 
 			forward = action.execute(request, response);
+
+		}else if(command.equals("/MemberDeleteMemberProAction.me")) { //회원 삭제 창
+			action = new MemberDeleteMemberProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/MemberModifyProAction.me")) { 
+			action = new MemberModifyProAction();
+		}else if(command.equals("/dbCheckId.me")) { // id 중복체크
+//			System.out.println(request.getParameter("member_id"));
+			action = new MemberIdCheckProAction();
+			forward = action.execute(request, response);
 		}
 	
 			
