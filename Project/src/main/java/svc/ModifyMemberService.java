@@ -42,7 +42,7 @@ public class ModifyMemberService {
 		return member2;
 	}
 	
-	public boolean isRightUser(MemberBean member) {
+  public boolean isRightUser(MemberBean member) {
 		boolean isRightUser = false;
 		
 		Connection con = JdbcUtil.getConnection();
@@ -59,5 +59,4 @@ public class ModifyMemberService {
 		}
 		return isRightUser;
 	}
-	
 }
