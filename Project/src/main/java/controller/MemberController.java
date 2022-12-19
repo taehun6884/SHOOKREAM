@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 
 import action.MemberJoinProAction;
+import action.MemberListAction;
 import action.MemberDeleteMemberProAction;
 import action.MemberLoginMemberProAction;
 import action.MemberLogoutProAction;
@@ -51,6 +52,8 @@ public class MemberController extends HttpServlet{
 			action = new MemberLogoutProAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/MemberList.me")) { //회원 목록
+			action = new MemberListAction();
+			forward = action.execute(request, response);
 		
 		}else if(command.equals("/MemberModifyForm.me")) { //회원 정보 수정 창
 			action = new MemberModifyFormAction();
