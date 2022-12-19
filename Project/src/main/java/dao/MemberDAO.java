@@ -193,4 +193,31 @@ private MemberDAO() {}
 		
 		return vo; 
 	} // 회원 목록 끝
+
+
+	// ID 중복 체크를 위한 회원 ID 조회
+	public int selectAllId(String id) {
+		int result = 0;
+		
+		ResultSet rs  = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "SELECT member_id FROM member WHERE member_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = 1; // 존재할 경우
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 - selectAllId()");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		return result;
+	}
 }

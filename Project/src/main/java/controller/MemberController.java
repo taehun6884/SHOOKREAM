@@ -8,11 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import action.Action;
 
 import action.MemberJoinProAction;
 import action.MemberDeleteMemberProAction;
+import action.MemberIdCheckProAction;
 import action.MemberLoginMemberProAction;
 import action.MemberLogoutProAction;
 import action.MemberModifyFormAction;
@@ -64,6 +66,10 @@ public class MemberController extends HttpServlet{
 			forward.setRedirect(false);
 		}else if(command.equals("/MemberDeletePro.me")) { //회원 삭제 pro
 			action = new MemberDeleteMemberProAction(); 
+			forward = action.execute(request, response);
+		}else if(command.equals("/dbCheckId.me")) { // id 중복체크
+//			System.out.println(request.getParameter("member_id"));
+			action = new MemberIdCheckProAction();
 			forward = action.execute(request, response);
 		}
 	
