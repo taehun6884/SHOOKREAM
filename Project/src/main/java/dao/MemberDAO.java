@@ -101,16 +101,17 @@ private MemberDAO() {}
 	}
 	// 회원가입
 	
-	public boolean isDeleteUser(String pass) {
+	public boolean isDeleteUser(String id, String pass) {
 		int deleteCount = 0;
 		boolean isDeleteSuccess = false;
 		PreparedStatement pstmt = null;
 		
 		try {
 			
-			String sql = "DELETE FROM member WHERE member_pass=?";
+			String sql = "DELETE FROM member WHERE member_id=? AND member_pass=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, pass);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pass);
 			deleteCount = pstmt.executeUpdate();
 			if(deleteCount>0) {
 				isDeleteSuccess =true;

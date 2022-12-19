@@ -65,6 +65,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 		<td width="100px">적립금</td>
 		<td width="100px">가입일자</td>
 		<td width="150px">수정</td>
+		
 	</tr>
 	<c:forEach var="member" items="${memberList }">
 	<tr>
@@ -75,7 +76,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	  	<td>${member.member_phone }</td>
 	  	<td>${member.member_point }</td>
 	  	<td>${member.member_date }</td>
-	  	<td></td>
+	  	
+	  	<td><input type ="button" value ="수정" onclick="location.href='d'">
+	  	<input type ="button" value ="삭제" onclick="location.href='MemberDeleteMemberProAction.me?id=${member.member_id}'"+"&"+'pass=${member.member_pass }'"></td>
 	
 	</tr>
   	</c:forEach>

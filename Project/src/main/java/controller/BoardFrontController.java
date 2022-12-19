@@ -31,6 +31,7 @@ public class BoardFrontController extends HttpServlet {
 		Action action = null; // XXXAction 클래스를 공통으로 관리할 Action 인터페이스 타입 변수
 		ActionForward forward = null; // 포워딩 정보를 저장할 ActionForward 타입 변수
 		
+
 		if(command.equals("/BoardInsertForm.me")) {//공지 폼화면
 
 		}else if(command.equals("/BoardJoinPro.me")) {//공지쓰기 pro
@@ -47,7 +48,8 @@ public class BoardFrontController extends HttpServlet {
 		
 		}else if(command.equals("/BoardDeletePro.me")) { //공지 삭제 pro
 			
-		}
+
+	}
 		
 		
 		//-----------------------------------------------------
