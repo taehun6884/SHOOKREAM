@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>회원 수정 </title>
+<title>회원목록</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -44,7 +45,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
-    <p class="w3-left">제목</p>
+    <p class="w3-left">회원목록</p>
     <p class="w3-right">
       <i class="fa fa-shopping-cart w3-margin-right"></i>
       <i class="fa fa-search"></i>
@@ -53,45 +54,37 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
   
   <!-- Footer -->
-  <!-- 로그인 화면 폼 -->
-  <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
-    <div id = "sform">
-        <h4>회원 정보</h4>
-        <p>Questions? Go ahead.</p>
-        <form action="MemberModifyPro.me" method="post">
-          <table>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="name" name="name" value = "${member.member_name }" required></td>
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="id" name="id" value = "${member.member_id }" required></td>
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="pass" name="pass" value = "${member.member_pass }" required></td>
-          <td><button type="submit" class="w3-button w3-block w3-black">수정</button></td>
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="address" name="address" value = "${member.member_address }" required></td>
-          <td><button type="submit" class="w3-button w3-block w3-black">수정</button></td>
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="email" name="email" value = "${member.member_email }" required></td>
-          <td><button type="submit" class="w3-button w3-block w3-black">수정</button></td>
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="phone" name="phone" value = "${member.member_phone }" required></td>
-          <td><button type="submit" class="w3-button w3-block w3-black">수정</button></td>
-          </tr>
-         	        
-        </table>
-        </form>
-    </div>
-  </footer>
- </div>	
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
-<!-- 로그인 화면 폼 -->
-  <!-- End page content -->
+  <!-- 회원정보 확인 (List) -->
+  <table border="1">
+	<tr>
+		<td width="100px">번호</td>
+		<td width="100px">아이디</td>
+		<td width="150px">이름</td>
+		<td width="150px">주소</td>
+		<td width="100px">전화번호</td>
+		<td width="100px">적립금</td>
+		<td width="100px">가입일자</td>
+		<td width="150px">수정</td>
+	</tr>
+	<c:forEach var="member" items="${memberList }">
+	<tr>
+		<td>${member.member_idx }</td>
+  		<td>${member.member_id }</td>
+	  	<td>${member.member_name }</td>
+	  	<td>${member.member_address }</td>
+	  	<td>${member.member_phone }</td>
+	  	<td>${member.member_point }</td>
+	  	<td>${member.member_date }</td>
+	  	<td></td>
+	
+	</tr>
+  	</c:forEach>
 
+  
+  </table>
+  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+  <!-- End page content -->
+	
 
 <!-- Newsletter Modal -->
 <div id="newsletter" class="w3-modal">
