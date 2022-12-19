@@ -68,8 +68,13 @@ public class MemberController extends HttpServlet{
 		}else if(command.equals("/MemberDeletePro.me")) { //회원 삭제 pro
 			action = new MemberDeleteMemberProAction(); 
 			forward = action.execute(request, response);
+		}else if(command.equals("/MemberDeleteMemberProAction.me")) { //회원 삭제 창
+			action = new MemberDeleteMemberProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/MemberModifyProAction.me")) { 
+			action = new MemberModifyProAction();
+			forward = action.execute(request, response);
 		}
-	
 			
 		if(forward != null) {
 			if(forward.isRedirect()) {

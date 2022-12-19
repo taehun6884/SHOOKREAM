@@ -39,4 +39,6 @@ public class ModifyMemberService {
 		return member2;
 	}
 	
+	
+	
 }

@@ -77,8 +77,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	  	<td>${member.member_point }</td>
 	  	<td>${member.member_date }</td>
 	  	
-	  	<td><input type ="button" value ="수정" onclick="location.href='d'">
-	  	<input type ="button" value ="삭제" onclick="location.href='MemberDeleteMemberProAction.me?id=${member.member_id}'"+"&"+'pass=${member.member_pass }'"></td>
+	  	<td><input type ="button" value ="수정" onclick="location.href='MemberModifyForm.me?id=${member.member_id}&pass=${member.member_pass }'">
+	  	<input type ="button" value ="삭제" onclick="location.href='MemberDeleteMemberProAction.me?id=${member.member_id}&pass=${member.member_pass }'"></td>
 	
 	</tr>
   	</c:forEach>
