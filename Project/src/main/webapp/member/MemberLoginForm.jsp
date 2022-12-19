@@ -16,6 +16,8 @@
 <!-- 네이버아이디로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<!-- 구글 아이디 로그인 -->
+<meta name="google-signin-client_id" content="1047574308186-h6ehte2k4901kjn1u3g5vnonbf2g56on.apps.googleusercontent.com">
 <style type="text/css">
 #sform {
           display: inline-block;
@@ -28,7 +30,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
 </head>
 <body class="w3-content" style="max-width:1200px">
-
 <!-- Sidebar/menu -->
 <jsp:include page="../inc/side.jsp"/>
 
@@ -76,7 +77,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           <tr>
           	<td>
           		<div id="naver_id_login"></div>
-          	</td>
+				<a href="javascript:kakaoLogin();"><img src="./images/kakao_login_medium_narrow.png"></a>
+				</td>
           </tr>
         </table>
         </form>
@@ -183,5 +185,47 @@ function w3_close() {
 //   	naver_id_login.setPopup();
   	naver_id_login.init_naver_id_login();
   </script>
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+Kakao.init('6405849a8d7a7fa490a223800b55af42'); //발급받은 키 중 javascript키를 사용해준다.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
+//카카오로그인
+function kakaoLogin() {
+    window.Kakao.Auth.login({
+      scope:'account_email,profile_nickname',
+      success: function(authObj){
+    	  console.log(authObk);
+    	  window.kakao.API.requset({
+    		  url:'/v2/user/me',
+    	  	  success: res =>{
+    	  		  const kakao_account = res.kakao_account;
+    	  		  console.log(kakao_account);
+    	  		if(kakao_account != null){
+    	  			alert(kakao_account);
+    	  			location.href="./";
+    	  		}
+    	  	  }	
+    	  });
+      }
+    });
+  }
+//카카오로그아웃  
+function kakaoLogout() {
+    if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function (response) {
+        	console.log(response)
+        },
+        fail: function (error) {
+          console.log(error)
+        },
+      })
+      Kakao.Auth.setAccessToken(undefined)
+    }
+  }  
+</script>
+  
+  
 </body>
 </html>
