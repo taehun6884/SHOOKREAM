@@ -98,8 +98,13 @@ public class BoardFrontController extends HttpServlet {
 			forward = action.execute(request, response);
 		} else if(command.equals("하이")) {
 			System.out.println("하이");
+<<<<<<< HEAD
 		} else if(command.equals("영진")) {
 			System.out.println("영진임다");
+=======
+		}else if(command.equals("gsdgf")) {
+			syso(":dasdasdas");
+>>>>>>> origin/kibaek
 		}
 		
 		// ----------------------------------------------------------------------
