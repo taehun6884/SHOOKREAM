@@ -127,29 +127,52 @@ private MemberDAO() {}
 	} //회원삭제
 	
 	// 회원 정보 수정 updateMember()
-	public int updateMember(MemberBean member) {
+	public boolean updateMember(MemberBean member,boolean isChangePass) {
 		int updateMember = 0;
-		
+		boolean result = false;
 		PreparedStatement pstmt = null;
 		
 		try {
-			String sql = "UPDATE member "
-									+ "SET "
-									+ "member_name=?,"
-									+ "member_id=?,"
-									+ "member_pass=?,"
-									+ "member_address=?,"
-									+ "member_email=?,"
-									+ "member_phone=?"
+			// 패스워드 변경 여부에 따른 각각의 SQL 구문 작성
+			String sql = "";
+			if(isChangePass) { //패스워드 변경시
+				sql = "UPDATE member "
+								+ "SET "
+										+ " member_name=?"
+										+ " ,member_id=?,"
+										+ " member_pass=?,"
+										+ " member_address=?,"
+										+ " member_email=?,"
+										+ " member_phone=?"
 									+ "WHERE member_id=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, member.getMember_name());
-			pstmt.setString(2, member.getMember_id());
-			pstmt.setString(3, member.getMember_pass());
-			pstmt.setString(4, member.getMember_address());
-			pstmt.setString(5, member.getMember_email());
-			pstmt.setString(6, member.getMember_phone());
-			pstmt.setString(7, member.getMember_id());
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, member.getMember_name());
+				pstmt.setString(2, member.getMember_id());
+				pstmt.setString(3, member.getMember_pass());
+				pstmt.setString(4, member.getMember_address());
+				pstmt.setString(5, member.getMember_email());
+				pstmt.setString(6, member.getMember_phone());
+				pstmt.setString(7, member.getMember_id());
+				
+				result = true;
+			} else { //패스워드 미변경시
+				sql = "UPDATE member "
+								+ "SET "
+									+ " member_name=?,"
+									+ " member_id=?,"
+									+ " member_address=?,"
+									+ " member_email=?,"
+									+ " member_phone=?"
+								+ "WHERE member_id=?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, member.getMember_name());
+				pstmt.setString(2, member.getMember_id());
+				pstmt.setString(3, member.getMember_address());
+				pstmt.setString(4, member.getMember_email());
+				pstmt.setString(5, member.getMember_phone());
+				pstmt.setString(6, member.getMember_id());
+			}
 			
 			updateMember = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -158,9 +181,53 @@ private MemberDAO() {}
 		} finally {
 			JdbcUtil.close(pstmt);
 		}
-		return updateMember;
+		return result;
 		
 	} // 회원 정보 수정 끝
+	
+	
+	// 로그인 판별 작업 수행 또는 
+		// 게시물 수정 권한 여부를 판별할 
+		// isRightUser() 메서드 
+		// => 파라미터 : MemberDTO 객체(member)   리턴타입 : boolean(isRightUser)
+		public boolean isRightUser(MemberBean member) {
+			boolean isRightUser = false;
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			con = JdbcUtil.getConnection();
+			
+			try {
+				
+				//3.
+				// 아이디, 패스워드가 일치하는 레코드 검색
+				String sql = "SELECT member_id FROM member WHERE member_id=? AND member_pass=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, member.getMember_id()); 
+				pstmt.setString(2, member.getMember_pass());
+				
+				//4.
+				rs = pstmt.executeQuery();
+				
+				// 조회 결과 레코드가 존재할 경우 isLoginSuccess를 true로 변경
+				if(rs.next()) {
+					isRightUser = true;
+				}
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 발생! - isRightUser()");
+				e.printStackTrace();
+			} finally {
+				//DB 자원 반환(역순)
+			 	JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+				JdbcUtil.close(con);
+			}	
+			
+			return isRightUser;
+			
+		} // 회원 수정 isRightUser()메서드 끝
 
 
 	public MemberBean getInfo(String id) {

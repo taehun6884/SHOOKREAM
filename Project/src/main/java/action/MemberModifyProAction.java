@@ -22,34 +22,56 @@ public class MemberModifyProAction implements Action {
 
 		member.setMember_name(request.getParameter("name"));
 		member.setMember_id(request.getParameter("id"));
-		member.setMember_pass(request.getParameter("pass"));
+//		member.setMember_pass(request.getParameter("oldpass"));
 		member.setMember_address(request.getParameter("address"));
 		member.setMember_email(request.getParameter("email"));
 		member.setMember_phone(request.getParameter("phone"));
-//	 	System.out.println(member);	
+		String newpass1 = request.getParameter("newpass1");
+		String newpass2 = request.getParameter("newpass2");
+		
+//		System.out.println(request.getParameter("newpass1"));
+//		System.out.println(request.getParameter("newpass2"));
+//		System.out.println(request.getParameter("name"));
+//		System.out.println(newpass1);
+		
+		if(newpass1.equals(newpass2)) {
+			member.setMember_pass(request.getParameter("newpass1"));
+		} else {
+			member.setMember_pass(request.getParameter("oldpass"));
+		}
 		
 		ModifyMemberService service = new ModifyMemberService();
 		
-		int updateMember = service.updateMember(member); 
-		
-		if(updateMember == 0) {
+		boolean updateMember = service.updateMember(member); 
+
+		if(updateMember) {
 			response.setContentType("text/html; charset=UTF-8");
-			
+			PrintWriter out;
 			try {
-				PrintWriter out = response.getWriter();
+				out = response.getWriter();
 				out.println("<script>");
-				out.println("alert('회원 수정 실패!')");
-				out.println("history.back()");
+				out.println("alert('회원 수정 성공!');");
 				out.println("</script>");
 			} catch (IOException e) {
 				e.printStackTrace();
-			} 
-			} else {
-				
-				forward = new ActionForward();
-				forward.setPath("./");
-				forward.setRedirect(true);
 			}
+			
+			forward = new ActionForward();
+			forward.setPath("./");
+			forward.setRedirect(true);
+		} else{
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out;
+				try {
+					out = response.getWriter();
+					out.println("<script>");
+					out.println("alert('회원 수정 실패!');");
+					out.println("history.back()");
+					out.println("</script>");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
 		return forward;
 		
 	}
