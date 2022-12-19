@@ -56,7 +56,6 @@ public class MemberController extends HttpServlet{
 		}else if(command.equals("/MemberList.me")) { //회원 목록
 			action = new MemberListAction();
 			forward = action.execute(request, response);
-		
 		}else if(command.equals("/MemberModifyForm.me")) { //회원 정보 수정 창
 			action = new MemberModifyFormAction();
 			forward = action.execute(request, response);
@@ -70,7 +69,6 @@ public class MemberController extends HttpServlet{
 		}else if(command.equals("/MemberDeletePro.me")) { //회원 삭제 pro
 			action = new MemberDeleteMemberProAction(); 
 			forward = action.execute(request, response);
-
 		}else if(command.equals("/MemberDeleteMemberProAction.me")) { //회원 삭제 창
 			action = new MemberDeleteMemberProAction();
 			forward = action.execute(request, response);
