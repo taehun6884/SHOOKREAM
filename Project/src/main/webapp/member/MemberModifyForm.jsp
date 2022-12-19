@@ -68,19 +68,21 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </tr>
           <tr>
           <td width="300px"><input class="w3-input w3-border" type="text" placeholder="pass" name="pass" value = "${member.member_pass }" required></td>
+          <td><button type="submit" class="w3-button w3-block w3-black">수정</button></td>
           </tr>
           <tr>
           <td width="300px"><input class="w3-input w3-border" type="text" placeholder="address" name="address" value = "${member.member_address }" required></td>
+          <td><button type="submit" class="w3-button w3-block w3-black">수정</button></td>
           </tr>
           <tr>
           <td width="300px"><input class="w3-input w3-border" type="text" placeholder="email" name="email" value = "${member.member_email }" required></td>
+          <td><button type="submit" class="w3-button w3-block w3-black">수정</button></td>
           </tr>
           <tr>
           <td width="300px"><input class="w3-input w3-border" type="text" placeholder="phone" name="phone" value = "${member.member_phone }" required></td>
-          </tr>
-          <tr>
           <td><button type="submit" class="w3-button w3-block w3-black">수정</button></td>
-		  </tr> 	        
+          </tr>
+         	        
         </table>
         </form>
     </div>
