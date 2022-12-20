@@ -14,12 +14,16 @@ public class CartListProAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
-		List<ProductBean> vo = null;
+		List<ProductBean> cartList = null;
 		
 		CartListProService service = new CartListProService();
-		service.getCartlist();
+		List<ProductBean> cartlist = service.getCartlist();
+		System.out.println(cartlist);
+		request.setAttribute("cartlist", cartlist);
 		
-		
+		forward = new ActionForward();
+		forward.setPath("product/Product_cart.jsp");
+		forward.setRedirect(false);
 		
 		return forward;
 	}
