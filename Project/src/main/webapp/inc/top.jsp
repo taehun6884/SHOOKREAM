@@ -20,6 +20,11 @@
 		    <a href="MemberLogout.me" class="w3-bar-item w3-button">logout</a>
 		    <a href="MemberModifyForm.me?id=${sessionScope.sId }" class="w3-bar-item w3-button">정보수정</a>
 		    <a href="MemberDeleteForm.me?id=${sessionScope.sId }" class="w3-bar-item w3-button">회원탈퇴</a>
+		    <c:choose>
+		    	<c:when test="${sessionScope.sId eq 'admin' }">
+		    		<a href="Admin.ad?id=${sessionScope.sId }" class="w3-bar-item w3-button">관리자 페이지</a>
+		    	</c:when>
+		    </c:choose>
 		  </div>
 		 </div> 
 		</i>
