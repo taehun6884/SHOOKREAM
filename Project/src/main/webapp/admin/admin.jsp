@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-<!--         <meta charset="utf-8" /> -->
-<!--         <meta http-equiv="X-UA-Compatible" content="IE=edge" /> -->
-<!--         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" /> -->
-<!--         <meta name="description" content="" /> -->
-<!--         <meta name="author" content="" /> -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
         <title>관리자 페이지</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="admin/css/styles.css" rel="stylesheet" />
@@ -33,6 +33,11 @@
                                     <div class="card-body" onclick="location.href='AdminProduct.ad'">상품 관리</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="AdminProduct.ad">View Details</a>
+                                    <div class="card-body">
+                                    <a href="./MemberList.me" class="small text-white stretched-link">회원 관리</a>
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="./MemberList.me">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>

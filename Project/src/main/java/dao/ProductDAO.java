@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import db.JdbcUtil;
+import java.util.List;
 
 import vo.ProductBean;
 
@@ -118,7 +119,21 @@ private ProductDAO() {}
 		return productList;
 	}
 	
-	
+	//----------------장바 구니----------------------
+		public List<ProductBean> getCartList() {
+			 List<ProductBean> cartlist = null;
+			 PreparedStatement pstmt =  null;
+			 
+			 
+			 
+			 String sql ="SELECT p.product_name, p.product_size, p.product_price,p.product_brand,p.product,p.product_original_image  "
+			 		+ "FROM shookream.cart c join shookream.product p "
+			 		+ "on c.product_idx = p.product_idx";
+			
+			 
+			 
+			return cartlist;
+		}
 	
 	
 }//DAO 끝
