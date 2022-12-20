@@ -1,7 +1,5 @@
 package vo;
 
-import java.sql.Date;
-
 public class ProductBean {
 //----------멤버변수-------------
 private int product_idx; //상품번호

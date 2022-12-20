@@ -75,7 +75,48 @@ private ProductDAO() {}
 		return insertCount;
 	}
 
-	
+
+	// 상품 상세 정보 조회
+	public ProductBean selectProduct(int product_idx) {
+		ProductBean product = null;
+		System.out.println(product_idx);
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT * FROM product WHERE product_idx=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, product_idx);
+			rs = pstmt.executeQuery();
+			
+			// 조회 결과가 있을 경우
+			if(rs.next()) {
+				// ProductBean 객체 생성 후 조회 데이터 저장
+				product = new ProductBean();
+				product.setProduct_idx(rs.getInt("product_idx"));
+				product.setProduct_name(rs.getString("product_name"));
+				product.setProduct_brand(rs.getString("product_brand"));
+				product.setProduct_price(rs.getInt("product_price"));
+				product.setProduct_size(rs.getString("product_size"));
+				product.setProduct_release_price(rs.getInt("product_release_price"));
+				product.setProduct_buy_price(rs.getInt("product_buy_price"));
+				product.setProduct_amount(rs.getInt("product_amount"));
+				product.setProduct_sell_count(rs.getInt("product_sell_count"));
+				product.setProduct_exp(rs.getString("product_exp"));
+				product.setProduct_detail_exp(rs.getString("product_detail_exp"));
+				product.setProduct_color(rs.getString("product_color"));
+				product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+				product.setProduct_img(rs.getString("product_img"));
+//				System.out.println(product);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL구문 오류 - selectProduct()");
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		return product;
 	// 관리자 - 상품 목록 조회
 	public List<ProductBean> selectProductList() {
 		ArrayList<ProductBean> productList = null;
