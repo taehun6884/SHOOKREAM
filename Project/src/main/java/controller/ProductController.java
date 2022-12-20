@@ -30,7 +30,7 @@ public class ProductController extends HttpServlet{
 		
 		if(command.equals("/ProductInsertForm.po")) {//Product 폼화면
 			forward = new ActionForward();
-			forward.setPath("product/ProductInsertForm.jsp");
+			forward.setPath("admin/admin_product_insert.jsp");
 			forward.setRedirect(false);
 			
 		}else if(command.equals("/ProductInsertPro.po")) {//Product 등록 작업
