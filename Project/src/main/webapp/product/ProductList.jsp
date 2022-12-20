@@ -142,8 +142,8 @@
                                     <thead>
                                         <tr>
                                             <th>상품명</th>
+                                            <th>이미지</th>
                                             <th>브랜드</th>
-                                            <th>판매가</th>
                                             <th>재고</th>
                                             <th>등록일</th>
                                             <th>수정</th>
@@ -162,11 +162,11 @@
                                     <tbody>
                                       <c:forEach var="product" items="${productList }">
 										<tr>
-										<td>${product.product_name } <img src="${product.product_img }" class="img-thumbnail" alt="..."></td>
+										<td>${product.product_name }</td>
+										<td><img src="./upload/${product.product_img }" class="img-thumbnail" alt="..." width="150" height="150"></td>
 										<td>${product.product_brand }</td>
 										<td>${product.product_price }</td>
 										<td>${product.product_amount }</td>
-										<td></td>
 										<td>
 										<button type="button" class="btn btn-light" onclick="location.href=''">수정</button>
 										<button type="button" class="btn btn-light" onclick="location.href=''">삭제</button>

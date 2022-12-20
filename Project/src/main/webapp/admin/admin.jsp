@@ -31,16 +31,11 @@
                             <li class="breadcrumb-item active">관리자 페이지</li>
                         </ol>
                         <div class="row">
-                            <div class="col-xl-3 col-md-6">
+                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
                                     <div class="card-body" onclick="location.href='AdminProduct.ad'">상품 관리</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="AdminProduct.ad">View Details</a>
-                                    <div class="card-body">
-                                    <a href="./MemberList.me" class="small text-white stretched-link">회원 관리</a>
-                                    </div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="./MemberList.me">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
