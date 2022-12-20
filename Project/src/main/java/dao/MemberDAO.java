@@ -196,7 +196,6 @@ private MemberDAO() {}
 		public boolean isRightUser(MemberBean member) {
 			boolean isRightUser = false;
 			
-			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
