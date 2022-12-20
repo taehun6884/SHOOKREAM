@@ -10,6 +10,7 @@ import java.util.List;
 
 import db.JdbcUtil;
 import vo.BoardBean;
+import vo.ProductBean;
 
 public class BoardDAO {
 private BoardDAO() {}
@@ -141,6 +142,8 @@ private BoardDAO() {}
 		
 		return listCount;
 	}
+	
+	
 	
 	
 	
