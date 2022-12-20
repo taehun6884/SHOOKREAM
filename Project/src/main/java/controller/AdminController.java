@@ -20,23 +20,16 @@ public class AdminController extends HttpServlet{
 		System.out.println("AdminController()");
 		
 		String command = request.getServletPath();
-		System.out.println("현재 주소 :"+command);
+		System.out.println("현재 주소 :" + command);
 		
 		ActionForward forward = null;
 		Action action = null;
 		
-		 if(command.equals("/AdminList.me")) { //회원 목록
-		
-		}else if(command.equals("/AdminModifyForm.me")) { //회원 정보 수정 창
-		
-		}else if(command.equals("/AdminModifyPro.me")) { //회원 정보 수정 pro
-		
-		}else if(command.equals("/AdminDeleteForm.me")) { //회원 삭제 창
-			
-		}else if(command.equals("/AdminDeletePro.me")) { //회원 삭제 pro
-		
+		 if(command.equals("/Admin.ad")) { //관리자 메인보드
+			 forward = new ActionForward();
+			 forward.setPath("admin/admin.jsp");
+			 forward.setRedirect(false);
 		}
-	
 			
 		if(forward != null) {
 			if(forward.isRedirect()) {
