@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.BoardDetailAction;
 import action.BoardListAction;
 import action.BoardWriteProAction;
 import vo.ActionForward;
@@ -20,14 +21,14 @@ import vo.ActionForward;
 public class BoardFrontController extends HttpServlet {
 	// GET or POST 방식 요청을 공통으로 처리할 doProcess() 메서드 정의
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("BoardFrontController");
+//		System.out.println("BoardFrontController");
 		
 		// POST 방식 요청에 대한 한글 인코딩 처리
 		request.setCharacterEncoding("UTF-8");
 		
 		// 서블릿 주소 추출
 		String command = request.getServletPath();
-		System.out.println("command : " + command);
+//		System.out.println("command : " + command);
 		
 		// 공통으로 사용할 변수 선언
 		Action action = null; // XXXAction 클래스를 공통으로 관리할 Action 인터페이스 타입 변수
@@ -36,7 +37,7 @@ public class BoardFrontController extends HttpServlet {
 
 		if(command.equals("/BoardWriteForm.bo")) {//공지 폼화면
 			forward = new ActionForward();
-			forward.setPath("admin/boardWriteForm.jsp");
+			forward.setPath("admin/board_write_form.jsp");
 			forward.setRedirect(false); 
 		} else if(command.equals("/BoardWritePro.bo")) { //공지쓰기 pro
 			action = new BoardWriteProAction();
@@ -45,7 +46,8 @@ public class BoardFrontController extends HttpServlet {
 			action = new BoardListAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/BoardInfo.bo")) { //공지 상세 정보
-		
+			action = new BoardDetailAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/BoardModifyForm.bo")) { //공지 정보 수정 창
 		
 		}else if(command.equals("/BoardModifyPro.bo")) { //공지 정보 수정 pro
