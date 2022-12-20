@@ -46,11 +46,10 @@ private ProductDAO() {}
 			System.out.println("새글 번호 :" + idx);
 			
 			//----------------상품 등록----------------------
-			sql = "INSERT INTO product"
-					+ "VALUES(?,?,?,?,?,0,0,?,0,?,?,?,?,?)";
+			sql = "INSERT INTO product VALUES(?,?,?,?,?,0,0,?,0,?,?,?,?,?)";
 			
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, idx); //name
+			pstmt.setInt(1, idx); //idx
 			pstmt.setString(2, product.getProduct_name()); //name
 			pstmt.setString(3, product.getProduct_brand()); //brand
 			pstmt.setString(4, product.getProduct_size()); // size

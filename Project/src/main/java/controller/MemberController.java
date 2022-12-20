@@ -76,8 +76,8 @@ public class MemberController extends HttpServlet{
 			action = new MemberModifyProAction();
 		}else if(command.equals("/dbCheckId.me")) { // id 중복체크
 //			System.out.println(request.getParameter("member_id"));
-			action = new MemberIdCheckProAction();
-			forward = action.execute(request, response);
+//			action = new MemberIdCheckProAction();
+//			forward = action.execute(request, response);
 		}
 	
 			
