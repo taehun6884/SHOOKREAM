@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.BoardListAction;
+import action.BoardWriteProAction;
 import vo.ActionForward;
 
 
@@ -32,21 +34,25 @@ public class BoardFrontController extends HttpServlet {
 		ActionForward forward = null; // 포워딩 정보를 저장할 ActionForward 타입 변수
 		
 
-		if(command.equals("/BoardInsertForm.me")) {//공지 폼화면
-
-		}else if(command.equals("/BoardJoinPro.me")) {//공지쓰기 pro
+		if(command.equals("/BoardWriteForm.bo")) {//공지 폼화면
+			forward = new ActionForward();
+			forward.setPath("admin/boardWriteForm.jsp");
+			forward.setRedirect(false); 
+		} else if(command.equals("/BoardWritePro.bo")) { //공지쓰기 pro
+			action = new BoardWriteProAction();
+			forward = action.execute(request, response);		
+		}else if(command.equals("/BoardList.bo")) { //공지 목록
+			action = new BoardListAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/BoardInfo.bo")) { //공지 상세 정보
 		
-		}else if(command.equals("/BoardList.me")) { //공지 목록
+		}else if(command.equals("/BoardModifyForm.bo")) { //공지 정보 수정 창
 		
-		}else if(command.equals("/BoardInfo.me")) { //공지 상세 정보
+		}else if(command.equals("/BoardModifyPro.bo")) { //공지 정보 수정 pro
 		
-		}else if(command.equals("/BoardModifyForm.me")) { //공지 정보 수정 창
+		}else if(command.equals("/BoardDeleteForm.bo")) { //공지 삭제 창
 		
-		}else if(command.equals("/BoardModifyPro.me")) { //공지 정보 수정 pro
-		
-		}else if(command.equals("/BoardDeleteForm.me")) { //공지 삭제 창
-		
-		}else if(command.equals("/BoardDeletePro.me")) { //공지 삭제 pro
+		}else if(command.equals("/BoardDeletePro.bo")) { //공지 삭제 pro
 			
 
 	}
