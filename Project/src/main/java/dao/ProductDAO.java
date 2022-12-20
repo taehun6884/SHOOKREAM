@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import db.JdbcUtil;
 import vo.ProductBean;
 
 public class ProductDAO {
@@ -77,15 +79,31 @@ private ProductDAO() {}
 		public List<ProductBean> getCartList() {
 			 List<ProductBean> cartlist = null;
 			 PreparedStatement pstmt =  null;
-			 
-			 
-			 
-			 String sql ="SELECT p.product_name, p.product_size, p.product_price,p.product_brand,p.product,p.product_original_image  "
+			 ResultSet rs = null;
+				
+			 String sql ="SELECT c.cart_idx,p.product_name, p.product_size, p.product_price,p.product_brand,p.product_image  "
 			 		+ "FROM shookream.cart c join shookream.product p "
 			 		+ "on c.product_idx = p.product_idx";
-			
-			 
-			 
+			 try {
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				cartlist = new ArrayList<ProductBean>();
+				while(rs.next()) {
+					ProductBean vo = new ProductBean();
+					vo.setCart_idx(rs.getInt("cart_idx"));
+					vo.setProduct_name(rs.getString("product_name"));
+					vo.setProduct_size(rs.getNString("product_size"));
+					vo.setProduct_price(rs.getInt("product_price"));
+					vo.setProduct_brand(rs.getNString("product_brand"));
+					vo.setProduct_img(rs.getString("product_image"));
+					cartlist.add(vo);
+				}
+			 } catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
 			return cartlist;
 		}
 	

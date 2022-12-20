@@ -19,7 +19,6 @@ public class CartListProService {
 			
 		cartlist = dao.getCartList();
 		
-		
 		JdbcUtil.close(con);
 		
 		return cartlist;
