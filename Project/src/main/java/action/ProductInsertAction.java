@@ -58,7 +58,7 @@ public class ProductInsertAction implements Action {
 
 		if(insertCount > 0) {
 			forward = new ActionForward();
-			forward.setPath("Admin.ad");
+			forward.setPath("AdminProduct.ad");
 			forward.setRedirect(true);
 			
 		}
