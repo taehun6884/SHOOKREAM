@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,16 +58,24 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <div id = "sform">
         <h4>회원가입</h4>
         <p>Questions? Go ahead.</p>
-        <form action="MemberJoinPro.me" method="post">
+        <form action="MemberJoinPro.me" method="post" name="joinForm">
           <table>
           <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="name" name="name" required></td>
+          <td width="300px">
+          <input class="w3-input w3-border" type="text" placeholder="name" name="name" required></td>
           </tr>
           <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="id" name="id" required></td>
+          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="id" name="id" id="id" required onkeydown="inputIdChk()">
+          <td>
+         <button type="button" class="btn btn-secondary" name="dbCheckId" onclick="fn_dbCheckId()">ID check</button>
+         <input type="hidden" name="isCheckId" value="idUncheck"/> <!-- 체크 여부 확인 -->
+          </td>
           </tr>
           <tr>
-          <td width="300px"><input class="w3-input w3-border" type="password" placeholder="password" name="pass" required></td>
+          <td width="300px">
+          <input class="w3-input w3-border" type="password" placeholder="password" name="pass" required onkeyup="checkPasswd(this.value)">
+          <span id="checkPasswdResult"></span>
+          </td> <!-- 비밀번호 확인 -->
           </tr>
           <tr>
           <td width="300px"><input class="w3-input w3-border" type="text" placeholder="phone   ex) 01012345678" name="phone" required></td>
@@ -81,7 +90,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           <td width="300px"><input class="w3-input w3-border" type="text" placeholder="address_detail" name="address_detail" required></td>
           </tr>
           <tr>
-          <td><button type="submit" class="w3-button w3-block w3-black">Send</button></td>
+          <td><button type="submit" class="w3-button w3-block w3-black" onclick="fn_joinMember()">Send</button></td>
 		  </tr> 	        
         </table>
         </form>
@@ -106,10 +115,55 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   </div>
 </div>
 
-
+<c:set var="contextPath" value="<%= request.getContextPath()%>"/>
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
 <script>
+
+function fn_joinMember() {
+	var joinForm = document.joinForm;
+	
+	if(joinForm.isCheckId.value != "idCheck"){
+		alert("ID 중복체크를 해주세요!")
+		event.preventDefault(); // submit 기능 막기
+	}
+}
+
+function fn_dbCheckId() {
+	var id = document.getElementById("id").value;
+	if(id.length == 0 || id == ""){
+		alert("아이디를 입력해주세요.");
+		joinForm.id.focus();
+	}else{
+		window.open("dbCheckId.me?member_id="+id,"","width=300, height=200, left=600, top=300");
+// 		window.open("http://localhost:8080/Project/dbCheckId.me?member_id="+id,"","width=500, height=300");
+	}
+}
+
+function inputIdChk(){
+	var joinForm = document.joinForm;
+	var dbCheckId = document.joinForm.dbCheckId;
+	document.joinForm.isCheckId.value = "idUncheck";
+	dbCheckId.disabled=false;
+	openJoinfrm.dbCheckId.style.opacity=1;
+	openJoinfrm.dbCheckId.style.cursor="pointer";
+}
+
+
+function checkPasswd(passwd) { // 패스워드 길이 체크
+	let spanCheckPasswdResult = document.getElementById("checkPasswdResult");
+
+	if(passwd.length >= 8 && passwd.length <= 16) {
+		spanCheckPasswdResult.innerHTML = "사용 가능한 패스워드 입니다";
+		spanCheckPasswdResult.style.color = "BLUE";    		
+	} else {
+		spanCheckPasswdResult.innerHTML = "8 ~ 16자를 입력하세요";
+		spanCheckPasswdResult.style.color = "RED";
+	}
+}
+
+
+
 // Accordion 
 function myAccFunc() {
   var x = document.getElementById("demoAcc");

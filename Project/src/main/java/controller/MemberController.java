@@ -8,12 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import action.Action;
 
 import action.MemberJoinProAction;
 import action.MemberListAction;
 import action.MemberDeleteMemberProAction;
+import action.MemberIdCheckProAction;
 import action.MemberLoginMemberProAction;
 import action.MemberLogoutProAction;
 import action.MemberModifyFormAction;
@@ -54,7 +56,6 @@ public class MemberController extends HttpServlet{
 		}else if(command.equals("/MemberList.me")) { //회원 목록
 			action = new MemberListAction();
 			forward = action.execute(request, response);
-		
 		}else if(command.equals("/MemberModifyForm.me")) { //회원 정보 수정 창
 			action = new MemberModifyFormAction();
 			forward = action.execute(request, response);
@@ -68,7 +69,6 @@ public class MemberController extends HttpServlet{
 		}else if(command.equals("/MemberDeletePro.me")) { //회원 삭제 pro
 			action = new MemberDeleteMemberProAction(); 
 			forward = action.execute(request, response);
-
 		}else if(command.equals("/MemberDeleteMemberProAction.me")) { //회원 삭제 창
 			action = new MemberDeleteMemberProAction();
 			forward = action.execute(request, response);
@@ -78,8 +78,9 @@ public class MemberController extends HttpServlet{
 //			System.out.println(request.getParameter("member_id"));
 //			action = new MemberIdCheckProAction();
 //			forward = action.execute(request, response);
+			action = new MemberIdCheckProAction();
+			forward = action.execute(request, response);
 		}
-	
 			
 		if(forward != null) {
 			if(forward.isRedirect()) {
