@@ -10,6 +10,7 @@ import java.util.List;
 
 import db.JdbcUtil;
 import vo.BoardBean;
+import vo.ProductBean;
 
 public class BoardDAO {
 private BoardDAO() {}
@@ -64,7 +65,7 @@ private BoardDAO() {}
 			e.printStackTrace();
 		} finally {
 			JdbcUtil.close(rs);
-//			JdbcUtil.close(pstmt);
+			JdbcUtil.close(pstmt);
 			JdbcUtil.close(pstmt2);
 
 		}
@@ -81,7 +82,7 @@ private BoardDAO() {}
 			String sql = "SELECT * FROM notice "
 					+ "WHERE notice_subject "
 					+ "LIKE ? "
-					+ "ORDER BY notice_idx DESC" 
+					+ "ORDER BY notice_idx DESC " 
 					+ "LIMIT ?,?";
 			
 			pstmt = con.prepareStatement(sql);
@@ -141,6 +142,65 @@ private BoardDAO() {}
 		
 		return listCount;
 	}
+	
+	public BoardBean selectBoard(int notice_idx) {
+		BoardBean board = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			String sql = "SELECT * FROM notice WHERE notice_idx=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, notice_idx);
+			rs = pstmt.executeQuery(); // SQL 구문 실행
+			
+			if(rs.next()) { 
+				board = new BoardBean(); 
+				board.setNotice_idx(rs.getInt("notice_idx"));
+				board.setNotice_category(rs.getString("notice_category"));
+				board.setNotice_subject(rs.getString("notice_subject"));
+				board.setNotice_content(rs.getString("notice_content"));
+				board.setNotice_readcount(rs.getInt("notice_readcount"));
+				board.setNotice_date(rs.getDate("notice_date"));
+				board.setNotice_type(rs.getString("notice_type"));
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류! - selectBoard()");
+			e.printStackTrace();
+		} finally {
+			// 자원 반환
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return board; 
+	}
+	
+	public int updateReadcount(int notice_idx) {
+		int updateCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			// 글번호가 일치하는 레코드의 조회수(readcount) 1만큼 증가
+			String sql = "UPDATE notice "
+								+ "SET notice_readcount=notice_readcount+1 "
+								+ "WHERE notice_idx=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, notice_idx);
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("BoardDAO - updateReadcount()");
+			e.printStackTrace();
+		} finally {
+			// DB 자원 반환
+			JdbcUtil.close(pstmt);
+		}
+		return updateCount;
+	}
+	
 	
 	
 	

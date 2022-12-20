@@ -44,7 +44,7 @@ public class MemberJoinProAction implements Action {
 			} else { // 성공 시
 				forward = new ActionForward();
 				forward.setPath("member/member_join_result.jsp");
-				forward.setRedirect(true);
+				forward.setRedirect(false);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

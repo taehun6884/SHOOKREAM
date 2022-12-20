@@ -12,7 +12,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+
 <!-- 네이버아이디로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -62,23 +63,27 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
     <div id = "sform">
         <h4>로그인</h4>
-        <p>Questions? Go ahead.</p>
         <form action="LoginMemberPro.me" method="post">
           <table>
           <tr>
           <td width="300px"><input class="w3-input w3-border" type="text" placeholder="id" name="id" required></td>
           </tr>
           <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="pass" name="pass" required></td>
+          <td width="300px"><input class="w3-input w3-border" type="password" placeholder="pass" name="pass" required></td>
           </tr>
           <tr>
-          <td><button type="submit" class="w3-button w3-block w3-black">Send</button></td>
+          <td><button type="submit" class="w3-button w3-block w3-black">로그인</button></td>
 		  </tr> 	        
           <tr>
           	<td>
           		<div id="naver_id_login"></div>
 				<a href="javascript:kakaoLogin();"><img src="./images/kakao_login_medium_narrow.png"></a>
 				</td>
+          </tr>
+          <tr>
+          	<td>
+          		<button type="button" class="btn btn-secondary" onclick="location.href='MemberJoinForm.me'">회원가입</button>
+          	</td>
           </tr>
         </table>
         </form>
@@ -225,7 +230,9 @@ function kakaoLogout() {
     }
   }  
 </script>
-  
+<!-- plugin -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+ 
   
 </body>
 </html>
