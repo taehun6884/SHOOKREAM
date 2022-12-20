@@ -16,6 +16,12 @@
           display: inline-block;
           text-align: center;
         }
+        
+#dbCheckId {
+		display:inline;
+      margin-left: -90px;
+      box-sizing: border-box;
+}
 </style>
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
@@ -65,9 +71,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           <input class="w3-input w3-border" type="text" placeholder="name" name="name" required></td>
           </tr>
           <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="id" name="id" id="id" required onkeydown="inputIdChk()">
+          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="ID" name="id" id="id" required onkeydown="inputIdChk()">
           <td>
-         <button type="button" class="btn btn-secondary" name="dbCheckId" onclick="fn_dbCheckId()">ID check</button>
+         <button type="button" class="btn btn-secondary" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">ID check</button>
          <input type="hidden" name="isCheckId" value="idUncheck"/> <!-- 체크 여부 확인 -->
           </td>
           </tr>
