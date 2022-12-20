@@ -18,6 +18,8 @@ public class LoginMemberService {
 		
 		isLoginUser = dao.isLoginUser(id,pass);
 		
+		JdbcUtil.close(con);
+		
 		return isLoginUser;
 	}
 
