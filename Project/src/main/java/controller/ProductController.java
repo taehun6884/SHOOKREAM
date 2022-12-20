@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.ProductInsertAction;
+import action.ProductListAction;
 import vo.ActionForward;
 
 @WebServlet("*.po") // 상품 컨트롤러
@@ -29,15 +30,15 @@ public class ProductController extends HttpServlet{
 		
 		if(command.equals("/ProductInsertForm.po")) {//Product 폼화면
 			forward = new ActionForward();
-			forward.setPath("product/ProductInsertForm.jsp");
+			forward.setPath("admin/admin_product_insert.jsp");
 			forward.setRedirect(false);
 			
 		}else if(command.equals("/ProductInsertPro.po")) {//Product 등록 작업
 			action = new ProductInsertAction();
 			forward = action.execute(request, response);
-			
 		}else if(command.equals("/ProductList.po")) { //Product 목록
-		
+			action = new ProductListAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/ProductInfoForm.po")) { //Product 상세 정보
 		
 		}else if(command.equals("/ProductInfoPro.po")) { //Product 상세 정보

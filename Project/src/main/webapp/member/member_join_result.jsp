@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+
 <style type="text/css">
 #sform {
           display: inline-block;
@@ -23,7 +25,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </head>
 <body class="w3-content" style="max-width:1200px">
 
-<!-- Sidebar/menu -->
+<!-- Sidebar/menu --> 
 <jsp:include page="../inc/side.jsp"/>
 
 <!-- Top menu on small screens -->
@@ -55,9 +57,10 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
     <div id = "sform">
         <h4>회원가입에 성공했습니다.</h4>
-        <p>Questions? Go ahead.</p>
-     
-    </div>
+
+		<button type="button" class="btn btn-secondary" onclick="location.href='LoginMember.me'">로그인</button>
+
+	</div>
   </footer>
  </div>	
   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
@@ -148,8 +151,8 @@ function w3_close() {
   });
 </script>
 <!-- End Channel Plugin -->
-
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
 </script>
+
 </body>
 </html>

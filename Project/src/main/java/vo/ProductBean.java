@@ -9,7 +9,7 @@ private String product_name; // 상품 이름
 private String product_brand; // 상품 브랜드명
 private int product_price; // 상품 가격
 private String product_size; // 상품 사이즈
-private Date product_release_price; // 상품 쿠폰적용가격
+private int product_release_price; // 상품 쿠폰적용가격
 private int product_buy_price; // 상품 누적 가격
 private int product_amount; // 상품 재고량
 private int product_sell_count; // 상품 판매수
@@ -51,10 +51,10 @@ public String getProduct_size() {
 public void setProduct_size(String product_size) {
 	this.product_size = product_size;
 }
-public Date getProduct_release_price() {
+public int getProduct_release_price() {
 	return product_release_price;
 }
-public void setProduct_release_price(Date product_release_price) {
+public void setProduct_release_price(int product_release_price) {
 	this.product_release_price = product_release_price;
 }
 public int getProduct_buy_price() {

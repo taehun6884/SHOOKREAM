@@ -14,7 +14,6 @@ public class BoardWriteProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("BoardWriteProAction");
 		
 		ActionForward forward = null;
 		
@@ -22,9 +21,10 @@ public class BoardWriteProAction implements Action {
 			BoardBean board = new BoardBean();
 			board.setNotice_category(request.getParameter("notice_category"));
 			board.setNotice_subject(request.getParameter("notice_subject"));
-			board.setNotice_content(request.getParameter("noctice_content"));
-//			board.setNotice_type(request.getParameter("notice_type"));
+			board.setNotice_content(request.getParameter("notice_content"));
+			board.setNotice_type(request.getParameter("notice_type"));
 			
+			System.out.println(board);
 			 
 			BoardWriteProService service = new BoardWriteProService();
 			boolean isWriteSuccess = service.registBoard(board);
@@ -49,8 +49,6 @@ public class BoardWriteProAction implements Action {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-	
 		
 		return forward;
 	}
