@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.ProductInfoProAction;
 import action.ProductInsertAction;
 import vo.ActionForward;
 
@@ -39,8 +40,8 @@ public class ProductController extends HttpServlet{
 		}else if(command.equals("/ProductList.po")) { //Product 목록
 		
 		}else if(command.equals("/ProductInfoForm.po")) { //Product 상세 정보
-		
-		}else if(command.equals("/ProductInfoPro.po")) { //Product 상세 정보
+			action = new ProductInfoProAction();
+			forward = action.execute(request, response);
 			
 		}else if(command.equals("/ProductModifyForm.po")) { //Product 정보 수정 창
 		
