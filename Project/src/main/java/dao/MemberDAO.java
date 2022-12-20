@@ -47,8 +47,11 @@ private MemberDAO() {}
 				isLogintUser = true;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("구문 오류 - isLoginUser");
 			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
 		}
 		
 		return isLogintUser;
@@ -222,7 +225,6 @@ private MemberDAO() {}
 				//DB 자원 반환(역순)
 			 	JdbcUtil.close(rs);
 				JdbcUtil.close(pstmt);
-				JdbcUtil.close(con);
 			}	
 			
 			return isRightUser;
