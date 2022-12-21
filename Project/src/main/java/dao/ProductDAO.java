@@ -288,6 +288,74 @@ private ProductDAO() {}
 			}
 			return productNewList;
 		}
-	
-	
+
+		public boolean updateProduct(ProductBean product, boolean updateProduct) {
+			int updateProduct2 =0;
+			boolean updateProduct1 = false;
+			
+			PreparedStatement pstmt =null;
+			
+			System.out.println(product);
+			
+			String sql ="UPDATE product SET product_name=?,  product_brand=?,  product_price=?, product_size=? , product_amount=?, product_color=?,  product_exp=?,  product_detail_exp=?,  product_discount_price=?, product_img=? ";
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, product.getProduct_name());
+				pstmt.setString(2, product.getProduct_brand());
+				pstmt.setInt(3, product.getProduct_price());
+				pstmt.setString(4, product.getProduct_size());
+				pstmt.setInt(5, product.getProduct_amount());
+				pstmt.setString(6, product.getProduct_color());
+				pstmt.setString(7, product.getProduct_exp());
+				pstmt.setString(8, product.getProduct_detail_exp());
+				pstmt.setDouble(9, product.getProduct_discount_price());
+				pstmt.setString(10, product.getProduct_img());
+				updateProduct2 = pstmt.executeUpdate();
+				if(updateProduct2 > 0) {
+					updateProduct1 =true;
+				}
+					} catch (SQLException e) {
+				System.out.println("sql 구문오류 -updateProduct");
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			} 
+		
+		return updateProduct1;
+}
+
+		public ProductBean getProduct(int idx) {
+			ProductBean bean = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs  = null;
+			String sql = "SELECT * FROM product WHERE product_idx=?";
+			try {
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, idx);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					bean = new ProductBean();
+					bean.setProduct_name(rs.getString("product_name"));
+					bean.setProduct_brand(rs.getString("product_brand"));
+					bean.setProduct_price(rs.getInt("product_price"));
+					bean.setProduct_size(rs.getString("product_size"));
+					bean.setProduct_amount(rs.getInt("product_amount"));
+					bean.setProduct_color(rs.getString("product_color"));
+					bean.setProduct_exp(rs.getString("product_exp"));
+					bean.setProduct_detail_exp(rs.getString("product_detail_exp"));
+					bean.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					bean.setProduct_img(rs.getString("product_img"));
+					
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return bean;
+		}
 }//DAO 끝
