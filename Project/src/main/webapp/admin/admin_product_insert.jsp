@@ -59,8 +59,12 @@
 					</tr>
 					<tr>
 						<td width="100px" align="left" >상품 가격</td>
-						<td><input type="text" id="testPrice" name ="price" placeholder="원래 가격을 입력하세요" onkeyup="inputNumberFormat(this);"><span>&nbsp;원</span></td>
+						<td><input type="text" id="testPrice" name ="inputprice" placeholder="원래 가격을 입력하세요" onkeyup="inputNumberFormat(this);"><span>&nbsp;원</span> <!-- 콤마 있는 값 -->
+							<input type="hidden" name ="price" onchange="deleteComma();"> <!--  콤마 제거해서 넘기는 값 -->
+						</td>
+						
 					</tr>
+					
 						
 					<tr>
 						<td width="100px" align="left">할인율</td>
@@ -175,6 +179,15 @@
 			        document.querySelector('#testResultBox02').innerText = newPriceResult + '원'
 			    }
 			});
+		</script>
+		
+		<script type="text/javascript">
+	   	
+		function deleteComma() {
+			var price = document.getElementById("testPrice");
+			var deletePrice = price.value.replace(/,/g, "");
+	   		return deletePrice;
+	   	} 	
 		</script>
 		
 	<!-- 숫자 에 "," 처리를 위한 함수 -->

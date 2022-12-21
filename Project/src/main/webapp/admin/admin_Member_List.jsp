@@ -42,7 +42,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                상품 목록 조회
+                                회원 목록 조회
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
