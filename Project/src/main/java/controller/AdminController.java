@@ -29,9 +29,13 @@ public class AdminController extends HttpServlet{
 			 forward = new ActionForward();
 			 forward.setPath("admin/admin.jsp");
 			 forward.setRedirect(false);
-		} else  if(command.equals("/AdminProduct.ad")) { //관리자 메인보드 -> 상품관리
+		} else if(command.equals("/AdminProduct.ad")) { //관리자 메인보드 -> 상품관리
 			 forward = new ActionForward();
 			 forward.setPath("admin/admin_product.jsp");
+			 forward.setRedirect(false);
+		} else if(command.equals("/AdminBoardManage.ad")) {
+			forward = new ActionForward();
+			 forward.setPath("admin/admin_board_manage.jsp");
 			 forward.setRedirect(false);
 		}
 			

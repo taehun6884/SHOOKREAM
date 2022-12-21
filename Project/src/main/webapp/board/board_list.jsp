@@ -65,7 +65,6 @@
 			      <th scope="col">구분</th>
 			      <th scope="col">제목</th>
 			      <th scope="col">등록일</th>
-<!-- 			      <th scope="col">게시판 관리</th> -->
 			    </tr>
 			  </thead>
 			 <c:forEach var="board" items="${boardList }">
@@ -77,11 +76,6 @@
 			      	<a href="BoardInfo.bo?notice_idx=${board.notice_idx }&pageNum=${pageNum }" style="text-decoration:none">${board.notice_subject }</a>
 				  </td>
 			      <td>${board.notice_date }</td>
-<!-- 			      <td> -->
-<!-- 			      	<input type="button" value="수정"  class="btn btn-outline-secondary btn-sm" onclick="location.href="> -->
-<!-- 					<input type="button" value="삭제" class="btn btn-outline-secondary btn-sm" onclick="confirmDelete()"> -->
-<!-- 					<input type="button" value="고정글" class="btn btn-outline-secondary btn-sm" onclick="confirmDelete()"> -->
-<!-- 			      </td> -->
 			    </tr>
 			  </tbody>
 			 </c:forEach> 
