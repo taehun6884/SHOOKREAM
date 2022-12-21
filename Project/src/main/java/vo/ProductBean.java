@@ -1,8 +1,8 @@
 package vo;
 
+
 import java.sql.Date;
 import java.sql.Timestamp;
-
 public class ProductBean {
 //----------멤버변수-------------
 private int product_idx; //상품번호
@@ -20,8 +20,7 @@ private String product_color; // 상품 색상 카테고리
 private double product_discount_price; // 상품 할인율
 private String product_img; // 상품 사진
 private Timestamp product_date; // 등록일
-
-
+private int cart_idx;
 //------------getter, setter-------------------
 public int getProduct_idx() {
 	return product_idx;
@@ -106,6 +105,11 @@ public String getProduct_img() {
 }
 public void setProduct_img(String product_img) {
 	this.product_img = product_img;
+}public int getCart_idx() {
+	return cart_idx;
+}
+public void setCart_idx(int cart_idx) {
+	this.cart_idx = cart_idx;
 }
 
 public Timestamp getProduct_date() {
@@ -115,7 +119,6 @@ public void setProduct_date(Timestamp product_date) {
 	this.product_date = product_date;
 }
 //-----------------toString--------------------
-
 @Override
 public String toString() {
 	return "ProductBean [product_idx=" + product_idx + ", product_name=" + product_name + ", product_brand="
@@ -123,8 +126,12 @@ public String toString() {
 			+ ", product_release_price=" + product_release_price + ", product_buy_price=" + product_buy_price
 			+ ", product_amount=" + product_amount + ", product_sell_count=" + product_sell_count + ", product_exp="
 			+ product_exp + ", product_detail_exp=" + product_detail_exp + ", product_color=" + product_color
-			+ ", product_discount_price=" + product_discount_price + ", product_img=" + product_img + "]";
+			+ ", product_discount_price=" + product_discount_price + ", product_img=" + product_img + ", cart_idx="
+			+ cart_idx + "]";
 }
+
+
+
 
 
 

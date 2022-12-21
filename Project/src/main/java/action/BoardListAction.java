@@ -39,13 +39,8 @@ public class BoardListAction implements Action {
 		BoardListService service = new BoardListService();
 		
 		List<BoardBean> boardList = service.getBoardList(keyword, startRow, listLimit);
-//		System.out.println(boardList);
-		
-		//--------------------------------------------------------------------------------------
-		// 페이징 처리에 사용될 게시물 목록 갯수 조회
-		// BoardListService - getBoardListCount()
+
 		int listCount = service.getBoardListCount(keyword);
-//		System.out.println("listCount : " + listCount);
 		
 		int pageListLimit = 3; 
 		
@@ -61,15 +56,13 @@ public class BoardListAction implements Action {
 			endPage = maxPage;
 		}
 		
-		// PageInfo에 페이징처리 정보 저장 > dto 기능
 		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
-		// -----------------------------------------------------------------------------
-		// 글목록(List 객체)과 페이징처리정보를 request 객체에 저장 - setAttribute()
+
 		request.setAttribute("boardList", boardList);
 		request.setAttribute("pageInfo", pageInfo);
 		
 		forward = new ActionForward();
-		forward.setPath("board/qna_board_list.jsp");
+		forward.setPath("board/board_list.jsp");
 		forward.setRedirect(false);
 		
 		// action클래스들은 redirect/ dispatcher 인지 모르므로 actionforward객체 필요.

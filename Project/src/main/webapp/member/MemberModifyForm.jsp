@@ -68,11 +68,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           <tr>
           <td width="300px"><input class="w3-input w3-border" type="text" placeholder="id" name="id" value = "${member.member_id }" required></td>
           </tr>
-<<<<<<< Updated upstream
           <tr>
           <td width="300px"><input class="w3-input w3-border" type="text" placeholder="pass" name="pass" value = "${member.member_pass }" required></td>
           <td><button type="submit" class="w3-button w3-block w3-black">수정</button></td>
-=======
           <tr> <!-- 기존 패스워드 -->
           <td width="300px"><input class="w3-input w3-border" type="text" placeholder="pass" name="oldpass" value = "${member.member_pass }" required></td>
           </tr>
@@ -81,7 +79,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </tr>
           <tr> <!-- 새 패스워드 확인 -->
           <td width="300px"><input class="w3-input w3-border" type="text"  name="newpass2" placeholder="새 비밀번호 확인(변경시에만 입력)" ></td>
->>>>>>> Stashed changes
           </tr>
           <tr>
           <td width="300px"><input class="w3-input w3-border" type="text" placeholder="address" name="address" value = "${member.member_address }" required></td>
@@ -95,10 +92,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           <td width="300px"><input class="w3-input w3-border" type="text" placeholder="phone" name="phone" value = "${member.member_phone }" required></td>
           <td><button type="submit" class="w3-button w3-block w3-black">수정</button></td>
           </tr>
-<<<<<<< Updated upstream
-         	        
-=======
->>>>>>> Stashed changes
         </table>
         </form>
     </div>
