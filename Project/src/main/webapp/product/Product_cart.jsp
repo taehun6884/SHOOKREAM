@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.net.URLEncoder" %>
-<%@ page import="java.security.SecureRandom" %>
-<%@ page import="java.math.BigInteger" %>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +21,12 @@
           text-align: center;
         }
 </style>
+<style type="text/css">
+#table, {
+     text-align: center;
+}
+</style>
+
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
@@ -59,32 +63,30 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- Footer -->
   <footer class="w3-padding-64 w3-small w3-center" id="footer">
   <table class="table">
-  <thead>
+  <thead  class="table-dark" >
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">image</th>
+      <th scope="col">name</th>
+      <th scope="col">brand</th>
+      <th scope="col">price</th>
+      <th scope="col">size</th>
+      <th scope="col">delete</th>
     </tr>
   </thead>
   <tbody>
+    
+    <c:forEach var="cart" items="${cartlist }">
     <tr>
-      <th scope="row">1</th>
-      <td><img src="../images/jeans.jpg" class="img-thumbnail" width="150" height="150"></td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row">${cart.cart_idx }</th>
+      <td><img src="upload/${cart.product_img }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
+      <td>${cart.product_name }</td>
+      <td>${cart.product_brand }</td>
+      <td>${cart.product_price }</td>
+      <td>${cart.product_size }</td>
+      <td><button type="button" class="btn btn-dark">삭제</button></td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    </c:forEach>
   </tbody>
 </table>
 </footer>

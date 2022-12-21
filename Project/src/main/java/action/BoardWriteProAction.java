@@ -39,9 +39,8 @@ public class BoardWriteProAction implements Action {
 				out.println("history.back()");
 				out.println("</script>");
 			} else { // 성공 시
-				// 서버에서 명령. 자바스크립트 사용시 자바스크립트로 이동하는 서블릿을 설정해야함
 				forward = new ActionForward();
-				forward.setPath("BoardList.bo");
+				forward.setPath("AdminBoardManage.ad");
 				forward.setRedirect(true);
 				
 			}

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-
+import action.CartListProAction;
 import vo.ActionForward;
 
 @WebServlet("*.ca") // 장바구니 컨트롤러
@@ -29,9 +29,8 @@ public class CartController extends HttpServlet{
 		//-----------------------------------------------
 		//장바구니
 		if(command.equals("/CartList.ca")) {//Cart 폼화면
-			forward = new ActionForward();
-			forward.setPath("member/product_cart.jsp");
-			forward.setRedirect(false);
+			action = new CartListProAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/CartInsertPro.ca")) {//Cart Pro
 
 		}else if(command.equals("/CartDeleteForm.ca")) { //Cart 삭제 창

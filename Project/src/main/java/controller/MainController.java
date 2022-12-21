@@ -10,34 +10,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.MainListAction;
+import action.ProductInsertAction;
+import action.ProductListAction;
 import vo.ActionForward;
 
-@WebServlet("*.ad")//관리자
-public class AdminController extends HttpServlet{
+@WebServlet("*.MAIN") // 메인 페이지 컨트롤러
+public class MainController extends HttpServlet{
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		System.out.println("AdminController()");
+		System.out.println("MainController()");
 		
 		String command = request.getServletPath();
-		System.out.println("현재 주소 :" + command);
+		System.out.println("현재 주소 :"+command);
 		
 		ActionForward forward = null;
 		Action action = null;
 		
-		 if(command.equals("/Admin.ad")) { //관리자 메인보드
-			 forward = new ActionForward();
-			 forward.setPath("admin/admin.jsp");
-			 forward.setRedirect(false);
-		} else if(command.equals("/AdminProduct.ad")) { //관리자 메인보드 -> 상품관리
-			 forward = new ActionForward();
-			 forward.setPath("admin/admin_product.jsp");
-			 forward.setRedirect(false);
-		} else if(command.equals("/AdminBoardManage.ad")) {
-			forward = new ActionForward();
-			 forward.setPath("admin/admin_board_manage.jsp");
-			 forward.setRedirect(false);
+		
+		if(command.equals("/main.MAIN")) {// Main 폼화면
+			action = new MainListAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("")) {
 		}
+	
 			
 		if(forward != null) {
 			if(forward.isRedirect()) {

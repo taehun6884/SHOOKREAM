@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.ProductInfoProAction;
 import action.ProductInsertAction;
 import action.ProductListAction;
 import vo.ActionForward;
@@ -32,7 +33,6 @@ public class ProductController extends HttpServlet{
 			forward = new ActionForward();
 			forward.setPath("admin/admin_product_insert.jsp");
 			forward.setRedirect(false);
-			
 		}else if(command.equals("/ProductInsertPro.po")) {//Product 등록 작업
 			action = new ProductInsertAction();
 			forward = action.execute(request, response);
@@ -40,8 +40,8 @@ public class ProductController extends HttpServlet{
 			action = new ProductListAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/ProductInfoForm.po")) { //Product 상세 정보
-		
-		}else if(command.equals("/ProductInfoPro.po")) { //Product 상세 정보
+			action = new ProductInfoProAction();
+			forward = action.execute(request, response);
 			
 		}else if(command.equals("/ProductModifyForm.po")) { //Product 정보 수정 창
 		
@@ -52,6 +52,8 @@ public class ProductController extends HttpServlet{
 		}else if(command.equals("/ProductDeletePro.po")) { //Product 삭제 pro
 			
 		}else if(command.equals("/ProductOrderForm.po")) { //Product 삭제 pro
+			
+		}else if(command.equals("/ProductOrderPro.po")) { //Product 삭제 pro
 			
 		}else if(command.equals("/ProductOrderPro.po")) { //Product 삭제 pro
 			
