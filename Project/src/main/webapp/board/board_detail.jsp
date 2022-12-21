@@ -1,7 +1,14 @@
+<%@page import="vo.BoardBean"%>
+<%@page import="dao.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri ="http://java.sun.com/jsp/jstl/functions" %>
+<%
+pageContext.setAttribute("br", "<br/>");
+pageContext.setAttribute("cn", "\n");
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -54,7 +61,7 @@
 			<h5><b>${board.notice_subject }</b></h5><br>
 			Date:${board.notice_date } / View:${board.notice_readcount }
 			<hr>
-			${board.notice_content }			
+			${fn:replace(board.notice_content, cn, br) }			
 		</footer> 
 		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
 	
