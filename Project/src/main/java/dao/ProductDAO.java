@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import db.JdbcUtil;
-import java.util.List;
 
 import db.JdbcUtil;
 import vo.ProductBean;
@@ -117,6 +115,8 @@ private ProductDAO() {}
 			JdbcUtil.close(pstmt);
 		}
 		return product;
+	}
+	
 	// 관리자 - 상품 목록 조회
 	public List<ProductBean> selectProductList() {
 		ArrayList<ProductBean> productList = null;
