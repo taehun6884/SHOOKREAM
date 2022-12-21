@@ -107,6 +107,7 @@ private ProductDAO() {}
 				product.setProduct_color(rs.getString("product_color"));
 				product.setProduct_discount_price(rs.getDouble("product_discount_price"));
 				product.setProduct_img(rs.getString("product_img"));
+				product.setProduct_date(rs.getTimestamp("product_date"));
 //				System.out.println(product);
 			}
 		} catch (SQLException e) {
@@ -117,6 +118,9 @@ private ProductDAO() {}
 			JdbcUtil.close(pstmt);
 		}
 		return product;
+	}
+	
+	
 	// 관리자 - 상품 목록 조회
 	public List<ProductBean> selectProductList() {
 		ArrayList<ProductBean> productList = null;
