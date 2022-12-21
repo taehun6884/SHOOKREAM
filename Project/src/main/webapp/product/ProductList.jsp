@@ -168,6 +168,7 @@
 										<td>${product.product_brand }</td>
 										<td>${product.product_price }</td>
 										<td>${product.product_amount }</td>
+										<td>${product.product_date}</td>
 										<td>(등록일 추가)</td>
 										<td>
 										<button type="button" class="btn btn-light" onclick="location.href=''">수정</button>

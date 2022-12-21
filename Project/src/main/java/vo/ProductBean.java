@@ -1,5 +1,8 @@
 package vo;
 
+
+import java.sql.Date;
+import java.sql.Timestamp;
 public class ProductBean {
 //----------멤버변수-------------
 private int product_idx; //상품번호
@@ -16,8 +19,8 @@ private String product_detail_exp; // 상품 상세설명
 private String product_color; // 상품 색상 카테고리
 private double product_discount_price; // 상품 할인율
 private String product_img; // 상품 사진
+private Timestamp product_date; // 등록일
 private int cart_idx;
-
 //------------getter, setter-------------------
 public int getProduct_idx() {
 	return product_idx;
@@ -107,6 +110,13 @@ public void setProduct_img(String product_img) {
 }
 public void setCart_idx(int cart_idx) {
 	this.cart_idx = cart_idx;
+}
+
+public Timestamp getProduct_date() {
+	return product_date;
+}
+public void setProduct_date(Timestamp product_date) {
+	this.product_date = product_date;
 }
 //-----------------toString--------------------
 @Override
