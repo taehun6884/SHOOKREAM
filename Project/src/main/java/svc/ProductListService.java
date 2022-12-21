@@ -39,4 +39,18 @@ public class ProductListService {
 		return productBestList;
 	}
 
+	public List<ProductBean> getProdoctNewList() {
+		List<ProductBean> productNewList = null;
+		
+		Connection con = JdbcUtil.getConnection();
+		
+		ProductDAO dao = ProductDAO.getInstance();
+		
+		dao.setConnection(con);
+		
+		productNewList = dao.selectNewProductList();
+		
+		return productNewList;
+	}
+
 }

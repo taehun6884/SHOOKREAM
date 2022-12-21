@@ -144,6 +144,7 @@
                                             <th>상품명</th>
                                             <th>이미지</th>
                                             <th>브랜드</th>
+                                            <th>가격</th>
                                             <th>재고</th>
                                             <th>등록일</th>
                                             <th>수정</th>
@@ -167,6 +168,7 @@
 										<td>${product.product_brand }</td>
 										<td>${product.product_price }</td>
 										<td>${product.product_amount }</td>
+										<td>${product.product_date}</td>
 										<td>
 										<button type="button" class="btn btn-light" onclick="location.href=''">수정</button>
 										<button type="button" class="btn btn-light" onclick="location.href=''">삭제</button>

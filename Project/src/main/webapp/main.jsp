@@ -80,64 +80,202 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	
   <!-- Product grid -->
   <div class="w3-row w3-grayscale">
-    <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <img src="./upload/${productBestList[0].product_img }" class="img-thumbnail" alt="..." style="width:100%">
-        <p>Ripped Skinny Jeans<br><b>$24.99</b></p>
-      </div>
-      <div class="w3-container">
-        <img src="./images/jeans.jpg" style="width:100%">
-        <p>Mega Ripped Jeans<br><b>$19.99</b></p>
-      </div>
-    </div>
-    <div class="w3-col l3 s6">
+   <div class="w3-col l3 s6">
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./images/jeans.jpg" style="width:100%">
-          <span class="w3-tag w3-display-topleft">New</span>
+          <img src="./upload/${productBestList[0].product_img }" class="img-thumbnail" alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
-        <p>Mega Ripped Jeans<br><b>$19.99</b></p>
-      </div>
-      <div class="w3-container">
-        <img src="./images/jeans.jpg" style="width:100%">
-        <p>Washed Skinny Jeans<br><b>$20.50</b></p>
-      </div>
-    </div>
-
-    <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <img src="./images/jeans.jpg" style="width:100%">
-        <p>Washed Skinny Jeans<br><b>$20.50</b></p>
+        <p>${productBestList[0].product_name }<br><b>${productBestList[0].product_price }</b></p><!-- 1번째 그리드 -->
       </div>
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./images/jeans.jpg" style="width:100%">
-          <span class="w3-tag w3-display-topleft">Sale</span>
+          <img src="./upload/${productBestList[4].product_img }" class="img-thumbnail" alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
-        <p>Vintage Skinny Jeans<br><b class="w3-text-red">$14.99</b></p>
+        <p>${productBestList[4].product_name }<br><b>${productBestList[4].product_price }</b></p><!-- 5번째 그리드 -->
+      </div>
+    </div>
+    
+    <div class="w3-col l3 s6">
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="./upload/${productBestList[1].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>${productBestList[1].product_name }<br><b>${productBestList[1].product_price }</b></p><!-- 2번째 그리드 -->
+      </div>
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="./upload/${productBestList[5].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>${productBestList[5].product_name }<br><b>${productBestList[5].product_price }</b></p><!-- 6번째 그리드 -->
+      </div>
+    </div>
+
+<!--     <div class="w3-col l3 s6"> -->
+<!--       <div class="w3-container"> -->
+<!--         <img src="./images/jeans.jpg" style="width:100%"> -->
+<!--         <p>5번째<br><b>$20.50</b></p> -->
+<!--       </div> -->
+<!--       <div class="w3-container"> -->
+<!--         <div class="w3-display-container"> -->
+<!--           <img src="./images/jeans.jpg" style="width:100%"> -->
+<!--           <span class="w3-tag w3-display-topleft">Sale</span> -->
+<!--           <div class="w3-display-middle w3-display-hover"> -->
+<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--         <p>6번째<br><b class="w3-text-red">$14.99</b></p> -->
+<!--       </div> -->
+<!--     </div> -->
+
+    <div class="w3-col l3 s6">
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="./upload/${productBestList[2].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>${productBestList[2].product_name }<br><b>${productBestList[2].product_price }</b></p><!-- 3번째 그리드 -->
+      </div>
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="./upload/${productBestList[6].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>${productBestList[6].product_name }<br><b>${productBestList[6].product_price }</b></p><!-- 7번째 그리드 -->
+      </div>
+    </div>
+    
+    <div class="w3-col l3 s6">
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="./upload/${productBestList[3].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>${productBestList[3].product_name }<br><b>${productBestList[3].product_price }</b></p><!-- 4번째 그리드 -->
+      </div>
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="./upload/${productBestList[7].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>${productBestList[7].product_name }<br><b>${productBestList[7].product_price }</b></p><!-- 8번째 그리드 -->
+      </div>
+    </div>
+</div>
+
+	<!-- 최근 등록 상품 조회 -->
+  <div id="main_category">
+		<p>NEW</p>
+	</div>
+	
+	<!-- Product grid -->
+  <div class="w3-row w3-grayscale">
+   <div class="w3-col l3 s6">
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="./upload/${productNewList[0].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>${productNewList[0].product_name }<br><b>${productNewList[0].product_price }</b></p><!-- 1번째 그리드 -->
+      </div>
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="./upload/${productNewList[4].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>${productNewList[4].product_name }<br><b>${productNewList[4].product_price }</b></p><!-- 5번째 그리드 -->
+      </div>
+    </div>
+    
+    <div class="w3-col l3 s6">
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="./upload/${productNewList[1].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>${productNewList[1].product_name }<br><b>${productNewList[1].product_price }</b></p><!-- 2번째 그리드 -->
+      </div>
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="./upload/${productNewList[5].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>${productNewList[5].product_name }<br><b>${productNewList[5].product_price }</b></p><!-- 6번째 그리드 -->
       </div>
     </div>
 
     <div class="w3-col l3 s6">
       <div class="w3-container">
-        <img src="./images/jeans.jpg" style="width:100%">
-        <p>Vintage Skinny Jeans<br><b>$14.99</b></p>
+        <div class="w3-display-container">
+          <img src="./upload/${productNewList[2].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>${productNewList[2].product_name }<br><b>${productNewList[2].product_price }</b></p><!-- 3번째 그리드 -->
       </div>
       <div class="w3-container">
-        <img src="./images/jeans.jpg" style="width:100%">
-        <p>Ripped Skinny Jeans<br><b>$24.99</b></p>
+        <div class="w3-display-container">
+          <img src="./upload/${productNewList[6].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>${productNewList[6].product_name }<br><b>${productNewList[6].product_price }</b></p><!-- 7번째 그리드 -->
       </div>
     </div>
-  </div>
-
+    
+    <div class="w3-col l3 s6">
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="./upload/${productNewList[3].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>${productNewList[3].product_name }<br><b>${productNewList[3].product_price }</b></p><!-- 4번째 그리드 -->
+      </div>
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="./upload/${productNewList[7].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>${productNewList[7].product_name }<br><b>${productNewList[7].product_price }</b></p><!-- 8번째 그리드 -->
+      </div>
+    </div>
+</div>
   <!-- footer -->
     <jsp:include page="./inc/footer.jsp"/>
+  
   
 
 <script>

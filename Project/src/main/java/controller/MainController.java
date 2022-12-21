@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-import action.MainBestListAction;
+import action.MainListAction;
 import action.ProductInsertAction;
 import action.ProductListAction;
 import vo.ActionForward;
@@ -30,7 +30,7 @@ public class MainController extends HttpServlet{
 		
 		
 		if(command.equals("/main.MAIN")) {// Main 폼화면
-			action = new MainBestListAction();
+			action = new MainListAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("")) {
 		}
