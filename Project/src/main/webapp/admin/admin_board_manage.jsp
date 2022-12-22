@@ -30,7 +30,6 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">게시판 관리</li>
                         </ol>
-
                             <div class="card-body">
                             <c:choose>
 								<c:when test="${empty param.pageNum }">
@@ -50,7 +49,6 @@
                                             <th>게시물 관리</th>
                                         </tr>
                                     </thead>
-                    				 <c:forEach var="board" items="${boardList }">
                                         <tr>
                                             <th>${board.notice_category }</th>
                                             <th>${board.notice_idx }</th>
@@ -62,7 +60,6 @@
 												<input type="button" value="고정글" class="btn btn-outline-secondary btn-sm" onclick="">
 										    </th>
                                         </tr>
-                                 	</c:forEach>
                                 </table>
                        		 </div>
                     </div>
