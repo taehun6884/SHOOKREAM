@@ -39,6 +39,7 @@ public class ProductListService {
 		return productBestList;
 	}
 
+
 	// 메인 - 최근 등록 상품 목록 조회
 	public List<ProductBean> getProdoctNewList() {
 		List<ProductBean> productNewList = null;

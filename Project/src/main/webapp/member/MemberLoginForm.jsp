@@ -195,25 +195,27 @@ function w3_close() {
 Kakao.init('6405849a8d7a7fa490a223800b55af42'); //발급받은 키 중 javascript키를 사용해준다.
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
 //카카오로그인
-function kakaoLogin() {
-    window.Kakao.Auth.login({
-      scope:'account_email,profile_nickname',
-      success: function(authObj){
-    	  console.log(authObk);
-    	  window.kakao.API.requset({
-    		  url:'/v2/user/me',
-    	  	  success: res =>{
-    	  		  const kakao_account = res.kakao_account;
-    	  		  console.log(kakao_account);
-    	  		if(kakao_account != null){
-    	  			alert(kakao_account);
-    	  			location.href="./";
-    	  		}
-    	  	  }	
-    	  });
-      }
-    });
-  }
+        window.Kakao.init('본인 JAVASCRIPT API 키');
+
+ function kakaoLogin() {
+     window.Kakao.Auth.login({
+         scope: 'account_email,	profile_nickname', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
+         success: function(response) {
+             console.log(response) // 로그인 성공하면 받아오는 데이터
+             window.Kakao.API.request({ // 사용자 정보 가져오기 
+                 url: '/v2/user/me',
+                 success: (res) => {
+                     const kakao_account = res.kakao_account;
+                     console.log(kakao_account)
+                 }
+             });
+          window.location.href="./main.MAIN"; 
+         },
+         fail: function(error) {
+             console.log(error);
+         }
+     });
+ }
 //카카오로그아웃  
 function kakaoLogout() {
     if (Kakao.Auth.getAccessToken()) {

@@ -21,7 +21,7 @@ public class ProductListAction implements Action {
 		request.setAttribute("productList", productList);
 		
 		forward = new ActionForward();
-		forward.setPath("product/ProductList.jsp");
+		forward.setPath("admin/admin_Product_List.jsp");
 		forward.setRedirect(false); //
 		
 		return forward;
