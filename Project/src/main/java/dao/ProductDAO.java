@@ -119,8 +119,7 @@ private ProductDAO() {}
 		}
 		return product;
 	}
-	
-	
+
 	// 관리자 - 상품 목록 조회
 	public List<ProductBean> selectProductList() {
 		ArrayList<ProductBean> productList = null;

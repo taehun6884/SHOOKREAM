@@ -25,11 +25,12 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	float: right;
 }
 </style>
+
 </head>
 <body class="w3-content" style="max-width:1200px">
 
 <!-- Sidebar/menu -->
-<jsp:include page="../inc/side.jsp"/>
+<%-- <jsp:include page="../inc/side.jsp"/> --%>
 
 <!-- Top menu on small screens -->
 <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
@@ -41,7 +42,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
+<div class="w3-main" style="margin-left:300px">
 
   <!-- Push down content on small screens -->
   <div class="w3-hide-large" style="margin-top:83px"></div>
@@ -127,8 +128,63 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--   </div> -->
 
   <!-- 제품 상세 페이지 -->
+  
+<style type="text/css">
+div{
+	align-content: center;
+}
 
-  ${product }
+</style>
+	<h3><b>상품 상세 정보</b></h3>
+	<section id="image">
+		<div class="title">
+			<h4>${product.product_brand}</h4>
+			<img alt="shoes" src="images/캡처10.PNG">
+		</div>
+	</section>
+	
+	<section id="detail">
+		<div class="text" > 
+			<p>상품명 : ${product.product_name }</p>
+		</div>
+		<div id="detail1">
+			<p>배송정보 </p>
+			<p>적립금정보 </p>
+			<input type="button" value="black">
+			<input type="button" value="white">
+			<input type="button" value="blue">
+			<input type="button" value="yellow">
+		</div>
+		<div id="detail2" >
+			<select>
+				<option>220</option>
+				<option>230</option>
+				<option>240</option>
+				<option>250</option>
+				<option>260</option>
+				<option>270</option>
+				<option>280</option>
+				<option>290</option>
+			</select>
+			<input type="button" value="좋아요">
+			<input type="button" value="장바구니">
+			<input type="button" value="구매하기">
+		</div>
+	
+	</section>
+   
+  
+
+<%-- 	<img src="./upload/${product.product_img }" class="img-thumbnail" alt="..." width="150" height="150"> --%>
+<!--  	<table border="1"> -->
+<!-- 	 	<tr> -->
+<%-- 			 <td width="70"><h1>${product }</h1></td> --%>
+<!-- 			 <td width="70"></td> -->
+<!-- 	 	</tr> -->
+	 
+<!-- 	 </table> -->
+
+
 <%-- 	<img src="./upload/${product.product_img }" class="img-thumbnail" alt="..." width="150" height="150"> --%>
 <!--  	<table border="1"> -->
 <!-- 	 	<tr> -->

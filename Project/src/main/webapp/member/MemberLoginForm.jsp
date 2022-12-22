@@ -77,12 +77,12 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           <tr>
           	<td>
           		<div id="naver_id_login"></div>
-				<a href="javascript:kakaoLogin();"><img src="./images/kakao_login_medium_narrow.png"></a>
+				<a href="javascript:kakaoLogin();"><img src="./images/kakao_login.png" height="50" width="250"></a>
 				</td>
           </tr>
           <tr>
           	<td>
-          		<button type="button" class="btn btn-secondary" onclick="location.href='MemberJoinForm.me'">회원가입</button>
+          		<button type="button" class="w3-button w3-block w3-black" onclick="location.href='MemberJoinForm.me'">회원가입</button>
           	</td>
           </tr>
         </table>
