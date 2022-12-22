@@ -49,7 +49,9 @@ public class BoardFrontController extends HttpServlet {
 			action = new BoardDetailAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/BoardModifyForm.bo")) { //공지 정보 수정 창
-		
+			forward = new ActionForward();
+			forward.setPath("admin/board_write_modify.jsp");
+			forward.setRedirect(false); 
 		}else if(command.equals("/BoardModifyPro.bo")) { //공지 정보 수정 pro
 		
 		}else if(command.equals("/BoardDeleteForm.bo")) { //공지 삭제 창

@@ -29,7 +29,7 @@ public class MemberListAction implements Action {
 		
 		//포워딩 정보 저장 (경로 설정, redirect 여부)
 		forward = new ActionForward();
-		forward.setPath("admin/adminMemberList.jsp");
+		forward.setPath("admin/admin_Member_List.jsp");
 		forward.setRedirect(false);
 		
 		
