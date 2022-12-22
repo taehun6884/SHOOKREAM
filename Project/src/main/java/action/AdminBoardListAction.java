@@ -2,7 +2,6 @@ package action;
 
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,11 +10,10 @@ import vo.ActionForward;
 import vo.BoardBean;
 import vo.PageInfo;
 
-public class BoardListAction implements Action {
+public class AdminBoardListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-//		System.out.println("BoardListAction");
 		ActionForward forward = null;
 
 		int listLimit = 10; 
@@ -58,7 +56,7 @@ public class BoardListAction implements Action {
 		request.setAttribute("pageInfo", pageInfo);
 		
 		forward = new ActionForward();
-		forward.setPath("board/board_list.jsp");
+		forward.setPath("admin/admin_board_manage.jsp");
 		forward.setRedirect(false);
 		
 		return forward;

@@ -34,14 +34,20 @@
 					  <footer class="w3-padding-64 w3-light-grey w3-small" id="footer">
 					  <h3>Notice</h3>
 					  <form action="BoardWritePro.bo" method="post">
-					  	<input type="hidden" name="notice_type" value="Notice">
+<!-- 					  	<input type="hidden" name="notice_type" value="Notice"> -->
 						<div class="mb-3">
 							<label for="exampleFormControlInput1" class="form-label">Subject</label>
 						  	<input type="text" class="form-control" name="notice_subject" placeholder="제목을 입력하세요">
 						</div>
+						<label for="exampleFormControlInput1" class="form-label">Type</label>
+						<select class="form-select" aria-label="Default select example" name="notice_type" onchange="selectChange(this.value)">
+						  <option selected><b>게시판 종류를 선택해 주세요</b></option>
+						  <option value="Notice">공지사항</option>
+						  <option value="F&A">자주묻는 질문</option>
+						</select>
 						<label for="exampleFormControlInput1" class="form-label">Category</label>
 						<select class="form-select" aria-label="Default select example" name="notice_category" onchange="selectChange(this.value)">
-						  <option selected>카테고리를 선택해주세요</option>
+						  <option selected><b>카테고리를 선택해주세요</b></option>
 						  <option value="[Event]">Event</option>
 						  <option value="[Delivery]">Delivery</option>
 						  <option value="[Notice]">Notice</option>
