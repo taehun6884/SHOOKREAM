@@ -46,8 +46,6 @@ public class ProductInsertAction implements Action {
 		product.setProduct_brand(multi.getParameter("brand")); // 상품 브랜드
 		product.setProduct_price(Integer.parseInt(multi.getParameter("price"))); // 상품 가격
 		product.setProduct_discount_price(Integer.parseInt(multi.getParameter("discount"))); // 할인율
-		product.setProduct_release_price(Integer.parseInt(multi.getParameter("release_price"))); // 할인 적용가격
-		product.setProduct_price(Integer.parseInt(multi.getParameter("price"))); // 상품 가격
 		product.setProduct_size(multi.getParameter("size")); // 사이즈
 		product.setProduct_color(multi.getParameter("color")); // 색상
 		product.setProduct_amount(Integer.parseInt(multi.getParameter("amount"))); //상품 재고량
