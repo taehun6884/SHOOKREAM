@@ -55,12 +55,11 @@
 					<tr>
 						<td width="100px" align="left">상품 브랜드</td>
 						<td width="300px"><input class="w3-input w3-border"
-							type="text" placeholder="Product Name" name="name" required></td>
+							type="text" placeholder="Product Name" name="brand" required></td>
 					</tr>
 					<tr>
 						<td width="100px" align="left" >상품 가격</td>
-						<td><input type="text" id="testPrice" name ="inputprice" placeholder="원래 가격을 입력하세요" onkeyup="inputNumberFormat(this);"><span>&nbsp;원</span> <!-- 콤마 있는 값 -->
-							<input type="hidden" name ="price" onchange="deleteComma();"> <!--  콤마 제거해서 넘기는 값 -->
+						<td><input type="text" id="testPrice" name ="price" placeholder="원래 가격을 입력하세요"><span>&nbsp;원</span> <!-- 콤마 있는 값 -->
 						</td>
 						
 					</tr>
@@ -76,15 +75,15 @@
 						
 					<tr>
 						<td width="150px" align="left">할인율 적용가격</td>
-						<td width="300px">
-						<p id="testResultBox02" class="w3-input w3-border"></p>
-						</td>
+						<td><p id ="testResultBox02"></p></td>
+						
 					</tr>
 	
 					<tr>
 
 						<td width="100px" align="left">상품 사이즈</td>
-						<td width="300px"><select name="size">
+						<td width="300px">
+						<select name="size">
 								<option value="220">220</option>
 								<option value="230">230</option>
 								<option value="240">240</option>
@@ -164,8 +163,8 @@
 	<!-- 할인율 -->
 		<script type="text/javascript">
 			document.querySelector('#testCalBtn').addEventListener('click', function() {
-				//상품가격의 값을 가져온 후 콤마제거
-			    var originPrice = document.querySelector('#testPrice').value.replace(/,/g, "");
+				//상품가격의 값 가져오기.
+			    var originPrice = document.querySelector('#testPrice').value;
 				//할인율 값 가져오기. 
 			    var discountRate = document.querySelector('#testRate').value;
 			 	//연산결과에 따른 처리
@@ -173,21 +172,13 @@
 			        return false;
 			    //할인율 계산식
 			    } else {
+			    	//할인율에 따른 계산
 			        var discounted = Math.round(originPrice * (discountRate / 100));	// 정수로 출력하기 위해 소수점 아래 반올림 처리
+			        //판매가격 - 할인율 계산
 			        var releasePrice = originPrice - discounted;
-			        var newPriceResult = releasePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); // 금액에 , 표시
-			        document.querySelector('#testResultBox02').innerText = newPriceResult + '원'
+			        document.querySelector('#testResultBox02').innerText = releasePrice + '원'
 			    }
 			});
-		</script>
-		
-		<script type="text/javascript">
-	   	
-		function deleteComma() {
-			var price = document.getElementById("testPrice");
-			var deletePrice = price.value.replace(/,/g, "");
-	   		return deletePrice;
-	   	} 	
 		</script>
 		
 	<!-- 숫자 에 "," 처리를 위한 함수 -->
