@@ -68,7 +68,7 @@
 					<tr>
 						<td width="100px" align="left">할인율</td>
 						<td>
-						<input type="text" id="testRate" name = "discount" placeholder="할인율" >
+						<input type="text" id="testRate" name = "discount" value = "0" placeholder="할인율" >
 						<span>&nbsp;%&nbsp;</span>
 						<button type="button" id="testCalBtn">&nbsp;계산하기&nbsp;</button>
 						</td>

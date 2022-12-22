@@ -206,9 +206,10 @@ private ProductDAO() {}
 			 PreparedStatement pstmt =  null;
 			 ResultSet rs = null;
 				
-			 String sql ="SELECT c.cart_idx,p.product_name, p.product_size, p.product_price,p.product_brand,p.product_image  "
-			 		+ "FROM shookream.cart c join shookream.product p "
-			 		+ "on c.product_idx = p.product_idx";
+			 String sql ="SELECT c.cart_idx,p.product_name, p.product_size, p.product_price,p.product_brand,i.image_main_file,m.member_id "
+			 		+ "FROM shookream.cart c join shookream.product p join shookream.image i join shookream.member m "
+			 		+ "on c.product_idx = p.product_idx and c.product_idx = i.product_idx and c.member_idx = m.member_idx";
+			 
 			 try {
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
@@ -220,7 +221,7 @@ private ProductDAO() {}
 					vo.setProduct_size(rs.getNString("product_size"));
 					vo.setProduct_price(rs.getInt("product_price"));
 					vo.setProduct_brand(rs.getNString("product_brand"));
-					vo.setProduct_img(rs.getString("product_image"));
+					vo.setProduct_img(rs.getString("image_main_file"));
 					cartlist.add(vo);
 				}
 			 } catch (SQLException e) {
@@ -240,7 +241,9 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT * FROM product GROUP BY product_name ORDER BY product_sell_count asc";
+				String sql = "SELECT p.product_idx, p.product_name, p.product_price, i.image_main_file "
+						+ "FROM shookream.product p join shookream.image i "
+						+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY p.product_idx ASC";
 				
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
@@ -251,19 +254,19 @@ private ProductDAO() {}
 					ProductBean product = new ProductBean();
 					product.setProduct_idx(rs.getInt("product_idx"));
 					product.setProduct_name(rs.getString("product_name"));
-					product.setProduct_brand(rs.getString("product_brand"));
-					product.setProduct_size(rs.getString("product_size"));
+//					product.setProduct_brand(rs.getString("product_brand"));
+//					product.setProduct_size(rs.getString("product_size"));
 					product.setProduct_price(rs.getInt("product_price"));
-					product.setProduct_release_price(rs.getInt("product_release_price"));
-					product.setProduct_buy_price(rs.getInt("product_buy_price"));
-					product.setProduct_amount(rs.getInt("product_amount"));
-					product.setProduct_sell_count(rs.getInt("product_sell_count"));
-					product.setProduct_exp(rs.getString("product_exp"));
-					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
-					product.setProduct_color(rs.getString("product_color"));
-					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
-					product.setProduct_img(rs.getString("product_img"));
-					product.setProduct_date(rs.getTimestamp("product_date"));
+//					product.setProduct_release_price(rs.getInt("product_release_price"));
+//					product.setProduct_buy_price(rs.getInt("product_buy_price"));
+////					product.setProduct_amount(rs.getInt("product_amount"));
+//					product.setProduct_sell_count(rs.getInt("product_sell_count"));
+//					product.setProduct_exp(rs.getString("product_exp"));
+//					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
+//					product.setProduct_color(rs.getString("product_color"));
+//					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					product.setProduct_img(rs.getString("image_main_file"));
+//					product.setProduct_date(rs.getTimestamp("product_date"));
 					
 					productBestList.add(product);
 				}
@@ -286,7 +289,9 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT * FROM product GROUP BY product_name ORDER BY product_date desc";
+				String sql = "SELECT p.product_idx, p.product_name, p.product_price, i.image_main_file "
+				+ "FROM shookream.product p join shookream.image i "
+				+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY product_date desc";
 				
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
@@ -297,19 +302,19 @@ private ProductDAO() {}
 					ProductBean product = new ProductBean();
 					product.setProduct_idx(rs.getInt("product_idx"));
 					product.setProduct_name(rs.getString("product_name"));
-					product.setProduct_brand(rs.getString("product_brand"));
-					product.setProduct_size(rs.getString("product_size"));
+//					product.setProduct_brand(rs.getString("product_brand"));
+//					product.setProduct_size(rs.getString("product_size"));
 					product.setProduct_price(rs.getInt("product_price"));
-					product.setProduct_release_price(rs.getInt("product_release_price"));
-					product.setProduct_buy_price(rs.getInt("product_buy_price"));
-					product.setProduct_amount(rs.getInt("product_amount"));
-					product.setProduct_sell_count(rs.getInt("product_sell_count"));
-					product.setProduct_exp(rs.getString("product_exp"));
-					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
-					product.setProduct_color(rs.getString("product_color"));
-					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
-					product.setProduct_img(rs.getString("product_img"));
-					product.setProduct_date(rs.getTimestamp("product_date"));
+//					product.setProduct_release_price(rs.getInt("product_release_price"));
+//					product.setProduct_buy_price(rs.getInt("product_buy_price"));
+//					product.setProduct_amount(rs.getInt("product_amount"));
+//					product.setProduct_sell_count(rs.getInt("product_sell_count"));
+//					product.setProduct_exp(rs.getString("product_exp"));
+//					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
+//					product.setProduct_color(rs.getString("product_color"));
+//					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					product.setProduct_img(rs.getString("image_main_file"));
+//					product.setProduct_date(rs.getTimestamp("product_date"));
 					
 					productNewList.add(product);
 				}
