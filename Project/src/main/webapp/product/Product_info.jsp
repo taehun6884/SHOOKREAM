@@ -19,12 +19,41 @@
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
+<style type="text/css">
+#sform { 
+		  border:1px solid red;
+          display: inline-block;
+          text-align: center;
+          margin-left: 270PX;
+          
+        }
+#image{
+/* background-color: blue; */
+padding-left: 50;
+float: left;
+}
+
+#title{
+align-content: center;
+}
+
+#detail{border:1px solid blue;
+font-family: "Montserrat", sans-serif;
+font-size:15px;
+float: right;
+margin-top: 100px;
+margin-left: 20px;
+text-align: left;
+}      
+</style>
 
 <style type="text/css">
 #logintvar{
 	float: right;
 }
+
 </style>
+
 </head>
 <body class="w3-content" style="max-width:1200px">
 
@@ -41,7 +70,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
+<div class="w3-main" style="margin-left:300px">
 
   <!-- Push down content on small screens -->
   <div class="w3-hide-large" style="margin-top:83px"></div>
@@ -51,84 +80,68 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	
 	 </div>
 	
-	
-  <!-- ./images header -->
-<!--   <div class="w3-display-container w3-container"> -->
-<!--     <img src="./images/jeans.jpg" alt="Jeans" style="width:100%"> -->
-<!--     <div class="w3-display-topleft w3-text-white" style="padding:24px 48px"> -->
-<!--       <h1 class="w3-jumbo w3-hide-small">New arrivals</h1> -->
-<!--       <h1 class="w3-hide-large w3-hide-medium">New arrivals</h1> -->
-<!--       <h1 class="w3-hide-small">COLLECTION 2016</h1> -->
-<!--       <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p> -->
-<!--     </div> -->
-<!--   </div> -->
-
-<!--   <div class="w3-container w3-text-grey" id="jeans"> -->
-<!--     <p>8 items</p> -->
-<!--   </div> -->
-
-<!--   <!-- Product grid --> 
-<!--   <div class="w3-row w3-grayscale"> -->
-<!--     <div class="w3-col l3 s6"> -->
-<!--       <div class="w3-container"> -->
-<!--         <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--         <p>Ripped Skinny Jeans<br><b>$24.99</b></p> -->
-<!--       </div> -->
-<!--       <div class="w3-container"> -->
-<!--         <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--         <p>Mega Ripped Jeans<br><b>$19.99</b></p> -->
-<!--       </div> -->
-<!--     </div> -->
-
-<!--     <div class="w3-col l3 s6"> -->
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<!--           <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--           <span class="w3-tag w3-display-topleft">New</span> -->
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<!--         <p>Mega Ripped Jeans<br><b>$19.99</b></p> -->
-<!--       </div> -->
-<!--       <div class="w3-container"> -->
-<!--         <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--         <p>Washed Skinny Jeans<br><b>$20.50</b></p> -->
-<!--       </div> -->
-<!--     </div> -->
-
-<!--     <div class="w3-col l3 s6"> -->
-<!--       <div class="w3-container"> -->
-<!--         <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--         <p>Washed Skinny Jeans<br><b>$20.50</b></p> -->
-<!--       </div> -->
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<!--           <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--           <span class="w3-tag w3-display-topleft">Sale</span> -->
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<!--         <p>Vintage Skinny Jeans<br><b class="w3-text-red">$14.99</b></p> -->
-<!--       </div> -->
-<!--     </div> -->
-
-<!--     <div class="w3-col l3 s6"> -->
-<!--       <div class="w3-container"> -->
-<!--         <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--         <p>Vintage Skinny Jeans<br><b>$14.99</b></p> -->
-<!--       </div> -->
-<!--       <div class="w3-container"> -->
-<!--         <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--         <p>Ripped Skinny Jeans<br><b>$24.99</b></p> -->
-<!--       </div> -->
-<!--     </div> -->
-<!--   </div> -->
 
   <!-- 제품 상세 페이지 -->
+  <div class="w3-padding-64 w3-light-grey w3-small w3-center" id="div">
+  <div id = "sform">
+	<h3><b>상품 상세 정보</b></h3>
+	<section id="image">
+		<p>
+		<div class="title" align="left">
+			<h4>${product.product_brand}</h4>
+			<img alt="shoes" src="images/캡처10.PNG">
+		</div>
+	</section>
+	<section id="detail" >
+		<div class="text" > 
+			<p>상품명 : ${product.product_name }</p>
+		</div>
+		<div id="detail1">
+			<p>상품번호 : ${product.product_idx }</p>
+			<p>가격 : ${product.product_price }</p>
+			<p>판매수 : ${product.product_sell_count } </p>
+			<p>좋아요 </p>
+			<p>구매후기(별점) </p>
+			<input type="button" value="black">
+			<input type="button" value="white">
+			<input type="button" value="blue">
+			<input type="button" value="yellow">
+		</div>
+		
+		<div id="detail2" >
+			<select>
+				<option selected>사이즈</option>
+				<option>220</option>
+				<option>230</option>
+				<option>240</option>
+				<option>250</option>
+				<option>260</option>
+				<option>270</option>
+				<option>280</option>
+				<option>290</option>
+			</select>
+			<input type="button" value="좋아요">
+			<input type="button" value="장바구니">
+			<input type="button" value="구매하기">
+		</div>
+	
+	</section>
+  </div>
+  </div>
+  
+    <!-- 
+<footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
+   -->
+<%-- 	<img src="./upload/${product.product_img }" class="img-thumbnail" alt="..." width="150" height="150"> --%>
+<!--  	<table border="1"> -->
+<!-- 	 	<tr> -->
+<%-- 			 <td width="70"><h1>${product }</h1></td> --%>
+<!-- 			 <td width="70"></td> -->
+<!-- 	 	</tr> -->
+	 
+<!-- 	 </table> -->
 
-  ${product }
+
 <%-- 	<img src="./upload/${product.product_img }" class="img-thumbnail" alt="..." width="150" height="150"> --%>
 <!--  	<table border="1"> -->
 <!-- 	 	<tr> -->
