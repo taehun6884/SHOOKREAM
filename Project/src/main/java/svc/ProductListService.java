@@ -39,6 +39,7 @@ public class ProductListService {
 		return productBestList;
 	}
 
+	// 메인 - 최근 등록 상품 목록 조회
 	public List<ProductBean> getProdoctNewList() {
 		List<ProductBean> productNewList = null;
 		
@@ -51,6 +52,36 @@ public class ProductListService {
 		productNewList = dao.selectNewProductList();
 		
 		return productNewList;
+	}
+
+	// 메인 - 세일 상품 목록 조회
+	public List<ProductBean> getProdoctSaleList() {
+		List<ProductBean> productSaleList = null;
+		
+		Connection con = JdbcUtil.getConnection();
+		
+		ProductDAO dao = ProductDAO.getInstance();
+		
+		dao.setConnection(con);
+		
+		productSaleList = dao.selectSaleProductList();
+		
+		return productSaleList;
+	}
+
+	// 메인 - 카테고리별 상품 목록 조회
+	public List<ProductBean> getProdoctCGList(String cg) {
+		List<ProductBean> productCGList = null;
+		
+		Connection con = JdbcUtil.getConnection();
+		
+		ProductDAO dao = ProductDAO.getInstance();
+		
+		dao.setConnection(con);
+		
+		productCGList = dao.selectCGProductList(cg);
+		
+		return productCGList;
 	}
 
 }
