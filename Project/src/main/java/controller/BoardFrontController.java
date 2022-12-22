@@ -12,7 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.BoardDetailAction;
 import action.BoardListAction;
+import action.BoardModifyFormAction;
+import action.BoardModifyProAction;
 import action.BoardWriteProAction;
+import action.FAQDetailAction;
+import action.FAQListAction;
 import vo.ActionForward;
 
 
@@ -48,12 +52,18 @@ public class BoardFrontController extends HttpServlet {
 		}else if(command.equals("/BoardInfo.bo")) { //공지 상세 정보
 			action = new BoardDetailAction();
 			forward = action.execute(request, response);
+		}else if(command.equals("/FAQList.bo")) { //FAQ 목록
+			action = new FAQListAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/FAQInfo.bo")) { //FAQ 상세 정보
+			action = new FAQDetailAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/BoardModifyForm.bo")) { //공지 정보 수정 창
-			forward = new ActionForward();
-			forward.setPath("admin/board_write_modify.jsp");
-			forward.setRedirect(false); 
+			action = new BoardModifyFormAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/BoardModifyPro.bo")) { //공지 정보 수정 pro
-		
+			action = new BoardModifyProAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/BoardDeleteForm.bo")) { //공지 삭제 창
 		
 		}else if(command.equals("/BoardDeletePro.bo")) { //공지 삭제 pro

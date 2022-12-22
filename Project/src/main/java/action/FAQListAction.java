@@ -11,7 +11,7 @@ import vo.ActionForward;
 import vo.BoardBean;
 import vo.PageInfo;
 
-public class BoardListAction implements Action {
+public class FAQListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
@@ -34,7 +34,7 @@ public class BoardListAction implements Action {
 		
 		BoardListService service = new BoardListService();
 		
-		String type = "Notice";
+		String type = "FAQ";
 		
 		List<BoardBean> boardList = service.getBoardList(keyword, startRow, listLimit, type);
 
@@ -60,7 +60,7 @@ public class BoardListAction implements Action {
 		request.setAttribute("pageInfo", pageInfo);
 		
 		forward = new ActionForward();
-		forward.setPath("board/board_list.jsp");
+		forward.setPath("board/FAQ_list.jsp");
 		forward.setRedirect(false);
 		
 		return forward;
