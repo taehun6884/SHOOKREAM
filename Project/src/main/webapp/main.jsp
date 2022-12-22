@@ -83,20 +83,22 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
    <div class="w3-col l3 s6">
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productBestList[0].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <img src="./upload/${productBestList[0].product_img }"  alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
+        <p>${productBestList[0].product_brand }<br></p>
         <p>${productBestList[0].product_name }<br><b>${productBestList[0].product_price }</b></p><!-- 1번째 그리드 -->
       </div>
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productBestList[4].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <img src="./upload/${productBestList[4].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
+        <p>${productBestList[4].product_brand }<br></p>
         <p>${productBestList[4].product_name }<br><b>${productBestList[4].product_price }</b></p><!-- 5번째 그리드 -->
       </div>
     </div>
@@ -104,7 +106,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <div class="w3-col l3 s6">
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productBestList[1].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <img src="./upload/${productBestList[1].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
@@ -113,11 +115,12 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       </div>
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productBestList[5].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <img src="./upload/${productBestList[5].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
+        <p>${productBestList[5].product_brand }<br></p>
         <p>${productBestList[5].product_name }<br><b>${productBestList[5].product_price }</b></p><!-- 6번째 그리드 -->
       </div>
     </div>
@@ -142,20 +145,22 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <div class="w3-col l3 s6">
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productBestList[2].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <img src="./upload/${productBestList[2].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
+        <p>${productBestList[2].product_brand }<br></p>
         <p>${productBestList[2].product_name }<br><b>${productBestList[2].product_price }</b></p><!-- 3번째 그리드 -->
       </div>
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productBestList[6].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <img src="./upload/${productBestList[6].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
+        <p>${productBestList[6].product_brand }<br></p>
         <p>${productBestList[6].product_name }<br><b>${productBestList[6].product_price }</b></p><!-- 7번째 그리드 -->
       </div>
     </div>
@@ -163,20 +168,22 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <div class="w3-col l3 s6">
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productBestList[3].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <img src="./upload/${productBestList[3].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
+        <p>${productBestList[3].product_brand }<br></p>
         <p>${productBestList[3].product_name }<br><b>${productBestList[3].product_price }</b></p><!-- 4번째 그리드 -->
       </div>
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productBestList[7].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <img src="./upload/${productBestList[7].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
+        <p>${productBestList[7].product_brand }<br></p>
         <p>${productBestList[7].product_name }<br><b>${productBestList[7].product_price }</b></p><!-- 8번째 그리드 -->
       </div>
     </div>
@@ -192,20 +199,22 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
    <div class="w3-col l3 s6">
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productNewList[0].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <img src="./upload/${productNewList[0].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
+        <p>${productNewList[0].product_brand }<br></p>
         <p>${productNewList[0].product_name }<br><b>${productNewList[0].product_price }</b></p><!-- 1번째 그리드 -->
       </div>
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productNewList[4].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <img src="./upload/${productNewList[4].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
+        <p>${productNewList[4].product_brand }<br></p>
         <p>${productNewList[4].product_name }<br><b>${productNewList[4].product_price }</b></p><!-- 5번째 그리드 -->
       </div>
     </div>
@@ -213,20 +222,22 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <div class="w3-col l3 s6">
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productNewList[1].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <img src="./upload/${productNewList[1].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
+        <p>${productNewList[1].product_brand }<br></p>
         <p>${productNewList[1].product_name }<br><b>${productNewList[1].product_price }</b></p><!-- 2번째 그리드 -->
       </div>
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productNewList[5].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <img src="./upload/${productNewList[5].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
+        <p>${productNewList[5].product_brand }<br></p>
         <p>${productNewList[5].product_name }<br><b>${productNewList[5].product_price }</b></p><!-- 6번째 그리드 -->
       </div>
     </div>
@@ -234,20 +245,22 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <div class="w3-col l3 s6">
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productNewList[2].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <img src="./upload/${productNewList[2].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
+        <p>${productNewList[2].product_brand }<br></p>
         <p>${productNewList[2].product_name }<br><b>${productNewList[2].product_price }</b></p><!-- 3번째 그리드 -->
       </div>
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productNewList[6].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <img src="./upload/${productNewList[6].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
+        <p>${productNewList[6].product_brand }<br></p>
         <p>${productNewList[6].product_name }<br><b>${productNewList[6].product_price }</b></p><!-- 7번째 그리드 -->
       </div>
     </div>
@@ -255,20 +268,22 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <div class="w3-col l3 s6">
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productNewList[3].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <img src="./upload/${productNewList[3].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
+        <p>${productNewList[3].product_brand }<br></p>
         <p>${productNewList[3].product_name }<br><b>${productNewList[3].product_price }</b></p><!-- 4번째 그리드 -->
       </div>
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productNewList[7].product_img }" class="img-thumbnail" alt="..." style="width:100%">
+          <img src="./upload/${productNewList[7].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
+        <p>${productNewList[7].product_brand }<br></p>
         <p>${productNewList[7].product_name }<br><b>${productNewList[7].product_price }</b></p><!-- 8번째 그리드 -->
       </div>
     </div>
