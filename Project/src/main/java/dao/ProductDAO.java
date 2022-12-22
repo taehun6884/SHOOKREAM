@@ -32,9 +32,12 @@ private ProductDAO() {}
 	
 	//--------상품 등록 작업--------------
 	public int insertProduct(ProductBean product) {
-		int insertCount = 0;
+		int insertCount = 0; 
+		int insertCount2 = 0;
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+		PreparedStatement pstmt4 = null;
 		ResultSet rs = null;
 		
 		try {
@@ -53,31 +56,56 @@ private ProductDAO() {}
 			
 			//----------------상품 등록----------------------
 
-			sql = "INSERT INTO product VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
+			sql = "INSERT INTO product VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
 			
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, idx); //idx
-			pstmt.setString(2, product.getProduct_name()); //name
-			pstmt.setString(3, product.getProduct_brand()); //brand
-			pstmt.setString(4, product.getProduct_size()); // size
-			pstmt.setInt(5, product.getProduct_price()); // price
-			pstmt.setInt(6, 0); // release price(쿠폰적용가격)
-			pstmt.setInt(7, 0); // buy price(누적가격)
-			pstmt.setInt(8, product.getProduct_amount()); // amount
-			pstmt.setInt(9, 0); // sell_count
-			pstmt.setString(10, product.getProduct_exp()); //요약 설명
-			pstmt.setString(11, product.getProduct_detail_exp()); //상세 설명
-			pstmt.setString(12, product.getProduct_color()); //색상
-			pstmt.setDouble(13, product.getProduct_discount_price()); //할인율
-			pstmt.setString(14, product.getProduct_img()); //메인 이미지
+			pstmt2 = con.prepareStatement(sql);
+			pstmt2.setInt(1, idx); //idx
+			pstmt2.setString(2, product.getProduct_name()); //name
+			pstmt2.setString(3, product.getProduct_brand()); //brand
+			pstmt2.setString(4, product.getProduct_size()); // size
+			pstmt2.setInt(5, product.getProduct_price()); // price
+			pstmt2.setInt(6, 0); // release price(쿠폰적용가격)
+			pstmt2.setInt(7, 0); // buy price(누적가격)
+			pstmt2.setInt(8, product.getProduct_amount()); // amount
+			pstmt2.setInt(9, 0); // sell_count
+			pstmt2.setString(10, product.getProduct_exp()); //요약 설명
+			pstmt2.setString(11, product.getProduct_detail_exp()); //상세 설명
+			pstmt2.setString(12, product.getProduct_color()); //색상
+			pstmt2.setDouble(13, product.getProduct_discount_price()); //할인율
 			
-			insertCount = pstmt.executeUpdate();
+			insertCount = pstmt2.executeUpdate();
+			
+			//----------------이미지 등록------------------
+			// image_idx 작업
+			if(insertCount > 0) {
+				sql = "SELECT MAX(image_idx) FROM image";
+				int idx2 = 1; // 새 글 번호
+				pstmt3 = con.prepareStatement(sql);
+				rs = pstmt3.executeQuery();
+				
+				if(rs.next()) { 
+					 //true -> 조회결과가 있을 경우 (= 게시물이 하나라도 존재할 경우)
+					 //존재하지 않을 경우 rs.next는 false , DB에서는 NULL이 표기된다.
+					idx2 = rs.getInt(1) + 1;
+				}
+				
+				sql = "INSERT INTO image (image_idx, product_idx, image_real_file1, image_real_file2, image_real_file3) VALUES(?,?,?,?,?)";
+				pstmt4 = con.prepareStatement(sql);
+				pstmt4.setInt(1, idx2);
+				pstmt4.setInt(2, idx);
+				pstmt4.setString(3, product.getProduct_img());
+				pstmt4.setString(4, product.getProduct_img2());
+				pstmt4.setString(5, product.getProduct_img3());
+				
+				insertCount2 = pstmt4.executeUpdate();
+			}
+			
 			
 		} catch (SQLException e) {
 			System.out.println("상품등록 - 관리자");
 			e.printStackTrace();
 		} 
-		return insertCount;
+		return insertCount2;
 	}
 
 

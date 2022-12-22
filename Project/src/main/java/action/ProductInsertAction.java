@@ -2,6 +2,7 @@ package action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +39,6 @@ public class ProductInsertAction implements Action {
 					request, realPath, maxSize, "UTF-8", new DefaultFileRenamePolicy()
 					);
 			System.out.println("M : 파일업로드완료"+multi);
-		
 
 		//4. 폼으로 넘어온 값들을 product에 저장
 		ProductBean product = new ProductBean();
@@ -51,7 +51,11 @@ public class ProductInsertAction implements Action {
 		product.setProduct_amount(Integer.parseInt(multi.getParameter("amount"))); //상품 재고량
 		product.setProduct_exp(multi.getParameter("exp")); // 상품 요약 설명
 		product.setProduct_detail_exp(multi.getParameter("detail_exp")); //상품 상세 설명
-		product.setProduct_img(multi.getFilesystemName("file")); //파일명
+		product.setProduct_img(multi.getFilesystemName("file")); //파일명1
+		product.setProduct_img2(multi.getFilesystemName("file2")); //파일명2
+		product.setProduct_img3(multi.getFilesystemName("file3")); //파일명3
+		
+		
 		System.out.println(product);
 		
 		int insertCount = service.insertProduct(product);
