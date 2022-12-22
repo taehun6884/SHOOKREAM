@@ -8,11 +8,11 @@
 	// 드롭박스 선택에 따른 드롭박스2번 변
 	function categoryChange(e) {
 		var category_notice = ["Event", "Delivery", "Notice"];
-		var category_fa = ["교환/반품","회원정보","배송","주문/결제", "서비스"];
+		var category_faq = ["교환/반품","회원정보","배송","주문/결제", "서비스"];
 		var target = document.getElementById("category");
 		
 		if(e.value == "Notice") var cat_detail = category_notice;
-		else if(e.value = "F&A") var cat_detail = category_fa;
+		else if(e.value = "FAQ") var cat_detail = category_faq;
 		
 		target.options.length = 0;
 		
@@ -63,7 +63,7 @@
 						<select class="form-select" aria-label="Default select example" name="notice_type" onchange="categoryChange(this)">
 						  <option selected>게시판 종류를 선택해 주세요</option>
 						  <option value="Notice">공지사항</option>
-						  <option value="F&A">자주묻는 질문</option>
+						  <option value="FAQ">자주묻는 질문</option>
 						</select>
 						<label for="exampleFormControlInput1" class="form-label">Category</label>
 						<select class="form-select" aria-label="Default select example" name="notice_category" id="category" onchange="selectChange(this.value)">

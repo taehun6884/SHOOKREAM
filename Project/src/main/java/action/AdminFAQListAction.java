@@ -2,7 +2,6 @@ package action;
 
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,11 +10,10 @@ import vo.ActionForward;
 import vo.BoardBean;
 import vo.PageInfo;
 
-public class BoardListAction implements Action {
+public class AdminFAQListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-//		System.out.println("BoardListAction");
 		ActionForward forward = null;
 
 		int listLimit = 10; 
@@ -32,9 +30,9 @@ public class BoardListAction implements Action {
 			keyword = "";
 		}
 		
-		BoardListService service = new BoardListService();
+		String type = "FAQ";
 		
-		String type = "Notice";
+		BoardListService service = new BoardListService();
 		
 		List<BoardBean> boardList = service.getBoardList(keyword, startRow, listLimit, type);
 
@@ -54,14 +52,18 @@ public class BoardListAction implements Action {
 			endPage = maxPage;
 		}
 		
+		
 		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 
 		request.setAttribute("boardList", boardList);
 		request.setAttribute("pageInfo", pageInfo);
 		
+//		System.out.println(boardList);
+	
 		forward = new ActionForward();
-		forward.setPath("board/board_list.jsp");
-		forward.setRedirect(false);
+		forward.setPath("admin/admin_FAQ_manage.jsp");
+		forward.setRedirect(false);			
+
 		
 		return forward;
 	}
