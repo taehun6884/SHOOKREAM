@@ -212,7 +212,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT * FROM product ORDER BY product_sell_count asc";
+				String sql = "SELECT * FROM product GROUP BY product_name ORDER BY product_sell_count asc";
 				
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
@@ -258,7 +258,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT * FROM product ORDER BY product_date desc";
+				String sql = "SELECT * FROM product GROUP BY product_name ORDER BY product_date desc";
 				
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();

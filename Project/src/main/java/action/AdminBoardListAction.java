@@ -56,7 +56,7 @@ public class AdminBoardListAction implements Action {
 		request.setAttribute("pageInfo", pageInfo);
 		
 		forward = new ActionForward();
-		forward.setPath("admin/admin_board_manage.jsp");
+		forward.setPath("admin/admin_notice_manage.jsp");
 		forward.setRedirect(false);
 		
 		return forward;
