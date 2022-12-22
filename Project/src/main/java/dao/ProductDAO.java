@@ -89,7 +89,7 @@ private ProductDAO() {}
 					idx2 = rs.getInt(1) + 1;
 				}
 				
-				sql = "INSERT INTO image (image_idx, product_idx, image_real_file1, image_real_file2, image_real_file3) VALUES(?,?,?,?,?)";
+				sql = "INSERT INTO image (image_idx, product_idx, image_main_file, image_real_file1, image_real_file2) VALUES(?,?,?,?,?)";
 				pstmt4 = con.prepareStatement(sql);
 				pstmt4.setInt(1, idx2);
 				pstmt4.setInt(2, idx);
