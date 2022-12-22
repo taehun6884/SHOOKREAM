@@ -26,9 +26,9 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">관리자 페이지</h1>
+                        <h1 class="mt-4">관리자 - 게시판 관리</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">게시판 관리</li>
+                            <li class="breadcrumb-item active">공지사항 관리</li>
                         </ol>
                             <div class="card-body">
                                 <table id="datatablesSimple">
