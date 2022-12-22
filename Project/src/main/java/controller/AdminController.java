@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.AdminBoardListAction;
+import action.BoardDetailAction;
 import vo.ActionForward;
 
 @WebServlet("*.ad")//관리자
@@ -33,10 +35,13 @@ public class AdminController extends HttpServlet{
 			 forward = new ActionForward();
 			 forward.setPath("admin/admin_product.jsp");
 			 forward.setRedirect(false);
-		} else if(command.equals("/AdminBoardManage.ad")) {
-			forward = new ActionForward();
-			 forward.setPath("admin/admin_board_manage.jsp");
+		} else if(command.equals("/AdminBoard.ad")) { // 관리자 메인보드 -> 게시판 관리
+			 forward = new ActionForward();
+			 forward.setPath("admin/admin_board.jsp");
 			 forward.setRedirect(false);
+		} else if(command.equals("/AdminNoticeManage.ad")) { // 관리자 게시판-공지사항 -> 관리자용 뷰페이지
+			 action = new AdminBoardListAction();
+			 forward = action.execute(request, response);
 		}
 			
 		if(forward != null) {

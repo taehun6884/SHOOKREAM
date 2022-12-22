@@ -4,6 +4,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html lang="en">
+<script type="text/javascript">
+	// 드롭박스 선택에 따른 드롭박스2번 변
+	function categoryChange(e) {
+		var category_notice = ["Event", "Delivery", "Notice"];
+		var category_fa = ["교환/반품","회원정보","배송","주문/결제", "서비스"];
+		var target = document.getElementById("category");
+		
+		if(e.value == "Notice") var cat_detail = category_notice;
+		else if(e.value = "F&A") var cat_detail = category_fa;
+		
+		target.options.length = 0;
+		
+		for(x in cat_detail) {
+			var opt = document.createElement("option");
+			opt.value = cat_detail[x];
+			opt.innerHTML = cat_detail[x];
+			target.appendChild(opt);
+		}
+	}
+</script>
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -34,17 +54,20 @@
 					  <footer class="w3-padding-64 w3-light-grey w3-small" id="footer">
 					  <h3>Notice</h3>
 					  <form action="BoardWritePro.bo" method="post">
-					  	<input type="hidden" name="notice_type" value="Notice">
+<!-- 					  	<input type="hidden" name="notice_type" value="Notice"> -->
 						<div class="mb-3">
 							<label for="exampleFormControlInput1" class="form-label">Subject</label>
 						  	<input type="text" class="form-control" name="notice_subject" placeholder="제목을 입력하세요">
 						</div>
+						<label for="exampleFormControlInput1" class="form-label">Type</label>
+						<select class="form-select" aria-label="Default select example" name="notice_type" onchange="categoryChange(this)">
+						  <option selected>게시판 종류를 선택해 주세요</option>
+						  <option value="Notice">공지사항</option>
+						  <option value="F&A">자주묻는 질문</option>
+						</select>
 						<label for="exampleFormControlInput1" class="form-label">Category</label>
-						<select class="form-select" aria-label="Default select example" name="notice_category" onchange="selectChange(this.value)">
-						  <option selected>카테고리를 선택해주세요</option>
-						  <option value="[Event]">Event</option>
-						  <option value="[Delivery]">Delivery</option>
-						  <option value="[Notice]">Notice</option>
+						<select class="form-select" aria-label="Default select example" name="notice_category" id="category" onchange="selectChange(this.value)">
+						  <option>카테고리를 선택해주세요</option>
 						</select>
 						<div class="mb-3">
 						  <label for="exampleFormControlTextarea1" class="form-label">Content</label><br>

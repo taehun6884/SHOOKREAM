@@ -28,8 +28,9 @@ private ProductDAO() {}
 	public void setConnection(Connection con) {
 		this.con = con;
 	}
-//---------------------상품 등록-------------------
-
+	
+	
+	//--------상품 등록 작업--------------
 	public int insertProduct(ProductBean product) {
 		int insertCount = 0;
 		PreparedStatement pstmt = null;
@@ -51,7 +52,8 @@ private ProductDAO() {}
 			System.out.println("새글 번호 :" + idx);
 			
 			//----------------상품 등록----------------------
-			sql = "INSERT INTO product VALUES(?,?,?,?,?,0,0,?,0,?,?,?,?,?,now())";
+
+			sql = "INSERT INTO product VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, idx); //idx
@@ -59,12 +61,15 @@ private ProductDAO() {}
 			pstmt.setString(3, product.getProduct_brand()); //brand
 			pstmt.setString(4, product.getProduct_size()); // size
 			pstmt.setInt(5, product.getProduct_price()); // price
-			pstmt.setInt(6, product.getProduct_amount()); // amount
-			pstmt.setString(7, product.getProduct_exp());
-			pstmt.setString(8, product.getProduct_detail_exp());
-			pstmt.setString(9, product.getProduct_color());
-			pstmt.setDouble(10, product.getProduct_discount_price());
-			pstmt.setString(11, product.getProduct_img());
+			pstmt.setInt(6, 0); // release price(쿠폰적용가격)
+			pstmt.setInt(7, 0); // buy price(누적가격)
+			pstmt.setInt(8, product.getProduct_amount()); // amount
+			pstmt.setInt(9, 0); // sell_count
+			pstmt.setString(10, product.getProduct_exp()); //요약 설명
+			pstmt.setString(11, product.getProduct_detail_exp()); //상세 설명
+			pstmt.setString(12, product.getProduct_color()); //색상
+			pstmt.setDouble(13, product.getProduct_discount_price()); //할인율
+			pstmt.setString(14, product.getProduct_img()); //메인 이미지
 			
 			insertCount = pstmt.executeUpdate();
 			
@@ -74,6 +79,7 @@ private ProductDAO() {}
 		} 
 		return insertCount;
 	}
+
 
 
 	// 상품 상세 정보 조회
@@ -206,7 +212,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT * FROM product ORDER BY product_sell_count asc";
+				String sql = "SELECT * FROM product GROUP BY product_name ORDER BY product_sell_count asc";
 				
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
@@ -252,7 +258,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT * FROM product ORDER BY product_date desc";
+				String sql = "SELECT * FROM product GROUP BY product_name ORDER BY product_date desc";
 				
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();

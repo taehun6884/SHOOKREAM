@@ -30,41 +30,35 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">게시판 관리</li>
                         </ol>
-
-                            <div class="card-body">
-                            <c:choose>
-								<c:when test="${empty param.pageNum }">
-									<c:set var="pageNum" value="1" />
-								</c:when>
-								<c:otherwise>
-									<c:set var="pageNum" value="${param.pageNum }" />
-								</c:otherwise>
-							</c:choose>
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>분류</th>
-                                            <th>공지사항 번호</th>
-                                            <th>공지사항 제목</th>
-                                            <th>게시 날짜</th>
-                                            <th>게시물 관리</th>
-                                        </tr>
-                                    </thead>
-                    				 <c:forEach var="board" items="${boardList }">
-                                        <tr>
-                                            <th>${board.notice_category }</th>
-                                            <th>${board.notice_idx }</th>
-                                            <th>${board.notice_subject }</th>
-                                            <th>${board.notice_date }</th>
-                                            <th>
-										      	<input type="button" value="수정"  class="btn btn-outline-secondary btn-sm" onclick="location.href=">
-												<input type="button" value="삭제" class="btn btn-outline-secondary btn-sm" onclick="confirmDelete()">
-												<input type="button" value="고정글" class="btn btn-outline-secondary btn-sm" onclick="">
-										    </th>
-                                        </tr>
-                                 	</c:forEach>
-                                </table>
-                       		 </div>
+					  <!-- 공지사항 글쓰기 폼 -->
+					  <footer class="w3-padding-64 w3-light-grey w3-small" id="footer">
+					  <h3>Notice</h3>
+					  <form action="BoardWritePro.bo" method="post">
+					  	<input type="hidden" name="notice_type" value="Notice">
+						<div class="mb-3">
+							<label for="exampleFormControlInput1" class="form-label">Subject</label>
+						  	<input type="text" class="form-control" name="notice_subject" value="${board.notice_subject }">
+						</div>
+						<label for="exampleFormControlInput1" class="form-label">Category</label>
+						<select class="form-select" aria-label="Default select example" name="notice_category" onchange="selectChange(this.value)">
+						  <option selected>카테고리를 선택해주세요</option>
+						  <option value="[Event]">Event</option>
+						  <option value="[Delivery]">Delivery</option>
+						  <option value="[Notice]">Notice</option>
+						</select>
+						<div class="mb-3">
+						  <label for="exampleFormControlTextarea1" class="form-label">Content</label><br>
+						  <textarea class="form-control" id="notice_content" name="notice_content" rows="15">${board.notice_content }</textarea>
+						</div>
+						<section id="commandCell">
+							<input type="submit" value="등록" class="btn btn-secondary">&nbsp;&nbsp;
+							<input type="reset" value="다시쓰기" class="btn btn-secondary">&nbsp;&nbsp;
+							<input type="button" value="취소" onclick="history.back()" class="btn btn-secondary">
+						</section>
+					  </form>
+					  </footer>
+						
+						
                     </div>
                 </main>
 				<jsp:include page="./inc2/footer.jsp"></jsp:include>
