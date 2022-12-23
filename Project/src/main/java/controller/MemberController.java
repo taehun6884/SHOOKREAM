@@ -20,8 +20,9 @@ import action.MemberLoginMemberProAction;
 import action.MemberLogoutProAction;
 import action.MemberModifyFormAction;
 import action.MemberModifyProAction;
-
+import svc.memberService;
 import vo.ActionForward;
+import vo.MemberBean;
 
 @WebServlet("*.me")
 public class MemberController extends HttpServlet{
@@ -90,7 +91,8 @@ public class MemberController extends HttpServlet{
 				dis.forward(request, response);
 			}
 		}
-}
+
+	}
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -102,5 +104,79 @@ public class MemberController extends HttpServlet{
 		doProcess(request, response);
 	}
 
+	
+	// 아이디 찾기
+	public String doFindLoginId(HttpServletRequest request, HttpServletResponse response) {
+		String name = request.getParameter("member_name");
+		String email = request.getParameter("member_email");
+
+		MemberBean member = memberService.getMemberByNameAndEmail(name, email);
+
+		// 해당 이름과 이메일주소를 가진 회원이 존재하는지 확인
+		if (member == null) {
+			request.setAttribute("alertMsg", "일치하는 회원이 존재하지 않습니다.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
+
+		// 로그인아이디 알림창 보여주고 로그인화면으로 이동
+		request.setAttribute("alertMsg", name + "회원님의 아이디는 \"" + member.getLoginId() + "\"입니다.");
+		request.setAttribute("replaceUrl", "../member/doLoginForm");
+		return "common/redirect";
+	}
+	// 비밀번호 찾기 폼
+		public String doFindLoginPwForm(HttpServletRequest request, HttpServletResponse response) {
+			return "usr/member/doFindLoginPwForm";
+		}
+
+		// 비밀번호 찾기
+		public String doFindLoginPw(HttpServletRequest request, HttpServletResponse response) {
+			String loginId = request.getParameter("loginId");
+			String email = request.getParameter("email");
+
+			Member member = memberService.getMemberByLoginId(loginId);
+
+			// 해당 loginId가 등록된 id인지 확인
+			if (member == null) {
+				request.setAttribute("alertMsg", "일치하는 회원이 존재하지 않습니다.");
+				request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+				return "common/redirect";
+			}
+
+			// 해당 email이 일치하는지 확인
+			if (member.getEmail().equals(email) == false) {
+				request.setAttribute("alertMsg", "이메일주소가 일치하지 않습니다.");
+				request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+				return "common/redirect";
+			}
+
+			// 임시 비밀번호 생성 후 회원 email로 발송
+			// memberService.sendTempLoginPwToEmail(member);
+
+			// 임시 비밀번호 생성 후 회원 email로 발송(개선)
+			/*
+			 * //ResultData 객체 도입으로 삭제 Map<String, Object> sendTempLoginPwToEmailRs =
+			 * memberService.sendTempLoginPwToEmail(member);
+			 * 
+			 * String resultCode = (String) sendTempLoginPwToEmailRs.get("resultCode");
+			 * String resultMsg = (String) sendTempLoginPwToEmailRs.get("resultMsg");
+			 */
+
+			// 임시 비밀번호 생성 후 회원 email로 발송(개선)
+			ResultData sendTempLoginPwToEmailRs = memberService.sendTempLoginPwToEmail(member);
+
+			/// 만약 메일 발송 실패인 경우
+			// if(resultCode.contains("F")) {
+			if (sendTempLoginPwToEmailRs.isFail()) {
+				request.setAttribute("alertMsg", sendTempLoginPwToEmailRs.getMsg());
+				request.setAttribute("historyBack", true);
+				return "common/redirect";
+			}
+
+			// 임시패스워드 발급 알림창 보여주고 메인화면으로 이동
+			request.setAttribute("alertMsg", sendTempLoginPwToEmailRs.getMsg());
+			request.setAttribute("replaceUrl", "../home/main");
+			return "common/redirect";
+		}
 }
 
