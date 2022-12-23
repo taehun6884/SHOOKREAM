@@ -20,6 +20,7 @@ import action.MemberLoginMemberProAction;
 import action.MemberLogoutProAction;
 import action.MemberModifyFormAction;
 import action.MemberModifyProAction;
+import svc.LoginMemberService;
 import svc.memberService;
 import vo.ActionForward;
 import vo.MemberBean;
@@ -110,7 +111,7 @@ public class MemberController extends HttpServlet{
 		String name = request.getParameter("member_name");
 		String email = request.getParameter("member_email");
 
-		MemberBean member = memberService.getMemberByNameAndEmail(name, email);
+		MemberBean member = LoginMemberService.getMemberByNameAndEmail(name, email);
 
 		// 해당 이름과 이메일주소를 가진 회원이 존재하는지 확인
 		if (member == null) {
@@ -120,21 +121,24 @@ public class MemberController extends HttpServlet{
 		}
 
 		// 로그인아이디 알림창 보여주고 로그인화면으로 이동
-		request.setAttribute("alertMsg", name + "회원님의 아이디는 \"" + member.getLoginId() + "\"입니다.");
-		request.setAttribute("replaceUrl", "../member/doLoginForm");
+		request.setAttribute("alertMsg", name + "회원님의 아이디는 \"" + member.getMember_id() + "\"입니다.");
+		request.setAttribute("replaceUrl", "../member/MemberLoginForm");
 		return "common/redirect";
 	}
+	
+	
 	// 비밀번호 찾기 폼
 		public String doFindLoginPwForm(HttpServletRequest request, HttpServletResponse response) {
 			return "usr/member/doFindLoginPwForm";
 		}
 
+		
 		// 비밀번호 찾기
 		public String doFindLoginPw(HttpServletRequest request, HttpServletResponse response) {
 			String loginId = request.getParameter("loginId");
 			String email = request.getParameter("email");
 
-			Member member = memberService.getMemberByLoginId(loginId);
+			MemberBean member = LoginMemberService.getMemberByLoginId(loginId);
 
 			// 해당 loginId가 등록된 id인지 확인
 			if (member == null) {
@@ -144,7 +148,7 @@ public class MemberController extends HttpServlet{
 			}
 
 			// 해당 email이 일치하는지 확인
-			if (member.getEmail().equals(email) == false) {
+			if (member.getMember_email().equals(email) == false) {
 				request.setAttribute("alertMsg", "이메일주소가 일치하지 않습니다.");
 				request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 				return "common/redirect";
@@ -163,7 +167,7 @@ public class MemberController extends HttpServlet{
 			 */
 
 			// 임시 비밀번호 생성 후 회원 email로 발송(개선)
-			ResultData sendTempLoginPwToEmailRs = memberService.sendTempLoginPwToEmail(member);
+			ResultData sendTempLoginPwToEmailRs = LoginMemberService.sendTempLoginPwToEmail(member);
 
 			/// 만약 메일 발송 실패인 경우
 			// if(resultCode.contains("F")) {
