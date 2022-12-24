@@ -64,7 +64,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--     <p>BEST</p> -->
 <!--   </div> -->
 	<div id="main_category">
-		<p>${param.cg }</p>
+		<c:choose>
+			<c:when test="${not empty param.cg }">
+				<p>${param.cg }</p>
+			</c:when>
+			<c:otherwise>
+				<p>검색어 : ${param.keyword }</p>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	
 	
@@ -82,16 +89,16 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <%--         <p>${productBestList[0].product_name }<br><b><fmt:formatNumber value="${productBestList[0].product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 --> --%>
 <!--       </div> -->
       
-      <c:forEach var="productCGList" items="${productCGList }">
+      <c:forEach var="productList" items="${productList }">
       	<div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productCGList.product_img }"  alt="..." style="width:100%">
+          <img src="./upload/${productList.product_img }"  alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
-        <p>${productCGList.product_brand }<br></p><!-- 1번째 그리드 -->
-        <p>${productCGList.product_name }<br><b><fmt:formatNumber value="${productCGList.product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 -->
+        <p>${productList.product_brand }<br></p><!-- 1번째 그리드 -->
+        <p>${productList.product_name }<br><b><fmt:formatNumber value="${productList.product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 -->
       </div>
       
       

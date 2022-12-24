@@ -24,15 +24,32 @@ public class MainBrandCGListAction implements Action {
 		}
 		
 		String cg = request.getParameter("cg");
-		System.out.println("카테고리 : " + cg);
+		String keyword = request.getParameter("keyword");
 		
-		ProductListService service = new ProductListService();
-		List<ProductBean> productCGList = service.getProdoctCGList(cg);
-		request.setAttribute("productCGList", productCGList);
+//		System.out.println("검색어" + request.getParameter("keyword"));
+//		System.out.println("카테고리 : " + cg);
 		
-		forward = new ActionForward();
-		forward.setPath("main_cg.jsp?cg="+cg);
-		forward.setRedirect(false);
+		if(cg != null) { // 브랜드별 카테고리 이동
+			
+			ProductListService service = new ProductListService();
+			List<ProductBean> productList = service.getProdoctCGList(cg);
+			request.setAttribute("productList", productList);
+			
+			forward = new ActionForward();
+			forward.setPath("main_cg.jsp?cg="+cg);
+			forward.setRedirect(false);
+			
+		} else if (keyword != null) { // 메인 검색 결과
+			
+			ProductListService service = new ProductListService();
+			List<ProductBean> productList = service.getProdoctSearchList(keyword);
+			request.setAttribute("productList", productList);
+			
+			forward = new ActionForward();
+			forward.setPath("main_cg.jsp?keyword="+keyword);
+			forward.setRedirect(false);
+		}
+		
 		
 		return forward;
 	}
