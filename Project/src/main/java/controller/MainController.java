@@ -45,7 +45,7 @@ public class MainController extends HttpServlet{
 		}else if(command.equals("/New.MAIN")) { // Main -> New 카테고리
 			action = new MainNewListAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/BrandCG.MAIN")) { // Main -> 브랜드별 카테고리
+		}else if(command.equals("/BrandCG.MAIN")) { // Main -> 브랜드별 카테고리 + 검색
 			action = new MainBrandCGListAction();
 			forward = action.execute(request, response);
 		}

@@ -85,4 +85,19 @@ public class ProductListService {
 		return productCGList;
 	}
 
+	// 메인 - 검색어 상품 목록 조회
+	public List<ProductBean> getProdoctSearchList(String keyword) {
+		List<ProductBean> productSearchList = null;
+		
+		Connection con = JdbcUtil.getConnection();
+		
+		ProductDAO dao = ProductDAO.getInstance();
+		
+		dao.setConnection(con);
+		
+		productSearchList = dao.selectKeywordProductList(keyword);
+		
+		return productSearchList;
+	}
+
 }

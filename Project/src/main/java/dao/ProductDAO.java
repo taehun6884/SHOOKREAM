@@ -164,7 +164,11 @@ private ProductDAO() {}
 		try {
 			String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_date, p.product_amount, p.product_color, i.image_main_file "
 					+ "FROM shookream.product p join shookream.image i "
-					+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY product_date desc";
+					+ "on p.product_idx = i.product_idx ORDER BY product_date desc";
+			
+//			String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_date, p.product_amount, p.product_color, i.image_main_file "
+//					+ "FROM shookream.product p join shookream.image i "
+//					+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY product_date desc";
 			
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -340,7 +344,9 @@ private ProductDAO() {}
 			try {
 				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, i.image_main_file "
 						+ "FROM shookream.product p join shookream.image i "
-						+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY product_discount_price ASC";
+						+ "on p.product_idx = i.product_idx "
+						+ "WHERE product_discount_price > 0 "
+						+ "GROUP BY product_name ORDER BY product_discount_price ASC";
 				
 //				String sql = "SELECT * FROM product "
 //						+ "WHERE product_discount_price IS NOT NULL "
@@ -435,6 +441,64 @@ private ProductDAO() {}
 				JdbcUtil.close(pstmt);
 			}
 			return productCGList;
+		}
+
+		
+		// 메인 - 검색어 상품 목록 조회
+		public List<ProductBean> selectKeywordProductList(String keyword) {
+			ArrayList<ProductBean> productSearchList = null;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, i.image_main_file "
+						+ "FROM shookream.product p join shookream.image i "
+						+ "on p.product_idx = i.product_idx "
+						+ "WHERE product_brand LIKE ? OR product_name LIKE ?"
+						+ "GROUP BY product_name ORDER BY product_sell_count ASC";
+				
+//				String sql = "SELECT * FROM product "
+//						+ "WHERE product_brand LIKE ? "
+//						+ "ORDER BY product_sell_count asc";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyword+"%");
+				pstmt.setString(2, "%"+keyword+"%");
+				
+				rs = pstmt.executeQuery();
+				
+				productSearchList = new ArrayList<ProductBean>();
+				
+				while(rs.next()) {
+					ProductBean product = new ProductBean();
+					product.setProduct_idx(rs.getInt("product_idx"));
+					product.setProduct_name(rs.getString("product_name"));
+					product.setProduct_brand(rs.getString("product_brand"));
+//					product.setProduct_size(rs.getString("product_size"));
+					product.setProduct_price(rs.getInt("product_price"));
+//					product.setProduct_release_price(rs.getInt("product_release_price"));
+//					product.setProduct_buy_price(rs.getInt("product_buy_price"));
+//					product.setProduct_amount(rs.getInt("product_amount"));
+//					product.setProduct_sell_count(rs.getInt("product_sell_count"));
+//					product.setProduct_exp(rs.getString("product_exp"));
+//					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
+//					product.setProduct_color(rs.getString("product_color"));
+//					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					product.setProduct_img(rs.getString("image_main_file"));
+//					product.setProduct_date(rs.getTimestamp("product_date"));
+					
+					productSearchList.add(product);
+					System.out.println(productSearchList);
+				}
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - selectKeywordProductList()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			return productSearchList;
 		}
 	
 	
