@@ -121,7 +121,7 @@ text-align: left;
 				<option>290</option>
 			</select>
 			<input type="button" value="좋아요">
-			<input type="button" value="장바구니">
+			<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${param.member_idx }'">
 			<input type="button" value="구매하기">
 		</div>
 	

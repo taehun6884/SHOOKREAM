@@ -140,7 +140,7 @@ private ProductDAO() {}
 				product.setProduct_detail_exp(rs.getString("product_detail_exp"));
 				product.setProduct_color(rs.getString("product_color"));
 				product.setProduct_discount_price(rs.getDouble("product_discount_price"));
-				product.setProduct_img(rs.getString("product_img"));
+//				product.setProduct_img(rs.getString("product_img"));
 				product.setProduct_date(rs.getTimestamp("product_date"));
 //				System.out.println(product);
 			}
@@ -206,6 +206,38 @@ private ProductDAO() {}
 	}
 	
 	//----------------장바 구니----------------------
+		public int CartInsert(int product_idx, int member_idx) {
+			int CartInsert = 0;
+			PreparedStatement pstmt1,pstmt2 = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT MAX(cart_idx) FROM cart";
+				int cart_idx = 1;
+				pstmt1 = con.prepareStatement(sql);
+				rs = pstmt1.executeQuery();
+				
+				if(rs.next()) { 
+					cart_idx = rs.getInt(1) + 1;
+				}
+				System.out.println(cart_idx);
+		 //--------------------장바구니 등록--------------------------------		
+			sql = "INSERT INTO cart VALUES(?,?,?,now())";	
+			pstmt2 = con.prepareStatement(sql);
+			pstmt2.setInt(1, cart_idx);
+			pstmt2.setInt(2, member_idx);	
+			pstmt2.setInt(3, product_idx);	
+			CartInsert = pstmt2.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return CartInsert;
+		}
+	
+	
+	
 		public List<ProductBean> getCartList() {
 			 List<ProductBean> cartlist = null;
 			 PreparedStatement pstmt =  null;
@@ -500,6 +532,9 @@ private ProductDAO() {}
 			}
 			return productSearchList;
 		}
+
+
+		
 	
 	
 }//DAO 끝
