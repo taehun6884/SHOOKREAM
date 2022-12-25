@@ -10,6 +10,7 @@ import db.JdbcUtil;
 import java.util.List;
 
 import db.JdbcUtil;
+import vo.OrderBean;
 import vo.ProductBean;
 
 public class ProductDAO {
@@ -238,17 +239,19 @@ private ProductDAO() {}
 	
 	
 	
-		public List<ProductBean> getCartList() {
+		public List<ProductBean> getCartList(int member_idx) {
 			 List<ProductBean> cartlist = null;
 			 PreparedStatement pstmt =  null;
 			 ResultSet rs = null;
 				
 			 String sql ="SELECT c.cart_idx,p.product_name, p.product_size, p.product_price,p.product_brand,i.image_main_file,m.member_id "
 			 		+ "FROM shookream.cart c join shookream.product p join shookream.image i join shookream.member m "
-			 		+ "on c.product_idx = p.product_idx and c.product_idx = i.product_idx and c.member_idx = m.member_idx";
+			 		+ "on c.product_idx = p.product_idx and c.product_idx = i.product_idx and c.member_idx = m.member_idx "
+			 		+ "where m.member_idx=?";
 			 
 			 try {
 				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, member_idx);
 				rs = pstmt.executeQuery();
 				cartlist = new ArrayList<ProductBean>();
 				while(rs.next()) {
@@ -533,6 +536,85 @@ private ProductDAO() {}
 			return productSearchList;
 		}
 
+        //주문 하기
+		public int insertOrder(OrderBean vo) {
+			int insertOrder = 0;
+			PreparedStatement pstmt,pstmt2,pstmt3 = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT MAX(order_idx) FROM orderlist";
+				int idx = 1; // 새 글 번호
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) { 
+					 //true -> 조회결과가 있을 경우 (= 게시물이 하나라도 존재할 경우)
+					 //존재하지 않을 경우 rs.next는 false , DB에서는 NULL이 표기된다.
+					idx = rs.getInt(1) + 1;
+				}
+				
+				sql = "INSERT INTO orderlist VALUES(?,now(),?,?,?,?)";
+				pstmt2 = con.prepareStatement(sql);
+				pstmt2.setInt(1,idx );
+				pstmt2.setString(2,vo.getOrder_category());
+				pstmt2.setString(3, vo.getOrder_progress());
+				pstmt2.setInt(4, vo.getOrder_member_idx());
+				pstmt2.setInt(5, vo.getOrder_product_idx());
+				insertOrder=pstmt2.executeUpdate();
+				
+				if(insertOrder >0) {
+				sql = "INSERT INTO order_detail VALUES(?,?,?)";
+				pstmt3 = con.prepareStatement(sql);
+				pstmt3.setInt(1, idx);
+				pstmt3.setInt(2, vo.getOrder_member_idx());
+				pstmt3.setInt(3, vo.getOrder_product_idx());
+				insertOrder=pstmt3.executeUpdate();
+				}
+				} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			return insertOrder;
+		}
+
+
+		public List<OrderBean> getOrderList(int member_idx) {
+			List<OrderBean> orderlist = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date "
+					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
+					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx "
+					+ "where m.member_idx=?";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1,member_idx );
+				rs = pstmt.executeQuery();
+				orderlist = new ArrayList<OrderBean>();
+				while(rs.next()) {
+					OrderBean vo = new OrderBean();
+					vo.setOrder_main_image(rs.getString("image_main_file"));
+					vo.setOrder_member_id(rs.getString("member_id"));
+					vo.setOrder_product_price(rs.getInt("product_price"));
+					vo.setOrder_category(rs.getString("order_category"));
+					vo.setOrder_progress(rs.getString("order_progress"));
+					vo.setOrder_date(rs.getTimestamp("order_date"));
+					orderlist.add(vo);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return orderlist;
+		}
+		
+		
 
 		
 	

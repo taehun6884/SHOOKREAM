@@ -5,26 +5,25 @@ import java.util.List;
 
 import dao.ProductDAO;
 import db.JdbcUtil;
-import vo.ProductBean;
+import vo.OrderBean;
 
-public class CartListProService {
+public class OrderListProService {
 
-	public List<ProductBean> getCartlist(int member_idx) {
-		List<ProductBean> cartlist = null;
+	public List<OrderBean> getOrderList(int member_idx) {
+		List<OrderBean> orderlist = null;
+		
 		Connection con = JdbcUtil.getConnection();
 		
 		ProductDAO dao = ProductDAO.getInstance();
 		
 		dao.setConnection(con);
 			
-		cartlist = dao.getCartList(member_idx);
+		orderlist = dao.getOrderList(member_idx);
 		
 		JdbcUtil.close(con);
 		
-		return cartlist;
+		
+		return orderlist;
 	}
 
-	
-	
-	
 }
