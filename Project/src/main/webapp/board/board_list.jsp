@@ -113,7 +113,7 @@
 			<!-- 현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 [다음] 링크 동작 -->
 			<c:choose>
 				<c:when test="${pageNum < pageInfo.maxPage}">
-					<input type="button" value="다음" class="btn btn-outline-secondary btn-sm" onclick="location.href='BoardList.bo?pageNum=${pageNum + 1}'">
+					<input type="button" value="다음" class="btn btn-outline-secondary btn-sm" onclick="location.href='BoardList.?pageNum=${pageNum + 1}'">
 				</c:when>
 				<c:otherwise>
 					<input type="button" class="btn btn-outline-secondary btn-sm" value="다음">

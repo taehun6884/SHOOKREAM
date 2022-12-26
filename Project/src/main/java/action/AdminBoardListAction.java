@@ -21,7 +21,8 @@ public class AdminBoardListAction implements Action {
 		if(request.getParameter("pageNum") != null) {
 			pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		}
-
+		
+//		System.out.println("리스트에서 확인하는 pageNum " + pageNum);
 		int startRow = (pageNum - 1) * listLimit;
 
 		String keyword = request.getParameter("keyword");
@@ -38,7 +39,7 @@ public class AdminBoardListAction implements Action {
 
 		int listCount = service.getBoardListCount(keyword);
 		
-		int pageListLimit = 10; 
+		int pageListLimit = 3; 
 		
 		int maxPage = listCount / listLimit 
 						+ (listCount % listLimit == 0 ? 0 : 1); 
