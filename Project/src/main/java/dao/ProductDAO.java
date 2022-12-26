@@ -178,7 +178,7 @@ private ProductDAO() {}
 			 PreparedStatement pstmt =  null;
 			 ResultSet rs = null;
 				
-			 String sql ="SELECT c.cart_idx,p.product_name, p.product_size, p.product_price,p.product_brand,p.product_image  "
+			 String sql ="SELECT c.cart_idx,p.product_name, p.product_size, p.product_price,p.product_brand,p.product_img  "
 			 		+ "FROM shookream.cart c join shookream.product p "
 			 		+ "on c.product_idx = p.product_idx";
 			 try {
@@ -192,7 +192,7 @@ private ProductDAO() {}
 					vo.setProduct_size(rs.getNString("product_size"));
 					vo.setProduct_price(rs.getInt("product_price"));
 					vo.setProduct_brand(rs.getNString("product_brand"));
-					vo.setProduct_img(rs.getString("product_image"));
+					vo.setProduct_img(rs.getString("product_img"));
 					cartlist.add(vo);
 				}
 			 } catch (SQLException e) {
@@ -363,5 +363,51 @@ private ProductDAO() {}
 			}
 			
 			return bean;
+		}
+		
+		public boolean isDeleteCart(int cart_idx) {
+			int deleteCount =0;
+			boolean isDeleteSuccess = false;
+			PreparedStatement pstmt = null;
+			
+			String sql = "DELETE FROM product WHERE cart_idx=?";
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, cart_idx);
+				deleteCount = pstmt.executeUpdate();
+				if(deleteCount > 0) {
+					isDeleteSuccess=true;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			return isDeleteSuccess;
+		}
+		
+		public boolean isDeleteList(int product_idx) {
+			int isDeletePro = 0;
+			boolean isDeleteProduct = false;
+			PreparedStatement pstmt = null;
+			
+			String sql = "DELETE FROM product WHERE product_idx=?";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, product_idx);
+				isDeletePro = pstmt.executeUpdate();
+				
+				if(isDeletePro > 0) {
+					isDeleteProduct =true;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			}
+			
+			return isDeleteProduct;
 		}
 }//DAO 끝

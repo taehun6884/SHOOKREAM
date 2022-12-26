@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.CartDeleteProAction;
 import action.CartListProAction;
 import vo.ActionForward;
 
@@ -34,9 +35,12 @@ public class CartController extends HttpServlet{
 		}else if(command.equals("/CartInsertPro.ca")) {//Cart Pro
 
 		}else if(command.equals("/CartDeleteForm.ca")) { //Cart 삭제 창
-		
+			forward = new ActionForward();
+			forward.setPath("product/CartDeleteForm.jsp");
+			forward.setRedirect(false);
 		}else if(command.equals("/CartDeletePro.ca")) { //Cart 삭제 pro
-			
+			action = new CartDeleteProAction();
+			forward = action.execute(request, response);
 		}
 		
 		//-----------------------------------------------
