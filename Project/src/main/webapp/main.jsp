@@ -86,7 +86,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productBestList[0].product_img }"  alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[0].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productBestList[0].product_brand }<br></p>
@@ -96,7 +96,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productBestList[4].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[4].product_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productBestList[4].product_brand }<br></p>
@@ -109,7 +109,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productBestList[1].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[1].product_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productBestList[1].product_brand }<br></p>
@@ -119,7 +119,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productBestList[5].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[5].product_idx }'" >Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productBestList[5].product_brand }<br></p>
@@ -149,7 +149,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productBestList[2].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[2].product_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productBestList[2].product_brand }<br></p>
@@ -159,7 +159,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productBestList[6].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[6].product_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productBestList[6].product_brand }<br></p>
@@ -172,7 +172,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productBestList[3].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[3].product_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productBestList[3].product_brand }<br></p>
@@ -182,7 +182,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productBestList[7].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[7].product_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productBestList[7].product_brand }<br></p>

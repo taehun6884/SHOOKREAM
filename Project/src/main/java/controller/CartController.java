@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.CartInsertProAction;
 import action.CartListProAction;
 import vo.ActionForward;
 
@@ -32,7 +33,8 @@ public class CartController extends HttpServlet{
 			action = new CartListProAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/CartInsertPro.ca")) {//Cart Pro
-
+			action = new CartInsertProAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/CartDeleteForm.ca")) { //Cart 삭제 창
 		
 		}else if(command.equals("/CartDeletePro.ca")) { //Cart 삭제 pro
