@@ -44,7 +44,17 @@ float: right;
 margin-top: 100px;
 margin-left: 20px;
 text-align: left;
-}      
+}   
+.prod_name{
+font-size: 30px;
+font-weight: 900px;
+
+}
+.prod_title{
+font-size: 15px;
+font-weight: bold;
+
+}    
 </style>
 
 <style type="text/css">
@@ -84,31 +94,41 @@ text-align: left;
   <!-- 제품 상세 페이지 -->
   <div class="w3-padding-64 w3-light-grey w3-small w3-center" id="div">
   <div id = "sform">
-	<h3><b>상품 상세 정보</b></h3>
 	<section id="image">
 		<p>
 		<div class="title" align="left">
-			<h4>${product.product_brand}</h4>
+			<h4></h4>
 			<img alt="shoes" src="images/캡처10.PNG">
 		</div>
 	</section>
 	<section id="detail" >
 		<div class="text" > 
-			<p>상품명 : ${product.product_name }</p>
-		</div>
-		<div id="detail1">
+			<p>${product.product_brand}</p>
+			<p class ="prod_name">${product.product_name }</p>
 			<p>상품번호 : ${product.product_idx }</p>
-			<p>가격 : ${product.product_price }</p>
-			<p>판매수 : ${product.product_sell_count } </p>
-			<p>좋아요 </p>
-			<p>구매후기(별점) </p>
+			
+		</div>
+		<hr>
+		<div id="detail1">
+			<p class="prod_title">가격</p>
+			<p>${product.product_price }</p>
+			<hr>
+			<p class="prod_title">판매수</p>
+			<p>${product.product_sell_count }</p>
+			<hr>
+			<p class="prod_title">좋아요 </p>
+			<hr>
+			<p class="prod_title">구매후기(별점) </p>
+			<hr>
+			<p class="prod_title">색상</p>
 			<input type="button" value="black">
 			<input type="button" value="white">
 			<input type="button" value="blue">
 			<input type="button" value="yellow">
+			<hr>
 		</div>
-		
 		<div id="detail2" >
+			<p>사이즈</p>
 			<select>
 				<option selected>사이즈</option>
 				<option>220</option>
@@ -120,8 +140,9 @@ text-align: left;
 				<option>280</option>
 				<option>290</option>
 			</select>
+			<hr>
 			<input type="button" value="좋아요">
-			<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${param.member_idx }'">
+			<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${param.member_idx}'">
 			<button onclick="iamport()">구매하기</button>
 		</div>
 	
@@ -291,6 +312,32 @@ function iamport(){
 		});
 	}
 </script>
+
+<!-- 숫자 에 "," 처리를 위한 함수 -->
+        <script type="text/javascript">
+		    function comma(str) {
+		        str = String(str);
+		        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		    }
+		
+		    function uncomma(str) {
+		        str = String(str);
+		        return str.replace(/[^\d]+/g, '');
+		    } 
+		    
+		    function inputNumberFormat(obj) {
+		        obj.value = comma(uncomma(obj.value));
+		    }
+		    
+		    function inputOnlyNumberFormat(obj) {
+		        obj.value = onlynumber(uncomma(obj.value));
+		    }
+		    
+		    function onlynumber(str) {
+			    str = String(str);
+			    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g,'$1');
+			}
+		</script>
 <!-- End Channel Plugin -->
 </body>
 </html>

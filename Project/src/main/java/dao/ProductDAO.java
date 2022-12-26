@@ -103,7 +103,7 @@ private ProductDAO() {}
 			
 			
 		} catch (SQLException e) {
-			System.out.println("상품등록 - 관리자");
+			System.out.println("SQL 구문 오류 - 상품등록: 관리자");
 			e.printStackTrace();
 		} 
 		return insertCount2;
