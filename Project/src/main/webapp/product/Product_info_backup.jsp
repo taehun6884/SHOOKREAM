@@ -54,17 +54,6 @@ text-align: left;
 
 </style>
 
-<style>
-#button {
-display:inline‑block;
-    height:10px;
-    width:10px;
-    border‑radius:10px;
-    background‑color: ;
-}
-
-</style>
-
 </head>
 <body class="w3-content" style="max-width:1200px">
 
@@ -92,7 +81,7 @@ display:inline‑block;
 	 </div>
 	
 
-<!-- 제품 상세 페이지 -->
+  <!-- 제품 상세 페이지 -->
   <div class="w3-padding-64 w3-light-grey w3-small w3-center" id="div">
   <div id = "sform">
 	<h3><b>상품 상세 정보</b></h3>
@@ -113,11 +102,10 @@ display:inline‑block;
 			<p>판매수 : ${product.product_sell_count } </p>
 			<p>좋아요 </p>
 			<p>구매후기(별점) </p>
-			<input type="button" id ="button1" class = "button" value="black">
-			<input type="button" id ="button2" class = "button" value="white">
-			<input type="button" id ="button3" class = "button" value="blue">
-			<input type="button" id ="button4" class = "button" value="yellow">
-			
+			<input type="button" value="black">
+			<input type="button" value="white">
+			<input type="button" value="blue">
+			<input type="button" value="yellow">
 		</div>
 		
 		<div id="detail2" >
@@ -131,10 +119,10 @@ display:inline‑block;
 				<option>270</option>
 				<option>280</option>
 				<option>290</option>
-			</select><br>
+			</select>
 			<input type="button" value="좋아요">
-			<input type="button" value="장바구니" onclick="./Product_cart.jsp">
-			<input type="button" value="바로구매" >
+			<input type="button" value="장바구니">
+			<input type="button" value="구매하기">
 		</div>
 	
 	</section>
@@ -284,38 +272,6 @@ function w3_close() {
   function naverSignInCallback() {
     alert(naver_id_login.getProfileData('email'));
   }
-</script>
-<script type="text/javascript">
-document.getElementById("button1").style.backgroundColor ="";
-document.getElementById("button2").style.backgroundColor ="";
-document.getElementById("button3").style.backgroundColor ="";
-document.getElementById("button4").style.backgroundColor ="";
-
-document.getElementById("button1").onclick = function(){
-            this.style.backgroundColor ="gray";
-            document.getElementById("button2").style.backgroundColor ="";
-            document.getElementById("button3").style.backgroundColor ="";
-            document.getElementById("button4").style.backgroundColor ="";
-        };
-
-document.getElementById("button2").onclick = function(){
-            this.style.backgroundColor ="gray";
-            document.getElementById("button1").style.backgroundColor ="";
-            document.getElementById("button3").style.backgroundColor ="";
-            document.getElementById("button4").style.backgroundColor ="";
-        };
-document.getElementById("button3").onclick = function(){
-            this.style.backgroundColor ="gray";
-            document.getElementById("button1").style.backgroundColor ="";
-            document.getElementById("button2").style.backgroundColor ="";
-            document.getElementById("button4").style.backgroundColor ="";
-        };
-document.getElementById("button4").onclick = function(){
-            this.style.backgroundColor ="gray";
-            document.getElementById("button2").style.backgroundColor ="";
-            document.getElementById("button3").style.backgroundColor ="";
-            document.getElementById("button1").style.backgroundColor ="";
-        };
 </script>
 <!-- End Channel Plugin -->
 </body>
