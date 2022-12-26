@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.CartInsertProAction;
 import action.CartListProAction;
+import action.LikeInsertProAction;
 import vo.ActionForward;
 
 @WebServlet("*.ca") // 장바구니 컨트롤러
@@ -44,10 +45,10 @@ public class CartController extends HttpServlet{
 		//-----------------------------------------------
 		//찜목록
 		
-		if(command.equals("/LikeList.ca")) {//Cart 폼화면
-
-		}else if(command.equals("/LikeInsertPro.ca")) {//Cart Pro
-
+		if(command.equals("/LikeList.ca")) {
+		}else if(command.equals("/LikeInsertPro.ca")) { // 찜하기 누름
+			action = new LikeInsertProAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/LikeDeleteForm.ca")) { //Cart 삭제 창
 		
 		}else if(command.equals("/LikeDeletePro.ca")) { //Cart 삭제 pro

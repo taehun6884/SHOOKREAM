@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+<script src="https://kit.fontawesome.com/498a54c4c7.js" crossorigin="anonymous"></script>
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
@@ -33,7 +34,37 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	font-size: x-large;
 }
 
+
 </style>
+
+<script src="../jquery/jquery-3.6.3.js"></script>
+<script type="text/javascript">
+$(function() {
+	$("#btnLike").on("click", function() {
+		// AJAX 를 사용하여 test1_result.jsp 페이지로 요청 전송하기
+		$.ajax({
+			type: "post", // AJAX 로 요청 시 HTTP 요청 방식(GET or POST) 지정
+			url: "LikeInsertPro.ca", // AJAX 로 요청할 요청 주소(URL)
+			data: { // 전송할 데이터(파라미터) 지정(일반 파라미터일 경우 중괄호로 묶음)
+				// 폼 데이터를 가져와서 파라미터로 표현(전송)하는 경우
+				// 파라미터명: 데이터 형식으로 지정
+				id: $("#id").val(), // id 선택자의 value 속성값을 id 파라미터로 저장
+				passwd: $("#passwd").val() // passwd 선택자의 value 속성값을 passwd 파라미터로 저장
+			},
+			dataType: "text", // 응답 데이터에 대한 타입 지정(일반 데이터는 text 이며 HTML 코드도 포함 가능, 자바스크립트 포함되면 html 사용)
+			success: function(response) { // 요청에 대한 처리 성공 시(= 정답 응답) 처리할 함수 정의
+				// 익명 함수 파라미터로 응답 데이터가 전달됨(처리 페이지의 응답 결과)
+				// id 선택자 resultArea 영역에 응답 데이터(response) 출력하기
+				$("#resultArea").html(response);
+			}, 
+			error: function(xhr, textStatus, errorThrown) { 
+				// 요청에 대한 처리 실패 시(= 에러 발생 시) 실행되는 이벤트
+				$("#resultArea").html("xhr = " + xhr + "<br>textStatus = " + textStatus + "<br>errorThrown = " + errorThrown);
+			}
+		});
+	});
+});
+</script>
 </head>
 <body class="w3-content" style="max-width:1200px">
 
@@ -90,6 +121,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
+          <button id="btnLike"><i class="fa-regular fa-heart"></i></button>
         </div>
         <p>${productBestList.product_brand }<br></p><!-- 1번째 그리드 -->
         <p>${productBestList.product_name }<br><b><fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 -->
@@ -273,5 +305,8 @@ function w3_close() {
   }
 </script>
 <!-- End Channel Plugin -->
+
+
+
 </body>
 </html>
