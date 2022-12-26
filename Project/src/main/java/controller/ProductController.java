@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.AdminOrderListProAction;
 import action.OrderListProAction;
 import action.OrderProAction;
 import action.ProductInfoProAction;
@@ -53,10 +54,10 @@ public class ProductController extends HttpServlet{
 		
 		}else if(command.equals("/ProductDeletePro.po")) { //Product 삭제 pro
 			
-		}else if(command.equals("/ProductOrderPro.po")) { //Product 삭제 pro
+		}else if(command.equals("/ProductOrderPro.po")) { //사용자 주문 하기
 			action = new OrderProAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/ProductOrderList.po")) { //Product 삭제 pro
+		}else if(command.equals("/ProductOrderList.po")) { //사용자 주문 상세 페이지
 			action = new OrderListProAction();
 			forward = action.execute(request, response);
 		}
