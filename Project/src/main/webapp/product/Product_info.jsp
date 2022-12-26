@@ -133,12 +133,9 @@ display:inline‑block;
 				<option>290</option>
 			</select><br>
 			<input type="button" value="좋아요">
-
-			<input type="button" value="장바구니" onclick="./Product_cart.jsp">
-			<input type="button" value="바로구매" >
-
+			<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${param.member_idx }'">
+			<button onclick="iamport()">구매하기</button>
 		</div>
-	
 	</section>
   </div>
   </div>
@@ -301,7 +298,7 @@ function iamport(){
 		         msg += '에러내용 : ' + rsp.error_msg;
 		    }
 		    alert(msg);
-		    location.href="ProductOrderPro.po?order_category=주문완료&order_progress=배송완료&member_idx=${member_idx}&product_idx=${product.product_idx}";
+		    location.href="ProductOrderPro.po?order_category=주문완료&order_progress=배송완료&member_idx=${member_idx}&product_idx=${product.product_idx}&product_amount=${product.product_amount}&product_sell_count=${product.product_sell_count} ";
 		});
 	}
 </script>
