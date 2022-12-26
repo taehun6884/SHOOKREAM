@@ -245,6 +245,7 @@ private MemberDAO() {}
 			
 			if(rs.next()) {
 				vo = new MemberBean();
+				vo.setMember_idx(rs.getInt("member_idx"));
 				vo.setMember_name(rs.getString("member_name"));
 				vo.setMember_id(rs.getString("member_id"));
 				vo.setMember_pass(rs.getString("member_pass"));

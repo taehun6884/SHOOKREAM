@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import svc.LoginMemberService;
+import svc.ModifyMemberService;
 import vo.ActionForward;
+import vo.MemberBean;
 
 public class MemberLoginMemberProAction implements Action {
 
@@ -28,6 +30,10 @@ public class MemberLoginMemberProAction implements Action {
 		
 		LoginMemberService service = new LoginMemberService();
 		boolean isLogintUser = service.isLoginUser(id,pass);
+		
+		ModifyMemberService service2 = new ModifyMemberService();
+		MemberBean vo = service2.getMemberInfo(id);
+//		System.out.println(vo);
 		
 		if(isLogintUser == false ) {
 			response.setContentType("text/html; charset=UTF-8");
@@ -44,7 +50,8 @@ public class MemberLoginMemberProAction implements Action {
 		}else {
 			HttpSession session = request.getSession();
 			session.setAttribute("sId", id);
-
+			session.setAttribute("member_idx", vo.getMember_idx());
+			
 			forward = new ActionForward();
 			forward.setPath("./");
 			forward.setRedirect(true);

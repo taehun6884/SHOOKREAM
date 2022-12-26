@@ -22,7 +22,7 @@ private String product_img; // 메인 사진
 private String product_img2; // 추가 사진1
 private String product_img3; // 추가 사진2
 private Timestamp product_date; // 등록일
-private int cart_idx;
+private int cart_idx; //카트 번호
 //------------getter, setter-------------------
 public int getProduct_idx() {
 	return product_idx;

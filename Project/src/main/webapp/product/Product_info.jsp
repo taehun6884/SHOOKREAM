@@ -133,8 +133,11 @@ display:inline‑block;
 				<option>290</option>
 			</select><br>
 			<input type="button" value="좋아요">
+
 			<input type="button" value="장바구니" onclick="./Product_cart.jsp">
 			<input type="button" value="바로구매" >
+			
+
 		</div>
 	
 	</section>
@@ -273,17 +276,35 @@ function w3_close() {
 	  }
 	}
 </script>
-<!-- 네이버 아이디 로그인 -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript">
-  var naver_id_login = new naver_id_login("nSNLHIW18gDjrrJsFDeE", "http://localhost:8080/Project/index.jsp");
-  // 접근 토큰 값 출력
-//   alert(naver_id_login.oauthParams.access_token);
-  // 네이버 사용자 프로필 조회
-  naver_id_login.get_naver_userprofile("naverSignInCallback()");
-  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-  function naverSignInCallback() {
-    alert(naver_id_login.getProfileData('email'));
-  }
+function iamport(){
+		//가맹점 식별코드
+		IMP.init('imp77718215');
+		IMP.request_pay({
+		    pg : 'kakaopay',
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '${product.product_name}' , //결제창에서 보여질 이름
+		    amount : '${product.product_price }', //실제 결제되는 가격
+		    buyer_name : '${sessionScope.sId}',
+		}, function(rsp) {
+			console.log(rsp);
+		    if ( rsp.success ) {
+		    	var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		    } else {
+		    	 var msg = '결제에 실패하였습니다.';
+		         msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    alert(msg);
+		    location.href="ProductOrderPro.po?order_category=주문완료&order_progress=배송완료&member_idx=${member_idx}&product_idx=${product.product_idx}";
+		});
+	}
 </script>
 <script type="text/javascript">
 document.getElementById("button1").style.backgroundColor ="";
