@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.BoardDeleteProAction;
 import action.BoardDetailAction;
 import action.BoardListAction;
 import action.BoardModifyFormAction;
@@ -52,62 +53,34 @@ public class BoardFrontController extends HttpServlet {
 		}else if(command.equals("/BoardInfo.bo")) { //공지 상세 정보
 			action = new BoardDetailAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/FAQList.bo")) { //FAQ 목록
+		}else if(command.equals("/BoardModifyForm.bo")) { //공지 정보 수정 창(관리자용)
+			action = new BoardModifyFormAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/BoardModifyPro.bo")) { //공지 정보 수정 pro(관리자용)
+			action = new BoardModifyProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/BoardDeleteForm.bo")) { //공지 삭제 창(관리자용)
+			
+		}else if(command.equals("/BoardDelete.bo")) { //공지 삭제 pro(관리자용)
+			action = new BoardDeleteProAction();
+			forward = action.execute(request, response);
+
+	}
+
+		//FAQ
+		if(command.equals("/FAQList.bo")) { //FAQ 목록
 			action = new FAQListAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/FAQInfo.bo")) { //FAQ 상세 정보
 			action = new FAQDetailAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/BoardModifyForm.bo")) { //공지 정보 수정 창
-			action = new BoardModifyFormAction();
-			forward = action.execute(request, response);
-		}else if(command.equals("/BoardModifyPro.bo")) { //공지 정보 수정 pro
-			action = new BoardModifyProAction();
-			forward = action.execute(request, response);
-		}else if(command.equals("/BoardDeleteForm.bo")) { //공지 삭제 창
-		
-		}else if(command.equals("/BoardDeletePro.bo")) { //공지 삭제 pro
-			
+		}else if(command.equals("/FAQModifyForm.bo")) { //FAQ 정보 수정 창(관리자용)
 
-	}
-		
-		
-		//-----------------------------------------------------
-		//문의사항
-		if(command.equals("/AskInsertForm.me")) {//문의사항 폼화면
+		}else if(command.equals("/FAQModifyPro.bo")) { //FAQ 정보 수정 pro(관리자용)
 
-		}else if(command.equals("/AskJoinPro.me")) {//문의사항 pro
-		
-		}else if(command.equals("/AskList.me")) { //문의사항 목록
-		
-		}else if(command.equals("/AskInfo.me")) { //문의사항 정보
-		
-		}else if(command.equals("/AskModifyForm.me")) { //문의사항 정보 수정 창
-		
-		}else if(command.equals("/AskModifyPro.me")) { //문의사항 정보 수정 pro
+		}else if(command.equals("/FAQDeleteForm.bo")) { //FAQ 삭제 창(관리자용)
 			
-		}else if(command.equals("/AskDeleteForm.me")) { //문의사항 삭제 창
-			
-		}else if(command.equals("/AskDeletePro.me")) { //문의사항 삭제 pro
-				
-		}
-		
-		//FAQ
-		if(command.equals("/FAQInsertForm.me")) {//FAQ 폼화면
-
-		}else if(command.equals("/FAQJoinPro.me")) {//FAQ pro
-		
-		}else if(command.equals("/FAQList.me")) { //FAQ 목록
-		
-		}else if(command.equals("/FAQInfo.me")) { //FAQ 상세 정보
-		
-		}else if(command.equals("/FAQModifyForm.me")) { //FAQ 정보 수정 창
-		
-		}else if(command.equals("/FAQModifyPro.me")) { //FAQ 정보 수정 pro
-		
-		}else if(command.equals("/FAQDeleteForm.me")) { //FAQ 삭제 창
-		
-		}else if(command.equals("/FAQDeletePro.me")) { //FAQ 삭제 pro
+		}else if(command.equals("/FAQDeletePro.bo")) { //FAQ 삭제 pro(관리자용)
 			
 		}
 		// ----------------------------------------------------------------------
