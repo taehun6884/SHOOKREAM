@@ -54,17 +54,6 @@ text-align: left;
 
 </style>
 
-<style>
-#button {
-display:inline‑block;
-    height:10px;
-    width:10px;
-    border‑radius:10px;
-    background‑color: ;
-}
-
-</style>
-
 </head>
 <body class="w3-content" style="max-width:1200px">
 
@@ -92,7 +81,7 @@ display:inline‑block;
 	 </div>
 	
 
-<!-- 제품 상세 페이지 -->
+  <!-- 제품 상세 페이지 -->
   <div class="w3-padding-64 w3-light-grey w3-small w3-center" id="div">
   <div id = "sform">
 	<h3><b>상품 상세 정보</b></h3>
@@ -113,11 +102,10 @@ display:inline‑block;
 			<p>판매수 : ${product.product_sell_count } </p>
 			<p>좋아요 </p>
 			<p>구매후기(별점) </p>
-			<input type="button" id ="button1" class = "button" value="black">
-			<input type="button" id ="button2" class = "button" value="white">
-			<input type="button" id ="button3" class = "button" value="blue">
-			<input type="button" id ="button4" class = "button" value="yellow">
-			
+			<input type="button" value="black">
+			<input type="button" value="white">
+			<input type="button" value="blue">
+			<input type="button" value="yellow">
 		</div>
 		
 		<div id="detail2" >
@@ -131,12 +119,10 @@ display:inline‑block;
 				<option>270</option>
 				<option>280</option>
 				<option>290</option>
-			</select><br>
+			</select>
 			<input type="button" value="좋아요">
-
-			<input type="button" value="장바구니" onclick="./Product_cart.jsp">
-			<input type="button" value="바로구매" >
-
+			<input type="button" value="장바구니">
+			<input type="button" value="구매하기">
 		</div>
 	
 	</section>
@@ -275,67 +261,17 @@ function w3_close() {
 	  }
 	}
 </script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<!-- 네이버 아이디 로그인 -->
 <script type="text/javascript">
-function iamport(){
-		//가맹점 식별코드
-		IMP.init('imp77718215');
-		IMP.request_pay({
-		    pg : 'kakaopay',
-		    pay_method : 'card',
-		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : '${product.product_name}' , //결제창에서 보여질 이름
-		    amount : '${product.product_price }', //실제 결제되는 가격
-		    buyer_name : '${sessionScope.sId}',
-		}, function(rsp) {
-			console.log(rsp);
-		    if ( rsp.success ) {
-		    	var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		    } else {
-		    	 var msg = '결제에 실패하였습니다.';
-		         msg += '에러내용 : ' + rsp.error_msg;
-		    }
-		    alert(msg);
-		    location.href="ProductOrderPro.po?order_category=주문완료&order_progress=배송완료&member_idx=${member_idx}&product_idx=${product.product_idx}";
-		});
-	}
-</script>
-<script type="text/javascript">
-document.getElementById("button1").style.backgroundColor ="";
-document.getElementById("button2").style.backgroundColor ="";
-document.getElementById("button3").style.backgroundColor ="";
-document.getElementById("button4").style.backgroundColor ="";
-
-document.getElementById("button1").onclick = function(){
-            this.style.backgroundColor ="gray";
-            document.getElementById("button2").style.backgroundColor ="";
-            document.getElementById("button3").style.backgroundColor ="";
-            document.getElementById("button4").style.backgroundColor ="";
-        };
-
-document.getElementById("button2").onclick = function(){
-            this.style.backgroundColor ="gray";
-            document.getElementById("button1").style.backgroundColor ="";
-            document.getElementById("button3").style.backgroundColor ="";
-            document.getElementById("button4").style.backgroundColor ="";
-        };
-document.getElementById("button3").onclick = function(){
-            this.style.backgroundColor ="gray";
-            document.getElementById("button1").style.backgroundColor ="";
-            document.getElementById("button2").style.backgroundColor ="";
-            document.getElementById("button4").style.backgroundColor ="";
-        };
-document.getElementById("button4").onclick = function(){
-            this.style.backgroundColor ="gray";
-            document.getElementById("button2").style.backgroundColor ="";
-            document.getElementById("button3").style.backgroundColor ="";
-            document.getElementById("button1").style.backgroundColor ="";
-        };
+  var naver_id_login = new naver_id_login("nSNLHIW18gDjrrJsFDeE", "http://localhost:8080/Project/index.jsp");
+  // 접근 토큰 값 출력
+//   alert(naver_id_login.oauthParams.access_token);
+  // 네이버 사용자 프로필 조회
+  naver_id_login.get_naver_userprofile("naverSignInCallback()");
+  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+  function naverSignInCallback() {
+    alert(naver_id_login.getProfileData('email'));
+  }
 </script>
 <!-- End Channel Plugin -->
 </body>

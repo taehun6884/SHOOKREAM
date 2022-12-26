@@ -3,6 +3,7 @@ package vo;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import lombok.Data;
 
 @Data
 //결과보고서 객체를 HashMap이 아닌 전용객체(ResultData)로 변경
@@ -72,4 +73,12 @@ public class ResultData {   //result 관련 값들을 모아 결과값을 계산
 	public boolean isSuccess() {
 		return resultCode.startsWith("S-");
 	}
+
+	public Object getMsg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	
 }
