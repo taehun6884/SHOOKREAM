@@ -136,7 +136,6 @@ display:inline‑block;
 
 			<input type="button" value="장바구니" onclick="./Product_cart.jsp">
 			<input type="button" value="바로구매" >
-			
 
 		</div>
 	
