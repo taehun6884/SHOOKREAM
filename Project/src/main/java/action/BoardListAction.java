@@ -34,7 +34,9 @@ public class BoardListAction implements Action {
 		
 		BoardListService service = new BoardListService();
 		
-		List<BoardBean> boardList = service.getBoardList(keyword, startRow, listLimit);
+		String type = "Notice";
+		
+		List<BoardBean> boardList = service.getBoardList(keyword, startRow, listLimit, type);
 
 		int listCount = service.getBoardListCount(keyword);
 		

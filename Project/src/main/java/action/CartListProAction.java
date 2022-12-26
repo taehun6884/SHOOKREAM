@@ -16,8 +16,11 @@ public class CartListProAction implements Action{
 		ActionForward forward = null;
 		List<ProductBean> cartList = null;
 		
+		int member_idx = Integer.parseInt(request.getParameter("member_idx"));
+		
+		
 		CartListProService service = new CartListProService();
-		List<ProductBean> cartlist = service.getCartlist();
+		List<ProductBean> cartlist = service.getCartlist(member_idx);
 		System.out.println(cartlist);
 		request.setAttribute("cartlist", cartlist);
 		

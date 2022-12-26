@@ -77,12 +77,12 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           <tr>
           	<td>
           		<div id="naver_id_login"></div>
-				<a href="javascript:kakaoLogin();"><img src="./images/kakao_login_medium_narrow.png"></a>
+				<a href="javascript:kakaoLogin();"><img src="./images/kakao_login.png" height="50" width="250"></a>
 				</td>
           </tr>
           <tr>
           	<td>
-          		<button type="button" class="btn btn-secondary" onclick="location.href='MemberJoinForm.me'">회원가입</button>
+          		<button type="button" class="w3-button w3-block w3-black" onclick="location.href='MemberJoinForm.me'">회원가입</button>
           	</td>
           </tr>
         </table>
@@ -195,25 +195,27 @@ function w3_close() {
 Kakao.init('6405849a8d7a7fa490a223800b55af42'); //발급받은 키 중 javascript키를 사용해준다.
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
 //카카오로그인
-function kakaoLogin() {
-    window.Kakao.Auth.login({
-      scope:'account_email,profile_nickname',
-      success: function(authObj){
-    	  console.log(authObk);
-    	  window.kakao.API.requset({
-    		  url:'/v2/user/me',
-    	  	  success: res =>{
-    	  		  const kakao_account = res.kakao_account;
-    	  		  console.log(kakao_account);
-    	  		if(kakao_account != null){
-    	  			alert(kakao_account);
-    	  			location.href="./";
-    	  		}
-    	  	  }	
-    	  });
-      }
-    });
-  }
+        window.Kakao.init('본인 JAVASCRIPT API 키');
+
+ function kakaoLogin() {
+     window.Kakao.Auth.login({
+         scope: 'account_email,	profile_nickname', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
+         success: function(response) {
+             console.log(response) // 로그인 성공하면 받아오는 데이터
+             window.Kakao.API.request({ // 사용자 정보 가져오기 
+                 url: '/v2/user/me',
+                 success: (res) => {
+                     const kakao_account = res.kakao_account;
+                     console.log(kakao_account)
+                 }
+             });
+          window.location.href="./main.MAIN"; 
+         },
+         fail: function(error) {
+             console.log(error);
+         }
+     });
+ }
 //카카오로그아웃  
 function kakaoLogout() {
     if (Kakao.Auth.getAccessToken()) {

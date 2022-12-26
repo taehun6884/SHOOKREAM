@@ -30,13 +30,15 @@ public class AdminBoardListAction implements Action {
 			keyword = "";
 		}
 		
+		String type = "Notice";
+		
 		BoardListService service = new BoardListService();
 		
-		List<BoardBean> boardList = service.getBoardList(keyword, startRow, listLimit);
+		List<BoardBean> boardList = service.getBoardList(keyword, startRow, listLimit, type);
 
 		int listCount = service.getBoardListCount(keyword);
 		
-		int pageListLimit = 3; 
+		int pageListLimit = 10; 
 		
 		int maxPage = listCount / listLimit 
 						+ (listCount % listLimit == 0 ? 0 : 1); 
@@ -54,10 +56,13 @@ public class AdminBoardListAction implements Action {
 
 		request.setAttribute("boardList", boardList);
 		request.setAttribute("pageInfo", pageInfo);
-		
+
 		forward = new ActionForward();
 		forward.setPath("admin/admin_notice_manage.jsp");
-		forward.setRedirect(false);
+		forward.setRedirect(false);		
+
+		
+		
 		
 		return forward;
 	}

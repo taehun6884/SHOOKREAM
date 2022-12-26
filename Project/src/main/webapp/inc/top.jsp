@@ -5,7 +5,7 @@
 <header class="w3-container w3-xlarge">
 	<p class="w3-left"></p> <!-- 카테고리명 페이지마다 추가하기 -->
 	<p class="w3-right">
-		<i class="fa fa-shopping-cart w3-margin-right"></i>
+		<a href="CartList.ca?member_idx=${member_idx }"><i class="fa fa-shopping-cart w3-margin-right"></i></a>
 		<i class="fa fa-search"></i>
 	<!-- 로그인 드롭다운 기능! -->	
 	<c:choose>

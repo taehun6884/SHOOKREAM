@@ -10,7 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.MainBestListAction;
+import action.MainBrandCGListAction;
 import action.MainListAction;
+import action.MainNewListAction;
+import action.MainSaleListAction;
 import action.ProductInsertAction;
 import action.ProductListAction;
 import vo.ActionForward;
@@ -31,8 +35,19 @@ public class MainController extends HttpServlet{
 		
 		if(command.equals("/main.MAIN")) {// Main 폼화면
 			action = new MainListAction();
+			forward = action.execute(request, response); // Main -> Best 카테고리
+		}else if(command.equals("/Best.MAIN")) {
+			action = new MainBestListAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("")) {
+		}else if(command.equals("/Sale.MAIN")) {  // Main -> Sale 카테고리
+			action = new MainSaleListAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/New.MAIN")) { // Main -> New 카테고리
+			action = new MainNewListAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/BrandCG.MAIN")) { // Main -> 브랜드별 카테고리 + 검색
+			action = new MainBrandCGListAction();
+			forward = action.execute(request, response);
 		}
 	
 			

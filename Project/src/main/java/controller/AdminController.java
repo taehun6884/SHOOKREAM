@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.AdminBoardListAction;
+import action.AdminFAQListAction;
 import action.BoardDetailAction;
 import vo.ActionForward;
 
@@ -19,10 +20,10 @@ public class AdminController extends HttpServlet{
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		System.out.println("AdminController()");
+//		System.out.println("AdminController()");
 		
 		String command = request.getServletPath();
-		System.out.println("현재 주소 :" + command);
+//		System.out.println("현재 주소 :" + command);
 		
 		ActionForward forward = null;
 		Action action = null;
@@ -41,6 +42,9 @@ public class AdminController extends HttpServlet{
 			 forward.setRedirect(false);
 		} else if(command.equals("/AdminNoticeManage.ad")) { // 관리자 게시판-공지사항 -> 관리자용 뷰페이지
 			 action = new AdminBoardListAction();
+			 forward = action.execute(request, response);
+		} else if(command.equals("/AdminFAQManage.ad")) {
+			 action = new AdminFAQListAction();
 			 forward = action.execute(request, response);
 		}
 			

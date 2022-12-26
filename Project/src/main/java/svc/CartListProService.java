@@ -9,7 +9,7 @@ import vo.ProductBean;
 
 public class CartListProService {
 
-	public List<ProductBean> getCartlist() {
+	public List<ProductBean> getCartlist(int member_idx) {
 		List<ProductBean> cartlist = null;
 		Connection con = JdbcUtil.getConnection();
 		
@@ -17,7 +17,7 @@ public class CartListProService {
 		
 		dao.setConnection(con);
 			
-		cartlist = dao.getCartList();
+		cartlist = dao.getCartList(member_idx);
 		
 		JdbcUtil.close(con);
 		

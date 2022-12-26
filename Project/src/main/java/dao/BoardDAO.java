@@ -72,29 +72,33 @@ private BoardDAO() {}
 		return insertCount;
 	}
 	
-	public List<BoardBean> selectBoardList(String keyword, int startRow, int listLimit) {
+	public List<BoardBean> selectBoardList(String keyword, int startRow, int listLimit, String type) {
 		List<BoardBean> boardList = null;
+		
+	
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			
 			String sql = "SELECT * FROM notice "
-					+ "WHERE notice_subject "
-					+ "LIKE ? "
-					+ "ORDER BY notice_idx DESC " 
-					+ "LIMIT ?,?";
+					+ "WHERE notice_type=? AND notice_subject" 
+					+ " LIKE ?"
+					+ " ORDER BY notice_idx DESC" 
+					+ " LIMIT ?,?";
 			
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%" + keyword + "%");
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, listLimit);
+			pstmt.setString(1, type);
+			pstmt.setString(2, "%" + keyword + "%");
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, listLimit);
 			rs = pstmt.executeQuery();
-
+			
+//			System.out.println("pstmt= " + pstmt);
 			boardList = new ArrayList<BoardBean>();
 			
 			while(rs.next()) {
-				BoardBean board = new BoardBean();
+				BoardBean board = new BoardBean(); //
 				board.setNotice_idx(rs.getInt("notice_idx"));
 				board.setNotice_category(rs.getString("notice_category"));
 				board.setNotice_subject(rs.getString("notice_subject"));
@@ -104,7 +108,8 @@ private BoardDAO() {}
 				board.setNotice_type(rs.getString("notice_type"));
 				
 				boardList.add(board);
-			}			
+			}	
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}  finally {
@@ -198,6 +203,27 @@ private BoardDAO() {}
 			// DB 자원 반환
 			JdbcUtil.close(pstmt);
 		}
+		return updateCount;
+	}
+
+	public int updateBoard(BoardBean board) {
+		int updateCount = 0;
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "UPDATE notice SET notice_subject=?, notice_content=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, board.getNotice_subject());
+			pstmt.setString(2, board.getNotice_content());
+			
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+		
+		
 		return updateCount;
 	}
 	

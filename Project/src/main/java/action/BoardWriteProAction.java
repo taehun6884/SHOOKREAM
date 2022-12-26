@@ -24,7 +24,7 @@ public class BoardWriteProAction implements Action {
 			board.setNotice_content(request.getParameter("notice_content"));
 			board.setNotice_type(request.getParameter("notice_type"));
 			
-			System.out.println(board);
+//			System.out.println(board);
 			 
 			BoardWriteProService service = new BoardWriteProService();
 			boolean isWriteSuccess = service.registBoard(board);
@@ -39,9 +39,15 @@ public class BoardWriteProAction implements Action {
 				out.println("history.back()");
 				out.println("</script>");
 			} else { // 성공 시
-				forward = new ActionForward();
-				forward.setPath("AdminBoardManage.ad");
-				forward.setRedirect(true);
+				if(request.getParameter("notice_type").equals("Notice")) {
+					forward = new ActionForward();
+					forward.setPath("AdminNoticeManage.ad");
+					forward.setRedirect(true);		
+				} else {
+					forward = new ActionForward();
+					forward.setPath("AdminFAQManage.ad");
+					forward.setRedirect(true);
+				}
 				
 			}
 			

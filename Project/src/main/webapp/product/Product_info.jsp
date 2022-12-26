@@ -19,12 +19,52 @@
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
+<style type="text/css">
+#sform { 
+		  border:1px solid red;
+          display: inline-block;
+          text-align: center;
+          margin-left: 270PX;
+          
+        }
+#image{
+/* background-color: blue; */
+padding-left: 50;
+float: left;
+}
+
+#title{
+align-content: center;
+}
+
+#detail{border:1px solid blue;
+font-family: "Montserrat", sans-serif;
+font-size:15px;
+float: right;
+margin-top: 100px;
+margin-left: 20px;
+text-align: left;
+}      
+</style>
 
 <style type="text/css">
 #logintvar{
 	float: right;
 }
+
 </style>
+
+<style>
+#button {
+display:inline‑block;
+    height:10px;
+    width:10px;
+    border‑radius:10px;
+    background‑color: ;
+}
+
+</style>
+
 </head>
 <body class="w3-content" style="max-width:1200px">
 
@@ -41,7 +81,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
+<div class="w3-main" style="margin-left:300px">
 
   <!-- Push down content on small screens -->
   <div class="w3-hide-large" style="margin-top:83px"></div>
@@ -51,84 +91,71 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	
 	 </div>
 	
+
+<!-- 제품 상세 페이지 -->
+  <div class="w3-padding-64 w3-light-grey w3-small w3-center" id="div">
+  <div id = "sform">
+	<h3><b>상품 상세 정보</b></h3>
+	<section id="image">
+		<p>
+		<div class="title" align="left">
+			<h4>${product.product_brand}</h4>
+			<img alt="shoes" src="images/캡처10.PNG">
+		</div>
+	</section>
+	<section id="detail" >
+		<div class="text" > 
+			<p>상품명 : ${product.product_name }</p>
+		</div>
+		<div id="detail1">
+			<p>상품번호 : ${product.product_idx }</p>
+			<p>가격 : ${product.product_price }</p>
+			<p>판매수 : ${product.product_sell_count } </p>
+			<p>좋아요 </p>
+			<p>구매후기(별점) </p>
+			<input type="button" id ="button1" class = "button" value="black">
+			<input type="button" id ="button2" class = "button" value="white">
+			<input type="button" id ="button3" class = "button" value="blue">
+			<input type="button" id ="button4" class = "button" value="yellow">
+			
+		</div>
+		
+		<div id="detail2" >
+			<select>
+				<option selected>사이즈</option>
+				<option>220</option>
+				<option>230</option>
+				<option>240</option>
+				<option>250</option>
+				<option>260</option>
+				<option>270</option>
+				<option>280</option>
+				<option>290</option>
+			</select><br>
+			<input type="button" value="좋아요">
+
+			<input type="button" value="장바구니" onclick="./Product_cart.jsp">
+			<input type="button" value="바로구매" >
+
+		</div>
 	
-  <!-- ./images header -->
-<!--   <div class="w3-display-container w3-container"> -->
-<!--     <img src="./images/jeans.jpg" alt="Jeans" style="width:100%"> -->
-<!--     <div class="w3-display-topleft w3-text-white" style="padding:24px 48px"> -->
-<!--       <h1 class="w3-jumbo w3-hide-small">New arrivals</h1> -->
-<!--       <h1 class="w3-hide-large w3-hide-medium">New arrivals</h1> -->
-<!--       <h1 class="w3-hide-small">COLLECTION 2016</h1> -->
-<!--       <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p> -->
-<!--     </div> -->
-<!--   </div> -->
+	</section>
+  </div>
+  </div>
+  
+    <!-- 
+<footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
+   -->
+<%-- 	<img src="./upload/${product.product_img }" class="img-thumbnail" alt="..." width="150" height="150"> --%>
+<!--  	<table border="1"> -->
+<!-- 	 	<tr> -->
+<%-- 			 <td width="70"><h1>${product }</h1></td> --%>
+<!-- 			 <td width="70"></td> -->
+<!-- 	 	</tr> -->
+	 
+<!-- 	 </table> -->
 
-<!--   <div class="w3-container w3-text-grey" id="jeans"> -->
-<!--     <p>8 items</p> -->
-<!--   </div> -->
 
-<!--   <!-- Product grid --> 
-<!--   <div class="w3-row w3-grayscale"> -->
-<!--     <div class="w3-col l3 s6"> -->
-<!--       <div class="w3-container"> -->
-<!--         <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--         <p>Ripped Skinny Jeans<br><b>$24.99</b></p> -->
-<!--       </div> -->
-<!--       <div class="w3-container"> -->
-<!--         <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--         <p>Mega Ripped Jeans<br><b>$19.99</b></p> -->
-<!--       </div> -->
-<!--     </div> -->
-
-<!--     <div class="w3-col l3 s6"> -->
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<!--           <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--           <span class="w3-tag w3-display-topleft">New</span> -->
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<!--         <p>Mega Ripped Jeans<br><b>$19.99</b></p> -->
-<!--       </div> -->
-<!--       <div class="w3-container"> -->
-<!--         <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--         <p>Washed Skinny Jeans<br><b>$20.50</b></p> -->
-<!--       </div> -->
-<!--     </div> -->
-
-<!--     <div class="w3-col l3 s6"> -->
-<!--       <div class="w3-container"> -->
-<!--         <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--         <p>Washed Skinny Jeans<br><b>$20.50</b></p> -->
-<!--       </div> -->
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<!--           <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--           <span class="w3-tag w3-display-topleft">Sale</span> -->
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<!--         <p>Vintage Skinny Jeans<br><b class="w3-text-red">$14.99</b></p> -->
-<!--       </div> -->
-<!--     </div> -->
-
-<!--     <div class="w3-col l3 s6"> -->
-<!--       <div class="w3-container"> -->
-<!--         <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--         <p>Vintage Skinny Jeans<br><b>$14.99</b></p> -->
-<!--       </div> -->
-<!--       <div class="w3-container"> -->
-<!--         <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--         <p>Ripped Skinny Jeans<br><b>$24.99</b></p> -->
-<!--       </div> -->
-<!--     </div> -->
-<!--   </div> -->
-
-  <!-- 제품 상세 페이지 -->
-
-  ${product }
 <%-- 	<img src="./upload/${product.product_img }" class="img-thumbnail" alt="..." width="150" height="150"> --%>
 <!--  	<table border="1"> -->
 <!-- 	 	<tr> -->
@@ -248,17 +275,67 @@ function w3_close() {
 	  }
 	}
 </script>
-<!-- 네이버 아이디 로그인 -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript">
-  var naver_id_login = new naver_id_login("nSNLHIW18gDjrrJsFDeE", "http://localhost:8080/Project/index.jsp");
-  // 접근 토큰 값 출력
-//   alert(naver_id_login.oauthParams.access_token);
-  // 네이버 사용자 프로필 조회
-  naver_id_login.get_naver_userprofile("naverSignInCallback()");
-  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-  function naverSignInCallback() {
-    alert(naver_id_login.getProfileData('email'));
-  }
+function iamport(){
+		//가맹점 식별코드
+		IMP.init('imp77718215');
+		IMP.request_pay({
+		    pg : 'kakaopay',
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '${product.product_name}' , //결제창에서 보여질 이름
+		    amount : '${product.product_price }', //실제 결제되는 가격
+		    buyer_name : '${sessionScope.sId}',
+		}, function(rsp) {
+			console.log(rsp);
+		    if ( rsp.success ) {
+		    	var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		    } else {
+		    	 var msg = '결제에 실패하였습니다.';
+		         msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    alert(msg);
+		    location.href="ProductOrderPro.po?order_category=주문완료&order_progress=배송완료&member_idx=${member_idx}&product_idx=${product.product_idx}";
+		});
+	}
+</script>
+<script type="text/javascript">
+document.getElementById("button1").style.backgroundColor ="";
+document.getElementById("button2").style.backgroundColor ="";
+document.getElementById("button3").style.backgroundColor ="";
+document.getElementById("button4").style.backgroundColor ="";
+
+document.getElementById("button1").onclick = function(){
+            this.style.backgroundColor ="gray";
+            document.getElementById("button2").style.backgroundColor ="";
+            document.getElementById("button3").style.backgroundColor ="";
+            document.getElementById("button4").style.backgroundColor ="";
+        };
+
+document.getElementById("button2").onclick = function(){
+            this.style.backgroundColor ="gray";
+            document.getElementById("button1").style.backgroundColor ="";
+            document.getElementById("button3").style.backgroundColor ="";
+            document.getElementById("button4").style.backgroundColor ="";
+        };
+document.getElementById("button3").onclick = function(){
+            this.style.backgroundColor ="gray";
+            document.getElementById("button1").style.backgroundColor ="";
+            document.getElementById("button2").style.backgroundColor ="";
+            document.getElementById("button4").style.backgroundColor ="";
+        };
+document.getElementById("button4").onclick = function(){
+            this.style.backgroundColor ="gray";
+            document.getElementById("button2").style.backgroundColor ="";
+            document.getElementById("button3").style.backgroundColor ="";
+            document.getElementById("button1").style.backgroundColor ="";
+        };
 </script>
 <!-- End Channel Plugin -->
 </body>

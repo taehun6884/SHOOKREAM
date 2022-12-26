@@ -10,12 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-import action.ProductDeleteProAction;
+import action.OrderListProAction;
+import action.OrderProAction;
 import action.ProductInfoProAction;
 import action.ProductInsertAction;
 import action.ProductListAction;
-import action.ProductModifyProAction;
-import svc.ProductModifyFormAction;
 import vo.ActionForward;
 
 @WebServlet("*.po") // 상품 컨트롤러
@@ -47,21 +46,19 @@ public class ProductController extends HttpServlet{
 			forward = action.execute(request, response);
 			
 		}else if(command.equals("/ProductModifyForm.po")) { //Product 정보 수정 창
-			action = new ProductModifyFormAction();
-			forward = action.execute(request, response);
+		
 		}else if(command.equals("/ProductModifyPro.po")) { //Product 정보 수정 pro
-			action = new ProductModifyProAction();
-			forward = action.execute(request, response);
-			
+		
+		}else if(command.equals("/ProductDeleteForm.po")) { //Product 삭제 창
+		
 		}else if(command.equals("/ProductDeletePro.po")) { //Product 삭제 pro
-			action = new ProductDeleteProAction();
-			forward= action.execute(request, response);
-		}else if(command.equals("/ProductOrderForm.po")) { //Product 삭제 pro
 			
 		}else if(command.equals("/ProductOrderPro.po")) { //Product 삭제 pro
-			
-		}else if(command.equals("/ProductOrderPro.po")) { //Product 삭제 pro
-			
+			action = new OrderProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/ProductOrderList.po")) { //Product 삭제 pro
+			action = new OrderListProAction();
+			forward = action.execute(request, response);
 		}
 	
 			

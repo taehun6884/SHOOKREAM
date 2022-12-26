@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import db.JdbcUtil;
 import vo.MemberBean;
@@ -244,6 +245,7 @@ private MemberDAO() {}
 			
 			if(rs.next()) {
 				vo = new MemberBean();
+				vo.setMember_idx(rs.getInt("member_idx"));
 				vo.setMember_name(rs.getString("member_name"));
 				vo.setMember_id(rs.getString("member_id"));
 				vo.setMember_pass(rs.getString("member_pass"));
@@ -333,5 +335,11 @@ private MemberDAO() {}
 				}
 				
 				return memberList;
+			}
+
+
+			public static void modify(Map<String, Object> modifyArg) {
+				// TODO Auto-generated method stub
+				
 			}
 }
