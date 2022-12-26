@@ -54,7 +54,7 @@
 					  <footer class="w3-padding-64 w3-light-grey w3-small" id="footer">
 					  <h3>Notice</h3>
 					  <form action="BoardModifyPro.bo" method="post">
-					  	<input type="hidden" name="board_num" value=${param.notice_idx }>
+					  	<input type="hidden" name="notice_idx" value=${param.notice_idx }>
 						<input type="hidden" name="pageNum" value=${param.pageNum }>
 <!-- 					  	<input type="hidden" name="notice_type" value="Notice"> -->
 						<div class="mb-3">
@@ -76,7 +76,7 @@
 						  <textarea class="form-control" id="notice_content" name="notice_content" rows="15">${board.notice_content }</textarea>
 						</div>
 						<section id="commandCell">
-							<input type="submit" value="등록" class="btn btn-secondary">&nbsp;&nbsp;
+							<input type="submit" value="수정" class="btn btn-secondary">&nbsp;&nbsp;
 							<input type="reset" value="다시쓰기" class="btn btn-secondary">&nbsp;&nbsp;
 							<input type="button" value="취소" onclick="history.back()" class="btn btn-secondary">
 						</section>
