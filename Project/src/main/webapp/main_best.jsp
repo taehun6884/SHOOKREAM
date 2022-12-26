@@ -39,6 +39,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 <script src="../jquery/jquery-3.6.3.js"></script>
 <script type="text/javascript">
+
 $(function() {
 	$("#btnLike").on("click", function() {
 		// AJAX 를 사용하여 test1_result.jsp 페이지로 요청 전송하기
@@ -48,10 +49,10 @@ $(function() {
 			data: { // 전송할 데이터(파라미터) 지정(일반 파라미터일 경우 중괄호로 묶음)
 				// 폼 데이터를 가져와서 파라미터로 표현(전송)하는 경우
 				// 파라미터명: 데이터 형식으로 지정
-				id: $("#id").val(), // id 선택자의 value 속성값을 id 파라미터로 저장
-				passwd: $("#passwd").val() // passwd 선택자의 value 속성값을 passwd 파라미터로 저장
+				member_idx: ${sessionScope.member_idx},
+				product_idx: $("#product_idx").val()
 			},
-			dataType: "text", // 응답 데이터에 대한 타입 지정(일반 데이터는 text 이며 HTML 코드도 포함 가능, 자바스크립트 포함되면 html 사용)
+			dataType: "html", // 응답 데이터에 대한 타입 지정(일반 데이터는 text 이며 HTML 코드도 포함 가능, 자바스크립트 포함되면 html 사용)
 			success: function(response) { // 요청에 대한 처리 성공 시(= 정답 응답) 처리할 함수 정의
 				// 익명 함수 파라미터로 응답 데이터가 전달됨(처리 페이지의 응답 결과)
 				// id 선택자 resultArea 영역에 응답 데이터(response) 출력하기
@@ -114,7 +115,7 @@ $(function() {
 <%--         <p>${productBestList[0].product_name }<br><b><fmt:formatNumber value="${productBestList[0].product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 --> --%>
 <!--       </div> -->
       
-      <c:forEach var="productBestList" items="${productBestList }">
+      <c:forEach var="productBestList" items="${productBestList }" varStatus="status">
       	<div class="w3-container">
         <div class="w3-display-container">
           <img src="./upload/${productBestList.product_img }"  alt="..." style="width:100%">
@@ -122,6 +123,7 @@ $(function() {
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
           <button id="btnLike"><i class="fa-regular fa-heart"></i></button>
+          <input type="hidden" id="product_idx" value="${productBestList.product_idx }">
         </div>
         <p>${productBestList.product_brand }<br></p><!-- 1번째 그리드 -->
         <p>${productBestList.product_name }<br><b><fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 -->
