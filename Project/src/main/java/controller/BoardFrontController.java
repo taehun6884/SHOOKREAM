@@ -61,7 +61,7 @@ public class BoardFrontController extends HttpServlet {
 			forward = action.execute(request, response);
 		}else if(command.equals("/BoardDeleteForm.bo")) { //공지 삭제 창(관리자용)
 			
-		}else if(command.equals("/BoardDelete.bo")) { //공지 삭제 pro(관리자용)
+		}else if(command.equals("/BoardDeletePro.bo")) { //공지 삭제 pro(관리자용)
 			action = new BoardDeleteProAction();
 			forward = action.execute(request, response);
 
@@ -75,9 +75,11 @@ public class BoardFrontController extends HttpServlet {
 			action = new FAQDetailAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/FAQModifyForm.bo")) { //FAQ 정보 수정 창(관리자용)
-
+			action = new BoardModifyFormAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/FAQModifyPro.bo")) { //FAQ 정보 수정 pro(관리자용)
-
+			action = new BoardModifyProAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/FAQDeleteForm.bo")) { //FAQ 삭제 창(관리자용)
 			
 		}else if(command.equals("/FAQDeletePro.bo")) { //FAQ 삭제 pro(관리자용)

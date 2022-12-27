@@ -46,7 +46,7 @@ private BoardDAO() {}
 				notice_idx = rs.getInt(1) + 1; // 기존 게시물 번호 중 가장 큰 번호(= 조회 결과) + 1
 			}
 			
-			System.out.println("새 글 번호 : " + notice_idx);
+//			System.out.println("새 글 번호 : " + notice_idx);
 			
 			sql = "INSERT INTO notice VALUES(?, ?, ?, ?, ?, now(), ?)";
 			pstmt2 = con.prepareStatement(sql);
@@ -58,7 +58,7 @@ private BoardDAO() {}
 			pstmt2.setString(6, board.getNotice_type());
 			
 			insertCount = pstmt2.executeUpdate();
-			System.out.println(pstmt2);
+//			System.out.println(pstmt2);
 			
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류! - insertBoard()");
@@ -120,18 +120,16 @@ private BoardDAO() {}
 		return boardList;
 	}
 	
-	public int selectBoardListCount(String keyword) {
+	public int selectBoardListCount(String keyword,String notice_type) {
 		int listCount = 0;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			
-			String sql = "SELECT COUNT(*) FROM notice WHERE notice_subject LIKE ?";
-			
+			String sql = "SELECT COUNT(*) FROM notice WHERE notice_type = ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%" + keyword + "%");
-
+			pstmt.setString(1, notice_type);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -211,10 +209,11 @@ private BoardDAO() {}
 		PreparedStatement pstmt = null;
 		
 		try {
-			String sql = "UPDATE notice SET notice_subject=?, notice_content=?";
+			String sql = "UPDATE notice SET notice_subject=?, notice_content=? WHERE notice_idx=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, board.getNotice_subject());
 			pstmt.setString(2, board.getNotice_content());
+			pstmt.setInt(3, board.getNotice_idx());
 			
 			updateCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -225,6 +224,25 @@ private BoardDAO() {}
 		
 		
 		return updateCount;
+	}
+
+	public int deleteBoard(int notice_idx) { // 관리자용 - 게시글 삭제
+		int deleteCount = 0;
+		PreparedStatement pstmt = null;
+	
+		try {
+			String sql = "DELETE FROM notice WHERE notice_idx=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, notice_idx);
+			deleteCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+		
+		return deleteCount;
 	}
 	
 	
