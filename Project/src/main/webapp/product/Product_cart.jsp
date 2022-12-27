@@ -108,7 +108,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <td>${cart.product_brand }</td>
       <td>${cart.product_price }</td>
       <td>${cart.product_size }</td>
-      <td><button type="button" class="btn btn-dark">삭제</button></td>
+      <td><button type="button" class="btn btn-dark" onclick="location.href='CartDeletePro.ca?cart_idx=${cart.cart_idx }'">삭제</button></td>
     </tr>
     </c:forEach>
   </tbody>

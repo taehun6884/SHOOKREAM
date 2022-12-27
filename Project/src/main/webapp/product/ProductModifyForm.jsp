@@ -126,7 +126,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </tr>
           
           <tr>
-          <td colspan="2"><button type="submit" class="w3-button w3-block w3-black">수정하기</button></td>
+          <td colspan="2"><button type="submit" class="w3-button w3-block w3-black" onclick ="location.href ='ProductModifyPro.po?product_idx=${product.product_idx}'">수정하기</button></td>
 		  </tr> 	        
         </table>
         </form>

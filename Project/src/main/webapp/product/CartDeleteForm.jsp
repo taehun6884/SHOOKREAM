@@ -64,7 +64,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           <td width="300px"><input class="w3-input w3-border" type="password" placeholder="pass" name="pass" required></td>
           </tr>
           <tr>
-          <td><button type="submit" class="w3-button w3-block w3-black" onclick ="location.href='CartDeletePro.ca?cart_idx=${cart_idx}'">삭제</button></td>
+          <td><button type="submit" class="w3-button w3-block w3-black" onclick ="location.href='CartDeletePro.ca?cart_idx=${param.cart_idx}'">삭제</button></td>
 		  </tr> 	        
         </table>
         </form>

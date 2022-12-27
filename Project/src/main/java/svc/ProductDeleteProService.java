@@ -24,6 +24,7 @@ public class ProductDeleteProService {
 		JdbcUtil.rollback(con);
 	}
 	JdbcUtil.close(con);
+	
 	return isDeleteList;
 	
 }
