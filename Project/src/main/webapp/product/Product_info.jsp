@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>W3.CSS Template</title>
+<title>${product.product_name }</title>
 <meta charset="UTF-8">
 <!-- 네이버 아이디 로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
@@ -41,7 +41,6 @@ align-content: center;
 font-family: "Montserrat", sans-serif;
 font-size:15px;
 float: right;
-margin-top: 100px;
 margin-left: 20px;
 text-align: left;
 }   
@@ -95,21 +94,21 @@ font-weight: bold;
 
 <!-- 제품 상세 페이지 -->
   <div class="w3-padding-64 w3-light-grey w3-small w3-center" id="div">
+  <!-- 섬네일 이미지 -->
   <div id = "sform">
 	<section id="image">
 		<p>
 		<div class="title" align="left">
-			<h4></h4>
-			<img alt="shoes" src="images/캡처10.PNG">
+			<img alt="shoes" src="./upload/${image.image_main_file}">
 		</div>
 	</section>
+	<!-- 상품 사진 옆 -->
 	<section id="detail" >
 		<div class="text" > 
 			<p>${product.product_brand}</p>
 			<p class ="prod_name">${product.product_name }</p>
 			<p>상품번호 : ${product.product_idx }</p>			
 		</div>
-		<hr>
 		<div id="detail1">
 			<p class="prod_title">가격</p>
 			<p>${product.product_price }</p>
@@ -148,6 +147,12 @@ font-weight: bold;
 			<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${param.member_idx}'">
 			<button onclick="iamport()">구매하기</button>
 		</div>
+	</section>
+	<section>
+		<div class="title" align="left">
+			<img alt="shoes" src="./upload/${image.image_real_file1}">
+		</div>
+	
 	</section>
   </div>
   </div>

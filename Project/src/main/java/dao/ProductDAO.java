@@ -12,6 +12,7 @@ import java.util.List;
 import db.JdbcUtil;
 import vo.OrderBean;
 import vo.ProductBean;
+import vo.imageBean;
 
 public class ProductDAO {
 private ProductDAO() {}
@@ -144,7 +145,10 @@ private ProductDAO() {}
 //				product.setProduct_img(rs.getString("product_img"));
 				product.setProduct_date(rs.getTimestamp("product_date"));
 //				System.out.println(product);
+			
 			}
+			
+			
 		} catch (SQLException e) {
 			System.out.println("SQL구문 오류 - selectProduct()");
 			e.printStackTrace();
@@ -856,6 +860,31 @@ private ProductDAO() {}
 			}
 			
 			return bean;
+		}
+
+//상품 상세정보에서 이미지 정보 가져오는 메서드
+		public imageBean selectImage(int product_idx) {
+			imageBean image = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs  = null;
+			//--------------------이미지 이름 가져오기 작업--------------
+			try {
+				String sql = "SELECT image_main_file, image_real_file1 FROM image WHERE product_idx = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, product_idx);
+				rs = pstmt.executeQuery();
+				
+				
+				if(rs.next()) {
+					image = new imageBean();
+					image.setImage_main_file(rs.getString("image_main_file")); //메인 이미지 가져오기
+					image.setImage_main_file(rs.getString("image_real_file1")); //메인 이미지 가져오기
+				}
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - selectImage");
+				e.printStackTrace();
+			}
+			return image;
 		}
 		
 	
