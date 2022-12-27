@@ -206,7 +206,7 @@ private BoardDAO() {}
 		return updateCount;
 	}
 
-	public int updateBoard(BoardBean board) {
+	public int updateBoard(BoardBean board) { // 게시판 수정
 		int updateCount = 0;
 		PreparedStatement pstmt = null;
 		

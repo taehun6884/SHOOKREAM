@@ -36,7 +36,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 </style>
 </head>
-<body class="w3-content" style="max-width:1200px">
+<body class="w3-content" style="min-width:1219px;  position: ">
 
 <!-- Sidebar/menu -->
 <jsp:include page="./inc/side.jsp"/>
@@ -96,7 +96,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productBestList[4].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[4].product_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[4].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productBestList[4].product_brand }<br></p>
@@ -109,7 +109,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productBestList[1].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[1].product_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[1].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productBestList[1].product_brand }<br></p>
@@ -119,7 +119,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productBestList[5].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[5].product_idx }'" >Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[5].product_idx }&member_idx=${sessionScope.member_idx }'" >Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productBestList[5].product_brand }<br></p>
@@ -149,7 +149,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productBestList[2].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[2].product_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[2].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productBestList[2].product_brand }<br></p>
@@ -159,7 +159,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productBestList[6].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[6].product_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[6].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productBestList[6].product_brand }<br></p>
@@ -172,7 +172,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productBestList[3].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[3].product_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[3].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productBestList[3].product_brand }<br></p>
@@ -182,7 +182,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productBestList[7].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[7].product_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[7].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productBestList[7].product_brand }<br></p>
@@ -203,7 +203,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productNewList[0].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black"  onclick="location.href='ProductInfoForm.po?product_idx=${productNewList[0].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productNewList[0].product_brand }<br></p>
@@ -213,7 +213,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productNewList[4].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black"  onclick="location.href='ProductInfoForm.po?product_idx=${productNewList[4].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productNewList[4].product_brand }<br></p>
@@ -226,7 +226,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productNewList[1].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black"  onclick="location.href='ProductInfoForm.po?product_idx=${productNewList[1].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productNewList[1].product_brand }<br></p>
@@ -236,7 +236,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productNewList[5].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black"  onclick="location.href='ProductInfoForm.po?product_idx=${productNewList[5].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productNewList[5].product_brand }<br></p>
@@ -249,7 +249,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productNewList[2].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black"  onclick="location.href='ProductInfoForm.po?product_idx=${productNewList[2].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productNewList[2].product_brand }<br></p>
@@ -259,7 +259,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productNewList[6].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black"  onclick="location.href='ProductInfoForm.po?product_idx=${productNewList[6].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productNewList[6].product_brand }<br></p>
@@ -282,13 +282,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <div class="w3-display-container">
           <img src="./upload/${productNewList[7].product_img }"   alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+            <button class="w3-button w3-black"  onclick="location.href='ProductInfoForm.po?product_idx=${productNewList[7].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
         <p>${productNewList[7].product_brand }<br></p>
         <p>${productNewList[7].product_name }<br><b>${productNewList[7].product_price }</b></p><!-- 8번째 그리드 -->
       </div>
     </div>
+</div>
 </div>
   <!-- footer -->
     <jsp:include page="./inc/footer.jsp"/>

@@ -238,8 +238,8 @@ private ProductDAO() {}
 		}
 	
 	
-	
-		public List<ProductBean> getCartList(int member_idx) {
+		//장바구니 리스트 출력
+		public List<ProductBean> getCartList(int member_idx, int startRow, int listLimit) {
 			 List<ProductBean> cartlist = null;
 			 PreparedStatement pstmt =  null;
 			 ResultSet rs = null;
@@ -247,11 +247,14 @@ private ProductDAO() {}
 			 String sql ="SELECT c.cart_idx,p.product_name, p.product_size, p.product_price,p.product_brand,i.image_main_file,m.member_id "
 			 		+ "FROM shookream.cart c join shookream.product p join shookream.image i join shookream.member m "
 			 		+ "on c.product_idx = p.product_idx and c.product_idx = i.product_idx and c.member_idx = m.member_idx "
-			 		+ "where m.member_idx=?";
+			 		+ "where m.member_idx=? "
+			 		+ "LIMIT ?,?";
 			 
 			 try {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, member_idx);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, listLimit);
 				rs = pstmt.executeQuery();
 				cartlist = new ArrayList<ProductBean>();
 				while(rs.next()) {
@@ -271,6 +274,41 @@ private ProductDAO() {}
 				JdbcUtil.close(pstmt);
 			}
 			return cartlist;
+		}//
+		
+		// 장바구니 총 수량 새기
+		public int selectCartListCount(int member_idx) {
+			int listCount = 0;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				// board 테이블의 모든 레코드 갯수 조회
+				// => 제목에 검색어를 포함하는 레코드 조회(WHERE subject LIKE '%검색어%')
+				//    (단, 쿼리에 직접 '%?%' 형태로 작성 시 ? 문자를 파라미터로 인식하지 못함
+				//    (따라서, setXXX() 메서드에서 문자열 결합으로 "%" + "검색어" + "%" 로 처리)
+				String sql = "SELECT COUNT(cart_idx) "
+									+ "FROM cart "
+									+ "where member_idx = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, member_idx);
+				rs = pstmt.executeQuery();
+				// 조회 결과가 있을 경우 listCount 변수에 저장
+				if(rs.next()) {
+					listCount = rs.getInt(1);
+				}
+				
+			} catch (SQLException e) {
+				System.out.println("BoardDAO - selectBoardListCount()");
+				e.printStackTrace();
+			} finally {
+				// DB 자원 반환
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return listCount;
 		}
 
 		// 메인 - 메인화면 베스트 상품 목록 조회
@@ -539,8 +577,8 @@ private ProductDAO() {}
         //주문 하기
 		public int insertOrder(OrderBean vo) {
 			int insertOrder = 0;
-			PreparedStatement pstmt,pstmt2,pstmt3 = null;
-			ResultSet rs = null;
+			PreparedStatement pstmt = null,pstmt2 = null,pstmt3 = null,pstmt4=null;
+			ResultSet rs = null,rs2=null;
 			
 			try {
 				String sql = "SELECT MAX(order_idx) FROM orderlist";
@@ -564,24 +602,38 @@ private ProductDAO() {}
 				insertOrder=pstmt2.executeUpdate();
 				
 				if(insertOrder >0) {
-				sql = "INSERT INTO order_detail VALUES(?,?,?)";
-				pstmt3 = con.prepareStatement(sql);
-				pstmt3.setInt(1, idx);
-				pstmt3.setInt(2, vo.getOrder_member_idx());
-				pstmt3.setInt(3, vo.getOrder_product_idx());
-				insertOrder=pstmt3.executeUpdate();
+					sql = "INSERT INTO order_detail VALUES(?,?,?)";
+					pstmt3 = con.prepareStatement(sql);
+					pstmt3.setInt(1, idx);
+					pstmt3.setInt(2, vo.getOrder_member_idx());
+					pstmt3.setInt(3, vo.getOrder_product_idx());
+					insertOrder=pstmt3.executeUpdate();
+					
+					sql="UPDATE product SET product_amount = ?,product_sell_count=? WHERE product_idx=?";
+					pstmt4 = con.prepareStatement(sql);
+					pstmt4.setInt(1,  vo.getOrder_product_amount()-1);
+					pstmt4.setInt(2,  vo.getOrder_product_sell_count()+1);
+					pstmt4.setInt(3, vo.getOrder_product_idx());
+					pstmt4.executeUpdate();
 				}
-				} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				
+			
+			} catch (SQLException e) {
 				e.printStackTrace();
+			
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt3);
+				JdbcUtil.close(pstmt2);
+				JdbcUtil.close(pstmt);
 			}
 			
 			
 			return insertOrder;
 		}
 
-
-		public List<OrderBean> getOrderList(int member_idx) {
+		// 주문 리스트
+		public List<OrderBean> getOrderList(int member_idx, int startRow, int listLimit) {
 			List<OrderBean> orderlist = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -589,11 +641,14 @@ private ProductDAO() {}
 			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date "
 					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx "
-					+ "where m.member_idx=?";
+					+ "where m.member_idx=? "
+					+ "LIMIT ?,?";
 			
 			try {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1,member_idx );
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, listLimit);
 				rs = pstmt.executeQuery();
 				orderlist = new ArrayList<OrderBean>();
 				while(rs.next()) {
@@ -609,14 +664,84 @@ private ProductDAO() {}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
 			}
 			
 			return orderlist;
 		}
-		
-		
 
-		
+		//주문 총 수량
+		public int selectOrderListCount(int member_idx) {
+			int listCount = 0;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				// board 테이블의 모든 레코드 갯수 조회
+				// => 제목에 검색어를 포함하는 레코드 조회(WHERE subject LIKE '%검색어%')
+				//    (단, 쿼리에 직접 '%?%' 형태로 작성 시 ? 문자를 파라미터로 인식하지 못함
+				//    (따라서, setXXX() 메서드에서 문자열 결합으로 "%" + "검색어" + "%" 로 처리)
+				String sql = "SELECT COUNT(order_idx) "
+									+ "FROM orderlist "
+									+ "where member_idx = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, member_idx);
+				rs = pstmt.executeQuery();
+				// 조회 결과가 있을 경우 listCount 변수에 저장
+				if(rs.next()) {
+					listCount = rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				System.out.println("BoardDAO - selectBoardListCount()");
+				e.printStackTrace();
+			} finally {
+				// DB 자원 반환
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return listCount;
+		}
+
+
+		public List<OrderBean> getAdminOrderList() {
+			List<OrderBean> orderlist = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date "
+					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
+					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx";
+					
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				orderlist = new ArrayList<OrderBean>();
+				while(rs.next()) {
+					OrderBean vo = new OrderBean();
+					vo.setOrder_main_image(rs.getString("image_main_file"));
+					vo.setOrder_member_id(rs.getString("member_id"));
+					vo.setOrder_product_price(rs.getInt("product_price"));
+					vo.setOrder_category(rs.getString("order_category"));
+					vo.setOrder_progress(rs.getString("order_progress"));
+					vo.setOrder_date(rs.getTimestamp("order_date"));
+					orderlist.add(vo);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return orderlist;
+		}
+
 	
 	
 }//DAO 끝
