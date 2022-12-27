@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.AdminBoardListAction;
 import action.AdminFAQListAction;
+import action.AdminOrderListDeleteProAction;
 import action.AdminOrderListProAction;
 import action.BoardDetailAction;
 import vo.ActionForward;
@@ -49,6 +50,9 @@ public class AdminController extends HttpServlet{
 			 forward = action.execute(request, response);
 		}else if(command.equals("/AdminProductOrderList.ad")) { //관리자 주문 상세 페이지
 			action = new AdminOrderListProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/AdminProductOrderListDelete.ad")) { // 주문내역 삭제
+			action = new AdminOrderListDeleteProAction();
 			forward = action.execute(request, response);
 		}
 			
