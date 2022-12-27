@@ -36,7 +36,7 @@ public class AdminFAQListAction implements Action {
 		
 		List<BoardBean> boardList = service.getBoardList(keyword, startRow, listLimit, type);
 
-		int listCount = service.getBoardListCount(keyword);
+		int listCount = service.getBoardListCount(keyword,type);
 		
 		int pageListLimit = 3; 
 		

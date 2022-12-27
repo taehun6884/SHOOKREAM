@@ -11,10 +11,13 @@ public class BoardModifyProService {
 	public boolean modifyBoard(BoardBean board) {
 		boolean isModifySuccess = false;
 		
+//		System.out.println("svc에서 확인하는 notice_idx : " + board.getNotice_idx());
+		
 		Connection con = JdbcUtil.getConnection();
 		BoardDAO dao = BoardDAO.getInstance();
 		dao.setConnection(con);
-
+		
+		
 		int updateCount = dao.updateBoard(board);
 		
 		if(updateCount > 0) {
