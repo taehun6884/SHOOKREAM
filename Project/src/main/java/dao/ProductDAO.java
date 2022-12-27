@@ -109,7 +109,7 @@ private ProductDAO() {}
 		return insertCount2;
 	}
 
-
+	
 
 	// 상품 상세 정보 조회
 	public ProductBean selectProduct(int product_idx) {
@@ -712,7 +712,7 @@ private ProductDAO() {}
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date "
+			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date,o.order_idx "
 					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx";
 					
@@ -729,6 +729,7 @@ private ProductDAO() {}
 					vo.setOrder_category(rs.getString("order_category"));
 					vo.setOrder_progress(rs.getString("order_progress"));
 					vo.setOrder_date(rs.getTimestamp("order_date"));
+					vo.setOrder_idx(rs.getInt("order_idx"));
 					orderlist.add(vo);
 				}
 			} catch (SQLException e) {
@@ -742,6 +743,146 @@ private ProductDAO() {}
 			return orderlist;
 		}
 
+		public boolean isDeleteCart(int cart_idx) {
+			int deleteCount =0;
+			boolean isDeleteSuccess = false;
+			PreparedStatement pstmt = null;
+			
+			String sql = "DELETE FROM cart WHERE cart_idx=?";
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, cart_idx);
+				deleteCount = pstmt.executeUpdate();
+				if(deleteCount > 0) {
+					isDeleteSuccess=true;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			}
 		
+			return isDeleteSuccess;
+		}
+		
+		public boolean isDeleteList(int product_idx) {
+			int isDeletePro = 0;
+			boolean isDeleteProduct = false;
+			PreparedStatement pstmt = null;
+			
+			String sql = "DELETE FROM product WHERE product_idx=?";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, product_idx);
+				isDeletePro = pstmt.executeUpdate();
+				
+				if(isDeletePro > 0) {
+					isDeleteProduct =true;
+				}
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			}
+			
+			return isDeleteProduct;
+		}
+		
+		public boolean updateProduct(ProductBean product, boolean updateProduct) {
+			int updateProduct2 =0;
+			boolean updateProduct1 = false;
+			
+			PreparedStatement pstmt =null;
+			
+			System.out.println(product);
+			
+			String sql ="UPDATE product SET product_name=?,  product_brand=?,  product_price=?, product_size=? , product_amount=?, product_color=?,  product_exp=?,  product_detail_exp=?,  product_discount_price=?, product_img=? ";
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, product.getProduct_name());
+				pstmt.setString(2, product.getProduct_brand());
+				pstmt.setInt(3, product.getProduct_price());
+				pstmt.setString(4, product.getProduct_size());
+				pstmt.setInt(5, product.getProduct_amount());
+				pstmt.setString(6, product.getProduct_color());
+				pstmt.setString(7, product.getProduct_exp());
+				pstmt.setString(8, product.getProduct_detail_exp());
+				pstmt.setDouble(9, product.getProduct_discount_price());
+				pstmt.setString(10, product.getProduct_img());
+				updateProduct2 = pstmt.executeUpdate();
+				if(updateProduct2 > 0) {
+					updateProduct1 =true;
+				}
+					} catch (SQLException e) {
+				System.out.println("sql 구문오류 -updateProduct");
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			} 
+		
+		return updateProduct1;
+}
+		public ProductBean getProduct(int idx) {
+			ProductBean bean = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs  = null;
+			String sql = "SELECT * FROM product WHERE product_idx=?";
+			try {
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, idx);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					bean = new ProductBean();
+					bean.setProduct_name(rs.getString("product_name"));
+					bean.setProduct_brand(rs.getString("product_brand"));
+					bean.setProduct_price(rs.getInt("product_price"));
+					bean.setProduct_size(rs.getString("product_size"));
+					bean.setProduct_amount(rs.getInt("product_amount"));
+					bean.setProduct_color(rs.getString("product_color"));
+					bean.setProduct_exp(rs.getString("product_exp"));
+					bean.setProduct_detail_exp(rs.getString("product_detail_exp"));
+					bean.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					bean.setProduct_img(rs.getString("product_img"));
+					
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return bean;
+		}
+		
+		public boolean isDeleteOrder(int order_idx) {
+			int isDeleteOrderList = 0;
+			boolean isDeleteSuccess = false;
+			PreparedStatement pstmt =null;
+			String sql ="DELETE FROM orderlist WHERE order_idx=?"; 
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, order_idx);
+				isDeleteOrderList =pstmt.executeUpdate();
+				
+				if(isDeleteOrderList >0) {
+					isDeleteSuccess = true;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			}
+			return isDeleteSuccess;
+			
+		}
+		
+
 	
 }//DAO 끝

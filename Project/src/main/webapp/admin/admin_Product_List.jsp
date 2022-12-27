@@ -83,7 +83,7 @@
 										<td>${product.product_date}</td>
 										<td>
 										<button type="button" class="btn btn-light" onclick="location.href='ProductModifyForm.po?product_idx=${product.product_idx}'">수정</button>
-										<button type="button" class="btn btn-light" onclick="location.href=''">삭제</button>
+										<button type="button" class="btn btn-light" onclick="location.href='ProductDeletePro.po?product_idx=${product.product_idx}'">삭제</button>
 										</td>
 										</tr> 
 										</c:forEach>  

@@ -11,14 +11,10 @@ public class ProductModifyService {
 
 	public ProductBean getProduct(int idx) {
 		ProductBean vo = null;
-		
+		ProductBean bean = null;
 		Connection con = JdbcUtil.getConnection();
 		ProductDAO dao = ProductDAO.getInstance();
 		dao.setConnection(con);
-		
-		
-		
 		return vo;
 	}
-
 }
