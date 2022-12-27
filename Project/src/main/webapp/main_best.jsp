@@ -68,9 +68,10 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 		<p>BEST</p>
 	</div>
 	
-	
+
   <!-- Product grid -->
   <div class="w3-row w3-grayscale">
+  <c:forEach var="productBestList" items="${productBestList }">	
    <div class="w3-col l3 s6">
       <div class="w3-container">
 <!--         <div class="w3-display-container"> -->
@@ -82,9 +83,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <%--         <p>${productBestList[0].product_brand }<br></p><!-- 1번째 그리드 --> --%>
 <%--         <p>${productBestList[0].product_name }<br><b><fmt:formatNumber value="${productBestList[0].product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 --> --%>
 <!--       </div> -->
-      
-      <c:forEach var="productBestList" items="${productBestList }">
-      	<div class="w3-container">
         <div class="w3-display-container">
           <img src="./upload/${productBestList.product_img }"  alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
@@ -171,8 +169,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--           </div> -->
 <!--         </div> -->
 <%--         <p>${productBestList[7].product_name }<br><b>${productBestList[7].product_price }</b></p><!-- 8번째 그리드 --> --%>
-</c:forEach>
       </div>
+  </c:forEach>
     </div>
 </div>
 	

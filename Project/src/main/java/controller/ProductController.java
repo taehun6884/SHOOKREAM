@@ -16,6 +16,7 @@ import action.OrderProAction;
 import action.ProductInfoProAction;
 import action.ProductInsertAction;
 import action.ProductListAction;
+import action.ProductModifyFormAction;
 import vo.ActionForward;
 
 @WebServlet("*.po") // 상품 컨트롤러
@@ -47,7 +48,8 @@ public class ProductController extends HttpServlet{
 			forward = action.execute(request, response);
 			
 		}else if(command.equals("/ProductModifyForm.po")) { //Product 정보 수정 창
-		
+			action = new ProductModifyFormAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/ProductModifyPro.po")) { //Product 정보 수정 pro
 		
 		}else if(command.equals("/ProductDeleteForm.po")) { //Product 삭제 창

@@ -706,7 +706,7 @@ private ProductDAO() {}
 			return listCount;
 		}
 
-
+		// 관리자 페이지 - 주문 내역
 		public List<OrderBean> getAdminOrderList() {
 			List<OrderBean> orderlist = null;
 			PreparedStatement pstmt = null;
@@ -742,6 +742,6 @@ private ProductDAO() {}
 			return orderlist;
 		}
 
-	
+		
 	
 }//DAO 끝
