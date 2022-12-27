@@ -13,8 +13,22 @@ private int order_product_idx;
 private String order_main_image;
 private String order_member_id;
 private int order_product_price;
+private int order_product_sell_count;
+private int order_product_amount;
 
 
+public int getOrder_product_amount() {
+	return order_product_amount;
+}
+public void setOrder_product_amount(int order_product_amount) {
+	this.order_product_amount = order_product_amount;
+}
+public int getOrder_product_sell_count() {
+	return order_product_sell_count;
+}
+public void setOrder_product_sell_count(int order_product_sell_count) {
+	this.order_product_sell_count = order_product_sell_count;
+}
 public String getOrder_main_image() {
 	return order_main_image;
 }
@@ -74,8 +88,13 @@ public String toString() {
 	return "OrderBean [order_idx=" + order_idx + ", order_date=" + order_date + ", order_category=" + order_category
 			+ ", order_progress=" + order_progress + ", order_member_idx=" + order_member_idx + ", order_product_idx="
 			+ order_product_idx + ", order_main_image=" + order_main_image + ", order_member_id=" + order_member_id
-			+ ", order_product_release_price=" + order_product_price + "]";
+			+ ", order_product_price=" + order_product_price + ", order_product_sell_count=" + order_product_sell_count
+			+ ", order_product_amount=" + order_product_amount + "]";
 }
+
+
+
+
 
 
 }

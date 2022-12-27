@@ -6,13 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품 목록</title>
+<title>주문 목록</title>
 <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>상품 조회</title>
+        <title>주문 조회</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
@@ -30,7 +30,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">상품 목록</h1>
+                        <h1 class="mt-4">주문 목록</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="Admin.ad">Dashboard</a></li>
 <!--                             <li class="breadcrumb-item active">Tables</li> -->
@@ -45,7 +45,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                상품 목록 조회
+                                주문 목록 조회
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
@@ -72,18 +72,17 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                      <c:forEach var="product" items="${productList }">
+                                      <c:forEach var="orderlist" items="${Adminorderlist }">
 										<tr>
-										<td>${product.product_idx }</td>
-										<td>${product.product_name }</td>
-										<td><img src="./upload/${product.product_img }" class="img-thumbnail" alt="..." width="150" height="150"></td>
-										<td>${product.product_brand }</td>
-										<td>${product.product_price }</td>
-										<td>${product.product_amount }</td>
-										<td>${product.product_date}</td>
+										 <td><img src="upload/${orderlist.order_main_image }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
+									      <td>${orderlist.order_member_id }</td>
+									      <td>${orderlist.order_product_price }</td>
+									      <td>${orderlist.order_category }</td>
+									      <td>${orderlist.order_progress }</td>
+									      <td>${orderlist.order_date }</td>
 										<td>
-										<button type="button" class="btn btn-light" onclick="location.href='ProductModifyPro.'">수정</button>
-										<button type="button" class="btn btn-light" onclick="location.href='ProductDeletePro.po?product_idx=${product.product_idx}'">삭제</button>
+<!-- 										<button type="button" class="btn btn-light" onclick="location.href=''">수정</button> -->
+										<button type="button" class="btn btn-light" onclick="location.href=''">삭제</button>
 										</td>
 										</tr> 
 										</c:forEach>  

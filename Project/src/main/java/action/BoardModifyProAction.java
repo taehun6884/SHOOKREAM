@@ -23,10 +23,13 @@ public class BoardModifyProAction implements Action {
 		
 		new BoardModifyProService().modifyBoard(board);
 		
-		System.out.println("notice_idx = " + board.getNotice_idx());
+		System.out.println("notice_idx = " + board.getNotice_idx()); // 0이  출력
+		System.out.println("notice_idx = " + request.getParameter("notice_idx")); // null 이 출력
+		
+		
 		
 		forward = new ActionForward();
-		forward.setPath("BoardInfo.bo?notice_idx=" + board.getNotice_idx() + "&pageNum=" + request.getParameter("pageNum"));
+		forward.setPath("AdminNoticeManage.ad?notice_idx=" + request.getParameter("notice_idx") + "&pageNum=" + request.getParameter("pageNum"));
 		forward.setRedirect(true);
 		
 		return forward;

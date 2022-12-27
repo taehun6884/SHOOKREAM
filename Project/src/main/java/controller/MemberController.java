@@ -21,9 +21,9 @@ import action.MemberLogoutProAction;
 import action.MemberModifyFormAction;
 import action.MemberModifyProAction;
 import svc.LoginMemberService;
-import svc.memberService;
 import vo.ActionForward;
 import vo.MemberBean;
+import vo.ResultData;
 
 @WebServlet("*.me")
 public class MemberController extends HttpServlet{
@@ -135,8 +135,8 @@ public class MemberController extends HttpServlet{
 		
 		// 비밀번호 찾기
 		public String doFindLoginPw(HttpServletRequest request, HttpServletResponse response) {
-			String loginId = request.getParameter("loginId");
-			String email = request.getParameter("email");
+			String loginId = request.getParameter("member_id");
+			String email = request.getParameter("member_email");
 
 			MemberBean member = LoginMemberService.getMemberByLoginId(loginId);
 
@@ -167,7 +167,13 @@ public class MemberController extends HttpServlet{
 			 */
 
 			// 임시 비밀번호 생성 후 회원 email로 발송(개선)
-			ResultData sendTempLoginPwToEmailRs = LoginMemberService.sendTempLoginPwToEmail(member);
+			ResultData sendTempLoginPwToEmailRs = null;
+			try {
+				sendTempLoginPwToEmailRs = LoginMemberService.sendTempLoginPwToEmail(member);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			/// 만약 메일 발송 실패인 경우
 			// if(resultCode.contains("F")) {
@@ -179,7 +185,7 @@ public class MemberController extends HttpServlet{
 
 			// 임시패스워드 발급 알림창 보여주고 메인화면으로 이동
 			request.setAttribute("alertMsg", sendTempLoginPwToEmailRs.getMsg());
-			request.setAttribute("replaceUrl", "../home/main");
+			request.setAttribute("replaceUrl", "../main.jsp");
 			return "common/redirect";
 		}
 }

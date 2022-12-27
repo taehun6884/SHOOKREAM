@@ -73,12 +73,10 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 			</c:otherwise>
 		</c:choose>
 	</div>
-	
-	
   <!-- Product grid -->
   <div class="w3-row w3-grayscale">
+  <c:forEach var="productList" items="${productList }">
    <div class="w3-col l3 s6">
-      <div class="w3-container">
 <!--         <div class="w3-display-container"> -->
 <%--           <img src="./upload/${productBestList[0].product_img }"  alt="..." style="width:100%"> --%>
 <!--           <div class="w3-display-middle w3-display-hover"> -->
@@ -89,7 +87,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <%--         <p>${productBestList[0].product_name }<br><b><fmt:formatNumber value="${productBestList[0].product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 --> --%>
 <!--       </div> -->
       
-      <c:forEach var="productList" items="${productList }">
       	<div class="w3-container">
         <div class="w3-display-container">
           <img src="./upload/${productList.product_img }"  alt="..." style="width:100%">
@@ -177,11 +174,11 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--           </div> -->
 <!--         </div> -->
 <%--         <p>${productBestList[7].product_name }<br><b>${productBestList[7].product_price }</b></p><!-- 8번째 그리드 --> --%>
-</c:forEach>
-      </div>
+
     </div>
+    </c:forEach>
 </div>
-	
+</div>	
   <!-- footer -->
     <jsp:include page="./inc/footer.jsp"/>
   
