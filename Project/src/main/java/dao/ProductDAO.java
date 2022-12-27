@@ -57,7 +57,7 @@ private ProductDAO() {}
 			
 			//----------------상품 등록----------------------
 
-			sql = "INSERT INTO product VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
+			sql = "INSERT INTO product VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?)";
 			
 			pstmt2 = con.prepareStatement(sql);
 			pstmt2.setInt(1, idx); //idx
@@ -73,6 +73,7 @@ private ProductDAO() {}
 			pstmt2.setString(11, product.getProduct_detail_exp()); //상세 설명
 			pstmt2.setString(12, product.getProduct_color()); //색상
 			pstmt2.setDouble(13, product.getProduct_discount_price()); //할인율
+			pstmt2.setInt(14, 0); //상품 좋아요 수 누적
 			
 			insertCount = pstmt2.executeUpdate();
 			
@@ -764,6 +765,74 @@ private ProductDAO() {}
 			return isDeleteSuccess;
 		}
 		
+		// 좋아요(찜하기) 버튼 클릭
+		public int InsertLike(int member_idx, int product_idx) {
+			int insertCount = 0;
+			
+			PreparedStatement pstmt1 = null, pstmt2 = null;
+			ResultSet rs = null;
+			
+			try {
+				// wish_idx 증가
+				String sql = "SELECT MAX(wish_idx) FROM wish";
+				int wish_idx = 1;
+				pstmt1 = con.prepareStatement(sql);
+				rs = pstmt1.executeQuery();
+				
+				if(rs.next()) { 
+					wish_idx = rs.getInt(1) + 1;
+				}
+				System.out.println("wish_idx : " + wish_idx);
+				
+				// ----------------------------------------------
+				
+				// 찜하기 추가
+				sql = "INSERT INTO wish VALUES(?,?,?)";	
+				pstmt2 = con.prepareStatement(sql);
+				pstmt2.setInt(1, wish_idx);
+				pstmt2.setInt(2, member_idx);	
+				pstmt2.setInt(3, product_idx);	
+				insertCount = pstmt2.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - InsertLike()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt2);
+				JdbcUtil.close(pstmt1);
+			}
+			return insertCount;
+		}
+
+		
+		// 상품별 좋아요 수 누적
+		public int updateWishCount(int product_idx) {
+			int wishCount = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			try {
+			String sql="UPDATE product p INNER JOIN wish w "
+					+ "ON p.product_idx = w.product_idx "
+					+ "SET p.product_wishcount = p.product_wishcount + 1 "
+					+ "WHERE p.product_idx = ?";
+			
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1,product_idx );
+				wishCount = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - updateWishCount()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(pstmt);
+			}
+			
+			return wishCount;
+		}
+		
+		
+		
 		public boolean isDeleteList(int product_idx) {
 			int isDeletePro = 0;
 			boolean isDeleteProduct = false;
@@ -858,6 +927,5 @@ private ProductDAO() {}
 			return bean;
 		}
 		
-	
 	
 }//DAO 끝
