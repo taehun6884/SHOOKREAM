@@ -29,8 +29,9 @@ public class LoginMemberService {
 		return isLoginUser;
 	}
 
-	public ResultData sendTempLoginPwToEmail(MemberBean member) {
+	public static ResultData sendTempLoginPwToEmail(MemberBean member) {
 		// 메일의 제목과 내용 생성
+		String siteName = "SHOOKREAM";
 		String siteLoginUrl = App.getLoginUrl();
 		String title = "[" + siteName + "]" + member.getMember_name() + " 님, 임시 패스워드가 발급되었습니다.";
 		String tempPassword = Util.getTempPassword(6);
@@ -38,7 +39,7 @@ public class LoginMemberService {
 		body += "<a href=\"" + siteLoginUrl + "\" target=\"_blank\">로그인하러 가기</a>";
 
 		// 메일 발송(결과를 알 수 없음)
-		// emailService.send(actor.getEmail(), title, body);
+//		 emailService.send(actor.getEmail(), title, body);
 
 		// 메일 발송 결과를 int값으로 받음(개선)
 		int sendRs = emailService.send(member.getMember_email(), title, body);
@@ -52,13 +53,9 @@ public class LoginMemberService {
 		 * // 회원의 패스워드를 방금 생성한 임시 패스워드로 변경 setTempPassword(actor, tempPassword); } else
 		 * { // 발송 실패인 경우 rs.put("resultCode", "F-1"); rs.put("resultMsg",
 		 * "메일 발송에 실패했습니다.");
-		 * 
 		 * }
-		 * 
-		 * 
 		 * return rs;
 		 */
-
 		
 		if(sendRs != 1) {
 			return new ResultData("F-1", "메일 발송에 실패했습니다.");
@@ -70,17 +67,26 @@ public class LoginMemberService {
 		
 	}
 
-	private void setTempPassword(MemberBean actor, String tempPassword) {
+	private static void setTempPassword(MemberBean member, String tempPassword) {
 		Map<String, Object> modifyArg = new HashMap<>();
-		modifyArg.put("id", actor.getMember_id());
+		modifyArg.put("id", member.getMember_id());
 		modifyArg.put("loginPw", Util.sha256(tempPassword));
 
 		modify(modifyArg);
 	}
 
-	private void modify(Map<String, Object> modifyArg) {
+	private static void modify(Map<String, Object> modifyArg) {
 		MemberDAO.modify(modifyArg);
 
+	}
+
+	public static MemberBean getMemberByLoginId(String loginId) {
+		return null;
+		
+	}
+
+	public static MemberBean getMemberByNameAndEmail(String name, String email) {
+		return null;
 	}
 
 	

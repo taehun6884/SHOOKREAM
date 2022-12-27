@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import db.JdbcUtil;
 import vo.MemberBean;
@@ -334,5 +335,11 @@ private MemberDAO() {}
 				}
 				
 				return memberList;
+			}
+
+
+			public static void modify(Map<String, Object> modifyArg) {
+				// TODO Auto-generated method stub
+				
 			}
 }

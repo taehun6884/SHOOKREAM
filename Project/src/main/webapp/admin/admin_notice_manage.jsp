@@ -31,6 +31,8 @@
                             <li class="breadcrumb-item active">공지사항 관리</li>
                         </ol>
                             <div class="card-body">
+                            <input type="hidden" name="notice_idx" value="${param.notice_idx }">
+                            <input type="hidden" name="pageNum" value="${param.pageNum }">
                                 <table id="datatablesSimple">
                                 	<c:choose>
 										<c:when test="${empty param.pageNum }">
@@ -56,13 +58,47 @@
                                             <th>${board.notice_subject }</th>
                                             <th>${board.notice_date }</th>
                                             <th>
-										      	<input type="button" value="수정"  class="btn btn-outline-secondary btn-sm" onclick="location.href='BoardModifyForm.bo'">
-												<input type="button" value="삭제" class="btn btn-outline-secondary btn-sm" onclick="confirmDelete()">
-												<input type="button" value="고정글" class="btn btn-outline-secondary btn-sm" onclick="">
+										      	<input type="button" value="수정"  class="btn btn-outline-secondary btn-sm" onclick="location.href='BoardModifyForm.bo?notice_idx=${param.notice_idx}&pageNum=${param.pageNum }'">
+												<input type="button" value="삭제" class="btn btn-outline-secondary btn-sm" onclick="location.href='BoardDelete.bo??notice_idx=${param.notice_idx}&pageNum=${param.pageNum }'">
+<!-- 												<input type="button" value="고정글" class="btn btn-outline-secondary btn-sm" onclick=""> -->
+
 										    </th>
                                         </tr>
                                      </c:forEach>   
                                 </table>
+                                <section id="pageList" style="text-align:center">
+									<c:choose>
+										<c:when test="${pageNum > 1}">
+											<input type="button" class="btn btn-outline-secondary btn-sm" value="이전" onclick="location.href='AdminNoticeManage.ad?pageNum=${pageNum - 1}'">
+										</c:when>
+										<c:otherwise>
+											<input type="button" class="btn btn-outline-secondary btn-sm" value="이전">
+										</c:otherwise>
+									</c:choose>
+										
+									<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
+									<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+										<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
+										<c:choose>
+											<c:when test="${pageNum eq i}">
+												${i }
+											</c:when>
+											<c:otherwise>
+												<a href="AdminNoticeManage.ad?pageNum=${i }">${i }</a>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+							
+									<!-- 현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 [다음] 링크 동작 -->
+									<c:choose>
+										<c:when test="${pageNum < pageInfo.maxPage}">
+											<input type="button" value="다음" class="btn btn-outline-secondary btn-sm" onclick="location.href='AdminNoticeManage.ad?pageNum=${pageNum + 1}'">
+										</c:when>
+										<c:otherwise>
+											<input type="button" class="btn btn-outline-secondary btn-sm" value="다음">
+										</c:otherwise>
+									</c:choose>
+								</section>	
                        		 </div>
                     </div>
                 </main>

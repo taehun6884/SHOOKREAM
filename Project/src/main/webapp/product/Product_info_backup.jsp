@@ -44,17 +44,7 @@ float: right;
 margin-top: 100px;
 margin-left: 20px;
 text-align: left;
-}   
-.prod_name{
-font-size: 30px;
-font-weight: 900px;
-
-}
-.prod_title{
-font-size: 15px;
-font-weight: bold;
-
-}    
+}      
 </style>
 
 <style type="text/css">
@@ -63,8 +53,6 @@ font-weight: bold;
 }
 
 </style>
-
-
 
 </head>
 <body class="w3-content" style="max-width:1200px">
@@ -93,44 +81,34 @@ font-weight: bold;
 	 </div>
 	
 
-<!-- 제품 상세 페이지 -->
+  <!-- 제품 상세 페이지 -->
   <div class="w3-padding-64 w3-light-grey w3-small w3-center" id="div">
   <div id = "sform">
+	<h3><b>상품 상세 정보</b></h3>
 	<section id="image">
 		<p>
 		<div class="title" align="left">
-			<h4></h4>
+			<h4>${product.product_brand}</h4>
 			<img alt="shoes" src="images/캡처10.PNG">
 		</div>
 	</section>
 	<section id="detail" >
 		<div class="text" > 
-			<p>${product.product_brand}</p>
-			<p class ="prod_name">${product.product_name }</p>
-			<p>상품번호 : ${product.product_idx }</p>			
+			<p>상품명 : ${product.product_name }</p>
 		</div>
-		<hr>
 		<div id="detail1">
-			<p class="prod_title">가격</p>
-			<p>${product.product_price }</p>
-			<hr>
-			<p class="prod_title">판매수</p>
-			<p>${product.product_sell_count }</p>
-			<hr>
-			<p class="prod_title">좋아요 </p>
-			<hr>
-			<p class="prod_title">구매후기(별점) </p>
-			<hr>
-			<p class="prod_title">색상</p>
+			<p>상품번호 : ${product.product_idx }</p>
+			<p>가격 : ${product.product_price }</p>
+			<p>판매수 : ${product.product_sell_count } </p>
+			<p>좋아요 </p>
+			<p>구매후기(별점) </p>
 			<input type="button" value="black">
 			<input type="button" value="white">
 			<input type="button" value="blue">
 			<input type="button" value="yellow">
-			<hr>
-
 		</div>
+		
 		<div id="detail2" >
-			<p>사이즈</p>
 			<select>
 				<option selected>사이즈</option>
 				<option>220</option>
@@ -142,12 +120,11 @@ font-weight: bold;
 				<option>280</option>
 				<option>290</option>
 			</select>
-			<hr>
-
 			<input type="button" value="좋아요">
-			<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${param.member_idx}'">
-			<button onclick="iamport()">구매하기</button>
+			<input type="button" value="장바구니">
+			<input type="button" value="구매하기">
 		</div>
+	
 	</section>
   </div>
   </div>
@@ -284,68 +261,17 @@ function w3_close() {
 	  }
 	}
 </script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<!-- 네이버 아이디 로그인 -->
 <script type="text/javascript">
-function iamport(){
-		//가맹점 식별코드
-		IMP.init('imp77718215');
-		IMP.request_pay({
-		    pg : 'kakaopay',
-		    pay_method : 'card',
-		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : '${product.product_name}' , //결제창에서 보여질 이름
-		    amount : '${product.product_price }', //실제 결제되는 가격
-		    buyer_name : '${sessionScope.sId}',
-		}, function(rsp) {
-			console.log(rsp);
-		    if ( rsp.success ) {
-		    	var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		    } else {
-		    	 var msg = '결제에 실패하였습니다.';
-		         msg += '에러내용 : ' + rsp.error_msg;
-		    }
-		    alert(msg);
-		    location.href="ProductOrderPro.po?order_category=주문완료&order_progress=배송완료&member_idx=${member_idx}&product_idx=${product.product_idx}&product_amount=${product.product_amount}&product_sell_count=${product.product_sell_count} ";
-		});
-	}
-</script>
-
-<script type="text/javascript">
-document.getElementById("button1").style.backgroundColor ="";
-document.getElementById("button2").style.backgroundColor ="";
-document.getElementById("button3").style.backgroundColor ="";
-document.getElementById("button4").style.backgroundColor ="";
-
-document.getElementById("button1").onclick = function(){
-            this.style.backgroundColor ="gray";
-            document.getElementById("button2").style.backgroundColor ="";
-            document.getElementById("button3").style.backgroundColor ="";
-            document.getElementById("button4").style.backgroundColor ="";
-        };
-
-document.getElementById("button2").onclick = function(){
-            this.style.backgroundColor ="gray";
-            document.getElementById("button1").style.backgroundColor ="";
-            document.getElementById("button3").style.backgroundColor ="";
-            document.getElementById("button4").style.backgroundColor ="";
-        };
-document.getElementById("button3").onclick = function(){
-            this.style.backgroundColor ="gray";
-            document.getElementById("button1").style.backgroundColor ="";
-            document.getElementById("button2").style.backgroundColor ="";
-            document.getElementById("button4").style.backgroundColor ="";
-        };
-document.getElementById("button4").onclick = function(){
-            this.style.backgroundColor ="gray";
-            document.getElementById("button2").style.backgroundColor ="";
-            document.getElementById("button3").style.backgroundColor ="";
-            document.getElementById("button1").style.backgroundColor ="";
-        };
+  var naver_id_login = new naver_id_login("nSNLHIW18gDjrrJsFDeE", "http://localhost:8080/Project/index.jsp");
+  // 접근 토큰 값 출력
+//   alert(naver_id_login.oauthParams.access_token);
+  // 네이버 사용자 프로필 조회
+  naver_id_login.get_naver_userprofile("naverSignInCallback()");
+  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+  function naverSignInCallback() {
+    alert(naver_id_login.getProfileData('email'));
+  }
 </script>
 <!-- End Channel Plugin -->
 </body>
