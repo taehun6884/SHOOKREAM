@@ -21,8 +21,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
 <style type="text/css">
 #sform { 
-		  border:1px solid red;
-          display: inline-block;
+		  border:1px;
+		  display: inline-block;
           text-align: center;
           margin-left: 270PX;
           
@@ -37,7 +37,7 @@ float: left;
 align-content: center;
 }
 
-#detail{border:1px solid blue;
+#detail{border:1px;
 font-family: "Montserrat", sans-serif;
 font-size:15px;
 float: right;
@@ -93,13 +93,12 @@ font-weight: bold;
 	
 
 <!-- 제품 상세 페이지 -->
-  <div class="w3-padding-64 w3-light-grey w3-small w3-center" id="div">
   <!-- 섬네일 이미지 -->
   <div id = "sform">
 	<section id="image">
 		<p>
 		<div class="title" align="left">
-			<img alt="shoes" src="./upload/${image.image_main_file}">
+			<img alt="shoes" src="./upload/${image.image_main_file}" width="450px">
 		</div>
 	</section>
 	<!-- 상품 사진 옆 -->
@@ -136,7 +135,7 @@ font-weight: bold;
 				<option>230</option>
 				<option>240</option>
 				<option>250</option>
-				<option>260</option>
+				<option>260</option>	
 				<option>270</option>
 				<option>280</option>
 				<option>290</option>
@@ -148,13 +147,16 @@ font-weight: bold;
 			<button onclick="iamport()">구매하기</button>
 		</div>
 	</section>
-	<section>
-		<div class="title" align="left">
-			<img alt="shoes" src="./upload/${image.image_real_file1}">
+	<table>
+		<tr>
+			<td><img alt="shoes" src="./upload/${image.image_real_file1}" width="450px"></td>
+		</tr>
+		
+	</table>
+		<div>
+		
 		</div>
 	
-	</section>
-  </div>
   </div>
   
     <!-- 

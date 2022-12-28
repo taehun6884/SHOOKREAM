@@ -880,7 +880,7 @@ private ProductDAO() {}
 				if(rs.next()) {
 					image = new imageBean();
 					image.setImage_main_file(rs.getString("image_main_file")); //메인 이미지 가져오기
-					image.setImage_main_file(rs.getString("image_real_file1")); //메인 이미지 가져오기
+					image.setImage_real_file1(rs.getString("image_real_file1")); //상세 이미지 가져오기
 				}
 			} catch (SQLException e) {
 				System.out.println("SQL 구문 오류 - selectImage");
