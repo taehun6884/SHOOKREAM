@@ -1,185 +1,251 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>SHOKREAM</title>
 <meta charset="UTF-8">
 <!-- 네이버 아이디 로그인 -->
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript"
+	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+	charset="utf-8"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+<script src="https://kit.fontawesome.com/498a54c4c7.js"
+	crossorigin="anonymous"></script>
 <style>
-.w3-sidebar a {font-family: "Roboto", sans-serif}
-body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+.w3-sidebar a {
+	font-family: "Roboto", sans-serif
+}
+
+body, h1, h2, h3, h4, h5, h6, .w3-wide {
+	font-family: "Montserrat", sans-serif;
+}
 </style>
 
 <style type="text/css">
-#logintvar{
+#logintvar {
 	float: right;
 }
 
-#main_category{
+#main_category {
 	text-align: center;
 	padding-top: 100px;
 	padding-bottom: 30px;
 	font-size: x-large;
 }
 
+#btnLikeImage {
+	width: 20px;
+	height: 20px;
+}
 </style>
+
+<script src="../jquery/jquery-3.6.3.js"></script>
+<script type="text/javascript">
+for(var i = 0; i < ${fn:length(productBestList)}; i++){
+$(function() {
+	$("#btnLike").on("click", function(i) {
+		$.ajax({
+			type: "post", // AJAX 로 요청 시 HTTP 요청 방식(GET or POST) 지정
+			url: "LikeInsertPro.ca", // AJAX 로 요청할 요청 주소(URL)
+			data: { // 전송할 데이터(파라미터) 지정(일반 파라미터일 경우 중괄호로 묶음)
+				member_idx: ${sessionScope.member_idx},
+				product_idx: $("#product_idx").val()
+			},
+			dataType: "html", // 응답 데이터에 대한 타입 지정(일반 데이터는 text 이며 HTML 코드도 포함 가능, 자바스크립트 포함되면 html 사용)
+			async:false,
+			success: function(data) { 
+					$("#btnLikeImage").attr("src", "images/after_heart.png");
+			}, 
+			error: function(xhr, textStatus, errorThrown) {
+				alert("찜하기 실패"); 
+			}
+		});
+	});
+})(i);
+}
+</script>
 </head>
-<body class="w3-content" style="max-width:1200px">
 
-<!-- Sidebar/menu -->
-<jsp:include page="./inc/side.jsp"/>
+<body class="w3-content" style="max-width: 1200px">
 
-<!-- Top menu on small screens -->
-<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-  <div class="w3-bar-item w3-padding-24 w3-wide">SHOOKREAM</div>
-  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-</header>
+	<!-- Sidebar/menu -->
+	<jsp:include page="./inc/side.jsp" />
 
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+	<!-- Top menu on small screens -->
+	<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
+		<div class="w3-bar-item w3-padding-24 w3-wide">SHOOKREAM</div>
+		<a href="javascript:void(0)"
+			class="w3-bar-item w3-button w3-padding-24 w3-right"
+			onclick="w3_open()"><i class="fa fa-bars"></i></a>
+	</header>
 
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
+	<!-- Overlay effect when opening sidebar on small screens -->
+	<div class="w3-overlay w3-hide-large" onclick="w3_close()"
+		style="cursor: pointer" title="close side menu" id="myOverlay"></div>
 
-  <!-- Push down content on small screens -->
-  <div class="w3-hide-large" style="margin-top:83px"></div>
-  
-  <!-- Top header -->
-  <jsp:include page="./inc/top.jsp"/>
+	<!-- !PAGE CONTENT! -->
+	<div class="w3-main" style="margin-left: 250px">
 
-  
+		<!-- Push down content on small screens -->
+		<div class="w3-hide-large" style="margin-top: 83px"></div>
 
-<!--   <div class="w3-container w3-text-grey" id="jeans"> -->
-<!--     <p>BEST</p> -->
-<!--   </div> -->
-
-	<div id="main_category">
-		<p>BEST</p>
-	</div>
-	
-
-  <!-- Product grid -->
-  <div class="w3-row w3-grayscale">
-  <c:forEach var="productBestList" items="${productBestList }">	
-   <div class="w3-col l3 s6">
-      <div class="w3-container">
-<!--         <div class="w3-display-container"> -->
-<%--           <img src="./upload/${productBestList[0].product_img }"  alt="..." style="width:100%"> --%>
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<%--         <p>${productBestList[0].product_brand }<br></p><!-- 1번째 그리드 --> --%>
-<%--         <p>${productBestList[0].product_name }<br><b><fmt:formatNumber value="${productBestList[0].product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 --> --%>
-<!--       </div> -->
-        <div class="w3-display-container">
-          <img src="./upload/${productBestList.product_img }"  alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productBestList.product_brand }<br></p><!-- 1번째 그리드 -->
-        <p>${productBestList.product_name }<br><b><fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 -->
-      </div>
-      
-      
-      
-      
-      
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<%--           <img src="./upload/${productBestList[4].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<%--         <p>${productBestList[4].product_name }<br><b>${productBestList[4].product_price }</b></p><!-- 5번째 그리드 --> --%>
-<!--       </div> -->
-<!--     </div> -->
-    
-<!--     <div class="w3-col l3 s6"> -->
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<%--           <img src="./upload/${productBestList[1].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<%--         <p>${productBestList[1].product_name }<br><b>${productBestList[1].product_price }</b></p><!-- 2번째 그리드 --> --%>
-<!--       </div> -->
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<%--           <img src="./upload/${productBestList[5].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<%--         <p>${productBestList[5].product_name }<br><b>${productBestList[5].product_price }</b></p><!-- 6번째 그리드 --> --%>
-<!--       </div> -->
-<!--     </div> -->
+		<!-- Top header -->
+		<jsp:include page="./inc/top.jsp" />
 
 
-<!--     <div class="w3-col l3 s6"> -->
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<%--           <img src="./upload/${productBestList[2].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<%--         <p>${productBestList[2].product_name }<br><b>${productBestList[2].product_price }</b></p><!-- 3번째 그리드 --> --%>
-<!--       </div> -->
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<%--           <img src="./upload/${productBestList[6].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<%--         <p>${productBestList[6].product_name }<br><b>${productBestList[6].product_price}</b></p><!-- 7번째 그리드 --> --%>
-<!--       </div> -->
-<!--     </div> -->
-    
-<!--     <div class="w3-col l3 s6"> -->
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<%--           <img src="./upload/${productBestList[3].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<%--         <p>${productBestList[3].product_name }<br><b>${productBestList[3].product_price }</b></p><!-- 4번째 그리드 --> --%>
-<!--       </div> -->
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<%--           <img src="./upload/${productBestList[7].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<%--         <p>${productBestList[7].product_name }<br><b>${productBestList[7].product_price }</b></p><!-- 8번째 그리드 --> --%>
-      </div>
-  </c:forEach>
-    </div>
-</div>
-	
-  <!-- footer -->
-    <jsp:include page="./inc/footer.jsp"/>
-  
-  
 
-<script>
+		<!--   <div class="w3-container w3-text-grey" id="jeans"> -->
+		<!--     <p>BEST</p> -->
+		<!--   </div> -->
+
+		<div id="main_category">
+			<p>BEST</p>
+		</div>
+
+
+		<!-- Product grid -->
+		<div class="w3-row w3-grayscale">
+			<div class="w3-col l3 s6">
+				<div class="w3-container">
+					<!--         <div class="w3-display-container"> -->
+					<%--           <img src="./upload/${productBestList[0].product_img }"  alt="..." style="width:100%"> --%>
+					<!--           <div class="w3-display-middle w3-display-hover"> -->
+					<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
+					<!--           </div> -->
+					<!--         </div> -->
+					<%--         <p>${productBestList[0].product_brand }<br></p><!-- 1번째 그리드 --> --%>
+					<%--         <p>${productBestList[0].product_name }<br><b><fmt:formatNumber value="${productBestList[0].product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 --> --%>
+					<!--       </div> -->
+
+					<c:forEach var="productBestList" items="${productBestList }">
+						<div class="w3-container">
+							<div class="w3-display-container">
+								<img src="./upload/${productBestList.product_img }" alt="..."
+									style="width: 100%">
+								<div class="w3-display-middle w3-display-hover">
+									<button class="w3-button w3-black">
+										Buy now <i class="fa fa-shopping-cart" ></i>
+									</button>
+								</div>
+								<button id="btnLike">
+									<img alt="" src="images/before_heart.png" id="btnLikeImage" />
+<!-- 									<i class="fa-regular fa-heart" id="btnLikeImage"></i> -->
+								</button>
+								<input type="hidden" id="product_idx"
+									value="${productBestList.product_idx }">
+							</div>
+							<p>${productBestList.product_brand }<br>
+							</p>
+							<p>${productBestList.product_name }<br>
+								<b><fmt:formatNumber
+										value="${productBestList.product_price }" pattern="#,###" /></b>
+							</p>
+						</div>
+					</c:forEach>
+
+
+
+
+					<!--       <div class="w3-container"> -->
+					<!--         <div class="w3-display-container"> -->
+					<%--           <img src="./upload/${productBestList[4].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
+					<!--           <div class="w3-display-middle w3-display-hover"> -->
+					<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
+					<!--           </div> -->
+					<!--         </div> -->
+					<%--         <p>${productBestList[4].product_name }<br><b>${productBestList[4].product_price }</b></p><!-- 5번째 그리드 --> --%>
+					<!--       </div> -->
+					<!--     </div> -->
+
+					<!--     <div class="w3-col l3 s6"> -->
+					<!--       <div class="w3-container"> -->
+					<!--         <div class="w3-display-container"> -->
+					<%--           <img src="./upload/${productBestList[1].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
+					<!--           <div class="w3-display-middle w3-display-hover"> -->
+					<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
+					<!--           </div> -->
+					<!--         </div> -->
+					<%--         <p>${productBestList[1].product_name }<br><b>${productBestList[1].product_price }</b></p><!-- 2번째 그리드 --> --%>
+					<!--       </div> -->
+					<!--       <div class="w3-container"> -->
+					<!--         <div class="w3-display-container"> -->
+					<%--           <img src="./upload/${productBestList[5].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
+					<!--           <div class="w3-display-middle w3-display-hover"> -->
+					<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
+					<!--           </div> -->
+					<!--         </div> -->
+					<%--         <p>${productBestList[5].product_name }<br><b>${productBestList[5].product_price }</b></p><!-- 6번째 그리드 --> --%>
+					<!--       </div> -->
+					<!--     </div> -->
+
+
+					<!--     <div class="w3-col l3 s6"> -->
+					<!--       <div class="w3-container"> -->
+					<!--         <div class="w3-display-container"> -->
+					<%--           <img src="./upload/${productBestList[2].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
+					<!--           <div class="w3-display-middle w3-display-hover"> -->
+					<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
+					<!--           </div> -->
+					<!--         </div> -->
+					<%--         <p>${productBestList[2].product_name }<br><b>${productBestList[2].product_price }</b></p><!-- 3번째 그리드 --> --%>
+					<!--       </div> -->
+					<!--       <div class="w3-container"> -->
+					<!--         <div class="w3-display-container"> -->
+					<%--           <img src="./upload/${productBestList[6].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
+					<!--           <div class="w3-display-middle w3-display-hover"> -->
+					<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
+					<!--           </div> -->
+					<!--         </div> -->
+					<%--         <p>${productBestList[6].product_name }<br><b>${productBestList[6].product_price}</b></p><!-- 7번째 그리드 --> --%>
+					<!--       </div> -->
+					<!--     </div> -->
+
+					<!--     <div class="w3-col l3 s6"> -->
+					<!--       <div class="w3-container"> -->
+					<!--         <div class="w3-display-container"> -->
+					<%--           <img src="./upload/${productBestList[3].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
+					<!--           <div class="w3-display-middle w3-display-hover"> -->
+					<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
+					<!--           </div> -->
+					<!--         </div> -->
+					<%--         <p>${productBestList[3].product_name }<br><b>${productBestList[3].product_price }</b></p><!-- 4번째 그리드 --> --%>
+					<!--       </div> -->
+					<!--       <div class="w3-container"> -->
+					<!--         <div class="w3-display-container"> -->
+					<%--           <img src="./upload/${productBestList[7].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
+					<!--           <div class="w3-display-middle w3-display-hover"> -->
+					<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
+					<!--           </div> -->
+					<!--         </div> -->
+					<%--         <p>${productBestList[7].product_name }<br><b>${productBestList[7].product_price }</b></p><!-- 8번째 그리드 --> --%>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- footer -->
+		<jsp:include page="./inc/footer.jsp" />
+
+
+
+		<script>
+=======
+
 // Accordion 
 function myAccFunc() {
   var x = document.getElementById("demoAcc");
@@ -205,8 +271,8 @@ function w3_close() {
   document.getElementById("myOverlay").style.display = "none";
 }
 </script>
-<!-- Channel Plugin Scripts -->
-<script>
+		<!-- Channel Plugin Scripts -->
+		<script>
   (function() {
     var w = window;
     if (w.ChannelIO) {
@@ -247,8 +313,8 @@ function w3_close() {
   });
 </script>
 
-<!-- 로그인 드롭다운 기능! -->
-<script>
+		<!-- 로그인 드롭다운 기능! -->
+		<script>
 	function myFunction() {
 	  var x = document.getElementById("Demo");
 	  if (x.className.indexOf("w3-show") == -1) { 
@@ -258,8 +324,8 @@ function w3_close() {
 	  }
 	}
 </script>
-<!-- 네이버 아이디 로그인 -->
-<script type="text/javascript">
+		<!-- 네이버 아이디 로그인 -->
+		<script type="text/javascript">
   var naver_id_login = new naver_id_login("nSNLHIW18gDjrrJsFDeE", "http://localhost:8080/Project/index.jsp");
   // 접근 토큰 값 출력
 //   alert(naver_id_login.oauthParams.access_token);
@@ -270,6 +336,6 @@ function w3_close() {
     alert(naver_id_login.getProfileData('email'));
   }
 </script>
-<!-- End Channel Plugin -->
+		<!-- End Channel Plugin -->
 </body>
 </html>

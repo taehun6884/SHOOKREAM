@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import svc.ProductListService;
 import vo.ActionForward;
@@ -19,6 +20,7 @@ public class ProductListAction implements Action {
 		List<ProductBean> productList = service.getProdoctList();
 		
 		request.setAttribute("productList", productList);
+		
 		
 		forward = new ActionForward();
 		forward.setPath("admin/admin_Product_List.jsp");
