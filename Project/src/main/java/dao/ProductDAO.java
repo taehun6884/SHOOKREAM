@@ -862,7 +862,7 @@ private ProductDAO() {}
 			return bean;
 		}
 
-//상품 상세정보에서 이미지 정보 가져오는 메서드
+//--------- 이미지 정보 가져오는 메서드 -------------
 		public imageBean selectImage(int product_idx) {
 			imageBean image = null;
 			PreparedStatement pstmt = null;

@@ -1,5 +1,6 @@
 package action;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -29,12 +30,12 @@ public class ProductModifyProAction implements Action {
 		int filesize = 1024 * 1024 * 10;
 		int maxSize = 10 * 1024 * 1024; 
 		
+		MultipartRequest multi;
+		multi = new MultipartRequest(
+				request, realPath, maxSize, "UTF-8", new DefaultFileRenamePolicy()
+				);
 		
 			try {
-				MultipartRequest multi;
-				multi = new MultipartRequest(
-						request, realPath, maxSize, "UTF-8", new DefaultFileRenamePolicy()
-						);
 
 
 				product.setProduct_name(multi.getParameter("name"));
@@ -46,9 +47,9 @@ public class ProductModifyProAction implements Action {
 				product.setProduct_color(multi.getParameter("color"));
 				product.setProduct_exp(multi.getParameter("exp"));
 				product.setProduct_detail_exp(multi.getParameter("detail_exp"));
-				product.setProduct_img(multi.getFilesystemName("file1"));
-				product.setProduct_img2(multi.getFilesystemName("file2"));
-				product.setProduct_img3(multi.getFilesystemName("file3"));
+				
+				//파일을 수정을 위해 선택할 경우 기존의 파일을 삭제하고, 새로운 파일을 업로드
+			
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -59,25 +60,28 @@ public class ProductModifyProAction implements Action {
 			
 			boolean isUpdateSuccess = service.modifyProduct(product); 
 
-			if(isUpdateSuccess == true) {
+			if(!isUpdateSuccess) {
+				try {
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>");
+					out.println("alert('상품 수정 실패!')");
+					out.println("history.back()");
+					out.println("</script>");	
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			 
-					forward = new ActionForward();
-					forward.setPath("ProductList.po");
-					forward.setRedirect(false);
 				
 
-			} else{
-					response.setContentType("text/html; charset=UTF-8");
-					PrintWriter out;
-					try {
-						out = response.getWriter();
-						out.println("<script>");
-						out.println("alert('상품 수정 실패!');");
-						out.println("history.back()");
-						out.println("</script>");
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+			} else{ // 업데이트 성공 시 
+				if(isNewFile) {
+					File f = new File(realPath, multi.getParameter("))
+				}
+				forward = new ActionForward();
+				forward.setPath("ProductList.po");
+				forward.setRedirect(false);
 			}
 		
 		return forward;

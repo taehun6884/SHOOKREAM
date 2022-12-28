@@ -68,7 +68,7 @@
 					<tr>
 						<td width="100px" align="left">할인율</td>
 						<td>
-						<input type="text" id="testRate" name = "discount" value = "0" placeholder="할인율"  value ="${product.product_discount_price }">
+						<input type="text" id="testRate" name = "discount" placeholder="할인율"  value ="${product.product_discount_price }">
 						<span>&nbsp;%&nbsp;</span>
 						<button type="button" id="testCalBtn">&nbsp;계산하기&nbsp;</button>
 						</td>
@@ -129,7 +129,7 @@
 
 					<tr>
 						<td width="100px" align="left">메인 이미지</td>
-						<td><input type="file" name="file" > 기존 메인이미지:${image.image_main_file }</td>
+						<td><input type="file" name="file" >기존 메인 파일: <input type="text" value="${image.image_main_file }" width="100"></td>
 					</tr>
 					<tr>
 						<td width="100px" align="left">제품 이미지1</td>
