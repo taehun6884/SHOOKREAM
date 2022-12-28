@@ -92,7 +92,6 @@ font-weight: bold;
 	 </div>
 	
 
-<!-- 제품 상세 페이지 -->
   <!-- 섬네일 이미지 -->
   <div id = "sform">
 	<section id="image">
@@ -147,14 +146,9 @@ font-weight: bold;
 			<button onclick="iamport()">구매하기</button>
 		</div>
 	</section>
-	<table>
-		<tr>
-			<td><img alt="shoes" src="./upload/${image.image_real_file1}" width="450px"></td>
-		</tr>
-		
-	</table>
-		<div>
-		
+
+		<div id = "detail">
+			<img alt="shoes" src="./upload/${image.image_real_file1}" width="450px">
 		</div>
 	
   </div>

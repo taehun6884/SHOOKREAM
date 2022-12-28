@@ -794,16 +794,17 @@ private ProductDAO() {}
 			
 			return isDeleteProduct;
 		}
-		
-		public boolean updateProduct(ProductBean product, boolean updateProduct) {
-			int updateProduct2 =0;
-			boolean updateProduct1 = false;
+		//-------------------------상품수정 쿼리-------------------------------
+		public int updateProduct(ProductBean product) {
+			int updateProduct = 0;
 			
 			PreparedStatement pstmt =null;
 			
 			System.out.println(product);
 			
-			String sql ="UPDATE product SET product_name=?,  product_brand=?,  product_price=?, product_size=? , product_amount=?, product_color=?,  product_exp=?,  product_detail_exp=?,  product_discount_price=?, product_img=? ";
+			String sql ="UPDATE product "
+					+ "SET product_name=?,  product_brand=?,  product_price=?, product_size=? , product_amount=?, product_color=?,  product_exp=?,  product_detail_exp=?,  product_discount_price=? "
+					+ "WHERE product_idx =?";
 			try {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, product.getProduct_name());
@@ -815,19 +816,16 @@ private ProductDAO() {}
 				pstmt.setString(7, product.getProduct_exp());
 				pstmt.setString(8, product.getProduct_detail_exp());
 				pstmt.setDouble(9, product.getProduct_discount_price());
-				pstmt.setString(10, product.getProduct_img());
-				updateProduct2 = pstmt.executeUpdate();
-				if(updateProduct2 > 0) {
-					updateProduct1 =true;
-				}
-					} catch (SQLException e) {
-				System.out.println("sql 구문오류 -updateProduct");
+				pstmt.setInt(10, product.getProduct_idx());
+				updateProduct = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("sql 구문오류 - updateProduct");
 				e.printStackTrace();
 			}finally {
 				JdbcUtil.close(pstmt);
 			} 
 		
-		return updateProduct1;
+		return updateProduct;
 }
 		public ProductBean getProduct(int idx) {
 			ProductBean bean = null;
@@ -871,7 +869,7 @@ private ProductDAO() {}
 			ResultSet rs  = null;
 			//--------------------이미지 이름 가져오기 작업--------------
 			try {
-				String sql = "SELECT image_main_file, image_real_file1 FROM image WHERE product_idx = ?";
+				String sql = "SELECT image_main_file, image_real_file1, image_real_file2  FROM image WHERE product_idx = ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, product_idx);
 				rs = pstmt.executeQuery();
@@ -880,7 +878,8 @@ private ProductDAO() {}
 				if(rs.next()) {
 					image = new imageBean();
 					image.setImage_main_file(rs.getString("image_main_file")); //메인 이미지 가져오기
-					image.setImage_real_file1(rs.getString("image_real_file1")); //상세 이미지 가져오기
+					image.setImage_real_file1(rs.getString("image_real_file1")); //상세 이미지1 가져오기
+					image.setImage_real_file2(rs.getString("image_real_file2")); //상세 이미지2 가져오기
 				}
 			} catch (SQLException e) {
 				System.out.println("SQL 구문 오류 - selectImage");

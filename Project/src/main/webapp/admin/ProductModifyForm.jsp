@@ -50,16 +50,16 @@
 					<tr>
 						<td width="100px" align="left">상품명</td>
 						<td width="300px"><input class="w3-input w3-border"
-							type="text" placeholder="Product Name" name="name" required></td>
+							type="text" placeholder="Product Name" name="name" value ="${product.product_name }"  required ></td>
 					</tr>
 					<tr>
 						<td width="100px" align="left">상품 브랜드</td>
 						<td width="300px"><input class="w3-input w3-border"
-							type="text" placeholder="Product Name" name="brand" required></td>
+							type="text" placeholder="Product brand" name="brand" value ="${product.product_brand }" required></td>
 					</tr>
 					<tr>
 						<td width="100px" align="left" >상품 가격</td>
-						<td><input type="text" id="testPrice" name ="price" placeholder="원래 가격을 입력하세요"><span>&nbsp;원</span> <!-- 콤마 있는 값 -->
+						<td><input type="text" id="testPrice" name ="price" placeholder="원래 가격을 입력하세요" value ="${product.product_price }"><span>&nbsp;원</span> <!-- 콤마 있는 값 -->
 						</td>
 						
 					</tr>
@@ -68,7 +68,7 @@
 					<tr>
 						<td width="100px" align="left">할인율</td>
 						<td>
-						<input type="text" id="testRate" name = "discount" value = "0" placeholder="할인율" >
+						<input type="text" id="testRate" name = "discount" value = "0" placeholder="할인율"  value ="${product.product_discount_price }">
 						<span>&nbsp;%&nbsp;</span>
 						<button type="button" id="testCalBtn">&nbsp;계산하기&nbsp;</button>
 						</td>
@@ -84,6 +84,7 @@
 						<td width="100px" align="left">상품 사이즈</td>
 						<td width="300px">
 						<select name="size">
+								<option value ="${product.product_discount_price }" selected="selected"></option>
 								<option value="220">220</option>
 								<option value="230">230</option>
 								<option value="240">240</option>
@@ -96,7 +97,9 @@
 						</select></td>
 					<tr>
 						<td width="100px" align="left">상품 재고량</td>
-						<td width="300px"><input class="w3-input w3-border" type="number" min="0" max="100" placeholder="수량" name="amount" onkeyup="inputNumberFormat(this);" required></td>
+						<td width="300px">
+						<input class="w3-input w3-border" type="number" min="0" max="100" placeholder="수량" name="amount" onkeyup="inputNumberFormat(this);" value ="${product.product_amount }" required>
+						</td>
 					</tr>
 
 					<tr>
@@ -111,8 +114,8 @@
 					<tr>
 						<td width="100px" align="left">요약 설명</td>
 						<td><textarea class="w3-input w3-border" style="resize: none"
-								rows="5" cols="30" placeholder="Product summary" name="exp"
-								required="required"></textarea></td>
+								rows="5" cols="30" placeholder="Product summary" name="exp" 
+								required="required">${product.product_exp }</textarea></td>
 						<!--           <td width="300px"><input class="w3-input w3-border" type="" placeholder="Product summary" name="Product summary" required></td> -->
 					</tr>
 
@@ -120,26 +123,26 @@
 						<td width="100px" align="left">상세 설명</td>
 						<td><textarea class="w3-input w3-border" style="resize: none"
 								rows="5" cols="30" placeholder="Product detail"
-								name="detail_exp" required="required"></textarea></td>
+								name="detail_exp" required="required">${product.product_detail_exp }</textarea></td>
 					</tr>
 
 
 					<tr>
 						<td width="100px" align="left">메인 이미지</td>
-						<td><input type="file" name="file"></td>
+						<td><input type="file" name="file" > 기존 메인이미지:${image.image_main_file }</td>
 					</tr>
 					<tr>
 						<td width="100px" align="left">제품 이미지1</td>
-						<td><input type="file" name="file2"></td>
+						<td><input type="file" name="file2" > 기존 제품1이미지:${image.image_real_file1 }</td>
 					</tr>
 					<tr>
 						<td width="100px" align="left">제품 이미지2</td>
-						<td><input type="file" name="file3"></td>
+						<td><input type="file" name="file3"> 기존 제품2이미지:${image.image_real_file2 }</td>
 					</tr>
 
 					<tr>
 						<td colspan="2"><button type="submit"
-								class="w3-button w3-block w3-black">등록하기</button></td>
+								class="w3-button w3-block w3-black" onclick="location.href ='ProductModifyPro.po?product_idx=${product.product_idx}'">수정하기</button></td>
 					</tr>
 				</table>
 			</form>

@@ -6,13 +6,12 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import svc.ModifyMemberService;
-import svc.ProductModifyService;
+import svc.ProductModifyProService;
 import vo.ActionForward;
+import vo.BoardBean;
 import vo.ProductBean;
 
 public class ProductModifyProAction implements Action {
@@ -41,33 +40,30 @@ public class ProductModifyProAction implements Action {
 				product.setProduct_name(multi.getParameter("name"));
 				product.setProduct_brand(multi.getParameter("brand"));
 				product.setProduct_price(Integer.parseInt(multi.getParameter("price")));
+				product.setProduct_discount_price(Double.parseDouble(multi.getParameter("discount")));
 				product.setProduct_size(multi.getParameter("size"));
 				product.setProduct_amount(Integer.parseInt(multi.getParameter("amount")));
 				product.setProduct_color(multi.getParameter("color"));
 				product.setProduct_exp(multi.getParameter("exp"));
 				product.setProduct_detail_exp(multi.getParameter("detail_exp"));
-				product.setProduct_discount_price(Double.parseDouble(multi.getParameter("discount")));
-				product.setProduct_img(multi.getFilesystemName("file"));
-//				product.setProduct_img(multi.getFilesystemName("file2"));
+				product.setProduct_img(multi.getFilesystemName("file1"));
+				product.setProduct_img2(multi.getFilesystemName("file2"));
+				product.setProduct_img3(multi.getFilesystemName("file3"));
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		
-			ProductModifyService service = new ProductModifyService();
+			ProductModifyProService service = new ProductModifyProService();
 			
-			boolean updateProduct = service.updateProduct(product); 
+			boolean isUpdateSuccess = service.modifyProduct(product); 
 
-			if(updateProduct ==true) {
-			
-				
+			if(isUpdateSuccess == true) {
+			 
 					forward = new ActionForward();
-					forward.setPath("./");
+					forward.setPath("ProductList.po");
 					forward.setRedirect(false);
-				
 				
 
 			} else{
@@ -89,4 +85,6 @@ public class ProductModifyProAction implements Action {
 	
 
 }
+
+	
 }
