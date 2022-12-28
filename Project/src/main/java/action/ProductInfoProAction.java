@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import svc.ProductInfoProService;
 import vo.ActionForward;
 import vo.ProductBean;
+import vo.imageBean;
 
 public class ProductInfoProAction implements Action {
 
@@ -23,8 +24,10 @@ public class ProductInfoProAction implements Action {
 		ProductInfoProService service = new ProductInfoProService();
 		ProductBean product = service.getProduct(product_idx);
 		System.out.println(product);
+		imageBean image = service.getImage(product_idx);
 		
 		request.setAttribute("product", product);
+		request.setAttribute("image", image);
 		
 		forward = new ActionForward();
 		forward.setPath("product/Product_info.jsp");
