@@ -87,6 +87,7 @@ $(function() {
 // }
 </script>
 </head>
+
 <body class="w3-content" style="max-width: 1200px">
 
 	<!-- Sidebar/menu -->
@@ -249,6 +250,8 @@ $(function() {
 
 
 		<script>
+=======
+
 // Accordion 
 function myAccFunc() {
   var x = document.getElementById("demoAcc");

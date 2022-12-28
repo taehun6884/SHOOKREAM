@@ -31,8 +31,7 @@
                             <li class="breadcrumb-item active">공지사항 관리</li>
                         </ol>
                             <div class="card-body">
-                            <input type="hidden" name="notice_idx" value="${param.notice_idx }">
-                            <input type="hidden" name="pageNum" value="${param.pageNum }">
+                           	<form method="post">
                                 <table id="datatablesSimple">
                                 	<c:choose>
 										<c:when test="${empty param.pageNum }">
@@ -45,8 +44,9 @@
                                     <thead>
                                         <tr>
                                             <th>분류</th>
-                                            <th>공지사항 번호</th>
-                                            <th>공지사항 제목</th>
+                                            <th>글 번호</th>
+                                            <th>카테고리</th>
+                                            <th>글 제목</th>
                                             <th>게시 날짜</th>
                                             <th>게시물 관리</th>
                                         </tr>
@@ -55,20 +55,24 @@
                                         <tr>
                                             <th>${board.notice_type }</th>
                                             <th>${board.notice_idx }</th>
+                                            <th>${board.notice_category }</th>
                                             <th>${board.notice_subject }</th>
                                             <th>${board.notice_date }</th>
                                             <th>
-										      	<input type="button" value="수정"  class="btn btn-outline-secondary btn-sm" onclick="location.href='BoardModifyForm.bo?notice_idx=${param.notice_idx}&pageNum=${param.pageNum }'">
-												<input type="button" value="삭제" class="btn btn-outline-secondary btn-sm" onclick="location.href='BoardDelete.bo??notice_idx=${param.notice_idx}&pageNum=${param.pageNum }'">
-<!-- 												<input type="button" value="고정글" class="btn btn-outline-secondary btn-sm" onclick=""> -->
-
+                                            	<input type="hidden" name="notice_idx" value=${board.notice_idx }>
+                            					<input type="hidden" name="pageNum" value=${param.pageNum }>
+										      	<a href="BoardModifyForm.bo?notice_idx=${board.notice_idx }&pageNum=${param.pageNum}"><input type="button" value="수정"  class="btn btn-outline-secondary btn-sm" ></a>
+												<a href="BoardDeletePro.bo?notice_idx=${board.notice_idx }&pageNum=${param.pageNum}"><input type="button" value="삭제" class="btn btn-outline-secondary btn-sm"></a>
+<!--		<input type="button" value="고정글" class="btn btn-outline-secondary btn-sm" onclick=""> -->
 										    </th>
                                         </tr>
                                      </c:forEach>   
                                 </table>
+							 </form>
+							 <input type="button" onclick="location.href='BoardWriteForm.bo'" value="글쓰기" style="text-align:center">
                                 <section id="pageList" style="text-align:center">
 									<c:choose>
-										<c:when test="${pageNum > 1}">
+										<c:when test="${param.pageNum > 1}">
 											<input type="button" class="btn btn-outline-secondary btn-sm" value="이전" onclick="location.href='AdminNoticeManage.ad?pageNum=${pageNum - 1}'">
 										</c:when>
 										<c:otherwise>
@@ -80,7 +84,7 @@
 									<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 										<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
 										<c:choose>
-											<c:when test="${pageNum eq i}">
+											<c:when test="${param.pageNum eq i}">
 												${i }
 											</c:when>
 											<c:otherwise>
@@ -91,7 +95,7 @@
 							
 									<!-- 현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 [다음] 링크 동작 -->
 									<c:choose>
-										<c:when test="${pageNum < pageInfo.maxPage}">
+										<c:when test="${param.pageNum < pageInfo.maxPage}">
 											<input type="button" value="다음" class="btn btn-outline-secondary btn-sm" onclick="location.href='AdminNoticeManage.ad?pageNum=${pageNum + 1}'">
 										</c:when>
 										<c:otherwise>
