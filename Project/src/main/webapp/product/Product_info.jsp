@@ -54,6 +54,15 @@ font-size: 15px;
 font-weight: bold;
 
 }    
+
+#detail_table{
+border:1px;
+display: inline-block;
+text-align: center;
+margin-left: 270PX;
+}
+
+
 </style>
 
 <style type="text/css">
@@ -98,7 +107,7 @@ font-weight: bold;
 	<section id="image">
 		<p>
 		<div class="title" align="left">
-			<img alt="shoes" src="./upload/${image.image_main_file}" width="450px">
+			<img alt="shoes" src="./upload/${image.image_main_file}" width="450px" height="650px">
 		</div>
 	</section>
 	<!-- 상품 사진 옆 -->
@@ -147,18 +156,21 @@ font-weight: bold;
 			<button onclick="iamport()">구매하기</button>
 		</div>
 	</section>
-	<table>
+  </div>
+  <Br>
+  <br>
+  <br>
+ 	
+  <table id="detail_table">
 		<tr>
 			<td><img alt="shoes" src="./upload/${image.image_real_file1}" width="450px"></td>
+		</tr>	
+		
+		<tr>
+			<td><img alt="shoes" src="./upload/${image.image_real_file2}" width="450px"></td>
 		</tr>
 		
 	</table>
-		<div>
-		
-		</div>
-	
-  </div>
-  
     <!-- 
 <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
    -->
@@ -312,12 +324,14 @@ function iamport(){
 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
 		        msg += '결제 금액 : ' + rsp.paid_amount;
 		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		        location.href="ProductOrderPro.po?order_category=주문완료&order_progress=배송완료&member_idx=${member_idx}&product_idx=${product.product_idx}&product_amount=${product.product_amount}&product_sell_count=${product.product_sell_count} ";
 		    } else {
 		    	 var msg = '결제에 실패하였습니다.';
 		         msg += '에러내용 : ' + rsp.error_msg;
+		         window.history.back();
 		    }
 		    alert(msg);
-		    location.href="ProductOrderPro.po?order_category=주문완료&order_progress=배송완료&member_idx=${member_idx}&product_idx=${product.product_idx}&product_amount=${product.product_amount}&product_sell_count=${product.product_sell_count} ";
+		    
 		});
 	}
 </script>

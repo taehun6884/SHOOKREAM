@@ -642,7 +642,7 @@ private ProductDAO() {}
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date "
+			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date,o.order_idx "
 					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx "
 					+ "where m.member_idx=? "
@@ -663,6 +663,7 @@ private ProductDAO() {}
 					vo.setOrder_category(rs.getString("order_category"));
 					vo.setOrder_progress(rs.getString("order_progress"));
 					vo.setOrder_date(rs.getTimestamp("order_date"));
+					vo.setOrder_idx(rs.getInt("order_idx"));
 					orderlist.add(vo);
 				}
 			} catch (SQLException e) {
@@ -871,7 +872,7 @@ private ProductDAO() {}
 			ResultSet rs  = null;
 			//--------------------이미지 이름 가져오기 작업--------------
 			try {
-				String sql = "SELECT image_main_file, image_real_file1 FROM image WHERE product_idx = ?";
+				String sql = "SELECT image_main_file, image_real_file1,image_real_file2  FROM image WHERE product_idx = ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, product_idx);
 				rs = pstmt.executeQuery();
@@ -881,6 +882,7 @@ private ProductDAO() {}
 					image = new imageBean();
 					image.setImage_main_file(rs.getString("image_main_file")); //메인 이미지 가져오기
 					image.setImage_real_file1(rs.getString("image_real_file1")); //상세 이미지 가져오기
+					image.setImage_real_file2(rs.getString("image_real_file2")); //상세 이미지 가져오기
 				}
 			} catch (SQLException e) {
 				System.out.println("SQL 구문 오류 - selectImage");
