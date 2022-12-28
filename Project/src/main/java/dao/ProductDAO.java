@@ -12,6 +12,7 @@ import java.util.List;
 import db.JdbcUtil;
 import vo.OrderBean;
 import vo.ProductBean;
+import vo.imageBean;
 
 public class ProductDAO {
 private ProductDAO() {}
@@ -104,7 +105,7 @@ private ProductDAO() {}
 			
 			
 		} catch (SQLException e) {
-			System.out.println("상품등록 - 관리자");
+			System.out.println("SQL 구문 오류 - 상품등록: 관리자");
 			e.printStackTrace();
 		} 
 		return insertCount2;
@@ -145,7 +146,10 @@ private ProductDAO() {}
 //				product.setProduct_img(rs.getString("product_img"));
 				product.setProduct_date(rs.getTimestamp("product_date"));
 //				System.out.println(product);
+			
 			}
+			
+			
 		} catch (SQLException e) {
 			System.out.println("SQL구문 오류 - selectProduct()");
 			e.printStackTrace();
@@ -639,7 +643,7 @@ private ProductDAO() {}
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date "
+			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date,o.order_idx "
 					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx "
 					+ "where m.member_idx=? "
@@ -660,6 +664,7 @@ private ProductDAO() {}
 					vo.setOrder_category(rs.getString("order_category"));
 					vo.setOrder_progress(rs.getString("order_progress"));
 					vo.setOrder_date(rs.getTimestamp("order_date"));
+					vo.setOrder_idx(rs.getInt("order_idx"));
 					orderlist.add(vo);
 				}
 			} catch (SQLException e) {
@@ -707,13 +712,13 @@ private ProductDAO() {}
 			return listCount;
 		}
 
-
+		// 관리자 페이지 - 주문 내역
 		public List<OrderBean> getAdminOrderList() {
 			List<OrderBean> orderlist = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date "
+			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date,o.order_idx "
 					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx";
 					
@@ -730,6 +735,7 @@ private ProductDAO() {}
 					vo.setOrder_category(rs.getString("order_category"));
 					vo.setOrder_progress(rs.getString("order_progress"));
 					vo.setOrder_date(rs.getTimestamp("order_date"));
+					vo.setOrder_idx(rs.getInt("order_idx"));
 					orderlist.add(vo);
 				}
 			} catch (SQLException e) {
@@ -742,6 +748,7 @@ private ProductDAO() {}
 			
 			return orderlist;
 		}
+
 		public boolean isDeleteCart(int cart_idx) {
 			int deleteCount =0;
 			boolean isDeleteSuccess = false;
@@ -926,6 +933,58 @@ private ProductDAO() {}
 			
 			return bean;
 		}
+
+//상품 상세정보에서 이미지 정보 가져오는 메서드
+		public imageBean selectImage(int product_idx) {
+			imageBean image = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs  = null;
+			//--------------------이미지 이름 가져오기 작업--------------
+			try {
+				String sql = "SELECT image_main_file, image_real_file1,image_real_file2  FROM image WHERE product_idx = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, product_idx);
+				rs = pstmt.executeQuery();
+				
+				
+				if(rs.next()) {
+					image = new imageBean();
+					image.setImage_main_file(rs.getString("image_main_file")); //메인 이미지 가져오기
+					image.setImage_real_file1(rs.getString("image_real_file1")); //상세 이미지 가져오기
+					image.setImage_real_file2(rs.getString("image_real_file2")); //상세 이미지 가져오기
+				}
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - selectImage");
+				e.printStackTrace();
+			}
+			return image;
+		}
 		
+
+		public boolean isDeleteOrder(int order_idx) {
+			int isDeleteOrderList = 0;
+			boolean isDeleteSuccess = false;
+			PreparedStatement pstmt =null;
+			String sql ="DELETE FROM orderlist WHERE order_idx=?"; 
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, order_idx);
+				isDeleteOrderList =pstmt.executeUpdate();
+				
+				if(isDeleteOrderList >0) {
+					isDeleteSuccess = true;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			}
+			return isDeleteSuccess;
+			
+		}
+		
+
+
 	
 }//DAO 끝

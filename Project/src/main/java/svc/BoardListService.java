@@ -28,7 +28,7 @@ public class BoardListService {
 		return boardList;
 	}
 
-	public int getBoardListCount(String keyword) {
+	public int getBoardListCount(String keyword,String notice_type) {
 		int listCount = 0;
 		
 		Connection con = JdbcUtil.getConnection();
@@ -37,7 +37,7 @@ public class BoardListService {
 		
 		dao.setConnection(con);
 		
-		listCount = dao.selectBoardListCount(keyword);
+		listCount = dao.selectBoardListCount(keyword,notice_type);
 		
 		JdbcUtil.close(con);
 		

@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,7 +13,7 @@
 <!--         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" /> -->
 <!--         <meta name="description" content="" /> -->
 <!--         <meta name="author" content="" /> -->
-        <title>상품등록 페이지</title>
+        <title>상품수정 페이지</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="admin/css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -35,7 +34,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">상품 등록</h1>
+                        <h1 class="mt-4">상품 수정</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active"></li>
                         </ol>
