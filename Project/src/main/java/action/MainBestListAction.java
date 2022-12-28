@@ -22,7 +22,7 @@ public class MainBestListAction implements Action {
 		request.setAttribute("productBestList", productBestList);
 		
 		// 찜하기(좋아요) 누른 회원, 상품별 찜한 횟수 출력
-		List<ProductBean> productWish = service.getProductWish();
+//		List<ProductBean> productWish = service.getProductWish();
 		
 		forward = new ActionForward();
 		forward.setPath("main_best.jsp");

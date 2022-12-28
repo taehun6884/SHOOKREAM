@@ -109,7 +109,7 @@ public class ProductListService {
 		
 		dao.setConnection(con);
 		
-		productWish = dao.selectProductWish();
+//		productWish = dao.selectProductWish();
 		
 		return productWish;
 	}

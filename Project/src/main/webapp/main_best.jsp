@@ -54,13 +54,16 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 }
 </style>
 
-<script src="../jquery/jquery-3.6.3.js"></script>
+<script src="jquery/jquery-3.6.3.js"></script>
 <script type="text/javascript">
 // for(var i = 0; i < ${fn:length(productBestList)}; i++){
 $(function() {
-	$("#btnLike").on("click", function() {
+	$("button[id^='btnLike']").on("click", function(e) {
 		
-		if(${sessionScope.sId eq null}){
+		var loginCk = "${sessionScope.sId}";
+		
+		if(loginCk == ""){
+			e.preventDefault();
 			alert("로그인 후 이용 가능합니다.");
 			location.href="LoginMember.me";
 		}
@@ -70,7 +73,7 @@ $(function() {
 			url: "LikeInsertPro.ca", // AJAX 로 요청할 요청 주소(URL)
 			data: { // 전송할 데이터(파라미터) 지정(일반 파라미터일 경우 중괄호로 묶음)
 				member_idx: ${sessionScope.member_idx},
-				product_idx: $("#product_idx").val()
+				product_idx: $("input[id^='product_idx']").val()
 			},
 			dataType: "html", // 응답 데이터에 대한 타입 지정(일반 데이터는 text 이며 HTML 코드도 포함 가능, 자바스크립트 포함되면 html 사용)
 			async:false,
@@ -149,10 +152,10 @@ $(function() {
 										Buy now <i class="fa fa-shopping-cart" ></i>
 									</button>
 								</div>
-								<button id="btnLike">
+								<button id="btnLike${productBestList.product_idx }">
 									<img alt="" src="images/before_heart.png" id="btnLikeImage" />
 								</button>
-								<input type="hidden" id="product_idx"
+								<input type="hidden" id="product_idx${productBestList.product_idx }"
 									value="${productBestList.product_idx }">
 							</div>
 							<p>${productBestList.product_brand }<br>
@@ -250,7 +253,6 @@ $(function() {
 
 
 		<script>
-=======
 
 // Accordion 
 function myAccFunc() {

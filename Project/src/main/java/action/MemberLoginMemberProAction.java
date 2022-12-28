@@ -44,6 +44,7 @@ public class MemberLoginMemberProAction implements Action {
 				out.println("alert('로그인 실패!')");
 				out.println("history.back()");
 				out.println("</script>");
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
