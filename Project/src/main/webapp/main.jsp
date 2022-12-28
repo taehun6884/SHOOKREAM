@@ -36,7 +36,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 </style>
 </head>
-<body class="w3-content" style="min-width:1219px;  position: ">
+<body class="w3-content" style="max-width:1200px" >
 
 <!-- Sidebar/menu -->
 <jsp:include page="./inc/side.jsp"/>
@@ -62,7 +62,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- ./images header -->
   <div class="w3-display-container w3-container">
     <img src="./images/jeans.jpg" alt="Jeans" style="width:100%">
-    <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
+    <div class="w3-display-topleft w3-text-white" style="padding:60px 48px">
       <h1 class="w3-jumbo w3-hide-small">New arrivals</h1>
       <h1 class="w3-hide-large w3-hide-medium">New arrivals</h1>
       <h1 class="w3-hide-small">COLLECTION 2016</h1>

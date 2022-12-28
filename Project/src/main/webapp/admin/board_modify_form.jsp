@@ -63,13 +63,12 @@
 						</div>
 						<label for="exampleFormControlInput1" class="form-label">Type</label>
 						<select class="form-select" aria-label="Default select example" name="notice_type" onchange="categoryChange(this)">
-						  <option selected>게시판 종류를 선택해 주세요</option>
-						  <option value="Notice">공지사항</option>
-						  <option value="FAQ">자주묻는 질문</option>
+						  <option selected>${board.notice_type }</option>
+						  
 						</select>
 						<label for="exampleFormControlInput1" class="form-label">Category</label>
 						<select class="form-select" aria-label="Default select example" name="notice_category" id="category" onchange="selectChange(this.value)">
-						  <option>카테고리를 선택해주세요</option>
+						  <option selected>${board.notice_category }</option>
 						</select>
 						<div class="mb-3">
 						  <label for="exampleFormControlTextarea1" class="form-label">Content</label><br>

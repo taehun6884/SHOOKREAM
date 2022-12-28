@@ -710,13 +710,13 @@ private ProductDAO() {}
 			return listCount;
 		}
 
-
+		// 관리자 페이지 - 주문 내역
 		public List<OrderBean> getAdminOrderList() {
 			List<OrderBean> orderlist = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date "
+			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date,o.order_idx "
 					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx";
 					
@@ -733,6 +733,7 @@ private ProductDAO() {}
 					vo.setOrder_category(rs.getString("order_category"));
 					vo.setOrder_progress(rs.getString("order_progress"));
 					vo.setOrder_date(rs.getTimestamp("order_date"));
+					vo.setOrder_idx(rs.getInt("order_idx"));
 					orderlist.add(vo);
 				}
 			} catch (SQLException e) {
@@ -745,6 +746,7 @@ private ProductDAO() {}
 			
 			return orderlist;
 		}
+
 		public boolean isDeleteCart(int cart_idx) {
 			int deleteCount =0;
 			boolean isDeleteSuccess = false;
@@ -887,6 +889,29 @@ private ProductDAO() {}
 			return image;
 		}
 		
-	
+		public boolean isDeleteOrder(int order_idx) {
+			int isDeleteOrderList = 0;
+			boolean isDeleteSuccess = false;
+			PreparedStatement pstmt =null;
+			String sql ="DELETE FROM orderlist WHERE order_idx=?"; 
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, order_idx);
+				isDeleteOrderList =pstmt.executeUpdate();
+				
+				if(isDeleteOrderList >0) {
+					isDeleteSuccess = true;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			}
+			return isDeleteSuccess;
+			
+		}
+		
+
 	
 }//DAO 끝
