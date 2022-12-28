@@ -336,10 +336,36 @@ private MemberDAO() {}
 				
 				return memberList;
 			}
-
-
-			public static void modify(Map<String, Object> modifyArg) {
-				// TODO Auto-generated method stub
+			
+			// 아이디/비밀번호 찾기
+			public boolean findID(MemberBean member) {
+				boolean flag = false;
 				
-			}
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+				
+				try {
+					// 1) 이름/이메일과 일치하는 아이디 가져오기
+					String sql = "SELECT member_id FROM member WHERE member_name=? AND member_email=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, member.getMember_name());
+					pstmt.setString(2, member.getMember_email());
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) { // 이름과 이메일이 일치한 경우
+						flag = true;
+					} 
+				} catch (SQLException e) {
+					System.out.println("sql 구문 오류 - findID()");
+					e.printStackTrace();
+				} finally {
+					JdbcUtil.close(rs);
+					JdbcUtil.close(pstmt);
+				}
+				return flag;
+			}//아이디 찾기() 끝
+
+			// 임시 비밀번호 발급받아 member 테이블 수정하기
+
+
 }

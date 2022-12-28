@@ -14,23 +14,25 @@ public class BoardModifyProAction implements Action {
 		ActionForward forward = null;
 		
 		BoardBean board = new BoardBean();
-
+		System.out.println(request.getParameter("pageNum"));
+		board.setNotice_idx(Integer.parseInt(request.getParameter("notice_idx")));
 		board.setNotice_category(request.getParameter("notice_category"));
 		board.setNotice_subject(request.getParameter("notice_subject"));
 		board.setNotice_content(request.getParameter("notice_content"));
 		board.setNotice_type(request.getParameter("notice_type"));
 		
+		new BoardModifyProService().modifyBoard(board);		
 		
-		new BoardModifyProService().modifyBoard(board);
-		
-		System.out.println("notice_idx = " + board.getNotice_idx()); // 0이  출력
-		System.out.println("notice_idx = " + request.getParameter("notice_idx")); // null 이 출력
-		
-		
-		
-		forward = new ActionForward();
-		forward.setPath("AdminNoticeManage.ad?notice_idx=" + request.getParameter("notice_idx") + "&pageNum=" + request.getParameter("pageNum"));
-		forward.setRedirect(true);
+		if(request.getParameter("notice_type").equals("Notice")) {
+			forward = new ActionForward();
+			forward.setPath("AdminNoticeManage.ad?notice_idx=" + request.getParameter("notice_idx") + "&pageNum=" + request.getParameter("pageNum"));
+			forward.setRedirect(true);			
+		} else {
+			forward = new ActionForward();
+			forward.setPath("AdminFAQManage.ad?notice_idx=" + request.getParameter("notice_idx") + "&pageNum=" + request.getParameter("pageNum"));
+			forward.setRedirect(true);			
+			
+		}
 		
 		return forward;
 	}

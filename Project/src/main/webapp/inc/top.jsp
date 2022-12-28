@@ -5,11 +5,11 @@
 <header class="w3-container w3-xlarge">
 	<p class="w3-left"></p> <!-- 카테고리명 페이지마다 추가하기 -->
 	<p class="w3-right">
-		<a href="CartList.ca?member_idx=${member_idx }&pageNum=1"><i class="fa fa-shopping-cart w3-margin-right"></i></a>
-		<i class="fa fa-search"></i>
+<!-- 		<i class="fa fa-search"></i> -->
 	<!-- 로그인 드롭다운 기능! -->	
 	<c:choose>
 		<c:when test="${not empty sessionScope.sId }">
+		<a href="CartList.ca?member_idx=${member_idx }&pageNum=1"><i class="fa fa-shopping-cart w3-margin-right"></i></a>
 		<i>
 		  <div class="w3-dropdown-click" id="logintvar">
 		  <button onclick="myFunction()" >
@@ -27,13 +27,16 @@
 		    		<a href="Admin.ad?id=${sessionScope.sId }" class="w3-bar-item w3-button">관리자 페이지</a>
 		    	</c:when>
 		    </c:choose>
+		     </div>
 		  </div>
-		 </div> 
 		</i>
 		</c:when>
 		<c:otherwise>
-		<a href="LoginMember.me">login</a> | <a href="MemberJoinForm.me">join</a>
+		<div class="w3-dropdown-click" id="logintvar">
+		<div><a href="LoginMember.me">login</a> | <a href="MemberJoinForm.me">join</a></div>
+		</div>
 		</c:otherwise>
 	</c:choose>	
 	</p>
+	
 </header>

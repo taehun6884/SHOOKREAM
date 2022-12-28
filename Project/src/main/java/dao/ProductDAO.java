@@ -57,7 +57,7 @@ private ProductDAO() {}
 			
 			//----------------상품 등록----------------------
 
-			sql = "INSERT INTO product VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
+			sql = "INSERT INTO product VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?)";
 			
 			pstmt2 = con.prepareStatement(sql);
 			pstmt2.setInt(1, idx); //idx
@@ -73,6 +73,7 @@ private ProductDAO() {}
 			pstmt2.setString(11, product.getProduct_detail_exp()); //상세 설명
 			pstmt2.setString(12, product.getProduct_color()); //색상
 			pstmt2.setDouble(13, product.getProduct_discount_price()); //할인율
+			pstmt2.setInt(14, 0); //상품 좋아요 수 누적
 			
 			insertCount = pstmt2.executeUpdate();
 			
@@ -706,13 +707,13 @@ private ProductDAO() {}
 			return listCount;
 		}
 
-
+		// 관리자 페이지 - 주문 내역
 		public List<OrderBean> getAdminOrderList() {
 			List<OrderBean> orderlist = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date "
+			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date,o.order_idx "
 					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx";
 					
@@ -729,6 +730,7 @@ private ProductDAO() {}
 					vo.setOrder_category(rs.getString("order_category"));
 					vo.setOrder_progress(rs.getString("order_progress"));
 					vo.setOrder_date(rs.getTimestamp("order_date"));
+					vo.setOrder_idx(rs.getInt("order_idx"));
 					orderlist.add(vo);
 				}
 			} catch (SQLException e) {
@@ -741,6 +743,7 @@ private ProductDAO() {}
 			
 			return orderlist;
 		}
+
 		public boolean isDeleteCart(int cart_idx) {
 			int deleteCount =0;
 			boolean isDeleteSuccess = false;
@@ -763,6 +766,74 @@ private ProductDAO() {}
 		
 			return isDeleteSuccess;
 		}
+		
+		// 좋아요(찜하기) 버튼 클릭
+		public int InsertLike(int member_idx, int product_idx) {
+			int insertCount = 0;
+			
+			PreparedStatement pstmt1 = null, pstmt2 = null;
+			ResultSet rs = null;
+			
+			try {
+				// wish_idx 증가
+				String sql = "SELECT MAX(wish_idx) FROM wish";
+				int wish_idx = 1;
+				pstmt1 = con.prepareStatement(sql);
+				rs = pstmt1.executeQuery();
+				
+				if(rs.next()) { 
+					wish_idx = rs.getInt(1) + 1;
+				}
+				System.out.println("wish_idx : " + wish_idx);
+				
+				// ----------------------------------------------
+				
+				// 찜하기 추가
+				sql = "INSERT INTO wish VALUES(?,?,?)";	
+				pstmt2 = con.prepareStatement(sql);
+				pstmt2.setInt(1, wish_idx);
+				pstmt2.setInt(2, member_idx);	
+				pstmt2.setInt(3, product_idx);	
+				insertCount = pstmt2.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - InsertLike()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt2);
+				JdbcUtil.close(pstmt1);
+			}
+			return insertCount;
+		}
+
+		
+		// 상품별 좋아요 수 누적
+		public int updateWishCount(int product_idx) {
+			int wishCount = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			try {
+			String sql="UPDATE product p INNER JOIN wish w "
+					+ "ON p.product_idx = w.product_idx "
+					+ "SET p.product_wishcount = p.product_wishcount + 1 "
+					+ "WHERE p.product_idx = ?";
+			
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1,product_idx );
+				wishCount = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - updateWishCount()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(pstmt);
+			}
+			
+			return wishCount;
+		}
+		
+		
 		
 		public boolean isDeleteList(int product_idx) {
 			int isDeletePro = 0;
@@ -858,6 +929,32 @@ private ProductDAO() {}
 			return bean;
 		}
 		
-	
+<<<<<<< HEAD
+=======
+		public boolean isDeleteOrder(int order_idx) {
+			int isDeleteOrderList = 0;
+			boolean isDeleteSuccess = false;
+			PreparedStatement pstmt =null;
+			String sql ="DELETE FROM orderlist WHERE order_idx=?"; 
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, order_idx);
+				isDeleteOrderList =pstmt.executeUpdate();
+				
+				if(isDeleteOrderList >0) {
+					isDeleteSuccess = true;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			}
+			return isDeleteSuccess;
+			
+		}
+		
+
+>>>>>>> main
 	
 }//DAO 끝
