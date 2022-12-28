@@ -25,7 +25,7 @@ public class ProductListService {
 	}
 
 	// 메인 - 베스트 상품 목록 조회
-	public List<ProductBean> getProdoctBestList() {
+	public List<ProductBean> getProductBestList() {
 		List<ProductBean> productBestList = null;
 		
 		Connection con = JdbcUtil.getConnection();
@@ -98,6 +98,20 @@ public class ProductListService {
 		productSearchList = dao.selectKeywordProductList(keyword);
 		
 		return productSearchList;
+	}
+
+	public List<ProductBean> getProductWish() {
+		List<ProductBean> productWish = null;
+		
+		Connection con = JdbcUtil.getConnection();
+		
+		ProductDAO dao = ProductDAO.getInstance();
+		
+		dao.setConnection(con);
+		
+		productWish = dao.selectProductWish();
+		
+		return productWish;
 	}
 
 }

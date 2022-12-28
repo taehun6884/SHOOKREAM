@@ -56,9 +56,15 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 
 <script src="../jquery/jquery-3.6.3.js"></script>
 <script type="text/javascript">
-for(var i = 0; i < ${fn:length(productBestList)}; i++){
+// for(var i = 0; i < ${fn:length(productBestList)}; i++){
 $(function() {
-	$("#btnLike").on("click", function(i) {
+	$("#btnLike").on("click", function() {
+		
+		if(${sessionScope.sId eq null}){
+			alert("로그인 후 이용 가능합니다.");
+			location.href="LoginMember.me";
+		}
+		
 		$.ajax({
 			type: "post", // AJAX 로 요청 시 HTTP 요청 방식(GET or POST) 지정
 			url: "LikeInsertPro.ca", // AJAX 로 요청할 요청 주소(URL)
@@ -70,14 +76,15 @@ $(function() {
 			async:false,
 			success: function(data) { 
 					$("#btnLikeImage").attr("src", "images/after_heart.png");
+					alert("찜한 상품에 추가되었습니다!");
 			}, 
 			error: function(xhr, textStatus, errorThrown) {
 				alert("찜하기 실패"); 
 			}
 		});
 	});
-})(i);
-}
+});
+// }
 </script>
 </head>
 <body class="w3-content" style="max-width: 1200px">
@@ -143,7 +150,6 @@ $(function() {
 								</div>
 								<button id="btnLike">
 									<img alt="" src="images/before_heart.png" id="btnLikeImage" />
-<!-- 									<i class="fa-regular fa-heart" id="btnLikeImage"></i> -->
 								</button>
 								<input type="hidden" id="product_idx"
 									value="${productBestList.product_idx }">

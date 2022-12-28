@@ -926,6 +926,40 @@ private ProductDAO() {}
 			
 			return bean;
 		}
+
+
+		public List<ProductBean> selectProductWish() {
+			ArrayList<ProductBean> productWish = null;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT w.member_idx, p.product_wishcount "
+						+ "FROM shookream.product p join shookream.wish w "
+						+ "on p.product_idx = w.product_idx";
+				
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				productWish = new ArrayList<ProductBean>();
+				
+				while(rs.next()) {
+					ProductBean product = new ProductBean();
+					
+					
+					productWish.add(product);
+//					System.out.println(productWish);
+				}
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - selectKeywordProductList()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			return productWish;
+		}
 		
 	
 }//DAO 끝
