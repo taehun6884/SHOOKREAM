@@ -74,7 +74,8 @@ private ProductDAO() {}
 			pstmt2.setString(11, product.getProduct_detail_exp()); //상세 설명
 			pstmt2.setString(12, product.getProduct_color()); //색상
 			pstmt2.setDouble(13, product.getProduct_discount_price()); //할인율
-			pstmt2.setInt(14, 0); //좋아요 개수
+
+			pstmt2.setInt(14, 0); //상품 좋아요 수 누적
 			
 			insertCount = pstmt2.executeUpdate();
 			
@@ -643,7 +644,7 @@ private ProductDAO() {}
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date "
+			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date,o.order_idx "
 					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx "
 					+ "where m.member_idx=? "
@@ -664,6 +665,7 @@ private ProductDAO() {}
 					vo.setOrder_category(rs.getString("order_category"));
 					vo.setOrder_progress(rs.getString("order_progress"));
 					vo.setOrder_date(rs.getTimestamp("order_date"));
+					vo.setOrder_idx(rs.getInt("order_idx"));
 					orderlist.add(vo);
 				}
 			} catch (SQLException e) {
@@ -791,6 +793,97 @@ private ProductDAO() {}
 			
 			return deleteCount;
 		}
+
+		
+		// 좋아요(찜하기) 버튼 클릭
+		public int InsertLike(int member_idx, int product_idx) {
+			int insertCount = 0;
+			
+			PreparedStatement pstmt1 = null, pstmt2 = null;
+			ResultSet rs = null;
+			
+			try {
+				// wish_idx 증가
+				String sql = "SELECT MAX(wish_idx) FROM wish";
+				int wish_idx = 1;
+				pstmt1 = con.prepareStatement(sql);
+				rs = pstmt1.executeQuery();
+				
+				if(rs.next()) { 
+					wish_idx = rs.getInt(1) + 1;
+				}
+				System.out.println("wish_idx : " + wish_idx);
+				
+				// ----------------------------------------------
+				
+				// 찜하기 추가
+				sql = "INSERT INTO wish VALUES(?,?,?)";	
+				pstmt2 = con.prepareStatement(sql);
+				pstmt2.setInt(1, wish_idx);
+				pstmt2.setInt(2, member_idx);	
+				pstmt2.setInt(3, product_idx);	
+				insertCount = pstmt2.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - InsertLike()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt2);
+				JdbcUtil.close(pstmt1);
+			}
+			return insertCount;
+		}
+
+		
+		// 상품별 좋아요 수 누적
+		public int updateWishCount(int product_idx) {
+			int wishCount = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			try {
+			String sql="UPDATE product p INNER JOIN wish w "
+					+ "ON p.product_idx = w.product_idx "
+					+ "SET p.product_wishcount = p.product_wishcount + 1 "
+					+ "WHERE p.product_idx = ?";
+			
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1,product_idx );
+				wishCount = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - updateWishCount()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(pstmt);
+			}
+			
+			return wishCount;
+		}
+		
+		
+		
+		public boolean isDeleteList(int product_idx) {
+			int isDeletePro = 0;
+			boolean isDeleteProduct = false;
+			PreparedStatement pstmt = null;
+			
+			String sql = "DELETE FROM product WHERE product_idx=?";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, product_idx);
+				deleteCount = pstmt.executeUpdate();
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			}
+			
+			return deleteCount;
+		}
 		//-------------------------상품수정 쿼리-------------------------------
 		public int updateProduct(int idx, ProductBean product) {
 			int updateProduct = 0;
@@ -883,6 +976,7 @@ private ProductDAO() {}
 			//--------------------이미지 이름 가져오기 작업--------------
 			try {
 				String sql = "SELECT image_main_file, image_real_file1, image_real_file2  FROM image WHERE product_idx = ?";
+
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, product_idx);
 				rs = pstmt.executeQuery();
@@ -893,6 +987,7 @@ private ProductDAO() {}
 					image.setImage_main_file(rs.getString("image_main_file")); //메인 이미지 가져오기
 					image.setImage_real_file1(rs.getString("image_real_file1")); //상세 이미지1 가져오기
 					image.setImage_real_file2(rs.getString("image_real_file2")); //상세 이미지2 가져오기
+
 				}
 			} catch (SQLException e) {
 				System.out.println("SQL 구문 오류 - selectImage");
@@ -901,6 +996,7 @@ private ProductDAO() {}
 			return image;
 		}
 		
+
 		public boolean isDeleteOrder(int order_idx) {
 			int isDeleteOrderList = 0;
 			boolean isDeleteSuccess = false;
@@ -924,6 +1020,7 @@ private ProductDAO() {}
 			
 		}
 		
+
 
 	
 }//DAO 끝
