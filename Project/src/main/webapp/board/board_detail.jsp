@@ -12,8 +12,9 @@ pageContext.setAttribute("cn", "\n");
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Notice</title>
+		<title>SHOOKREAM</title>
 		<meta charset="UTF-8">
+		<script src="../images"></script>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -29,6 +30,17 @@ pageContext.setAttribute("cn", "\n");
 		<style type="text/css">
 		#logintvar{
 			float: right;
+		}
+		
+		.reviewListArea {
+			
+		}
+		
+		table { 
+			border: solid 1px;
+			width : 800px;
+			height: 150px; 
+		}
 		</style>
 		
 	</head>
@@ -63,10 +75,27 @@ pageContext.setAttribute("cn", "\n");
 			<hr>
 			${fn:replace(board.notice_content, cn, br) }			
 		</footer> 
+		<hr>		
+		<div class="reviewListArea">
+			<h3>Review</h3>
+			<div class="reviewContent">
+				<div>
+					<table class="reviewContent">
+						<tr>
+							<td rowspan="2" width="30%">리뷰사진<img src="../images/kakao_small.jpg"/>${review.review_img }</td>
+							<td width="60%">주문 내용${review.order_detail }</td> <%-- 주문 상세내용 : 사이즈 색상 --%>
+							<td width="10%">작성 멤버${review.member_idx }<br>작성일자${review.review_data }</td> <%-- 리뷰 작성하는 멤버 --%>
+						</tr>
+						<tr>
+							<td rowspan="2">리뷰 내용${review.review_content }</td>
+						</tr>
+					</table>
+				</div>
+			</div>	
+		</div> 
 		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
 	
 	  <!-- End page content -->
 	</div>
-		 
 	</body>
 </html>	
