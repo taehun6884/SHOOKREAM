@@ -1085,37 +1085,34 @@ private ProductDAO() {}
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql="SELECT i.image_main_file,m.member_id,p.product_price,p.product_name,p.product_brand,p.product_size,p.product_color "
-					+ "from shookream.wish w join shookream.product p join shookream.member m join shookream.image i "
-					+ "on w.product_idx = p.product_idx and w.member_idx = m.member_idx and w.product_idx = i.product_idx "
-					+ "where m.member_idx=? "
+			String sql="SELECT w.wish_idx, i.image_main_file,m.member_id,p.product_price,p.product_name,"
+					+ "p.product_brand,p.product_size,p.product_color "
+					+ "FROM shookream.wish w JOIN shookream.product p JOIN shookream.member m JOIN shookream.image i "
+					+ "ON w.product_idx = p.product_idx AND w.member_idx = m.member_idx AND w.product_idx = i.product_idx "
+					+ "WHERE m.member_idx=? "
 					+ "LIMIT ?,?";
 			
-			 String sql ="SELECT c.cart_idx,p.product_name, p.product_size, p.product_price,p.product_brand,i.image_main_file,m.member_id "
-				 		+ "FROM shookream.cart c join shookream.product p join shookream.image i join shookream.member m "
-				 		+ "on c.product_idx = p.product_idx and c.product_idx = i.product_idx and c.member_idx = m.member_idx "
-				 		+ "where m.member_idx=? "
-				 		+ "LIMIT ?,?";
 			try {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1,member_idx );
 				pstmt.setInt(2, startRow);
 				pstmt.setInt(3, listLimit);
 				rs = pstmt.executeQuery();
+				
 				wishlist = new ArrayList<ProductBean>();
 				while(rs.next()) {
 					ProductBean vo = new ProductBean();
-					vo.setOrder_main_image(rs.getString("image_main_file"));
-					vo.setOrder_member_id(rs.getString("member_id"));
-					vo.setOrder_product_price(rs.getInt("product_price"));
-					vo.setOrder_category(rs.getString("order_category"));
-					vo.setOrder_progress(rs.getString("order_progress"));
-					vo.setOrder_date(rs.getTimestamp("order_date"));
-					vo.setOrder_idx(rs.getInt("order_idx"));
+					vo.setWish_idx(rs.getInt("wish_idx"));
+					vo.setProduct_name(rs.getString("product_name"));
+					vo.setProduct_size(rs.getNString("product_size"));
+					vo.setProduct_price(rs.getInt("product_price"));
+					vo.setProduct_brand(rs.getNString("product_brand"));
+					vo.setProduct_color(rs.getNString("product_color"));
+					vo.setProduct_img(rs.getString("image_main_file"));
 					wishlist.add(vo);
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				System.out.println("SQL 구문 오류 - getWishList()");
 				e.printStackTrace();
 			}finally {
 				JdbcUtil.close(rs);
@@ -1123,6 +1120,36 @@ private ProductDAO() {}
 			}
 			
 			return wishlist;
+		}
+
+
+		public int selectWishListCount(int member_idx) {
+			int listCount = 0;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT COUNT(wish_idx) "
+									+ "FROM wish "
+									+ "WHERE member_idx = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, member_idx);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					listCount = rs.getInt(1);
+				}
+				
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류! - selectWishListCount()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return listCount;
 		}
 		
 

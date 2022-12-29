@@ -15,9 +15,9 @@ public class LikeListProAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
-		List<ProductBean> wishlist = null;
 		
 		int member_idx = Integer.parseInt(request.getParameter("member_idx"));
+		System.out.println("member_idx: " +  member_idx);
 		
 		int listLimit = 10; 
 		int pageNum = 1; 
@@ -30,11 +30,12 @@ public class LikeListProAction implements Action {
 
 			CartListProService service = new CartListProService();
 			List<ProductBean> wishlist = service.getWishlist(member_idx,startRow,listLimit);
+			System.out.println("wishlist 왜 : " + wishlist);
 			// 페이징 처리
 			// 한 페이지에서 표시할 페이지 목록(번호) 갯수 계산
 			// 1. BoardListService - selectBoardListCount() 메서드를 호출하여 전체 게시물 수 조회(페이지 목록 계산에 사용)
 			// => 파라미터 : 검색어   리턴타입 : int(listCount)
-			int listCount = service.getCartListCount(member_idx);
+			int listCount = service.getWishListCount(member_idx);
 			//	System.out.println("총 게시물 수 : " + listCount);
 			
 			// 2. 한 페이지에서 표시할 페이지 목록 갯수 설정
@@ -63,7 +64,7 @@ public class LikeListProAction implements Action {
 		request.setAttribute("wishlist", wishlist);
 		
 		forward = new ActionForward();
-		forward.setPath("product/Product_cart.jsp");
+		forward.setPath("product/Product_wishlist.jsp");
 		forward.setRedirect(false);
 		
 		return forward;

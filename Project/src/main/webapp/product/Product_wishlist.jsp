@@ -100,15 +100,15 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   </thead>
   <tbody>
     
-    <c:forEach var="cart" items="${cartlist }">
+    <c:forEach var="wish" items="${wishlist }">
     <tr>
-      <th scope="row">${cart.cart_idx }</th>
-      <td><img src="upload/${cart.product_img }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
-      <td>${cart.product_name }</td>
-      <td>${cart.product_brand }</td>
-      <td>${cart.product_price }</td>
-      <td>${cart.product_size }</td>
-      <td><button type="button" class="btn btn-dark" onclick="location.href='CartDeletePro.ca?cart_idx=${cart.cart_idx }'">삭제</button></td>
+      <th scope="row">${wish.wish_idx }</th>
+      <td><img src="upload/${wish.product_img }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
+      <td>${wish.product_name }</td>
+      <td>${wish.product_brand }</td>
+      <td>${wish.product_price }</td>
+      <td>${wish.product_size }</td>
+      <td><button type="button" class="btn btn-dark" onclick="location.href='CartDeletePro.ca?cart_idx=${wish.wish_idx }'">삭제</button></td>
     </tr>
     </c:forEach>
   </tbody>
@@ -131,14 +131,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 					${i }
 				</c:when>
 				<c:otherwise>
-					<a href="CartList.ca?pageNum=${i }&member_idx=${member_idx }">${i }</a>
+					<a href="LikeList.ca?pageNum=${i }&member_idx=${member_idx }">${i }</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		
 		<c:choose>
 			<c:when test="${param.pageNum < pageInfo.maxPage}">
-				<a href="CartList.ca?pageNum=${param.pageNum + 1 }&member_idx=${member_idx }">다음</a>
+				<a href="LikeList.ca?pageNum=${param.pageNum + 1 }&member_idx=${member_idx }">다음</a>
 			</c:when>
 			<c:otherwise>
 				<a href="javascript:void(0)">다음</a>

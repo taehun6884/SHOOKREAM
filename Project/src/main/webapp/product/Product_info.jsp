@@ -111,6 +111,7 @@ $(function() {
 				dataType: "html", 
 				success: function(data) { 
 						$("#btnWishBeforImage").attr("src", "images/after_heart.png");
+						$('#wishLoad').load(location.href+' #wishLoad')
 						alert("찜한 상품에 추가되었습니다!");
 				}, 
 				error: function(xhr, textStatus, errorThrown) {
@@ -136,6 +137,7 @@ $(function() {
 				success: function(data) { 
 						$("#btnWishAfterImage").attr("src", "images/before_heart.png");
 						alert("찜한 상품에서 삭제했습니다!");
+						$('#wishLoad').load(location.href+' #wishLoad')
 				}, 
 				error: function(xhr, textStatus, errorThrown) {
 					alert("찜 삭제 실패"); 
@@ -221,7 +223,8 @@ $(function() {
 			</select>
 			<hr>
 			<input type="hidden" id="product_idx" value="${product.product_idx }">
-
+	
+		<span id="wishLoad">
 			<c:choose>
 				<c:when test="${wish.product_idx eq product.product_idx }">
 					<button id="btnAfterWish" >
@@ -234,7 +237,8 @@ $(function() {
 					</button>
 				</c:otherwise>
 			</c:choose>
-			
+		</span>	
+		
 			<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${param.member_idx}'">
 			<button onclick="iamport()">구매하기</button>
 		</div>

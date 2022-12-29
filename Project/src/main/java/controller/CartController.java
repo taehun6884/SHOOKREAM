@@ -51,18 +51,16 @@ public class CartController extends HttpServlet{
 		//-----------------------------------------------
 		//찜목록
 		
-		if(command.equals("/LikeList.ca")) {
-			
+		if(command.equals("/LikeList.ca")) { // 찜 목록
+			action = new LikeListProAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/LikeInsertPro.ca")) { // 찜하기 누름
 			action = new LikeInsertProAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/LikeDeletePro.ca")) { //찜하기 취소
 			action = new LikeDeleteProAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/LikeList.ca")) { // 찜 목록
-			action = new LikeListProAction();
-			forward = action.execute(request, response);
-		}	
+		}
 		
 		
 		
