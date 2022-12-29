@@ -65,8 +65,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         	String id = request.getParameter("id");
         	MemberBean member = new MemberBean();
         	member.setMember_id(id);
-        	MemberDAO dao = new MemberDAO();
-        	dao.findID(member);
+        	
         %>
         <h5>회원님의 아이디는</h5>
         <%=member.getMember_id() %>

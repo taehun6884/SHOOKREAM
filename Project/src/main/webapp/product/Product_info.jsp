@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>W3.CSS Template</title>
+<title>${product.product_name }</title>
 <meta charset="UTF-8">
 <!-- 네이버 아이디 로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
@@ -21,8 +21,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
 <style type="text/css">
 #sform { 
-		  border:1px solid red;
-          display: inline-block;
+		  border:1px;
+		  display: inline-block;
           text-align: center;
           margin-left: 270PX;
           
@@ -37,14 +37,32 @@ float: left;
 align-content: center;
 }
 
-#detail{border:1px solid blue;
+#detail{border:1px;
 font-family: "Montserrat", sans-serif;
 font-size:15px;
 float: right;
-margin-top: 100px;
 margin-left: 20px;
 text-align: left;
-}      
+}   
+.prod_name{
+font-size: 30px;
+font-weight: 900px;
+
+}
+.prod_title{
+font-size: 15px;
+font-weight: bold;
+
+}    
+
+#detail_table{
+border:1px;
+display: inline-block;
+text-align: center;
+margin-left: 270PX;
+}
+
+
 </style>
 
 <style type="text/css">
@@ -54,16 +72,7 @@ text-align: left;
 
 </style>
 
-<style>
-#button {
-display:inline‑block;
-    height:10px;
-    width:10px;
-    border‑radius:10px;
-    background‑color: ;
-}
 
-</style>
 
 </head>
 <body class="w3-content" style="max-width:1200px">
@@ -93,53 +102,75 @@ display:inline‑block;
 	
 
 <!-- 제품 상세 페이지 -->
-  <div class="w3-padding-64 w3-light-grey w3-small w3-center" id="div">
+  <!-- 섬네일 이미지 -->
   <div id = "sform">
-	<h3><b>상품 상세 정보</b></h3>
 	<section id="image">
 		<p>
 		<div class="title" align="left">
-			<h4>${product.product_brand}</h4>
-			<img alt="shoes" src="images/캡처10.PNG">
+			<img alt="shoes" src="./upload/${image.image_main_file}" width="450px" height="650px">
 		</div>
 	</section>
+	<!-- 상품 사진 옆 -->
 	<section id="detail" >
 		<div class="text" > 
-			<p>상품명 : ${product.product_name }</p>
+			<p>${product.product_brand}</p>
+			<p class ="prod_name">${product.product_name }</p>
+			<p>상품번호 : ${product.product_idx }</p>			
 		</div>
 		<div id="detail1">
-			<p>상품번호 : ${product.product_idx }</p>
-			<p>가격 : ${product.product_price }</p>
-			<p>판매수 : ${product.product_sell_count } </p>
-			<p>좋아요 </p>
-			<p>구매후기(별점) </p>
-			<input type="button" id ="button1" class = "button" value="black">
-			<input type="button" id ="button2" class = "button" value="white">
-			<input type="button" id ="button3" class = "button" value="blue">
-			<input type="button" id ="button4" class = "button" value="yellow">
-			
+			<p class="prod_title">가격</p>
+			<p>${product.product_price }</p>
+			<hr>
+			<p class="prod_title">판매수</p>
+			<p>${product.product_sell_count }</p>
+			<hr>
+			<p class="prod_title">좋아요 </p>
+			<hr>
+			<p class="prod_title">구매후기(별점) </p>
+			<hr>
+			<p class="prod_title">색상</p>
+			<input type="button" value="black">
+			<input type="button" value="white">
+			<input type="button" value="blue">
+			<input type="button" value="yellow">
+			<hr>
+
 		</div>
-		
 		<div id="detail2" >
+			<p>사이즈</p>
 			<select>
 				<option selected>사이즈</option>
 				<option>220</option>
 				<option>230</option>
 				<option>240</option>
 				<option>250</option>
-				<option>260</option>
+				<option>260</option>	
 				<option>270</option>
 				<option>280</option>
 				<option>290</option>
-			</select><br>
+			</select>
+			<hr>
+
 			<input type="button" value="좋아요">
-			<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${param.member_idx }'">
+			<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${param.member_idx}'">
 			<button onclick="iamport()">구매하기</button>
 		</div>
 	</section>
   </div>
-  </div>
-  
+  <Br>
+  <br>
+  <br>
+ 	
+  <table id="detail_table">
+		<tr>
+			<td><img alt="shoes" src="./upload/${image.image_real_file1}" width="450px"></td>
+		</tr>	
+		
+		<tr>
+			<td><img alt="shoes" src="./upload/${image.image_real_file2}" width="450px"></td>
+		</tr>
+		
+	</table>
     <!-- 
 <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
    -->
@@ -293,15 +324,18 @@ function iamport(){
 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
 		        msg += '결제 금액 : ' + rsp.paid_amount;
 		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		        location.href="ProductOrderPro.po?order_category=주문완료&order_progress=배송완료&member_idx=${member_idx}&product_idx=${product.product_idx}&product_amount=${product.product_amount}&product_sell_count=${product.product_sell_count} ";
 		    } else {
 		    	 var msg = '결제에 실패하였습니다.';
 		         msg += '에러내용 : ' + rsp.error_msg;
+		         window.history.back();
 		    }
 		    alert(msg);
-		    location.href="ProductOrderPro.po?order_category=주문완료&order_progress=배송완료&member_idx=${member_idx}&product_idx=${product.product_idx}&product_amount=${product.product_amount}&product_sell_count=${product.product_sell_count} ";
+		    
 		});
 	}
 </script>
+
 <script type="text/javascript">
 document.getElementById("button1").style.backgroundColor ="";
 document.getElementById("button2").style.backgroundColor ="";
