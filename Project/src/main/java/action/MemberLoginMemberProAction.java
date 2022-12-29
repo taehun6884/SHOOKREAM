@@ -16,6 +16,7 @@ import svc.LoginMemberService;
 import svc.ModifyMemberService;
 import vo.ActionForward;
 import vo.MemberBean;
+import vo.WishBean;
 
 public class MemberLoginMemberProAction implements Action {
 
@@ -35,6 +36,9 @@ public class MemberLoginMemberProAction implements Action {
 		MemberBean vo = service2.getMemberInfo(id);
 //		System.out.println(vo);
 		
+
+		
+		
 		if(isLogintUser == false ) {
 			response.setContentType("text/html; charset=UTF-8");
 			
@@ -44,6 +48,7 @@ public class MemberLoginMemberProAction implements Action {
 				out.println("alert('로그인 실패!')");
 				out.println("history.back()");
 				out.println("</script>");
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -51,6 +56,10 @@ public class MemberLoginMemberProAction implements Action {
 			HttpSession session = request.getSession();
 			session.setAttribute("sId", id);
 			session.setAttribute("member_idx", vo.getMember_idx());
+			
+//				if(wish != null) {
+//					session.setAttribute("wish", wish);
+//				}
 			
 			forward = new ActionForward();
 			forward.setPath("./");
