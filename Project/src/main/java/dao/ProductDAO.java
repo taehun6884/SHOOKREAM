@@ -249,7 +249,7 @@ private ProductDAO() {}
 			 PreparedStatement pstmt =  null;
 			 ResultSet rs = null;
 				
-			 String sql ="SELECT c.cart_idx,p.product_name, p.product_size, p.product_price,p.product_brand,i.image_main_file,m.member_id "
+			 String sql ="SELECT c.cart_idx,p.product_name, p.product_size, p.product_price,p.product_brand,i.image_main_file,m.member_id,p.product_idx "
 			 		+ "FROM shookream.cart c join shookream.product p join shookream.image i join shookream.member m "
 			 		+ "on c.product_idx = p.product_idx and c.product_idx = i.product_idx and c.member_idx = m.member_idx "
 			 		+ "where m.member_idx=? "
@@ -270,6 +270,7 @@ private ProductDAO() {}
 					vo.setProduct_price(rs.getInt("product_price"));
 					vo.setProduct_brand(rs.getNString("product_brand"));
 					vo.setProduct_img(rs.getString("image_main_file"));
+					vo.setProduct_idx(rs.getInt("product_idx"));
 					cartlist.add(vo);
 				}
 			 } catch (SQLException e) {
@@ -314,6 +315,34 @@ private ProductDAO() {}
 			}
 			
 			return listCount;
+		}
+		
+		//장바구니 총 금액
+		public int totalPrice(int member_idx) {
+			int total = 0;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = "SELECT sum(p.product_price) "
+					+ "FROM shookream.cart c join shookream.product p join shookream.member m "
+					+ "on c.product_idx = p.product_idx and c.member_idx = m.member_idx "
+					+ "where p.product_idx is not null and m.member_idx = ?";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, member_idx);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					total = rs.getInt(1);
+				}
+				System.out.println(total);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			return total;
 		}
 
 		// 메인 - 메인화면 베스트 상품 목록 조회
@@ -983,6 +1012,8 @@ private ProductDAO() {}
 			return isDeleteSuccess;
 			
 		}
+
+		
 		
 
 

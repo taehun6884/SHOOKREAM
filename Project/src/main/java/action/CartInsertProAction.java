@@ -49,7 +49,7 @@ public class CartInsertProAction implements Action {
 			}
 			
 			forward = new ActionForward();
-			forward.setPath("./CartList.ca?member_idx="+member_idx);
+			forward.setPath("./CartList.ca?member_idx="+member_idx+"&product_idx="+product_idx);
 			forward.setRedirect(true);
 		}
 		

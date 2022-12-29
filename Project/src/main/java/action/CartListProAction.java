@@ -18,7 +18,6 @@ public class CartListProAction implements Action{
 		List<ProductBean> cartList = null;
 		
 		int member_idx = Integer.parseInt(request.getParameter("member_idx"));
-		
 		// 페이징 처리를 위한 변수 선언
 		int listLimit = 10; // 한 페이지에서 표시할 게시물 목록을 10개로 제한
 		int pageNum = 1; // 현재 페이지 번호 설정(pageNum 파라미터 사용)
@@ -34,6 +33,9 @@ public class CartListProAction implements Action{
 
 			CartListProService service = new CartListProService();
 			List<ProductBean> cartlist = service.getCartlist(member_idx,startRow,listLimit);
+			int total = service.CartTotalPrice(member_idx);
+			
+//			int total = service.CartTotalPrice(member_idx, product_idx);
 			// 페이징 처리
 			// 한 페이지에서 표시할 페이지 목록(번호) 갯수 계산
 			// 1. BoardListService - selectBoardListCount() 메서드를 호출하여 전체 게시물 수 조회(페이지 목록 계산에 사용)
@@ -65,7 +67,8 @@ public class CartListProAction implements Action{
 		request.setAttribute("pageInfo", pageInfo);
 		System.out.println(pageInfo);
 		request.setAttribute("cartlist", cartlist);
-		
+		System.out.println(cartlist);
+		request.setAttribute("total", total);
 		forward = new ActionForward();
 		forward.setPath("product/Product_cart.jsp");
 		forward.setRedirect(false);
