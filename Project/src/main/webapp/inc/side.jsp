@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script>
+	$(function() {
+		$("#customerBtn").click(function(){
+			$("#cusList").toggle();	
+		});
+	});
+</script>
 <nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
   <div class="w3-container w3-display-container w3-padding-16">
     <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
@@ -30,7 +37,12 @@
       <a href="BrandCG.MAIN?cg=아디다스" class="w3-bar-item w3-button">아디다스 &nbsp;<i class="fa fa-caret-right w3-margin-right"></i></a>
       <a href="BrandCG.MAIN?cg=슈펜" class="w3-bar-item w3-button">슈펜 &nbsp;<i class="fa fa-caret-right w3-margin-right"></i></a>
     </div>
-
+    <hr>
+    <a class="w3-button w3-block w3-white w3-left-align" id="customerBtn">
+      고객센터 <i class="fa fa-caret-down"></i>
+    </a>
+   	<a href="BoardList.bo" class="w3-button w3-block w3-white w3-left-align">공지사항</a>
+   	<a href="FAQList.bo" class="w3-button w3-block w3-white w3-left-align">자주묻는 질문</a>
   </div>
   
 </nav>
