@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
-
+import action.FindMemberIdProAction;
 import action.MemberJoinProAction;
 import action.MemberListAction;
 import action.MemberDeleteMemberProAction;
@@ -81,6 +81,17 @@ public class MemberController extends HttpServlet{
 //			action = new MemberIdCheckProAction();
 //			forward = action.execute(request, response);
 			action = new MemberIdCheckProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/FindMemberIdForm.me")) { // 아이디 찾기
+			forward = new ActionForward(); 
+			forward.setPath("member/findIDForm.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/FindMemberIdResult.me")) { // 아이디 찾기 결과
+			forward = new ActionForward(); 
+			forward.setPath("member/findID_result.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/FindIdFormAction.me")) { // 아이디 찾기 pro
+			action = new FindMemberIdProAction();
 			forward = action.execute(request, response);
 		}
 			

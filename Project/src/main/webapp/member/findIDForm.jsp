@@ -59,7 +59,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
     <div id = "sform">
         <h4>아이디 / 비밀번호 찾기</h4>
-        <form method="post" action="findID_result.jsp">
+        <form method="post" action="./FindIdFormAction.me">
         <p align="center"><a href="MemberLoginForm.jsp">[돌아가기]</a></p>
           <table class=table>
 				<tr>
@@ -72,7 +72,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="submit" value="아이디찾기" class="w3-button w3-block w3-black" onclick="location.href='findID_result.jsp'">
+						<input type="submit" value="아이디찾기" class="w3-button w3-block w3-black" >
 					</td>
 				</tr>
 				<tr>

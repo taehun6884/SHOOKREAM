@@ -60,15 +60,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
     <div id = "sform">
         <h3>아이디 찾기 결과</h3>
-        <%
-        	request.setCharacterEncoding("UTF-8");
-        	String id = request.getParameter("id");
-        	MemberBean member = new MemberBean();
-        	member.setMember_id(id);
-        	
-        %>
+        
         <h5>회원님의 아이디는</h5>
-        <%=member.getMember_id() %>
+        <b>${member }</b>
         <h5>입니다.</h5>
 		<button type="button" class="btn btn-secondary" onclick="location.href='LoginMember.me'">로그인</button>
 		<button type="button" class="btn btn-secondary" onclick="location.href=''">비밀번호 찾기</button>

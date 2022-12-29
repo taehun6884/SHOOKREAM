@@ -928,9 +928,7 @@ private ProductDAO() {}
 			
 			return bean;
 		}
-		
-<<<<<<< HEAD
-=======
+
 		public boolean isDeleteOrder(int order_idx) {
 			int isDeleteOrderList = 0;
 			boolean isDeleteSuccess = false;
@@ -955,6 +953,5 @@ private ProductDAO() {}
 		}
 		
 
->>>>>>> main
 	
 }//DAO 끝
