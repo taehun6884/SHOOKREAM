@@ -26,7 +26,7 @@ public class ProductModifyFormAction implements Action {
 		request.setAttribute("image", image);
 		
 		forward = new ActionForward();
-		forward.setPath("admin/ProductModifyForm.jsp");
+		forward.setPath("admin/admin_Product_ModifyForm.jsp");
 		forward.setRedirect(false);
 		
 		

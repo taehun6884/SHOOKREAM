@@ -43,8 +43,7 @@
                 	 
           
             <!-- 상품 등록 폼 -->
-			<form action="ProductInsertPro.po" method="post"
-				enctype="multipart/form-data">
+			<form action="ProductModifyPro.po?product_idx=${product.product_idx}" method="post" enctype="multipart/form-data">
 				<table class="table">
 
 					<tr>
@@ -129,20 +128,20 @@
 
 					<tr>
 						<td width="100px" align="left">메인 이미지</td>
-						<td><input type="file" name="file" >기존 메인 파일: <input type="text" value="${image.image_main_file }" width="100"></td>
+						<td><input type="file" name="file" >기존 메인 파일: <input type="text" value="${image.image_main_file }" width="100" name ="origin_file" readonly></td>
 					</tr>
 					<tr>
 						<td width="100px" align="left">제품 이미지1</td>
-						<td><input type="file" name="file2" > 기존 제품1이미지:${image.image_real_file1 }</td>
+						<td><input type="file" name="file2" >기존 제품 이미지1: <input type="text" value="${image.image_real_file1 }" width="100" name ="origin_file2" readonly></td>
 					</tr>
 					<tr>
 						<td width="100px" align="left">제품 이미지2</td>
-						<td><input type="file" name="file3"> 기존 제품2이미지:${image.image_real_file2 }</td>
+						<td><input type="file" name="file3"> 기존 제품 이미지2: <input type="text" value="${image.image_real_file2 }" width="100" name ="origin_file3" readonly></td>
 					</tr>
 
 					<tr>
 						<td colspan="2"><button type="submit"
-								class="w3-button w3-block w3-black" onclick="location.href ='ProductModifyPro.po?product_idx=${product.product_idx}'">수정하기</button></td>
+								class="w3-button w3-block w3-black">수정하기</button></td>
 					</tr>
 				</table>
 			</form>

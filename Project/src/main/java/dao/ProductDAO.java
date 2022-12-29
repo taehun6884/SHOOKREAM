@@ -58,7 +58,7 @@ private ProductDAO() {}
 			
 			//----------------상품 등록----------------------
 
-			sql = "INSERT INTO product VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
+			sql = "INSERT INTO product VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?)";
 			
 			pstmt2 = con.prepareStatement(sql);
 			pstmt2.setInt(1, idx); //idx
@@ -74,6 +74,7 @@ private ProductDAO() {}
 			pstmt2.setString(11, product.getProduct_detail_exp()); //상세 설명
 			pstmt2.setString(12, product.getProduct_color()); //색상
 			pstmt2.setDouble(13, product.getProduct_discount_price()); //할인율
+			pstmt2.setInt(14, 0); //좋아요 개수
 			
 			insertCount = pstmt2.executeUpdate();
 			
@@ -769,10 +770,9 @@ private ProductDAO() {}
 		
 			return isDeleteSuccess;
 		}
-		
-		public boolean isDeleteList(int product_idx) {
-			int isDeletePro = 0;
-			boolean isDeleteProduct = false;
+		//---------------상품 삭제(관리자)---------------
+		public int deleteProduct(int product_idx) {
+			int deleteCount = 0;
 			PreparedStatement pstmt = null;
 			
 			String sql = "DELETE FROM product WHERE product_idx=?";
@@ -780,32 +780,31 @@ private ProductDAO() {}
 			try {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, product_idx);
-				isDeletePro = pstmt.executeUpdate();
+				deleteCount = pstmt.executeUpdate();
 				
-				if(isDeletePro > 0) {
-					isDeleteProduct =true;
-				}
+				
 			} catch (SQLException e) {
-				
 				e.printStackTrace();
 			}finally {
 				JdbcUtil.close(pstmt);
 			}
 			
-			return isDeleteProduct;
+			return deleteCount;
 		}
 		//-------------------------상품수정 쿼리-------------------------------
-		public int updateProduct(ProductBean product) {
+		public int updateProduct(int idx, ProductBean product) {
 			int updateProduct = 0;
+//			int updateImage = 0;
 			
 			PreparedStatement pstmt =null;
 			
 			System.out.println(product);
 			
-			String sql ="UPDATE product "
-					+ "SET product_name=?,  product_brand=?,  product_price=?, product_size=? , product_amount=?, product_color=?,  product_exp=?,  product_detail_exp=?,  product_discount_price=? "
-					+ "WHERE product_idx =?";
 			try {
+				String sql ="UPDATE product "
+						+ "SET product_name=?,  product_brand=?,  product_price=?, product_size=? , product_amount=?, product_color=?,  product_exp=?,  product_detail_exp=?,  product_discount_price=? "
+						+ "WHERE product_idx =?";
+				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, product.getProduct_name());
 				pstmt.setString(2, product.getProduct_brand());
@@ -816,8 +815,22 @@ private ProductDAO() {}
 				pstmt.setString(7, product.getProduct_exp());
 				pstmt.setString(8, product.getProduct_detail_exp());
 				pstmt.setDouble(9, product.getProduct_discount_price());
-				pstmt.setInt(10, product.getProduct_idx());
+				pstmt.setInt(10, idx);
 				updateProduct = pstmt.executeUpdate();
+				
+//				if(updateProduct > 0) {
+//					//--------------이미지 테이블 업데이트 작업--------------------
+//					sql = "UPDATE image SET image_main_file =?, image_real_file1 =?, image_real_file2 =? WHERE product_idx = ?";
+//					
+//					pstmt2 = con.prepareStatement(sql);
+//					pstmt2.setString(1, image.getImage_main_file());
+//					pstmt2.setString(2, image.getImage_real_file1());
+//					pstmt2.setString(3, image.getImage_real_file2());
+//					pstmt2.setInt(4, idx);
+//					updateImage = pstmt2.executeUpdate();
+//					
+//				}
+				
 			} catch (SQLException e) {
 				System.out.println("sql 구문오류 - updateProduct");
 				e.printStackTrace();
