@@ -10,8 +10,14 @@
 <!--         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" /> -->
 <!--         <meta name="description" content="" /> -->
 <!--         <meta name="author" content="" /> -->
-        <title>관리자 페이지</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<title>관리자 페이지</title>
+
+<script>
+	function deleteMember(id) {
+		alert(id);
+	};
+</script>
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="admin/css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
@@ -80,9 +86,9 @@
 											<td>${member.member_date }</td>
 											<td>
 											<input type ="button" value ="수정" onclick="location.href='MemberModifyForm.me?id=${member.member_id}&pass=${member.member_pass }'">
-					  						<input type ="button" value ="삭제" onclick="location.href='MemberDeleteMemberProAction.me?id=${member.member_id}&pass=${member.member_pass }'">
+											<input type ="button" value ="탈퇴" onclick="deleteMember(${member.member_id})">
 					  						</td>
-					
+						
 										</tr> 
 										</c:forEach>  
                                     </tbody>
