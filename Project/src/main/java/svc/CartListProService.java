@@ -47,6 +47,21 @@ public class CartListProService {
 		return listCount;
 	}
 
+	public List<ProductBean> getWishlist(int member_idx, int startRow, int listLimit) {
+		List<ProductBean> wishlist = null;
+		Connection con = JdbcUtil.getConnection();
+		
+		ProductDAO dao = ProductDAO.getInstance();
+		
+		dao.setConnection(con);
+			
+		wishlist = dao.getWishList(member_idx,startRow,listLimit);
+		
+		JdbcUtil.close(con);
+		
+		return wishlist;
+	}
+
 	
 	
 	

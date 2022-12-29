@@ -2,10 +2,13 @@ package action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import svc.MemberIdCheckService;
 import svc.ProductInfoProService;
 import vo.ActionForward;
 import vo.ProductBean;
+import vo.WishBean;
 import vo.imageBean;
 
 public class ProductInfoProAction implements Action {
@@ -23,8 +26,26 @@ public class ProductInfoProAction implements Action {
 		
 		ProductInfoProService service = new ProductInfoProService();
 		ProductBean product = service.getProduct(product_idx);
-		System.out.println(product);
+//		System.out.println(product);
 		imageBean image = service.getImage(product_idx);
+		
+		
+		HttpSession session = request.getSession();
+//		int member_idx = Integer.parseInt(request.getParameter("member_idx"));
+		
+		String sId = (String)session.getAttribute("sId");
+		// session 에 저장된 id로 member_idx 조회
+		MemberIdCheckService service2 = new MemberIdCheckService();
+		int member_idx = service2.getMemberIdx(sId);
+		System.out.println("member_idx : " + member_idx);
+		
+		WishBean wish = service.getWishInfo(product_idx, member_idx);
+		
+		if(wish != null) {
+			request.setAttribute("wish", wish);
+		} else {
+			request.setAttribute("wish", null);
+		}
 		
 		request.setAttribute("product", product);
 		request.setAttribute("image", image);

@@ -60,22 +60,22 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 $(function() {
 	$("button[id^='btnLike']").on("click", function(e) {
 		
-		var loginCk = "${sessionScope.sId}";
+// 		var loginCk = "${sessionScope.sId}";
+		var loginCk = "<%=(String)session.getAttribute("sId")%>"
 		
-		if(loginCk == ""){
-			e.preventDefault();
+		if(loginCk == "null"){
 			alert("로그인 후 이용 가능합니다.");
 			location.href="LoginMember.me";
-		}
+		} 
 		
 		$.ajax({
-			type: "post", // AJAX 로 요청 시 HTTP 요청 방식(GET or POST) 지정
-			url: "LikeInsertPro.ca", // AJAX 로 요청할 요청 주소(URL)
-			data: { // 전송할 데이터(파라미터) 지정(일반 파라미터일 경우 중괄호로 묶음)
+			type: "post", 
+			url: "LikeInsertPro.ca", 
+			data: { 
 				member_idx: ${sessionScope.member_idx},
 				product_idx: $("input[id^='product_idx']").val()
 			},
-			dataType: "html", // 응답 데이터에 대한 타입 지정(일반 데이터는 text 이며 HTML 코드도 포함 가능, 자바스크립트 포함되면 html 사용)
+			dataType: "html", 
 			async:false,
 			success: function(data) { 
 					$("#btnLikeImage").attr("src", "images/after_heart.png");
@@ -85,6 +85,7 @@ $(function() {
 				alert("찜하기 실패"); 
 			}
 		});
+		
 	});
 });
 // }
@@ -132,15 +133,7 @@ $(function() {
 		<div class="w3-row w3-grayscale">
 			<div class="w3-col l3 s6">
 				<div class="w3-container">
-					<!--         <div class="w3-display-container"> -->
-					<%--           <img src="./upload/${productBestList[0].product_img }"  alt="..." style="width:100%"> --%>
-					<!--           <div class="w3-display-middle w3-display-hover"> -->
-					<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-					<!--           </div> -->
-					<!--         </div> -->
-					<%--         <p>${productBestList[0].product_brand }<br></p><!-- 1번째 그리드 --> --%>
-					<%--         <p>${productBestList[0].product_name }<br><b><fmt:formatNumber value="${productBestList[0].product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 --> --%>
-					<!--       </div> -->
+					
 
 					<c:forEach var="productBestList" items="${productBestList }">
 						<div class="w3-container">

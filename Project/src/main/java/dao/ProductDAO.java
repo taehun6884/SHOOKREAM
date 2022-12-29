@@ -12,6 +12,7 @@ import java.util.List;
 import db.JdbcUtil;
 import vo.OrderBean;
 import vo.ProductBean;
+import vo.WishBean;
 import vo.imageBean;
 
 public class ProductDAO {
@@ -826,7 +827,10 @@ private ProductDAO() {}
 			
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1,product_idx );
+				
 				wishCount = pstmt.executeUpdate();
+				
+//				System.out.println("wishCount : " + wishCount);
 				
 			} catch (SQLException e) {
 				System.out.println("SQL 구문 오류 - updateWishCount()");
@@ -982,6 +986,143 @@ private ProductDAO() {}
 			}
 			return isDeleteSuccess;
 			
+		}
+
+		// 찜한 상품 조회
+		public WishBean selectWish(int product_idx, int member_idx) {
+				WishBean wish = null;
+				
+				ResultSet rs  = null;
+				PreparedStatement pstmt = null;
+				
+				try {
+					String sql = "SELECT * FROM wish WHERE product_idx=? AND member_idx=?";
+					
+					pstmt = con.prepareStatement(sql);
+					pstmt.setInt(1, product_idx);
+					pstmt.setInt(2, member_idx);
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						wish = new WishBean();
+						wish.setMember_idx(rs.getInt("member_idx"));
+						wish.setWish_idx(rs.getInt("wish_idx"));
+						wish.setProduct_idx(rs.getInt("product_idx"));
+						
+						System.out.println(wish);
+					}
+				} catch (SQLException e) {
+					System.out.println("SQL 구문 오류 - selectWish()");
+					e.printStackTrace();
+				} finally {
+					JdbcUtil.close(rs);
+					JdbcUtil.close(pstmt);
+				}
+				
+				return wish;
+			}
+
+
+		// 찜하기 취소
+		public int deleteWish(int member_idx, int product_idx) {
+			int deleteCount = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			try {
+				String sql = "DELETE FROM wish WHERE member_idx=? AND product_idx=?";	
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, member_idx);	
+				pstmt.setInt(2, product_idx);	
+				deleteCount = pstmt.executeUpdate();
+				
+				System.out.println("deleteCount : " + deleteCount);
+				
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - deleteWish()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(pstmt);
+			}
+			return deleteCount;
+		}
+
+		
+		// 찜하기 취소 시 누적 수 감소
+		public int DecWishCount(int product_idx) {
+			int updateCount = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			try {
+			String sql="UPDATE product p INNER JOIN wish w "
+					+ "ON p.product_idx = w.product_idx "
+					+ "SET p.product_wishcount = p.product_wishcount - 1 "
+					+ "WHERE p.product_idx = ?";
+			
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1,product_idx );
+				
+				updateCount = pstmt.executeUpdate();
+				
+				System.out.println("updateCount : " + updateCount);
+				
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - DecWishCount()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(pstmt);
+			}
+			
+			return updateCount;
+		}
+
+
+		// 찜 목록 조회
+		public List<ProductBean> getWishList(int member_idx, int startRow, int listLimit) {
+			List<ProductBean> wishlist = null;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql="SELECT i.image_main_file,m.member_id,p.product_price,p.product_name,p.product_brand,p.product_size,p.product_color "
+					+ "from shookream.wish w join shookream.product p join shookream.member m join shookream.image i "
+					+ "on w.product_idx = p.product_idx and w.member_idx = m.member_idx and w.product_idx = i.product_idx "
+					+ "where m.member_idx=? "
+					+ "LIMIT ?,?";
+			
+			 String sql ="SELECT c.cart_idx,p.product_name, p.product_size, p.product_price,p.product_brand,i.image_main_file,m.member_id "
+				 		+ "FROM shookream.cart c join shookream.product p join shookream.image i join shookream.member m "
+				 		+ "on c.product_idx = p.product_idx and c.product_idx = i.product_idx and c.member_idx = m.member_idx "
+				 		+ "where m.member_idx=? "
+				 		+ "LIMIT ?,?";
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1,member_idx );
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, listLimit);
+				rs = pstmt.executeQuery();
+				wishlist = new ArrayList<ProductBean>();
+				while(rs.next()) {
+					ProductBean vo = new ProductBean();
+					vo.setOrder_main_image(rs.getString("image_main_file"));
+					vo.setOrder_member_id(rs.getString("member_id"));
+					vo.setOrder_product_price(rs.getInt("product_price"));
+					vo.setOrder_category(rs.getString("order_category"));
+					vo.setOrder_progress(rs.getString("order_progress"));
+					vo.setOrder_date(rs.getTimestamp("order_date"));
+					vo.setOrder_idx(rs.getInt("order_idx"));
+					wishlist.add(vo);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return wishlist;
 		}
 		
 

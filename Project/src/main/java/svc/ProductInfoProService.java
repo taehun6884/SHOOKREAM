@@ -2,9 +2,11 @@ package svc;
 
 import java.sql.Connection;
 
+import dao.MemberDAO;
 import dao.ProductDAO;
 import db.JdbcUtil;
 import vo.ProductBean;
+import vo.WishBean;
 import vo.imageBean;
 
 public class ProductInfoProService {
@@ -39,6 +41,21 @@ public class ProductInfoProService {
 		return image;
 	}
 
-	
+	// 좋아요 한 상품 조회
+		public WishBean getWishInfo(int product_idx, int member_idx) {
+			WishBean wish = null;
+			
+			Connection con = JdbcUtil.getConnection();
+			
+			ProductDAO dao = ProductDAO.getInstance();
+			
+			dao.setConnection(con);
+			
+			wish = dao.selectWish(product_idx, member_idx);
+			
+			JdbcUtil.close(con);
+			
+			return wish;
+		}
 
 }
