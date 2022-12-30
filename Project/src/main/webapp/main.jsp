@@ -195,7 +195,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <div id="main_category">
 		<p>NEW</p>
 	</div>
-	
 	<!-- Product grid -->
   <div class="w3-row w3-grayscale">
    <div class="w3-col l3 s6">
@@ -292,7 +291,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </div>
 </div>
   <!-- footer -->
-    <jsp:include page="./inc/footer.jsp"/>
+<%--     <jsp:include page="./inc/footer.jsp"/> --%>
   
   
 

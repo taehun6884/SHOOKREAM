@@ -131,11 +131,9 @@ $(function() {
 
 		<!-- Product grid -->
 		<div class="w3-row w3-grayscale">
+		<c:forEach var="productBestList" items="${productBestList }">
 			<div class="w3-col l3 s6">
 				<div class="w3-container">
-					
-
-					<c:forEach var="productBestList" items="${productBestList }">
 						<div class="w3-container">
 							<div class="w3-display-container">
 								<img src="./upload/${productBestList.product_img }" alt="..."
@@ -157,9 +155,12 @@ $(function() {
 								<b><fmt:formatNumber
 										value="${productBestList.product_price }" pattern="#,###" /></b>
 							</p>
+							</div>
 						</div>
-					</c:forEach>
-
+					</div>
+				</c:forEach>
+			</div>
+		</div>
 
 
 
@@ -236,9 +237,7 @@ $(function() {
 					<!--         </div> -->
 					<%--         <p>${productBestList[7].product_name }<br><b>${productBestList[7].product_price }</b></p><!-- 8번째 그리드 --> --%>
 
-				</div>
-			</div>
-		</div>
+			
 
 		<!-- footer -->
 		<jsp:include page="./inc/footer.jsp" />
