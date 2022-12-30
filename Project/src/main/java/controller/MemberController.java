@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.FindMemberIdProAction;
+<<<<<<< Updated upstream
 import action.FindMemberPwProAction;
 import action.MemberJoinProAction;
 import action.MemberListAction;
@@ -110,6 +111,13 @@ public class MemberController extends HttpServlet{
 		}else if(command.equals("/FindPwFormAction.me")) { // 비번 찾기 pro
 			action = new FindMemberPwProAction();
 			forward = action.execute(request, response);
+		}else if(command.equals("/FindMemberPassForm.me")) { // 비번 찾기
+			forward = new ActionForward(); 
+			forward.setPath("member/findPassForm.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/FindPassFormAction.me")) { // 비번 찾기 pro
+			action = new FindMemberPassProAction();
+			forward = action.execute(request, response);
 		}
 			
 		if(forward != null) {
@@ -133,5 +141,9 @@ public class MemberController extends HttpServlet{
 		doProcess(request, response);
 	}
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 }
 
