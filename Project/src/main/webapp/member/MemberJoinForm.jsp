@@ -22,6 +22,32 @@
       margin-left: -90px;
       box-sizing: border-box;
 }
+table.type03 {
+  border-collapse: collapse;
+  text-align: left;
+  line-height: 1.5;
+  border-top: 1px solid #ccc;
+  border-left: 3px solid #369;
+  margin-left:auto; 
+  margin-right:auto;
+}
+table.type03 th {
+  width: 147px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  color: #153d73;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+
+}
+table.type03 td {
+  width: 349px;
+  padding: 10px;
+  vertical-align: top;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
 </style>
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
@@ -48,59 +74,28 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- Push down content on small screens -->
 <!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
   
-  <!-- Top header -->
-  <header class="w3-container w3-xlarge">
-    <p class="w3-left">회원가입</p>
-    <p class="w3-right">
-      <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i>
-    </p>
-</header>
+
 
   
   <!-- Footer -->
   <!-- 로그인 화면 폼 -->
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
-    <div id = "sform">
-        <h4>회원가입</h4>
-        <p>Questions? Go ahead.</p>
-        <form action="MemberJoinPro.me" method="post" name="joinForm">
-          <table>
-          <tr>
-          <td width="300px">
-          <input class="w3-input w3-border" type="text" placeholder="name" name="name" required></td>
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="ID" name="id" id="id" required onkeydown="inputIdChk()">
-          <td>
-         <button type="button" class="btn btn-secondary" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">ID check</button>
-         <input type="hidden" name="isCheckId" value="idUncheck"/> <!-- 체크 여부 확인 -->
-          </td>
-          </tr>
-          <tr>
-          <td width="300px">
-          <input class="w3-input w3-border" type="password" placeholder="password" name="pass" required onkeyup="checkPasswd(this.value)">
-          <span id="checkPasswdResult"></span>
-          </td> <!-- 비밀번호 확인 -->
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="phone   ex) 01012345678" name="phone" required></td>
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="email    ex) abcd@gmail.com" name="email" required></td>
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" id="address_kakao" type="text" placeholder="address" name="address" required></td>
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="address_detail" name="address_detail" required></td>
-          </tr>
-          <tr>
-          <td><button type="submit" class="w3-button w3-block w3-black" onclick="fn_joinMember()">Send</button></td>
-		  </tr> 	        
-        </table>
-        </form>
-    </div>
+   <div>
+		<table class="type03">
+			<h1>회원가입</h1>
+			<tr>
+				<th scope="row">항목명</th>
+				<td width="300px"><input type="text" name = "name" placeholder="이름을 입력하세요" required></td>
+			</tr>
+			<tr>
+				<th scope="row">항목명</th>
+			</tr>
+			<tr>
+				<th scope="row">항목명</th>
+			</tr>
+		</table>
+
+		</div>
   </footer>
  </div>	
   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
