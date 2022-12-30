@@ -91,7 +91,6 @@ $(function() {
 // }
 </script>
 </head>
-
 <body class="w3-content" style="max-width: 1200px">
 
 	<!-- Sidebar/menu -->
@@ -114,10 +113,6 @@ $(function() {
 
 		<!-- Push down content on small screens -->
 		<div class="w3-hide-large" style="margin-top: 83px"></div>
-
-		<!-- Top header -->
-		<jsp:include page="./inc/top.jsp" />
-
 
 
 		<!--   <div class="w3-container w3-text-grey" id="jeans"> -->
@@ -237,15 +232,10 @@ $(function() {
 					<!--         </div> -->
 					<%--         <p>${productBestList[7].product_name }<br><b>${productBestList[7].product_price }</b></p><!-- 8번째 그리드 --> --%>
 
-			
-
 		<!-- footer -->
 <%-- 		<jsp:include page="./inc/footer.jsp" /> --%>
 
-
-
-		<script>
-
+<script>
 // Accordion 
 function myAccFunc() {
   var x = document.getElementById("demoAcc");

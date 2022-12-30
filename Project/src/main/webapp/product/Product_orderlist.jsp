@@ -107,7 +107,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <td>${order.order_category }</td>
       <td>${order.order_progress }</td>
       <td>${order.order_date }</td>
-      <td><button type="button" class="btn btn-dark"  onclick="location.href='AdminProductOrderListDelete.ad?order_idx=${orderlist.order_idx}'">삭제</button></td>
+      <td><button type="button" class="btn btn-dark" >삭제</button></td>
     </tr>
     </c:forEach>
   </tbody>
