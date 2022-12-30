@@ -81,6 +81,7 @@ pageContext.setAttribute("cn", "\n");
 			<div class="reviewContent">
 				<div>
 					<table class="reviewContent">
+						<c:forEach var="review" items="${reviewList }">
 						<tr>
 							<td rowspan="2" width="30%">리뷰사진<img src="../images/kakao_small.jpg"/>${review.review_img }</td>
 							<td width="60%">주문 내용${review.order_detail }</td> <%-- 주문 상세내용 : 사이즈 색상 --%>
@@ -89,6 +90,7 @@ pageContext.setAttribute("cn", "\n");
 						<tr>
 							<td rowspan="2">리뷰 내용${review.review_content }</td>
 						</tr>
+						</c:forEach>
 					</table>
 				</div>
 			</div>	

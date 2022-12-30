@@ -20,6 +20,7 @@ import action.MemberLoginMemberProAction;
 import action.MemberLogoutProAction;
 import action.MemberModifyFormAction;
 import action.MemberModifyProAction;
+import action.ReviewWriteProAction;
 import svc.LoginMemberService;
 import vo.ActionForward;
 import vo.MemberBean;
@@ -81,6 +82,9 @@ public class MemberController extends HttpServlet{
 //			action = new MemberIdCheckProAction();
 //			forward = action.execute(request, response);
 			action = new MemberIdCheckProAction();
+			forward = action.execute(request, response);
+		} else if(command.equals("/ReviewWrite.me")) { // 회원 리뷰 작성(구매목록에서)
+			action = new ReviewWriteProAction();
 			forward = action.execute(request, response);
 		}
 			
