@@ -75,6 +75,7 @@ private ProductDAO() {}
 			pstmt2.setString(11, product.getProduct_detail_exp()); //상세 설명
 			pstmt2.setString(12, product.getProduct_color()); //색상
 			pstmt2.setDouble(13, product.getProduct_discount_price()); //할인율
+
 			pstmt2.setInt(14, 0); //상품 좋아요 수 누적
 			
 			insertCount = pstmt2.executeUpdate();
@@ -797,6 +798,28 @@ private ProductDAO() {}
 		
 			return isDeleteSuccess;
 		}
+		//---------------상품 삭제(관리자)---------------
+		public int deleteProduct(int product_idx) {
+			int deleteCount = 0;
+			PreparedStatement pstmt = null;
+			
+			String sql = "DELETE FROM product WHERE product_idx=?";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, product_idx);
+				deleteCount = pstmt.executeUpdate();
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			}
+			
+			return deleteCount;
+		}
+
 		
 		// 좋아요(찜하기) 버튼 클릭
 		public int InsertLike(int member_idx, int product_idx) {
@@ -879,31 +902,31 @@ private ProductDAO() {}
 			try {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, product_idx);
-				isDeletePro = pstmt.executeUpdate();
+				deleteCount = pstmt.executeUpdate();
 				
-				if(isDeletePro > 0) {
-					isDeleteProduct =true;
-				}
+				
 			} catch (SQLException e) {
-				
 				e.printStackTrace();
 			}finally {
 				JdbcUtil.close(pstmt);
 			}
 			
-			return isDeleteProduct;
+			return deleteCount;
 		}
-		
-		public boolean updateProduct(ProductBean product, boolean updateProduct) {
-			int updateProduct2 =0;
-			boolean updateProduct1 = false;
+		//-------------------------상품수정 쿼리-------------------------------
+		public int updateProduct(int idx, ProductBean product) {
+			int updateProduct = 0;
+//			int updateImage = 0;
 			
 			PreparedStatement pstmt =null;
 			
 			System.out.println(product);
 			
-			String sql ="UPDATE product SET product_name=?,  product_brand=?,  product_price=?, product_size=? , product_amount=?, product_color=?,  product_exp=?,  product_detail_exp=?,  product_discount_price=?, product_img=? ";
 			try {
+				String sql ="UPDATE product "
+						+ "SET product_name=?,  product_brand=?,  product_price=?, product_size=? , product_amount=?, product_color=?,  product_exp=?,  product_detail_exp=?,  product_discount_price=? "
+						+ "WHERE product_idx =?";
+				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, product.getProduct_name());
 				pstmt.setString(2, product.getProduct_brand());
@@ -914,19 +937,30 @@ private ProductDAO() {}
 				pstmt.setString(7, product.getProduct_exp());
 				pstmt.setString(8, product.getProduct_detail_exp());
 				pstmt.setDouble(9, product.getProduct_discount_price());
-				pstmt.setString(10, product.getProduct_img());
-				updateProduct2 = pstmt.executeUpdate();
-				if(updateProduct2 > 0) {
-					updateProduct1 =true;
-				}
-					} catch (SQLException e) {
-				System.out.println("sql 구문오류 -updateProduct");
+				pstmt.setInt(10, idx);
+				updateProduct = pstmt.executeUpdate();
+				
+//				if(updateProduct > 0) {
+//					//--------------이미지 테이블 업데이트 작업--------------------
+//					sql = "UPDATE image SET image_main_file =?, image_real_file1 =?, image_real_file2 =? WHERE product_idx = ?";
+//					
+//					pstmt2 = con.prepareStatement(sql);
+//					pstmt2.setString(1, image.getImage_main_file());
+//					pstmt2.setString(2, image.getImage_real_file1());
+//					pstmt2.setString(3, image.getImage_real_file2());
+//					pstmt2.setInt(4, idx);
+//					updateImage = pstmt2.executeUpdate();
+//					
+//				}
+				
+			} catch (SQLException e) {
+				System.out.println("sql 구문오류 - updateProduct");
 				e.printStackTrace();
 			}finally {
 				JdbcUtil.close(pstmt);
 			} 
 		
-		return updateProduct1;
+		return updateProduct;
 }
 		public ProductBean getProduct(int idx) {
 			ProductBean bean = null;
@@ -962,6 +996,37 @@ private ProductDAO() {}
 			
 			return bean;
 		}
+
+
+//--------- 이미지 정보 가져오는 메서드 -------------
+		public imageBean selectImage(int product_idx) {
+			imageBean image = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs  = null;
+			//--------------------이미지 이름 가져오기 작업--------------
+			try {
+				String sql = "SELECT image_main_file, image_real_file1, image_real_file2  FROM image WHERE product_idx = ?";
+
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, product_idx);
+				rs = pstmt.executeQuery();
+				
+				
+				if(rs.next()) {
+					image = new imageBean();
+					image.setImage_main_file(rs.getString("image_main_file")); //메인 이미지 가져오기
+					image.setImage_real_file1(rs.getString("image_real_file1")); //상세 이미지1 가져오기
+					image.setImage_real_file2(rs.getString("image_real_file2")); //상세 이미지2 가져오기
+
+				}
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - selectImage");
+				e.printStackTrace();
+			}
+			return image;
+		}
+		
+
 
 		public boolean isDeleteOrder(int order_idx) {
 			int isDeleteOrderList = 0;

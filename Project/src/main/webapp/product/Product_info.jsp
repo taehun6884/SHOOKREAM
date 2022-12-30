@@ -231,7 +231,6 @@ margin-left: 270PX;
 	 </div>
 	
 
-<!-- 제품 상세 페이지 -->
   <!-- 섬네일 이미지 -->
   <div id = "sform">
 	<section id="image">
@@ -305,6 +304,7 @@ margin-left: 270PX;
 			<button onclick="iamport()">구매하기</button>
 		</div>
 	</section>
+
   </div>
   <Br>
   <br>
@@ -320,7 +320,7 @@ margin-left: 270PX;
 		</tr>
 		
 	</table>
-	
+
     <!-- 
 <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
    -->

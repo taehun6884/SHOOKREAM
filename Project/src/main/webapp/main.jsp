@@ -17,6 +17,26 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+<!-- slick 슬라이드 작업, jquery -->
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> 
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+<script type="text/javascript">
+$(function() {
+	$('.post-wrapper').slick({
+		  dots: true,
+		  infinite: true,
+		  autoplay: true,
+		  autoplaySpeed: 2000,
+		  slidesToShow: 1,
+		  adaptiveHeight: true
+		});
+				
+});
+
+</script>
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
@@ -58,18 +78,16 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   
   <!-- Top header -->
   <jsp:include page="./inc/top.jsp"/>
+  <br>
 
   <!-- ./images header -->
-  <div class="w3-display-container w3-container">
-    <img src="./images/jeans.jpg" alt="Jeans" style="width:100%">
-    <div class="w3-display-topleft w3-text-white" style="padding:60px 48px">
-      <h1 class="w3-jumbo w3-hide-small">New arrivals</h1>
-      <h1 class="w3-hide-large w3-hide-medium">New arrivals</h1>
-      <h1 class="w3-hide-small">COLLECTION 2016</h1>
-      <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p>
-    </div>
+  <div class ="post-wrapper">
+  	<div><img src="images/메롱1.jpg" height="700" width="900"></div>
+  	<div><img src="images/메롱2.jpg" height="700" width="900"></div>
+  	<div><img src="images/섬네일(슈펜).jpg" height="700" width="900"></div>
+  	<div><img src="images/화이팅.png" height="700" width="900"></div>
+  
   </div>
-
 <!--   <div class="w3-container w3-text-grey" id="jeans"> -->
 <!--     <p>BEST</p> -->
 <!--   </div> -->
