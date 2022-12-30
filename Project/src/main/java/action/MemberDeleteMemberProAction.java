@@ -41,7 +41,7 @@ public class MemberDeleteMemberProAction implements Action {
 						} else { // 삭제 성공 시
 							
 							forward = new ActionForward();
-							forward.setPath("./");
+							forward.setPath("./MemberList.me");
 							forward.setRedirect(true);
 							
 								

@@ -7,6 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 목록</title>
+<!-- 삭제 버튼에 confirm 추가 -->
+<script>	function deleteProduct(idx) {
+		var result = confirm("삭제하시겠습니까?");
+
+		if (result) {
+			location.href="ProductDeletePro.po?product_idx=" + idx;
+		} else {
+			alert("삭제가 취소되었습니다");
+		}
+	};
+</script>
 <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -22,6 +33,7 @@
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
  <body class="sb-nav-fixed">
+	
   	<!-- TOP -->
        <jsp:include page="./inc2/top.jsp"></jsp:include>
           
@@ -80,10 +92,11 @@
 										<td>${product.product_brand }</td>
 										<td>${product.product_price }</td>
 										<td>${product.product_amount }</td>
-										<td>${product.product_date}</td>
+										<td><fmt:formatDate value="${product.product_date}" pattern="yyyy-MM-dd"/></td>
 										<td>
-										<button type="button" class="btn btn-light" onclick="location.href='ProductModifyForm.po?product_idx=${product.product_idx}'">수정</button>
-										<button type="button" class="btn btn-light" onclick="location.href='ProductDeletePro.po?product_idx=${product.product_idx}'">삭제</button>
+										
+										<button type="button" class="btn btn-light" onclick="location.href ='ProductModifyForm.po?product_idx=${product.product_idx}'">수정</button>
+										<button type="button" class="btn btn-light" onclick= "deleteProduct(${product.product_idx})">삭제</button>
 										</td>
 										</tr> 
 										</c:forEach>  
@@ -111,5 +124,6 @@
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="admin/js/datatables-simple-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+       
     </body>
 </html>
