@@ -11,11 +11,18 @@
 <!--         <meta name="description" content="" /> -->
 <!--         <meta name="author" content="" /> -->
 <title>관리자 페이지</title>
-
+<script src="../js/jquery-3.6.3.js"></script>
 <script>
-	function deleteMember(id) {
-		alert(id);
+	function deleteMember(memberId, memberPass) {
+		var result = confirm(memberId + " 회원을 탈퇴하시겠습니까?");
+		if(result){
+			location.href = "MemberDeleteMemberProAction.me?id=" + memberId + "&pass=" + memberPass;
+		}else{
+			alert("취소되었습니다.");
+		}
 	};
+	
+
 </script>
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="admin/css/styles.css" rel="stylesheet" />
@@ -86,7 +93,7 @@
 											<td>${member.member_date }</td>
 											<td>
 											<input type ="button" value ="수정" onclick="location.href='MemberModifyForm.me?id=${member.member_id}&pass=${member.member_pass }'">
-											<input type ="button" value ="탈퇴" onclick="deleteMember(${member.member_id})">
+											<input type ="button" value ="탈퇴" onclick="deleteMember('${member.member_id}', '${member.member_pass }')">
 					  						</td>
 						
 										</tr> 
