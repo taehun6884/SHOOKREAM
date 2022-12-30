@@ -1,68 +1,39 @@
+<%@page import="java.util.List"%>
+<%@page import="vo.MemberBean"%>
+<%@page import="dao.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>로그인</title>
+<title>아이디 찾기</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- 네이버아이디로그인 -->
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<!-- 구글 아이디 로그인 -->
-<meta name="google-signin-client_id" content="1047574308186-h6ehte2k4901kjn1u3g5vnonbf2g56on.apps.googleusercontent.com">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+
 <style type="text/css">
 #sform {
           display: inline-block;
           text-align: center;
         }
 </style>
-<style type="text/css">
-#table, {
-     text-align: center;
-}
-</style>
-<style>
-    .paging {
-        text-align: center;
-    }
-    .paging a {
-        /*
-        display: inline-block 인라인 요소의 특징과 블록 요소의 특징을 모두 갖는다
-        크기를 가질 수 있으며 텍스트 정렬도 적용받는다
-        */
-        display: inline-block;
-        
-        font-weight: bold;
-        text-decoration: none;
-        padding: 5px 8px;
-        border: 1px solid #ccc;
-       	color: #000; 
-/*         background-color: #F5F5DC; */
-    }
-    /* 현재 페이징에 select 클래스를 적용한다*/
-    .paging a.select {
-/*         color: #fff; */
-/*         background-color: #FFA7A7; */
-    }
-    </style>
-
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
 </head>
 <body class="w3-content" style="max-width:1200px">
-<!-- Sidebar/menu -->
+
+<!-- Sidebar/menu --> 
 <jsp:include page="../inc/side.jsp"/>
 
 <!-- Top menu on small screens -->
 <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-  <div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
+  <div class="w3-bar-item w3-padding-24 w3-wide">SHOOKREAM</div>
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
 </header>
 
@@ -77,82 +48,30 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
-    <p class="w3-left">찜 목록</p>
+    <p class="w3-left"></p>
     <p class="w3-right">
       <i class="fa fa-shopping-cart w3-margin-right"></i>
       <i class="fa fa-search"></i>
     </p>
 </header>
-   
-  <!-- Footer -->
-  <footer class="w3-padding-64 w3-small w3-center" id="footer">
-  <table class="table">
-  <thead  class="table-dark" >
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">image</th>
-      <th scope="col">name</th>
-      <th scope="col">brand</th>
-      <th scope="col">price</th>
-      <th scope="col">size</th>
-      <th scope="col">delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    
-    <c:forEach var="wish" items="${wishlist }">
-    <tr>
-      <th scope="row">${wish.wish_idx }</th>
-      <td><img src="upload/${wish.product_img }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
-      <td>${wish.product_name }</td>
-      <td>${wish.product_brand }</td>
-      <td>${wish.product_price }</td>
-      <td>${wish.product_size }</td>
-      <td><button type="button" class="btn btn-dark" onclick="location.href='LikeDeletePro.ca?member_idx=${sessionScope.member_idx}&product_idx=${wish.product_idx }'">삭제</button></td>
-    </tr>
-    </c:forEach>
-  </tbody>
-</table>
-<!-- 페이징 처리 -->	
-	<div class="paging">
-        <c:choose>
-			<c:when test="${param.pageNum > 1}">
-				<a href="CartList.ca?pageNum=${param.pageNum - 1 }&member_idx=${member_idx }">이전</a>
-			</c:when>
-			<c:otherwise>
-				<a href="javascript:void(0)">이전</a>
-			</c:otherwise>
-		</c:choose>
-		
-		<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
-			<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
-			<c:choose>
-				<c:when test="${param.pageNum eq i}">
-					${i }
-				</c:when>
-				<c:otherwise>
-					<a href="LikeList.ca?pageNum=${i }&member_idx=${member_idx }">${i }</a>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-		
-		<c:choose>
-			<c:when test="${param.pageNum < pageInfo.maxPage}">
-				<a href="LikeList.ca?pageNum=${param.pageNum + 1 }&member_idx=${member_idx }">다음</a>
-			</c:when>
-			<c:otherwise>
-				<a href="javascript:void(0)">다음</a>
-			</c:otherwise>
-		</c:choose>
-<!--         <a class="select" href="#">1</a> -->
-<!--         <a href="#">2</a> -->
-<!--         <a href="#">3</a> -->
-<!--         <a href="#">4</a> -->
-<!--         <a href="#">5</a> -->
-    </div>
-</footer>
-  
 
+  
+  <!-- Footer -->
+  <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
+    <div id = "sform">
+        <h3>아이디 찾기 결과</h3>
+        
+        <h5>회원님의 아이디는</h5>
+        <b>${member }</b>
+        <h5>입니다.</h5>
+		<button type="button" class="btn btn-secondary" onclick="location.href='LoginMember.me'">로그인</button>
+		<button type="button" class="btn btn-secondary" onclick="location.href=''">비밀번호 찾기</button>
+
+	</div>
+  </footer>
+ </div>	
+  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+  <!-- End page content -->
 
 
 <!-- Newsletter Modal -->
@@ -238,6 +157,9 @@ function w3_close() {
     "pluginKey": "552ea0bb-d4a5-4c70-8ba7-463b7682c434"
   });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<!-- End Channel Plugin -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+</script>
+
 </body>
 </html>

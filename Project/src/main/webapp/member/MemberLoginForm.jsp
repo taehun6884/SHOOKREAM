@@ -77,12 +77,17 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           <tr>
           	<td>
           		<div id="naver_id_login"></div>
-				<a href="javascript:kakaoLogin();"><img src="./images/kakao_login.png" height="50" width="250"></a>
+				<a href="javascript:kakaoLogin();"><img src="../images/kakao_login_medium.png" height="40px" ></a>
 				</td>
           </tr>
           <tr>
           	<td>
           		<button type="button" class="w3-button w3-block w3-black" onclick="location.href='MemberJoinForm.me'">회원가입</button>
+          	</td>
+          </tr>
+          <tr>
+          	<td>
+          		<button type="button" class="w3-button w3-block w3-black" onclick="location.href='FindMemberIdForm.me'">아이디 찾기</button>
           	</td>
           </tr>
         </table>
@@ -184,7 +189,7 @@ function w3_close() {
  <script type="text/javascript">
   	var naver_id_login = new naver_id_login("nSNLHIW18gDjrrJsFDeE", "http://localhost:8080/Project/index.jsp");
   	var state = naver_id_login.getUniqState();
-  	naver_id_login.setButton("white", 2,40);
+  	naver_id_login.setButton("white", 2,35);
   	naver_id_login.setDomain("http://localhost:8080/Project");
 //   	naver_id_login.setState(state);
 //   	naver_id_login.setPopup();

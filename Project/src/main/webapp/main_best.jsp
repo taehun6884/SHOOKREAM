@@ -91,7 +91,6 @@ $(function() {
 // }
 </script>
 </head>
-
 <body class="w3-content" style="max-width: 1200px">
 
 	<!-- Sidebar/menu -->
@@ -115,10 +114,6 @@ $(function() {
 		<!-- Push down content on small screens -->
 		<div class="w3-hide-large" style="margin-top: 83px"></div>
 
-		<!-- Top header -->
-		<jsp:include page="./inc/top.jsp" />
-
-
 
 		<!--   <div class="w3-container w3-text-grey" id="jeans"> -->
 		<!--     <p>BEST</p> -->
@@ -131,11 +126,9 @@ $(function() {
 
 		<!-- Product grid -->
 		<div class="w3-row w3-grayscale">
+		<c:forEach var="productBestList" items="${productBestList }">
 			<div class="w3-col l3 s6">
 				<div class="w3-container">
-					
-
-					<c:forEach var="productBestList" items="${productBestList }">
 						<div class="w3-container">
 							<div class="w3-display-container">
 								<img src="./upload/${productBestList.product_img }" alt="..."
@@ -157,9 +150,12 @@ $(function() {
 								<b><fmt:formatNumber
 										value="${productBestList.product_price }" pattern="#,###" /></b>
 							</p>
+							</div>
 						</div>
-					</c:forEach>
-
+					</div>
+				</c:forEach>
+			</div>
+		</div>
 
 
 
@@ -236,17 +232,10 @@ $(function() {
 					<!--         </div> -->
 					<%--         <p>${productBestList[7].product_name }<br><b>${productBestList[7].product_price }</b></p><!-- 8번째 그리드 --> --%>
 
-				</div>
-			</div>
-		</div>
-
 		<!-- footer -->
-		<jsp:include page="./inc/footer.jsp" />
+<%-- 		<jsp:include page="./inc/footer.jsp" /> --%>
 
-
-
-		<script>
-
+<script>
 // Accordion 
 function myAccFunc() {
   var x = document.getElementById("demoAcc");

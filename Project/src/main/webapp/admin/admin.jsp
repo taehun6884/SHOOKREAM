@@ -570,7 +570,7 @@
                                             <td>New York</td>
                                             <td>27</td>
                                             <td>2011/01/25</td>
-                                            <td>$112,000</td>
+                                            <td>25000</td>
                                         </tr>
                                     </tbody>
                                 </table>
