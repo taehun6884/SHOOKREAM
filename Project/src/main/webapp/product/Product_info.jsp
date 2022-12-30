@@ -70,6 +70,13 @@ margin-left: 270PX;
 	float: right;
 }
 
+
+.reviewContent { 
+	border: solid 1px;
+	width : 800px;
+	height: 150px; 
+}
+
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
@@ -320,7 +327,30 @@ margin-left: 270PX;
 		</tr>
 		
 	</table>
+	
+	<hr>		
+		<div class="reviewListArea">
+			<h3>Review</h3>
+			<div class="reviewContent">
+				<div>
+					<table class="reviewContent">
+						<c:forEach var="review" items="${reviewList }">
+						<tr>
+							<td rowspan="2" width="30%">리뷰사진<img src="../images/kakao_small.jpg"/>${review.review_img }</td>
+							<td width="60%">주문 내용${review.order_detail }</td> <%-- 주문 상세내용 : 사이즈 색상 --%>
+							<td width="10%">작성 멤버${review.member_idx }<br>작성일자${review.review_data }</td> <%-- 리뷰 작성하는 멤버 --%>
+						</tr>
+						<tr>
+							<td rowspan="2">리뷰 내용${review.review_content }</td>
+						</tr>
+						</c:forEach>
+					</table>
+				</div>
+			</div>	
+		</div> 	
+	
 
+ main
     <!-- 
 <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
    -->

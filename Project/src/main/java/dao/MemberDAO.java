@@ -19,6 +19,7 @@ import javax.mail.internet.MimeMessage;
 import db.JdbcUtil;
 import mail.GoogleMailAuthenticator;
 import vo.MemberBean;
+import vo.ReviewBean;
 import vo.WishBean;
 
 public class MemberDAO {
@@ -527,5 +528,47 @@ private MemberDAO() {}
 				}
 				
 				return member_idx;
+			}
+
+
+			public int insertReview(ReviewBean review) { // 리뷰 작성
+				int insertCount = 0;
+				
+				PreparedStatement pstmt=null, pstmt2=null;
+				ResultSet rs = null;
+				
+				try {
+					int review_idx = 1; // 새 글 번호
+					
+					String sql = "SELECT MAX(review_idx) FROM review";
+					pstmt = con.prepareStatement(sql);
+					rs = pstmt.executeQuery(); // 조회를 실행하면
+					
+					if(rs.next()) { // 조회 결과가 있을 경우(= 기존 게시물이 하나라도 존재할 경우)
+						review_idx = rs.getInt(1) + 1; // 기존 게시물 번호 중 가장 큰 번호(= 조회 결과) + 1
+					}
+					
+					sql = "INSERT INTO review VALUES(?,?,?,?,?,?,now(),?)";
+					pstmt2 = con.prepareStatement(sql);
+					
+					insertCount = pstmt2.executeUpdate();
+					pstmt2.setInt(1, review_idx);
+					pstmt2.setInt(2, review.getProduct_idx());
+					pstmt2.setInt(3, review.getMember_idx());
+					pstmt2.setString(4, review.getReview_content());
+					pstmt2.setString(5, review.getReview_img());
+					pstmt2.setString(6, review.getReview_real_img());
+					pstmt2.setString(7, review.getRe_order_detail());
+					
+					
+					} catch (SQLException e) {
+						System.out.println("SQL 구문 오류! - insertReview()");
+						e.printStackTrace();
+					} finally {
+						JdbcUtil.close(rs);
+						JdbcUtil.close(pstmt);
+						JdbcUtil.close(pstmt2);
+					}
+				return insertCount;
 			}
 }
