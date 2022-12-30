@@ -1,6 +1,5 @@
 package dao;
 
-import java.net.Authenticator;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,11 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
+import javax.mail.Address;
+import javax.mail.Authenticator;
 import javax.mail.Message;
+import javax.mail.Message.RecipientType;
+import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -413,7 +418,7 @@ private MemberDAO() {}
 							Authenticator authenticator = new GoogleMailAuthenticator(); // 메일서버에서 인증받은 계정 + 비번
 							Session mailSession = Session.getDefaultInstance(properties, authenticator); // 메일서버, 계정, 비번이 유효한지 검증
 							
-							InternetAddress[] address = { new InternetAddress(member.getMember_email()) }; // 받는사람 이메일 주소
+							InternetAddress address = new InternetAddress(member.getMember_email()); // 받는사람 이메일 주소
 							Message msg = new MimeMessage(mailSession);									  // 메일 관련 정보 작성
 							msg.setRecipient(Message.RecipientType.TO, address);						// 받는 사람
 							msg.setFrom(new InternetAddress("hz0123hz@gmail.com"));						// 보내는 사람
@@ -432,6 +437,10 @@ private MemberDAO() {}
 					}
 				} catch (SQLException e) {
 					System.out.println("sql 구문 오류 - findID()");
+					e.printStackTrace();
+				} catch (AddressException e) {
+					e.printStackTrace();
+				} catch (MessagingException e) {
 					e.printStackTrace();
 				} finally {
 					JdbcUtil.close(rs);
@@ -466,8 +475,6 @@ private MemberDAO() {}
 			return id;
 		} //아이디 찾기() 끝
 	
-			// 아이디/비밀번호 찾기
-			
 			
 			// 찜한 상품 조회
 			public WishBean selectWish(int member_idx) {

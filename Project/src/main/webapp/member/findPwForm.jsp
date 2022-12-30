@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>아이디 / 비밀번호 찾기</title>
+<title>비밀번호 찾기</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -58,10 +58,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- 로그인 화면 폼 -->
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
     <div id = "sform">
-        <h4>아이디 찾기</h4>
-        <form method="post" action="./FindIdFormAction.me">
+        <h4>비밀번호 찾기</h4>
+        <form method="post" action="./FindPwFormAction.me">
         <p align="center"><a href="MemberLoginForm.jsp">[돌아가기]</a></p>
           <table class=table>
+				<tr>
+					<th class="active">아이디</th>
+					<td><input type="text" name="member_id" id="member_id" required></td>
+				</tr>
 				<tr>
 					<th class="active">이름</th>
 					<td><input type="text" name="member_name" id="member_name" required></td>
@@ -72,13 +76,11 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="submit" value="아이디찾기" class="w3-button w3-block w3-black" >
+						<input type="submit" value="비밀번호찾기" class="w3-button w3-block w3-black">
 					</td>
 				</tr>
 			</table>
         </form>
-				<input type="button" value="비밀번호찾기" class="w3-button w3-block w3-black" onclick="location.href='./FindPwForm.me'"><br>
-				<input type="button" value="회원가입" class="w3-button w3-block w3-black" onclick="location.href='./MemberJoinForm.me'">
     </div>
   </footer>
  </div>	
