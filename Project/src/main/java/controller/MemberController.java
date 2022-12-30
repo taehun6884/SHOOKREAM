@@ -140,9 +140,5 @@ public class MemberController extends HttpServlet{
 		doProcess(request, response);
 	}
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 }
 

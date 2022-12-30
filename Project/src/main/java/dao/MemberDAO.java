@@ -394,32 +394,6 @@ private MemberDAO() {}
 					pstmt.setString(2, member.getMember_name());
 					pstmt.setString(3, member.getMember_email());
 //						rs = pstmt.executeQuery();
-					
-					int cnt = pstmt.executeUpdate();
-					if(cnt == 1) {
-						//임시 비번으로 테이블 수정시, 아이디와 비밀번호 이메일로 전송하기
-						String content = "임시 비밀번호로 로그인 한 후, 회원정보 수정에서 비밀번호를 변경하시기 바랍니다.";
-						content += "<hr>";
-						content += "<table border='1'>";
-						content += "<tr>";
-						content += "	<th>아이디</th>";
-						content += "	<th>" + id + "</th>";
-						content += "</tr>";
-						content += "<tr>";
-						content += "	<td>임시비밀번호</td>";
-						content += "	<td>" + imsiPw.toString() + "</td>";
-						content += "</tr>";
-						content += "</table>";
-						
-						
-						String mailServer = "smtp.gmail.com"; // 메일 서버 지정하기
-						Properties properties = new Properties();
-						properties.put("mail.smtp.host", mailServer);
-						properties.put("mail.smtp.auth", true);
-						Authenticator authenticator = new GoogleMailAuthenticator(); // 메일서버에서 인증받은 계정 + 비번
-						Session mailSession = Session.getDefaultInstance(properties, authenticator); // 메일서버, 계정, 비번이 유효한지 검증
-						
-<<<<<<< Updated upstream
 						int cnt = pstmt.executeUpdate();
 						if(cnt == 1) {
 							//임시 비번으로 테이블 수정시, 아이디와 비밀번호 이메일로 전송하기
@@ -454,40 +428,7 @@ private MemberDAO() {}
 							Transport.send(msg);
 							
 							flag = true; // 최종 성공
-							
-						} // if end
-=======
-						InternetAddress address =  new InternetAddress(member.getMember_email()); // 받는사람 이메일 주소
-						Message msg = new MimeMessage(mailSession);									  // 메일 관련 정보 작성
-						msg.setRecipient(Message.RecipientType.TO, address);						// 받는 사람
-						msg.setFrom(new InternetAddress("hz0123hz@gmail.com"));						// 보내는 사람
-						msg.setSubject("[Myweb] 임시 비밀번호 입니다.");							//메일 제목
-						msg.setContent(content, "text/html; charset=UTF-8");
-						msg.setSentDate(new Date());
-						Transport.send(msg);
->>>>>>> Stashed changes
-						
-						flag = true; // 최종 성공
-						
-<<<<<<< Updated upstream
-						flag = false;
-					}
-				} catch (SQLException e) {
-					System.out.println("sql 구문 오류 - findID()");
-					e.printStackTrace();
-				} catch (AddressException e) {
-					e.printStackTrace();
-				} catch (MessagingException e) {
-					e.printStackTrace();
-				} finally {
-					JdbcUtil.close(rs);
-					JdbcUtil.close(pstmt);
-				}
-				return flag;
-			} // 비밀번호 찾기() 끝
-=======
-					} // if end
-					
+						} // if end						
 				} else {
 					
 					flag = false;
@@ -506,7 +447,6 @@ private MemberDAO() {}
 			return flag;
 		} // 비밀번호 찾기() 끝
 
->>>>>>> Stashed changes
 			
 			// 아이디 찾기
 		public String findID(MemberBean member) {
@@ -534,7 +474,6 @@ private MemberDAO() {}
 			return id;
 		} //아이디 찾기() 끝
 	
-<<<<<<< Updated upstream
 			
 			// 찜한 상품 조회
 			public WishBean selectWish(int member_idx) {
@@ -567,7 +506,6 @@ private MemberDAO() {}
 				}
 						return wish;
 			}
-			// 임시 비밀번호 발급받아 member 테이블 수정하기
 			public int selectMemberIdx(String sId) {
 				int member_idx = 0;
 				
@@ -638,7 +576,5 @@ private MemberDAO() {}
 					}
 				return insertCount;
 			}
-=======
 
->>>>>>> Stashed changes
 }
