@@ -282,7 +282,6 @@ margin-left: 270PX;
 				<option value="280">290</option>
 			</select>
 			<hr>
-			<input type="button" value="좋아요">
 			<input type="hidden" id="product_idx" value="${product.product_idx }">
 		<span id="wishLoad">
 			<c:choose>

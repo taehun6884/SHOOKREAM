@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,8 +50,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 #main_category{
 	text-align: center;
-	padding-top: 100px;
-	padding-bottom: 30px;
+	padding-top: 120px;
+	padding-bottom: 60px;
 	font-size: x-large;
 }
 
@@ -108,7 +109,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </div>
         </div>
         <p>${productBestList[0].product_brand }<br></p>
-        <p>${productBestList[0].product_name }<br><b>${productBestList[0].product_price }</b></p><!-- 1번째 그리드 -->
+        <p>${productBestList[0].product_name }<br>
+        <b><fmt:formatNumber value="${productBestList[0].product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 -->
       </div>
       <div class="w3-container">
         <div class="w3-display-container">
@@ -118,7 +120,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </div>
         </div>
         <p>${productBestList[4].product_brand }<br></p>
-        <p>${productBestList[4].product_name }<br><b>${productBestList[4].product_price }</b></p><!-- 5번째 그리드 -->
+        <p>${productBestList[4].product_name }<br><b><fmt:formatNumber value="${productBestList[4].product_price }" pattern="#,###" /></b></p><!-- 5번째 그리드 -->
       </div>
     </div>
     
@@ -131,7 +133,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </div>
         </div>
         <p>${productBestList[1].product_brand }<br></p>
-        <p>${productBestList[1].product_name }<br><b>${productBestList[1].product_price }</b></p><!-- 2번째 그리드 -->
+        <p>${productBestList[1].product_name }<br><b><fmt:formatNumber value="${productBestList[1].product_price }" pattern="#,###" /></b></p><!-- 2번째 그리드 -->
       </div>
       <div class="w3-container">
         <div class="w3-display-container">
@@ -141,7 +143,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </div>
         </div>
         <p>${productBestList[5].product_brand }<br></p>
-        <p>${productBestList[5].product_name }<br><b>${productBestList[5].product_price }</b></p><!-- 6번째 그리드 -->
+        <p>${productBestList[5].product_name }<br><b><fmt:formatNumber value="${productBestList[5].product_price }" pattern="#,###" /></b></p><!-- 6번째 그리드 -->
       </div>
     </div>
 
@@ -171,7 +173,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </div>
         </div>
         <p>${productBestList[2].product_brand }<br></p>
-        <p>${productBestList[2].product_name }<br><b>${productBestList[2].product_price }</b></p><!-- 3번째 그리드 -->
+        <p>${productBestList[2].product_name }<br><b><fmt:formatNumber value="${productBestList[2].product_price }" pattern="#,###" /></b></p><!-- 3번째 그리드 -->
       </div>
       <div class="w3-container">
         <div class="w3-display-container">
@@ -181,7 +183,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </div>
         </div>
         <p>${productBestList[6].product_brand }<br></p>
-        <p>${productBestList[6].product_name }<br><b>${productBestList[6].product_price }</b></p><!-- 7번째 그리드 -->
+        <p>${productBestList[6].product_name }<br><b><fmt:formatNumber value="${productBestList[6].product_price }" pattern="#,###" /></b></p><!-- 7번째 그리드 -->
       </div>
     </div>
     
@@ -194,7 +196,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </div>
         </div>
         <p>${productBestList[3].product_brand }<br></p>
-        <p>${productBestList[3].product_name }<br><b>${productBestList[3].product_price }</b></p><!-- 4번째 그리드 -->
+        <p>${productBestList[3].product_name }<br><b><fmt:formatNumber value="${productBestList[3].product_price }" pattern="#,###" /></b></p><!-- 4번째 그리드 -->
       </div>
       <div class="w3-container">
         <div class="w3-display-container">
@@ -204,7 +206,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </div>
         </div>
         <p>${productBestList[7].product_brand }<br></p>
-        <p>${productBestList[7].product_name }<br><b>${productBestList[7].product_price }</b></p><!-- 8번째 그리드 -->
+        <p>${productBestList[7].product_name }<br><b><fmt:formatNumber value="${productBestList[7].product_price }" pattern="#,###" /></b></p><!-- 8번째 그리드 -->
       </div>
     </div>
 </div>
@@ -224,7 +226,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </div>
         </div>
         <p>${productNewList[0].product_brand }<br></p>
-        <p>${productNewList[0].product_name }<br><b>${productNewList[0].product_price }</b></p><!-- 1번째 그리드 -->
+        <p>${productNewList[0].product_name }<br><b><fmt:formatNumber value="${productNewList[0].product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 -->
       </div>
       <div class="w3-container">
         <div class="w3-display-container">
@@ -234,7 +236,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </div>
         </div>
         <p>${productNewList[4].product_brand }<br></p>
-        <p>${productNewList[4].product_name }<br><b>${productNewList[4].product_price }</b></p><!-- 5번째 그리드 -->
+        <p>${productNewList[4].product_name }<br><b><fmt:formatNumber value="${productNewList[4].product_price }" pattern="#,###" /></b></b></p><!-- 5번째 그리드 -->
       </div>
     </div>
     
@@ -247,7 +249,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </div>
         </div>
         <p>${productNewList[1].product_brand }<br></p>
-        <p>${productNewList[1].product_name }<br><b>${productNewList[1].product_price }</b></p><!-- 2번째 그리드 -->
+        <p>${productNewList[1].product_name }<br><b><fmt:formatNumber value="${productNewList[1].product_price }" pattern="#,###" /></b></b></p><!-- 2번째 그리드 -->
       </div>
       <div class="w3-container">
         <div class="w3-display-container">
@@ -257,7 +259,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </div>
         </div>
         <p>${productNewList[5].product_brand }<br></p>
-        <p>${productNewList[5].product_name }<br><b>${productNewList[5].product_price }</b></p><!-- 6번째 그리드 -->
+        <p>${productNewList[5].product_name }<br><b><fmt:formatNumber value="${productNewList[5].product_price }" pattern="#,###" /></b></b></p><!-- 6번째 그리드 -->
       </div>
     </div>
 
@@ -270,7 +272,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </div>
         </div>
         <p>${productNewList[2].product_brand }<br></p>
-        <p>${productNewList[2].product_name }<br><b>${productNewList[2].product_price }</b></p><!-- 3번째 그리드 -->
+        <p>${productNewList[2].product_name }<br><b><fmt:formatNumber value="${productNewList[2].product_price }" pattern="#,###" /></b></b></p><!-- 3번째 그리드 -->
       </div>
       <div class="w3-container">
         <div class="w3-display-container">
@@ -280,7 +282,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </div>
         </div>
         <p>${productNewList[6].product_brand }<br></p>
-        <p>${productNewList[6].product_name }<br><b>${productNewList[6].product_price }</b></p><!-- 7번째 그리드 -->
+        <p>${productNewList[6].product_name }<br><b><fmt:formatNumber value="${productNewList[6].product_price }" pattern="#,###" /></b></b></p><!-- 7번째 그리드 -->
       </div>
     </div>
     
@@ -293,7 +295,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </div>
         </div>
         <p>${productNewList[3].product_brand }<br></p>
-        <p>${productNewList[3].product_name }<br><b>${productNewList[3].product_price }</b></p><!-- 4번째 그리드 -->
+        <p>${productNewList[3].product_name }<br><b><fmt:formatNumber value="${productNewList[3].product_price }" pattern="#,###" /></b></b></p><!-- 4번째 그리드 -->
       </div>
       <div class="w3-container">
         <div class="w3-display-container">
@@ -303,7 +305,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </div>
         </div>
         <p>${productNewList[7].product_brand }<br></p>
-        <p>${productNewList[7].product_name }<br><b>${productNewList[7].product_price }</b></p><!-- 8번째 그리드 -->
+        <p>${productNewList[7].product_name }<br><b><fmt:formatNumber value="${productNewList[7].product_price }" pattern="#,###" /></b></b></p><!-- 8번째 그리드 -->
       </div>
     </div>
 </div>
