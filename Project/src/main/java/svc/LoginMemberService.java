@@ -89,8 +89,4 @@ public class LoginMemberService {
 	public static MemberBean getMemberByNameAndEmail(String name, String email) {
 		return null;
 	}
-	
-	
-	
-
 }
