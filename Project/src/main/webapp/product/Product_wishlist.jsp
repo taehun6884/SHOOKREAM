@@ -108,7 +108,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <td>${wish.product_brand }</td>
       <td>${wish.product_price }</td>
       <td>${wish.product_size }</td>
-      <td><button type="button" class="btn btn-dark" onclick="location.href='CartDeletePro.ca?cart_idx=${wish.wish_idx }'">삭제</button></td>
+      <td><button type="button" class="btn btn-dark" onclick="location.href='LikeDeletePro.ca?member_idx=${sessionScope.member_idx}&product_idx=${wish.product_idx }'">삭제</button></td>
     </tr>
     </c:forEach>
   </tbody>
