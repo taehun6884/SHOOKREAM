@@ -23,8 +23,9 @@ public class LikeDeleteProService {
 
 			if (updateCount > 0) {
 				deleteWish = true;
-				JdbcUtil.commit(con);
+				JdbcUtil.commit(con); 
 			}
+			
 		} else {
 			JdbcUtil.rollback(con);
 		}
@@ -32,6 +33,6 @@ public class LikeDeleteProService {
 		JdbcUtil.close(con);
 
 		return deleteWish;
-	}
+		}
 
-}
+	}
