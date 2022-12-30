@@ -24,6 +24,8 @@ private String product_img3; // 추가 사진2
 private Timestamp product_date; // 등록일
 private int product_wishcount; // 좋아요 누적수
 private int cart_idx; //카트 번호
+private int member_idx; // 좋아요 누른 회원
+private int wish_idx; // 좋아요 번호
 //------------getter, setter-------------------
 public int getProduct_idx() {
 	return product_idx;
@@ -139,6 +141,20 @@ public int getProduct_wishcount() {
 }
 public void setProduct_wishcount(int product_wishcount) {
 	this.product_wishcount = product_wishcount;
+}
+public int getMember_idx() {
+	return member_idx;
+}
+public void setMember_idx(int member_idx) {
+	this.member_idx = member_idx;
+}
+
+
+public int getWish_idx() {
+	return wish_idx;
+}
+public void setWish_idx(int wish_idx) {
+	this.wish_idx = wish_idx;
 }
 //--------------toString----------------
 @Override

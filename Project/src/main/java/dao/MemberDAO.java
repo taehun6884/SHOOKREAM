@@ -22,6 +22,7 @@ import javax.mail.internet.MimeMessage;
 import db.JdbcUtil;
 import mail.GoogleMailAuthenticator;
 import vo.MemberBean;
+import vo.WishBean;
 
 public class MemberDAO {
 private MemberDAO() {}
@@ -441,9 +442,6 @@ private MemberDAO() {}
 				}
 				return flag;
 			} // 비밀번호 찾기() 끝
-
-<<<<<<< Updated upstream
-			
 			
 			// 아이디 찾기
 		public String findID(MemberBean member) {
@@ -471,7 +469,6 @@ private MemberDAO() {}
 			return id;
 		} //아이디 찾기() 끝
 	
-=======
 			// 아이디/비밀번호 찾기
 			
 			public boolean findID(MemberBean member) {
@@ -516,15 +513,67 @@ private MemberDAO() {}
 					System.out.println("이메일 중복 확인 실패:" + e);
 					e.printStackTrace();
 				}finally {
+
+      		return flag;
+			}//아이디 찾기() 끝
+			
+			// 찜한 상품 조회
+			public WishBean selectWish(int member_idx) {
+				WishBean wish = null;
+				
+				ResultSet rs  = null;
+				PreparedStatement pstmt = null;
+				
+				try {
+					String sql = "SELECT * FROM wish WHERE member_idx=?";
+					
+					pstmt = con.prepareStatement(sql);
+					pstmt.setInt(1, member_idx);
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						wish = new WishBean();
+						wish.setMember_idx(rs.getInt("member_idx"));
+						wish.setWish_idx(rs.getInt("wish_idx"));
+						wish.setProduct_idx(rs.getInt("product_idx"));
+						
+						System.out.println(wish);
+					}
+				} catch (SQLException e) {
+					System.out.println("SQL 구문 오류 - selectWish()");
+					e.printStackTrace();
+				} finally {
+					JdbcUtil.close(rs);
+					JdbcUtil.close(pstmt);
+				}
+						return wish;
+			}
+			// 임시 비밀번호 발급받아 member 테이블 수정하기
+			public int selectMemberIdx(String sId) {
+				int member_idx = 0;
+				
+				ResultSet rs  = null;
+				PreparedStatement pstmt = null;
+				
+				try {
+					String sql = "SELECT member_idx FROM member WHERE member_id=?";
+					
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, sId);
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						member_idx = rs.getInt(1);
+					}
+					
+				} catch (SQLException e) {
+					System.out.println("SQL 구문 오류 - selectMemberIdx()");
+					e.printStackTrace();
+				} finally {
 					JdbcUtil.close(rs);
 					JdbcUtil.close(pstmt);
 				}
 				
-				return flag;
-			}//아이디 찾기() 끝
-
-			// 임시 비밀번호 발급받아 member 테이블 수정하기
-
-		
->>>>>>> Stashed changes
+				return member_idx;
+			}
 }

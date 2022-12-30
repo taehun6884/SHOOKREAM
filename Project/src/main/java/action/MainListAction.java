@@ -18,7 +18,7 @@ public class MainListAction implements Action {
 		ProductListService service = new ProductListService();
 		
 		// 베스트 상품 가져오기
-		List<ProductBean> productBestList = service.getProdoctBestList();
+		List<ProductBean> productBestList = service.getProductBestList();
 		request.setAttribute("productBestList", productBestList);
 		
 		// 최근 등록 상품 가져오기
