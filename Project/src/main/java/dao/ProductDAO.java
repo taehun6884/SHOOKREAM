@@ -1115,7 +1115,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			String sql="SELECT w.wish_idx, i.image_main_file,m.member_id,p.product_price,p.product_name,"
-					+ "p.product_brand,p.product_size,p.product_color "
+					+ "p.product_brand,p.product_size,p.product_color,p.product_idx "
 					+ "FROM shookream.wish w JOIN shookream.product p JOIN shookream.member m JOIN shookream.image i "
 					+ "ON w.product_idx = p.product_idx AND w.member_idx = m.member_idx AND w.product_idx = i.product_idx "
 					+ "WHERE m.member_idx=? "
@@ -1133,6 +1133,7 @@ private ProductDAO() {}
 					ProductBean vo = new ProductBean();
 					vo.setWish_idx(rs.getInt("wish_idx"));
 					vo.setProduct_name(rs.getString("product_name"));
+					vo.setProduct_idx(rs.getInt("product_idx")); // 찜 삭제 위해 필요함
 					vo.setProduct_size(rs.getNString("product_size"));
 					vo.setProduct_price(rs.getInt("product_price"));
 					vo.setProduct_brand(rs.getNString("product_brand"));
