@@ -72,8 +72,80 @@ margin-left: 270PX;
 
 </style>
 
+<script src="jquery/jquery-3.6.3.js"></script>
+<script type="text/javascript">
+
+// function btnWishFn() {
+<%-- 	var checkLogin = '<%=(String)session.getAttribute("sId")%>'; --%>
+	
+// 	if(checkLogin == "null"){
+// 		alert("로그인 후 이용 가능합니다.");
+// 		location.href="LoginMember.me";
+// 	} 
+// }
+
+$(document).ready(function() {
+
+	$('#btnBeforWish').click(function(){
+
+		var checkLogin = '<%=(String)session.getAttribute("sId")%>';
+		
+		if(checkLogin == "null"){
+			alert("로그인 후 이용 가능합니다.");
+			location.href="LoginMember.me";
+			}
+		});
+	});
+
+// 찜하기
+$(function() {
+	$("#btnBeforWish").on("click", function() {
+			
+			$.ajax({
+				type: "post", 
+				url: "LikeInsertPro.ca", 
+				data: { 
+					member_idx: ${sessionScope.member_idx},
+					product_idx: $("#product_idx").val()
+				},	
+				dataType: "html", 
+				success: function(data) { 
+						$("#btnWishBeforImage").attr("src", "images/after_heart.png");
+						$('#wishLoad').load(location.href+' #wishLoad')
+						alert("찜한 상품에 추가되었습니다!");
+				}, 
+				error: function(xhr, textStatus, errorThrown) {
+					alert("찜하기 실패"); 
+				}
+			});
+	});
+});
 
 
+//찜하기 취소
+$(function() {
+	$("#btnAfterWish").on("click", function() {
+			
+			$.ajax({
+				type: "post", 
+				url: "LikeDeletePro.ca", 
+				data: { 
+					member_idx: ${sessionScope.member_idx},
+					product_idx: $("#product_idx").val()
+				},	
+				dataType: "html", 
+				success: function(data) { 
+						$("#btnWishAfterImage").attr("src", "images/before_heart.png");
+						alert("찜한 상품에서 삭제했습니다!");
+						$('#wishLoad').load(location.href+' #wishLoad')
+				}, 
+				error: function(xhr, textStatus, errorThrown) {
+					alert("찜 삭제 실패"); 
+				}
+			});
+	});
+});
+</script>
 </head>
 <body class="w3-content" style="max-width:1200px">
 
@@ -128,30 +200,49 @@ margin-left: 270PX;
 			<p class="prod_title">구매후기(별점) </p>
 			<hr>
 			<p class="prod_title">색상</p>
-			<input type="button" value="black">
-			<input type="button" value="white">
-			<input type="button" value="blue">
-			<input type="button" value="yellow">
+			<select name="product_color">
+				<option selected>색깔</option>
+				<option value="black">black</option>
+				<option value="yellow">yellow</option>
+				<option value="red">red</option>
+				<option value="blue">blue</option>
+			</select>
 			<hr>
 
 		</div>
 		<div id="detail2" >
 			<p>사이즈</p>
-			<select>
+			<select name="product_size">
 				<option selected>사이즈</option>
-				<option>220</option>
-				<option>230</option>
-				<option>240</option>
-				<option>250</option>
-				<option>260</option>	
-				<option>270</option>
-				<option>280</option>
-				<option>290</option>
+				<option value="220">220</option>
+				<option value="230">230</option>
+				<option value="240">240</option>
+				<option value="250">250</option>
+				<option value="260">260</option>	
+				<option value="270">270</option>
+				<option value="280">280</option>
+				<option value="280">290</option>
 			</select>
 			<hr>
-
 			<input type="button" value="좋아요">
-			<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${param.member_idx}'">
+			<input type="hidden" id="product_idx" value="${product.product_idx }">
+		<span id="wishLoad">
+			<c:choose>
+				<c:when test="${wish.product_idx eq product.product_idx }">
+					<button id="btnAfterWish" >
+					<img alt="" src="images/after_heart.png" id="btnWishAfterImage" style="width: 30px; height: 30px;"/>
+					</button>
+				</c:when>
+				<c:otherwise>
+					<button id="btnBeforWish" onclick="btnWishFn()">
+					<img alt="" src="images/before_heart.png" id="btnWishBeforImage" style="width: 30px; height: 30px;"/>
+					</button>
+				</c:otherwise>
+			</c:choose>
+		</span>	
+		
+		<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${member_idx}'">
+
 			<button onclick="iamport()">구매하기</button>
 		</div>
 	</section>
@@ -226,6 +317,8 @@ margin-left: 270PX;
 <!-- </div> -->
 
 <script>
+
+
 // Accordion 
 function myAccFunc() {
   var x = document.getElementById("demoAcc");
@@ -304,6 +397,7 @@ function w3_close() {
 	  }
 	}
 </script>
+<!-- 주문하기 -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript">

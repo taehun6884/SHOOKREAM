@@ -77,7 +77,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
-    <p class="w3-left">장바구니</p>
+    <p class="w3-left">찜 목록</p>
     <p class="w3-right">
       <i class="fa fa-shopping-cart w3-margin-right"></i>
       <i class="fa fa-search"></i>
@@ -100,32 +100,19 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   </thead>
   <tbody>
     
-    <c:forEach var="cart" items="${cartlist }">
+    <c:forEach var="wish" items="${wishlist }">
     <tr>
-      <th scope="row">${cart.cart_idx }</th>
-      <td><img src="upload/${cart.product_img }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
-      <td>${cart.product_name }</td>
-      <td>${cart.product_brand }</td>
-      <td>${cart.product_price }</td>
-      <td>${cart.product_size }</td>
-      <td>
-      <button type="button" class="btn btn-dark" onclick="location.href='ProductInfoForm.po?product_idx=${cart.product_idx }'">상세내용</button>
-      <button type="button" class="btn btn-dark" onclick="location.href='CartDeletePro.ca?cart_idx=${cart.cart_idx }'">삭제</button>
-      </td>
+      <th scope="row">${wish.wish_idx }</th>
+      <td><img src="upload/${wish.product_img }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
+      <td>${wish.product_name }</td>
+      <td>${wish.product_brand }</td>
+      <td>${wish.product_price }</td>
+      <td>${wish.product_size }</td>
+      <td><button type="button" class="btn btn-dark" onclick="location.href='LikeDeletePro.ca?member_idx=${sessionScope.member_idx}&product_idx=${wish.product_idx }'">삭제</button></td>
     </tr>
     </c:forEach>
   </tbody>
 </table>
-	<div class="container px-4 text-center">
-	  <div class="row gx-5">
-	    <div class="col">
-	     <div class="p-3 border bg-light"><h4>총 금액:${total }</h4> </div>
-	    </div>
-	    <div class="col">
-	      <div class="p-3 border bg-light"><button onclick="iamport()">구매하기</button></div>
-	    </div>
-	  </div>
-</div>
 <!-- 페이징 처리 -->	
 	<div class="paging">
         <c:choose>
@@ -144,14 +131,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 					${i }
 				</c:when>
 				<c:otherwise>
-					<a href="CartList.ca?pageNum=${i }&member_idx=${member_idx }">${i }</a>
+					<a href="LikeList.ca?pageNum=${i }&member_idx=${member_idx }">${i }</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		
 		<c:choose>
 			<c:when test="${param.pageNum < pageInfo.maxPage}">
-				<a href="CartList.ca?pageNum=${param.pageNum + 1 }&member_idx=${member_idx }">다음</a>
+				<a href="LikeList.ca?pageNum=${param.pageNum + 1 }&member_idx=${member_idx }">다음</a>
 			</c:when>
 			<c:otherwise>
 				<a href="javascript:void(0)">다음</a>
@@ -184,14 +171,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
-<script type="text/javascript">
-	function order() {
-		
-	}
-
-
-</script>
-
 <script>
 // Accordion 
 function myAccFunc() {
@@ -258,38 +237,6 @@ function w3_close() {
   ChannelIO('boot', {
     "pluginKey": "552ea0bb-d4a5-4c70-8ba7-463b7682c434"
   });
-</script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-<script type="text/javascript">
-function iamport(){
-		//가맹점 식별코드
-		IMP.init('imp77718215');
-		IMP.request_pay({
-		    pg : 'kakaopay',
-		    pay_method : 'card',
-		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : '${product.product_name}' , //결제창에서 보여질 이름
-		    amount : '${total }', //실제 결제되는 가격
-		    buyer_name : '${sessionScope.sId}',
-		}, function(rsp) {
-			console.log(rsp);
-		    if ( rsp.success ) {
-		    	var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		        location.href="ProductOrderPro.po?order_category=주문완료&order_progress=배송완료&member_idx=${member_idx}&product_idx=${product.product_idx}&product_amount=${product.product_amount}&product_sell_count=${product.product_sell_count} ";
-		    } else {
-		    	 var msg = '결제에 실패하였습니다.';
-		         msg += '에러내용 : ' + rsp.error_msg;
-		         window.history.back();
-		    }
-		    alert(msg);
-		    
-		});
-	}
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
