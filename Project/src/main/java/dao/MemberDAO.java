@@ -8,12 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
-import javax.mail.Address;
 import javax.mail.Message;
-import javax.mail.Message.RecipientType;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -471,51 +468,6 @@ private MemberDAO() {}
 	
 			// 아이디/비밀번호 찾기
 			
-			public boolean findID(MemberBean member) {
-				boolean flag = false;
-				
-				PreparedStatement pstmt = null;
-				ResultSet rs = null;
-				
-				try {
-					// 1) 이름/이메일과 일치하는 아이디 가져오기
-					String sql = "SELECT id FROM member WHERE member_name=? AND member_id=?";
-					pstmt = con.prepareStatement(sql);
-					pstmt.setString(1, member.getMember_name());
-					pstmt.setString(2, member.getMember_id());
-					rs = pstmt.executeQuery();
-					
-					if(rs.next()) { // 이름과 이메일이 일치한 경우
-						String id = rs.getString("id"); // 아이디
-						
-						// 임시 비밀번호 발급
-						//대문자, 소문자, 숫자 이용 배열 만들기
-						String[] ch = {
-							"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
-							"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z,",
-							"0","1","2","3","4","5","6","7","8","9"
-						};
-						StringBuilder imsiPw = new  StringBuilder();
-						for(int i=0; i < 16; i++) {
-							int num = (int)(Math.random()*ch.length);
-							imsiPw.append(ch[num]);
-						}
-						
-						// 임시 비밀번호로 테이블 수정하기
-						sql = new StringBuilder();
-						sql
-						
-					} else {
-						flag = false;
-					}
-				}catch (SQLException e) {
-					System.out.println("sql 구문 오류 - findID()");
-					System.out.println("이메일 중복 확인 실패:" + e);
-					e.printStackTrace();
-				}finally {
-
-      		return flag;
-			}//아이디 찾기() 끝
 			
 			// 찜한 상품 조회
 			public WishBean selectWish(int member_idx) {

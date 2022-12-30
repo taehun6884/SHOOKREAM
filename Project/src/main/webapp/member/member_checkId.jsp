@@ -45,6 +45,7 @@
 			<p style="color: red">이미 사용 중인 아이디입니다.</p>
 			<input type="hidden" name="chResult" value="N"/>
 		</c:when>
+		<c:when test="${result==0}">	
 			<p style="color: blue">사용가능한 아이디입니다.</p>
 			<input type="hidden" name="chResult" value="Y"/>
 		</c:when>
