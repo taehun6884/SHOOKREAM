@@ -550,8 +550,7 @@ private MemberDAO() {}
 					
 					sql = "INSERT INTO review VALUES(?,?,?,?,?,?,now(),?)";
 					pstmt2 = con.prepareStatement(sql);
-					
-					insertCount = pstmt2.executeUpdate();
+
 					pstmt2.setInt(1, review_idx);
 					pstmt2.setInt(2, review.getProduct_idx());
 					pstmt2.setInt(3, review.getMember_idx());
@@ -560,7 +559,9 @@ private MemberDAO() {}
 					pstmt2.setString(6, review.getReview_real_img());
 					pstmt2.setString(7, review.getRe_order_detail());
 					
+					System.out.println("리뷰 > DAO 확인 : " + pstmt2);
 					
+					insertCount = pstmt2.executeUpdate();
 					} catch (SQLException e) {
 						System.out.println("SQL 구문 오류! - insertReview()");
 						e.printStackTrace();

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>로그인</title>
+<title>SHOOKREAM</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -54,6 +54,18 @@
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
+<script>
+	// 리뷰작성 폼 팝업 <<<<<url 파라미터 변경하기!>>>>
+	function reviewForm() {
+		let url = "ReviewWriteForm.me?member_idx=3&product_idx=12397";  // 테스트용 파라미터임!
+		let name = "review form";
+		let attr = "width=600, height=600, top=200, left=510"
+		
+		window.open(url, name, attr);
+	}
+	
+</script>
+
 </head>
 <body class="w3-content" style="max-width:1200px">
 <!-- Sidebar/menu -->
@@ -85,6 +97,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
    
   <!-- Footer -->
   <footer class="w3-padding-64 w3-small w3-center" id="footer">
+  <form action="ReviewWrite.me" method="post">
+  <input type="hidden" name="member_idx" value="3" > <%-- value 값 수정 하기!!!!꼭!!! --%>
+  <input type="hidden" name="product_idx" value="12398" >
   <table class="table">
   <thead  class="table-dark" >
     <tr>
@@ -94,11 +109,21 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <th scope="col">brand</th>
       <th scope="col">price</th>
       <th scope="col">size</th>
+      <th scope="col">review</th>
       <th scope="col">delete</th>
     </tr>
   </thead>
-  <tbody>
-    
+  <tbody id="tableList">
+    <tr> <%--여기 <tr> 삭제해야함. 테스트용 --%>
+    	<td>1</td>	
+    	<td><img src="./images/logo.jpg"></td>	
+    	<td>슈크림신발</td>	
+    	<td>슈크림</td>	
+    	<td>130,000</td>	
+    	<td>230</td>	
+    	<td><input type="button" value="리뷰 작성하기" class="btn btn-dark btn-sm" onclick="reviewForm()"></td>	
+    	<td><input type="button" value="삭제인척 삭제안함" class="btn btn-dark btn-sm"></td>	
+    </tr> <%--여기까지 --%>
     <c:forEach var="order" items="${orderlist }">
     <tr>
       <td><img src="upload/${order.order_main_image }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
@@ -107,11 +132,13 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <td>${order.order_category }</td>
       <td>${order.order_progress }</td>
       <td>${order.order_date }</td>
+	  <td><input type="button" value="리뷰 작성하기" class="btn btn-dark" onclick="reviewForm()"></td>
       <td><button type="button" class="btn btn-dark" >삭제</button></td>
     </tr>
     </c:forEach>
   </tbody>
 </table>
+</form>
 <div class="paging">
         <c:choose>
 			<c:when test="${param.pageNum > 1}">

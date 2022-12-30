@@ -85,11 +85,11 @@ public class MemberController extends HttpServlet{
 			forward = action.execute(request, response);
 		} else if(command.equals("/ReviewWriteForm.me")) {	// 회원 리뷰 작성 폼(구매목록에서)
 			forward = new ActionForward();
-			forward.setPath("board/review_write_form.jsp");
+			forward.setPath("product/review_write_form.jsp");
 			forward.setRedirect(false);
 		} else if(command.equals("/ReviewWrite.me")) { 
 			action = new ReviewWriteProAction();
-
+			forward = action.execute(request, response);
 		}else if(command.equals("/FindMemberIdForm.me")) { // 아이디 찾기
 			forward = new ActionForward(); 
 			forward.setPath("member/findIDForm.jsp");
@@ -100,7 +100,6 @@ public class MemberController extends HttpServlet{
 			forward.setRedirect(false);
 		}else if(command.equals("/FindIdFormAction.me")) { // 아이디 찾기 pro
 			action = new FindMemberIdProAction();
-
 			forward = action.execute(request, response);
 		}
 			
