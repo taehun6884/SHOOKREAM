@@ -51,25 +51,25 @@
 			<h3>자주묻는 질문</h3>
 			<hr style="border:solid 2px black;">
 			
-			<div class="container">
-			  <div class="row">
-			    <div class="col">
-			      회원정보
-			    </div>
-			    <div class="col">
-			      교환/반품
-			    </div>
-			    <div class="col">
-			     배송
-			    </div>
-			    <div class="col">
-			     주문/결제
-			    </div>
-			    <div class="col">
-			     서비스
-			    </div>
-			  </div>
-			</div>
+<!-- 			<div class="container"> -->
+<!-- 			  <div class="row"> -->
+<!-- 			    <div class="col"> -->
+<!-- 			      회원정보 -->
+<!-- 			    </div> -->
+<!-- 			    <div class="col"> -->
+<!-- 			      교환/반품 -->
+<!-- 			    </div> -->
+<!-- 			    <div class="col"> -->
+<!-- 			     배송 -->
+<!-- 			    </div> -->
+<!-- 			    <div class="col"> -->
+<!-- 			     주문/결제 -->
+<!-- 			    </div> -->
+<!-- 			    <div class="col"> -->
+<!-- 			     서비스 -->
+<!-- 			    </div> -->
+<!-- 			  </div> -->
+<!-- 			</div> -->
 			
 			<table class="table">
 			  <c:choose>

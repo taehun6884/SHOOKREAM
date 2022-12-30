@@ -10,6 +10,7 @@ import dao.MemberDAO;
 import db.JdbcUtil;
 import vo.MemberBean;
 import vo.ResultData;
+import vo.WishBean;
 
 public class LoginMemberService {
 
@@ -88,7 +89,8 @@ public class LoginMemberService {
 	public static MemberBean getMemberByNameAndEmail(String name, String email) {
 		return null;
 	}
-
+	
+	
 	
 
 }

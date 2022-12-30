@@ -22,4 +22,18 @@ public class MemberIdCheckService {
 		return result;
 	}
 
+	public int getMemberIdx(String sId) {
+		int member_idx = 0;
+		
+		Connection con = JdbcUtil.getConnection();
+		
+		MemberDAO dao = MemberDAO.getInstance();
+		
+		dao.setConnection(con);
+		
+		member_idx = dao.selectMemberIdx(sId);
+		
+		return member_idx;
+	}
+
 }

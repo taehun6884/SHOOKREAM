@@ -72,8 +72,80 @@ margin-left: 270PX;
 
 </style>
 
+<script src="jquery/jquery-3.6.3.js"></script>
+<script type="text/javascript">
+
+// function btnWishFn() {
+<%-- 	var checkLogin = '<%=(String)session.getAttribute("sId")%>'; --%>
+	
+// 	if(checkLogin == "null"){
+// 		alert("로그인 후 이용 가능합니다.");
+// 		location.href="LoginMember.me";
+// 	} 
+// }
+
+$(document).ready(function() {
+
+	$('#btnBeforWish').click(function(){
+
+		var checkLogin = '<%=(String)session.getAttribute("sId")%>';
+		
+		if(checkLogin == "null"){
+			alert("로그인 후 이용 가능합니다.");
+			location.href="LoginMember.me";
+			}
+		});
+	});
+
+// 찜하기
+$(function() {
+	$("#btnBeforWish").on("click", function() {
+			
+			$.ajax({
+				type: "post", 
+				url: "LikeInsertPro.ca", 
+				data: { 
+					member_idx: ${sessionScope.member_idx},
+					product_idx: $("#product_idx").val()
+				},	
+				dataType: "html", 
+				success: function(data) { 
+						$("#btnWishBeforImage").attr("src", "images/after_heart.png");
+						$('#wishLoad').load(location.href+' #wishLoad')
+						alert("찜한 상품에 추가되었습니다!");
+				}, 
+				error: function(xhr, textStatus, errorThrown) {
+					alert("찜하기 실패"); 
+				}
+			});
+	});
+});
 
 
+//찜하기 취소
+$(function() {
+	$("#btnAfterWish").on("click", function() {
+			
+			$.ajax({
+				type: "post", 
+				url: "LikeDeletePro.ca", 
+				data: { 
+					member_idx: ${sessionScope.member_idx},
+					product_idx: $("#product_idx").val()
+				},	
+				dataType: "html", 
+				success: function(data) { 
+						$("#btnWishAfterImage").attr("src", "images/before_heart.png");
+						alert("찜한 상품에서 삭제했습니다!");
+						$('#wishLoad').load(location.href+' #wishLoad')
+				}, 
+				error: function(xhr, textStatus, errorThrown) {
+					alert("찜 삭제 실패"); 
+				}
+			});
+	});
+});
+</script>
 </head>
 <body class="w3-content" style="max-width:1200px">
 
@@ -153,9 +225,25 @@ margin-left: 270PX;
 				<option value="280">290</option>
 			</select>
 			<hr>
-
 			<input type="button" value="좋아요">
-			<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${member_idx}'">
+			<input type="hidden" id="product_idx" value="${product.product_idx }">
+		<span id="wishLoad">
+			<c:choose>
+				<c:when test="${wish.product_idx eq product.product_idx }">
+					<button id="btnAfterWish" >
+					<img alt="" src="images/after_heart.png" id="btnWishAfterImage" style="width: 30px; height: 30px;"/>
+					</button>
+				</c:when>
+				<c:otherwise>
+					<button id="btnBeforWish" onclick="btnWishFn()">
+					<img alt="" src="images/before_heart.png" id="btnWishBeforImage" style="width: 30px; height: 30px;"/>
+					</button>
+				</c:otherwise>
+			</c:choose>
+		</span>	
+		
+		<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${member_idx}'">
+
 			<button onclick="iamport()">구매하기</button>
 		</div>
 	</section>
@@ -174,6 +262,7 @@ margin-left: 270PX;
 		</tr>
 		
 	</table>
+	
     <!-- 
 <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
    -->
@@ -228,6 +317,8 @@ margin-left: 270PX;
 <!-- </div> -->
 
 <script>
+
+
 // Accordion 
 function myAccFunc() {
   var x = document.getElementById("demoAcc");
