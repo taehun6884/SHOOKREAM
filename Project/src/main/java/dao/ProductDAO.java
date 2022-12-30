@@ -1055,17 +1055,20 @@ private ProductDAO() {}
 			PreparedStatement pstmt = null;
 			
 			try {
-			String sql="UPDATE product p INNER JOIN wish w "
-					+ "ON p.product_idx = w.product_idx "
-					+ "SET p.product_wishcount = p.product_wishcount - 1 "
-					+ "WHERE p.product_idx = ?";
-			
+//			String sql="UPDATE product p INNER JOIN wish w "
+//					+ "ON p.product_idx = w.product_idx "
+//					+ "SET p.product_wishcount = p.product_wishcount - 1 "
+//					+ "WHERE p.product_idx = ?";
+				String sql="UPDATE product "
+						+ "SET product_wishcount = product_wishcount - 1 "
+						+ "WHERE product_idx = ?";
+				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1,product_idx );
-				
+				System.out.println(pstmt);
 				updateCount = pstmt.executeUpdate();
 				
-				System.out.println("updateCount : " + updateCount);
+				System.out.println("updateCount111 : " + updateCount);
 				
 			} catch (SQLException e) {
 				System.out.println("SQL 구문 오류 - DecWishCount()");

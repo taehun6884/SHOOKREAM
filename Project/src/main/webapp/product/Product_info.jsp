@@ -72,7 +72,7 @@ margin-left: 270PX;
 
 </style>
 
-<script src="jquery/jquery-3.6.3.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript">
 
 // function btnWishFn() {
@@ -84,67 +84,125 @@ margin-left: 270PX;
 // 	} 
 // }
 
-$(document).ready(function() {
 
-	$('#btnBeforWish').click(function(){
-
-		var checkLogin = '<%=(String)session.getAttribute("sId")%>';
-		
-		if(checkLogin == "null"){
-			alert("로그인 후 이용 가능합니다.");
-			location.href="LoginMember.me";
-			}
-		});
-	});
 
 // 찜하기
-$(function() {
-	$("#btnBeforWish").on("click", function() {
+// $(function() {
+// 	$("#beforeHeart").on("click", function() {
+		
+// // 		alert("btnBeforWish");
+<%-- 		var checkLogin = '<%=(String)session.getAttribute("sId")%>'; --%>
+		
+// 		if(checkLogin == "null"){
+// 			alert("로그인 후 이용 가능합니다.");
+// 			location.href="LoginMember.me";
+// 		}
+// 	});	
+// 			$.ajax({
+// 				type: "post", 
+// 				url: "LikeInsertPro.ca", 
+// 				data: { 
+// 					member_idx: ${sessionScope.member_idx},
+// 					product_idx: $("#product_idx").val()
+// 				},	
+// 				dataType: "html", 
+// 				success: function(data) { 
+// // 						$("#btnWishBeforImage").attr("src", "images/after_heart.png");
+// // 						$('#wishLoad').load(location.href+' #wishLoad')
+		
+// 						alert("찜한 상품에 추가되었습니다!");
+						
+// 						$(".wishBtn").html('<img id="afterHeart" alt="" src="images/after_heart.png" id="btnWishAfterImage" style="width: 30px; height: 30px;"/>');
+// 				}, 
+// 				error: function(xhr, textStatus, errorThrown) {
+// 					alert("찜하기 실패"); 
+// 				}
+// 			});
+// 		});
+			
+// 	$("#afterHeart").on("click", function() {
+// 		alert("btnAfterWish");
+// 			$.ajax({
+// 				type: "post", 
+// 				url: "LikeDeletePro.ca", 
+// 				data: { 
+// 					member_idx: ${sessionScope.member_idx},
+// 					product_idx: $("#product_idx").val()
+// 				},	
+// 				dataType: "html", 
+// 				success: function(data) { 
+// // 						$("#btnWishAfterImage").attr("src", "images/before_heart.png");
+// 						alert("찜한 상품에서 삭제했습니다!");
+// // 						$('#wishLoad').load(location.href+' #wishLoad')
+// 						$(".wishBtn").html('<img id="beforeHeart" alt="" src="images/before_heart.png" id="btnWishBeforImage" style="width: 30px; height: 30px;"/>');
+// 				}, 
+// 				error: function(xhr, textStatus, errorThrown) {
+// 					alert("찜 삭제 실패"); 
+// 				}
+// 			});
+// 	});
+	
+	
+			
+// });
+
+	
+	function deleteWish() {
+		$.ajax({
+			type: "post", 
+			url: "LikeDeletePro.ca", 
+			data: { 
+				member_idx: '${sessionScope.member_idx}',
+				product_idx: $("#product_idx").val()
+			},	
+			dataType: "html", 
+			success: function(data) { 
+	//					$("#btnWishAfterImage").attr("src", "images/before_heart.png");
+					alert("찜한 상품에서 삭제했습니다!");
+	//					$('#wishLoad').load(location.href+' #wishLoad')
+					$(".wishBtn").html('<img id="beforeHeart" alt="" src="images/before_heart.png" id="btnWishBeforImage" onclick="addWish()" style="width: 30px; height: 30px;"/>');
+			}, 
+			error: function(xhr, textStatus, errorThrown) {
+				alert("찜 삭제 실패"); 
+			}
+		});
+	}
+		
+	function addWish() {
+		
+		var checkLogin = '<%=(String)session.getAttribute("sId")%>';
+// 		var checkLogin = ${sessionScope.member_idx};
+		
+		if( checkLogin == "null"){
+			alert("로그인 후 이용 가능합니다.");
+			location.href="LoginMember.me";
+			
+		} else {
 			
 			$.ajax({
 				type: "post", 
 				url: "LikeInsertPro.ca", 
 				data: { 
-					member_idx: ${sessionScope.member_idx},
+					member_idx: '${sessionScope.member_idx}',
 					product_idx: $("#product_idx").val()
 				},	
 				dataType: "html", 
 				success: function(data) { 
-						$("#btnWishBeforImage").attr("src", "images/after_heart.png");
-						$('#wishLoad').load(location.href+' #wishLoad')
+	//						$("#btnWishBeforImage").attr("src", "images/after_heart.png");
+	//						$('#wishLoad').load(location.href+' #wishLoad')
+		
 						alert("찜한 상품에 추가되었습니다!");
+						
+						$(".wishBtn").html('<img id="afterHeart" alt="" src="images/after_heart.png" id="btnWishAfterImage" onclick="deleteWish()" style="width: 30px; height: 30px;"/>');
 				}, 
 				error: function(xhr, textStatus, errorThrown) {
 					alert("찜하기 실패"); 
 				}
 			});
-	});
-});
-
+		}
+	}
 
 //찜하기 취소
-$(function() {
-	$("#btnAfterWish").on("click", function() {
-			
-			$.ajax({
-				type: "post", 
-				url: "LikeDeletePro.ca", 
-				data: { 
-					member_idx: ${sessionScope.member_idx},
-					product_idx: $("#product_idx").val()
-				},	
-				dataType: "html", 
-				success: function(data) { 
-						$("#btnWishAfterImage").attr("src", "images/before_heart.png");
-						alert("찜한 상품에서 삭제했습니다!");
-						$('#wishLoad').load(location.href+' #wishLoad')
-				}, 
-				error: function(xhr, textStatus, errorThrown) {
-					alert("찜 삭제 실패"); 
-				}
-			});
-	});
-});
 </script>
 </head>
 <body class="w3-content" style="max-width:1200px">
@@ -227,14 +285,14 @@ $(function() {
 		<span id="wishLoad">
 			<c:choose>
 				<c:when test="${wish.product_idx eq product.product_idx }">
-					<button id="btnAfterWish" >
-					<img alt="" src="images/after_heart.png" id="btnWishAfterImage" style="width: 30px; height: 30px;"/>
-					</button>
+					<span class="wishBtn">
+						<img onclick="deleteWish()" id="afterHeart" alt="" src="images/after_heart.png" id="btnWishAfterImage" style="width: 30px; height: 30px;"/>
+					</span>
 				</c:when>
 				<c:otherwise>
-					<button id="btnBeforWish" onclick="btnWishFn()">
-					<img alt="" src="images/before_heart.png" id="btnWishBeforImage" style="width: 30px; height: 30px;"/>
-					</button>
+					<span class="wishBtn">
+						<img id="beforeHeart" onclick="addWish()" alt="" src="images/before_heart.png" id="btnWishBeforImage" style="width: 30px; height: 30px;"/>
+					</span>
 				</c:otherwise>
 			</c:choose>
 		</span>	
