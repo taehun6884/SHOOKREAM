@@ -117,6 +117,9 @@ public class MemberController extends HttpServlet{
 	}
 
 	
+<<<<<<< Updated upstream
 	
+=======
+>>>>>>> Stashed changes
 }
 
