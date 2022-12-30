@@ -1,4 +1,7 @@
 <<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 <%@page import="dao.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -59,47 +62,39 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- 로그인 화면 폼 -->
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
     <div id = "sform">
-        <h4>아이디 / 비밀번호 찾기</h4>
+        <h4>아이디 찾기</h4>
         <form method="post" action="./FindIdFormAction.me">
-        <p align="center"><a href="MemberLoginForm.jsp">[돌아가기]</a></p>
+        <p align="center"><a href="LoginMember.me">[돌아가기]</a></p>
           <table class=table>
+<<<<<<< Updated upstream
 =======
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h3> 아이디 / 비밀번호 찾기</h3>
-	
-	<div class="container">
-		<p align="center"><a href="MemberLoginForm.jsp">돌아가기</a></p>
-			<table class=table>
+
 >>>>>>> Stashed changes
 				<tr>
 					<th class="active">이름</th>
-					<td><input type="text" name="member_name" id="member_name" required></td>
+					<td><input type="text" name="member_name" id="member_name" placeholder="이름을 입력해주세요." required></td>
 				</tr>
 				<tr>
 					<th class="active">이메일 주소</th>
-					<td><input type="text" name="member_email" id="member_email" required></td>
+					<td><input type="text" name="member_email" id="member_email" placeholder="이메일을 입력해주세요." required></td>
 				</tr>
 				<tr>
 					<td colspan="2">
-<<<<<<< Updated upstream
 						<input type="submit" value="아이디찾기" class="w3-button w3-block w3-black" >
 					</td>
 				</tr>
-				<tr>
-					<td colspan="2">
-						<input type="submit" value="비밀번호찾기" class="w3-button w3-block w3-black">
-					</td>
-				</tr>
+<<<<<<< Updated upstream
 			</table>
         </form>
+				<input type="button" value="비밀번호찾기" class="w3-button w3-block w3-black" onclick="location.href='./FindPwForm.me'"><br>
+				<input type="button" value="회원가입" class="w3-button w3-block w3-black" onclick="location.href='./MemberJoinForm.me'">
+=======
+				
+			</table>
+        </form>
+        		<input type="button" value="비밀번호찾기" class="w3-button w3-block w3-black" onclick="location.href='FindMemberPassForm.me'"><br>
+				<input type="button" value="회원가입" class="w3-button w3-block w3-black" onclick="location.href='MemberJoinForm.me'">
+>>>>>>> Stashed changes
     </div>
   </footer>
  </div>	
@@ -176,12 +171,3 @@ fuction findIDCheck(){
   
 </body>
 </html>
-=======
-						<input type="submit" value="찾기" class="byn btn-danger">
-					</td>
-				</tr>
-			</table>
-	</div>
-</body>
-</html>
->>>>>>> Stashed changes
