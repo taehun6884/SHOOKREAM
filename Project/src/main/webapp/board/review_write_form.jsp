@@ -30,11 +30,11 @@
 		}
 	}
 	$(function() {
-// 		$(document).ready(function() {		
-// 			$("#register").on("click", function() {
-// 				self.close();
-// 			});
-// 		});		
+		$(document).ready(function() {		
+			$("#register").on("click", function() {
+				self.close();
+			});
+		});		
 	});
 </script>
 <style type="text/css">
