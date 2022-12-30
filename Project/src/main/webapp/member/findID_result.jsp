@@ -1,24 +1,20 @@
+<%@page import="java.util.List"%>
+<%@page import="vo.MemberBean"%>
+<%@page import="dao.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.net.URLEncoder" %>
-<%@ page import="java.security.SecureRandom" %>
-<%@ page import="java.math.BigInteger" %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>로그인</title>
+<title>아이디 찾기</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 
-<!-- 네이버아이디로그인 -->
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<!-- 구글 아이디 로그인 -->
-<meta name="google-signin-client_id" content="1047574308186-h6ehte2k4901kjn1u3g5vnonbf2g56on.apps.googleusercontent.com">
 <style type="text/css">
 #sform {
           display: inline-block;
@@ -31,12 +27,13 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
 </head>
 <body class="w3-content" style="max-width:1200px">
-<!-- Sidebar/menu -->
+
+<!-- Sidebar/menu --> 
 <jsp:include page="../inc/side.jsp"/>
 
 <!-- Top menu on small screens -->
 <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-  <div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
+  <div class="w3-bar-item w3-padding-24 w3-wide">SHOOKREAM</div>
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
 </header>
 
@@ -51,52 +48,29 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
-    <p class="w3-left">제목</p>
+    <p class="w3-left"></p>
     <p class="w3-right">
       <i class="fa fa-shopping-cart w3-margin-right"></i>
       <i class="fa fa-search"></i>
     </p>
 </header>
-   
+
+  
   <!-- Footer -->
-  <!-- 로그인 화면 폼 -->
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
     <div id = "sform">
-        <h4>로그인</h4>
-        <form action="LoginMemberPro.me" method="post">
-          <table>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="id" name="id" required></td>
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="password" placeholder="pass" name="pass" required></td>
-          </tr>
-          <tr>
-          <td><button type="submit" class="w3-button w3-block w3-black">로그인</button></td>
-		  </tr> 	        
-          <tr>
-          	<td>
-          		<div id="naver_id_login"></div>
-				<a href="javascript:kakaoLogin();"><img src="../images/kakao_login_medium.png" height="40px" ></a>
-				</td>
-          </tr>
-          <tr>
-          	<td>
-          		<button type="button" class="w3-button w3-block w3-black" onclick="location.href='MemberJoinForm.me'">회원가입</button>
-          	</td>
-          </tr>
-          <tr>
-          	<td>
-          		<button type="button" class="w3-button w3-block w3-black" onclick="location.href='FindMemberIdForm.me'">아이디 찾기</button>
-          	</td>
-          </tr>
-        </table>
-        </form>
-    </div>
+        <h3>아이디 찾기 결과</h3>
+        
+        <h5>회원님의 아이디는</h5>
+        <b>${member }</b>
+        <h5>입니다.</h5>
+		<button type="button" class="btn btn-secondary" onclick="location.href='LoginMember.me'">로그인</button>
+		<button type="button" class="btn btn-secondary" onclick="location.href=''">비밀번호 찾기</button>
+
+	</div>
   </footer>
  </div>	
   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
-<!-- 로그인 화면 폼 -->
   <!-- End page content -->
 
 
@@ -183,63 +157,9 @@ function w3_close() {
     "pluginKey": "552ea0bb-d4a5-4c70-8ba7-463b7682c434"
   });
 </script>
- 
 <!-- End Channel Plugin -->
- <!-- 네이버 아이디 로그인 -->
- <script type="text/javascript">
-  	var naver_id_login = new naver_id_login("nSNLHIW18gDjrrJsFDeE", "http://localhost:8080/Project/index.jsp");
-  	var state = naver_id_login.getUniqState();
-  	naver_id_login.setButton("white", 2,35);
-  	naver_id_login.setDomain("http://localhost:8080/Project");
-//   	naver_id_login.setState(state);
-//   	naver_id_login.setPopup();
-  	naver_id_login.init_naver_id_login();
-  </script>
-  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script>
-Kakao.init('6405849a8d7a7fa490a223800b55af42'); //발급받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
-//카카오로그인
-        window.Kakao.init('본인 JAVASCRIPT API 키');
-
- function kakaoLogin() {
-     window.Kakao.Auth.login({
-         scope: 'account_email,	profile_nickname', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
-         success: function(response) {
-             console.log(response) // 로그인 성공하면 받아오는 데이터
-             window.Kakao.API.request({ // 사용자 정보 가져오기 
-                 url: '/v2/user/me',
-                 success: (res) => {
-                     const kakao_account = res.kakao_account;
-                     console.log(kakao_account)
-                 }
-             });
-          window.location.href="./main.MAIN"; 
-         },
-         fail: function(error) {
-             console.log(error);
-         }
-     });
- }
-//카카오로그아웃  
-function kakaoLogout() {
-    if (Kakao.Auth.getAccessToken()) {
-      Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function (response) {
-        	console.log(response)
-        },
-        fail: function (error) {
-          console.log(error)
-        },
-      })
-      Kakao.Auth.setAccessToken(undefined)
-    }
-  }  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
 </script>
-<!-- plugin -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
- 
-  
+
 </body>
 </html>

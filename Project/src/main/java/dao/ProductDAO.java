@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import db.JdbcUtil;
 import java.util.List;
-
 import db.JdbcUtil;
 import vo.OrderBean;
 import vo.ProductBean;
 import vo.WishBean;
 import vo.imageBean;
+
 
 public class ProductDAO {
 private ProductDAO() {}
@@ -107,7 +107,7 @@ private ProductDAO() {}
 			
 			
 		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류 - 상품등록: 관리자");
+			System.out.println("상품등록 - 관리자");
 			e.printStackTrace();
 		} 
 		return insertCount2;
@@ -148,10 +148,7 @@ private ProductDAO() {}
 //				product.setProduct_img(rs.getString("product_img"));
 				product.setProduct_date(rs.getTimestamp("product_date"));
 //				System.out.println(product);
-			
 			}
-			
-			
 		} catch (SQLException e) {
 			System.out.println("SQL구문 오류 - selectProduct()");
 			e.printStackTrace();
@@ -674,7 +671,7 @@ private ProductDAO() {}
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date,o.order_idx "
+			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date "
 					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx "
 					+ "where m.member_idx=? "
@@ -695,7 +692,6 @@ private ProductDAO() {}
 					vo.setOrder_category(rs.getString("order_category"));
 					vo.setOrder_progress(rs.getString("order_progress"));
 					vo.setOrder_date(rs.getTimestamp("order_date"));
-					vo.setOrder_idx(rs.getInt("order_idx"));
 					orderlist.add(vo);
 				}
 			} catch (SQLException e) {
@@ -1001,6 +997,7 @@ private ProductDAO() {}
 			return bean;
 		}
 
+
 //--------- 이미지 정보 가져오는 메서드 -------------
 		public imageBean selectImage(int product_idx) {
 			imageBean image = null;
@@ -1029,6 +1026,7 @@ private ProductDAO() {}
 			return image;
 		}
 		
+
 
 		public boolean isDeleteOrder(int order_idx) {
 			int isDeleteOrderList = 0;
@@ -1120,17 +1118,20 @@ private ProductDAO() {}
 			PreparedStatement pstmt = null;
 			
 			try {
-			String sql="UPDATE product p INNER JOIN wish w "
-					+ "ON p.product_idx = w.product_idx "
-					+ "SET p.product_wishcount = p.product_wishcount - 1 "
-					+ "WHERE p.product_idx = ?";
-			
+//			String sql="UPDATE product p INNER JOIN wish w "
+//					+ "ON p.product_idx = w.product_idx "
+//					+ "SET p.product_wishcount = p.product_wishcount - 1 "
+//					+ "WHERE p.product_idx = ?";
+				String sql="UPDATE product "
+						+ "SET product_wishcount = product_wishcount - 1 "
+						+ "WHERE product_idx = ?";
+				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1,product_idx );
-				
+				System.out.println(pstmt);
 				updateCount = pstmt.executeUpdate();
 				
-				System.out.println("updateCount : " + updateCount);
+				System.out.println("updateCount111 : " + updateCount);
 				
 			} catch (SQLException e) {
 				System.out.println("SQL 구문 오류 - DecWishCount()");
@@ -1219,7 +1220,6 @@ private ProductDAO() {}
 		}
 
 		
-
 
 	
 }//DAO 끝
