@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 <script>//여기 부분 수정해야함!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	function reviewForm() {
-		let url = "board/review_write_form.jsp"; // 서블릿 주소 만들기!
+		let url = "ReviewWriteForm.me"; 
 		let name = "review form";
 		let attr = "width=600, height=600, top=200, left=510"
 		

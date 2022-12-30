@@ -83,7 +83,11 @@ public class MemberController extends HttpServlet{
 //			forward = action.execute(request, response);
 			action = new MemberIdCheckProAction();
 			forward = action.execute(request, response);
-		} else if(command.equals("/ReviewWrite.me")) { // 회원 리뷰 작성(구매목록에서)
+		} else if(command.equals("/ReviewWriteForm.me")) {	// 회원 리뷰 작성 폼(구매목록에서)
+			forward = new ActionForward();
+			forward.setPath("board/review_write_form.jsp");
+			forward.setRedirect(false);
+		} else if(command.equals("/ReviewWrite.me")) { 
 			action = new ReviewWriteProAction();
 			forward = action.execute(request, response);
 		}

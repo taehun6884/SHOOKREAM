@@ -65,11 +65,16 @@ public class ReviewWriteProAction implements Action {
 				out.println("history.back()");
 				out.println("</script>");
 			} else { 
-				forward = new ActionForward();
-				forward.setPath("BoardList.bo");
-				forward.setRedirect(true);
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println(".close()");
+				out.println("</script>");
 			}
-			
+			forward = new ActionForward();
+			forward.setPath("BoardList.bo");
+			forward.setRedirect(true);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

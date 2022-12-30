@@ -29,7 +29,13 @@
 			document.getElementById('preview').src = "";
 		}
 	}
-	
+	$(function() {
+// 		$(document).ready(function() {		
+// 			$("#register").on("click", function() {
+// 				self.close();
+// 			});
+// 		});		
+	});
 </script>
 <style type="text/css">
 	h2 {
@@ -56,9 +62,9 @@
 		margin : 5px;
 	}
 	
-	#id {
-		height:50px;
-		width:35em;
+	#preview {
+		height:10em;
+		width:10em;
 	}
 </style>
 </head>
@@ -71,12 +77,12 @@
 		<input type="hidden" name="member_idx" value="">
 		<input type="hidden" name="re_order_detail" value="">
 		<input type="hidden" name="" value="">
-		<input type="file" id="fileInsert" name="review_img" accept=".png, .jpeg, .jpg" onchange="readURL(this);"><br>
-		<img id="preview" />
+		<input type="file" id="fileInsert" name="review_img" accept=".png, .jpeg, .jpg, .gif" onchange="readURL(this);"><br>
+		<img id="preview"></img>
 		<hr>
 		<textarea placeholder="욕설 및 관련없는 내용은 관리자에 의해 삭제될 수 있습니다."></textarea><br>
 		<div id="reviewBtn">
-			<input type="submit" class="btn btn-outline-secondary btn-sm" value="글 등록하기">
+			<input type="submit" class="btn btn-outline-secondary btn-sm" id="register" value="글 등록하기">
 			<input type="button" class="btn btn-outline-secondary btn-sm" value="닫기" onclick="closeReview()">
 		</div>	
 	</form>
