@@ -27,7 +27,7 @@
     <a href="New.MAIN" class="w3-bar-item w3-button">New</a>
     <a href="Sale.MAIN" class="w3-bar-item w3-button">Sale</a>
     <hr>
-    <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
+    <a onclick="myAccFunc()"  href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
       운동화 <i class="fa fa-caret-down"></i>
     </a>
     <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
@@ -38,11 +38,13 @@
       <a href="BrandCG.MAIN?cg=슈펜" class="w3-bar-item w3-button">슈펜 &nbsp;<i class="fa fa-caret-right w3-margin-right"></i></a>
     </div>
     <hr>
-    <a class="w3-button w3-block w3-white w3-left-align" id="customerBtn">
+    <a onclick="myAccFunc1()" class="w3-button w3-block w3-white w3-left-align" id="customerBtn">
       고객센터 <i class="fa fa-caret-down"></i>
     </a>
-   	<a href="BoardList.bo" class="w3-button w3-block w3-white w3-left-align">공지사항</a>
-   	<a href="FAQList.bo" class="w3-button w3-block w3-white w3-left-align">자주묻는 질문</a>
+    <div id=cusAcc class="w3-bar-block w3-hide w3-padding-large w3-medium">
+	   	<a href="BoardList.bo" class="w3-bar-item w3-button">공지사항</a>
+	   	<a href="FAQList.bo" class="w3-bar-item w3-button">자주묻는 질문</a>
+   	</div>
   </div>
   
 </nav>

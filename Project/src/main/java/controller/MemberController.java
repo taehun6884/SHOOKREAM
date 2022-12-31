@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.FindMemberIdProAction;
+<<<<<<< Updated upstream
+import action.FindMemberPwProAction;
 import action.MemberJoinProAction;
 import action.MemberListAction;
 import action.MemberDeleteMemberProAction;
@@ -20,6 +22,7 @@ import action.MemberLoginMemberProAction;
 import action.MemberLogoutProAction;
 import action.MemberModifyFormAction;
 import action.MemberModifyProAction;
+import action.ReviewWriteProAction;
 import svc.LoginMemberService;
 import vo.ActionForward;
 import vo.MemberBean;
@@ -82,6 +85,13 @@ public class MemberController extends HttpServlet{
 //			forward = action.execute(request, response);
 			action = new MemberIdCheckProAction();
 			forward = action.execute(request, response);
+		} else if(command.equals("/ReviewWriteForm.me")) {	// 회원 리뷰 작성 폼(구매목록에서)
+			forward = new ActionForward();
+			forward.setPath("product/review_write_form.jsp");
+			forward.setRedirect(false);
+		} else if(command.equals("/ReviewWrite.me")) { 
+			action = new ReviewWriteProAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/FindMemberIdForm.me")) { // 아이디 찾기
 			forward = new ActionForward(); 
 			forward.setPath("member/findIDForm.jsp");
@@ -92,6 +102,20 @@ public class MemberController extends HttpServlet{
 			forward.setRedirect(false);
 		}else if(command.equals("/FindIdFormAction.me")) { // 아이디 찾기 pro
 			action = new FindMemberIdProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/FindPwForm.me")) { // 비번 찾기
+			forward = new ActionForward(); 
+			forward.setPath("member/findPwForm.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/FindPwFormAction.me")) { // 비번 찾기 pro
+			action = new FindMemberPwProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/FindMemberPassForm.me")) { // 비번 찾기
+			forward = new ActionForward(); 
+			forward.setPath("member/findPassForm.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/FindPassFormAction.me")) { // 비번 찾기 pro
+			action = new FindMemberPassProAction();
 			forward = action.execute(request, response);
 		}
 			

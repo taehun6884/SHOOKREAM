@@ -1,6 +1,5 @@
 package dao;
 
-import java.net.Authenticator;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,17 +7,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
+import javax.mail.Address;
+import javax.mail.Authenticator;
 import javax.mail.Message;
+import javax.mail.Message.RecipientType;
+import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import db.JdbcUtil;
 import mail.GoogleMailAuthenticator;
 import vo.MemberBean;
+import vo.ReviewBean;
 import vo.WishBean;
 
 public class MemberDAO {
@@ -347,48 +353,47 @@ private MemberDAO() {}
 				return memberList;
 			}
 			
-			// 비밀번호 찾기
-			// 임시 비밀번호 발급받아 member 테이블 수정하기
+		// 비밀번호 찾기
+		// 임시 비밀번호 발급받아 member 테이블 수정하기
+		
+		public boolean findPass(MemberBean member) {
+			boolean flag = false;
 			
-			public boolean findPass(MemberBean member) {
-				boolean flag = false;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				// 1) 이름/이메일과 일치하는 아이디 가져오기
+				String sql = "SELECT member_id FROM member WHERE member_name=? AND member_email=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, member.getMember_name());
+				pstmt.setString(2, member.getMember_email());
+				rs = pstmt.executeQuery();
 				
-				PreparedStatement pstmt = null;
-				ResultSet rs = null;
-				
-				try {
-					// 1) 이름/이메일과 일치하는 아이디 가져오기
-					String sql = "SELECT member_id FROM member WHERE member_name=? AND member_email=?";
-					pstmt = con.prepareStatement(sql);
-					pstmt.setString(1, member.getMember_name());
-					pstmt.setString(2, member.getMember_email());
-					rs = pstmt.executeQuery();
+				if(rs.next()) { // 이름과 이메일이 일치한 경우
+					String id = rs.getString("member_id"); // 1) 아이디
 					
-					if(rs.next()) { // 이름과 이메일이 일치한 경우
-						String id = rs.getString("member_id"); // 1) 아이디
-						
-						// 임시 비밀번호 발급
-						//대문자, 소문자, 숫자 이용 배열 만들기
-						String[] ch = {
-							"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
-							"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z,",
-							"0","1","2","3","4","5","6","7","8","9"
-						};
-						// ch 배열에서 랜덤 16글자 가져오기
-						StringBuilder imsiPw = new  StringBuilder();
-						for(int i=0; i < 16; i++) {
-							int num = (int)(Math.random()*ch.length);
-							imsiPw.append(ch[num]);
-						}
-						
-						// 임시 비밀번호로 테이블 수정하기
-						sql = "UPDATE member SET member_pass=? WHERE member_name=? AND member_email=?";
-						pstmt = con.prepareStatement(sql);
-						pstmt.setString(1, imsiPw.toString()); // 임시 비밀번호
-						pstmt.setString(2, member.getMember_name());
-						pstmt.setString(3, member.getMember_email());
+					// 임시 비밀번호 발급
+					//대문자, 소문자, 숫자 이용 배열 만들기
+					String[] ch = {
+						"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
+						"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z,",
+						"0","1","2","3","4","5","6","7","8","9"
+					};
+					// ch 배열에서 랜덤 16글자 가져오기
+					StringBuilder imsiPw = new  StringBuilder();
+					for(int i=0; i < 16; i++) {
+						int num = (int)(Math.random()*ch.length);
+						imsiPw.append(ch[num]);
+					}
+					
+					// 임시 비밀번호로 테이블 수정하기
+					sql = "UPDATE member SET member_pass=? WHERE member_name=? AND member_email=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, imsiPw.toString()); // 임시 비밀번호
+					pstmt.setString(2, member.getMember_name());
+					pstmt.setString(3, member.getMember_email());
 //						rs = pstmt.executeQuery();
-						
 						int cnt = pstmt.executeUpdate();
 						if(cnt == 1) {
 							//임시 비번으로 테이블 수정시, 아이디와 비밀번호 이메일로 전송하기
@@ -413,7 +418,7 @@ private MemberDAO() {}
 							Authenticator authenticator = new GoogleMailAuthenticator(); // 메일서버에서 인증받은 계정 + 비번
 							Session mailSession = Session.getDefaultInstance(properties, authenticator); // 메일서버, 계정, 비번이 유효한지 검증
 							
-							InternetAddress[] address = { new InternetAddress(member.getMember_email()) }; // 받는사람 이메일 주소
+							InternetAddress address = new InternetAddress(member.getMember_email()); // 받는사람 이메일 주소
 							Message msg = new MimeMessage(mailSession);									  // 메일 관련 정보 작성
 							msg.setRecipient(Message.RecipientType.TO, address);						// 받는 사람
 							msg.setFrom(new InternetAddress("hz0123hz@gmail.com"));						// 보내는 사람
@@ -423,22 +428,25 @@ private MemberDAO() {}
 							Transport.send(msg);
 							
 							flag = true; // 최종 성공
-							
-						} // if end
-						
-					} else {
-						
-						flag = false;
-					}
-				} catch (SQLException e) {
-					System.out.println("sql 구문 오류 - findID()");
-					e.printStackTrace();
-				} finally {
-					JdbcUtil.close(rs);
-					JdbcUtil.close(pstmt);
+						} // if end						
+				} else {
+					
+					flag = false;
 				}
-				return flag;
-			} // 비밀번호 찾기() 끝
+			} catch (SQLException e) {
+				System.out.println("sql 구문 오류 - findID()");
+				e.printStackTrace();
+			} catch (AddressException e) {
+				e.printStackTrace();
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			return flag;
+		} // 비밀번호 찾기() 끝
+
 			
 			// 아이디 찾기
 		public String findID(MemberBean member) {
@@ -466,8 +474,6 @@ private MemberDAO() {}
 			return id;
 		} //아이디 찾기() 끝
 	
-			// 아이디/비밀번호 찾기
-			
 			
 			// 찜한 상품 조회
 			public WishBean selectWish(int member_idx) {
@@ -500,7 +506,6 @@ private MemberDAO() {}
 				}
 						return wish;
 			}
-			// 임시 비밀번호 발급받아 member 테이블 수정하기
 			public int selectMemberIdx(String sId) {
 				int member_idx = 0;
 				
@@ -528,4 +533,48 @@ private MemberDAO() {}
 				
 				return member_idx;
 			}
+
+
+			public int insertReview(ReviewBean review) { // 리뷰 작성
+				int insertCount = 0;
+				
+				PreparedStatement pstmt=null, pstmt2=null;
+				ResultSet rs = null;
+				
+				try {
+					int review_idx = 1; // 새 글 번호
+					
+					String sql = "SELECT MAX(review_idx) FROM review";
+					pstmt = con.prepareStatement(sql);
+					rs = pstmt.executeQuery(); // 조회를 실행하면
+					
+					if(rs.next()) { // 조회 결과가 있을 경우(= 기존 게시물이 하나라도 존재할 경우)
+						review_idx = rs.getInt(1) + 1; // 기존 게시물 번호 중 가장 큰 번호(= 조회 결과) + 1
+					}
+					
+					sql = "INSERT INTO review VALUES(?,?,?,?,?,?,now(),?)";
+					pstmt2 = con.prepareStatement(sql);
+
+					pstmt2.setInt(1, review_idx);
+					pstmt2.setInt(2, review.getProduct_idx());
+					pstmt2.setInt(3, review.getMember_idx());
+					pstmt2.setString(4, review.getReview_content());
+					pstmt2.setString(5, review.getReview_img());
+					pstmt2.setString(6, review.getReview_real_img());
+					pstmt2.setString(7, review.getRe_order_detail());
+					
+					System.out.println("리뷰 > DAO 확인 : " + pstmt2);
+					
+					insertCount = pstmt2.executeUpdate();
+					} catch (SQLException e) {
+						System.out.println("SQL 구문 오류! - insertReview()");
+						e.printStackTrace();
+					} finally {
+						JdbcUtil.close(rs);
+						JdbcUtil.close(pstmt);
+						JdbcUtil.close(pstmt2);
+					}
+				return insertCount;
+			}
+
 }
