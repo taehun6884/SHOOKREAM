@@ -283,7 +283,6 @@ margin-left: 270PX;
 				</c:forEach>
 			</select>
 			<hr>
-			<input type="button" value="좋아요">
 			<input type="hidden" id="product_idx" value="${product.product_idx }">
 		<span id="wishLoad">
 			<c:choose>

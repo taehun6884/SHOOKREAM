@@ -403,7 +403,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, i.image_main_file "
+				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_discount_price, i.image_main_file "
 						+ "FROM shookream.product p join shookream.image i "
 						+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY p.product_idx ASC";
 				
@@ -426,7 +426,7 @@ private ProductDAO() {}
 //					product.setProduct_exp(rs.getString("product_exp"));
 //					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
 //					product.setProduct_color(rs.getString("product_color"));
-//					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
 					product.setProduct_img(rs.getString("image_main_file"));
 //					product.setProduct_date(rs.getTimestamp("product_date"));
 					
@@ -451,7 +451,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_date, i.image_main_file "
+				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_date, p.product_discount_price, i.image_main_file "
 				+ "FROM shookream.product p join shookream.image i "
 				+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY product_date desc";
 				
@@ -474,7 +474,7 @@ private ProductDAO() {}
 //					product.setProduct_exp(rs.getString("product_exp"));
 //					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
 //					product.setProduct_color(rs.getString("product_color"));
-//					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
 					product.setProduct_img(rs.getString("image_main_file"));
 					product.setProduct_date(rs.getTimestamp("product_date"));
 					
@@ -499,7 +499,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, i.image_main_file "
+				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price,p.product_discount_price, i.image_main_file "
 						+ "FROM shookream.product p join shookream.image i "
 						+ "on p.product_idx = i.product_idx "
 						+ "WHERE product_discount_price > 0 "
@@ -528,7 +528,7 @@ private ProductDAO() {}
 //					product.setProduct_exp(rs.getString("product_exp"));
 //					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
 //					product.setProduct_color(rs.getString("product_color"));
-//					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
 					product.setProduct_img(rs.getString("image_main_file"));
 //					product.setProduct_date(rs.getTimestamp("product_date"));
 					
@@ -552,7 +552,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, i.image_main_file "
+				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_discount_price, i.image_main_file "
 						+ "FROM shookream.product p join shookream.image i "
 						+ "on p.product_idx = i.product_idx "
 						+ "WHERE product_brand LIKE ? "
@@ -583,7 +583,7 @@ private ProductDAO() {}
 //					product.setProduct_exp(rs.getString("product_exp"));
 //					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
 //					product.setProduct_color(rs.getString("product_color"));
-//					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
 					product.setProduct_img(rs.getString("image_main_file"));
 //					product.setProduct_date(rs.getTimestamp("product_date"));
 					
