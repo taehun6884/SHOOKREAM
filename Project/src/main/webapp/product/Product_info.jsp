@@ -267,10 +267,9 @@ margin-left: 270PX;
 			<p class="prod_title">색상</p>
 			<select name="product_color">
 				<option selected>색깔</option>
-				<option value="black">black</option>
-				<option value="yellow">yellow</option>
-				<option value="red">red</option>
-				<option value="blue">blue</option>
+				<c:forEach var="color" items="${colorlist}">
+				<option value="color">${color }</option>
+				</c:forEach>
 			</select>
 			<hr>
 
@@ -279,14 +278,9 @@ margin-left: 270PX;
 			<p>사이즈</p>
 			<select name="product_size">
 				<option selected>사이즈</option>
-				<option value="220">220</option>
-				<option value="230">230</option>
-				<option value="240">240</option>
-				<option value="250">250</option>
-				<option value="260">260</option>	
-				<option value="270">270</option>
-				<option value="280">280</option>
-				<option value="280">290</option>
+				<c:forEach var="category" items="${categorylist}">
+				<option value="${category}">${category}</option>
+				</c:forEach>
 			</select>
 			<hr>
 			<input type="button" value="좋아요">
