@@ -55,6 +55,31 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	font-size: x-large;
 }
 
+#product_brand {
+	margin-bottom: 1.5px; 
+	margin-top:2px; 
+	font-weight: bold
+}
+
+#product_name {
+	margin-bottom: 3.5px;
+	color: gray;
+}
+
+#price {
+	margin-bottom:20px;
+}
+
+#product_price {
+	text-decoration: line-through; 
+	font-size: small;
+}
+
+#product_discount_price {
+	color: red; 
+	font-size: big; 
+	float: right;
+}
 </style>
 </head>
 <body class="w3-content" style="max-width:1200px" >

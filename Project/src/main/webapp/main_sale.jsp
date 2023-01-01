@@ -33,6 +33,31 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	font-size: x-large;
 }
 
+#product_brand {
+	margin-bottom: 1.5px; 
+	margin-top:2px; 
+	font-weight: bold
+}
+
+#product_name {
+	margin-bottom: 3.5px;
+	color: gray;
+}
+
+#price {
+	margin-bottom:20px;
+}
+
+#product_price {
+	text-decoration: line-through; 
+	font-size: small;
+}
+
+#product_discount_price {
+	color: red; 
+	font-size: big; 
+	float: right;
+}
 </style>
 </head>
 <body class="w3-content" style="max-width:1200px">
@@ -72,103 +97,40 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
      <c:forEach var="productSaleList" items="${productSaleList }">
    <div class="w3-col l3 s6">
       <div class="w3-container">
-<!--         <div class="w3-display-container"> -->
-<%--           <img src="./upload/${productBestList[0].product_img }"  alt="..." style="width:100%"> --%>
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<%--         <p>${productBestList[0].product_brand }<br></p><!-- 1번째 그리드 --> --%>
-<%--         <p>${productBestList[0].product_name }<br><b><fmt:formatNumber value="${productBestList[0].product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 --> --%>
-<!--       </div> -->
         <div class="w3-display-container">
           <img src="./upload/${productSaleList.product_img }"  alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productSaleList.product_brand }<br></p><!-- 1번째 그리드 -->
-        <p>${productSaleList.product_name }<br><b><fmt:formatNumber value="${productSaleList.product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 -->
-      </div>
-      
-      
-      
-      
-      
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<%--           <img src="./upload/${productBestList[4].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<%--         <p>${productBestList[4].product_name }<br><b>${productBestList[4].product_price }</b></p><!-- 5번째 그리드 --> --%>
-<!--       </div> -->
-<!--     </div> -->
-    
-<!--     <div class="w3-col l3 s6"> -->
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<%--           <img src="./upload/${productBestList[1].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<%--         <p>${productBestList[1].product_name }<br><b>${productBestList[1].product_price }</b></p><!-- 2번째 그리드 --> --%>
-<!--       </div> -->
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<%--           <img src="./upload/${productBestList[5].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<%--         <p>${productBestList[5].product_name }<br><b>${productBestList[5].product_price }</b></p><!-- 6번째 그리드 --> --%>
-<!--       </div> -->
-<!--     </div> -->
-
-
-<!--     <div class="w3-col l3 s6"> -->
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<%--           <img src="./upload/${productBestList[2].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<%--         <p>${productBestList[2].product_name }<br><b>${productBestList[2].product_price }</b></p><!-- 3번째 그리드 --> --%>
-<!--       </div> -->
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<%--           <img src="./upload/${productBestList[6].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<%--         <p>${productBestList[6].product_name }<br><b>${productBestList[6].product_price}</b></p><!-- 7번째 그리드 --> --%>
-<!--       </div> -->
-<!--     </div> -->
-    
-<!--     <div class="w3-col l3 s6"> -->
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<%--           <img src="./upload/${productBestList[3].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<%--         <p>${productBestList[3].product_name }<br><b>${productBestList[3].product_price }</b></p><!-- 4번째 그리드 --> --%>
-<!--       </div> -->
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<%--           <img src="./upload/${productBestList[7].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<%--         <p>${productBestList[7].product_name }<br><b>${productBestList[7].product_price }</b></p><!-- 8번째 그리드 --> --%>
-      </div>
-      </c:forEach>
+         <div class="w3-display-middle w3-display-hover">
+									<button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productSaleList.product_idx }&member_idx=${sessionScope.member_idx }'">
+										Buy now <i class="fa fa-shopping-cart" ></i>
+									</button>
+								</div>
+								<input type="hidden" id="product_idx${productSaleList.product_idx }"
+									value="${productSaleList.product_idx }">
+							</div>
+							<p id="product_brand" >${productSaleList.product_brand }</p>
+							<p id="product_name" >${productSaleList.product_name }<br></p>
+							
+							<div id="price">
+							<c:choose>
+								<c:when test="${productSaleList.product_discount_price gt 0}">
+									<span>
+<%-- 									<c:set var="discounted_price" value="${productBestList.product_price - (productBestList.product_price * productBestList.product_discount_price) }"/> --%>
+<%-- 									<c:out value="${discounted_price}" /> --%>
+										<fmt:formatNumber value="${productSaleList.product_price - (productSaleList.product_price * (productSaleList.product_discount_price/100)) }" pattern="#,###" />
+									</span>
+									<span id="product_price">
+									<fmt:formatNumber value="${productSaleList.product_price }" pattern="#,###" /></span>
+									<span id="product_discount_price" ><fmt:formatNumber value="${productSaleList.product_discount_price }" pattern="" />%</span>
+								</c:when>
+								<c:otherwise>
+									<span><fmt:formatNumber value="${productSaleList.product_price }" pattern="#,###" /></span>
+								</c:otherwise>
+							</c:choose>
+							</div>
+							
+						</div>
+					</div>
+				</c:forEach>
     </div>
 </div>
 	

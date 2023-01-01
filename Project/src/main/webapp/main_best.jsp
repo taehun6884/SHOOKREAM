@@ -49,9 +49,30 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 	font-size: x-large;
 }
 
-#btnLikeImage {
-	width: 20px;
-	height: 20px;
+#product_brand {
+	margin-bottom: 1.5px; 
+	margin-top:2px; 
+	font-weight: bold
+}
+
+#product_name {
+	margin-bottom: 3.5px;
+	color: gray;
+}
+
+#price {
+	margin-bottom:20px;
+}
+
+#product_price {
+	text-decoration: line-through; 
+	font-size: small;
+}
+
+#product_discount_price {
+	color: red; 
+	font-size: big; 
+	float: right;
 }
 </style>
 
@@ -132,31 +153,37 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 		<c:forEach var="productBestList" items="${productBestList }">
 			<div class="w3-col l3 s6">
 				<div class="w3-container">
-						<div class="w3-container">
 							<div class="w3-display-container">
-								<img src="./upload/${productBestList.product_img }" alt="..."
-									style="width: 100%">
+								<img src="./upload/${productBestList.product_img }" alt="..." style="width: 100%">
 								<div class="w3-display-middle w3-display-hover">
-									<button class="w3-button w3-black">
+									<button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList.product_idx }&member_idx=${sessionScope.member_idx }'">
 										Buy now <i class="fa fa-shopping-cart" ></i>
 									</button>
 								</div>
 								<input type="hidden" id="product_idx${productBestList.product_idx }"
 									value="${productBestList.product_idx }">
 							</div>
-							<p style="margin-bottom: 1.5px; margin-top:2px; font-weight: bold">${productBestList.product_brand }</p>
-							<p style="margin-bottom: 3.5px; color: gray">${productBestList.product_name }<br></p>
-							<div>
-							<span></span>
-							<span style="text-decoration: line-through; text-align:right;">
-							<fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></span>
+							<p id="product_brand" >${productBestList.product_brand }</p>
+							<p id="product_name" >${productBestList.product_name }<br></p>
+							
+							<div id="price">
 							<c:choose>
-								<c:when test="${productBestList.product_discount_price gt 0} ">
-									<span style="color: red;"><fmt:formatNumber value="${productBestList.product_discount_price }" pattern="" />%</span>
+								<c:when test="${productBestList.product_discount_price gt 0}">
+									<span>
+<%-- 									<c:set var="discounted_price" value="${productBestList.product_price - (productBestList.product_price * productBestList.product_discount_price) }"/> --%>
+<%-- 									<c:out value="${discounted_price}" /> --%>
+										<fmt:formatNumber value="${productBestList.product_price - (productBestList.product_price * (productBestList.product_discount_price/100)) }" pattern="#,###" />
+									</span>
+									<span id="product_price">
+									<fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></span>
+									<span id="product_discount_price" ><fmt:formatNumber value="${productBestList.product_discount_price }" pattern="" />%</span>
 								</c:when>
+								<c:otherwise>
+									<span><fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></span>
+								</c:otherwise>
 							</c:choose>
 							</div>
-							</div>
+							
 						</div>
 					</div>
 				</c:forEach>
