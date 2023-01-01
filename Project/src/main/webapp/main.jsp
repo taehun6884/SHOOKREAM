@@ -124,217 +124,93 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	
 	
   <!-- Product grid -->
-  <div class="w3-row w3-grayscale">
-   <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./upload/${productBestList[0].product_img }"  alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[0].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productBestList[0].product_brand }<br></p>
-        <p>${productBestList[0].product_name }<br>
-        <b><fmt:formatNumber value="${productBestList[0].product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 -->
-      </div>
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./upload/${productBestList[4].product_img }"   alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[4].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productBestList[4].product_brand }<br></p>
-        <p>${productBestList[4].product_name }<br><b><fmt:formatNumber value="${productBestList[4].product_price }" pattern="#,###" /></b></p><!-- 5번째 그리드 -->
-      </div>
-    </div>
-    
-    <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./upload/${productBestList[1].product_img }"   alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[1].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productBestList[1].product_brand }<br></p>
-        <p>${productBestList[1].product_name }<br><b><fmt:formatNumber value="${productBestList[1].product_price }" pattern="#,###" /></b></p><!-- 2번째 그리드 -->
-      </div>
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./upload/${productBestList[5].product_img }"   alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[5].product_idx }&member_idx=${sessionScope.member_idx }'" >Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productBestList[5].product_brand }<br></p>
-        <p>${productBestList[5].product_name }<br><b><fmt:formatNumber value="${productBestList[5].product_price }" pattern="#,###" /></b></p><!-- 6번째 그리드 -->
-      </div>
-    </div>
-
-<!--     <div class="w3-col l3 s6"> -->
-<!--       <div class="w3-container"> -->
-<!--         <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--         <p>5번째<br><b>$20.50</b></p> -->
-<!--       </div> -->
-<!--       <div class="w3-container"> -->
-<!--         <div class="w3-display-container"> -->
-<!--           <img src="./images/jeans.jpg" style="width:100%"> -->
-<!--           <span class="w3-tag w3-display-topleft">Sale</span> -->
-<!--           <div class="w3-display-middle w3-display-hover"> -->
-<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-<!--           </div> -->
-<!--         </div> -->
-<!--         <p>6번째<br><b class="w3-text-red">$14.99</b></p> -->
-<!--       </div> -->
-<!--     </div> -->
-
-    <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./upload/${productBestList[2].product_img }"   alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[2].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productBestList[2].product_brand }<br></p>
-        <p>${productBestList[2].product_name }<br><b><fmt:formatNumber value="${productBestList[2].product_price }" pattern="#,###" /></b></p><!-- 3번째 그리드 -->
-      </div>
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./upload/${productBestList[6].product_img }"   alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[6].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productBestList[6].product_brand }<br></p>
-        <p>${productBestList[6].product_name }<br><b><fmt:formatNumber value="${productBestList[6].product_price }" pattern="#,###" /></b></p><!-- 7번째 그리드 -->
-      </div>
-    </div>
-    
-    <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./upload/${productBestList[3].product_img }"   alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[3].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productBestList[3].product_brand }<br></p>
-        <p>${productBestList[3].product_name }<br><b><fmt:formatNumber value="${productBestList[3].product_price }" pattern="#,###" /></b></p><!-- 4번째 그리드 -->
-      </div>
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./upload/${productBestList[7].product_img }"   alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList[7].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productBestList[7].product_brand }<br></p>
-        <p>${productBestList[7].product_name }<br><b><fmt:formatNumber value="${productBestList[7].product_price }" pattern="#,###" /></b></p><!-- 8번째 그리드 -->
-      </div>
-    </div>
-</div>
+<div class="w3-row w3-grayscale">
+		<c:forEach var="productBestList" items="${productBestList }" begin="0" end="7" step="1">
+			<div class="w3-col l3 s6">
+				<div class="w3-container">
+							<div class="w3-display-container">
+								<img src="./upload/${productBestList.product_img }" alt="..." style="width: 100%">
+								<div class="w3-display-middle w3-display-hover">
+									<button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList.product_idx }&member_idx=${sessionScope.member_idx }'">
+										Buy now <i class="fa fa-shopping-cart" ></i>
+									</button>
+								</div>
+								<input type="hidden" id="product_idx${productBestList.product_idx }"
+									value="${productBestList.product_idx }">
+							</div>
+							<p id="product_brand" >${productBestList.product_brand }</p>
+							<p id="product_name" >${productBestList.product_name }<br></p>
+							
+							<div id="price">
+							<c:choose>
+								<c:when test="${productBestList.product_discount_price gt 0}">
+									<span>
+<%-- 									<c:set var="discounted_price" value="${productBestList.product_price - (productBestList.product_price * productBestList.product_discount_price) }"/> --%>
+<%-- 									<c:out value="${discounted_price}" /> --%>
+										<fmt:formatNumber value="${productBestList.product_price - (productBestList.product_price * (productBestList.product_discount_price/100)) }" pattern="#,###" />
+									</span>
+									<span id="product_price">
+									<fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></span>
+									<span id="product_discount_price" ><fmt:formatNumber value="${productBestList.product_discount_price }" pattern="" />%</span>
+								</c:when>
+								<c:otherwise>
+									<span><fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></span>
+								</c:otherwise>
+							</c:choose>
+							</div>
+							
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		
 
 	<!-- 최근 등록 상품 조회 -->
-  <div id="main_category">
+  <div id="main_category" style="margin-top: 400px;">
 		<p>NEW</p>
 	</div>
 	<!-- Product grid -->
   <div class="w3-row w3-grayscale">
+  <c:forEach var="productNewList" items="${productNewList }" begin="0" end="7" step="1">
    <div class="w3-col l3 s6">
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productNewList[0].product_img }"   alt="..." style="width:100%">
+          <img src="./upload/${productNewList.product_img }"  alt="..." style="width:100%">
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black"  onclick="location.href='ProductInfoForm.po?product_idx=${productNewList[0].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productNewList[0].product_brand }<br></p>
-        <p>${productNewList[0].product_name }<br><b><fmt:formatNumber value="${productNewList[0].product_price }" pattern="#,###" /></b></p><!-- 1번째 그리드 -->
-      </div>
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./upload/${productNewList[4].product_img }"   alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black"  onclick="location.href='ProductInfoForm.po?product_idx=${productNewList[4].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productNewList[4].product_brand }<br></p>
-        <p>${productNewList[4].product_name }<br><b><fmt:formatNumber value="${productNewList[4].product_price }" pattern="#,###" /></b></b></p><!-- 5번째 그리드 -->
-      </div>
-    </div>
-    
-    <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./upload/${productNewList[1].product_img }"   alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black"  onclick="location.href='ProductInfoForm.po?product_idx=${productNewList[1].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productNewList[1].product_brand }<br></p>
-        <p>${productNewList[1].product_name }<br><b><fmt:formatNumber value="${productNewList[1].product_price }" pattern="#,###" /></b></b></p><!-- 2번째 그리드 -->
-      </div>
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./upload/${productNewList[5].product_img }"   alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black"  onclick="location.href='ProductInfoForm.po?product_idx=${productNewList[5].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productNewList[5].product_brand }<br></p>
-        <p>${productNewList[5].product_name }<br><b><fmt:formatNumber value="${productNewList[5].product_price }" pattern="#,###" /></b></b></p><!-- 6번째 그리드 -->
-      </div>
-    </div>
-
-    <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./upload/${productNewList[2].product_img }"   alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black"  onclick="location.href='ProductInfoForm.po?product_idx=${productNewList[2].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productNewList[2].product_brand }<br></p>
-        <p>${productNewList[2].product_name }<br><b><fmt:formatNumber value="${productNewList[2].product_price }" pattern="#,###" /></b></b></p><!-- 3번째 그리드 -->
-      </div>
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./upload/${productNewList[6].product_img }"   alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black"  onclick="location.href='ProductInfoForm.po?product_idx=${productNewList[6].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productNewList[6].product_brand }<br></p>
-        <p>${productNewList[6].product_name }<br><b><fmt:formatNumber value="${productNewList[6].product_price }" pattern="#,###" /></b></b></p><!-- 7번째 그리드 -->
-      </div>
-    </div>
-    
-    <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./upload/${productNewList[3].product_img }"   alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productNewList[3].product_brand }<br></p>
-        <p>${productNewList[3].product_name }<br><b><fmt:formatNumber value="${productNewList[3].product_price }" pattern="#,###" /></b></b></p><!-- 4번째 그리드 -->
-      </div>
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./upload/${productNewList[7].product_img }"   alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black"  onclick="location.href='ProductInfoForm.po?product_idx=${productNewList[7].product_idx }&member_idx=${sessionScope.member_idx }'">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>${productNewList[7].product_brand }<br></p>
-        <p>${productNewList[7].product_name }<br><b><fmt:formatNumber value="${productNewList[7].product_price }" pattern="#,###" /></b></b></p><!-- 8번째 그리드 -->
-      </div>
-    </div>
-</div>
-</div>
+									<button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productNewList.product_idx }&member_idx=${sessionScope.member_idx }'">
+										Buy now <i class="fa fa-shopping-cart" ></i>
+									</button>
+								</div>
+								<input type="hidden" id="product_idx${productNewList.product_idx }"
+									value="${productNewList.product_idx }">
+							</div>
+							<p id="product_brand" >${productNewList.product_brand }</p>
+							<p id="product_name" >${productNewList.product_name }<br></p>
+							
+							<div id="price">
+							<c:choose>
+								<c:when test="${productNewList.product_discount_price gt 0}">
+									<span>
+<%-- 									<c:set var="discounted_price" value="${productBestList.product_price - (productBestList.product_price * productBestList.product_discount_price) }"/> --%>
+<%-- 									<c:out value="${discounted_price}" /> --%>
+										<fmt:formatNumber value="${productNewList.product_price - (productNewList.product_price * (productNewList.product_discount_price/100)) }" pattern="#,###" />
+									</span>
+									<span id="product_price">
+									<fmt:formatNumber value="${productNewList.product_price }" pattern="#,###" /></span>
+									<span id="product_discount_price" ><fmt:formatNumber value="${productNewList.product_discount_price }" pattern="" />%</span>
+								</c:when>
+								<c:otherwise>
+									<span><fmt:formatNumber value="${productNewList.product_price }" pattern="#,###" /></span>
+								</c:otherwise>
+							</c:choose>
+							</div>
+							
+						</div>
+					</div>
+				</c:forEach>
+   	 </div>
+   	 
+   	 </div>
   <!-- footer -->
 <%--     <jsp:include page="./inc/footer.jsp"/> --%>
 <script>
