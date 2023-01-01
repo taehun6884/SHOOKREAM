@@ -268,6 +268,7 @@ margin-left: 270PX;
 			<select name="product_color">
 				<option selected>색깔</option>
 				<option value="black">black</option>
+				<option value="black">white</option>
 				<option value="yellow">yellow</option>
 				<option value="red">red</option>
 				<option value="blue">blue</option>

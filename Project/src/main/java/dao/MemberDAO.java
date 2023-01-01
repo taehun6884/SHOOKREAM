@@ -353,101 +353,7 @@ private MemberDAO() {}
 				return memberList;
 			}
 			
-		// 비밀번호 찾기
-		// 임시 비밀번호 발급받아 member 테이블 수정하기
 		
-		public boolean findPass(MemberBean member) {
-			boolean flag = false;
-			
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			
-			try {
-				// 1) 이름/이메일과 일치하는 아이디 가져오기
-				String sql = "SELECT member_id FROM member WHERE member_name=? AND member_email=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, member.getMember_name());
-				pstmt.setString(2, member.getMember_email());
-				rs = pstmt.executeQuery();
-				
-				if(rs.next()) { // 이름과 이메일이 일치한 경우
-					String id = rs.getString("member_id"); // 1) 아이디
-					
-					// 임시 비밀번호 발급
-					//대문자, 소문자, 숫자 이용 배열 만들기
-					String[] ch = {
-						"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
-						"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z,",
-						"0","1","2","3","4","5","6","7","8","9"
-					};
-					// ch 배열에서 랜덤 16글자 가져오기
-					StringBuilder imsiPw = new  StringBuilder();
-					for(int i=0; i < 16; i++) {
-						int num = (int)(Math.random()*ch.length);
-						imsiPw.append(ch[num]);
-					}
-					
-					// 임시 비밀번호로 테이블 수정하기
-					sql = "UPDATE member SET member_pass=? WHERE member_name=? AND member_email=?";
-					pstmt = con.prepareStatement(sql);
-					pstmt.setString(1, imsiPw.toString()); // 임시 비밀번호
-					pstmt.setString(2, member.getMember_name());
-					pstmt.setString(3, member.getMember_email());
-//						rs = pstmt.executeQuery();
-						int cnt = pstmt.executeUpdate();
-						if(cnt == 1) {
-							//임시 비번으로 테이블 수정시, 아이디와 비밀번호 이메일로 전송하기
-							String content = "임시 비밀번호로 로그인 한 후, 회원정보 수정에서 비밀번호를 변경하시기 바랍니다.";
-							content += "<hr>";
-							content += "<table border='1'>";
-							content += "<tr>";
-							content += "	<th>아이디</th>";
-							content += "	<th>" + id + "</th>";
-							content += "</tr>";
-							content += "<tr>";
-							content += "	<td>임시비밀번호</td>";
-							content += "	<td>" + imsiPw.toString() + "</td>";
-							content += "</tr>";
-							content += "</table>";
-							
-							
-							String mailServer = "smtp.gmail.com"; // 메일 서버 지정하기
-							Properties properties = new Properties();
-							properties.put("mail.smtp.host", mailServer);
-							properties.put("mail.smtp.auth", true);
-							Authenticator authenticator = new GoogleMailAuthenticator(); // 메일서버에서 인증받은 계정 + 비번
-							Session mailSession = Session.getDefaultInstance(properties, authenticator); // 메일서버, 계정, 비번이 유효한지 검증
-							
-							InternetAddress address = new InternetAddress(member.getMember_email()); // 받는사람 이메일 주소
-							Message msg = new MimeMessage(mailSession);									  // 메일 관련 정보 작성
-							msg.setRecipient(Message.RecipientType.TO, address);						// 받는 사람
-							msg.setFrom(new InternetAddress("hz0123hz@gmail.com"));						// 보내는 사람
-							msg.setSubject("[Myweb] 임시 비밀번호 입니다.");							//메일 제목
-							msg.setContent(content, "text/html; charset=UTF-8");
-							msg.setSentDate(new Date());
-							Transport.send(msg);
-							
-							flag = true; // 최종 성공
-						} // if end						
-				} else {
-					
-					flag = false;
-				}
-			} catch (SQLException e) {
-				System.out.println("sql 구문 오류 - findID()");
-				e.printStackTrace();
-			} catch (AddressException e) {
-				e.printStackTrace();
-			} catch (MessagingException e) {
-				e.printStackTrace();
-			} finally {
-				JdbcUtil.close(rs);
-				JdbcUtil.close(pstmt);
-			}
-			return flag;
-		} // 비밀번호 찾기() 끝
-
-			
 			// 아이디 찾기
 		public String findID(MemberBean member) {
 			String id = "";
@@ -473,6 +379,11 @@ private MemberDAO() {}
 					
 			return id;
 		} //아이디 찾기() 끝
+		
+		
+		
+		
+		
 	
 			
 			// 찜한 상품 조회
@@ -576,5 +487,62 @@ private MemberDAO() {}
 					}
 				return insertCount;
 			}
+
+
+			// 임시비밀번호(아이디 확인)
+			public boolean findPass(MemberBean member) {
+				boolean isRightUser = false;
+				
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+				
+				try {
+					String sql ="SELECT member_id FROM member WHERE member_id=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, member.getMember_id());
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						isRightUser=true;
+					}
+					
+				} catch (SQLException e) {
+					System.out.println("구문오류-findPass()");
+					e.printStackTrace();
+				} finally {
+					JdbcUtil.close(rs);
+					JdbcUtil.close(pstmt);
+				}
+			
+				return isRightUser;
+			}
+
+
+			public boolean updatePass(MemberBean member, StringBuilder imsiPw) {
+				boolean result = false;
+				
+				PreparedStatement pstmt = null;
+				
+				try {
+					String sql="UPDATE member SET member_pass=? WHERE member_id=?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, imsiPw.toString());
+					pstmt.setString(2, member.getMember_id());
+					if(pstmt.executeUpdate() > 0) {
+						result = true;
+						
+					}
+				} catch (SQLException e) {
+					System.out.println("sql구문오류 - updatePass()");
+					e.printStackTrace();
+				} finally {
+					JdbcUtil.close(pstmt);
+				}
+				
+				
+				return result;
+			}
+			
+			
 
 }
