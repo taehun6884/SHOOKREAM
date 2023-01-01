@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+
 <style type="text/css">
 #sform {
           display: inline-block;
@@ -35,14 +37,18 @@ table.type03 th {
   width: 147px;
   padding: 10px;
   font-weight: bold;
+  font-size : 17px;
   vertical-align: top;
   color: #153d73;
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
+  height: 90px;
+  width: 300px;
 
 }
 table.type03 td {
-  width: 349px;
+  height: 90px;
+  width: 700px;
   padding: 10px;
   vertical-align: top;
   border-right: 1px solid #ccc;
@@ -55,6 +61,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
 </head>
 <body class="w3-content" style="max-width:1200px">
+
+<!-- Top/menu -->
+<jsp:include page="../inc/top.jsp"/>
 
 <!-- Sidebar/menu -->
 <jsp:include page="../inc/side.jsp"/>
@@ -71,34 +80,88 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:250px">
 
-  <!-- Push down content on small screens -->
-<!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
+  <!-- 회원가입 폼 -->
   
+  	<form action="MemberJoinPro.me" method="post" name="joinForm" style="margin-bottom: 300px">
+			<h1 style="text-align: center;">회원가입</h1>
+			<h6 style="color: gray;text-align: center;margin-bottom: 100px" >SHOOKREAM에 오신 것을 환영합니다.</h6>
+		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3>
+			
+			
+			<div>
+				<table class="type03">
+					<tr>
+						<th scope="row">아이디</th>
+						<td>
+						<input type="text" name="id" required size="20px" style="line-height: 30px"><br>
+						<span style="color: gray;" >(영문소문자/숫자, 4~16자.)</span>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">비밀번호</th>
+						<td>
+						<input type="password" name="passwd" required size="20px" style="line-height: 30px"><br>
+						<span style="color: gray;">(영문소문자/숫자/특수문자 중 2가지 이상 조합, 8~16자.)</span>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">비밀번호 확인</th>
+						<td>
+						<input type="password" name="passwd" required size="20px" style="line-height: 30px"><br>
+						<span style="color: gray;">(비밀번호 확인을 위해 동일하게 입력해주세요.)</span>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">이름</th>
+						<td>
+						<input type="text" name="name" required size="20px"style="line-height: 30px" ><br>
+						<span style="color: gray;">(성함을 입력해주세요.)</span>
+						
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">주소</th>
+						<td>
+						<input type="text" name="address" id="address_kakao2" required size="30px" style="margin-bottom: 10px;line-height: 30px"> &nbsp;
+						<button id="address_kakao" class="btn btn-dark">주소찾기</button><br>
+						<input type="text" name="address_detail"  size="30px" style="line-height: 30px" ><br>
+						<span style="color: gray;">(상세 주소를 입력해주세요.)</span>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">휴대전화</th>
+						<td>
+						<input type="text" name="phone" required size="20px" style="line-height: 30px" ><br>
+						<span style="color: gray;">("-"를 제외한 휴대전화를 입력해주세요. ex)01011111111 )</span>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">이메일</th>
+						<td>
+						<input type="text" name="name" placeholder="" required size="20px" style="line-height: 30px"><br>
+						<span style="color: gray;">("@"를 포함하여 이메일을 입력해주세요. ex) abcd@gmail.com)</span>
+						</td>
+						
+					</tr>
+					<tr>
+						<td colspan="2" align="center"><button type="submit" class="btn btn-secondary btn-lg" onclick="fn_joinMember()" >회원가입</button></td>
+					</tr>
+				</table>
+
+			</div>
+
+		</form>
 
 
-  
+  <br>
   <!-- Footer -->
+  <jsp:include page="../inc/footer.jsp"/>
+  
   <!-- 로그인 화면 폼 -->
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
-   <div>
-		<table class="type03">
-			<h1>회원가입</h1>
-			<tr>
-				<th scope="row">항목명</th>
-				<td width="300px"><input type="text" name = "name" placeholder="이름을 입력하세요" required></td>
-			</tr>
-			<tr>
-				<th scope="row">항목명</th>
-			</tr>
-			<tr>
-				<th scope="row">항목명</th>
-			</tr>
-		</table>
-
-		</div>
   </footer>
  </div>	
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+<!--   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
 <!-- 로그인 화면 폼 -->
   <!-- End page content -->
 
@@ -241,7 +304,7 @@ window.onload = function(){
         //카카오 지도 발생
         new daum.Postcode({
             oncomplete: function(data) { //선택시 입력값 세팅
-                document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                document.getElementById("address_kakao2").value = data.address; // 주소 넣기
                 document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
             }
         }).open();
