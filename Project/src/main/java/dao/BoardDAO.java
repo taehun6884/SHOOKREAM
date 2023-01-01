@@ -27,7 +27,7 @@ private BoardDAO() {}
 		this.con = con;
 	}
 	
-	public int insertBoard(BoardBean board) {
+	public int insertBoard(BoardBean board) { //게시판 글쓰기
 //		System.out.println("BoardDAO - insertBoard()");
 		int insertCount = 0;
 		
@@ -72,11 +72,9 @@ private BoardDAO() {}
 		return insertCount;
 	}
 	
-	public List<BoardBean> selectBoardList(String keyword, int startRow, int listLimit, String type) {
+	public List<BoardBean> selectBoardList(String keyword, int startRow, int listLimit, String type) { //게시판 목록 출력 > 고객, 관리자 동일
 		List<BoardBean> boardList = null;
-		
 	
-		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -120,7 +118,7 @@ private BoardDAO() {}
 		return boardList;
 	}
 	
-	public int selectBoardListCount(String keyword,String notice_type) {
+	public int selectBoardListCount(String keyword,String notice_type) { // 게시판 페이징 처리
 		int listCount = 0;
 		
 		PreparedStatement pstmt = null;
@@ -146,7 +144,7 @@ private BoardDAO() {}
 		return listCount;
 	}
 	
-	public BoardBean selectBoard(int notice_idx) {
+	public BoardBean selectBoard(int notice_idx) { // 게시판 상세페이
 		BoardBean board = null;
 		
 		PreparedStatement pstmt = null;
@@ -181,7 +179,7 @@ private BoardDAO() {}
 		return board; 
 	}
 	
-	public int updateReadcount(int notice_idx) {
+	public int updateReadcount(int notice_idx) { //게시판 조회수 증가
 		int updateCount = 0;
 		
 		PreparedStatement pstmt = null;
