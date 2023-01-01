@@ -11,6 +11,7 @@ import java.util.List;
 import db.JdbcUtil;
 import vo.OrderBean;
 import vo.ProductBean;
+import vo.ReviewBean;
 import vo.WishBean;
 import vo.imageBean;
 
@@ -1258,6 +1259,72 @@ private ProductDAO() {}
 				System.out.println("SQL 구문 오류! - selectWishListCount()");
 				e.printStackTrace();
 			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return listCount;
+		}
+
+
+		public List<ReviewBean> selectReviewList(int startRow, int listLimit) { // 리뷰 리스트 출
+			List<ReviewBean> reviewList = null;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT * FROM review ORDER BY review_idx DESC LIMIT ?,? ";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, listLimit);
+				rs = pstmt.executeQuery();
+				
+				reviewList = new ArrayList<ReviewBean>();
+				
+				while(rs.next()) {
+					ReviewBean review = new ReviewBean();
+					review.setReview_idx(rs.getInt("review_idx"));
+					review.setProduct_idx(rs.getInt("product_list"));
+					review.setMember_idx(rs.getInt("member_idx"));
+					review.setReview_content(rs.getString("review_content"));
+					review.setReview_img(rs.getString("review_img"));
+					review.setReview_real_img(rs.getString("review_real_img"));
+					review.setReview_date(rs.getDate("review_date"));
+					review.setRe_order_detail(rs.getString("re_order_detail"));
+					
+					reviewList.add(review);
+				}
+			} catch (SQLException e) {
+				System.out.println("sql구문 - reviewList 오류");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return reviewList;
+		}
+
+
+		public int selectReviewListCount() { // 리뷰의 페이징 처리 작업
+			int listCount = 0;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				
+				String sql = "SELECT COUNT(*) FROM review";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					listCount = rs.getInt(1);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  finally {
 				JdbcUtil.close(rs);
 				JdbcUtil.close(pstmt);
 			}
