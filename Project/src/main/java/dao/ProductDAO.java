@@ -113,7 +113,57 @@ private ProductDAO() {}
 		return insertCount2;
 	}
 
+	//상품 상품별 사이즈 적용
+	public List<String> ProductCategory(String product_name){
+		List<String> categorylist = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select distinct(product_size) from shookream.product where product_name=? order by product_size";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, product_name);
+			rs = pstmt.executeQuery();
+			categorylist = new ArrayList<String>();
+			while(rs.next()) {
+				product_name = rs.getString(1);
+				categorylist.add(product_name);
+			}
+			System.out.println(categorylist);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return categorylist;
+	}
 	
+		//상품 상품별 컬러 적용
+		public List<String> ProductColorCategory(String product_name){
+			List<String> colorlist = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = "select distinct(product_color) from shookream.product where product_name=?";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, product_name);
+				rs = pstmt.executeQuery();
+				colorlist  = new ArrayList<String>();
+				while(rs.next()) {
+					product_name = rs.getString(1);
+					colorlist.add(product_name);
+				}
+				System.out.println("colorlist:"+colorlist );
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return colorlist;
+		}
 
 	// 상품 상세 정보 조회
 	public ProductBean selectProduct(int product_idx) {
@@ -713,10 +763,6 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			try {
-				// board 테이블의 모든 레코드 갯수 조회
-				// => 제목에 검색어를 포함하는 레코드 조회(WHERE subject LIKE '%검색어%')
-				//    (단, 쿼리에 직접 '%?%' 형태로 작성 시 ? 문자를 파라미터로 인식하지 못함
-				//    (따라서, setXXX() 메서드에서 문자열 결합으로 "%" + "검색어" + "%" 로 처리)
 				String sql = "SELECT COUNT(order_idx) "
 									+ "FROM orderlist "
 									+ "where member_idx = ?";
