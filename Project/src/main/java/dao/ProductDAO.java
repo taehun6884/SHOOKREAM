@@ -938,8 +938,8 @@ private ProductDAO() {}
 		
 		
 		
-		public boolean isDeleteList(int product_idx) {
-			int isDeletePro = 0;
+		public int isDeleteList(int product_idx) {
+			int deleteCount = 0;
 			boolean isDeleteProduct = false;
 			PreparedStatement pstmt = null;
 			

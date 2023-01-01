@@ -14,16 +14,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
-<script>//여기 부분 수정해야함!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	function reviewForm() {
-		let url = "ReviewWriteForm.me"; 
-		let name = "review form";
-		let attr = "width=600, height=600, top=200, left=510"
-		
-		window.open(url, name, attr);
-	}
-	
-</script>
 <style>
 	.w3-sidebar a {font-family: "Roboto", sans-serif}
 	body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
@@ -90,7 +80,6 @@
 			      	<a href="BoardInfo.bo?notice_idx=${board.notice_idx }&pageNum=${pageNum }" style="text-decoration:none">${board.notice_subject }</a>
 				  </td>
 			      <td>${board.notice_date }</td>
-			      		<%--리뷰 작성페이지 이동!!!!! 수정해야함~!!!!! --%>	<td><input type="button" value="리뷰 작성하기" onclick="reviewForm()"></td>
 			    </tr>
 			  </tbody>
 			 </c:forEach> 

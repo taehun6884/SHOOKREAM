@@ -267,12 +267,12 @@ margin-left: 270PX;
 			<p class="prod_title">색상</p>
 			<select name="product_color">
 				<option selected>색깔</option>
+
 				<c:forEach var="color" items="${colorlist}">
 				<option value="color">${color }</option>
 				</c:forEach>
 			</select>
 			<hr>
-
 		</div>
 		<div id="detail2" >
 			<p>사이즈</p>
