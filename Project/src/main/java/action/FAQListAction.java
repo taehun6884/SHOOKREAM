@@ -60,7 +60,7 @@ public class FAQListAction implements Action {
 		request.setAttribute("pageInfo", pageInfo);
 		
 		forward = new ActionForward();
-		forward.setPath("board/FAQ.jsp");
+		forward.setPath("board/FAQ_list.jsp");
 		forward.setRedirect(false);
 		
 		return forward;

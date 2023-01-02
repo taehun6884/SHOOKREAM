@@ -1273,28 +1273,31 @@ private ProductDAO() {}
 			
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			
+			ReviewBean review = new ReviewBean();
 			try {
-				String sql = "SELECT * FROM review ORDER BY review_idx DESC LIMIT ?,? ";
+				String sql = "SELECT * FROM review WHERE product_idx=? ORDER BY review_idx DESC LIMIT ?,? ";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, startRow);
-				pstmt.setInt(2, listLimit);
+				pstmt.setInt(1, review.getProduct_idx());
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, listLimit);
 				rs = pstmt.executeQuery();
 				
 				reviewList = new ArrayList<ReviewBean>();
 				
 				while(rs.next()) {
-					ReviewBean review = new ReviewBean();
+					review = new ReviewBean();
 					review.setReview_idx(rs.getInt("review_idx"));
-					review.setProduct_idx(rs.getInt("product_list"));
+					review.setProduct_idx(rs.getInt("product_idx"));
 					review.setMember_idx(rs.getInt("member_idx"));
 					review.setReview_content(rs.getString("review_content"));
 					review.setReview_img(rs.getString("review_img"));
 					review.setReview_real_img(rs.getString("review_real_img"));
 					review.setReview_date(rs.getDate("review_date"));
-					review.setRe_order_detail(rs.getString("re_order_detail"));
+//					review.setRe_order_detail(rs.getString("re_order_detail"));
 					
 					reviewList.add(review);
+					System.out.println("review 확인" + review);
+					System.out.println("reviewList확인"+reviewList);
 				}
 			} catch (SQLException e) {
 				System.out.println("sql구문 - reviewList 오류");
