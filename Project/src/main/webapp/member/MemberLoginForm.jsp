@@ -76,12 +76,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 		  </tr> 	        
           <tr>
           	<td>
-          		<div id="naver_id_login"></div>
-				<a href="javascript:kakaoLogin();"><img src="../images/kakao_login_medium.png" height="40px" ></a>
-				</td>
-          </tr>
-          <tr>
-          	<td>
           		<button type="button" class="w3-button w3-block w3-black" onclick="location.href='MemberJoinForm.me'">회원가입</button>
           	</td>
           </tr>
@@ -196,55 +190,55 @@ function w3_close() {
 <!-- End Channel Plugin -->
  <!-- 네이버 아이디 로그인 -->
  <script type="text/javascript">
-  	var naver_id_login = new naver_id_login("nSNLHIW18gDjrrJsFDeE", "http://localhost:8080/Project/index.jsp");
-  	var state = naver_id_login.getUniqState();
-  	naver_id_login.setButton("white", 2,35);
-  	naver_id_login.setDomain("http://localhost:8080/Project");
-//   	naver_id_login.setState(state);
-//   	naver_id_login.setPopup();
-  	naver_id_login.init_naver_id_login();
+//   	var naver_id_login = new naver_id_login("nSNLHIW18gDjrrJsFDeE", "http://localhost:8080/Project/index.jsp");
+//   	var state = naver_id_login.getUniqState();
+//   	naver_id_login.setButton("white", 2,35);
+//   	naver_id_login.setDomain("http://localhost:8080/Project");
+// //   	naver_id_login.setState(state);
+// //   	naver_id_login.setPopup();
+//   	naver_id_login.init_naver_id_login();
   </script>
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-Kakao.init('6405849a8d7a7fa490a223800b55af42'); //발급받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
-//카카오로그인
-        window.Kakao.init('본인 JAVASCRIPT API 키');
+// Kakao.init('6405849a8d7a7fa490a223800b55af42'); //발급받은 키 중 javascript키를 사용해준다.
+// console.log(Kakao.isInitialized()); // sdk초기화여부판단
+// //카카오로그인
+//         window.Kakao.init('본인 JAVASCRIPT API 키');
 
- function kakaoLogin() {
-     window.Kakao.Auth.login({
-         scope: 'account_email,	profile_nickname', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
-         success: function(response) {
-             console.log(response) // 로그인 성공하면 받아오는 데이터
-             window.Kakao.API.request({ // 사용자 정보 가져오기 
-                 url: '/v2/user/me',
-                 success: (res) => {
-                     const kakao_account = res.kakao_account;
-                     console.log(kakao_account)
-                 }
-             });
-          window.location.href="./main.MAIN"; 
-         },
-         fail: function(error) {
-             console.log(error);
-         }
-     });
- }
-//카카오로그아웃  
-function kakaoLogout() {
-    if (Kakao.Auth.getAccessToken()) {
-      Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function (response) {
-        	console.log(response)
-        },
-        fail: function (error) {
-          console.log(error)
-        },
-      })
-      Kakao.Auth.setAccessToken(undefined)
-    }
-  }  
+//  function kakaoLogin() {
+//      window.Kakao.Auth.login({
+//          scope: 'account_email,	profile_nickname', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
+//          success: function(response) {
+//              console.log(response) // 로그인 성공하면 받아오는 데이터
+//              window.Kakao.API.request({ // 사용자 정보 가져오기 
+//                  url: '/v2/user/me',
+//                  success: (res) => {
+//                      const kakao_account = res.kakao_account;
+//                      console.log(kakao_account)
+//                  }
+//              });
+//           window.location.href="./main.MAIN"; 
+//          },
+//          fail: function(error) {
+//              console.log(error);
+//          }
+//      });
+//  }
+// //카카오로그아웃  
+// function kakaoLogout() {
+//     if (Kakao.Auth.getAccessToken()) {
+//       Kakao.API.request({
+//         url: '/v1/user/unlink',
+//         success: function (response) {
+//         	console.log(response)
+//         },
+//         fail: function (error) {
+//           console.log(error)
+//         },
+//       })
+//       Kakao.Auth.setAccessToken(undefined)
+//     }
+//   }  
 </script>
 <!-- plugin -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
