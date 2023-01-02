@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import action.CheckEmailAddrProAction;
 import action.FindMemberIdProAction;
-import action.FindMemberPwProAction;
 import action.FindMemberPassProAction;
 import action.MemberJoinProAction;
 import action.MemberListAction;
@@ -105,12 +104,12 @@ public class MemberController extends HttpServlet{
 			forward = action.execute(request, response);
 		}else if(command.equals("/FindPwForm.me")) { // 비번 찾기
 			forward = new ActionForward(); 
-			forward.setPath("member/findPwForm.jsp");
+			forward.setPath("member/findPassForm.jsp");
 			forward.setRedirect(false);
-		}else if(command.equals("/FindPwFormAction.me")) { // 비번 찾기 pro
+		}else if(command.equals("/FindPwProAction.me")) { // 비번 찾기 pro
 			action = new FindMemberPassProAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/CheckEmailAddress.me")) { // 비번 찾기 pro
+		}else if(command.equals("/CheckEmailAddress.me")) { // 이메일 인증
 			action = new CheckEmailAddrProAction();
 			forward = action.execute(request, response);
 		}
