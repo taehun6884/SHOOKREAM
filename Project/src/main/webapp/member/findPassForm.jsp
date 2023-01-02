@@ -60,7 +60,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
     <div id = "sform">
         <h4>비밀번호 찾기</h4>
-        <form method="post" action="./FindPassFormAction.me">
+        <form method="post" action="FindPwProAction.me">
         <p align="center"><a href="LoginMember.me">[돌아가기]</a></p>
           <table class=table>
 
@@ -161,8 +161,8 @@ fuction findIDCheck(){
 		}
 		return true;
 } // findIDCheck() 끝
-
 </script>
+
  
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
  

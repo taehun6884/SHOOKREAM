@@ -233,8 +233,12 @@ $(function() {
 					<tr>
 						<th scope="row">이메일</th>
 						<td>
+
 						<input type="text" name="email" id="email" placeholder="" required size="20px" style="line-height: 30px">&nbsp; <span id ="emailCheckResult"></span><br>
+
 						<span style="color: gray;">("@"를 포함하여 이메일을 입력해주세요. ex) abcd@gmail.com)</span>
+						<input type="text" name="authCode" id="authCode" size="20px" style="line-height: 30px" placeholder="인증코드를 입력하세요">
+						<a href="MemberAuthAction.me" id="checkEmail">인증하려면 클릭하세요</a>
 						</td>
 						
 					</tr>
@@ -346,6 +350,7 @@ function reCheckPasswd(pass2) {//재입력 확인
 	}
 }
 
+
 function inputIdChk(){
 	var joinForm = document.joinForm;
 	var dbCheckId = document.joinForm.dbCheckId;
@@ -370,15 +375,20 @@ function inputIdChk(){
 // 	}
 // }
 
+
+
+
 	$(function() {
-		$("#email").on("change", function() {
+		$("#checkEmail").on("click", function() {
 			
 			$.ajax({
 				type: "get",
 	            url: "CheckEmailAddress.me",
 	            data: {
-	               id: $("#id").val()
+	               id: $("#id").val(),
+	               authCode: $("#authCode").val()
 	            },
+	            
 	            success: function(result) {
 	                //  리턴받은 결과("true", "false") 판별
 	                if(result == "true") { // 아이디 존재(중복)

@@ -10,16 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.mail.Address;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.Message.RecipientType;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 import db.JdbcUtil;
 import mail.GoogleMailAuthenticator;
@@ -525,7 +515,6 @@ private MemberDAO() {}
 				
 				try {
 					String sql="UPDATE member SET member_pass=? WHERE member_id=?";
-					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, imsiPw.toString());
 					pstmt.setString(2, member.getMember_id());
 					if(pstmt.executeUpdate() > 0) {
@@ -542,6 +531,7 @@ private MemberDAO() {}
 				
 				return result;
 			}
+			
 			
 			
 

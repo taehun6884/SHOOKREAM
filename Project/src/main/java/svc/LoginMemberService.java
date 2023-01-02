@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mysql.cj.util.Util;
 
 import dao.MemberDAO;
 import db.JdbcUtil;
