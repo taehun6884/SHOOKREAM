@@ -56,8 +56,7 @@
 	  
 	  <!-- Top header -->
 	  <jsp:include page="../inc/top.jsp"/>
-		<footer class="w3-padding-64 w3-light-grey w3-small" id="footer">
-		
+	
 			<h3>공지사항</h3>
 			<hr style="border:solid 2px black;">
 			<select id="collectView" class="btn btn-sm dropdown-toggle" name="notice_category" onclick="collectView(this)"> <%-- 카테고리 모아보기 --%>
@@ -136,7 +135,7 @@
 				</c:otherwise>
 			</c:choose>
 		</section>	
-		</footer>
+
 		
 		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
 	
