@@ -13,6 +13,7 @@ private String member_phone; // 회원 전화번호
 private int member_dec; // 회원 신고수
 private int member_point; // 회원 적립금
 private String member_address; // 회원 주소
+private String authStatus; // 회원 인증 여부
 
 //-------------------------------------------
 // getter/setter 메서드
@@ -77,6 +78,12 @@ public void setMember_address(String member_address) {
 	this.member_address = member_address;
 }
 
+public String getAuthStatus() {
+	return authStatus;
+}
+public void setAuthStatus(String authStatus) {
+	this.authStatus = authStatus;
+}
 // ------------------------------------------------------
 // toString 메서드
 @Override
@@ -84,7 +91,7 @@ public String toString() {
 	return "MemberBean [member_idx=" + member_idx + ", member_id=" + member_id + ", member_name=" + member_name
 			+ ", member_pass=" + member_pass + ", member_email=" + member_email + ", member_date=" + member_date
 			+ ", member_phone=" + member_phone + ", member_dec=" + member_dec + ", member_point=" + member_point
-			+ ", member_address=" + member_address + "]";
+			+ ", member_address=" + member_address + ", authStatus=" + authStatus + "]";
 }
 
 

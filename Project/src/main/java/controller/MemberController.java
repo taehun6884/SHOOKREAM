@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
+import action.CheckEmailAddrProAction;
 import action.FindMemberIdProAction;
 import action.FindMemberPassProAction;
 import action.MemberJoinProAction;
@@ -25,7 +26,6 @@ import action.ReviewWriteProAction;
 import svc.LoginMemberService;
 import vo.ActionForward;
 import vo.MemberBean;
-import vo.ResultData;
 
 @WebServlet("*.me")
 public class MemberController extends HttpServlet{
@@ -109,7 +109,12 @@ public class MemberController extends HttpServlet{
 		}else if(command.equals("/FindPwFormAction.me")) { // 비번 찾기 pro
 			action = new FindMemberPassProAction();
 			forward = action.execute(request, response);
+		}else if(command.equals("/CheckEmailAddress.me")) { // 비번 찾기 pro
+			action = new CheckEmailAddrProAction();
+			forward = action.execute(request, response);
 		}
+		
+		
 			
 		if(forward != null) {
 			if(forward.isRedirect()) {
