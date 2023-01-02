@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.CouponInsertProAction;
 import action.OrderListProAction;
 import action.OrderProAction;
 import action.ProductDeleteProAction;
@@ -63,6 +64,13 @@ public class ProductController extends HttpServlet{
 			forward = action.execute(request, response);
 		}else if(command.equals("/ProductOrderList.po")) { //사용자 주문 상세 페이지
 			action = new OrderListProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/CouponInsertForm.po")) { //관리자 쿠폰 등록 폼 
+			forward = new ActionForward();
+			forward.setPath("admin/admin_coupon_insert.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/CouponInsertPro.po")) {//Coupon 등록 작업
+			action = new CouponInsertProAction();
 			forward = action.execute(request, response);
 		}
 	
