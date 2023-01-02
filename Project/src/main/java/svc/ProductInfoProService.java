@@ -1,6 +1,7 @@
 package svc;
 
 import java.sql.Connection;
+import java.util.List;
 
 import dao.MemberDAO;
 import dao.ProductDAO;
@@ -56,6 +57,33 @@ public class ProductInfoProService {
 			JdbcUtil.close(con);
 			
 			return wish;
+		}
+		
+		//상품별 사이즈 카테고리 가져오기
+		public List<String> getCategoryList(String product_name) {
+			List<String> categorylist = null;
+			Connection con = JdbcUtil.getConnection();
+			
+			ProductDAO dao = ProductDAO.getInstance();
+			
+			dao.setConnection(con);			
+			
+			categorylist = dao.ProductCategory(product_name);
+			
+			return categorylist;
+		}
+		//상품별 사이즈 카테고리 가져오기
+		public List<String> ProductColorCategory(String product_name) {
+			List<String> colorlist = null;
+			Connection con = JdbcUtil.getConnection();
+			
+			ProductDAO dao = ProductDAO.getInstance();
+			
+			dao.setConnection(con);			
+			
+			colorlist = dao.ProductColorCategory(product_name);
+			
+			return colorlist;
 		}
 
 }
