@@ -75,7 +75,7 @@ public class ProductInfoProAction implements Action {
 		
 		int startRow = (pageNum - 1) * listLimit;
 				
-		List<ReviewBean> reviewList = service3.getReviewList(startRow, listLimit);
+		List<ReviewBean> reviewList = service3.getReviewList(startRow, listLimit,product_idx);
 		
 		int listCount = service3.getReviewListCount();
 		

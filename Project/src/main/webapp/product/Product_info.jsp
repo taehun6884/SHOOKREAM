@@ -344,8 +344,9 @@ margin-left: 270PX;
 					<table class="reviewContent">
 						<c:forEach var="review" items="${reviewList }">
 						<tr>
-							<td rowspan="2" width="30%">리뷰사진<img src="../images/kakao_small.jpg"/></td>
-							<td width="60%">주문 내용</td> <%-- 주문 상세내용 : 사이즈 색상 --%>
+							<td rowspan="2" width="30%">리뷰사진<img src="upload/${review.review_img }"/></td>
+							<td width="60%">주문 내용</td> 
+							<td>주문 상세 내용: ${review.re_order_detail }</td>
 							<td width="10%">작성 멤버${review.member_idx }<br>작성일자${review.review_date }</td> <%-- 리뷰 작성하는 멤버 --%>
 						</tr>
 						<tr>

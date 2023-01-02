@@ -45,12 +45,12 @@ public class ReviewWriteProAction implements Action {
 			
 //			review.setReview_content(multi.getParameter("review_content"));
 			review.setReview_idx(1);
-			review.setProduct_idx(Integer.parseInt(request.getParameter("product_idx")));
-			review.setMember_idx(Integer.parseInt(request.getParameter("member_idx")));
+			review.setProduct_idx(Integer.parseInt(multi.getParameter("prodcut_idx")));
+			review.setMember_idx(Integer.parseInt(multi.getParameter("member_idx")));
 			review.setReview_img(multi.getOriginalFileName("review_img")); //살리기
 			review.setReview_real_img(multi.getFilesystemName("review_img")); //살리기
-			review.setReview_content("신발이 편해요");
-			review.setRe_order_detail("230, red");
+			review.setReview_content(multi.getParameter("content"));
+			review.setRe_order_detail(multi.getParameter("product_size")+","+multi.getParameter("product_color"));
 			
 			System.out.println("리뷰 작성 : " + review);
 			

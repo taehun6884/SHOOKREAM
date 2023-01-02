@@ -745,7 +745,7 @@ private ProductDAO() {}
 					vo.setOrder_date(rs.getTimestamp("order_date"));
 					vo.setOrder_product_idx(rs.getInt("product_idx"));
 					vo.setOrder_product_size(rs.getString("product_size"));
-					vo.setOrder_product_color(rs.getString("prodcut_color"));
+					vo.setOrder_product_color(rs.getString("product_color"));
 					orderlist.add(vo);
 				}
 			} catch (SQLException e) {
@@ -1270,7 +1270,7 @@ private ProductDAO() {}
 		}
 
 
-		public List<ReviewBean> selectReviewList(int startRow, int listLimit) { // 리뷰 리스트 출
+		public List<ReviewBean> selectReviewList(int startRow, int listLimit,int product_idx) { // 리뷰 리스트 출
 			List<ReviewBean> reviewList = null;
 			
 			PreparedStatement pstmt = null;
@@ -1279,13 +1279,12 @@ private ProductDAO() {}
 			try {
 				String sql = "SELECT * FROM review WHERE product_idx=? ORDER BY review_idx DESC LIMIT ?,? ";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, review.getProduct_idx());
+				pstmt.setInt(1, product_idx);
 				pstmt.setInt(2, startRow);
 				pstmt.setInt(3, listLimit);
 				rs = pstmt.executeQuery();
-				
+				System.out.println("productDao-review: "+product_idx);
 				reviewList = new ArrayList<ReviewBean>();
-				
 				while(rs.next()) {
 					review = new ReviewBean();
 					review.setReview_idx(rs.getInt("review_idx"));
@@ -1295,7 +1294,7 @@ private ProductDAO() {}
 					review.setReview_img(rs.getString("review_img"));
 					review.setReview_real_img(rs.getString("review_real_img"));
 					review.setReview_date(rs.getDate("review_date"));
-//					review.setRe_order_detail(rs.getString("re_order_detail"));
+					review.setRe_order_detail(rs.getString("re_order_detail"));
 					
 					reviewList.add(review);
 					System.out.println("review 확인" + review);

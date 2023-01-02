@@ -56,12 +56,17 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
 <script>
 	// 리뷰작성 폼 팝업 <<<<<url 파라미터 변경하기!>>>>
-	function reviewForm(idx) {
-		let url = "ReviewWriteForm.me?member_idx=3&product_idx="+idx;  // 테스트용 파라미터임!
+	function reviewForm(idx,size,color) {
+		let url = "ReviewWriteForm.me?member_idx=${sessionScope.member_idx}&product_idx="+idx+"&product_size="+size+"&product_color="+color;  // 테스트용 파라미터임!
 		let name = "review form";
 		let attr = "width=600, height=600, top=200, left=510"
 		
 		window.open(url, name, attr);
+// 		window.open.member_idx = ${sessionScope.member_idx};
+// 		window.open.product_idx = idx;
+// 		window.open.product_size = size;
+// 		window.open.product_color = color;
+		
 	}
 	
 </script>
@@ -135,7 +140,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <td>${order.order_product_size }</td>
       <td>${order.order_product_color }</td>
       <td>${order.order_date }</td>
-	  <td><input type="button" value="리뷰 작성하기" class="btn btn-dark" onclick="reviewForm(${order.order_product_idx})">
+	  <td><input type="button" value="리뷰 작성하기" class="btn btn-dark" onclick="reviewForm(${order.order_product_idx },'${order.order_product_size },'${order.order_product_color }')">
       <button type="button" class="btn btn-dark" >삭제</button></td>
     </tr>
     </c:forEach>
