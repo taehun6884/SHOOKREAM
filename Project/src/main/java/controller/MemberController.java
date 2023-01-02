@@ -88,7 +88,7 @@ public class MemberController extends HttpServlet{
 			forward = new ActionForward();
 			forward.setPath("product/review_write_form.jsp");
 			forward.setRedirect(false);
-		} else if(command.equals("/ReviewWrite.me")) { 
+		} else if(command.equals("/ReviewWrite.me")) {  // 리뷰작성
 			action = new ReviewWriteProAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/FindMemberIdForm.me")) { // 아이디 찾기
