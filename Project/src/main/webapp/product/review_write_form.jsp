@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,6 +82,21 @@
 		<input type="file" id="fileInsert" name="review_img" accept=".png, .jpeg, .jpg, .gif" onchange="readURL(this);"><br>
 		<img id="preview"></img>
 		<hr>
+		<div >
+		&nbsp; 구매 옵션<br>
+			<select name="product_size">
+				<option selected>구매하신 사이즈를 골라주세요</option>
+				<c:forEach var="category" items="${categorylist}">
+				<option value="${category}">${category}</option>
+				</c:forEach>
+			</select>
+			<select name="product_colour" >
+				<option selected>구매하신 색상 골라주세요</option>
+				<c:forEach var="color" items="${colorlist}">
+					<option value="${color}">${color}</option>
+				</c:forEach>
+			</select>	
+		</div>
 		<textarea placeholder="욕설 및 관련없는 내용은 관리자에 의해 삭제될 수 있습니다."></textarea><br>
 		<div id="reviewBtn">
 			<input type="submit" class="btn btn-outline-secondary btn-sm" id="register" value="글 등록하기">

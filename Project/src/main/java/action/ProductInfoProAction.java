@@ -40,8 +40,6 @@ public class ProductInfoProAction implements Action {
 		List<String>categorylist =  service.getCategoryList(product.getProduct_name());
 		List<String> colorlist = service.ProductColorCategory(product.getProduct_name());
 		
-		
-		
 		HttpSession session = request.getSession();
 //		int member_idx = Integer.parseInt(request.getParameter("member_idx"));
 		
@@ -64,7 +62,7 @@ public class ProductInfoProAction implements Action {
 		request.setAttribute("categorylist", categorylist);
 		request.setAttribute("colorlist", colorlist);
 		
-		// 상품 리뷰 출력 서비스 시작
+		// 상품 리뷰 출력 시작
 		
 		ReviewListService service3 = new ReviewListService();
 		// 리뷰 페이징 처리
@@ -73,7 +71,8 @@ public class ProductInfoProAction implements Action {
 		if(request.getParameter("pageNum") != null) {
 			pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		}
-
+		
+		
 		int startRow = (pageNum - 1) * listLimit;
 				
 		List<ReviewBean> reviewList = service3.getReviewList(startRow, listLimit);
