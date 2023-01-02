@@ -21,7 +21,6 @@
         
 #dbCheckId {
 		display:inline;
-      margin-left: -90px;
       box-sizing: border-box;
 }
 table.type03 {
@@ -84,7 +83,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   
   	<form action="MemberJoinPro.me" method="post" name="joinForm" style="margin-bottom: 300px">
 			<h1 style="text-align: center;">회원가입</h1>
-			<h6 style="color: gray;text-align: center;margin-bottom: 100px" >SHOOKREAM에 오신 것을 환영합니다.</h6>
+			<h6 style="color: gray;text-align: center;margin-bottom: 50px" >SHOOKREAM에 오신 것을 환영합니다.</h6>
 		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3>
 			
 			
@@ -93,7 +92,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 					<tr>
 						<th scope="row">아이디</th>
 						<td>
-						<input type="text" name="id" required size="20px" style="line-height: 30px"><button class="btn btn-dark" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">ID Check</button>
+						<input type="text" name="id" id ="id" required size="20px" style="line-height: 30px" onkeydown="inputIdChk()"> &nbsp;
+						<button class="btn btn-dark" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">ID Check</button>
 <!-- 						<button type="button" class="btn btn-secondary" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">ID check</button> -->
 						<input type="hidden" name="isCheckId" value="idUncheck"/> <!-- 체크 여부 확인 -->			
 						<br>
@@ -104,14 +104,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 					<tr>
 						<th scope="row">비밀번호</th>
 						<td>
-						<input type="password" name="passwd" required size="20px" style="line-height: 30px" onkeyup="checkPasswd(this.value)"><span id="checkPasswdResult"></span><br>
+						<input type="password" name="pass" id ="pass"required size="20px" style="line-height: 30px" onkeyup="checkPasswd(this.value)"><span id="checkPasswdResult"></span><br>
 						<span style="color: gray;">(영문소문자/숫자/특수문자 중 2가지 이상 조합, 8~16자.)</span>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">비밀번호 확인</th>
 						<td>
-						<input type="password" name="passwd" required size="20px" style="line-height: 30px"><br>
+						<input type="password" name="pass2" required size="20px" style="line-height: 30px" onkeyup="reCheckPasswd(this.value)"><span id ="recheckResult"></span><br>
 						<span style="color: gray;">(비밀번호 확인을 위해 동일하게 입력해주세요.)</span>
 						</td>
 					</tr>
@@ -142,7 +142,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 					<tr>
 						<th scope="row">이메일</th>
 						<td>
-						<input type="text" name="name" placeholder="" required size="20px" style="line-height: 30px"><br>
+						<input type="text" name="email" placeholder="" required size="20px" style="line-height: 30px"><br>
 						<span style="color: gray;">("@"를 포함하여 이메일을 입력해주세요. ex) abcd@gmail.com)</span>
 						</td>
 						
@@ -208,6 +208,21 @@ function fn_dbCheckId() {
 	}
 }
 
+function reCheckPasswd(pass2) {//재입력 확인 
+	var pass = document.getElementById("pass").value;
+// 	var pass2 = document.getElementById("pass2").value;
+	let spanRecheckResult = document.getElementById("recheckResult");
+
+	if(pass == pass2){
+		spanRecheckResult.innerHTML = "동일한 패스워드 입니다";
+		spanRecheckResult.style.color = "BLUE";    		
+	}else{
+		spanRecheckResult.innerHTML = "일치하지 않는 패스워드 입니다";
+		spanRecheckResult.style.color = "RED";    		
+		event.preventDefault(); // submit 기능 막기
+	}
+}
+
 function inputIdChk(){
 	var joinForm = document.joinForm;
 	var dbCheckId = document.joinForm.dbCheckId;
@@ -227,6 +242,8 @@ function checkPasswd(passwd) { // 패스워드 길이 체크
 	} else {
 		spanCheckPasswdResult.innerHTML = "8 ~ 16자를 입력하세요";
 		spanCheckPasswdResult.style.color = "RED";
+		event.preventDefault(); // submit 기능 막기
+
 	}
 }
 
