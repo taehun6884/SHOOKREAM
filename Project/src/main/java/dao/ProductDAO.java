@@ -722,7 +722,7 @@ private ProductDAO() {}
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date,p.product_idx "
+			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date,p.product_idx,p.product_size,p.product_color "
 					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx "
 					+ "where m.member_idx=? "
@@ -744,6 +744,8 @@ private ProductDAO() {}
 					vo.setOrder_progress(rs.getString("order_progress"));
 					vo.setOrder_date(rs.getTimestamp("order_date"));
 					vo.setOrder_product_idx(rs.getInt("product_idx"));
+					vo.setOrder_product_size(rs.getString("product_size"));
+					vo.setOrder_product_color(rs.getString("prodcut_color"));
 					orderlist.add(vo);
 				}
 			} catch (SQLException e) {
