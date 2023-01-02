@@ -5,6 +5,7 @@
 <html>
 <head>
 <title>회원가입</title>
+<script src="../js/jquery-3.6.3.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -87,7 +88,10 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           <td width="300px"><input class="w3-input w3-border" type="text" placeholder="phone   ex) 01012345678" name="phone" required></td>
           </tr>
           <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="email    ex) abcd@gmail.com" name="email" required></td>
+          <td width="300px"><input class="w3-input w3-border" id="email" type="text" placeholder="email    ex) abcd@gmail.com" name="email" required>
+          <span id="checkEmailAddress"></span>
+          <!-- 이메일 인증 확인 -->
+          </td>
           </tr>
           <tr>
           <td width="300px"><input class="w3-input w3-border" id="address_kakao" type="text" placeholder="address" name="address" required></td>
@@ -168,6 +172,26 @@ function checkPasswd(passwd) { // 패스워드 길이 체크
 	}
 }
 
+	$(function() {
+		$("#email").on("change", function() {
+			
+			$.ajax({
+				type: "get",
+	            url: "CheckEmailAddress.me",
+	            data: {
+	               id: $("#id").val()
+	            },
+	            success: function(result) {
+	                //  리턴받은 결과("true", "false") 판별
+	                if(result == "true") { // 아이디 존재(중복)
+	                   $("#checkEmailAddress").html("인증이 완료된 아이디").css("color", "blue");
+	                } else {
+	                   $("#checkEmailAddress").html("인증되지 않은 아이디").css("color", "red");
+	                }
+	             }
+	         });
+		});
+	});
 
 
 // Accordion 
