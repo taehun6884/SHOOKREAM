@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import action.CheckEmailAddrProAction;
 import action.FindMemberIdProAction;
+import action.FindMemberPwProAction;
 import action.FindMemberPassProAction;
 import action.MemberJoinProAction;
 import action.MemberListAction;
@@ -113,7 +114,6 @@ public class MemberController extends HttpServlet{
 			action = new CheckEmailAddrProAction();
 			forward = action.execute(request, response);
 		}
-		
 		
 			
 		if(forward != null) {

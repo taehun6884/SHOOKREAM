@@ -21,9 +21,17 @@
         
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!-- 외부 jQuery 라이브러리 등록 -->
-		<script src = "../js/jquery-3.6.3.js"></script>
+		<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 		
+		<!-- 할인선택에 따른 처리 -->
+		<script type="text/javascript">
+		$(function() {
+			$('input:radio[id="saleRadio1"]').prop("checked", function() {
+				$('#testRate').attr('readonly', true);
+			});
+		});
 		
+		</script>
     </head>
     <body class="sb-nav-fixed">
     
@@ -47,19 +55,26 @@
 			<form action="ProductInsertPro.po" method="post"
 				enctype="multipart/form-data">
 				<table class="table">
-
 					<tr>
-						<td width="100px" align="left">상품명</td>
+						<td width="100px" align="left" class="table-secondary">상품명</td>
 						<td width="300px"><input class="w3-input w3-border"
-							type="text" placeholder="Product Name" name="name" required></td>
+							type="text" placeholder="Product Name" name="name" required ></td>
 					</tr>
 					<tr>
-						<td width="100px" align="left">상품 브랜드</td>
-						<td width="300px"><input class="w3-input w3-border"
-							type="text" placeholder="Product Name" name="brand" required></td>
+						<td width="100px" align="left" class="table-secondary">상품 브랜드</td>
+						<td width="300px">
+						<select name="brand" >
+								<option value="" selected>브랜드를 선택하세요</option>
+								<option value="나이키">나이키</option>
+								<option value="뉴발란스">뉴발란스</option>
+								<option value="컨버스">컨버스</option>
+								<option value="아디다스">아디다스</option>
+								<option value="슈펜">슈펜</option>
+						</select>
+						</td>
 					</tr>
 					<tr>
-						<td width="100px" align="left" >상품 가격</td>
+						<td width="100px" align="left" class="table-secondary">상품 가격</td>
 						<td><input type="text" id="testPrice" name ="price" placeholder="원래 가격을 입력하세요"><span>&nbsp;원</span> <!-- 콤마 있는 값 -->
 						</td>
 						
@@ -67,22 +82,34 @@
 					
 						
 					<tr>
-						<td width="100px" align="left">할인율</td>
+						<td width="100px" align="left" class="table-secondary">할인율</td>
 						<td>
-						<input type="text" id="testRate" name = "discount" value = "0" placeholder="할인율" >
-						<span>&nbsp;%&nbsp;</span>
-						<button type="button" id="testCalBtn">&nbsp;계산하기&nbsp;</button>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="saleRadio" id="saleRadio1" value="notselected" checked="checked">
+							<label class="form-check-label" for="flexRadioDefault2">할인 미선택</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="saleRadio" id="saleRadio2" value="selected"> 
+							<label class="form-check-label" for="flexRadioDefault1">할인 적용 <input type="text" id="testRate" name = "discount" value = "0" size="1" style = "text-align:center;">
+							<span>&nbsp;%&nbsp;</span>
+							<button type="button" id="testCalBtn">&nbsp;계산하기&nbsp;</button>
+							</label>
+						</div>
+						
+						</td>
+						<td>
 						</td>
 						
 					<tr>
-						<td width="150px" align="left">할인율 적용가격</td>
-						<td><p id ="testResultBox02"></p></td>
+						<td width="150px" align="left" class="table-secondary">할인율 적용가격</td>
+						
+						<td><p id = "testResultBox02"></p></td>
 						
 					</tr>
 	
 					<tr>
 
-						<td width="100px" align="left">상품 사이즈</td>
+						<td width="100px" align="left" class="table-secondary">상품 사이즈</td>
 						<td width="300px">
 						<select name="size">
 								<option value="220">220</option>
@@ -96,12 +123,12 @@
 								<option value="240">300</option>
 						</select></td>
 					<tr>
-						<td width="100px" align="left">상품 재고량</td>
+						<td width="100px" align="left" class="table-secondary">상품 재고량</td>
 						<td width="300px"><input class="w3-input w3-border" type="number" min="0" max="100" placeholder="수량" name="amount" onkeyup="inputNumberFormat(this);" required></td>
 					</tr>
 
 					<tr>
-						<td width="100px" align="left">상품색상</td>
+						<td width="100px" align="left" class="table-secondary">상품색상</td>
 						<td width="300px"><select name="color">
 								<option value="red">red</option>
 								<option value="blue">blue</option>
@@ -110,31 +137,31 @@
 					</tr>
 
 					<tr>
-						<td width="100px" align="left">요약 설명</td>
+						<td width="100px" align="left" class="table-secondary">요약 설명</td>
 						<td><textarea class="w3-input w3-border" style="resize: none"
-								rows="5" cols="30" placeholder="Product summary" name="exp"
+								rows="5" cols="40" placeholder="Product summary" name="exp"
 								required="required"></textarea></td>
 						<!--           <td width="300px"><input class="w3-input w3-border" type="" placeholder="Product summary" name="Product summary" required></td> -->
 					</tr>
 
 					<tr>
-						<td width="100px" align="left">상세 설명</td>
+						<td width="100px" align="left" class="table-secondary">상세 설명</td>
 						<td><textarea class="w3-input w3-border" style="resize: none"
-								rows="5" cols="30" placeholder="Product detail"
+								rows="10" cols="150" placeholder="Product detail"
 								name="detail_exp" required="required"></textarea></td>
 					</tr>
 
 
 					<tr>
-						<td width="100px" align="left">메인 이미지</td>
+						<td width="100px" align="left" class="table-secondary">메인 이미지</td>
 						<td><input type="file" name="file"></td>
 					</tr>
 					<tr>
-						<td width="100px" align="left">제품 이미지1</td>
+						<td width="100px" align="left" class="table-secondary">제품 이미지1</td>
 						<td><input type="file" name="file2"></td>
 					</tr>
 					<tr>
-						<td width="100px" align="left">제품 이미지2</td>
+						<td width="100px" align="left" class="table-secondary">제품 이미지2</td>
 						<td><input type="file" name="file3"></td>
 					</tr>
 
@@ -158,7 +185,7 @@
         <script src="admin/assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="admin/js/datatables-simple-demo.js"></script>
-        <script src="../js/jquery-3.6.3.js"></script>
+<!--         <script src="../js/jquery-3.6.3.js"></script> -->
         
 		
 
