@@ -108,8 +108,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
   <!-- ./images header -->
   <div class ="post-wrapper">
-  	<div><img src="images/메롱1.jpg" height="700" width="900"></div>
-  	<div><img src="images/메롱2.jpg" height="700" width="900"></div>
+  	<div><img src="images/jeans.jpg" height="700" width="900"></div>
+  	<div><img src="images/jeans1.jpg" height="700" width="900"></div>
   	<div><img src="images/섬네일(슈펜).jpg" height="700" width="900"></div>
   	<div><img src="images/화이팅.png" height="700" width="900"></div>
   
