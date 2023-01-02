@@ -18,10 +18,10 @@ public class FAQDetailAction implements Action {
 		
 		BoardDetailService service = new BoardDetailService();
 		BoardBean board = service.getBoard(notice_idx, true);
-//		System.out.println(board);
+		System.out.println("FAQ에서 확인 하는" + board);
 		
 		request.setAttribute("board", board);
-
+		
 		
 		forward = new ActionForward();
 		forward.setPath("board/FAQ_detail.jsp");
