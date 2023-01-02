@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
+import action.CheckEmailAddrProAction;
 import action.FindMemberIdProAction;
 import action.FindMemberPwProAction;
+import action.FindMemberPassProAction;
 import action.MemberJoinProAction;
 import action.MemberListAction;
 import action.MemberDeleteMemberProAction;
@@ -25,7 +27,6 @@ import action.ReviewWriteProAction;
 import svc.LoginMemberService;
 import vo.ActionForward;
 import vo.MemberBean;
-import vo.ResultData;
 
 @WebServlet("*.me")
 public class MemberController extends HttpServlet{
@@ -88,7 +89,7 @@ public class MemberController extends HttpServlet{
 			forward = new ActionForward();
 			forward.setPath("product/review_write_form.jsp");
 			forward.setRedirect(false);
-		} else if(command.equals("/ReviewWrite.me")) { 
+		} else if(command.equals("/ReviewWrite.me")) {  // 리뷰작성
 			action = new ReviewWriteProAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/FindMemberIdForm.me")) { // 아이디 찾기
@@ -107,17 +108,13 @@ public class MemberController extends HttpServlet{
 			forward.setPath("member/findPwForm.jsp");
 			forward.setRedirect(false);
 		}else if(command.equals("/FindPwFormAction.me")) { // 비번 찾기 pro
-			action = new FindMemberPwProAction();
+			action = new FindMemberPassProAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/FindMemberPassForm.me")) { // 비번 찾기
-			forward = new ActionForward(); 
-			forward.setPath("member/findPassForm.jsp");
-			forward.setRedirect(false);
+		}else if(command.equals("/CheckEmailAddress.me")) { // 비번 찾기 pro
+			action = new CheckEmailAddrProAction();
+			forward = action.execute(request, response);
 		}
-//			else if(command.equals("/FindPassFormAction.me")) { // 비번 찾기 pro
-//			action = new FindMemberPassProAction();
-//			forward = action.execute(request, response);
-//		}
+		
 			
 		if(forward != null) {
 			if(forward.isRedirect()) {

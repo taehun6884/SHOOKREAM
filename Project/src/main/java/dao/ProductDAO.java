@@ -11,6 +11,7 @@ import java.util.List;
 import db.JdbcUtil;
 import vo.OrderBean;
 import vo.ProductBean;
+import vo.ReviewBean;
 import vo.WishBean;
 import vo.imageBean;
 
@@ -113,7 +114,57 @@ private ProductDAO() {}
 		return insertCount2;
 	}
 
+	//상품 상품별 사이즈 적용
+	public List<String> ProductCategory(String product_name){
+		List<String> categorylist = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select distinct(product_size) from shookream.product where product_name=? order by product_size";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, product_name);
+			rs = pstmt.executeQuery();
+			categorylist = new ArrayList<String>();
+			while(rs.next()) {
+				product_name = rs.getString(1);
+				categorylist.add(product_name);
+			}
+			System.out.println(categorylist);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return categorylist;
+	}
 	
+		//상품 상품별 컬러 적용
+		public List<String> ProductColorCategory(String product_name){
+			List<String> colorlist = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = "select distinct(product_color) from shookream.product where product_name=?";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, product_name);
+				rs = pstmt.executeQuery();
+				colorlist  = new ArrayList<String>();
+				while(rs.next()) {
+					product_name = rs.getString(1);
+					colorlist.add(product_name);
+				}
+				System.out.println("colorlist:"+colorlist );
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return colorlist;
+		}
 
 	// 상품 상세 정보 조회
 	public ProductBean selectProduct(int product_idx) {
@@ -352,7 +403,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, i.image_main_file "
+				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_discount_price, i.image_main_file "
 						+ "FROM shookream.product p join shookream.image i "
 						+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY p.product_idx ASC";
 				
@@ -375,7 +426,7 @@ private ProductDAO() {}
 //					product.setProduct_exp(rs.getString("product_exp"));
 //					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
 //					product.setProduct_color(rs.getString("product_color"));
-//					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
 					product.setProduct_img(rs.getString("image_main_file"));
 //					product.setProduct_date(rs.getTimestamp("product_date"));
 					
@@ -400,7 +451,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_date, i.image_main_file "
+				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_date, p.product_discount_price, i.image_main_file "
 				+ "FROM shookream.product p join shookream.image i "
 				+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY product_date desc";
 				
@@ -423,7 +474,7 @@ private ProductDAO() {}
 //					product.setProduct_exp(rs.getString("product_exp"));
 //					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
 //					product.setProduct_color(rs.getString("product_color"));
-//					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
 					product.setProduct_img(rs.getString("image_main_file"));
 					product.setProduct_date(rs.getTimestamp("product_date"));
 					
@@ -448,7 +499,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, i.image_main_file "
+				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price,p.product_discount_price, i.image_main_file "
 						+ "FROM shookream.product p join shookream.image i "
 						+ "on p.product_idx = i.product_idx "
 						+ "WHERE product_discount_price > 0 "
@@ -477,7 +528,7 @@ private ProductDAO() {}
 //					product.setProduct_exp(rs.getString("product_exp"));
 //					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
 //					product.setProduct_color(rs.getString("product_color"));
-//					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
 					product.setProduct_img(rs.getString("image_main_file"));
 //					product.setProduct_date(rs.getTimestamp("product_date"));
 					
@@ -501,7 +552,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, i.image_main_file "
+				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_discount_price, i.image_main_file "
 						+ "FROM shookream.product p join shookream.image i "
 						+ "on p.product_idx = i.product_idx "
 						+ "WHERE product_brand LIKE ? "
@@ -532,7 +583,7 @@ private ProductDAO() {}
 //					product.setProduct_exp(rs.getString("product_exp"));
 //					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
 //					product.setProduct_color(rs.getString("product_color"));
-//					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
 					product.setProduct_img(rs.getString("image_main_file"));
 //					product.setProduct_date(rs.getTimestamp("product_date"));
 					
@@ -713,10 +764,6 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			try {
-				// board 테이블의 모든 레코드 갯수 조회
-				// => 제목에 검색어를 포함하는 레코드 조회(WHERE subject LIKE '%검색어%')
-				//    (단, 쿼리에 직접 '%?%' 형태로 작성 시 ? 문자를 파라미터로 인식하지 못함
-				//    (따라서, setXXX() 메서드에서 문자열 결합으로 "%" + "검색어" + "%" 로 처리)
 				String sql = "SELECT COUNT(order_idx) "
 									+ "FROM orderlist "
 									+ "where member_idx = ?";
@@ -1212,6 +1259,72 @@ private ProductDAO() {}
 				System.out.println("SQL 구문 오류! - selectWishListCount()");
 				e.printStackTrace();
 			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return listCount;
+		}
+
+
+		public List<ReviewBean> selectReviewList(int startRow, int listLimit) { // 리뷰 리스트 출
+			List<ReviewBean> reviewList = null;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT * FROM review ORDER BY review_idx DESC LIMIT ?,? ";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, listLimit);
+				rs = pstmt.executeQuery();
+				
+				reviewList = new ArrayList<ReviewBean>();
+				
+				while(rs.next()) {
+					ReviewBean review = new ReviewBean();
+					review.setReview_idx(rs.getInt("review_idx"));
+					review.setProduct_idx(rs.getInt("product_list"));
+					review.setMember_idx(rs.getInt("member_idx"));
+					review.setReview_content(rs.getString("review_content"));
+					review.setReview_img(rs.getString("review_img"));
+					review.setReview_real_img(rs.getString("review_real_img"));
+					review.setReview_date(rs.getDate("review_date"));
+					review.setRe_order_detail(rs.getString("re_order_detail"));
+					
+					reviewList.add(review);
+				}
+			} catch (SQLException e) {
+				System.out.println("sql구문 - reviewList 오류");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return reviewList;
+		}
+
+
+		public int selectReviewListCount() { // 리뷰의 페이징 처리 작업
+			int listCount = 0;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				
+				String sql = "SELECT COUNT(*) FROM review";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					listCount = rs.getInt(1);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}  finally {
 				JdbcUtil.close(rs);
 				JdbcUtil.close(pstmt);
 			}

@@ -15,7 +15,8 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+<link rel="stylesheet" href="./css/main.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet"
@@ -48,46 +49,67 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 	font-size: x-large;
 }
 
-#btnLikeImage {
-	width: 20px;
-	height: 20px;
+#product_brand {
+	margin-bottom: 1.5px; 
+	margin-top:2px; 
+	font-weight: bold
+}
+
+#product_name {
+	margin-bottom: 3.5px;
+	color: gray;
+}
+
+#price {
+	margin-bottom:20px;
+}
+
+#product_price {
+	text-decoration: line-through; 
+	font-size: small;
+}
+
+#product_discount_price {
+	color: red; 
+	font-size: big; 
+	float: right;
 }
 </style>
 
 <script src="jquery/jquery-3.6.3.js"></script>
 <script type="text/javascript">
 // for(var i = 0; i < ${fn:length(productBestList)}; i++){
-$(function() {
-	$("button[id^='btnLike']").on("click", function(e) {
+// $(function() {
+// 	$("button[id^='btnLike']").on("click", function(e) {
 		
 // 		var loginCk = "${sessionScope.sId}";
-		var loginCk = "<%=(String)session.getAttribute("sId")%>"
+<%-- 		var loginCk = "<%=(String)session.getAttribute("sId")%>" --%>
 		
-		if(loginCk == "null"){
-			alert("로그인 후 이용 가능합니다.");
-			location.href="LoginMember.me";
-		} 
+// 		if(loginCk == "null"){
+// 			alert("로그인 후 이용 가능합니다.");
+// 			location.href="LoginMember.me";
+// 		} 
 		
-		$.ajax({
-			type: "post", 
-			url: "LikeInsertPro.ca", 
-			data: { 
-				member_idx: ${sessionScope.member_idx},
-				product_idx: $("input[id^='product_idx']").val()
-			},
-			dataType: "html", 
-			async:false,
-			success: function(data) { 
-					$("#btnLikeImage").attr("src", "images/after_heart.png");
-					alert("찜한 상품에 추가되었습니다!");
-			}, 
-			error: function(xhr, textStatus, errorThrown) {
-				alert("찜하기 실패"); 
-			}
-		});
+// 		$.ajax({
+// 			type: "post", 
+// 			url: "LikeInsertPro.ca", 
+// 			data: { 
+// 				member_idx: ${sessionScope.member_idx},
+// 				product_idx: $("input[id^='product_idx']").val()
+// 			},
+// 			dataType: "html", 
+// 			async:false,
+// 			success: function(data) { 
+// 					$("#btnLikeImage").attr("src", "images/after_heart.png");
+// 					alert("찜한 상품에 추가되었습니다!");
+// 			}, 
+// 			error: function(xhr, textStatus, errorThrown) {
+// 				alert("찜하기 실패"); 
+// 			}
+// 		});
 		
-	});
-});
+// 	});
+// });
 // }
 </script>
 </head>
@@ -114,7 +136,9 @@ $(function() {
 		<!-- Push down content on small screens -->
 		<div class="w3-hide-large" style="margin-top: 83px"></div>
 
-
+		  <!-- Top header -->
+		  <jsp:include page="./inc/top.jsp"/>
+		  
 		<!--   <div class="w3-container w3-text-grey" id="jeans"> -->
 		<!--     <p>BEST</p> -->
 		<!--   </div> -->
@@ -129,28 +153,37 @@ $(function() {
 		<c:forEach var="productBestList" items="${productBestList }">
 			<div class="w3-col l3 s6">
 				<div class="w3-container">
-						<div class="w3-container">
 							<div class="w3-display-container">
-								<img src="./upload/${productBestList.product_img }" alt="..."
-									style="width: 100%">
+								<img src="./upload/${productBestList.product_img }" alt="..." style="width: 100%">
 								<div class="w3-display-middle w3-display-hover">
-									<button class="w3-button w3-black">
+									<button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList.product_idx }&member_idx=${sessionScope.member_idx }'">
 										Buy now <i class="fa fa-shopping-cart" ></i>
 									</button>
 								</div>
-								<button id="btnLike${productBestList.product_idx }">
-									<img alt="" src="images/before_heart.png" id="btnLikeImage" />
-								</button>
 								<input type="hidden" id="product_idx${productBestList.product_idx }"
 									value="${productBestList.product_idx }">
 							</div>
-							<p>${productBestList.product_brand }<br>
-							</p>
-							<p>${productBestList.product_name }<br>
-								<b><fmt:formatNumber
-										value="${productBestList.product_price }" pattern="#,###" /></b>
-							</p>
+							<p id="product_brand" >${productBestList.product_brand }</p>
+							<p id="product_name" >${productBestList.product_name }<br></p>
+							
+							<div id="price">
+							<c:choose>
+								<c:when test="${productBestList.product_discount_price gt 0}">
+									<span>
+<%-- 									<c:set var="discounted_price" value="${productBestList.product_price - (productBestList.product_price * productBestList.product_discount_price) }"/> --%>
+<%-- 									<c:out value="${discounted_price}" /> --%>
+										<fmt:formatNumber value="${productBestList.product_price - (productBestList.product_price * (productBestList.product_discount_price/100)) }" pattern="#,###" />
+									</span>
+									<span id="product_price">
+									<fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></span>
+									<span id="product_discount_price" ><fmt:formatNumber value="${productBestList.product_discount_price }" pattern="" />%</span>
+								</c:when>
+								<c:otherwise>
+									<span><fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></span>
+								</c:otherwise>
+							</c:choose>
 							</div>
+							
 						</div>
 					</div>
 				</c:forEach>
@@ -245,6 +278,24 @@ function myAccFunc() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
+
+function myAccFunc1() {
+	  var x = document.getElementById("cusAcc");
+	  if (x.className.indexOf("w3-show") == -1) {
+	    x.className += " w3-show";
+	  } else {
+	    x.className = x.className.replace(" w3-show", "");
+	  }
+	}
+
+function myAccFunc1() {
+	  var x = document.getElementById("cusAcc");
+	  if (x.className.indexOf("w3-show") == -1) {
+	    x.className += " w3-show";
+	  } else {
+	    x.className = x.className.replace(" w3-show", "");
+	  }
+	}
 
 // Click on the "Jeans" link on page load to open the accordion for demo purposes
 document.getElementById("myBtn").click();

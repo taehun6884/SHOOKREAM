@@ -5,6 +5,7 @@
 <html>
 <head>
 <title>회원가입</title>
+<script src="../js/jquery-3.6.3.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -160,10 +161,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <br>
   <!-- Footer -->
   <jsp:include page="../inc/footer.jsp"/>
-  
-  <!-- 로그인 화면 폼 -->
-  <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
-  </footer>
  </div>	
 <!--   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
 <!-- 로그인 화면 폼 -->
@@ -247,6 +244,26 @@ function checkPasswd(passwd) { // 패스워드 길이 체크
 	}
 }
 
+	$(function() {
+		$("#email").on("change", function() {
+			
+			$.ajax({
+				type: "get",
+	            url: "CheckEmailAddress.me",
+	            data: {
+	               id: $("#id").val()
+	            },
+	            success: function(result) {
+	                //  리턴받은 결과("true", "false") 판별
+	                if(result == "true") { // 아이디 존재(중복)
+	                   $("#checkEmailAddress").html("인증이 완료된 아이디").css("color", "blue");
+	                } else {
+	                   $("#checkEmailAddress").html("인증되지 않은 아이디").css("color", "red");
+	                }
+	             }
+	         });
+		});
+	});
 
 
 // Accordion 
@@ -258,6 +275,15 @@ function myAccFunc() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
+
+function myAccFunc1() {
+	  var x = document.getElementById("cusAcc");
+	  if (x.className.indexOf("w3-show") == -1) {
+	    x.className += " w3-show";
+	  } else {
+	    x.className = x.className.replace(" w3-show", "");
+	  }
+	}
 
 // Click on the "Jeans" link on page load to open the accordion for demo purposes
 document.getElementById("myBtn").click();
