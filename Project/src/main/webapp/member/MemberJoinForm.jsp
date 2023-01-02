@@ -93,14 +93,18 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 					<tr>
 						<th scope="row">아이디</th>
 						<td>
-						<input type="text" name="id" required size="20px" style="line-height: 30px"><br>
-						<span style="color: gray;" >(영문소문자/숫자, 4~16자.)</span>
+						<input type="text" name="id" required size="20px" style="line-height: 30px"><button class="btn btn-dark" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">ID Check</button>
+<!-- 						<button type="button" class="btn btn-secondary" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">ID check</button> -->
+						<input type="hidden" name="isCheckId" value="idUncheck"/> <!-- 체크 여부 확인 -->			
+						<br>
+						<span style="color: gray;" >(영문소문자/숫자, 8~16자.)</span>
+						
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">비밀번호</th>
 						<td>
-						<input type="password" name="passwd" required size="20px" style="line-height: 30px"><br>
+						<input type="password" name="passwd" required size="20px" style="line-height: 30px" onkeyup="checkPasswd(this.value)"><span id="checkPasswdResult"></span><br>
 						<span style="color: gray;">(영문소문자/숫자/특수문자 중 2가지 이상 조합, 8~16자.)</span>
 						</td>
 					</tr>
