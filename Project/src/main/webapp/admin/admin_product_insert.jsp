@@ -23,13 +23,29 @@
         <!-- 외부 jQuery 라이브러리 등록 -->
 		<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 		
-		<!-- 할인선택에 따른 처리 -->
 		<script type="text/javascript">
+		//할인 버튼에 따른 처리
 		$(function() {
-			$('input:radio[id="saleRadio1"]').prop("checked", function() {
+			$('input:radio[id="saleRadio1"]').on("click", function() {
 				$('#testRate').attr('readonly', true);
 			});
+			$('input:radio[id="saleRadio2"]').on("click", function() {
+				$('#testRate').attr('readonly', false);
+			});
+			
+			
 		});
+		
+		//할인율 숫자만 입력
+		$(function() {
+			$('input:number[id="discount"]').on("change", function() {
+				var discount = $('#testRate').val();
+				
+				alert(discount);
+			});
+		});
+		
+		
 		
 		</script>
     </head>
@@ -75,7 +91,7 @@
 					</tr>
 					<tr>
 						<td width="100px" align="left" class="table-secondary">상품 가격</td>
-						<td><input type="text" id="testPrice" name ="price" placeholder="원래 가격을 입력하세요"><span>&nbsp;원</span> <!-- 콤마 있는 값 -->
+						<td><input type="text" id="testPrice" name ="price" placeholder="원래 가격을 입력하세요"><span>&nbsp;원</span> 
 						</td>
 						
 					</tr>
@@ -85,13 +101,14 @@
 						<td width="100px" align="left" class="table-secondary">할인율</td>
 						<td>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="saleRadio" id="saleRadio1" value="notselected" checked="checked">
+							<input class="form-check-input" type="radio" name="saleRadio" id="saleRadio1" >
 							<label class="form-check-label" for="flexRadioDefault2">할인 미선택</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="saleRadio" id="saleRadio2" value="selected"> 
-							<label class="form-check-label" for="flexRadioDefault1">할인 적용 <input type="text" id="testRate" name = "discount" value = "0" size="1" style = "text-align:center;">
-							<span>&nbsp;%&nbsp;</span>
+							<input class="form-check-input" type="radio" name="saleRadio" id="saleRadio2" > 
+							<label class="form-check-label" for="flexRadioDefault1">할인 적용 
+							<input type="number" id="testRate" name ="discount" value = "0" size="1" min = "0" max ="100" style = "text-align:center;" readonly="readonly"> <!-- 할인율 입력칸 -->
+							<span>%</span>
 							<button type="button" id="testCalBtn">&nbsp;계산하기&nbsp;</button>
 							</label>
 						</div>
