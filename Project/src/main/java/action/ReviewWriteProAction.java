@@ -44,7 +44,7 @@ public class ReviewWriteProAction implements Action {
 			ReviewBean review = new ReviewBean();
 			
 //			review.setReview_content(multi.getParameter("review_content"));
-			review.setReview_idx(1);
+			review.setReview_idx(Integer.parseInt(multi.getParameter("review_idx")));
 			review.setProduct_idx(Integer.parseInt(multi.getParameter("prodcut_idx")));
 			review.setMember_idx(Integer.parseInt(multi.getParameter("member_idx")));
 			review.setReview_img(multi.getOriginalFileName("review_img")); //살리기

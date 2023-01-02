@@ -30,8 +30,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         }
 
 #reviewListArea { 
-		  border:1px;
-		  display: inline-block;
           text-align: center;
           margin-left: 270PX;
           
@@ -82,7 +80,6 @@ margin-left: 270PX;
 }
 
 .reviewContent { 
-	border: solid 1px;
 	width : 1000px;
 	height: 150px; 
 }
@@ -344,13 +341,13 @@ margin-left: 270PX;
 					<table class="reviewContent">
 						<c:forEach var="review" items="${reviewList }">
 						<tr>
-							<td rowspan="2" width="30%">리뷰사진<img src="upload/${review.review_img }"/></td>
-							<td width="60%">주문 내용</td> 
-							<td>주문 상세 내용: ${review.re_order_detail }</td>
-							<td width="10%">작성 멤버${review.member_idx }<br>작성일자${review.review_date }</td> <%-- 리뷰 작성하는 멤버 --%>
+							<td rowspan="2" width="30%">${review.review_img }</td>
+							<td width="60%">$review.review_content</td> 
+							<td>${review.re_order_detail }</td>
+							<td width="10%">${review.member_idx }<br>${review.review_date }</td> <%-- 리뷰 작성하는 멤버 --%>
 						</tr>
 						<tr>
-							<td rowspan="2">리뷰 내용${review.review_content }</td>
+							<td rowspan="2">${review.review_content }</td>
 						</tr>
 						</c:forEach>
 					</table>
@@ -458,6 +455,15 @@ function myAccFunc() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
+
+function myAccFunc1() {
+	  var x = document.getElementById("cusAcc");
+	  if (x.className.indexOf("w3-show") == -1) {
+	    x.className += " w3-show";
+	  } else {
+	    x.className = x.className.replace(" w3-show", "");
+	  }
+	}
 
 // Click on the "Jeans" link on page load to open the accordion for demo purposes
 document.getElementById("myBtn").click();
