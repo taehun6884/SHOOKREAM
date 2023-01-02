@@ -222,6 +222,7 @@ function reCheckPasswd(pass2) {//재입력 확인
 	}
 }
 
+
 function inputIdChk(){
 	var joinForm = document.joinForm;
 	var dbCheckId = document.joinForm.dbCheckId;
