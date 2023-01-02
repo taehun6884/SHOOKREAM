@@ -9,7 +9,6 @@ import com.mysql.cj.util.Util;
 import dao.MemberDAO;
 import db.JdbcUtil;
 import vo.MemberBean;
-import vo.ResultData;
 import vo.WishBean;
 
 public class LoginMemberService {

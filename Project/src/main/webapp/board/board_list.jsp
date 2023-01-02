@@ -29,6 +29,7 @@
 	
 	#collectView {
 		float: right;
+		text-align: left;
 	}
 	
 </style>
@@ -59,7 +60,7 @@
 		
 			<h3>공지사항</h3>
 			<hr style="border:solid 2px black;">
-			<select id="collectView" class="btn btn-sm dropdown-toggle" name="notice_category"> <%-- 카테고리 모아보기 --%>
+			<select id="collectView" class="btn btn-sm dropdown-toggle" name="notice_category" onclick="collectView(this)"> <%-- 카테고리 모아보기 --%>
 				<option selected>카테고리별 모아보기</option>
 				<option>Event</option>
 				<option>Delivery</option>
@@ -241,6 +242,15 @@ function w3_close() {
   function naverSignInCallback() {
     alert(naver_id_login.getProfileData('email'));
   }
+</script>
+
+<!-- 카테고리 모아보기 이동 페이지 -->
+<script>
+
+function collectView(e) {
+	
+}
+
 </script>
 <!-- End Channel Plugin -->
 

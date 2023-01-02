@@ -48,7 +48,7 @@ public class OrderProAction implements Action {
 				}
 			}else {
 				forward = new ActionForward();
-				forward.setPath("./ProductOrderList.po?member_idx="+vo.getOrder_member_idx());
+				forward.setPath("./ProductOrderList.po?member_idx="+vo.getOrder_member_idx()+"&product_idx"+vo.getOrder_product_idx());
 				forward.setRedirect(true);
 			}
 		

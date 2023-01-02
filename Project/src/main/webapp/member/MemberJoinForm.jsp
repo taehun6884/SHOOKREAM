@@ -5,12 +5,15 @@
 <html>
 <head>
 <title>회원가입</title>
+<script src="../js/jquery-3.6.3.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+
 <style type="text/css">
 #sform {
           display: inline-block;
@@ -19,8 +22,37 @@
         
 #dbCheckId {
 		display:inline;
-      margin-left: -90px;
       box-sizing: border-box;
+}
+table.type03 {
+  border-collapse: collapse;
+  text-align: left;
+  line-height: 1.5;
+  border-top: 1px solid #ccc;
+  border-left: 3px solid #369;
+  margin-left:auto; 
+  margin-right:auto;
+}
+table.type03 th {
+  width: 147px;
+  padding: 10px;
+  font-weight: bold;
+  font-size : 17px;
+  vertical-align: top;
+  color: #153d73;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  height: 90px;
+  width: 300px;
+
+}
+table.type03 td {
+  height: 90px;
+  width: 700px;
+  padding: 10px;
+  vertical-align: top;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }
 </style>
 <style>
@@ -29,6 +61,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
 </head>
 <body class="w3-content" style="max-width:1200px">
+
+<!-- Top/menu -->
+<jsp:include page="../inc/top.jsp"/>
 
 <!-- Sidebar/menu -->
 <jsp:include page="../inc/side.jsp"/>
@@ -45,65 +80,89 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:250px">
 
-  <!-- Push down content on small screens -->
-<!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
+  <!-- 회원가입 폼 -->
   
-  <!-- Top header -->
-  <header class="w3-container w3-xlarge">
-    <p class="w3-left">회원가입</p>
-    <p class="w3-right">
-      <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i>
-    </p>
-</header>
+  	<form action="MemberJoinPro.me" method="post" name="joinForm" style="margin-bottom: 300px">
+			<h1 style="text-align: center;">회원가입</h1>
+			<h6 style="color: gray;text-align: center;margin-bottom: 50px" >SHOOKREAM에 오신 것을 환영합니다.</h6>
+		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3>
+			
+			
+			<div>
+				<table class="type03">
+					<tr>
+						<th scope="row">아이디</th>
+						<td>
+						<input type="text" name="id" id ="id" required size="20px" style="line-height: 30px" onkeydown="inputIdChk()"> &nbsp;
+						<button class="btn btn-dark" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">ID Check</button>
+<!-- 						<button type="button" class="btn btn-secondary" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">ID check</button> -->
+						<input type="hidden" name="isCheckId" value="idUncheck"/> <!-- 체크 여부 확인 -->			
+						<br>
+						<span style="color: gray;" >(영문소문자/숫자, 8~16자.)</span>
+						
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">비밀번호</th>
+						<td>
+						<input type="password" name="pass" id ="pass"required size="20px" style="line-height: 30px" onkeyup="checkPasswd(this.value)"><span id="checkPasswdResult"></span><br>
+						<span style="color: gray;">(영문소문자/숫자/특수문자 중 2가지 이상 조합, 8~16자.)</span>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">비밀번호 확인</th>
+						<td>
+						<input type="password" name="pass2" required size="20px" style="line-height: 30px" onkeyup="reCheckPasswd(this.value)"><span id ="recheckResult"></span><br>
+						<span style="color: gray;">(비밀번호 확인을 위해 동일하게 입력해주세요.)</span>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">이름</th>
+						<td>
+						<input type="text" name="name" required size="20px"style="line-height: 30px" ><br>
+						<span style="color: gray;">(성함을 입력해주세요.)</span>
+						
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">주소</th>
+						<td>
+						<input type="text" name="address" id="address_kakao2" required size="30px" style="margin-bottom: 10px;line-height: 30px"> &nbsp;
+						<button id="address_kakao" class="btn btn-dark">주소찾기</button><br>
+						<input type="text" name="address_detail"  size="30px" style="line-height: 30px" ><br>
+						<span style="color: gray;">(상세 주소를 입력해주세요.)</span>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">휴대전화</th>
+						<td>
+						<input type="text" name="phone" required size="20px" style="line-height: 30px" ><br>
+						<span style="color: gray;">("-"를 제외한 휴대전화를 입력해주세요. ex)01011111111 )</span>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">이메일</th>
+						<td>
+						<input type="text" name="email" placeholder="" required size="20px" style="line-height: 30px"><br>
+						<span style="color: gray;">("@"를 포함하여 이메일을 입력해주세요. ex) abcd@gmail.com)</span>
+						</td>
+						
+					</tr>
+					<tr>
+						<td colspan="2" align="center"><button type="submit" class="btn btn-secondary btn-lg" onclick="fn_joinMember()" >회원가입</button></td>
+					</tr>
+				</table>
 
-  
+			</div>
+
+		</form>
+
+
+  <br>
   <!-- Footer -->
-  <!-- 로그인 화면 폼 -->
-  <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
-    <div id = "sform">
-        <h4>회원가입</h4>
-        <p>Questions? Go ahead.</p>
-        <form action="MemberJoinPro.me" method="post" name="joinForm">
-          <table>
-          <tr>
-          <td width="300px">
-          <input class="w3-input w3-border" type="text" placeholder="name" name="name" required></td>
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="ID" name="id" id="id" required onkeydown="inputIdChk()">
-          <td>
-         <button type="button" class="btn btn-secondary" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">ID check</button>
-         <input type="hidden" name="isCheckId" value="idUncheck"/> <!-- 체크 여부 확인 -->
-          </td>
-          </tr>
-          <tr>
-          <td width="300px">
-          <input class="w3-input w3-border" type="password" placeholder="password" name="pass" required onkeyup="checkPasswd(this.value)">
-          <span id="checkPasswdResult"></span>
-          </td> <!-- 비밀번호 확인 -->
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="phone   ex) 01012345678" name="phone" required></td>
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="email    ex) abcd@gmail.com" name="email" required></td>
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" id="address_kakao" type="text" placeholder="address" name="address" required></td>
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="address_detail" name="address_detail" required></td>
-          </tr>
-          <tr>
-          <td><button type="submit" class="w3-button w3-block w3-black" onclick="fn_joinMember()">Send</button></td>
-		  </tr> 	        
-        </table>
-        </form>
-    </div>
-  </footer>
+  <jsp:include page="../inc/footer.jsp"/>
  </div>	
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+<!--   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
 <!-- 로그인 화면 폼 -->
   <!-- End page content -->
 
@@ -146,6 +205,21 @@ function fn_dbCheckId() {
 	}
 }
 
+function reCheckPasswd(pass2) {//재입력 확인 
+	var pass = document.getElementById("pass").value;
+// 	var pass2 = document.getElementById("pass2").value;
+	let spanRecheckResult = document.getElementById("recheckResult");
+
+	if(pass == pass2){
+		spanRecheckResult.innerHTML = "동일한 패스워드 입니다";
+		spanRecheckResult.style.color = "BLUE";    		
+	}else{
+		spanRecheckResult.innerHTML = "일치하지 않는 패스워드 입니다";
+		spanRecheckResult.style.color = "RED";    		
+		event.preventDefault(); // submit 기능 막기
+	}
+}
+
 function inputIdChk(){
 	var joinForm = document.joinForm;
 	var dbCheckId = document.joinForm.dbCheckId;
@@ -165,9 +239,31 @@ function checkPasswd(passwd) { // 패스워드 길이 체크
 	} else {
 		spanCheckPasswdResult.innerHTML = "8 ~ 16자를 입력하세요";
 		spanCheckPasswdResult.style.color = "RED";
+		event.preventDefault(); // submit 기능 막기
+
 	}
 }
 
+	$(function() {
+		$("#email").on("change", function() {
+			
+			$.ajax({
+				type: "get",
+	            url: "CheckEmailAddress.me",
+	            data: {
+	               id: $("#id").val()
+	            },
+	            success: function(result) {
+	                //  리턴받은 결과("true", "false") 판별
+	                if(result == "true") { // 아이디 존재(중복)
+	                   $("#checkEmailAddress").html("인증이 완료된 아이디").css("color", "blue");
+	                } else {
+	                   $("#checkEmailAddress").html("인증되지 않은 아이디").css("color", "red");
+	                }
+	             }
+	         });
+		});
+	});
 
 
 // Accordion 
@@ -255,7 +351,7 @@ window.onload = function(){
         //카카오 지도 발생
         new daum.Postcode({
             oncomplete: function(data) { //선택시 입력값 세팅
-                document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                document.getElementById("address_kakao2").value = data.address; // 주소 넣기
                 document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
             }
         }).open();
