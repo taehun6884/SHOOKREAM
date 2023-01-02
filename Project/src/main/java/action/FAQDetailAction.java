@@ -18,8 +18,7 @@ public class FAQDetailAction implements Action {
 		
 		BoardDetailService service = new BoardDetailService();
 		BoardBean board = service.getBoard(notice_idx, true);
-//		System.out.println("FAQ에서 확인 하는" + board);
-		
+
 		request.setAttribute("board", board);
 		
 		
