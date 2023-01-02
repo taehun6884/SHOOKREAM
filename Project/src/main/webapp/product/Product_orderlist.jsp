@@ -103,8 +103,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- Footer -->
   <footer class="w3-padding-64 w3-small w3-center" id="footer">
   <form action="ReviewWrite.me" method="post">
-  <input type="hidden" name="member_idx" value="3" > <%-- value 값 수정 하기!!!!꼭!!! --%>
-  <input type="hidden" name="product_idx" value="12398" >
   <table class="table">
   <thead  class="table-dark" >
     <tr>
@@ -120,16 +118,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     </tr>
   </thead>
   <tbody id="tableList">
-    <tr> <%--여기 <tr> 삭제해야함. 테스트용 --%>
-    	<td>1</td>	
-    	<td><img src="./images/logo.jpg"></td>	
-    	<td>슈크림신발</td>	
-    	<td>슈크림</td>	
-    	<td>130,000</td>	
-    	<td>230</td>	
-    	<td><input type="button" value="리뷰 작성하기" class="btn btn-dark btn-sm" onclick="reviewForm()"></td>	
-    	<td><input type="button" value="삭제인척 삭제안함" class="btn btn-dark btn-sm"></td>	
-    </tr> <%--여기까지 --%>
     <c:forEach var="order" items="${orderlist }">
     <tr>
       <td>${order.order_idx }</td>
@@ -215,6 +203,15 @@ function myAccFunc() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
+
+function myAccFunc1() {
+	  var x = document.getElementById("cusAcc");
+	  if (x.className.indexOf("w3-show") == -1) {
+	    x.className += " w3-show";
+	  } else {
+	    x.className = x.className.replace(" w3-show", "");
+	  }
+	}
 
 // Click on the "Jeans" link on page load to open the accordion for demo purposes
 document.getElementById("myBtn").click();
