@@ -75,7 +75,7 @@
 					</c:otherwise>
 				</c:choose>
 			  <thead>
-			    <tr>
+			    <tr style="text-align: center">
 			      <th scope="col">번호</th>
 			      <th scope="col">구분</th>
 			      <th scope="col">제목</th>
@@ -85,12 +85,12 @@
 			 <c:forEach var="board" items="${boardList }">
 			  <tbody>
 			    <tr>
-			      <th scope="row">${board.notice_idx }</th>
-			      <td><b>${board.notice_category }</b></td>
+			      <th scope="row"  style="text-align: center">${board.notice_idx }</th>
+			      <td style="text-align: center"><b>${board.notice_category }</b></td>
 			      <td>
-			      	<a href="BoardInfo.bo?notice_idx=${board.notice_idx }&pageNum=${pageNum }" style="text-decoration:none">${board.notice_subject }</a>
+			      	<a href="FAQInfo.bo?notice_idx=${board.notice_idx }&pageNum=${pageNum }" style="text-decoration:none">${board.notice_subject }</a>
 				  </td>
-			      <td>${board.notice_date }</td>
+			      <td style="text-align: center">${board.notice_date }</td>
 			    </tr>
 			  </tbody>
 			 </c:forEach> 

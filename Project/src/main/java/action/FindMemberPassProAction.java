@@ -64,10 +64,10 @@ public class FindMemberPassProAction implements Action {
 			content += "<table>";
 			content += "<tr>";
 			content += "	<th> 아이디 </th>";
-			content += "	<th>"+ id + "</th>";
+			content += "	<td>"+ id + "</td>";
 			content += "</tr>";
 			content += "<tr>";
-			content += "	<td> 임시 비밀번호 </td>";
+			content += "	<th> 임시 비밀번호 </th>";
 			content += "	<td>"+ imsiPw.toString() + "</td>" ;
 			content += "</tr>";
 			content += "</table>";
@@ -87,7 +87,7 @@ public class FindMemberPassProAction implements Action {
 				Message msg = new MimeMessage(mailSession);								 // 메일 관련 정보 작성
 				msg.setRecipient(Message.RecipientType.TO, address);					 // 받는 사람
 				msg.setFrom(new InternetAddress("hz0123hz@gmail.com"));					 // 보내는 사람
-				msg.setSubject("임시 비밀번호 입니다.");							// 메일 제목
+				msg.setSubject("[SHOOKREAM] 임시 비밀번호 입니다.");							// 메일 제목
 				msg.setContent(content, "text/html; charset=UTF-8");
 				msg.setSentDate(new Date());
 				Transport.send(msg);
@@ -100,6 +100,12 @@ public class FindMemberPassProAction implements Action {
 		
 			boolean result = service.updatePass(member, imsiPw); 
 			System.out.println("result = " + result);
+			
+		
+		forward = new ActionForward();
+		forward.setPath("main.MAIN");
+		forward.setRedirect(true);
+			
 			
 		return forward;
 		

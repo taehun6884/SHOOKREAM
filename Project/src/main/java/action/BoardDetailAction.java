@@ -19,14 +19,19 @@ public class BoardDetailAction implements Action {
 		BoardDetailService service = new BoardDetailService();
 		BoardBean board = service.getBoard(notice_idx, true);
 //		System.out.println(board);
-		System.out.println("공지사항에서 확인 하는 board" + board);
+
 		
 		request.setAttribute("board", board);
 
-		
-		forward = new ActionForward();
-		forward.setPath("board/board_detail.jsp");
-		forward.setRedirect(false);
+		if(request.getParameter("notice_type") == "Notice") {
+			forward = new ActionForward();
+			forward.setPath("board/board_detail.jsp");
+			forward.setRedirect(false);			
+		} else {
+			forward = new ActionForward();
+			forward.setPath("board/FAQ_detail.jsp");
+			forward.setRedirect(false);
+		}
 		
 		return forward;
 	}

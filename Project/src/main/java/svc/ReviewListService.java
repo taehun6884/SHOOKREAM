@@ -9,7 +9,7 @@ import vo.ReviewBean;
 
 public class ReviewListService {
 
-	public List<ReviewBean> getReviewList(int startRow, int listLimit) {
+	public List<ReviewBean> getReviewList(int startRow, int listLimit, int product_idx) {
 		List<ReviewBean> reviewList = null; 
 		
 		Connection con = JdbcUtil.getConnection();
@@ -18,7 +18,7 @@ public class ReviewListService {
 		
 		dao.setConnection(con);
 
-		reviewList = dao.selectReviewList(startRow, listLimit);
+		reviewList = dao.selectReviewList(startRow, listLimit,product_idx);
 
 		
 		JdbcUtil.close(con);

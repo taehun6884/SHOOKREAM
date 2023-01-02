@@ -56,12 +56,17 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
 <script>
 	// 리뷰작성 폼 팝업 <<<<<url 파라미터 변경하기!>>>>
-	function reviewForm(idx) {
-		let url = "ReviewWriteForm.me?member_idx=3&product_idx="+idx;  // 테스트용 파라미터임!
+	function reviewForm(idx,size,color) {
+		let url = "ReviewWriteForm.me?member_idx=${sessionScope.member_idx}&product_idx="+idx+"&product_size="+size+"&product_color="+color;  // 테스트용 파라미터임!
 		let name = "review form";
 		let attr = "width=600, height=600, top=200, left=510"
 		
 		window.open(url, name, attr);
+// 		window.open.member_idx = ${sessionScope.member_idx};
+// 		window.open.product_idx = idx;
+// 		window.open.product_size = size;
+// 		window.open.product_color = color;
+		
 	}
 	
 </script>
@@ -106,11 +111,12 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <th scope="col">#</th>
       <th scope="col">image</th>
       <th scope="col">name</th>
-      <th scope="col">brand</th>
       <th scope="col">price</th>
+      <th scope="col">category</th>
       <th scope="col">size</th>
-      <th scope="col">review</th>
-      <th scope="col">delete</th>
+      <th scope="col">color</th>
+      <th scope="col">date</th>
+      <th scope="col" colspan="2">manage</th>
     </tr>
   </thead>
   <tbody id="tableList">
@@ -126,14 +132,16 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     </tr> <%--여기까지 --%>
     <c:forEach var="order" items="${orderlist }">
     <tr>
+      <td>${order.order_idx }</td>
       <td><img src="upload/${order.order_main_image }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
       <td>${order.order_member_id }</td>
       <td>${order.order_product_price }</td>
       <td>${order.order_category }</td>
-      <td>${order.order_progress }</td>
+      <td>${order.order_product_size }</td>
+      <td>${order.order_product_color }</td>
       <td>${order.order_date }</td>
-	  <td><input type="button" value="리뷰 작성하기" class="btn btn-dark" onclick="reviewForm(${order.order_product_idx})"></td>
-      <td><button type="button" class="btn btn-dark" >삭제</button></td>
+	  <td><input type="button" value="리뷰 작성하기" class="btn btn-dark" onclick="reviewForm(${order.order_product_idx },'${order.order_product_size },'${order.order_product_color }')">
+      <button type="button" class="btn btn-dark" >삭제</button></td>
     </tr>
     </c:forEach>
   </tbody>

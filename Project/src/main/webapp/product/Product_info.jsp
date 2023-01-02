@@ -1,3 +1,4 @@
+<%@page import="vo.ReviewBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
@@ -27,6 +28,16 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           margin-left: 270PX;
           
         }
+
+#reviewListArea { 
+		  border:1px;
+		  display: inline-block;
+          text-align: center;
+          margin-left: 270PX;
+          
+        }        
+ 
+        
 #image{
 /* background-color: blue; */
 padding-left: 50;
@@ -324,17 +335,19 @@ margin-left: 270PX;
 		
 	</table>
 	
-	<hr>		
-		<div class="reviewListArea">
+	<hr>	
+		<div class="reviewListArea" id="reviewListArea">
 			<h3>Review</h3>
 			<div class="reviewContent">
 				<div>
+					<img src="../images/kakao_small.jpg" />
 					<table class="reviewContent">
 						<c:forEach var="review" items="${reviewList }">
 						<tr>
-							<td rowspan="2" width="30%">리뷰사진<img src="../images/kakao_small.jpg"/>${review.review_img }</td>
-							<td width="60%">주문 내용 ${review.order_detail }</td> <%-- 주문 상세내용 : 사이즈 색상 --%>
-							<td width="10%">작성 멤버${review.member_idx }<br>작성일자${review.review_data }</td> <%-- 리뷰 작성하는 멤버 --%>
+							<td rowspan="2" width="30%">리뷰사진<img src="upload/${review.review_img }"/></td>
+							<td width="60%">주문 내용</td> 
+							<td>주문 상세 내용: ${review.re_order_detail }</td>
+							<td width="10%">작성 멤버${review.member_idx }<br>작성일자${review.review_date }</td> <%-- 리뷰 작성하는 멤버 --%>
 						</tr>
 						<tr>
 							<td rowspan="2">리뷰 내용${review.review_content }</td>
@@ -342,6 +355,39 @@ margin-left: 270PX;
 						</c:forEach>
 					</table>
 				</div>
+				<section id="pageList" style="text-align:center">
+			<c:choose>
+				<c:when test="${pageNum > 1}">
+					<input type="button" class="btn btn-outline-secondary btn-sm" value="이전" onclick="location.href=''">
+				</c:when>
+				<c:otherwise>
+					<input type="button" class="btn btn-outline-secondary btn-sm" value="이전">
+				</c:otherwise>
+			</c:choose>
+				
+			<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
+			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
+				<c:choose>
+					<c:when test="${pageNum eq i}">
+						${i }
+					</c:when>
+					<c:otherwise>
+						<a href="${i }">${i }</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+	
+			<!-- 현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 [다음] 링크 동작 -->
+			<c:choose>
+				<c:when test="${pageNum < pageInfo.maxPage}">
+					<input type="button" value="다음" class="btn btn-outline-secondary btn-sm" onclick="location.href=''">
+				</c:when>
+				<c:otherwise>
+					<input type="button" class="btn btn-outline-secondary btn-sm" value="다음">
+				</c:otherwise>
+			</c:choose>
+		</section>	
 			</div>	
 		</div> 	
 	
