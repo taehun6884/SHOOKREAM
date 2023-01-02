@@ -12,7 +12,7 @@ pageContext.setAttribute("cn", "\n");
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Notice</title>
+		<title>SHOOKREAM - FAQ</title>
 		<meta charset="UTF-8">
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,6 +29,12 @@ pageContext.setAttribute("cn", "\n");
 		<style type="text/css">
 		#logintvar{
 			float: right;
+		}
+		
+		#no_content {
+			height: auto;
+		}	
+			
 		</style>
 		
 	</head>
@@ -54,15 +60,16 @@ pageContext.setAttribute("cn", "\n");
 	  
 	  <!-- Top header -->
 	  <jsp:include page="../inc/top.jsp"/>
-		<footer class="w3-padding-64 w3-light-grey w3-small" id="footer">
 		<h2>Notice</h2>
 		<br><br>
 		<hr style="border:solid 1px;">	
 			<h5><b>${board.notice_subject }</b></h5><br>
 			Date:${board.notice_date } / View:${board.notice_readcount }
 			<hr>
-			${fn:replace(board.notice_content, cn, br) }			
-		</footer> 
+			<div id="no_content">${fn:replace(board.notice_content, cn, br) }</div><br><br>	
+
+			<a href="FAQList.bo?pageNum=${param.pageNum }"><button id="listBtn" class="btn btn-outline-secondary btn-sm">목록으로</button></a> <br><br>
+
 		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
 	
 	  <!-- End page content -->

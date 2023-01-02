@@ -54,7 +54,6 @@
 	  
 	  <!-- Top header -->
 	  <jsp:include page="../inc/top.jsp"/>
-		<footer class="w3-padding-64 w3-light-grey w3-small" id="footer">
 			<h3>자주묻는 질문</h3>
 			<hr style="border:solid 2px black;">
 			<select id="collectView" class="btn btn-sm dropdown-toggle" name="notice_category"> <%-- 카테고리 모아보기 --%>
@@ -76,7 +75,7 @@
 					</c:otherwise>
 				</c:choose>
 			  <thead>
-			    <tr>
+			    <tr style="text-align: center">
 			      <th scope="col">번호</th>
 			      <th scope="col">구분</th>
 			      <th scope="col">제목</th>
@@ -86,12 +85,12 @@
 			 <c:forEach var="board" items="${boardList }">
 			  <tbody>
 			    <tr>
-			      <th scope="row">${board.notice_idx }</th>
-			      <td><b>${board.notice_category }</b></td>
+			      <th scope="row"  style="text-align: center">${board.notice_idx }</th>
+			      <td style="text-align: center"><b>${board.notice_category }</b></td>
 			      <td>
-			      	<a href="BoardInfo.bo?notice_idx=${board.notice_idx }&pageNum=${pageNum }" style="text-decoration:none">${board.notice_subject }</a>
+			      	<a href="FAQInfo.bo?notice_idx=${board.notice_idx }&pageNum=${pageNum }" style="text-decoration:none">${board.notice_subject }</a>
 				  </td>
-			      <td>${board.notice_date }</td>
+			      <td style="text-align: center">${board.notice_date }</td>
 			    </tr>
 			  </tbody>
 			 </c:forEach> 
@@ -136,7 +135,6 @@
 				</c:otherwise>
 			</c:choose>
 		</section>	
-		</footer>
 		
 		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
 	
