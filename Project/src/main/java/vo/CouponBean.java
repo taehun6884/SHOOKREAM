@@ -7,8 +7,8 @@ public class CouponBean {
 	private String coupon_name;
 	private int coupon_price;
 	private String coupon_content;
-	private Date coupon_start;
-	private Date coupon_end;
+	private String coupon_start;
+	private String coupon_end;
 	private Date coupon_date;
 	public int getCoupon_idx() {
 		return coupon_idx;
@@ -34,16 +34,16 @@ public class CouponBean {
 	public void setCoupon_content(String coupon_content) {
 		this.coupon_content = coupon_content;
 	}
-	public Date getCoupon_start() {
+	public String getCoupon_start() {
 		return coupon_start;
 	}
-	public void setCoupon_start(Date coupon_start) {
+	public void setCoupon_start(String coupon_start) {
 		this.coupon_start = coupon_start;
 	}
-	public Date getCoupon_end() {
+	public String getCoupon_end() {
 		return coupon_end;
 	}
-	public void setCoupon_end(Date coupon_end) {
+	public void setCoupon_end(String coupon_end) {
 		this.coupon_end = coupon_end;
 	}
 	public Date getCoupon_date() {

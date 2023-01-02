@@ -9,6 +9,7 @@ import java.util.List;
 import db.JdbcUtil;
 import java.util.List;
 import db.JdbcUtil;
+import vo.CouponBean;
 import vo.OrderBean;
 import vo.ProductBean;
 import vo.ReviewBean;
@@ -1335,6 +1336,118 @@ private ProductDAO() {}
 			}
 			
 			return listCount;
+		}
+
+		
+		// 관리자 쿠폰 등록
+		public int insertCoupon(CouponBean coupon) {
+			int insertCount = 0;
+			
+			PreparedStatement pstmt = null, pstmt2 = null;
+			ResultSet rs = null;
+			
+			try {
+				int coupon_idx = 1; // 쿠폰 idx 처리
+				String sql = "SELECT MAX(coupon_idx) FROM coupon";
+				pstmt= con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					coupon_idx = rs.getInt(1) + 1;
+				} 
+				
+				sql = "INSERT INTO coupon VALUES(?,?,?,?,?,?,now())";
+				pstmt2= con.prepareStatement(sql);
+				
+				pstmt2.setInt(1, coupon_idx);
+				pstmt2.setString(2, coupon.getCoupon_name());
+				pstmt2.setInt(3, coupon.getCoupon_price());
+				pstmt2.setString(4, coupon.getCoupon_content());
+				pstmt2.setString(5, coupon.getCoupon_start());
+				pstmt2.setString(6, coupon.getCoupon_end());
+				
+				insertCount = pstmt2.executeUpdate();
+				
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류! - insertCoupon()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+				JdbcUtil.close(pstmt2);
+			}
+			return insertCount;
+		}
+
+		
+		// 관리자 쿠폰 조회
+		public List<CouponBean> selectCouponList() {
+			List<CouponBean> couponList = null;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT * FROM coupon";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				couponList = new ArrayList<CouponBean>();
+				
+				while(rs.next()) {
+					CouponBean coupon = new CouponBean();
+					coupon.setCoupon_idx(rs.getInt("coupon_idx"));
+					coupon.setCoupon_name(rs.getString("coupon_name"));
+					coupon.setCoupon_content(rs.getString("coupon_content"));
+					coupon.setCoupon_price(rs.getInt("coupon_price"));
+					coupon.setCoupon_start(rs.getString("coupon_start"));
+					coupon.setCoupon_end(rs.getString("coupon_end"));
+					coupon.setCoupon_date(rs.getDate("coupon_date"));
+					
+					couponList.add(coupon);
+				}
+			} catch (SQLException e) {
+				System.out.println("sql구문 - selectCouponList 오류");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return couponList;
+		}
+
+		
+		// 관리자 쿠폰 수정 폼에 필요한 상세정보
+		public CouponBean selectCoupon(int coupon_idx) {
+			CouponBean coupon = null;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT * FROM coupon WHERE coupon_idx=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, coupon_idx);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					coupon = new CouponBean();
+					coupon.setCoupon_idx(rs.getInt("coupon_idx"));
+					coupon.setCoupon_name(rs.getString("coupon_name"));
+					coupon.setCoupon_content(rs.getString("coupon_content"));
+					coupon.setCoupon_price(rs.getInt("coupon_price"));
+					coupon.setCoupon_start(rs.getString("coupon_start"));
+					coupon.setCoupon_end(rs.getString("coupon_end"));
+				}
+			} catch (SQLException e) {
+				System.out.println("SQL구문 오류 - selectCoupon()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			return coupon;
 		}
 
 		

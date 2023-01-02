@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.CouponInsertProAction;
+import action.CouponListProAction;
+import action.CouponModifyFormAction;
 import action.OrderListProAction;
 import action.OrderProAction;
 import action.ProductDeleteProAction;
@@ -71,6 +73,12 @@ public class ProductController extends HttpServlet{
 			forward.setRedirect(false);
 		}else if(command.equals("/CouponInsertPro.po")) {//Coupon 등록 작업
 			action = new CouponInsertProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/CouponList.po")) {//Coupon 등록 작업
+			action = new CouponListProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/CouponModifyForm.po")) { //coupon 정보 수정 창
+			action = new CouponModifyFormAction();
 			forward = action.execute(request, response);
 		}
 	
