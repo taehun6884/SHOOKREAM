@@ -822,7 +822,7 @@ private ProductDAO() {}
 			
 			return orderlist;
 		}
-
+		//--------------장바구니 삭제----------------
 		public boolean isDeleteCart(int cart_idx) {
 			int deleteCount =0;
 			boolean isDeleteSuccess = false;

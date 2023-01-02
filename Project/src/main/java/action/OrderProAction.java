@@ -41,7 +41,7 @@ public class OrderProAction implements Action {
 				try {
 					out = response.getWriter();
 					out.println("<script>");
-					out.println("alert('카트 담기 실패!');");
+					out.println("alert('주문 실패!');");
 					out.println("</script>");
 				} catch (IOException e) {
 					e.printStackTrace();

@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>로그인</title>
+<title>장바구니</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -15,6 +17,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <!-- 구글 아이디 로그인 -->
 <meta name="google-signin-client_id" content="1047574308186-h6ehte2k4901kjn1u3g5vnonbf2g56on.apps.googleusercontent.com">
+
 <style type="text/css">
 #sform {
           display: inline-block;
@@ -106,7 +109,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <td><img src="upload/${cart.product_img }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
       <td>${cart.product_name }</td>
       <td>${cart.product_brand }</td>
-      <td>${cart.product_price }</td>
+	  <td><fmt:formatNumber value="${cart.product_price }" pattern="#,###"></fmt:formatNumber></td>
       <td>${cart.product_size }</td>
       <td>
       <button type="button" class="btn btn-dark" onclick="location.href='ProductInfoForm.po?product_idx=${cart.product_idx }'">상세내용</button>
@@ -119,10 +122,13 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	<div class="container px-4 text-center">
 	  <div class="row gx-5">
 	    <div class="col">
-	     <div class="p-3 border bg-light"><h4>총 금액:${total }</h4> </div>
-	    </div>
+<div class="p-3 border bg-light"><h4>총 금액 : <fmt:formatNumber value="${total }" pattern="#,###"></fmt:formatNumber> </h4></div>	    </div>
 	    <div class="col">
-	      <div class="p-3 border bg-light"><button onclick="iamport()">구매하기</button></div>
+	      <div class="p-3 border bg-light">
+	      <button onclick="iamport()">구매하기</button>
+	      
+	      <button onclick="test()">test</button>
+	      </div>
 	    </div>
 	  </div>
 </div>
@@ -263,13 +269,14 @@ function w3_close() {
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript">
 function iamport(){
+	// 	
 		//가맹점 식별코드
 		IMP.init('imp77718215');
 		IMP.request_pay({
 		    pg : 'kakaopay',
-		    pay_method : 'card',
+		    pay_method : 'cart',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : '${product.product_name}' , //결제창에서 보여질 이름
+		    name : 'SHOOKREAM' , //결제창에서 보여질 이름
 		    amount : '${total }', //실제 결제되는 가격
 		    buyer_name : '${sessionScope.sId}',
 		}, function(rsp) {
@@ -290,6 +297,11 @@ function iamport(){
 		    
 		});
 	}
+	
+	function test() {
+		}
+	}
+	
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
