@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +9,11 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
 <title>Review</title>
 <script>
+	var product_idx;
+	var member_idx;
+	var product_size;
+	var product_color;
+	
 	function closeReview() { // 창닫기
 		let result = confirm("작성한 내용은 모두 삭제됩니다. 그래도 작성을 취소하시겠습니까?");
 		if(result == true) {
@@ -31,7 +38,9 @@
 	}
 	$(function() {
 		$(document).ready(function() {		
+			
 			$("#register").on("click", function() {
+				alert(product_idx, member_idx, product_size, product_color);
 				self.close();
 			});
 		});		
@@ -74,13 +83,17 @@
 	<h3>shookream</h3>
 	</div>
 	<form action="ReviewWrite.me" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="member_idx" value="">
-		<input type="hidden" name="re_order_detail" value="">
-		<input type="hidden" name="" value="">
+		<input type="hidden" name="member_idx" value="${param.member_idx }">
+		<input type="hidden" name="prodcut_idx" value="${param.product_idx }">
 		<input type="file" id="fileInsert" name="review_img" accept=".png, .jpeg, .jpg, .gif" onchange="readURL(this);"><br>
 		<img id="preview"></img>
 		<hr>
-		<textarea placeholder="욕설 및 관련없는 내용은 관리자에 의해 삭제될 수 있습니다."></textarea><br>
+		<div >
+		&nbsp; 구매 옵션<br>
+			사이즈 : <input type="text" value="${param.product_size }" name="product_size">
+			색상 : <input type="text" value="${param.product_color }" name="product_color">
+		</div>
+		<textarea placeholder="욕설 및 관련없는 내용은 관리자에 의해 삭제될 수 있습니다." name="content"></textarea><br>
 		<div id="reviewBtn">
 			<input type="submit" class="btn btn-outline-secondary btn-sm" id="register" value="글 등록하기">
 			<input type="button" class="btn btn-outline-secondary btn-sm" value="닫기" onclick="closeReview()">

@@ -93,7 +93,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
 <script>
-// Accordion 
+// Accordion : 사이드메뉴 토글 기능
 function myAccFunc() {
   var x = document.getElementById("demoAcc");
   if (x.className.indexOf("w3-show") == -1) {
@@ -102,6 +102,15 @@ function myAccFunc() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
+
+function myAccFunc1() {
+	  var x = document.getElementById("cusAcc");
+	  if (x.className.indexOf("w3-show") == -1) {
+	    x.className += " w3-show";
+	  } else {
+	    x.className = x.className.replace(" w3-show", "");
+	  }
+	}
 
 // Click on the "Jeans" link on page load to open the accordion for demo purposes
 document.getElementById("myBtn").click();

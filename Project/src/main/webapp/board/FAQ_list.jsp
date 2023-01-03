@@ -22,6 +22,13 @@
 		<style type="text/css">
 		#logintvar{
 			float: right;
+		}
+			
+		#collectView {
+			float: right;
+			text-align: left;
+		}
+	
 		
 		</style>
 	</head>
@@ -47,29 +54,16 @@
 	  
 	  <!-- Top header -->
 	  <jsp:include page="../inc/top.jsp"/>
-		<footer class="w3-padding-64 w3-light-grey w3-small" id="footer">
 			<h3>자주묻는 질문</h3>
 			<hr style="border:solid 2px black;">
-			
-<!-- 			<div class="container"> -->
-<!-- 			  <div class="row"> -->
-<!-- 			    <div class="col"> -->
-<!-- 			      회원정보 -->
-<!-- 			    </div> -->
-<!-- 			    <div class="col"> -->
-<!-- 			      교환/반품 -->
-<!-- 			    </div> -->
-<!-- 			    <div class="col"> -->
-<!-- 			     배송 -->
-<!-- 			    </div> -->
-<!-- 			    <div class="col"> -->
-<!-- 			     주문/결제 -->
-<!-- 			    </div> -->
-<!-- 			    <div class="col"> -->
-<!-- 			     서비스 -->
-<!-- 			    </div> -->
-<!-- 			  </div> -->
-<!-- 			</div> -->
+			<select id="collectView" class="btn btn-sm dropdown-toggle" name="notice_category"> <%-- 카테고리 모아보기 --%>
+				<option selected>카테고리별 모아보기</option>
+				<option>교환/반품</option>
+				<option>회원정보</option>
+				<option>배송</option>
+				<option>주문/결제</option>
+				<option>서비스</option>
+			</select>
 			
 			<table class="table">
 			  <c:choose>
@@ -80,21 +74,23 @@
 						<c:set var="pageNum" value="${param.pageNum }" />
 					</c:otherwise>
 				</c:choose>
-<!-- 			  <thead> -->
-<!-- 			    <tr> -->
-<!-- 			      <th scope="col">구분</th> -->
-<!-- 			      <th scope="col">제목</th> -->
-<!-- 			      <th scope="col">등록일</th> -->
-<!-- 			    </tr> -->
-<!-- 			  </thead> -->
+			  <thead>
+			    <tr style="text-align: center">
+			      <th scope="col">번호</th>
+			      <th scope="col">구분</th>
+			      <th scope="col">제목</th>
+			      <th scope="col">등록일</th>
+			    </tr>
+			  </thead>
 			 <c:forEach var="board" items="${boardList }">
 			  <tbody>
 			    <tr>
-			      <td><b>${board.notice_category }</b></td>
+			      <th scope="row"  style="text-align: center">${board.notice_idx }</th>
+			      <td style="text-align: center"><b>${board.notice_category }</b></td>
 			      <td>
-			      	<a href="BoardInfo.bo?notice_idx=${board.notice_idx }&pageNum=${pageNum }" style="text-decoration:none">${board.notice_subject }</a>
+			      	<a href="FAQInfo.bo?notice_idx=${board.notice_idx }&pageNum=${pageNum }" style="text-decoration:none">${board.notice_subject }</a>
 				  </td>
-			      <td>${board.notice_date }</td>
+			      <td style="text-align: center">${board.notice_date }</td>
 			    </tr>
 			  </tbody>
 			 </c:forEach> 
@@ -139,7 +135,6 @@
 				</c:otherwise>
 			</c:choose>
 		</section>	
-		</footer>
 		
 		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
 	
