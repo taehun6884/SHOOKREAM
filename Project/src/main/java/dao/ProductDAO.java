@@ -1337,6 +1337,25 @@ private ProductDAO() {}
 			return listCount;
 		}
 
+		public int deleteBoard(int review_idx) {
+			int deleteCount = 0;
+			PreparedStatement pstmt = null;
+		
+			try {
+				String sql = "DELETE FROM review WHERE review_idx=?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, review_idx);
+				deleteCount = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(pstmt);
+			}
+			
+			return deleteCount;
+		}
+
 		
 
 	

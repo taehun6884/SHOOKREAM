@@ -7,21 +7,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import svc.BoardDeleteProService;
+import svc.ReviewDeleteProService;
 import vo.ActionForward;
 
-public class BoardDeleteProAction implements Action {
+public class ReviewDeleteProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
 		
-		int notice_idx = Integer.parseInt(request.getParameter("notice_idx"));
+		int review_idx = Integer.parseInt(request.getParameter("review_idx"));
 		
-//		System.out.println("DeleteProAction - notice_idx = " + request.getParameter("notice_idx"));
+		System.out.println("DeleteProAction - review_idx = " + request.getParameter("review_idx"));
 		
-		BoardDeleteProService service = new BoardDeleteProService();
+		ReviewDeleteProService service = new ReviewDeleteProService();
 		
-		boolean isDeleteSuccess = service.removeBoard(notice_idx);
+		boolean isDeleteSuccess = service.deleteReview(review_idx);
 		
 		try {
 			if(!isDeleteSuccess) {
@@ -32,9 +33,8 @@ public class BoardDeleteProAction implements Action {
 				out.println("history.back()");
 				out.println("</script>");
 			} else {
-				
 				forward = new ActionForward();
-				forward.setPath("AdminNoticeManage.ad?pageNum=" + request.getParameter("pageNum"));
+				forward.setPath("ProductInfoForm.po?product_idx=" + request.getParameter("product_idx") + "&member_idx=" + request.getParameter("member_idx"));
 				forward.setRedirect(true);
 			}
 		} catch (IOException e) {

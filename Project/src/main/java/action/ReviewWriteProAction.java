@@ -27,7 +27,7 @@ public class ReviewWriteProAction implements Action {
 		try {
 			String uploadPath = "upload"; 
 			String realPath = request.getServletContext().getRealPath(uploadPath); 
-//			System.out.println("실제 업로드 경로 : " + realPath);		
+			System.out.println("실제 업로드 경로 : " + realPath);		
 
 			int fileSize = 1024 * 1024 * 10;
 			
@@ -43,8 +43,8 @@ public class ReviewWriteProAction implements Action {
 			
 			ReviewBean review = new ReviewBean();
 			
-//			review.setReview_content(multi.getParameter("review_content"));
-			review.setReview_idx(Integer.parseInt(multi.getParameter("review_idx")));
+//			review.setReview_content(multi.getParameter("review_content")); Integer.parseInt(multi.getParameter("review_idx"))
+			review.setReview_idx(1); // null값 넘어옴 > 수정해야함
 			review.setProduct_idx(Integer.parseInt(multi.getParameter("prodcut_idx")));
 			review.setMember_idx(Integer.parseInt(multi.getParameter("member_idx")));
 			review.setReview_img(multi.getOriginalFileName("review_img")); //살리기
@@ -86,8 +86,6 @@ public class ReviewWriteProAction implements Action {
 				out.println("window.close()");
 				out.println("</script>");
 			}
-
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

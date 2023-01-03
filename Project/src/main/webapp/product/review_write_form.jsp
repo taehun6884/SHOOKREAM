@@ -40,8 +40,7 @@
 		$(document).ready(function() {		
 			
 			$("#register").on("click", function() {
-				alert(product_idx, member_idx, product_size, product_color);
-				self.close();
+				
 			});
 		});		
 	});
@@ -85,6 +84,8 @@
 	<form action="ReviewWrite.me" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="member_idx" value="${param.member_idx }">
 		<input type="hidden" name="prodcut_idx" value="${param.product_idx }">
+		<input type="hidden" name="product_size" value="${param.product_size }">
+		<input type="hidden" name="product_color" value="${param.product_color }">
 		<input type="file" id="fileInsert" name="review_img" accept=".png, .jpeg, .jpg, .gif" onchange="readURL(this);"><br>
 		<img id="preview"></img>
 		<hr>
