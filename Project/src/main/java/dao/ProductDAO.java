@@ -1450,7 +1450,59 @@ private ProductDAO() {}
 			return coupon;
 		}
 
+		// 쿠폰 수정 작업
+		public int updateCoupon(int coupon_idx, CouponBean coupon) {
+			int updatecount = 0;
+			
+			PreparedStatement pstmt =null;
+			
+			try {
+				String sql ="UPDATE coupon "
+						+ "SET coupon_name=?, coupon_price=?, coupon_content=?, coupon_start=? , coupon_end=? "
+						+ "WHERE coupon_idx =?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, coupon.getCoupon_name());
+				pstmt.setInt(2, coupon.getCoupon_price());
+				pstmt.setString(3, coupon.getCoupon_content());
+				pstmt.setString(4, coupon.getCoupon_start());
+				pstmt.setString(5, coupon.getCoupon_end());
+				pstmt.setInt(6, coupon_idx);
+				
+				updatecount = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				System.out.println("sql 구문오류 - updateCoupon");
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			} 
+			
+			return updatecount;
+		}
+
 		
+		// 관리자 쿠폰 삭제
+		public int deleteCoupon(int coupon_idx) {
+			int deleteCount = 0;
+			PreparedStatement pstmt = null;
+			
+			String sql = "DELETE FROM coupon WHERE coupon_idx=?";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, coupon_idx);
+				deleteCount = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				System.out.println("sql 구문오류 - deleteCoupon");
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			}
+			
+			return deleteCount;
+		}
 
 	
 }//DAO 끝

@@ -8,11 +8,11 @@
 <meta charset="UTF-8">
 <title>상품 목록</title>
 <!-- 삭제 버튼에 confirm 추가 -->
-<script>	function deleteProduct(idx) {
+<script>	function deleteCoupon(coupon_idx) {
 		var result = confirm("삭제하시겠습니까?");
 
 		if (result) {
-			location.href="ProductDeletePro.po?product_idx=" + idx;
+			location.href="CouponDeletePro.po?coupon_idx=" + coupon_idx;
 		} else {
 			alert("삭제가 취소되었습니다");
 		}
@@ -94,7 +94,7 @@
 										<td>
 										
 										<button type="button" class="btn btn-light" onclick="location.href ='CouponModifyForm.po?coupon_idx=${couponList.coupon_idx}'">수정</button>
-										<button type="button" class="btn btn-light" onclick= "deletecoupon(${couponList.coupon_idx})">삭제</button>
+										<button type="button" class="btn btn-light" onclick= "deleteCoupon(${couponList.coupon_idx})">삭제</button>
 										</td>
 										</tr> 
 										</c:forEach>  

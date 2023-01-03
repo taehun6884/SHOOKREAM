@@ -67,7 +67,7 @@
                 	 </div>
                 	 
           
-			<form action="CouponModifyPro.po" method="post">
+			<form action="CouponModifyPro.po?coupon_idx=${coupon.coupon_idx}" method="post">
 				<table class="table">
 					<tr>
 						<td width="100px" align="left" class="table-secondary">쿠폰명</td>
@@ -95,12 +95,12 @@
 						
 					<tr>
 						<td width="150px" align="left" class="table-secondary">쿠폰 시작일</td>
-						<td><input type="date" name="coupon_start">&nbsp;<span>${coupon.coupon_start}</span></td>
+						<td><input type="date" name="coupon_start" value="${coupon.coupon_start}"></td>
 						
 					</tr>
 					<tr>
 						<td width="150px" align="left" class="table-secondary">쿠폰 만료일</td>
-						<td><input type="date" name="coupon_end">&nbsp;<span>${coupon.coupon_end}</span></td>
+						<td><input type="date" name="coupon_end" value="${coupon.coupon_end}"></td>
 					</tr>
 					
 
