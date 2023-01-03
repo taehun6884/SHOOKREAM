@@ -262,7 +262,7 @@ private ProductDAO() {}
 	}
 	
 	//----------------장바 구니----------------------
-		public int CartInsert(int product_idx, int member_idx) {
+		public int CartInsert(int product_idx, int member_idx, int cart_price) {
 			int CartInsert = 0;
 			PreparedStatement pstmt1,pstmt2 = null;
 			ResultSet rs = null;
@@ -278,11 +278,13 @@ private ProductDAO() {}
 				}
 				System.out.println(cart_idx);
 		 //--------------------장바구니 등록--------------------------------		
-			sql = "INSERT INTO cart VALUES(?,?,?,now())";	
+			sql = "INSERT INTO cart VALUES(?,?,?,now(),?)";	
 			pstmt2 = con.prepareStatement(sql);
 			pstmt2.setInt(1, cart_idx);
 			pstmt2.setInt(2, member_idx);	
-			pstmt2.setInt(3, product_idx);	
+			pstmt2.setInt(3, product_idx);
+			pstmt2.setInt(4, cart_price); //
+			
 			CartInsert = pstmt2.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -394,6 +396,66 @@ private ProductDAO() {}
 			
 			return total;
 		}
+		
+		
+		// ----------- 장바구니 금액 증가 작업 -----------------
+		public int plusTotal(int cart_idx) {
+			int plusTotal = 0;
+			int member_idx = 0;
+			int product_idx = 0;
+			int product_price = 0;
+			
+			PreparedStatement pstmt = null;
+			PreparedStatement pstmt2 = null;
+			ResultSet rs = null;
+			//체크박스 value값인 cart_idx 를 통해 member_idx, product_idx를 검색(기존 값들 가져오기)
+			
+	
+			try {
+				String sql = "SELECT c.member_idx, p.product_price, p.product_idx "
+						+ "FROM shookream.cart c join shookream.product p join shookream.member m "
+						+ "on c.product_idx = p.product_idx and c.member_idx = m.member_idx "
+						+ "where m.member_idx is not null and c.cart_idx = ?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, cart_idx);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					member_idx = rs.getInt(1);
+					product_price = rs.getInt(2);
+					product_idx = rs.getInt(3);
+				}
+				System.out.println(member_idx + product_idx + cart_idx);
+				sql = "UPDATE shookream.cart c join shookream.product p join shookream.member m "
+						+ "ON c.product_idx = p.product_idx and c.member_idx = m.member_idx SET c.cart_price = c.cart_price + ? WHERE p.product_idx =? and m.member_idx = ? and c.cart_idx = ?";
+				pstmt2 = con.prepareStatement(sql);
+				pstmt2.setInt(1, product_price);
+				pstmt2.setInt(2, product_idx);
+				pstmt2.setInt(3, member_idx);
+				pstmt2.setInt(4, cart_idx);
+				plusTotal = pstmt2.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt2);
+				JdbcUtil.close(pstmt);
+			}
+			return plusTotal;
+		}
+
+		
+		
+		// ----------- 장바구니 금액 감소 작업 -----------------
+		public int minusTotal(int member_idx) {
+			int minusTotal = 0;
+			return minusTotal;
+		}
+
+		
+		
 
 		// 메인 - 메인화면 베스트 상품 목록 조회
 		public List<ProductBean> selectBestProductList() {
@@ -1337,7 +1399,7 @@ private ProductDAO() {}
 			return listCount;
 		}
 
-		
+
 
 	
 }//DAO 끝

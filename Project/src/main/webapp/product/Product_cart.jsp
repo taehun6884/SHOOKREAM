@@ -92,12 +92,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <table class="table">
   <thead  class="table-dark" >
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">번호</th>
+      <th scope="col">선택</th>
       <th scope="col">image</th>
       <th scope="col">name</th>
       <th scope="col">brand</th>
       <th scope="col">price</th>
       <th scope="col">size</th>
+      <th scope="col">개수</th>
       <th scope="col">delete</th>
     </tr>
   </thead>
@@ -106,13 +108,15 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <c:forEach var="cart" items="${cartlist }">
     <tr>
       <th scope="row">${cart.cart_idx }</th>
+	  <td><input type="checkbox" class ="cartCheckBox" id="cartCheckBox" checked="checked" value="${cart.cart_idx }"></td>
       <td><img src="upload/${cart.product_img }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
       <td>${cart.product_name }</td>
       <td>${cart.product_brand }</td>
 	  <td><fmt:formatNumber value="${cart.product_price }" pattern="#,###"></fmt:formatNumber></td>
       <td>${cart.product_size }</td>
+      <td>${cart.product_amount }</td>
       <td>
-      <button type="button" class="btn btn-dark" onclick="location.href='ProductInfoForm.po?product_idx=${cart.product_idx }'">상세내용</button>
+      <button type="button" class=	"btn btn-dark" onclick="location.href='ProductInfoForm.po?product_idx=${cart.product_idx }'">상세내용</button>
       <button type="button" class="btn btn-dark" onclick="location.href='CartDeletePro.ca?cart_idx=${cart.cart_idx }'">삭제</button>
       </td>
     </tr>
@@ -125,7 +129,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="p-3 border bg-light"><h4>총 금액 : <fmt:formatNumber value="${total }" pattern="#,###"></fmt:formatNumber> </h4></div>	    </div>
 	    <div class="col">
 	      <div class="p-3 border bg-light">
-	      <button onclick="iamport()">구매하기</button>
+	      <button onclick="">구매하기</button>
 	      
 	      <button onclick="test()">test</button>
 	      </div>
@@ -274,6 +278,103 @@ function w3_close() {
     "pluginKey": "552ea0bb-d4a5-4c70-8ba7-463b7682c434"
   });
 </script>
+
+<!-- 체크박스에 따른 금액변동 처리 -->
+<script type="text/javascript">
+
+if($("#cartCheckBox").is(":checked") == true){
+	alert("true");
+}
+
+
+
+// $("#cartCheckBox").click(function() {
+	
+// 	let check = $("#cartCheckBox").val();
+// 		$.ajax({
+// 				type: "get",
+// 				url: "CartPlusPro.ca",
+// 				data: {
+// 					cart_idx: check
+// 				},
+// 				dataType: "text",
+// 				success: function() {
+// 					alert("성공함");
+// 				}
+// 			});
+// });
+
+
+//ajax 사용
+// $(document).ready(function() {
+// 	$("#cartCheckBox").click(function() {
+	
+		
+// 	});
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function setInfo() {
+
+// let totalPrice = 0;
+// let totalCount = 0;
+
+// $(".cartCheckBox").each(function(index, element){
+// 	if($(element).find(".productCheckbox").is(":checked") === true){	//체크여부
+// 		// 총 가격
+// 		totalPrice += parseInt($(element).find(".product_price").val());
+// 		// 총 갯수
+// 		totalCount += parseInt($(element).find(".product_amount").val());
+		
+// 		document.querySelector('#testResultBox').innerText = totalPrice
+		
+// 	}
+// });
+	
+// }
+
+// $(".cartCheckBox").on("change", function(){
+// 	setInfo($(".cartCheckBox"));
+// });
+
+
+
+
+
+
+
+//체크 여부에 따라 + - 처리
+// $(document).ready(function(){
+//     $("#cartCheckbox").change(function(){
+// 		let totalPrice = ${total};
+// 		let cartPrice = ("#cartPrice").val();
+//     	if($("#cartCheckbox").is(":checked")){
+// // 			totalPrice += $("#cartPrice").val();	
+// // 			alert("변경 후 값 : " + totalPrice);
+// 			alert("값 : " + cartPrice);
+// //             alert("체크박스 체크 선택!");
+//         }else{
+//             alert("체크박스 체크 해제!");
+//         }
+//     });
+// });
+
+
+
+
+</script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript">
@@ -306,10 +407,7 @@ function iamport(){
 		    
 		});
 	}
-	
-	function test() {
-		}
-	}
+
 	
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>

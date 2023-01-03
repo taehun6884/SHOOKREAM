@@ -47,7 +47,7 @@ public class CartListProService {
 		return listCount;
 	}
 
-
+	
 	public int CartTotalPrice(int member_idx) {
 		int total =0;
 		
@@ -97,6 +97,24 @@ public class CartListProService {
 		JdbcUtil.close(con);
 		
 		return listCount;
+	}
+	
+
+	//-------체크박스 선택 시 cart_price 감소 작업-----------
+	public int CartMinusTotal(int member_idx) {
+		int minusTotal = 0;
+		
+		// 공통작업-1. Connection 객체 가져오기
+		Connection con = JdbcUtil.getConnection();
+		
+		// 공통작업-2. BoardDAO 객체 가져오기
+		ProductDAO dao = ProductDAO.getInstance();
+		
+		// 공통작업-3. BoardDAO 객체에 Connection 객체 전달하기
+		dao.setConnection(con);
+		minusTotal = dao.minusTotal(member_idx);
+
+		return minusTotal;
 	}
 	
 	

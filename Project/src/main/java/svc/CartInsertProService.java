@@ -7,7 +7,7 @@ import db.JdbcUtil;
 
 public class CartInsertProService {
 
-	public boolean InsertCart(int product_idx, int member_idx) {
+	public boolean InsertCart(int product_idx, int member_idx, int cart_price) {
 		
 		boolean InsertCart = false;
 		
@@ -17,7 +17,7 @@ public class CartInsertProService {
 		
 		dao.setConnection(con);
 		
-		int insertCount = dao.CartInsert(product_idx,member_idx);
+		int insertCount = dao.CartInsert(product_idx, member_idx, cart_price);
 		
 		if(insertCount > 0) { // 성공 시
 			JdbcUtil.commit(con);

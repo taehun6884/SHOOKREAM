@@ -13,6 +13,7 @@ import action.Action;
 import action.CartDeleteProAction;
 import action.CartInsertProAction;
 import action.CartListProAction;
+import action.CartPlusProAction;
 import action.LikeDeleteProAction;
 import action.LikeInsertProAction;
 import action.LikeListProAction;
@@ -38,6 +39,12 @@ public class CartController extends HttpServlet{
 			forward = action.execute(request, response);
 		}else if(command.equals("/CartInsertPro.ca")) {//Cart Pro
 			action = new CartInsertProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/CartPlusPro.ca")) {//Cart 금액 증가
+			action = new CartPlusProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/CartMinusPro.ca")) {//Cart 금액 감소
+//			action = new CartMinusProAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/CartDeleteForm.ca")) { //Cart 삭제 창
 			forward = new ActionForward();

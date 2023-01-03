@@ -295,6 +295,7 @@ margin-left: 270PX;
 			</select>
 			<hr>
 			<input type="hidden" id="product_idx" value="${product.product_idx }">
+			<input type="hidden" id="product_price" value="${product.product_price }">
 		<span id="wishLoad">
 			<c:choose>
 				<c:when test="${wish.product_idx eq product.product_idx }">
@@ -310,7 +311,7 @@ margin-left: 270PX;
 			</c:choose>
 		</span>	
 		
-		<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${member_idx}'">
+		<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${member_idx}&cart_price=${product.product_price}'">
 
 			<button onclick="iamport()">구매하기</button>
 		</div>
