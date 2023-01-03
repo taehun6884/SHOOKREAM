@@ -1523,5 +1523,44 @@ private ProductDAO() {}
 			return deleteCount;
 		}
 
+		
+		// 메인 쿠폰 목록 조회
+		public List<CouponBean> selectCouponMainList(String coupon_content) {
+			ArrayList<CouponBean> couponList = null;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT coupon_name, coupon_price, coupon_start, coupon_end "
+						+ "FROM coupon WHERE coupon_content LIKE ? ORDER BY coupon_price ASC";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+coupon_content+"%");
+				
+				rs = pstmt.executeQuery();
+				
+				couponList = new ArrayList<CouponBean>();
+				
+				while(rs.next()) {
+					CouponBean coupon = new CouponBean();
+					coupon.setCoupon_name(rs.getString("coupon_name"));
+					coupon.setCoupon_price(rs.getInt("coupon_price"));
+					coupon.setCoupon_start(rs.getString("coupon_start"));
+					coupon.setCoupon_end(rs.getString("coupon_end"));
+					
+					couponList.add(coupon);
+					System.out.println(couponList);
+				}
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - selectCouponMainList()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			return couponList;
+		}
+
 	
 }//DAO 끝
