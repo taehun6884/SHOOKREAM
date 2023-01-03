@@ -531,6 +531,63 @@ private MemberDAO() {}
 				
 				return result;
 			}
+
+			// 회원가입시 회원가입 쿠폰 지급
+			public int insertWelcomCoupon() {
+				int insertCount = 0;
+				
+				PreparedStatement pstmt=null, pstmt2=null, pstmt3=null;
+				ResultSet rs = null, rs2 = null;
+				
+				try {
+					int member_idx = 1; // 회원 idx 처리
+					String sql = "SELECT MAX(member_idx) FROM member";
+					pstmt= con.prepareStatement(sql);
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						member_idx = rs.getInt(1) + 1;
+					} 
+					
+					// coupon 조회
+					int coupon_idx = 0;
+					String coupon_name = "";
+					int coupon_price = 0;
+					
+					sql = "SELECT * FROM coupon where coupon_name = '회원가입 감사 쿠폰'";
+					pstmt2 = con.prepareStatement(sql);
+					rs2 = pstmt.executeQuery(); 
+					
+					if(rs2.next()) { 
+						coupon_idx = rs2.getInt("coupon_idx");
+						coupon_name = rs2.getString("coupon_name");
+						coupon_price = rs2.getInt("coupon_price");
+					}
+					
+					// member_coupon insert 작업
+					sql = "INSERT INTO member_coupon VALUES(?,?,?,?,?,now(),date_add(now(),interval 30 day))";
+					pstmt3 = con.prepareStatement(sql);
+
+					pstmt3.setInt(1, member_idx);
+					pstmt3.setInt(2, coupon_idx);
+					pstmt3.setString(3, coupon_name);
+					pstmt3.setInt(4, coupon_price);
+					pstmt3.setInt(5, 0);
+					
+					System.out.println(pstmt3);
+					
+					insertCount = pstmt3.executeUpdate();
+					} catch (SQLException e) {
+						System.out.println("SQL 구문 오류! - insertWelcomCoupon()");
+						e.printStackTrace();
+					} finally {
+						JdbcUtil.close(rs);
+						JdbcUtil.close(pstmt);
+						JdbcUtil.close(pstmt2);
+						JdbcUtil.close(pstmt3);
+					}
+				return insertCount;
+			}
 			
 			
 			
