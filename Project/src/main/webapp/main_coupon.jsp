@@ -21,21 +21,23 @@
 <!-- slick 슬라이드 작업, jquery -->
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> 
+<script src="https://kit.fontawesome.com/498a54c4c7.js"
+	crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 <script type="text/javascript">
-$(function() {
-	$('.post-wrapper').slick({
-		  dots: true,
-		  infinite: true,
-		  autoplay: true,
-		  autoplaySpeed: 2000,
-		  slidesToShow: 1,
-		  adaptiveHeight: true
-		});
+// $(function() {
+// 	$('.post-wrapper').slick({
+// 		  dots: true,
+// 		  infinite: true,
+// 		  autoplay: true,
+// 		  autoplaySpeed: 2000,
+// 		  slidesToShow: 1,
+// 		  adaptiveHeight: true
+// 		});
 				
-});
+// });
 
 </script>
 <style>
@@ -50,7 +52,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 #main_category{
 	text-align: center;
-	padding-top: 120px;
+	padding-top: 50px;
 	padding-bottom: 60px;
 	font-size: x-large;
 }
@@ -109,10 +111,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- ./images header -->
   <div class ="post-wrapper">
 <!--   	<div><img src="images/jeans.jpg" height="700" width="900" onclick="location.href=''"></div> -->
-  	<div><a href="CouponMainList.po?coupon_content=banner_1"><img src="images/banner_1.jpg" height="700" width="900"></a></div>
-  	<div><img src="images/jeans1.jpg" height="700" width="900"></div>
-  	<div><img src="images/섬네일(슈펜).jpg" height="700" width="900"></div>
-  	<div><img src="images/logo.png" height="700" width="900"></div>
+  	<div><img src="images/${param.coupon_content }.jpg" height="700" width="900"></div>
   
   </div>
 <!--   <div class="w3-container w3-text-grey" id="jeans"> -->
@@ -120,45 +119,44 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--   </div> -->
 
 	<div id="main_category">
-		<p>BEST</p>
+		<p>Coupon Download</p>
+<!-- 		<img src="images/coupon_5000.png" alt="..." style="width: 500px"> -->
 	</div>
 	
 	
   <!-- Product grid -->
 <div class="w3-row w3-grayscale">
-		<c:forEach var="productBestList" items="${productBestList }" begin="0" end="7" step="1">
+		<c:forEach var="couponList" items="${couponList }">
 			<div class="w3-col l3 s6">
 				<div class="w3-container">
 							<div class="w3-display-container">
-								<img src="./upload/${productBestList.product_img }" alt="..." style="width: 100%">
+								<img src="../images/coupon_5000.png" alt="..." style="width: 100%">
 								<div class="w3-display-middle w3-display-hover">
 									<button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList.product_idx }&member_idx=${sessionScope.member_idx }'">
-										Buy now <i class="fa fa-shopping-cart" ></i>
+										다운로드 <i class="fa-regular fa-circle-down"></i>
 									</button>
 								</div>
-								<input type="hidden" id="product_idx${productBestList.product_idx }"
-									value="${productBestList.product_idx }">
 							</div>
-							<p id="product_brand" >${productBestList.product_brand }</p>
-							<p id="product_name" >${productBestList.product_name }<br></p>
+							<p id="product_brand" >${couponList.coupon_name }</p>
+<%-- 							<p id="product_name" >${productBestList.product_name }<br></p> --%>
 							
-							<div id="price">
-							<c:choose>
-								<c:when test="${productBestList.product_discount_price gt 0}">
-									<span>
-<%-- 									<c:set var="discounted_price" value="${productBestList.product_price - (productBestList.product_price * productBestList.product_discount_price) }"/> --%>
-<%-- 									<c:out value="${discounted_price}" /> --%>
-										<fmt:formatNumber value="${productBestList.product_price - (productBestList.product_price * (productBestList.product_discount_price/100)) }" pattern="#,###" />
-									</span>
-									<span id="product_price">
-									<fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></span>
-									<span id="product_discount_price" ><fmt:formatNumber value="${productBestList.product_discount_price }" pattern="" />%</span>
-								</c:when>
-								<c:otherwise>
-									<span><fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></span>
-								</c:otherwise>
-							</c:choose>
-							</div>
+<!-- 							<div id="price"> -->
+<%-- 							<c:choose> --%>
+<%-- 								<c:when test="${productBestList.product_discount_price gt 0}"> --%>
+<!-- 									<span> -->
+<%-- <%-- 									<c:set var="discounted_price" value="${productBestList.product_price - (productBestList.product_price * productBestList.product_discount_price) }"/> --%> --%>
+<%-- <%-- 									<c:out value="${discounted_price}" /> --%> --%>
+<%-- 										<fmt:formatNumber value="${productBestList.product_price - (productBestList.product_price * (productBestList.product_discount_price/100)) }" pattern="#,###" /> --%>
+<!-- 									</span> -->
+<!-- 									<span id="product_price"> -->
+<%-- 									<fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></span> --%>
+<%-- 									<span id="product_discount_price" ><fmt:formatNumber value="${productBestList.product_discount_price }" pattern="" />%</span> --%>
+<%-- 								</c:when> --%>
+<%-- 								<c:otherwise> --%>
+<%-- 									<span><fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></span> --%>
+<%-- 								</c:otherwise> --%>
+<%-- 							</c:choose> --%>
+<!-- 							</div> -->
 							
 						</div>
 					</div>
@@ -167,49 +165,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 		
 
 	<!-- 최근 등록 상품 조회 -->
-  <div id="main_category" style="margin-top: 400px;">
-		<p>NEW</p>
-	</div>
-	<!-- Product grid -->
-  <div class="w3-row w3-grayscale">
-  <c:forEach var="productNewList" items="${productNewList }" begin="0" end="7" step="1">
-   <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./upload/${productNewList.product_img }"  alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-									<button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productNewList.product_idx }&member_idx=${sessionScope.member_idx }'">
-										Buy now <i class="fa fa-shopping-cart" ></i>
-									</button>
-								</div>
-								<input type="hidden" id="product_idx${productNewList.product_idx }"
-									value="${productNewList.product_idx }">
-							</div>
-							<p id="product_brand" >${productNewList.product_brand }</p>
-							<p id="product_name" >${productNewList.product_name }<br></p>
-							
-							<div id="price">
-							<c:choose>
-								<c:when test="${productNewList.product_discount_price gt 0}">
-									<span>
-<%-- 									<c:set var="discounted_price" value="${productBestList.product_price - (productBestList.product_price * productBestList.product_discount_price) }"/> --%>
-<%-- 									<c:out value="${discounted_price}" /> --%>
-										<fmt:formatNumber value="${productNewList.product_price - (productNewList.product_price * (productNewList.product_discount_price/100)) }" pattern="#,###" />
-									</span>
-									<span id="product_price">
-									<fmt:formatNumber value="${productNewList.product_price }" pattern="#,###" /></span>
-									<span id="product_discount_price" ><fmt:formatNumber value="${productNewList.product_discount_price }" pattern="" />%</span>
-								</c:when>
-								<c:otherwise>
-									<span><fmt:formatNumber value="${productNewList.product_price }" pattern="#,###" /></span>
-								</c:otherwise>
-							</c:choose>
-							</div>
-							
-						</div>
-					</div>
-				</c:forEach>
-   	 </div>
+  
    	 
    	 </div>
   <!-- footer -->

@@ -13,6 +13,7 @@ import action.Action;
 import action.CouponDeleteProAction;
 import action.CouponInsertProAction;
 import action.CouponListProAction;
+import action.CouponMainListProAction;
 import action.CouponModifyFormAction;
 import action.CouponModifyProAction;
 import action.OrderListProAction;
@@ -93,9 +94,14 @@ public class ProductController extends HttpServlet{
 		}else if(command.equals("/CouponDeletePro.po")) { //coupon 삭제 작업
 			action = new CouponDeleteProAction();
 			forward = action.execute(request, response);
-
+		}else if(command.equals("/CouponDownloadForm.po")) { //관리자 쿠폰 등록 폼 
+			forward = new ActionForward();
+			forward.setPath("main_coupon.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/CouponMainList.po")) { //coupon 메인 목록
+			action = new CouponMainListProAction();
+			forward = action.execute(request, response);
 		}
-	
 			
 		if(forward != null) {
 			if(forward.isRedirect()) {
