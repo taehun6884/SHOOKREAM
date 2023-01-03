@@ -23,6 +23,7 @@ import action.ProductInsertAction;
 import action.ProductListAction;
 import action.ProductModifyFormAction;
 import action.ProductModifyProAction;
+import action.ReviewDeleteProAction;
 import vo.ActionForward;
 
 @WebServlet("*.po") // 상품 컨트롤러
@@ -69,14 +70,14 @@ public class ProductController extends HttpServlet{
 		}else if(command.equals("/ProductOrderList.po")) { //사용자 주문 상세 페이지
 			action = new OrderListProAction();
 			forward = action.execute(request, response);
+
+		} else if(command.equals("/ReviewDeletePro.po")) { // 리뷰 삭제 Pro
+			action = new ReviewDeleteProAction();
+			forward = action.execute(request, response);	
 		}else if(command.equals("/CouponInsertForm.po")) { //관리자 쿠폰 등록 폼 
 			forward = new ActionForward();
 			forward.setPath("admin/admin_coupon_insert.jsp");
 			forward.setRedirect(false);
-		
-		// ====================================================================
-		
-		
 		}else if(command.equals("/CouponInsertPro.po")) {//Coupon 등록 작업
 			action = new CouponInsertProAction();
 			forward = action.execute(request, response);
@@ -92,6 +93,7 @@ public class ProductController extends HttpServlet{
 		}else if(command.equals("/CouponDeletePro.po")) { //coupon 삭제 작업
 			action = new CouponDeleteProAction();
 			forward = action.execute(request, response);
+
 		}
 	
 			
