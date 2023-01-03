@@ -1365,7 +1365,7 @@ private ProductDAO() {}
 				pstmt2.setString(4, coupon.getCoupon_content());
 				pstmt2.setString(5, coupon.getCoupon_start());
 				pstmt2.setString(6, coupon.getCoupon_end());
-				
+				System.out.println(pstmt2);
 				insertCount = pstmt2.executeUpdate();
 				
 			} catch (SQLException e) {
