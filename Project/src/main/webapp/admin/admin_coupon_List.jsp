@@ -66,6 +66,7 @@
                                             <th>번호</th>
                                             <th>쿠폰명</th>
                                             <th>쿠폰내용</th>
+                                            <th>가격</th>
                                             <th>시작일</th>
                                             <th>만료일</th>
                                             <th>등록일</th>
@@ -88,6 +89,7 @@
 										<td>${couponList.coupon_idx }</td>
 										<td>${couponList.coupon_name }</td>
 										<td>${couponList.coupon_content }</td>
+										<td>${couponList.coupon_price }</td>
 										<td>${couponList.coupon_start }</td>
 										<td>${couponList.coupon_end }</td>
 										<td><fmt:formatDate value="${couponList.coupon_date}" pattern="yyyy-MM-dd"/></td>

@@ -1,7 +1,13 @@
 <%@page import="vo.ReviewBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri ="http://java.sun.com/jsp/jstl/functions" %>
+<%
+pageContext.setAttribute("br", "<br/>");
+pageContext.setAttribute("cn", "\n");
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,12 +86,18 @@ margin-left: 270PX;
 }
 
 .reviewContent { 
-	width : 1000px;
+	width : 900px;
 	height: 150px; 
 }
 
-.reviewListArea {
-	padding: 20px;
+
+#imgSize {
+	width: 9em;
+	height: 9em;
+}
+
+#delBtn {
+	float: right;
 }
 
 </style>
@@ -331,37 +343,34 @@ margin-left: 270PX;
 		</tr>
 		
 	</table>
-	
-	<hr>	
-		<div class="reviewListArea" id="reviewListArea">
+
+	<hr>	 <%-- 리뷰구역 --%> -->
+		<div id="reviewListArea">
 			<h3>Review</h3>
-			<div class="reviewContent">
 				<div>
-					<img src="../images/kakao_small.jpg" />
-					<table class="reviewContent">
-						<c:forEach var="review" items="${reviewList }">
-						<tr>
-							<td rowspan="2" width="30%">${review.review_img }</td>
-							<td width="60%">$review.review_content</td> 
-							<td>${review.re_order_detail }</td>
-							<td width="10%">${review.member_idx }<br>${review.review_date }</td> <%-- 리뷰 작성하는 멤버 --%>
-						</tr>
-						<tr>
-							<td rowspan="2">${review.review_content }</td>
-						</tr>
-						</c:forEach>
-					</table>
+					<c:forEach var="review" items="${reviewList }">
+						<table class="reviewContent">
+							<tr>
+								<td rowspan="7" width="20%"><img id="imgSize" src="./upload/${review.review_real_img }" width="100px" ></td>
+								<td style="text-align:left;" width="65%"><small>상세 사이즈 및 색상 : ${review.re_order_detail }</small></td>							
+								<td style="text-align:left;" width="15%">
+									<small>
+									작성일 : ${review.review_date } <br>
+ 									주문자 : ${review.member_idx }<br>
+ 									</small>
+								</td>					
+							</tr>
+							<tr></tr>
+							<tr>
+								<td colspan="4" style="text-align:left"><br>${fn:replace(review.review_content, cn, br) }</td>
+							</tr>
+						</table>
+						<c:if test="${sessionScope.sId eq 'admin' || param.member_idx eq review.member_idx }" >
+							<input id="delBtn" type="button" value="리뷰 삭제하기" class="btn btn-sm btn-secondary" onclick="location.href='ReviewDeletePro.po?product_idx=${review.product_idx }&member_idx=${sessionScope.member_idx }&review_idx=${review.review_idx}'">
+						</c:if>		
+					</c:forEach>
 				</div>
-				<section id="pageList" style="text-align:center">
-			<c:choose>
-				<c:when test="${pageNum > 1}">
-					<input type="button" class="btn btn-outline-secondary btn-sm" value="이전" onclick="location.href=''">
-				</c:when>
-				<c:otherwise>
-					<input type="button" class="btn btn-outline-secondary btn-sm" value="이전">
-				</c:otherwise>
-			</c:choose>
-				
+				<section id="pageList" style="text-align:center">				
 			<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
 			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
@@ -374,18 +383,7 @@ margin-left: 270PX;
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
-	
-			<!-- 현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 [다음] 링크 동작 -->
-			<c:choose>
-				<c:when test="${pageNum < pageInfo.maxPage}">
-					<input type="button" value="다음" class="btn btn-outline-secondary btn-sm" onclick="location.href=''">
-				</c:when>
-				<c:otherwise>
-					<input type="button" class="btn btn-outline-secondary btn-sm" value="다음">
-				</c:otherwise>
-			</c:choose>
 		</section>	
-			</div>	
 		</div> 	
 	
 

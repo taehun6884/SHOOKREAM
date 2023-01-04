@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
+import action.CheckAddrProAction;
 import action.CheckEmailAddrProAction;
 import action.FindMemberIdProAction;
 import action.FindMemberPassProAction;
@@ -110,7 +111,7 @@ public class MemberController extends HttpServlet{
 			action = new FindMemberPassProAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/CheckEmailAddress.me")) { // 이메일 인증
-			action = new CheckEmailAddrProAction();
+			action = new CheckAddrProAction();
 			forward = action.execute(request, response);
 		}
 		

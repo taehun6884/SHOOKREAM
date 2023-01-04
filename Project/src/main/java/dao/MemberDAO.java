@@ -1,5 +1,4 @@
 package dao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,10 +8,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
-
 import db.JdbcUtil;
 import mail.GoogleMailAuthenticator;
+import vo.AuthBean;
 import vo.MemberBean;
 import vo.ReviewBean;
 import vo.WishBean;
@@ -109,7 +107,7 @@ private MemberDAO() {}
 		}
 		return insertCount;
 	}
-	// 회원가입
+	// 회원삭제
 	
 	public boolean isDeleteUser(String id, String pass) {
 		int deleteCount = 0;
@@ -247,38 +245,6 @@ private MemberDAO() {}
 			String sql = "SELECT * FROM member WHERE member_id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				vo = new MemberBean();
-				vo.setMember_idx(rs.getInt("member_idx"));
-				vo.setMember_name(rs.getString("member_name"));
-				vo.setMember_id(rs.getString("member_id"));
-				vo.setMember_pass(rs.getString("member_pass"));
-				vo.setMember_address(rs.getString("member_address"));
-				vo.setMember_email(rs.getString("member_email"));
-				vo.setMember_phone(rs.getString("member_phone"));
-				System.out.println(vo);
-				
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JdbcUtil.close(rs);
-			JdbcUtil.close(pstmt);
-		}
-		
-		return vo; 
-	} // 회원 목록 끝
-	public MemberBean getInfo(int idx) {
-		MemberBean vo = null;
-		ResultSet rs  = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			String sql = "SELECT * FROM member WHERE member_idx=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, idx);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -539,7 +505,7 @@ private MemberDAO() {}
 				return isRightUser;
 			}
 
-
+			// 임시비번 -> 비번 수정
 			public boolean updatePass(MemberBean member, StringBuilder imsiPw) {
 				boolean result = false;
 				
@@ -563,7 +529,36 @@ private MemberDAO() {}
 				
 				return result;
 			}
+
+			// 이메일 인증 위해 auth 테이블에 데이터 넣기
+			public boolean insertAuth(AuthBean auth) {
+				boolean insertSuccess = false;
+				
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
 			
+				try {
+					// auth 테이블에 삽입
+					String sql = "INSERT INTO auth VALUES(?,?)";
+					pstmt= con.prepareStatement(sql);
+					
+					pstmt.setString(1, auth.getAuth_id());
+					pstmt.setString(2, auth.getAuth_authCode());
+					
+					if(pstmt.executeUpdate()>0) {
+						insertSuccess = true;
+					};
+					
+				} catch (SQLException e) {
+					System.out.println("sql 구문 오류 - insertAuth()");
+					e.printStackTrace();
+				} finally {
+					JdbcUtil.close(rs);
+					JdbcUtil.close(pstmt);
+				}
+				
+				return insertSuccess;
+		}
 			
 			
 

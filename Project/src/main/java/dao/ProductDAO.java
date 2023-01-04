@@ -1338,6 +1338,25 @@ private ProductDAO() {}
 			return listCount;
 		}
 
+		public int deleteBoard(int review_idx) {
+			int deleteCount = 0;
+			PreparedStatement pstmt = null;
+		
+			try {
+				String sql = "DELETE FROM review WHERE review_idx=?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, review_idx);
+				deleteCount = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(pstmt);
+			}
+			
+			return deleteCount;
+		}
+
 		
 		// 관리자 쿠폰 등록
 		public int insertCoupon(CouponBean coupon) {
@@ -1365,7 +1384,7 @@ private ProductDAO() {}
 				pstmt2.setString(4, coupon.getCoupon_content());
 				pstmt2.setString(5, coupon.getCoupon_start());
 				pstmt2.setString(6, coupon.getCoupon_end());
-				
+				System.out.println(pstmt2);
 				insertCount = pstmt2.executeUpdate();
 				
 			} catch (SQLException e) {
@@ -1539,8 +1558,6 @@ private ProductDAO() {}
 			
 			return deleteCount;
 		}
-
-
 		public int CouponUsePrice(int idx) {
 			int Coupon_price = 0;
 			PreparedStatement pstmt = null;
@@ -1563,7 +1580,45 @@ private ProductDAO() {}
 			System.out.println(Coupon_price);
 			
 			return Coupon_price;
-		}
+}
+		
+		// 메인 쿠폰 목록 조회
+		public List<CouponBean> selectCouponMainList(String coupon_content) {
+			ArrayList<CouponBean> couponList = null;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT coupon_name, coupon_price, coupon_start, coupon_end "
+						+ "FROM coupon WHERE coupon_content LIKE ? ORDER BY coupon_price ASC";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+coupon_content+"%");
+				
+				rs = pstmt.executeQuery();
+				
+				couponList = new ArrayList<CouponBean>();
+				
+				while(rs.next()) {
+					CouponBean coupon = new CouponBean();
+					coupon.setCoupon_name(rs.getString("coupon_name"));
+					coupon.setCoupon_price(rs.getInt("coupon_price"));
+					coupon.setCoupon_start(rs.getString("coupon_start"));
+					coupon.setCoupon_end(rs.getString("coupon_end"));
+					
+					couponList.add(coupon);
+					System.out.println(couponList);
+				}
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - selectCouponMainList()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			return couponList;
 
+		}
 	
 }//DAO 끝

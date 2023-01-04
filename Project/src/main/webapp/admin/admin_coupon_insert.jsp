@@ -71,13 +71,13 @@
 			<form action="CouponInsertPro.po" method="post">
 				<table class="table">
 					<tr>
-						<td width="100px" align="left" class="table-secondary">쿠폰명</td>
-						<td width="300px"><input class="w3-input w3-border"
+						<td width="50px" align="left" class="table-secondary">쿠폰명</td>
+						<td width="100px"><input class="w3-input w3-border"
 							type="text" placeholder="Coupon Name" name="coupon_name" required ></td>
 					</tr>
 					
 					<tr>
-						<td width="100px" align="left" class="table-secondary">쿠폰 내용</td>
+						<td width="50px" align="left" class="table-secondary">쿠폰 내용</td>
 						<td><textarea class="w3-input w3-border" style="resize: none"
 								rows="5" cols="40" placeholder="Coupon summary" name="coupon_content"
 								required="required"></textarea></td>
@@ -85,7 +85,7 @@
 					</tr>
 					
 					<tr>
-						<td width="100px" align="left" class="table-secondary">할인 가격</td>
+						<td width="50px" align="left" class="table-secondary">할인 가격</td>
 						<td><input type="text" id="testPrice" name ="coupon_price" placeholder="할인 가격을 입력하세요"><span>&nbsp;원</span> 
 						</td>
 						
