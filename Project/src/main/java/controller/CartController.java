@@ -13,6 +13,7 @@ import action.Action;
 import action.CartDeleteProAction;
 import action.CartInsertProAction;
 import action.CartListProAction;
+import action.CartMinusProAction;
 import action.CartPlusProAction;
 import action.LikeDeleteProAction;
 import action.LikeInsertProAction;
@@ -44,7 +45,7 @@ public class CartController extends HttpServlet{
 			action = new CartPlusProAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/CartMinusPro.ca")) {//Cart 금액 감소
-//			action = new CartMinusProAction();
+			action = new CartMinusProAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/CartDeleteForm.ca")) { //Cart 삭제 창
 			forward = new ActionForward();

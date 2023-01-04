@@ -108,7 +108,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <c:forEach var="cart" items="${cartlist }">
     <tr>
       <th scope="row">${cart.cart_idx }</th>
-	  <td><input type="checkbox" class ="cartCheckBox" id="cartCheckBox" checked="checked" value="${cart.cart_idx }"></td>
+	  <td><input type="checkbox" class ="cartCheckBox" id="cartCheckBox" name ="cartCheckBox" checked="checked" value="${cart.cart_idx }"></td>
       <td><img src="upload/${cart.product_img }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
       <td>${cart.product_name }</td>
       <td>${cart.product_brand }</td>
@@ -282,9 +282,9 @@ function w3_close() {
 <!-- 체크박스에 따른 금액변동 처리 -->
 <script type="text/javascript">
 
-if($("#cartCheckBox").is(":checked") == true){
-	alert("true");
-}
+// if($("#cartCheckBox").is(":checked") == true){
+// 	alert("true");
+// }
 
 
 
@@ -293,7 +293,7 @@ if($("#cartCheckBox").is(":checked") == true){
 // 	let check = $("#cartCheckBox").val();
 // 		$.ajax({
 // 				type: "get",
-// 				url: "CartPlusPro.ca",
+// 				url: "CartMinusPro.ca",
 // 				data: {
 // 					cart_idx: check
 // 				},
@@ -303,6 +303,37 @@ if($("#cartCheckBox").is(":checked") == true){
 // 				}
 // 			});
 // });
+
+$("input[name='cartCheckBox']").click(function() {
+	//체크박스의 체크 여부를 판별
+	var isChecked = $("#cartCheckBox").is(":checked");
+	//배열 선언
+	let listArr = new Array();
+	let list = $("input[name='cartCheckBox']:checked");
+	//listArr에 각 체크박스의 값을 넣음
+	for(var i=0; i<list.length; i++){
+		if(list[i].checked){
+			listArr.push(list[i].value);
+		}
+	//onchange를 통해 변경된 idx 값 가져오기
+	$("input[name='cartCheckBox']:checked").change(function(){
+		alert(listArr[i] 값이 변경되었습니다.);
+	}
+			
+// 	var product_idx = listArr[i].val();
+// 	alert(product_idx);
+			
+			
+			
+// 	for(int i=0; i<listArr.length; i++){
+		
+// 	}
+	
+// 	 var product_idx = $("input[name='cartCheckBox']").val();
+// 	 alert(product_idx);
+
+});
+	
 
 
 //ajax 사용
@@ -342,6 +373,7 @@ if($("#cartCheckBox").is(":checked") == true){
 		
 // 	}
 // });
+
 	
 // }
 
