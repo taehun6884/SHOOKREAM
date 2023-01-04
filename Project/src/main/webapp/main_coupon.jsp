@@ -83,6 +83,36 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	float: right;
 }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<script type="text/javascript">
+
+function downCoupon(){
+	var checkLogin = '<%=(String)session.getAttribute("sId")%>';
+	
+	if( checkLogin == "null"){
+		alert("로그인 후 이용 가능합니다.");
+		location.href="LoginMember.me";
+		
+	}else {
+		
+		$.ajax({
+			type: "post", 
+			url: "CouponDownPro.po", 
+			data: { 
+				member_idx: '${sessionScope.member_idx}',
+				coupon_content: $("#coupon_content").val()
+			},	
+			dataType: "html", 
+			success: function(data) { 
+				alert("쿠폰이 발급되었습니다");
+			}, 
+			error: function(xhr, textStatus, errorThrown) {
+				alert("쿠폰 발급 실패"); 
+			}
+		});
+	}
+}
+</script>
 </head>
 <body class="w3-content" style="max-width:1200px" >
 
@@ -125,48 +155,28 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	
 	
   <!-- Product grid -->
-<div class="w3-row w3-grayscale">
+<div class="w3-row w3-grayscale" style="padding-bottom: 500px" >
 		<c:forEach var="couponList" items="${couponList }">
-			<div class="w3-col l3 s6">
-				<div class="w3-container">
-							<div class="w3-display-container">
-								<img src="../images/coupon_5000.png" alt="..." style="width: 100%">
+			<div class="w3-col l3 s6" >
+				<div class="w3-container" >
+							<div class="w3-display-container"  >
+								<img src="images/coupon.png" alt="..." style="width:100%">
 								<div class="w3-display-middle w3-display-hover">
-									<button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList.product_idx }&member_idx=${sessionScope.member_idx }'">
-										다운로드 <i class="fa-regular fa-circle-down"></i>
+									<button class="w3-button w3-black" onclick="downCoupon()">
+									다운로드 <i class="fa-regular fa-circle-down"></i>
 									</button>
 								</div>
 							</div>
-							<p id="product_brand" >${couponList.coupon_name }</p>
-<%-- 							<p id="product_name" >${productBestList.product_name }<br></p> --%>
-							
-<!-- 							<div id="price"> -->
-<%-- 							<c:choose> --%>
-<%-- 								<c:when test="${productBestList.product_discount_price gt 0}"> --%>
-<!-- 									<span> -->
-<%-- <%-- 									<c:set var="discounted_price" value="${productBestList.product_price - (productBestList.product_price * productBestList.product_discount_price) }"/> --%> --%>
-<%-- <%-- 									<c:out value="${discounted_price}" /> --%> --%>
-<%-- 										<fmt:formatNumber value="${productBestList.product_price - (productBestList.product_price * (productBestList.product_discount_price/100)) }" pattern="#,###" /> --%>
-<!-- 									</span> -->
-<!-- 									<span id="product_price"> -->
-<%-- 									<fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></span> --%>
-<%-- 									<span id="product_discount_price" ><fmt:formatNumber value="${productBestList.product_discount_price }" pattern="" />%</span> --%>
-<%-- 								</c:when> --%>
-<%-- 								<c:otherwise> --%>
-<%-- 									<span><fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></span> --%>
-<%-- 								</c:otherwise> --%>
-<%-- 							</c:choose> --%>
-<!-- 							</div> -->
+							<div>
+							<span id="product_brand" >${couponList.coupon_name }</span>
+							<span id="product_discount_price" ><fmt:formatNumber value="${couponList.coupon_price }" pattern="#,###" /> 원 할인</span>
+							<input type="hidden" id="coupon_content" value="${couponList.coupon_content }">
+							</div>
 							
 						</div>
 					</div>
 				</c:forEach>
 			</div>
-		
-
-	<!-- 최근 등록 상품 조회 -->
-  
-   	 
    	 </div>
   <!-- footer -->
 <%--     <jsp:include page="./inc/footer.jsp"/> --%>

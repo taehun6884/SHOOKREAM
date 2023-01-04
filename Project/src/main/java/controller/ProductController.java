@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.CouponDeleteProAction;
+import action.CouponDownProAction;
 import action.CouponInsertProAction;
 import action.CouponListProAction;
 import action.CouponMainListProAction;
@@ -84,7 +85,7 @@ public class ProductController extends HttpServlet{
 		}else if(command.equals("/CouponInsertPro.po")) {//Coupon 등록 작업
 			action = new CouponInsertProAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/CouponList.po")) {//Coupon 등록 작업
+		}else if(command.equals("/CouponList.po")) {// 관리자 쿠폰 리스트
 			action = new CouponListProAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/CouponModifyForm.po")) { //coupon 정보 수정 창
@@ -101,12 +102,12 @@ public class ProductController extends HttpServlet{
 			forward = action.execute(request, response);
 		}else if(command.equals("/CouponListForm.po")) {
 			action = new MemberCouponListProAction();
-		}else if(command.equals("/CouponDownloadForm.po")) { //관리자 쿠폰 등록 폼 
-			forward = new ActionForward();
-			forward.setPath("main_coupon.jsp");
-			forward.setRedirect(false);
+			forward = action.execute(request, response);
 		}else if(command.equals("/CouponMainList.po")) { //coupon 메인 목록
 			action = new CouponMainListProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/CouponDownPro.po")) { //coupon 발급
+			action = new CouponDownProAction();
 			forward = action.execute(request, response);
 		}
 			
