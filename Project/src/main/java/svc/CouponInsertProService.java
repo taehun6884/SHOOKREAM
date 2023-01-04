@@ -30,5 +30,28 @@ public class CouponInsertProService {
 		
 		return insertCoupon;
 	}
+
+	public boolean DownCoupon(int member_idx, String coupon_content) {
+		boolean insertCoupon = false;
+		
+		Connection con = JdbcUtil.getConnection();
+		
+		ProductDAO dao = ProductDAO.getInstance();
+		
+		dao.setConnection(con);
+		
+		int insertCount = dao.memberDownCoupon(member_idx, coupon_content);
+		
+		if(insertCount > 0) { // 성공 시
+			JdbcUtil.commit(con);
+			insertCoupon = true;
+		} else { // 실패 시
+			JdbcUtil.rollback(con);
+		}
+		
+		JdbcUtil.close(con);
+		
+		return insertCoupon;
+	}
 	
 }
