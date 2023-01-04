@@ -10,6 +10,15 @@ public class CouponBean {
 	private String coupon_start;
 	private String coupon_end;
 	private Date coupon_date;
+	private int coupon_isUse;
+	
+	
+	public int getCoupon_isUse() {
+		return coupon_isUse;
+	}
+	public void setCoupon_isUse(int coupon_isUse) {
+		this.coupon_isUse = coupon_isUse;
+	}
 	public int getCoupon_idx() {
 		return coupon_idx;
 	}
@@ -52,14 +61,12 @@ public class CouponBean {
 	public void setCoupon_date(Date coupon_date) {
 		this.coupon_date = coupon_date;
 	}
-	
-	
 	@Override
 	public String toString() {
 		return "CouponBean [coupon_idx=" + coupon_idx + ", coupon_name=" + coupon_name + ", coupon_price="
 				+ coupon_price + ", coupon_content=" + coupon_content + ", coupon_start=" + coupon_start
-				+ ", coupon_end=" + coupon_end + ", coupon_date=" + coupon_date + "]";
+				+ ", coupon_end=" + coupon_end + ", coupon_date=" + coupon_date + ", coupon_isUse=" + coupon_isUse
+				+ "]";
 	}
-	
 	
 }

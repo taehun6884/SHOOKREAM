@@ -15,6 +15,8 @@ import action.CouponInsertProAction;
 import action.CouponListProAction;
 import action.CouponModifyFormAction;
 import action.CouponModifyProAction;
+import action.MemberCouponListProAction;
+import action.OrderDetailProAtion;
 import action.OrderListProAction;
 import action.OrderProAction;
 import action.ProductDeleteProAction;
@@ -91,6 +93,12 @@ public class ProductController extends HttpServlet{
 			forward = action.execute(request, response);
 		}else if(command.equals("/CouponDeletePro.po")) { //coupon 삭제 작업
 			action = new CouponDeleteProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/OrderDetailForm.po")) {
+			action = new OrderDetailProAtion();
+			forward = action.execute(request, response);
+		}else if(command.equals("/CouponListForm.po")) {
+			action = new MemberCouponListProAction();
 			forward = action.execute(request, response);
 		}
 	

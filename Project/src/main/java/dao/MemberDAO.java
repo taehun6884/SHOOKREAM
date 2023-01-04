@@ -270,6 +270,38 @@ private MemberDAO() {}
 		
 		return vo; 
 	} // 회원 목록 끝
+	public MemberBean getInfo(int idx) {
+		MemberBean vo = null;
+		ResultSet rs  = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "SELECT * FROM member WHERE member_idx=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new MemberBean();
+				vo.setMember_idx(rs.getInt("member_idx"));
+				vo.setMember_name(rs.getString("member_name"));
+				vo.setMember_id(rs.getString("member_id"));
+				vo.setMember_pass(rs.getString("member_pass"));
+				vo.setMember_address(rs.getString("member_address"));
+				vo.setMember_email(rs.getString("member_email"));
+				vo.setMember_phone(rs.getString("member_phone"));
+				System.out.println(vo);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return vo; 
+	} // 회원 목록 끝
 
 
 

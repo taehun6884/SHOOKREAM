@@ -1449,6 +1449,42 @@ private ProductDAO() {}
 			}
 			return coupon;
 		}
+		
+		// 사용자 쿠폰 조회
+		public List<CouponBean> selectUserCouponList(int member_idx) {
+			List<CouponBean> couponList = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT * FROM member_coupon where member_idx = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, member_idx);
+				rs = pstmt.executeQuery();
+				
+				couponList = new ArrayList<CouponBean>();
+				
+				while(rs.next()) {
+					CouponBean coupon = new CouponBean();
+					coupon.setCoupon_idx(rs.getInt("coupon_idx"));
+					coupon.setCoupon_name(rs.getString("coupon_name"));
+					coupon.setCoupon_price(rs.getInt("coupon_price"));
+					coupon.setCoupon_isUse(rs.getInt("isUse"));
+					coupon.setCoupon_start(rs.getString("coupon_start"));
+					coupon.setCoupon_end(rs.getString("coupon_end"));
+					couponList.add(coupon);
+				}
+			} catch (SQLException e) {
+				System.out.println("sql구문 - selectCouponList 오류");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return couponList;
+		}
+
 
 		// 쿠폰 수정 작업
 		public int updateCoupon(int coupon_idx, CouponBean coupon) {
@@ -1502,6 +1538,31 @@ private ProductDAO() {}
 			}
 			
 			return deleteCount;
+		}
+
+
+		public int CouponUsePrice(int idx) {
+			int Coupon_price = 0;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = "SELECT coupon_price FROM member_coupon where coupon_idx=?";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, idx);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					Coupon_price = rs.getInt(1);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(Coupon_price);
+			
+			return Coupon_price;
 		}
 
 	

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>로그인</title>
+<title>주문 상세 내용</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -58,7 +58,6 @@
 	
 	table th {
 		vertical-align : middle;
-		background-color: red;
 	}	
 	
 	}
@@ -101,19 +100,25 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <table class="table">
   <thead  class="table-dark" >
     <tr>
-      <th scope="col" colspan="8" style="text-align: center">주문 내역</th>
+      <th scope="col" colspan="6" style="text-align: center">주문 내역</th>
     </tr>
   </thead>
   <tbody>
+	     <tr>
+     		 <th>상품</th>
+     		 <th>상품이름</th>
+     		 <th>상품가격</th>
+     		 <th>수량</th>
+     		 <th>할인</th>
+     		 <th>할인 금액</th>
+    	</tr>
 	    <tr>
-	      <td><img src="../images/logo.jpg"  alt="없음!" class="img-thumbnail" width="100" height="100"></td>
-	      <td>상품이름</td>
-	      <td>250000 </td>
+	      <td><img src="upload/${image.image_main_file }"  alt="없음!" class="img-thumbnail" width="100" height="100"></td>
+	      <td>${product.product_name }</td>
+	      <td>${product.product_price }</td>
 	      <td>1</td>
-	      <td>-</td>
-	      <td>0</td>
-	      <td>29000</td>
-	      <td>무료배송</td>
+	      <td>${product.product_discount_price }</td>
+	      <td>${product.product_price }</td>
 	    </tr>
 	  </tbody>
 	</table>
@@ -121,7 +126,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	  <table class="table">
 	  <thead>
 	    <tr>
-	      <th scope="col" colspan="8" style="font-size: x-large;">할인 해택</th>
+	      <th scope="col" colspan="6" style="font-size: x-large;">할인 해택</th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -130,12 +135,12 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	    	<p style="font: bold; font-size: large; text-align: center;">
 	    	사용 가능한 쿠폰(0장) 중 (0장)의 쿠폰이 적용되었습니다.
 	    	</p>
-	    	<button type="button" class="btn btn-light" style="  margin:auto; display:block;">내가 보유한 쿠폰 보러가기</button>
+	    	<button type="button" class="btn btn-light" style="  margin:auto; display:block;" onclick="CouponCheck()">내가 보유한 쿠폰 보러가기</button>
 	    	</td>
 	   </tr>
 	   <tr>
-		<th  colspan="2">상품 할인쿠폰</th>
-		<td colspan="6" style="margin-left:500px;">0원 할인</td>
+		<th colspan="2">상품 할인쿠폰</th>
+		<td colspan="6" style="margin-left:500px;">${param.coupon_price }원 할인</td>
 	   </tr>
 	   <tr>
 	    <th colspan="2">이포인트</th>
@@ -222,6 +227,16 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
+<script type="text/javascript">
+function CouponCheck() {
+	let url = "CouponListForm.po?member_idx="+${sessionScope.member_idx};  // 테스트용 파라미터임!
+	let name = "Coupon List";
+	let attr = "width=900, height=600, top=200, left=510"
+
+	window.open(url, name, attr);
+}
+
+</script>
 <script type="text/javascript">
 	function order() {
 		

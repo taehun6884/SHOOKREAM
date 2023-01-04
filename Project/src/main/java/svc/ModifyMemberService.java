@@ -42,6 +42,18 @@ public class ModifyMemberService {
 		return member2;
 	}
 	
+	public MemberBean getMemberInfo(int idx) {
+		MemberBean member2 = null;
+		
+		Connection con = JdbcUtil.getConnection();
+		MemberDAO dao = MemberDAO.getInstance();
+		dao.setConnection(con);
+		
+		member2 = dao.getInfo(idx);
+		
+		return member2;
+	}
+	
   public boolean isRightUser(MemberBean member) {
 		boolean isRightUser = false;
 		
