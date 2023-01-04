@@ -98,17 +98,17 @@
 		<section id="buttonArea" style="text-align:center">
 			<form action="BoardList.bo">
 				<input type="text" name="keyword">
-				<input type="submit" value="검색">
+				<input type="submit" value="검색" class="btn btn-dark btn-sm">
 			</form>
 		</section>
 		<br>
 		<section id="pageList" style="text-align:center">
 			<c:choose>
 				<c:when test="${pageNum > 1}">
-					<input type="button" class="btn btn-outline-secondary btn-sm" value="이전" onclick="location.href='BoardList.bo?pageNum=${pageNum - 1}'">
+					<input type="button" class="btn btn-dark btn-sm" value="이전" onclick="location.href='BoardList.bo?pageNum=${pageNum - 1}'">
 				</c:when>
 				<c:otherwise>
-					<input type="button" class="btn btn-outline-secondary btn-sm" value="이전">
+					<input type="button" class="btn btn-dark btn-sm" value="이전">
 				</c:otherwise>
 			</c:choose>
 				
@@ -128,10 +128,10 @@
 			<!-- 현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 [다음] 링크 동작 -->
 			<c:choose>
 				<c:when test="${pageNum < pageInfo.maxPage}">
-					<input type="button" value="다음" class="btn btn-outline-secondary btn-sm" onclick="location.href='BoardList.?pageNum=${pageNum + 1}'">
+					<input type="button" value="다음" class="btn btn-dark btn-sm" onclick="location.href='BoardList.?pageNum=${pageNum + 1}'">
 				</c:when>
 				<c:otherwise>
-					<input type="button" class="btn btn-outline-secondary btn-sm" value="다음">
+					<input type="button" class="btn btn-dark btn-sm" value="다음">
 				</c:otherwise>
 			</c:choose>
 		</section>	
