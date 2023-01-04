@@ -24,5 +24,21 @@ public class CouponListService {
 		
 		return couponList;
 	}
+	
+	public List<CouponBean> MemberCouponList(int member_idx) {
+		List<CouponBean> couponList = null;
+		
+		Connection con = JdbcUtil.getConnection();
+		
+		ProductDAO dao = ProductDAO.getInstance();
+		
+		dao.setConnection(con);
+		
+		couponList = dao.selectUserCouponList(member_idx);
+		
+		JdbcUtil.close(con);
+		
+		return couponList;
+	}
 
 }

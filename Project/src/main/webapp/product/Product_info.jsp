@@ -324,7 +324,7 @@ margin-left: 270PX;
 		
 		<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${member_idx}'">
 
-			<button onclick="iamport()">구매하기</button>
+			<button onclick="location.href='OrderDetailForm.po?member_idx=${sessionScope.member_idx}&product_idx=${param.product_idx}'">구매하기</button>
 		</div>
 	</section>
 
