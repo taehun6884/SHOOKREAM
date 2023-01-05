@@ -1588,11 +1588,13 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT coupon_name, coupon_price, coupon_start, coupon_end "
+				String sql = "SELECT coupon_name, coupon_price, coupon_start, coupon_end, coupon_content "
 						+ "FROM coupon WHERE coupon_content LIKE ? ORDER BY coupon_price ASC";
 				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+coupon_content+"%");
+				
+				System.out.println(pstmt);
 				
 				rs = pstmt.executeQuery();
 				
@@ -1604,6 +1606,7 @@ private ProductDAO() {}
 					coupon.setCoupon_price(rs.getInt("coupon_price"));
 					coupon.setCoupon_start(rs.getString("coupon_start"));
 					coupon.setCoupon_end(rs.getString("coupon_end"));
+					coupon.setCoupon_end(rs.getString("coupon_content"));
 					
 					couponList.add(coupon);
 //					System.out.println(couponList);
@@ -1639,6 +1642,7 @@ private ProductDAO() {}
 				pstmt= con.prepareStatement(sql);
 				pstmt.setString(1, "%"+coupon_content+"%");
 				rs = pstmt.executeQuery();
+//				System.out.println("쿠폰 다운 검색: " + pstmt);
 				
 				if(rs.next()) {
 					coupon_idx = rs.getInt(1);
@@ -1657,7 +1661,7 @@ private ProductDAO() {}
 				pstmt2.setInt(4, coupon_price);
 				pstmt2.setString(5, coupon_start);
 				pstmt2.setString(6, coupon_end);
-//				System.out.println(pstmt2);
+				System.out.println(pstmt2);
 				insertCount = pstmt2.executeUpdate();
 				
 			} catch (SQLException e) {

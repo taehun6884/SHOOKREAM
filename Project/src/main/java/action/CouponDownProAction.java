@@ -22,7 +22,7 @@ public class CouponDownProAction implements Action {
 		
 		CouponInsertProService servie = new CouponInsertProService();
 		boolean isSuccess = servie.DownCoupon(member_idx, coupon_content);
-		System.out.println(isSuccess);
+		System.out.println("쿠폰 지급 결과 : " + isSuccess);
 		
 		try {
 			if(isSuccess) {

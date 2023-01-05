@@ -25,7 +25,7 @@ public class CouponMainListProAction implements Action {
 		request.setAttribute("couponList", couponList);
 		
 		forward = new ActionForward();
-		forward.setPath("main_coupon.jsp?coupon_content="+coupon_content);
+		forward.setPath("CouponMainList.po?coupon_content="+coupon_content);
 		forward.setRedirect(false);
 		
 		return forward;
