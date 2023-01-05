@@ -110,7 +110,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <div class ="post-wrapper">
   	<div><img src="images/jeans.jpg" height="700" width="900" onclick="location.href=''"></div>
 <!--   	<div><a href="CouponMainList.po?coupon_content=banner_1"><img src="images/banner_1.jpg" height="700" width="900"></a></div> -->
-  	<div><img src="images/banner_1.jpg" height="700" width="900" onclick="couponDown()"></div>
+  	<div><img id="banner_1" src="images/banner_1.jpg"  style="cursor: pointer;" height="700" width="900" onclick="couponDown(this.id)"></div>
   	<div><img src="images/jeans1.jpg" height="700" width="900"></div>
   	<div><img src="images/섬네일(슈펜).jpg" height="700" width="900"></div>
   	<div><img src="images/logo.png" height="700" width="900"></div>
@@ -216,20 +216,16 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- footer -->
 <%--     <jsp:include page="./inc/footer.jsp"/> --%>
 <script>
-// function couponDown() {
-// 	let url = "CouponMainList.po?member_idx="+${sessionScope.member_idx}+"&coupon_content=banner_1"; 
-// 	let name = "Coupon List";
-// 	let attr = "width=900, height=600, top=200, left=510"
 
-// 	window.open(url, name, attr);
-// }
 
-function couponDown() {
-	let url = "CouponMainList.po?member_idx="+${sessionScope.member_idx}+"&coupon_content=banner_1";  // 테스트용 파라미터임!
+function couponDown(coupon_content) {
+	
+	let url = "CouponMainList.po?member_idx="+${sessionScope.member_idx}+"&coupon_content="+coupon_content;  // 테스트용 파라미터임!
 	let name = "Coupon List";
 	let attr = "width=250, height=280, top=200, left=510"
-
+		
 	window.open(url, name, attr);
+	
 }
 
 // Accordion 

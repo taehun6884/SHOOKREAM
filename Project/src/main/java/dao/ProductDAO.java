@@ -10,6 +10,7 @@ import db.JdbcUtil;
 import java.util.List;
 import db.JdbcUtil;
 import vo.CouponBean;
+import vo.MemberCouponBean;
 import vo.OrderBean;
 import vo.ProductBean;
 import vo.ReviewBean;
@@ -1673,6 +1674,49 @@ private ProductDAO() {}
 				JdbcUtil.close(pstmt2);
 			}
 			return insertCount;
+		}
+
+		// 멤버 쿠폰 조회
+		public MemberCouponBean selectMemberCoupon(String coupon_content, int member_idx) {
+			MemberCouponBean member_coupon = null;
+			
+			ResultSet rs  = null;
+			PreparedStatement pstmt = null;
+			
+			try {
+				String sql = "SELECT c.coupon_content"
+						+ " FROM shookream.member_coupon m join shookream.coupon c"
+						+ " on m.coupon_idx = c.coupon_idx"
+						+ " WHERE coupon_content LIKE ? AND member_idx=?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+coupon_content+"%");
+				pstmt.setInt(2, member_idx);
+				System.out.println(pstmt);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					member_coupon = new MemberCouponBean();
+//					member_coupon.setMember_idx(rs.getInt("member_idx"));
+//					member_coupon.setCoupon_idx(rs.getInt("coupon_idx"));
+//					member_coupon.setCoupon_price(rs.getInt("coupon_price"));
+//					member_coupon.setCoupon_name(rs.getString("coupon_name"));
+					member_coupon.setCoupon_content(rs.getString("coupon_content"));
+//					member_coupon.setCoupon_start(rs.getString("coupon_start"));
+//					member_coupon.setCoupon_end(rs.getString("coupon_end"));
+//					member_coupon.setCoupon_isUse(rs.getInt("isUse"));
+					
+					System.out.println("member_coupon : " + member_coupon);
+				}
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - selectMemberCoupon()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return member_coupon;
 		}
 	
 }//DAO 끝

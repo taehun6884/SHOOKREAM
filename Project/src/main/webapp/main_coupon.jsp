@@ -95,6 +95,7 @@ function downCoupon(){
 			success: function(data) { 
 // 				alert("쿠폰이 발급되었습니다");
 				$(".coupon").html('<img id="coupondown" alt="" src="images/coupon_down.png" style="width: 300px;"/>');
+				$("#btnDown").attr("disabled", true);
 			}, 
 			error: function(xhr, textStatus, errorThrown) {
 				alert("쿠폰 발급 실패"); 
@@ -131,14 +132,26 @@ function downCoupon(){
 			<div class="w3-col l3 s6" style="width: 320px">
 				<div class="w3-container" >
 							<div class="w3-display-container"  >
-								<span class="coupon">
-								<img src="images/coupon.png" alt="..." style="width:300px">
-								</span>
-								<div class="w3-display-middle w3-display-hover">
-									<button class="w3-button w3-black" onclick="downCoupon()">
+							
+							<c:choose>
+								<c:when test="${member_coupon.coupon_content eq couponList.coupon_content }">
+									<span class="coupon">
+									<img src="images/coupon_down.png" alt="..." style="width:300px">
+									</span>
+								</c:when>
+								<c:otherwise>
+									<span class="coupon">
+									<img src="images/coupon.png" alt="..." style="width:300px">
+									</span>
+									<div class="w3-display-middle w3-display-hover">
+									<button id="btnDown" class="w3-button w3-black" onclick="downCoupon()">
 									다운로드 <i class="fa-regular fa-circle-down"></i>
 									</button>
-								</div>
+									</div>
+								</c:otherwise>
+							</c:choose>
+							
+								
 							</div>
 							<div>
 							<span id="product_brand" >${couponList.coupon_name }</span>
