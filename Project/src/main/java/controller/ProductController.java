@@ -97,10 +97,10 @@ public class ProductController extends HttpServlet{
 		}else if(command.equals("/CouponDeletePro.po")) { //coupon 삭제 작업
 			action = new CouponDeleteProAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/OrderDetailForm.po")) {
+		}else if(command.equals("/OrderDetailForm.po")) { // 주문 상세 페이지
 			action = new OrderDetailProAtion();
 			forward = action.execute(request, response);
-		}else if(command.equals("/CouponListForm.po")) {
+		}else if(command.equals("/CouponListForm.po")) { // 회원 쿠폰 리스트
 			action = new MemberCouponListProAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/CouponMainList.po")) { //coupon 메인 목록

@@ -148,7 +148,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	   </tr>
 	   <tr>
 	   	<th colspan="2">할인된 가격</th>
-	   	<td colspan="6">3500000원</td>
+	   	<td colspan="6"><input type="text" id="totalprice">원</td>
 	   </tr>   
 	  </tbody>
 	</table>
@@ -207,10 +207,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	  </tbody>
 	</table>
 	    </div>
-	  
-
-
-
 <!-- Newsletter Modal -->
 <div id="newsletter" class="w3-modal">
   <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
@@ -225,9 +221,13 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </div>
 
 
+
+
+
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
 <script type="text/javascript">
+// alert(typeof(${product.product_price }));
 function CouponCheck() {
 	let url = "CouponListForm.po?member_idx="+${sessionScope.member_idx};  // 테스트용 파라미터임!
 	let name = "Coupon List";
@@ -239,11 +239,12 @@ function CouponCheck() {
 </script>
 <script src="../js/jquery-3.6.3.js"></script>
 <script type="text/javascript">
-	$("table").css({
-		border: "1px solid blue",
-		background: "lightgray"
+$(function(){
+	$("#priceValue").on("change",function(){
+		alert("한단계 성장중!");
 	});
 
+});
 
 </script>
 <script>

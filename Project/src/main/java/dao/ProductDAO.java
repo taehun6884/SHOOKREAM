@@ -1606,7 +1606,7 @@ private ProductDAO() {}
 					coupon.setCoupon_price(rs.getInt("coupon_price"));
 					coupon.setCoupon_start(rs.getString("coupon_start"));
 					coupon.setCoupon_end(rs.getString("coupon_end"));
-					coupon.setCoupon_end(rs.getString("coupon_content"));
+					coupon.setCoupon_content(rs.getString("coupon_content"));
 					
 					couponList.add(coupon);
 //					System.out.println(couponList);
@@ -1661,7 +1661,7 @@ private ProductDAO() {}
 				pstmt2.setInt(4, coupon_price);
 				pstmt2.setString(5, coupon_start);
 				pstmt2.setString(6, coupon_end);
-				System.out.println(pstmt2);
+//				System.out.println(pstmt2);
 				insertCount = pstmt2.executeUpdate();
 				
 			} catch (SQLException e) {
