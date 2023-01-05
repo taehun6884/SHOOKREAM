@@ -18,13 +18,14 @@ public class CouponMainListProAction implements Action {
 		ActionForward forward = null;
 		
 		String coupon_content = request.getParameter("coupon_content");
+		System.out.println("coupon_content : " + coupon_content);
 		
 		CouponMainListService service = new CouponMainListService();
 		List<CouponBean> couponList = service.getCouponMainList(coupon_content);
 		request.setAttribute("couponList", couponList);
 		
 		forward = new ActionForward();
-		forward.setPath("CouponDownloadForm.po?coupon_content="+coupon_content);
+		forward.setPath("main_coupon.jsp?coupon_content="+coupon_content);
 		forward.setRedirect(false);
 		
 		return forward;

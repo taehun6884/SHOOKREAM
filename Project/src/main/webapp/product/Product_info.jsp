@@ -322,9 +322,9 @@ margin-left: 270PX;
 			</c:choose>
 		</span>	
 		
-		<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${member_idx}'">
+		<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${member_idx}'" class="btn btn-dark btn-sm">
 
-			<button onclick="location.href='OrderDetailForm.po?member_idx=${sessionScope.member_idx}&product_idx=${param.product_idx}'">구매하기</button>
+			<button onclick="location.href='OrderDetailForm.po?member_idx=${sessionScope.member_idx}&product_idx=${param.product_idx}'" class="btn btn-dark btn-sm">구매하기</button>
 		</div>
 	</section>
 
@@ -366,7 +366,7 @@ margin-left: 270PX;
 							</tr>
 						</table>
 						<c:if test="${sessionScope.sId eq 'admin' || param.member_idx eq review.member_idx }" >
-							<input id="delBtn" type="button" value="리뷰 삭제하기" class="btn btn-sm btn-secondary" onclick="location.href='ReviewDeletePro.po?product_idx=${review.product_idx }&member_idx=${sessionScope.member_idx }&review_idx=${review.review_idx}'">
+							<input id="delBtn" type="button" value="리뷰 삭제하기" class="btn btn-dark btn-sm" onclick="location.href='ReviewDeletePro.po?product_idx=${review.product_idx }&member_idx=${sessionScope.member_idx }&review_idx=${review.review_idx}'">
 						</c:if>		
 					</c:forEach>
 				</div>

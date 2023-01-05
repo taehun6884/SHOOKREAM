@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.CouponDeleteProAction;
+import action.CouponDownProAction;
 import action.CouponInsertProAction;
 import action.CouponListProAction;
 import action.CouponMainListProAction;
 import action.CouponModifyFormAction;
 import action.CouponModifyProAction;
-import action.CouponUseProAction;
 import action.MemberCouponListProAction;
 import action.OrderDetailProAtion;
 import action.OrderListProAction;
@@ -74,6 +74,7 @@ public class ProductController extends HttpServlet{
 		}else if(command.equals("/ProductOrderList.po")) { //사용자 주문 상세 페이지
 			action = new OrderListProAction();
 			forward = action.execute(request, response);
+
 		} else if(command.equals("/ReviewDeletePro.po")) { // 리뷰 삭제 Pro
 			action = new ReviewDeleteProAction();
 			forward = action.execute(request, response);	
@@ -84,7 +85,7 @@ public class ProductController extends HttpServlet{
 		}else if(command.equals("/CouponInsertPro.po")) {//Coupon 등록 작업
 			action = new CouponInsertProAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/CouponList.po")) {//Coupon 등록 작업
+		}else if(command.equals("/CouponList.po")) {// 관리자 쿠폰 리스트
 			action = new CouponListProAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/CouponModifyForm.po")) { //coupon 정보 수정 창
@@ -96,18 +97,17 @@ public class ProductController extends HttpServlet{
 		}else if(command.equals("/CouponDeletePro.po")) { //coupon 삭제 작업
 			action = new CouponDeleteProAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/OrderDetailForm.po")) { // 주문상세 페이지
+		}else if(command.equals("/OrderDetailForm.po")) {
 			action = new OrderDetailProAtion();
 			forward = action.execute(request, response);
-		}else if(command.equals("/CouponListForm.po")) { // 회원 쿠폰 리스트
+		}else if(command.equals("/CouponListForm.po")) {
 			action = new MemberCouponListProAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/CouponDownloadForm.po")) { //관리자 쿠폰 등록 폼 
-			forward = new ActionForward();
-			forward.setPath("main_coupon.jsp");
-			forward.setRedirect(false);
 		}else if(command.equals("/CouponMainList.po")) { //coupon 메인 목록
 			action = new CouponMainListProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/CouponDownPro.po")) { //coupon 발급
+			action = new CouponDownProAction();
 			forward = action.execute(request, response);
 		}
 			
