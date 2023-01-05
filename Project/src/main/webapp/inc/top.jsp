@@ -1,7 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
+<style type="text/css">
+#logintvar {
+	font-size: 20px;
+	font-family: gothic;
+	text-decoration: none;
+	
+}
+
+#Demo{
+	font-size: 15px;
+}
+</style>    
 <header class="w3-container w3-xlarge">
 	<p class="w3-left"></p> <!-- 카테고리명 페이지마다 추가하기 -->
 	<p class="w3-right">
@@ -28,13 +39,13 @@
 		    		<a href="Admin.ad?id=${sessionScope.sId }" class="w3-bar-item w3-button">관리자 페이지</a>
 		    	</c:when>
 		    </c:choose>
-		     </div>
+		    </div>
 		  </div>
 		</i>
 		</c:when>
 		<c:otherwise>
 		<div class="w3-dropdown-click" id="logintvar">
-		<div><a href="LoginMember.me">login</a> | <a href="MemberJoinForm.me">join</a></div>
+		<div><a href="LoginMember.me">login</a>  <a href="MemberJoinForm.me">join</a></div>
 		</div>
 		</c:otherwise>
 	</c:choose>	

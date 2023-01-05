@@ -21,7 +21,7 @@
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
 </head>
-<body class="w3-content" style="max-width:1200px">
+<body class="w3-content">
 
 <!-- Sidebar/menu -->
 <jsp:include page="../inc/side.jsp"/>
