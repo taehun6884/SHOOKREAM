@@ -49,6 +49,7 @@ public class ProductInfoProAction implements Action {
 		int member_idx = service2.getMemberIdx(sId);
 		System.out.println("member_idx : " + member_idx);
 		
+		// 멤버 wish 저장하기
 		WishBean wish = service.getWishInfo(product_idx, member_idx);
 		
 		if(wish != null) {

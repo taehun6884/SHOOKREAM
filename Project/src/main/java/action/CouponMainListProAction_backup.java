@@ -12,9 +12,8 @@ import svc.ProductListService;
 import vo.ActionForward;
 import vo.CouponBean;
 import vo.ProductBean;
-import vo.WishBean;
 
-public class CouponMainListProAction implements Action {
+public class CouponMainListProAction_backup implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
@@ -34,13 +33,6 @@ public class CouponMainListProAction implements Action {
 		int member_idx = service2.getMemberIdx(sId);
 		System.out.println("member_idx : " + member_idx);
 		
-		WishBean wish = service.getWishInfo(coupon_content, member_idx);
-		
-		if(wish != null) {
-			request.setAttribute("wish", wish);
-		} else {
-			request.setAttribute("wish", null);
-		}
 		
 		forward = new ActionForward();
 		forward.setPath("main_coupon.jsp?coupon_content="+coupon_content);
