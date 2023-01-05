@@ -140,7 +140,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	   </tr>
 	   <tr>
 		<th colspan="2">상품 할인쿠폰</th>
-		<td colspan="6" style="margin-left:500px;">${param.coupon_price }원 할인</td>
+		<td colspan="6" style="margin-left:500px;"><input type="text" id="priceValue">원 할인</td>
 	   </tr>
 	   <tr>
 	    <th colspan="2">이포인트</th>
@@ -237,14 +237,15 @@ function CouponCheck() {
 }
 
 </script>
+<script src="../js/jquery-3.6.3.js"></script>
 <script type="text/javascript">
-	function order() {
-		
-	}
+	$("table").css({
+		border: "1px solid blue",
+		background: "lightgray"
+	});
 
 
 </script>
-
 <script>
 // Accordion 
 function myAccFunc() {

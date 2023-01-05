@@ -26,7 +26,7 @@
     <c:forEach var="coupon" items="${couponList }">
       <th scope="row">${coupon.coupon_idx }</th>
       <td>${coupon.coupon_name }</td>
-      <td>${coupon.coupon_price }</td>
+      <td id="price">${coupon.coupon_price }</td>
       <c:choose>
       	<c:when test="${coupon.coupon_isUse eq 0 }">
       	  <td>사용가능</td>
@@ -38,16 +38,17 @@
       <td>${coupon.coupon_start }</td>
       <td>${coupon.coupon_end }</td>
       <td>
-      <button type="button" class="btn btn-dark" id="useCoupon" onclick="useCoupon(${coupon.coupon_idx})">적용하기</button>
+      <button type="button" class="btn btn-dark" id="useCoupon" value="${coupon.coupon_price}" onclick="useCoupon()">적용하기</button>
      </c:forEach>
     </tr>
-  
   </tbody>
 </table>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript">
-	function useCoupon(price) {
-		location.href="CouponUseProAction.po?coupon_idx="+idx;
+	alert(typeof(window.opener.document.getElementById( "priceValue" ).value));
+	function useCoupon() {
+		 window.opener.document.getElementById( "priceValue" ).value = document.getElementById( "useCoupon" ).value;
+		 close();
 	}
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>

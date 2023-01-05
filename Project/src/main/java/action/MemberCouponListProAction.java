@@ -19,7 +19,7 @@ public class MemberCouponListProAction implements Action {
 		ActionForward forward = null;
 		
 		int member_idx = Integer.parseInt(request.getParameter("member_idx"));
-		
+		System.out.println(member_idx);
 		CouponListService service = new CouponListService();
 		List<CouponBean> couponList = new ArrayList<CouponBean>();
 		

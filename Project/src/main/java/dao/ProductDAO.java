@@ -1558,29 +1558,27 @@ private ProductDAO() {}
 			
 			return deleteCount;
 		}
+		
+		// 쿠폰 사용하기
 		public int CouponUsePrice(int idx) {
 			int Coupon_price = 0;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			
-			String sql = "SELECT coupon_price FROM member_coupon where coupon_idx=?";
-			
 			try {
+				String sql = "SELECT coupon_price FROM member_coupon where coupon_idx=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, idx);
 				rs = pstmt.executeQuery();
 				if(rs.next()) {
 					Coupon_price = rs.getInt(1);
 				}
-				
+				System.out.println(Coupon_price);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(Coupon_price);
-			
 			return Coupon_price;
-}
+		}
 		
 		// 메인 쿠폰 목록 조회
 		public List<CouponBean> selectCouponMainList(String coupon_content) {

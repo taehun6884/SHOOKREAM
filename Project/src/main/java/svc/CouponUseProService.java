@@ -15,9 +15,11 @@ public class CouponUseProService {
 		
 		dao.setConnection(con);
 		
-		dao.CouponUsePrice(idx);
+		coupon_price = dao.CouponUsePrice(idx);
 		
-		JdbcUtil.close(con);	
+		JdbcUtil.close(con);
+		
+		return coupon_price;
 	}
 
 }

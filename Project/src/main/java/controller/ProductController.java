@@ -16,6 +16,7 @@ import action.CouponListProAction;
 import action.CouponMainListProAction;
 import action.CouponModifyFormAction;
 import action.CouponModifyProAction;
+import action.CouponUseProAction;
 import action.MemberCouponListProAction;
 import action.OrderDetailProAtion;
 import action.OrderListProAction;
@@ -73,7 +74,6 @@ public class ProductController extends HttpServlet{
 		}else if(command.equals("/ProductOrderList.po")) { //사용자 주문 상세 페이지
 			action = new OrderListProAction();
 			forward = action.execute(request, response);
-
 		} else if(command.equals("/ReviewDeletePro.po")) { // 리뷰 삭제 Pro
 			action = new ReviewDeleteProAction();
 			forward = action.execute(request, response);	
@@ -96,11 +96,12 @@ public class ProductController extends HttpServlet{
 		}else if(command.equals("/CouponDeletePro.po")) { //coupon 삭제 작업
 			action = new CouponDeleteProAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/OrderDetailForm.po")) {
+		}else if(command.equals("/OrderDetailForm.po")) { // 주문상세 페이지
 			action = new OrderDetailProAtion();
 			forward = action.execute(request, response);
-		}else if(command.equals("/CouponListForm.po")) {
+		}else if(command.equals("/CouponListForm.po")) { // 회원 쿠폰 리스트
 			action = new MemberCouponListProAction();
+			forward = action.execute(request, response);
 		}else if(command.equals("/CouponDownloadForm.po")) { //관리자 쿠폰 등록 폼 
 			forward = new ActionForward();
 			forward.setPath("main_coupon.jsp");
