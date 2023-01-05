@@ -32,7 +32,7 @@
 		
 		</style>
 	</head>
-	<body class="w3-content" style="max-width:1200px">
+	<body class="w3-content" style="max-width:95%">
 	
 	<!-- Sidebar/menu -->
 	<jsp:include page="../inc/side.jsp"/>
@@ -56,15 +56,6 @@
 	  <jsp:include page="../inc/top.jsp"/>
 			<h3>자주묻는 질문</h3>
 			<hr style="border:solid 2px black;">
-			<select id="collectView" class="btn btn-sm dropdown-toggle" name="notice_category"> <%-- 카테고리 모아보기 --%>
-				<option selected>카테고리별 모아보기</option>
-				<option>교환/반품</option>
-				<option>회원정보</option>
-				<option>배송</option>
-				<option>주문/결제</option>
-				<option>서비스</option>
-			</select>
-			
 			<table class="table">
 			  <c:choose>
 					<c:when test="${empty param.pageNum }">
@@ -95,6 +86,11 @@
 			  </tbody>
 			 </c:forEach> 
 			</table>
+			<c:choose>
+		    	<c:when test="${sessionScope.sId eq 'admin' }">
+		    		<a href="AdminBoard.ad" class="w3-bar-item btn btn-dark btn-sm" style="float:right">게시판 관리하러가기</a>
+		    	</c:when>
+		    </c:choose>
 		<section id="buttonArea" style="text-align:center">
 			<form action="BoardList.bo">
 				<input type="text" name="keyword">

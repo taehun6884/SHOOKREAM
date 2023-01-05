@@ -235,7 +235,7 @@ margin-left: 270PX;
 //찜하기 취소
 </script>
 </head>
-<body class="w3-content" style="max-width:1200px">
+<body class="w3-content" style="max-width:95%">
 
 <!-- Sidebar/menu -->
 <jsp:include page="../inc/side.jsp"/>
