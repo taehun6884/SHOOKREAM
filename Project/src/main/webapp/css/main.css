@@ -62,9 +62,9 @@ b, strong {
 	font-weight: bolder
 }
 
-dfn {
-	font-style: italic
-}
+/* dfn { */
+/* 	font-style: italic */
+/* } */
 
 mark {
 	background: #ff0;
