@@ -677,13 +677,14 @@ private ProductDAO() {}
 					idx = rs.getInt(1) + 1;
 				}
 				
-				sql = "INSERT INTO orderlist VALUES(?,now(),?,?,?,?)";
+				sql = "INSERT INTO orderlist VALUES(?,now(),?,?,?,?,?)";
 				pstmt2 = con.prepareStatement(sql);
 				pstmt2.setInt(1,idx );
-				pstmt2.setString(2,vo.getOrder_category());
-				pstmt2.setString(3, vo.getOrder_progress());
-				pstmt2.setInt(4, vo.getOrder_member_idx());
-				pstmt2.setInt(5, vo.getOrder_product_idx());
+				pstmt2.setInt(2, vo.getOrder_product_price());
+				pstmt2.setString(3,vo.getOrder_category());
+				pstmt2.setString(4, vo.getOrder_progress());
+				pstmt2.setInt(5, vo.getOrder_member_idx());
+				pstmt2.setInt(6, vo.getOrder_product_idx());
 				insertOrder=pstmt2.executeUpdate();
 				
 				if(insertOrder >0) {
@@ -723,7 +724,7 @@ private ProductDAO() {}
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date,p.product_idx,p.product_size,p.product_color "
+			String sql="SELECT i.image_main_file,m.member_id,o.order_price,o.order_category,o.order_progress,o.order_date,p.product_idx,p.product_size,p.product_color "
 					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx "
 					+ "where m.member_idx=? "
@@ -740,7 +741,7 @@ private ProductDAO() {}
 					OrderBean vo = new OrderBean();
 					vo.setOrder_main_image(rs.getString("image_main_file"));
 					vo.setOrder_member_id(rs.getString("member_id"));
-					vo.setOrder_product_price(rs.getInt("product_price"));
+					vo.setOrder_product_price(rs.getInt("order_price"));
 					vo.setOrder_category(rs.getString("order_category"));
 					vo.setOrder_progress(rs.getString("order_progress"));
 					vo.setOrder_date(rs.getTimestamp("order_date"));

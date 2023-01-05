@@ -63,8 +63,6 @@ public class ProductController extends HttpServlet{
 		}else if(command.equals("/ProductModifyPro.po")) { //Product 정보 수정 pro
 			action = new ProductModifyProAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/ProductDeleteForm.po")) { //Product 삭제 창
-		
 		}else if(command.equals("/ProductDeletePro.po")) { //Product 삭제 pro
 			action = new ProductDeleteProAction();
 			forward= action.execute(request, response);
@@ -74,7 +72,9 @@ public class ProductController extends HttpServlet{
 		}else if(command.equals("/ProductOrderList.po")) { //사용자 주문 상세 페이지
 			action = new OrderListProAction();
 			forward = action.execute(request, response);
-
+		}else if(command.equals("/OrderDeletePro.po")) { //사용자 주문 상세 페이지 삭제
+			action = new OrderListProAction();
+			forward = action.execute(request, response);
 		} else if(command.equals("/ReviewDeletePro.po")) { // 리뷰 삭제 Pro
 			action = new ReviewDeleteProAction();
 			forward = action.execute(request, response);	

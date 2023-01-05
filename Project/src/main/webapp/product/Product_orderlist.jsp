@@ -130,7 +130,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <td>${order.order_product_color }</td>
       <td><fmt:formatDate value="${order.order_date }" pattern="yyyy-MM-DD"/></td>
 	  <td><input type="button" value="리뷰 작성하기" class="btn btn-dark" onclick="reviewForm(${order.order_product_idx },'${order.order_product_size }','${order.order_product_color }')">
-      <button type="button" class="btn btn-dark" onclick="location.href='OrderListDelete.po'">삭제</button></td>
+      <button type="button" class="btn btn-dark" onclick="deleteOrder(${order.order_idx})">삭제</button></td>
     </tr>
     </c:forEach>
   </tbody>
@@ -195,6 +195,16 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
 <script>
+//주문리스트 삭제
+function deleteOrder(idx){
+	let result =  confirm("삭제 하시겠습니까?");
+	if(result){
+		location.href="";
+	}
+}
+
+
+
 // Accordion 
 function myAccFunc() {
   var x = document.getElementById("demoAcc");

@@ -22,8 +22,8 @@
     </tr>
   </thead>
   <tbody>
+   <c:forEach var="coupon" items="${couponList }">
     <tr>
-    <c:forEach var="coupon" items="${couponList }">
       <th scope="row">${coupon.coupon_idx }</th>
       <td>${coupon.coupon_name }</td>
       <td id="price">${coupon.coupon_price }</td>
@@ -38,18 +38,20 @@
       <td>${coupon.coupon_start }</td>
       <td>${coupon.coupon_end }</td>
       <td>
-      <button type="button" class="btn btn-dark" id="useCoupon" value="${coupon.coupon_price}" onclick="useCoupon()">적용하기</button>
-     </c:forEach>
+      <button type="button" class="btn btn-dark" id="useCoupon" value="${coupon.coupon_price}" onclick="useCoupon(${coupon.coupon_price})">적용하기</button>
     </tr>
+     </c:forEach>
   </tbody>
 </table>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript">
-	alert(typeof(window.opener.document.getElementById( "priceValue" ).value));
-	function useCoupon() {
-		 window.opener.document.getElementById( "priceValue" ).value = document.getElementById( "useCoupon" ).value;
+	function useCoupon(price) {
+		 window.opener.document.getElementById( "priceValue" ).value = price;
+		 window.opener.document.getElementById( "totalprice" ).value =Number(${param.product_price})-Number(price);	
 		 close();
 	}
+	
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>

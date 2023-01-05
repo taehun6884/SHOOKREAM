@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import svc.CouponUseProService;
 import vo.ActionForward;
 
-public class CouponUseProAction implements Action {
+public class CouponResultAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
