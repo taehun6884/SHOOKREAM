@@ -57,9 +57,7 @@ public class MemberLoginMemberProAction implements Action {
 			session.setAttribute("sId", id);
 			session.setAttribute("member_idx", vo.getMember_idx());
 			
-//				if(wish != null) {
-//					session.setAttribute("wish", wish);
-//				}
+
 			
 			forward = new ActionForward();
 			forward.setPath("./");

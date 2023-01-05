@@ -27,7 +27,17 @@
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 <script type="text/javascript">
-
+// $(function() {
+// 	$('.post-wrapper').slick({
+// 		  dots: true,
+// 		  infinite: true,
+// 		  autoplay: true,
+// 		  autoplaySpeed: 2000,
+// 		  slidesToShow: 1,
+// 		  adaptiveHeight: true
+// 		});
+				
+// });
 
 </script>
 <style>
@@ -42,6 +52,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 #main_category{
 	text-align: center;
+	padding-top: 50px;
 	padding-bottom: 60px;
 	font-size: x-large;
 }
@@ -93,9 +104,8 @@ function downCoupon(){
 			},	
 			dataType: "html", 
 			success: function(data) { 
-// 				alert("쿠폰이 발급되었습니다");
-				$(".coupon").html('<img id="coupondown" alt="" src="images/coupon_down.png" style="width: 300px;"/>');
-				$("#btnDown").attr("disabled", true);
+				alert("쿠폰이 발급되었습니다");
+				$("#coupon").html('<img id="coupondown" alt="" src="images/coupon_down.png" onclick="addWish()" style="width: 100%;"/>');
 			}, 
 			error: function(xhr, textStatus, errorThrown) {
 				alert("쿠폰 발급 실패"); 
@@ -105,53 +115,58 @@ function downCoupon(){
 }
 </script>
 </head>
-<body class="w3-content" style="max-width:95%" >
+<body class="w3-content" style="max-width:1200px" >
 
 <!-- Sidebar/menu -->
+<jsp:include page="./inc/side.jsp"/>
 
 <!-- Top menu on small screens -->
+<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
+  <div class="w3-bar-item w3-padding-24 w3-wide">SHOOKREAM</div>
+  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+</header>
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px;">
+<div class="w3-main" style="margin-left:250px">
 
   <!-- Push down content on small screens -->
-  <div class="w3-hide-large" ></div>
+  <div class="w3-hide-large" style="margin-top:83px"></div>
   
+  <!-- Top header -->
+  <jsp:include page="./inc/top.jsp"/>
+  <br>
+
+  <!-- ./images header -->
+  <div class ="post-wrapper">
+<!--   	<div><img src="images/jeans.jpg" height="700" width="900" onclick="location.href=''"></div> -->
+  	<div><img src="images/${param.coupon_content }.jpg" height="700" width="900"></div>
+  
+  </div>
+<!--   <div class="w3-container w3-text-grey" id="jeans"> -->
+<!--     <p>BEST</p> -->
+<!--   </div> -->
 
 	<div id="main_category">
 		<p>Coupon Download</p>
+<!-- 		<img src="images/coupon_5000.png" alt="..." style="width: 500px"> -->
 	</div>
 	
 	
   <!-- Product grid -->
-<div class="w3-row w3-grayscale"  >
+<div class="w3-row w3-grayscale" style="padding-bottom: 500px" >
 		<c:forEach var="couponList" items="${couponList }">
-			<div class="w3-col l3 s6" style="width: 320px">
+			<div class="w3-col l3 s6" >
 				<div class="w3-container" >
 							<div class="w3-display-container"  >
-							
-							<c:choose>
-								<c:when test="${member_coupon.coupon_content eq couponList.coupon_content }">
-									<span class="coupon">
-									<img src="images/coupon_down.png" alt="..." style="width:300px">
-									</span>
-								</c:when>
-								<c:otherwise>
-									<span class="coupon">
-									<img src="images/coupon.png" alt="..." style="width:300px">
-									</span>
-									<div class="w3-display-middle w3-display-hover">
-									<button id="btnDown" class="w3-button w3-black" onclick="downCoupon()">
+								<img src="images/coupon.png" id="coupon" alt="..." style="width:100%">
+								<div class="w3-display-middle w3-display-hover">
+									<button class="w3-button w3-black" onclick="downCoupon()">
 									다운로드 <i class="fa-regular fa-circle-down"></i>
 									</button>
-									</div>
-								</c:otherwise>
-							</c:choose>
-							
-								
+								</div>
 							</div>
 							<div>
 							<span id="product_brand" >${couponList.coupon_name }</span>
@@ -165,6 +180,7 @@ function downCoupon(){
 			</div>
    	 </div>
   <!-- footer -->
+<%--     <jsp:include page="./inc/footer.jsp"/> --%>
 <script>
 // Accordion 
 function myAccFunc() {
@@ -189,7 +205,17 @@ function myAccFunc1() {
 document.getElementById("myBtn").click();
 
 
-
+// Open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+</script>
 <!-- Channel Plugin Scripts -->
 <script>
   (function() {
@@ -232,7 +258,30 @@ document.getElementById("myBtn").click();
   });
 </script>
 
-
+<!-- 로그인 드롭다운 기능! -->
+<script>
+	function myFunction() {
+	  var x = document.getElementById("Demo");
+	  if (x.className.indexOf("w3-show") == -1) { 
+	    x.className += " w3-show";
+	  } else {
+	    x.className = x.className.replace(" w3-show", "");
+	  }
+	}
+</script>
+<!-- 네이버 아이디 로그인 -->
+<script type="text/javascript">
+  var naver_id_login = new naver_id_login("nSNLHIW18gDjrrJsFDeE", "http://localhost:8080/Project/index.jsp");
+  // 접근 토큰 값 출력
+//   alert(naver_id_login.oauthParams.access_token);
+  // 네이버 사용자 프로필 조회
+  naver_id_login.get_naver_userprofile("naverSignInCallback()");
+  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+  function naverSignInCallback() {
+    alert(naver_id_login.getProfileData('email'));
+  }
+</script>
+<!-- End Channel Plugin -->
 
 
 
