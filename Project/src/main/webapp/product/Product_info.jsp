@@ -86,7 +86,7 @@ margin-left: 270PX;
 }
 
 .reviewContent { 
-	width : 900px;
+	width : 100%;
 	height: 150px; 
 }
 
@@ -370,24 +370,7 @@ margin-left: 270PX;
 						</c:if>		
 					</c:forEach>
 				</div>
-				<section id="pageList" style="text-align:center">				
-			<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
-			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
-				<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
-				<c:choose>
-					<c:when test="${pageNum eq i}">
-						${i }
-					</c:when>
-					<c:otherwise>
-						<a href="${i }">${i }</a>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-		</section>	
-		</div> 	
-	
-
- main
+				
     <!-- 
 <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
    -->
