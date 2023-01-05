@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import svc.CartInsertProService;
 import vo.ActionForward;
+import vo.cartBean;
 
 public class CartInsertProAction implements Action {
 
@@ -17,14 +18,22 @@ public class CartInsertProAction implements Action {
 		
 		int product_idx = Integer.parseInt(request.getParameter("product_idx"));
 		int member_idx = Integer.parseInt(request.getParameter("member_idx"));
-		int cart_price = Integer.parseInt(request.getParameter("cart_price")); // 카트에 담을 상품 가격 가져오기
+		//장바구니 정보 담는 객체 생성
+		cartBean cart = new cartBean();
+		cart.setCart_price(Integer.parseInt(request.getParameter("cart_price")));
+		cart.setCart_count(Integer.parseInt(request.getParameter("cart_count")));
+		cart.setCart_product_name(request.getParameter("cart_product_name"));
+		cart.setCart_size(request.getParameter("cart_size"));
+		cart.setCart_color(request.getParameter("cart_color"));
 		
-		System.out.println("product_idx" + product_idx+"member_idx" +member_idx+ "cart_price" + cart_price);
+		
+		System.out.println("product_idx= " + product_idx+"member_id= " +member_idx);
+		System.out.println(cart);
 		
 		
 		CartInsertProService service = new CartInsertProService();
 		
-		boolean result = service.InsertCart(product_idx,member_idx, cart_price);
+		boolean result = service.InsertCart(product_idx,member_idx, cart);
 		
 		if(result == false) {
 			response.setContentType("text/html; charset=UTF-8");
@@ -50,7 +59,7 @@ public class CartInsertProAction implements Action {
 			}
 			
 			forward = new ActionForward();
-			forward.setPath("./CartList.ca?member_idx="+member_idx+"&product_idx="+product_idx);
+			forward.setPath("./");
 			forward.setRedirect(true);
 		}
 		

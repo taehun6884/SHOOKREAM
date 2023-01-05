@@ -34,8 +34,7 @@ public class CartListProAction implements Action{
 			CartListProService service = new CartListProService();
 			List<ProductBean> cartlist = service.getCartlist(member_idx,startRow,listLimit);
 			
-			int minusTotal = service.CartMinusTotal(member_idx);
-			
+			//합계 가격
 			int total = service.CartTotalPrice(member_idx);
 			
 //			int total = service.CartTotalPrice(member_idx, product_idx);

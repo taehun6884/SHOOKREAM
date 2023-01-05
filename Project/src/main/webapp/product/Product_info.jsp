@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +63,17 @@ font-weight: 900px;
 font-size: 15px;
 font-weight: bold;
 
-}    
+}
+#discountResult{
+font-size: 20px;
+font-style: italic;
+white-space : nowrap
+}
+
+#product_price{
+font-size: 20px;
+font-style: italic;
+}
 
 #detail_table{
 border:1px;
@@ -258,44 +269,58 @@ margin-left: 270PX;
 		</div>
 	</section>
 	<!-- 상품 사진 옆 -->
+	
 	<section id="detail" >
+	<form action="CartInsertPro.ca?product_idx=${param.product_idx }&member_idx=${member_idx}" method="post">
+		<input type="hidden" id="product_idx" value="${param.product_idx }">
+		<input type="hidden" id="member_idx" value="${member_idx }">
+		<input type="hidden" name ="cart_discountprice" value="${product.product_discount_price }">
+		<input type="hidden" name ="cart_price" value="${product.product_price }">
+		<input type="hidden" name ="cart_product_name" value="${product.product_name }">
+		<!-- 상품 브랜드, 이름, 번호 -->
 		<div class="text" > 
 			<p>${product.product_brand}</p>
 			<p class ="prod_name">${product.product_name }</p>
-			<p>상품번호 : ${product.product_idx }</p>			
+			<p>상품번호 : ${product.product_idx }</p>		
+			<hr>	
 		</div>
+		<!-- 상품 선택(고객) -->
 		<div id="detail1">
-			<p class="prod_title">가격</p>
-			<p>${product.product_price }</p>
+			<p class="prod_title">상품금액</p>
+			<p id ="product_price"><fmt:formatNumber value="${product.product_price }" pattern="#,###원"></fmt:formatNumber></p>
+			<!-- 할인가격 표시 -->
+			<p class ="prod_title">판매가 (${product.product_discount_price}% 할인적용)</p> 
+			<p id ="discountResult"></p>
+			<p id ="nodiscountResult"></p>
+			
 			<hr>
-			<p class="prod_title">판매수</p>
-			<p>${product.product_sell_count }</p>
-			<hr>
-			<p class="prod_title">좋아요 </p>
-			<hr>
-			<p class="prod_title">구매후기(별점) </p>
-			<hr>
+		<!-- 색상 -->
 			<p class="prod_title">색상</p>
-			<select name="product_color">
-				<option selected>색깔</option>
-
+			<select name="cart_color" required="required">
+				<option selected>색상을 선택해주세요.</option>
 				<c:forEach var="color" items="${colorlist}">
-				<option value="color">${color }</option>
+				<option >${color }</option>
 				</c:forEach>
 			</select>
 			<hr>
 		</div>
 		<div id="detail2" >
-			<p>사이즈</p>
-			<select name="product_size">
-				<option selected>사이즈</option>
+		<!-- 사이즈 -->
+			<p class ="prod_title">사이즈</p>
+			<select name="cart_size" required="required">
+				<option selected>사이즈를 선택해주세요.</option>
 				<c:forEach var="category" items="${categorylist}">
 				<option value="${category}">${category}</option>
 				</c:forEach>
 			</select>
 			<hr>
-			<input type="hidden" id="product_idx" value="${product.product_idx }">
-			<input type="hidden" id="product_price" value="${product.product_price }">
+		<!-- 개수 -->
+			<p class ="prod_title">개수</p>
+			<span>
+				<span><input type="number" name="cart_count" value="1" size="1" max="${product.product_amount }" required="required"></span>
+			</span>
+			
+			<hr>
 		<span id="wishLoad">
 			<c:choose>
 				<c:when test="${wish.product_idx eq product.product_idx }">
@@ -311,10 +336,10 @@ margin-left: 270PX;
 			</c:choose>
 		</span>	
 		
-		<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${member_idx}&cart_price=${product.product_price}'">
-
-			<button onclick="iamport()">구매하기</button>
+		<input type="submit" value="장바구니">
+		<button onclick="iamport()">구매하기</button>
 		</div>
+	</form>
 	</section>
 
   </div>
@@ -566,6 +591,30 @@ function iamport(){
 		    
 		});
 	}
+	
+	
+</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+	//상품가격의 값 가져오기.
+	var originPrice = ${product.product_price}
+	//할인율 값 가져오기. 
+	var discountRate = ${product.product_discount_price}
+ 	
+	//-----할인 연산결과에 따른 처리-----
+	//1. 할인가격
+    var discounted = Math.round(originPrice * (discountRate / 100));	// 정수로 출력하기 위해 소수점 아래 반올림 처리
+    //2. 할인된 가격 = 원래가격 - 할인가격
+    var releasePrice = originPrice - discounted;
+    //** 콤마 붙힌 가격 변수 ** 
+    var commaReleasePrice = releasePrice.toLocaleString("en-US");
+    var commaOriginPrice = originPrice.toLocaleString("en-US");
+    document.querySelector('#discountResult').innerText = commaReleasePrice + '원'
+		 
+// 	    alert("로딩")
+	});
+
+
 </script>
 
 <script type="text/javascript">

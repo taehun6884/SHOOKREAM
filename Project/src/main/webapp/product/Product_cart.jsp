@@ -89,17 +89,17 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
    
   <!-- Footer -->
   <footer class="w3-padding-64 w3-small w3-center" id="footer">
+	<h3>장바구니</h3>
   <table class="table">
   <thead  class="table-dark" >
     <tr>
-      <th scope="col">번호</th>
       <th scope="col">선택</th>
       <th scope="col">image</th>
       <th scope="col">name</th>
       <th scope="col">brand</th>
       <th scope="col">price</th>
       <th scope="col">size</th>
-      <th scope="col">개수</th>
+      <th scope="col">수량</th>
       <th scope="col">delete</th>
     </tr>
   </thead>
@@ -107,14 +107,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     
     <c:forEach var="cart" items="${cartlist }">
     <tr>
-      <th scope="row">${cart.cart_idx }</th>
-	  <td><input type="checkbox" class ="cartCheckBox" id="cartCheckBox" name ="cartCheckBox" checked="checked" value="${cart.cart_idx }"></td>
+      <!-- 체크박스 -->
+	  <td><input type="checkbox" class ="cartCheckBox" id="cartCheckBox" name ="cartCheckBox" checked="checked" value="${cart.cart_idx }"></td> 
       <td><img src="upload/${cart.product_img }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
       <td>${cart.product_name }</td>
       <td>${cart.product_brand }</td>
 	  <td><fmt:formatNumber value="${cart.product_price }" pattern="#,###"></fmt:formatNumber></td>
       <td>${cart.product_size }</td>
-      <td>${cart.product_amount }</td>
+      <td>${cart.cart_count }</td>
       <td>
       <button type="button" class=	"btn btn-dark" onclick="location.href='ProductInfoForm.po?product_idx=${cart.product_idx }'">상세내용</button>
       <button type="button" class="btn btn-dark" onclick="location.href='CartDeletePro.ca?cart_idx=${cart.cart_idx }'">삭제</button>
@@ -304,9 +304,11 @@ function w3_close() {
 // 			});
 // });
 
-$("input[name='cartCheckBox']").click(function() {
-	//체크박스의 체크 여부를 판별
-	var isChecked = $("#cartCheckBox").is(":checked");
+
+//페이지 로딩 시 체크된 상품을 배열로 넣음.
+$(function() {
+	
+// 	var isChecked = $("#cartCheckBox").is(":checked");
 	//배열 선언
 	let listArr = new Array();
 	let list = $("input[name='cartCheckBox']:checked");
@@ -314,11 +316,20 @@ $("input[name='cartCheckBox']").click(function() {
 	for(var i=0; i<list.length; i++){
 		if(list[i].checked){
 			listArr.push(list[i].value);
+		}else{
+			listArr.pop(list[i].value);
 		}
-	//onchange를 통해 변경된 idx 값 가져오기
-	$("input[name='cartCheckBox']:checked").change(function(){
-		alert(listArr[i] 값이 변경되었습니다.);
+		
 	}
+});
+
+$("input[name='cartCheckBox']").click(function() {
+	//체크박스의 체크 여부를 판별
+		
+// 	//onchange를 통해 변경된 idx 값 가져오기
+// 	$("input[name='cartCheckBox']:checked").change(function(){
+// 		alert(listArr[i] 값이 변경되었습니다.);
+// 	)};
 			
 // 	var product_idx = listArr[i].val();
 // 	alert(product_idx);

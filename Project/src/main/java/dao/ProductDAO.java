@@ -13,6 +13,7 @@ import vo.OrderBean;
 import vo.ProductBean;
 import vo.ReviewBean;
 import vo.WishBean;
+import vo.cartBean;
 import vo.imageBean;
 
 
@@ -195,7 +196,7 @@ private ProductDAO() {}
 				product.setProduct_exp(rs.getString("product_exp"));
 				product.setProduct_detail_exp(rs.getString("product_detail_exp"));
 				product.setProduct_color(rs.getString("product_color"));
-				product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+				product.setProduct_discount_price(rs.getInt("product_discount_price"));
 //				product.setProduct_img(rs.getString("product_img"));
 				product.setProduct_date(rs.getTimestamp("product_date"));
 //				System.out.println(product);
@@ -245,7 +246,7 @@ private ProductDAO() {}
 //				product.setProduct_exp(rs.getString("product_exp"));
 //				product.setProduct_detail_exp(rs.getString("product_detail_exp"));
 				product.setProduct_color(rs.getString("product_color"));
-//				product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+//				product.setProduct_discount_price(rs.getInt("product_discount_price"));
 				product.setProduct_img(rs.getString("image_main_file"));
 				product.setProduct_date(rs.getTimestamp("product_date"));
 				
@@ -262,9 +263,9 @@ private ProductDAO() {}
 	}
 	
 	//----------------장바 구니----------------------
-		public int CartInsert(int product_idx, int member_idx, int cart_price) {
+		public int CartInsert(int product_idx, int member_idx, cartBean cart) {
 			int CartInsert = 0;
-			PreparedStatement pstmt1,pstmt2 = null;
+			PreparedStatement pstmt1 = null,pstmt2 = null;
 			ResultSet rs = null;
 			
 			try {
@@ -278,17 +279,24 @@ private ProductDAO() {}
 				}
 				System.out.println(cart_idx);
 		 //--------------------장바구니 등록--------------------------------		
-			sql = "INSERT INTO cart VALUES(?,?,?,now(),?)";	
+			sql = "INSERT INTO cart VALUES(?,?,?,now(),?,?,?,?,?)";	
 			pstmt2 = con.prepareStatement(sql);
 			pstmt2.setInt(1, cart_idx);
 			pstmt2.setInt(2, member_idx);	
 			pstmt2.setInt(3, product_idx);
-			pstmt2.setInt(4, cart_price); //
+			pstmt2.setInt(4, cart.getCart_price()); 
+			pstmt2.setInt(5, cart.getCart_count()); 
+			pstmt2.setString(6, cart.getCart_size()); 
+			pstmt2.setString(7, cart.getCart_color()); 
+			pstmt2.setString(8, cart.getCart_product_name()); 
 			
 			CartInsert = pstmt2.executeUpdate();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt2);
+				JdbcUtil.close(pstmt1);
 			}
 			
 			return CartInsert;
@@ -301,7 +309,7 @@ private ProductDAO() {}
 			 PreparedStatement pstmt =  null;
 			 ResultSet rs = null;
 				
-			 String sql ="SELECT c.cart_idx,p.product_name, p.product_size, p.product_price,p.product_brand,i.image_main_file,m.member_id,p.product_idx "
+			 String sql ="SELECT c.cart_idx, p.product_name, p.product_size, p.product_price,p.product_brand,i.image_main_file,m.member_id,p.product_idx "
 			 		+ "FROM shookream.cart c join shookream.product p join shookream.image i join shookream.member m "
 			 		+ "on c.product_idx = p.product_idx and c.product_idx = i.product_idx and c.member_idx = m.member_idx "
 			 		+ "where m.member_idx=? "
@@ -530,7 +538,7 @@ private ProductDAO() {}
 //					product.setProduct_exp(rs.getString("product_exp"));
 //					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
 //					product.setProduct_color(rs.getString("product_color"));
-					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					product.setProduct_discount_price(rs.getInt("product_discount_price"));
 					product.setProduct_img(rs.getString("image_main_file"));
 //					product.setProduct_date(rs.getTimestamp("product_date"));
 					
@@ -578,7 +586,7 @@ private ProductDAO() {}
 //					product.setProduct_exp(rs.getString("product_exp"));
 //					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
 //					product.setProduct_color(rs.getString("product_color"));
-					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					product.setProduct_discount_price(rs.getInt("product_discount_price"));
 					product.setProduct_img(rs.getString("image_main_file"));
 					product.setProduct_date(rs.getTimestamp("product_date"));
 					
@@ -632,7 +640,7 @@ private ProductDAO() {}
 //					product.setProduct_exp(rs.getString("product_exp"));
 //					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
 //					product.setProduct_color(rs.getString("product_color"));
-					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					product.setProduct_discount_price(rs.getInt("product_discount_price"));
 					product.setProduct_img(rs.getString("image_main_file"));
 //					product.setProduct_date(rs.getTimestamp("product_date"));
 					
@@ -687,7 +695,7 @@ private ProductDAO() {}
 //					product.setProduct_exp(rs.getString("product_exp"));
 //					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
 //					product.setProduct_color(rs.getString("product_color"));
-					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					product.setProduct_discount_price(rs.getInt("product_discount_price"));
 					product.setProduct_img(rs.getString("image_main_file"));
 //					product.setProduct_date(rs.getTimestamp("product_date"));
 					
@@ -745,7 +753,7 @@ private ProductDAO() {}
 //					product.setProduct_exp(rs.getString("product_exp"));
 //					product.setProduct_detail_exp(rs.getString("product_detail_exp"));
 //					product.setProduct_color(rs.getString("product_color"));
-//					product.setProduct_discount_price(rs.getDouble("product_discount_price"));
+//					product.setProduct_discount_price(rs.getInt("product_discount_price"));
 					product.setProduct_img(rs.getString("image_main_file"));
 //					product.setProduct_date(rs.getTimestamp("product_date"));
 					
@@ -1136,7 +1144,7 @@ private ProductDAO() {}
 					bean.setProduct_color(rs.getString("product_color"));
 					bean.setProduct_exp(rs.getString("product_exp"));
 					bean.setProduct_detail_exp(rs.getString("product_detail_exp"));
-					bean.setProduct_discount_price(rs.getDouble("product_discount_price"));
+					bean.setProduct_discount_price(rs.getInt("product_discount_price"));
 					bean.setProduct_img(rs.getString("product_img"));
 					
 				}

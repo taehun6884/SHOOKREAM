@@ -17,7 +17,7 @@ private int product_sell_count; // 상품 판매수
 private String product_exp; // 상품 요약설명
 private String product_detail_exp; // 상품 상세설명
 private String product_color; // 상품 색상 카테고리
-private double product_discount_price; // 상품 할인율
+private int product_discount_price; // 상품 할인율
 private String product_img; // 메인 사진
 private String product_img2; // 추가 사진1
 private String product_img3; // 추가 사진2
@@ -101,10 +101,10 @@ public String getProduct_color() {
 public void setProduct_color(String product_color) {
 	this.product_color = product_color;
 }
-public double getProduct_discount_price() {
+public int getProduct_discount_price() {
 	return product_discount_price;
 }
-public void setProduct_discount_price(double product_discount_price) {
+public void setProduct_discount_price(int product_discount_price) {
 	this.product_discount_price = product_discount_price;
 }
 public String getProduct_img() {
