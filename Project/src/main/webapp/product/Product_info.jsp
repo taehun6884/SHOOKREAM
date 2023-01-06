@@ -274,9 +274,10 @@ margin-left: 270PX;
 	<form action="CartInsertPro.ca?product_idx=${param.product_idx }&member_idx=${member_idx}" method="post">
 		<input type="hidden" id="product_idx" value="${param.product_idx }">
 		<input type="hidden" id="member_idx" value="${member_idx }">
-		<input type="hidden" name ="cart_discountprice" value="${product.product_discount_price }">
 		<input type="hidden" name ="cart_price" value="${product.product_price }">
+		<input type="hidden" name ="cart_discountprice" value="${product.product_discount_price }">
 		<input type="hidden" name ="cart_product_name" value="${product.product_name }">
+		<input type="hidden" name ="cart_product_image" value="${image.image_main_file }">
 		<!-- 상품 브랜드, 이름, 번호 -->
 		<div class="text" > 
 			<p>${product.product_brand}</p>
@@ -317,7 +318,7 @@ margin-left: 270PX;
 		<!-- 개수 -->
 			<p class ="prod_title">개수</p>
 			<span>
-				<span><input type="number" name="cart_count" value="1" size="1" max="${product.product_amount }" required="required"></span>
+				<span><input type="number" name="cart_count" value="1" max="${product.product_amount }" required="required" style="width: 50px"></span>
 			</span>
 			
 			<hr>

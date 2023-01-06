@@ -2,15 +2,39 @@ package vo;
 
 
 public class cartBean {
-
-	private int cart_price;
-	private int cart_count;
-	private String cart_size;
-	private String cart_color;
-	private String cart_product_name;
+	
+	private int member_idx; 
+	private int product_idx; 
+	private int cart_idx; 
+	private int cart_price;//hidden
+	private int cart_discount_price; //hidden
+	private int cart_count; //hidden
+	private String cart_size; //select
+	private String cart_color; //select
+	private String cart_product_name; //hidden
+	private String cart_product_image; //hidden
 	
 	
 	//-------setter, getter--------
+
+	public int getMember_idx() {
+		return member_idx;
+	}
+	public void setMember_idx(int member_idx) {
+		this.member_idx = member_idx;
+	}
+	public int getProduct_idx() {
+		return product_idx;
+	}
+	public void setProduct_idx(int product_idx) {
+		this.product_idx = product_idx;
+	}
+	public int getCart_idx() {
+		return cart_idx;
+	}
+	public void setCart_idx(int cart_idx) {
+		this.cart_idx = cart_idx;
+	}
 	public String getCart_color() {
 		return cart_color;
 	}
@@ -36,18 +60,35 @@ public class cartBean {
 	public void setCart_price(int cart_price) {
 		this.cart_price = cart_price;
 	}
+	public int getCart_discount_price() {
+		return cart_discount_price;
+	}
+	public void setCart_discount_price(int cart_discount_price) {
+		this.cart_discount_price = cart_discount_price;
+	}
 	public String getCart_product_name() {
 		return cart_product_name;
 	}
 	public void setCart_product_name(String cart_product_name) {
 		this.cart_product_name = cart_product_name;
 	}
+	public String getCart_product_image() {
+		return cart_product_image;
+	}
+	public void setCart_product_image(String cart_product_image) {
+		this.cart_product_image = cart_product_image;
+	}
 	//-----------------toString--------------------
 	@Override
 	public String toString() {
-		return "cartBean [cart_price=" + cart_price + ", cart_count=" + cart_count + ", cart_size=" + cart_size
-				+ ", cart_color=" + cart_color + ", cart_product_name=" + cart_product_name + "]";
+		return "cartBean [cart_idx=" + cart_idx + ", cart_price=" + cart_price + ", cart_discount_price="
+				+ cart_discount_price + ", cart_count=" + cart_count + ", cart_size=" + cart_size + ", cart_color="
+				+ cart_color + ", cart_product_name=" + cart_product_name + ", cart_product_image=" + cart_product_image
+				+ "]";
 	}
+
+
+
 
 
 

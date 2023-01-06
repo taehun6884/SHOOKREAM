@@ -7,11 +7,12 @@ import dao.BoardDAO;
 import dao.ProductDAO;
 import db.JdbcUtil;
 import vo.ProductBean;
+import vo.cartBean;
 
 public class CartListProService {
 
-	public List<ProductBean> getCartlist(int member_idx, int startRow, int listLimit) {
-		List<ProductBean> cartlist = null;
+	public List<cartBean> getCartlist(int member_idx, int startRow, int listLimit) {
+		List<cartBean> cartlist = null;
 		Connection con = JdbcUtil.getConnection();
 		
 		ProductDAO dao = ProductDAO.getInstance();

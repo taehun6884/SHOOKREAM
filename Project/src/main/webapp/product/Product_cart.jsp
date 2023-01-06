@@ -23,6 +23,15 @@
           display: inline-block;
           text-align: center;
         }
+.td_cart{
+	font-size: 14px;
+	text-align: center;
+	vertical-align : middle;
+}
+
+.th_cart{
+	font-size: 16px;
+}
 </style>
 <style type="text/css">
 #table, {
@@ -90,33 +99,38 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- Footer -->
   <footer class="w3-padding-64 w3-small w3-center" id="footer">
 	<h3>장바구니</h3>
-  <table class="table">
+  <table class="table" border ="3">
   <thead  class="table-dark" >
     <tr>
-      <th scope="col">선택</th>
-      <th scope="col">image</th>
-      <th scope="col">name</th>
-      <th scope="col">brand</th>
-      <th scope="col">price</th>
-      <th scope="col">size</th>
-      <th scope="col">수량</th>
-      <th scope="col">delete</th>
+      <th scope="col" class ="th_cart">선택</th>
+      <th scope="col" class ="th_cart"colspan="2">상품명</th>
+<!--       <th scope="col">상품명</th> -->	
+      <th scope="col"  class ="th_cart">상품금액</th>
+      <th scope="col"  class ="th_cart">할인금액</th>
+      <th scope="col"  class ="th_cart">주문금액</th>
+      <th scope="col"  class ="th_cart">수량</th>
+      <th scope="col"  class ="th_cart">배송정보</th>
+      <th scope="col"  class ="th_cart">삭제</th>
     </tr>
   </thead>
   <tbody>
     
-    <c:forEach var="cart" items="${cartlist }">
+    <c:forEach var="cart" items="${cartlist }" varStatus="status">
     <tr>
       <!-- 체크박스 -->
-	  <td><input type="checkbox" class ="cartCheckBox" id="cartCheckBox" name ="cartCheckBox" checked="checked" value="${cart.cart_idx }"></td> 
-      <td><img src="upload/${cart.product_img }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
-      <td>${cart.product_name }</td>
-      <td>${cart.product_brand }</td>
-	  <td><fmt:formatNumber value="${cart.product_price }" pattern="#,###"></fmt:formatNumber></td>
-      <td>${cart.product_size }</td>
-      <td>${cart.cart_count }</td>
-      <td>
-      <button type="button" class=	"btn btn-dark" onclick="location.href='ProductInfoForm.po?product_idx=${cart.product_idx }'">상세내용</button>
+	  <td class ="td_cart"><input type="checkbox" class ="cartCheckBox" id="cartCheckBox${status.index }" name ="cartCheckBox" checked="checked" value="${cart.cart_idx }" onclick="removeCheck(this)"></td> 
+      <td><a href="ProductInfoForm.po?product_idx=${cart.product_idx }"><img src="upload/${cart.cart_product_image }"  alt="없음!" class="img-thumbnail" width="150" height="150" ></a></td>
+      <td class ="td_cart">${cart.cart_product_name }<br>색상 : ${cart.cart_color }</td>
+	  <td class ="td_cart"><fmt:formatNumber value="${cart.cart_price }" pattern="#,###"></fmt:formatNumber>원</td>
+      <td class ="td_cart">할인금액 예정</td>
+      <td class ="td_cart">주문금액 예정</td>
+      <td class ="td_cart">
+      <input type="number" value="${cart.cart_count }" style="width: 35px">
+      <br>
+      <button>변경</button>
+      </td>
+      <td class ="td_cart">무료배송</td>
+      <td class ="td_cart">
       <button type="button" class="btn btn-dark" onclick="location.href='CartDeletePro.ca?cart_idx=${cart.cart_idx }'">삭제</button>
       </td>
     </tr>
@@ -307,29 +321,37 @@ function w3_close() {
 
 //페이지 로딩 시 체크된 상품을 배열로 넣음.
 $(function() {
-	
-// 	var isChecked = $("#cartCheckBox").is(":checked");
-	//배열 선언
 	let listArr = new Array();
 	let list = $("input[name='cartCheckBox']:checked");
-	//listArr에 각 체크박스의 값을 넣음
 	for(var i=0; i<list.length; i++){
+		//체크된 상품이 있으면 배열에 넣음.
 		if(list[i].checked){
 			listArr.push(list[i].value);
-		}else{
-			listArr.pop(list[i].value);
 		}
-		
+		//listArr에 들어간 상황
 	}
+	
+	
 });
 
-$("input[name='cartCheckBox']").click(function() {
+
+function removeCheck(cb) {
+// 	alert(cb.id);
+// 	let checkNum = cb.id.replace("cartCheckBox", ""); // id값의 index값을 가져옴
+	let checkNum = cb.value; // id값의 index값을 가져옴
+	alert(checkNum);
+// 	let checkNum2 = $("#checkNum").val();
+// 	alert(checkNum);//cartCheckbox0 / 1 / 2 
+// 	alert(checkNum.value);
+	if(checkNum == true){
+		alert("성공");
+	}else{
+		alert("실패");
+	}
+	
 	//체크박스의 체크 여부를 판별
-		
 // 	//onchange를 통해 변경된 idx 값 가져오기
-// 	$("input[name='cartCheckBox']:checked").change(function(){
-// 		alert(listArr[i] 값이 변경되었습니다.);
-// 	)};
+	
 			
 // 	var product_idx = listArr[i].val();
 // 	alert(product_idx);
@@ -343,7 +365,7 @@ $("input[name='cartCheckBox']").click(function() {
 // 	 var product_idx = $("input[name='cartCheckBox']").val();
 // 	 alert(product_idx);
 
-});
+}
 	
 
 
@@ -354,6 +376,8 @@ $("input[name='cartCheckBox']").click(function() {
 		
 // 	});
 // });
+
+
 
 
 
@@ -417,6 +441,25 @@ $("input[name='cartCheckBox']").click(function() {
 
 
 
+</script>
+<script type="text/javascript">
+
+
+ 	
+// 	//-----할인 연산결과에 따른 처리-----
+// 	//1. 할인가격
+//     var discounted = Math.round(originPrice * (discountRate / 100));	// 정수로 출력하기 위해 소수점 아래 반올림 처리
+//     //2. 할인된 가격 = 원래가격 - 할인가격
+//     var releasePrice = originPrice - discounted;
+//     //** 콤마 붙힌 가격 변수 ** 
+//     var commaReleasePrice = releasePrice.toLocaleString("en-US");
+//     var commaOriginPrice = originPrice.toLocaleString("en-US");
+//     var commaDiscounted = discounted.toLocaleString("en-US");
+//     //** 출력 ** 
+//     document.querySelector('#discount').innerText = commaDiscounted
+//     document.querySelector('#discountResult').innerText = commaReleasePrice
+		 
+// // 	    alert("로딩")
 </script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>

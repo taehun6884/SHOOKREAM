@@ -279,16 +279,18 @@ private ProductDAO() {}
 				}
 				System.out.println(cart_idx);
 		 //--------------------장바구니 등록--------------------------------		
-			sql = "INSERT INTO cart VALUES(?,?,?,now(),?,?,?,?,?)";	
+			sql = "INSERT INTO cart VALUES(?,?,?,now(),?,?,?,?,?,?,?)";	
 			pstmt2 = con.prepareStatement(sql);
 			pstmt2.setInt(1, cart_idx);
 			pstmt2.setInt(2, member_idx);	
 			pstmt2.setInt(3, product_idx);
 			pstmt2.setInt(4, cart.getCart_price()); 
-			pstmt2.setInt(5, cart.getCart_count()); 
-			pstmt2.setString(6, cart.getCart_size()); 
-			pstmt2.setString(7, cart.getCart_color()); 
-			pstmt2.setString(8, cart.getCart_product_name()); 
+			pstmt2.setInt(5, cart.getCart_discount_price()); 
+			pstmt2.setInt(6, cart.getCart_count()); 
+			pstmt2.setString(7, cart.getCart_size()); 
+			pstmt2.setString(8, cart.getCart_color()); 
+			pstmt2.setString(9, cart.getCart_product_name()); 
+			pstmt2.setString(10, cart.getCart_product_image()); 
 			
 			CartInsert = pstmt2.executeUpdate();
 			} catch (SQLException e) {
@@ -304,12 +306,12 @@ private ProductDAO() {}
 	
 	
 		//장바구니 리스트 출력
-		public List<ProductBean> getCartList(int member_idx, int startRow, int listLimit) {
-			 List<ProductBean> cartlist = null;
+		public List<cartBean> getCartList(int member_idx, int startRow, int listLimit) {
+			 List<cartBean> cartlist = null;
 			 PreparedStatement pstmt =  null;
 			 ResultSet rs = null;
 				
-			 String sql ="SELECT c.cart_idx, p.product_name, p.product_size, p.product_price,p.product_brand,i.image_main_file,m.member_id,p.product_idx "
+			 String sql ="SELECT c.cart_idx, c.cart_product_name, c.cart_product_image, c.cart_price, c.cart_discount_price, c.cart_color,c.cart_size, c.cart_count, c.member_idx, c.product_idx "
 			 		+ "FROM shookream.cart c join shookream.product p join shookream.image i join shookream.member m "
 			 		+ "on c.product_idx = p.product_idx and c.product_idx = i.product_idx and c.member_idx = m.member_idx "
 			 		+ "where m.member_idx=? "
@@ -321,16 +323,20 @@ private ProductDAO() {}
 				pstmt.setInt(2, startRow);
 				pstmt.setInt(3, listLimit);
 				rs = pstmt.executeQuery();
-				cartlist = new ArrayList<ProductBean>();
+				cartlist = new ArrayList<cartBean>();
+				
 				while(rs.next()) {
-					ProductBean vo = new ProductBean();
-					vo.setCart_idx(rs.getInt("cart_idx"));
-					vo.setProduct_name(rs.getString("product_name"));
-					vo.setProduct_size(rs.getNString("product_size"));
-					vo.setProduct_price(rs.getInt("product_price"));
-					vo.setProduct_brand(rs.getNString("product_brand"));
-					vo.setProduct_img(rs.getString("image_main_file"));
+					cartBean vo = new cartBean();
+					vo.setMember_idx(rs.getInt("member_idx"));
 					vo.setProduct_idx(rs.getInt("product_idx"));
+					vo.setCart_idx(rs.getInt("cart_idx"));
+					vo.setCart_price(rs.getInt("cart_price"));
+					vo.setCart_discount_price(rs.getInt("cart_discount_price"));
+					vo.setCart_count(rs.getInt("cart_count"));
+					vo.setCart_size(rs.getString("cart_size"));
+					vo.setCart_color(rs.getString("cart_color"));
+					vo.setCart_product_name(rs.getString("cart_product_name"));
+					vo.setCart_product_image(rs.getString("cart_product_image"));
 					cartlist.add(vo);
 				}
 			 } catch (SQLException e) {
