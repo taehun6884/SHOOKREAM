@@ -60,9 +60,6 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 	color: gray;
 }
 
-#price {
-	margin-bottom:20px;
-}
 
 #product_price {
 	text-decoration: line-through; 
@@ -166,7 +163,7 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 							<p id="product_brand" >${productBestList.product_brand }</p>
 							<p id="product_name" >${productBestList.product_name }<br></p>
 							
-							<div id="price">
+							<div id="price" style="margin-bottom: 0px">
 							<c:choose>
 								<c:when test="${productBestList.product_discount_price gt 0}">
 									<span>
@@ -183,7 +180,14 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 								</c:otherwise>
 							</c:choose>
 							</div>
-							
+							<div id="etcInfo" style="font-size: small; padding-bottom: 20px;">
+								<span>
+									구매 ${productBestList.product_sell_count } &nbsp;
+								</span>
+								<span>
+									<i class="fa-solid fa-heart" style="color:pink;"></i> ${productBestList.product_wishcount }
+								</span>
+							</div>
 						</div>
 					</div>
 				</c:forEach>
