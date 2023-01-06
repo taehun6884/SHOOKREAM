@@ -86,16 +86,18 @@ margin-left: 270PX;
 }
 
 .reviewContent { 
-	width : 900px;
+	width : 100%;
 	height: 150px; 
 }
 
-.reviewListArea {
-	padding: 20px;
+
+#imgSize {
+	width: 9em;
+	height: 9em;
 }
 
-#ex {
-	height: auto;
+#delBtn {
+	float: right;
 }
 
 </style>
@@ -233,7 +235,7 @@ margin-left: 270PX;
 //찜하기 취소
 </script>
 </head>
-<body class="w3-content" style="max-width:1200px">
+<body class="w3-content" style="max-width:95%">
 
 <!-- Sidebar/menu -->
 <jsp:include page="../inc/side.jsp"/>
@@ -321,9 +323,9 @@ margin-left: 270PX;
 			</c:choose>
 		</span>	
 		
-		<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${member_idx}'">
+		<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${member_idx}'" class="btn btn-dark btn-sm">
 
-			<button onclick="iamport()">구매하기</button>
+			<button onclick="location.href='OrderDetailForm.po?member_idx=${sessionScope.member_idx}&product_idx=${param.product_idx}'" class="btn btn-dark btn-sm">구매하기</button>
 		</div>
 	</section>
 
@@ -344,51 +346,32 @@ margin-left: 270PX;
 	</table>
 
 	<hr>	 <%-- 리뷰구역 --%> -->
-		<div class="reviewListArea" id="reviewListArea">
+		<div id="reviewListArea">
 			<h3>Review</h3>
-			<div class="reviewContent">
 				<div>
-					<table class="reviewContent">
-						<c:forEach var="review" items="${reviewList }">
-							<tr id="ex">
-								<td rowspan="5" width="25%"><img alt="review_img" src="./upload/${image.image_real_file1}" width="100px" ></td>
-								<td style="text-align:left;" width="60%" height="10%">상세 사이즈 및 색상 : ${review.re_order_detail }</td>							
-								<td style="text-align:left; " width="15%"><small>
+					<c:forEach var="review" items="${reviewList }">
+						<table class="reviewContent">
+							<tr>
+								<td rowspan="7" width="20%"><img id="imgSize" src="./upload/${review.review_real_img }" width="100px" ></td>
+								<td style="text-align:left;" width="65%"><small>상세 사이즈 및 색상 : ${review.re_order_detail }</small></td>							
+								<td style="text-align:left;" width="15%">
+									<small>
 									작성일 : ${review.review_date } <br>
  									주문자 : ${review.member_idx }<br>
  									</small>
- 									<c:if test="${sessionScope.sId eq 'admin' || param.member_idx eq review.member_idx }" >
- 										<br><br><input type="button" value="리뷰 삭제하기" class="btn btn-sm btn-secondary" onclick="location.href='ReviewDeletePro.po?product_idx=${review.product_idx }&member_idx=${sessionScope.member_idx }&review_idx=${review.review_idx}'">
- 									</c:if>
-								</td>							
+								</td>					
 							</tr>
 							<tr></tr>
 							<tr>
 								<td colspan="4" style="text-align:left"><br>${fn:replace(review.review_content, cn, br) }</td>
 							</tr>
-
-						</c:forEach>
-					</table>
+						</table>
+						<c:if test="${sessionScope.sId eq 'admin' || param.member_idx eq review.member_idx }" >
+							<input id="delBtn" type="button" value="리뷰 삭제하기" class="btn btn-dark btn-sm" onclick="location.href='ReviewDeletePro.po?product_idx=${review.product_idx }&member_idx=${sessionScope.member_idx }&review_idx=${review.review_idx}'">
+						</c:if>		
+					</c:forEach>
 				</div>
-				<section id="pageList" style="text-align:center">				
-			<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
-			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
-				<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
-				<c:choose>
-					<c:when test="${pageNum eq i}">
-						${i }
-					</c:when>
-					<c:otherwise>
-						<a href="${i }">${i }</a>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-		</section>	
-			</div>	
-		</div> 	
-	
-
- main
+				
     <!-- 
 <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
    -->

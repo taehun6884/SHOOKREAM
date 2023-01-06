@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
+import action.CheckAddrProAction;
 import action.CheckEmailAddrProAction;
 import action.FindMemberIdProAction;
 import action.FindMemberPassProAction;
@@ -22,7 +23,6 @@ import action.MemberLoginMemberProAction;
 import action.MemberLogoutProAction;
 import action.MemberModifyFormAction;
 import action.MemberModifyProAction;
-import action.ReportProAction;
 import action.ReviewWriteProAction;
 import svc.LoginMemberService;
 import vo.ActionForward;
@@ -111,14 +111,11 @@ public class MemberController extends HttpServlet{
 			action = new FindMemberPassProAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/CheckEmailAddress.me")) { // 이메일 인증
-			action = new CheckEmailAddrProAction();
+			action = new CheckAddrProAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/ReportAddProAction.me")) { 
-			action = new ReportProAction();
-			forward = action.execute(request, response);
-		}else if(command.equals("/ReportFormAction.me")) {
-			forward = new ActionForward();
-			forward.setPath("report/mail_form.jsp");
+		} else if(command.equals("/MemberMyPage.me")) {
+			forward = new ActionForward(); 
+			forward.setPath("member/my_page.jsp");
 			forward.setRedirect(false);
 		}
 		

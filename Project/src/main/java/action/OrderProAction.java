@@ -29,7 +29,7 @@ public class OrderProAction implements Action {
 			vo.setOrder_product_idx(Integer.parseInt(request.getParameter("product_idx")));
 			vo.setOrder_product_sell_count(Integer.parseInt(request.getParameter("product_sell_count")));
 			vo.setOrder_product_amount(Integer.parseInt(request.getParameter("product_amount")));
-			
+			vo.setOrder_product_price(Integer.parseInt(request.getParameter("product_price")));
 			System.out.println(vo);
 			
 			OrderProService service = new OrderProService();

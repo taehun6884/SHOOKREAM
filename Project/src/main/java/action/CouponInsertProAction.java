@@ -27,13 +27,15 @@ public class CouponInsertProAction implements Action {
 		String coupon_start = request.getParameter("coupon_start");
 		String coupon_end = request.getParameter("coupon_end");
 		
+//		System.out.println("coupon_end : ");
+		
 		
 		if(coupon_start.equals("") && coupon_end.equals("")) { // 사용시작일, 만료일 미설정시
 			coupon.setCoupon_start("0000-00-00");
 			coupon.setCoupon_end("0000-00-00");
 		} else {
-			coupon.setCoupon_start("coupon_start");
-			coupon.setCoupon_end("coupon_end");
+			coupon.setCoupon_start(coupon_start);
+			coupon.setCoupon_end(coupon_end);
 		}
 		
 		CouponInsertProService service = new CouponInsertProService();

@@ -32,7 +32,7 @@
 		
 		</style>
 	</head>
-	<body class="w3-content" style="max-width:1200px">
+	<body class="w3-content" style="max-width:95%">
 	
 	<!-- Sidebar/menu -->
 	<jsp:include page="../inc/side.jsp"/>
@@ -56,15 +56,6 @@
 	  <jsp:include page="../inc/top.jsp"/>
 			<h3>자주묻는 질문</h3>
 			<hr style="border:solid 2px black;">
-			<select id="collectView" class="btn btn-sm dropdown-toggle" name="notice_category"> <%-- 카테고리 모아보기 --%>
-				<option selected>카테고리별 모아보기</option>
-				<option>교환/반품</option>
-				<option>회원정보</option>
-				<option>배송</option>
-				<option>주문/결제</option>
-				<option>서비스</option>
-			</select>
-			
 			<table class="table">
 			  <c:choose>
 					<c:when test="${empty param.pageNum }">
@@ -95,20 +86,25 @@
 			  </tbody>
 			 </c:forEach> 
 			</table>
+			<c:choose>
+		    	<c:when test="${sessionScope.sId eq 'admin' }">
+		    		<a href="AdminBoard.ad" class="w3-bar-item btn btn-dark btn-sm" style="float:right">게시판 관리하러가기</a>
+		    	</c:when>
+		    </c:choose>
 		<section id="buttonArea" style="text-align:center">
 			<form action="BoardList.bo">
 				<input type="text" name="keyword">
-				<input type="submit" value="검색">
+				<input type="submit" value="검색" class="btn btn-dark btn-sm">
 			</form>
 		</section>
 		<br>
 		<section id="pageList" style="text-align:center">
 			<c:choose>
 				<c:when test="${pageNum > 1}">
-					<input type="button" class="btn btn-outline-secondary btn-sm" value="이전" onclick="location.href='BoardList.bo?pageNum=${pageNum - 1}'">
+					<input type="button" class="btn btn-dark btn-sm" value="이전" onclick="location.href='BoardList.bo?pageNum=${pageNum - 1}'">
 				</c:when>
 				<c:otherwise>
-					<input type="button" class="btn btn-outline-secondary btn-sm" value="이전">
+					<input type="button" class="btn btn-dark btn-sm" value="이전">
 				</c:otherwise>
 			</c:choose>
 				
@@ -128,14 +124,14 @@
 			<!-- 현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 [다음] 링크 동작 -->
 			<c:choose>
 				<c:when test="${pageNum < pageInfo.maxPage}">
-					<input type="button" value="다음" class="btn btn-outline-secondary btn-sm" onclick="location.href='FAQList.bo?pageNum=${pageNum + 1}'">
+					<input type="button" value="다음" class="btn btn-dark btn-sm" onclick="location.href='FAQList.bo?pageNum=${pageNum + 1}'">
 				</c:when>
 				<c:otherwise>
-					<input type="button" class="btn btn-outline-secondary btn-sm" value="다음">
+					<input type="button" class="btn btn-dark btn-sm" value="다음">
 				</c:otherwise>
 			</c:choose>
 		</section>	
-		
+		<br><br>
 		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
 	
 	  <!-- End page content -->

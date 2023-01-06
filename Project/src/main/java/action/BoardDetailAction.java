@@ -23,15 +23,10 @@ public class BoardDetailAction implements Action {
 		
 		request.setAttribute("board", board);
 
-		if(request.getParameter("notice_type") == "Notice") {
-			forward = new ActionForward();
-			forward.setPath("board/board_detail.jsp");
-			forward.setRedirect(false);			
-		} else {
-			forward = new ActionForward();
-			forward.setPath("board/FAQ_detail.jsp");
-			forward.setRedirect(false);
-		}
+		forward = new ActionForward();
+		forward.setPath("board/board_detail.jsp");
+		forward.setRedirect(false);			
+
 		
 		return forward;
 	}

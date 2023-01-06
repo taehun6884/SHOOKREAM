@@ -6,10 +6,12 @@ import java.util.List;
 import dao.ProductDAO;
 import db.JdbcUtil;
 import vo.CouponBean;
+import vo.MemberCouponBean;
+import vo.WishBean;
 
-public class CouponListService {
+public class CouponMainListService {
 
-	public List<CouponBean> getCouponList() {
+	public List<CouponBean> getCouponMainList(String coupon_content) {
 		List<CouponBean> couponList = null;
 		
 		Connection con = JdbcUtil.getConnection();
@@ -18,15 +20,15 @@ public class CouponListService {
 		
 		dao.setConnection(con);
 		
-		couponList = dao.selectCouponList();
+		couponList = dao.selectCouponMainList(coupon_content);
 		
 		JdbcUtil.close(con);
 		
 		return couponList;
 	}
-	
-	public List<CouponBean> MemberCouponList(int member_idx) {
-		List<CouponBean> couponList = null;
+
+	public MemberCouponBean getMemberCouponInfo(String coupon_content, int member_idx) {
+		MemberCouponBean member_coupon = null;
 		
 		Connection con = JdbcUtil.getConnection();
 		
@@ -34,11 +36,11 @@ public class CouponListService {
 		
 		dao.setConnection(con);
 		
-		couponList = dao.selectUserCouponList(member_idx);
+		member_coupon = dao.selectMemberCoupon(coupon_content, member_idx);
 		
 		JdbcUtil.close(con);
 		
-		return couponList;
+		return member_coupon;
 	}
 
 }

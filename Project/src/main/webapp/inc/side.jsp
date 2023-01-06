@@ -29,7 +29,7 @@
     <a href="Sale.MAIN" class="w3-bar-item w3-button">Sale</a>
     <hr>
     <a onclick="myAccFunc()"  href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
-      운동화 <i class="fa fa-caret-down"></i>
+      브랜드 <i class="fa fa-caret-down"></i>
     </a>
     <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
       <a href="BrandCG.MAIN?cg=나이키" class="w3-bar-item w3-button">나이키 &nbsp;<i class="fa fa-caret-right w3-margin-right"></i></a>
