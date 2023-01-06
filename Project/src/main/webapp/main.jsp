@@ -80,10 +80,15 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	color: red; 
 	font-size: big; 
 	float: right;
+
+}
+
+body{
+margin-top:10px;
 }
 </style>
 </head>
-<body class="w3-content" style="max-width:95%" >
+<body class="w3-content" style="max-width:95% ">
 
 <!-- Sidebar/menu -->
 <jsp:include page="./inc/side.jsp"/>
