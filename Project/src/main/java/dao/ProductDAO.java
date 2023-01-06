@@ -10,6 +10,7 @@ import db.JdbcUtil;
 import java.util.List;
 import db.JdbcUtil;
 import vo.CouponBean;
+import vo.MemberCouponBean;
 import vo.OrderBean;
 import vo.ProductBean;
 import vo.ReviewBean;
@@ -210,6 +211,48 @@ private ProductDAO() {}
 		}
 		return product;
 	}
+	// 멤버 쿠폰 조회
+    public MemberCouponBean selectMemberCoupon(String coupon_content, int member_idx) {
+       MemberCouponBean member_coupon = null;
+       
+       ResultSet rs  = null;
+       PreparedStatement pstmt = null;
+       
+       try {
+          String sql = "SELECT c.coupon_content"
+                + " FROM shookream.member_coupon m join shookream.coupon c"
+                + " on m.coupon_idx = c.coupon_idx"
+                + " WHERE coupon_content LIKE ? AND member_idx=?";
+          
+          pstmt = con.prepareStatement(sql);
+          pstmt.setString(1, "%"+coupon_content+"%");
+          pstmt.setInt(2, member_idx);
+          System.out.println(pstmt);
+          rs = pstmt.executeQuery();
+          
+          if(rs.next()) {
+             member_coupon = new MemberCouponBean();
+//             member_coupon.setMember_idx(rs.getInt("member_idx"));
+//             member_coupon.setCoupon_idx(rs.getInt("coupon_idx"));
+//             member_coupon.setCoupon_price(rs.getInt("coupon_price"));
+//             member_coupon.setCoupon_name(rs.getString("coupon_name"));
+             member_coupon.setCoupon_content(rs.getString("coupon_content"));
+//             member_coupon.setCoupon_start(rs.getString("coupon_start"));
+//             member_coupon.setCoupon_end(rs.getString("coupon_end"));
+//             member_coupon.setCoupon_isUse(rs.getInt("isUse"));
+             
+             System.out.println("member_coupon : " + member_coupon);
+          }
+       } catch (SQLException e) {
+          System.out.println("SQL 구문 오류 - selectMemberCoupon()");
+          e.printStackTrace();
+       } finally {
+          JdbcUtil.close(rs);
+          JdbcUtil.close(pstmt);
+       }
+       
+       return member_coupon;
+    }
 
 	// 관리자 - 상품 목록 조회
 	public List<ProductBean> selectProductList() {
@@ -1079,7 +1122,34 @@ private ProductDAO() {}
 			return image;
 		}
 		
+		//--------- 이미지 정보 가져오는 메서드 -------------
+				public List<imageBean> selectImageList(String product_name ) {
+					List<imageBean> imagelist = null;
+					PreparedStatement pstmt = null;
+					ResultSet rs  = null;
+					//--------------------이미지 이름 가져오기 작업--------------
+					try {
+						String sql = "SELECT i.image_main_file, i.image_real_file1, i.image_real_file2  FROM shookream.image i join shookream.product p  WHERE p.product_name = ?";
 
+						pstmt = con.prepareStatement(sql);
+						pstmt.setString(1, product_name);
+						rs = pstmt.executeQuery();
+						
+						imagelist = new ArrayList<imageBean>();
+						while(rs.next()) {
+							imageBean image = new imageBean();
+							image.setImage_main_file(rs.getString("image_main_file")); //메인 이미지 가져오기
+							image.setImage_real_file1(rs.getString("image_real_file1")); //상세 이미지1 가져오기
+							image.setImage_real_file2(rs.getString("image_real_file2")); //상세 이미지2 가져오기
+							imagelist.add(image);
+						}
+						System.out.println(imagelist);
+					} catch (SQLException e) {
+						System.out.println("SQL 구문 오류 - selectImage");
+						e.printStackTrace();
+					}
+					return imagelist;
+				}
 
 		public boolean isDeleteOrder(int order_idx) {
 			int isDeleteOrderList = 0;

@@ -88,16 +88,16 @@ border:1px;
 font-family: "Montserrat", sans-serif;
 font-size:15px;
 float: right;
-margin-left: 50px;
+margin-right: 700px;
 text-align: left;
 }   
 .prod_name{
-font-size: 30px;
+font-size: 25px;
 font-weight: 900px;
 
 }
 .prod_title{
-font-size: 15px;
+font-size: 20px;
 font-weight: bold;
 
 }    
@@ -118,7 +118,7 @@ margin-left: 270PX;
 }
 
 .reviewContent { 
-	width : 100%;
+	width : 900px;
 	height: 150px; 
 }
 
@@ -298,15 +298,22 @@ margin-left: 270PX;
   <div id = "sform">
 	<section id="image">
 	<div class="w3-content w3-display-container">
-		  	<div><img src="./images/jeans.jpg"  class="mySlides" width="450px" height="650px"onclick="location.href=''"></div>
-		  	<div><a href="CouponMainList.po?coupon_content=banner_1"><img src="./images/banner_1.jpg"  class="mySlides" width="450px" height="650px"></a></div>
-		  	<div><img src="./images/jeans1.jpg" width="200px"  class="mySlides" height="650px"></div>
-		  	<div><img src="./images/섬네일(슈펜).jpg" width="200px"  class="mySlides" height="650px"></div>
-		  	<div><img src="./images/logo.png" width="200px"  class="mySlides" height="650px"></div>
+<!-- 		  	<div><img src="./images/jeans.jpg"  class="mySlides" width="600px" height="650px"onclick="location.href=''"></div> -->
+<!-- 		  	<div><a href="CouponMainList.po?coupon_content=banner_1"><img src="./images/banner_1.jpg"  class="mySlides" width="450px" height="650px"></a></div> -->
+<!-- 		  	<div><img src="./images/jeans1.jpg" width="200px"  class="mySlides" height="650px"></div> -->
+<!-- 		  	<div><img src="./images/섬네일(슈펜).jpg" width="200px"  class="mySlides" height="650px"></div> -->
+<!-- 		  	<div><img src="./images/logo.png" width="200px"  class="mySlides" height="650px"></div> -->
+	<c:forEach var="image" items="${imagelist}">
+		<div><img src="upload/${image.image_main_file }"  class="mySlides" width="600px" height="650px"onclick="location.href=''"></div>
+		<div><img src="upload/${image.image_real_file1 }"  class="mySlides" width="600px" height="650px"onclick="location.href=''"></div>
+		<div><img src="upload/${image.image_real_file2 }"  class="mySlides" width="600px" height="650px"onclick="location.href=''"></div>
+	</c:forEach>
+
 		  	<button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
   			<button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
 	</div>
 	</section>
+   </div>	
 	<!-- 상품 사진 옆 -->
 	<section id="detail" >
 		<div class="text" > 
@@ -314,6 +321,8 @@ margin-left: 270PX;
 			<p class ="prod_name">${product.product_name }</p>
 			<p>상품번호 : ${product.product_idx }</p>			
 		</div>
+		
+	
 		<div id="detail1">
 			<p class="prod_title">가격</p>
 			<p>${product.product_price }</p>
@@ -366,7 +375,7 @@ margin-left: 270PX;
 		</div>
 	</section>
 
-  </div>
+  
   <Br>
   <br>
   <br>
@@ -408,7 +417,24 @@ margin-left: 270PX;
 						</c:if>		
 					</c:forEach>
 				</div>
-				
+				<section id="pageList" style="text-align:center">				
+			<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
+			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
+				<c:choose>
+					<c:when test="${pageNum eq i}">
+						${i }
+					</c:when>
+					<c:otherwise>
+						<a href="${i }">${i }</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+		</section>	
+		</div> 	
+	
+
+ main
     <!-- 
 <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
    -->
