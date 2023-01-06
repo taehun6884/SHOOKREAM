@@ -11,11 +11,9 @@ import svc.MemberIdCheckService;
 import svc.ProductListService;
 import vo.ActionForward;
 import vo.CouponBean;
-import vo.MemberCouponBean;
 import vo.ProductBean;
-import vo.WishBean;
 
-public class CouponMainListProAction implements Action {
+public class CouponMainListProAction_backup implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
@@ -35,13 +33,6 @@ public class CouponMainListProAction implements Action {
 		int member_idx = service2.getMemberIdx(sId);
 		System.out.println("member_idx : " + member_idx);
 		
-		MemberCouponBean member_coupon = service.getMemberCouponInfo(coupon_content, member_idx);
-		
-		if(member_coupon != null) {
-			request.setAttribute("member_coupon", member_coupon);
-		} else {
-			request.setAttribute("member_coupon", null);
-		}
 		
 		forward = new ActionForward();
 		forward.setPath("main_coupon.jsp?coupon_content="+coupon_content);

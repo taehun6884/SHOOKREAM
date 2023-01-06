@@ -23,10 +23,10 @@
 		<a href="CartList.ca?member_idx=${member_idx }&pageNum=1"><i class="fa fa-shopping-cart w3-margin-right"></i></a>
 		<i>
 		  <div class="w3-dropdown-click" id="logintvar">
-		  <button onclick="myFunction()" >
+		  <button onmouseover="myFunction()" onclick="location.href='MemberMyPage.me?id=${sessionScope.sId }'" >
 		  	<img src="./images/login_image.png" width="20px" height="20px">
 		  </button>
-		  <div id="Demo" class="w3-dropdown-content w3-bar-block w3-border">
+		  <div id="Demo" class="w3-dropdown-content w3-bar-block w3-border" style="font-style:none">
 
 		    <a href="MemberLogout.me" class="w3-bar-item w3-button">logout</a>
 		    <a href="MemberModifyForm.me?id=${sessionScope.sId }" class="w3-bar-item w3-button">정보수정</a>
