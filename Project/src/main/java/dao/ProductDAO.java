@@ -676,7 +676,7 @@ private ProductDAO() {}
 					 //존재하지 않을 경우 rs.next는 false , DB에서는 NULL이 표기된다.
 					idx = rs.getInt(1) + 1;
 				}
-				
+				System.out.println(idx);
 				sql = "INSERT INTO orderlist VALUES(?,now(),?,?,?,?,?)";
 				pstmt2 = con.prepareStatement(sql);
 				pstmt2.setInt(1,idx );
@@ -724,7 +724,7 @@ private ProductDAO() {}
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql="SELECT i.image_main_file,m.member_id,o.order_price,o.order_category,o.order_progress,o.order_date,p.product_idx,p.product_size,p.product_color "
+			String sql="SELECT i.image_main_file,m.member_id,o.order_price,o.order_category,o.order_progress,o.order_date,p.product_idx,p.product_size,p.product_color,o.order_idx "
 					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx "
 					+ "where m.member_idx=? "
@@ -748,6 +748,7 @@ private ProductDAO() {}
 					vo.setOrder_product_idx(rs.getInt("product_idx"));
 					vo.setOrder_product_size(rs.getString("product_size"));
 					vo.setOrder_product_color(rs.getString("product_color"));
+					vo.setOrder_idx(rs.getInt("order_idx"));
 					orderlist.add(vo);
 				}
 			} catch (SQLException e) {
@@ -1674,6 +1675,28 @@ private ProductDAO() {}
 				JdbcUtil.close(pstmt2);
 			}
 			return insertCount;
+		}
+		
+		public int OrderDeleteList(int order_idx) {
+			int deleteCount = 0;
+			boolean isDeleteProduct = false;
+			PreparedStatement pstmt = null;
+			
+			String sql = "DELETE FROM orderlist WHERE order_idx=?";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, order_idx);
+				deleteCount = pstmt.executeUpdate();
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			}
+			
+			return deleteCount;
 		}
 	
 }//DAO 끝

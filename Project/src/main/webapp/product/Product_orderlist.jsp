@@ -139,7 +139,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="paging">
         <c:choose>
 			<c:when test="${param.pageNum > 1}">
-				<a href="CartList.ca?pageNum=${param.pageNum - 1 }&member_idx=${member_idx }">이전</a>
+				<a href="ProductOrderList.po?pageNum=${param.pageNum - 1 }&member_idx=${member_idx }">이전</a>
 			</c:when>
 			<c:otherwise>
 				<a href="javascript:void(0)">이전</a>
@@ -153,14 +153,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 					${i }
 				</c:when>
 				<c:otherwise>
-					<a href="CartList.ca?pageNum=${i }&member_idx=${member_idx }">${i }</a>
+					<a href="ProductOrderList.po?pageNum=${i }&member_idx=${member_idx }">${i }</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		
 		<c:choose>
 			<c:when test="${param.pageNum < pageInfo.maxPage}">
-				<a href="CartList.ca?pageNum=${param.pageNum + 1 }&member_idx=${member_idx }">다음</a>
+				<a href="ProductOrderList.po?pageNum=${param.pageNum + 1 }&member_idx=${member_idx }">다음</a>
 			</c:when>
 			<c:otherwise>
 				<a href="javascript:void(0)">다음</a>
@@ -199,7 +199,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 function deleteOrder(idx){
 	let result =  confirm("삭제 하시겠습니까?");
 	if(result){
-		location.href="";
+		location.href="OrderDeletePro.po?order_idx="+idx+"&member_idx=${sessionScope.member_idx}&product_idx=${param.product_idx}";
 	}
 }
 

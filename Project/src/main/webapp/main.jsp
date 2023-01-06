@@ -113,7 +113,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   	<div><img src="images/jeans1.jpg" height="700" width="900"></div>
   	<div><img src="images/섬네일(슈펜).jpg" height="700" width="900"></div>
   	<div><img src="images/logo.png" height="700" width="900"></div>
-  
   </div>
 <!--   <div class="w3-container w3-text-grey" id="jeans"> -->
 <!--     <p>BEST</p> -->

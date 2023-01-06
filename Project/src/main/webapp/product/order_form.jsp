@@ -148,8 +148,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	   	<td colspan="6"><input type="checkbox">모두사용 하기 (이포인트 *원 보유) <button type="button" class="btn btn-dark btn-sm">포인트 조회</button></td>
 	   </tr>
 	   <tr>
-	   	<th colspan="2">할인된 가격</th>
-	   	<td colspan="6"><input type="text" id="totalprice">원</td>
+	   	<th colspan="2">가격</th>
+	   	<td colspan="6"><input type="text" id="totalprice" value="${product.product_price }">원</td>
 	   </tr>   
 	  </tbody>
 	</table>

@@ -42,5 +42,30 @@ public class ProductDeleteProService {
 		
 		return image;
 	}
+	
+	//주문 내역 삭제
+	public boolean OrderDeletePro(int order_idx) {
+		boolean isDeleteProduct = false;
+		
+		Connection con = JdbcUtil.getConnection();
+		
+		ProductDAO dao = ProductDAO.getInstance();
+		
+		dao.setConnection(con);
+		
+		
+		int deleteCount = dao.OrderDeleteList(order_idx);
+		if(deleteCount > 0 ) { // 삭제 성공 시 
+			JdbcUtil.commit(con);
+			isDeleteProduct = true;
+		}else {//삭제 실패 시
+			JdbcUtil.rollback(con);
+			isDeleteProduct = false;
+		}
+		JdbcUtil.close(con);
+		
+		return isDeleteProduct;
+		
+	}
 }
 

@@ -22,10 +22,41 @@ pageContext.setAttribute("cn", "\n");
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> 
+<script type="text/javascript">
+$('.center').slick({
+	  centerMode: true,
+	  centerPadding: '60px',
+	  slidesToShow: 3,
+	  responsive: [
+	    {
+	      breakpoint: 768,
+	      settings: {
+	        arrows: false,
+	        centerMode: true,
+	        centerPadding: '40px',
+	        slidesToShow: 3
+	      }
+	    },
+	    {
+	      breakpoint: 480,
+	      settings: {
+	        arrows: false,
+	        centerMode: true,
+	        centerPadding: '40px',
+	        slidesToShow: 1
+	      }
+	    }
+	  ]
+	});
+</script>
 <style type="text/css">
 #sform { 
 		  border:1px;
@@ -44,19 +75,20 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         
 #image{
 /* background-color: blue; */
-padding-left: 50;
-float: left;
+/* padding-left: 50; */
+/* float: left; */
 }
 
 #title{
 align-content: center;
 }
 
-#detail{border:1px;
+#detail{
+border:1px;
 font-family: "Montserrat", sans-serif;
 font-size:15px;
 float: right;
-margin-left: 20px;
+margin-left: 50px;
 text-align: left;
 }   
 .prod_name{
@@ -102,7 +134,6 @@ margin-left: 270PX;
 
 </style>
 
-<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript">
 
 // function btnWishFn() {
@@ -233,6 +264,8 @@ margin-left: 270PX;
 	}
 
 //찜하기 취소
+
+
 </script>
 </head>
 <body class="w3-content" style="max-width:95%">
@@ -264,10 +297,15 @@ margin-left: 270PX;
   <!-- 섬네일 이미지 -->
   <div id = "sform">
 	<section id="image">
-		<p>
-		<div class="title" align="left">
-			<img alt="shoes" src="./upload/${image.image_main_file}" width="450px" height="650px">
-		</div>
+	<div class="w3-content w3-display-container">
+		  	<div><img src="./images/jeans.jpg"  class="mySlides" width="450px" height="650px"onclick="location.href=''"></div>
+		  	<div><a href="CouponMainList.po?coupon_content=banner_1"><img src="./images/banner_1.jpg"  class="mySlides" width="450px" height="650px"></a></div>
+		  	<div><img src="./images/jeans1.jpg" width="200px"  class="mySlides" height="650px"></div>
+		  	<div><img src="./images/섬네일(슈펜).jpg" width="200px"  class="mySlides" height="650px"></div>
+		  	<div><img src="./images/logo.png" width="200px"  class="mySlides" height="650px"></div>
+		  	<button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+  			<button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+	</div>
 	</section>
 	<!-- 상품 사진 옆 -->
 	<section id="detail" >
@@ -333,16 +371,16 @@ margin-left: 270PX;
   <br>
   <br>
  	
-  <table id="detail_table">
-		<tr>
-			<td><img alt="shoes" src="./upload/${image.image_real_file1}" width="450px"></td>
-		</tr>	
+<!--   <table id="detail_table"> -->
+<!-- 		<tr> -->
+<%-- 			<td><img alt="shoes" src="./upload/${image.image_real_file1}" width="450px"></td> --%>
+<!-- 		</tr>	 -->
 		
-		<tr>
-			<td><img alt="shoes" src="./upload/${image.image_real_file2}" width="450px"></td>
-		</tr>
+<!-- 		<tr> -->
+<%-- 			<td><img alt="shoes" src="./upload/${image.image_real_file2}" width="450px"></td> --%>
+<!-- 		</tr> -->
 		
-	</table>
+<!-- 	</table> -->
 
 	<hr>	 <%-- 리뷰구역 --%> -->
 		<div id="reviewListArea">
@@ -440,10 +478,27 @@ margin-left: 270PX;
 <!--     </div> -->
 <!--   </div> -->
 <!-- </div> -->
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+</script>
 
 <script>
-
-
 // Accordion 
 function myAccFunc() {
   var x = document.getElementById("demoAcc");
@@ -563,6 +618,10 @@ function iamport(){
 		    
 		});
 	}
+</script>
+
+<script type="text/javascript">
+      $.noConflict();
 </script>
 
 <script type="text/javascript">

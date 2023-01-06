@@ -18,6 +18,7 @@ import action.CouponMainListProAction;
 import action.CouponModifyFormAction;
 import action.CouponModifyProAction;
 import action.MemberCouponListProAction;
+import action.OrderDeleteProAction;
 import action.OrderDetailProAtion;
 import action.OrderListProAction;
 import action.OrderProAction;
@@ -73,7 +74,7 @@ public class ProductController extends HttpServlet{
 			action = new OrderListProAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/OrderDeletePro.po")) { //사용자 주문 상세 페이지 삭제
-			action = new OrderListProAction();
+			action = new OrderDeleteProAction();
 			forward = action.execute(request, response);
 		} else if(command.equals("/ReviewDeletePro.po")) { // 리뷰 삭제 Pro
 			action = new ReviewDeleteProAction();
