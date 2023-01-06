@@ -30,24 +30,37 @@
 	.myPage1 {
 		text-align: center;
 		margin-left: 5em;
+		padding-top: 10em;
 	}
 	
 	nav>ul>li {
 		float: center;
 		display: inline-block;
-		width: 150px;
+		width: 100px;
+	}
+	
+	#navCount {
+		font-size: 20px;
+		font-weight: bold;
 	}
 	
 	i {
 		text-align: center;
-		font-size:20px;
+		font-size:15px;
 	}
 	
-	#text1{
+	#myPageList {
+		padding-top: 20px;
 		font-size:20px;
+		font-weight: bold;
 		text-align:left;
 	}
 
+	#recentOrder {
+		
+		padding: 10px;
+	}
+	
 </style>
 <style>
     .paging {
@@ -83,35 +96,49 @@
 	<nav class="myPageNav">
 		<ul>
 			<li><i class='fas fa-money-check'><br><br>입금 확인중</i></li>
+			<li><i class='fas fa-angle-right'></i></li>
 			<li><i class='fas fa-clipboard-check'><br><br>결제완료</i></li>
+			<li><i class='fas fa-angle-right'></i></li>
 			<li><i class='fas fa-box'><br><br>상품 준비중</i></li>
+			<li><i class='fas fa-angle-right'></i></li>
 			<li><i class='fas fa-truck'><br><br>배송중</i></li>
+			<li><i class='fas fa-angle-right'></i></li>
 			<li><i class='fas fa-home'><br><br>배송 완료</i></li>
+		</ul>
+		<ul id="navCount">
+			<li>0</li>
+			<li></li>
+			<li>0</li>
+			<li></li>
+			<li>0</li>
+			<li></li>
+			<li>0</li>
+			<li></li>
+			<li>1</li>
 		</ul>
 	</nav>
 
 <hr>
 	<div>
-		<div id="text1">최근 주문 내역
-			<c:forEach var="order" items="${orderlist }">
-				<tr>
-					<td>${order.order_idx }</td>
-					<td><img src="upload/${order.order_main_image }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
-					<td>${order.order_member_id }</td>
-					<td>${order.order_product_price }</td>
-					<td>${order.order_category }</td>
-					<td>${order.order_product_size }</td>
-					<td>${order.order_product_color }</td>
-					<td><fmt:formatDate value="${order.order_date }" pattern="yyyy-MM-DD"/></td>
-				</tr>
-    		</c:forEach>
-    	</div>	
-	</div>
-	
+		<div id="myPageList">최근 주문 내역</div>	
+		<table class="orderTable">
+				<thead  class="table-dark" >
+					<c:forEach var="order" items="${orderlist }">
+					<tr>
+						<td>${order.order_idx }</td>
+						<td><img src="upload/${order.order_main_image }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
+						<td>${order.order_member_id }</td>
+						<td>${order.order_product_price }</td>
+						<td>${order.order_category }</td>
+						<td>${order.order_product_size }</td>
+						<td>${order.order_product_color }</td>
+						<td><fmt:formatDate value="${order.order_date }" pattern="yyyy-MM-DD"/></td>
+					</tr>
+		    		</c:forEach>
+				</thead>
+		</table>	
+	</div>	
 </div>
-
-
-
 </div>	
 <script>
 // Accordion 
