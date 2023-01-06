@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head> 
@@ -27,6 +29,7 @@
 	
 	.myPage1 {
 		text-align: center;
+		margin-left: 5em;
 	}
 	
 	nav>ul>li {
@@ -37,8 +40,14 @@
 	
 	i {
 		text-align: center;
-		font-size:15px;
+		font-size:20px;
 	}
+	
+	#text1{
+		font-size:20px;
+		text-align:left;
+	}
+
 </style>
 <style>
     .paging {
@@ -47,9 +56,9 @@
     
     .paging a {
         display: inline-block;
-        font-weight: bold;
-        text-decoration: none;
-        padding: 5px 8px;
+		font-weight: bold; 
+	   	text-decoration: none; 
+	    padding: 5px 8px;
         border: 1px solid #ccc;
        	color: #000; 
 
@@ -71,15 +80,34 @@
 <div class="w3-main" style="margin-left:250px">
 
 <div class="myPage1">
-<nav class="myPageNav">
-	<ul>
-		<li><i class='fas fa-money-check'><br><br>입금 확인중</i></li>
-		<li><i class="material-icons"><br><br>결제 완료</i></li>
-		<li><i class='fas fa-box'><br><br>상품 준비중</i></li>
-		<li><i class='fas fa-truck'><br><br>배송중</i></li>
-		<li><i class='fas fa-home'><br><br>배송 완료</i></li>
-	</ul>
-</nav>
+	<nav class="myPageNav">
+		<ul>
+			<li><i class='fas fa-money-check'><br><br>입금 확인중</i></li>
+			<li><i class='fas fa-clipboard-check'><br><br>결제완료</i></li>
+			<li><i class='fas fa-box'><br><br>상품 준비중</i></li>
+			<li><i class='fas fa-truck'><br><br>배송중</i></li>
+			<li><i class='fas fa-home'><br><br>배송 완료</i></li>
+		</ul>
+	</nav>
+
+<hr>
+	<div>
+		<div id="text1">최근 주문 내역
+			<c:forEach var="order" items="${orderlist }">
+				<tr>
+					<td>${order.order_idx }</td>
+					<td><img src="upload/${order.order_main_image }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
+					<td>${order.order_member_id }</td>
+					<td>${order.order_product_price }</td>
+					<td>${order.order_category }</td>
+					<td>${order.order_product_size }</td>
+					<td>${order.order_product_color }</td>
+					<td><fmt:formatDate value="${order.order_date }" pattern="yyyy-MM-DD"/></td>
+				</tr>
+    		</c:forEach>
+    	</div>	
+	</div>
+	
 </div>
 
 
