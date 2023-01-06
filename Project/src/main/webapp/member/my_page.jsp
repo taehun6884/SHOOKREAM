@@ -27,7 +27,7 @@
 	     text-align: center;
 	}
 	
-	.myPage1 {
+	.myOrderState {
 		text-align: center;
 		margin-left: 5em;
 		padding-top: 10em;
@@ -36,7 +36,7 @@
 	nav>ul>li {
 		float: center;
 		display: inline-block;
-		width: 100px;
+		width: 10%;
 	}
 	
 	#navCount {
@@ -50,15 +50,12 @@
 	}
 	
 	#myPageList {
-		padding-top: 20px;
-		font-size:20px;
-		font-weight: bold;
-		text-align:left;
+		display: inline-block;
+		width: 10%;
 	}
 
-	#recentOrder {
-		
-		padding: 10px;
+	a {
+		decoration: none;
 	}
 	
 </style>
@@ -88,11 +85,11 @@
 </head>
 <body class="w3-content" style="max-width:95%">
 <!-- Sidebar/menu -->
-<jsp:include page="../inc/side_for_myPage.jsp"/>
+<jsp:include page="../inc/side.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <div class="w3-main" style="margin-left:250px">
 
-<div class="myPage1">
+<div class="myOrderState">
 	<nav class="myPageNav">
 		<ul>
 			<li><i class='fas fa-money-check'><br><br>입금 확인중</i></li>
@@ -119,27 +116,15 @@
 	</nav>
 
 <hr>
-	<div>
-		<div id="myPageList">최근 주문 내역</div>	
-		<table class="orderTable">
-				<thead  class="table-dark" >
-					<c:forEach var="order" items="${orderlist }">
-					<tr>
-						<td>${order.order_idx }</td>
-						<td><img src="upload/${order.order_main_image }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
-						<td>${order.order_member_id }</td>
-						<td>${order.order_product_price }</td>
-						<td>${order.order_category }</td>
-						<td>${order.order_product_size }</td>
-						<td>${order.order_product_color }</td>
-						<td><fmt:formatDate value="${order.order_date }" pattern="yyyy-MM-DD"/></td>
-					</tr>
-		    		</c:forEach>
-				</thead>
-		</table>	
+	<div id="myPageList">
+		<a href="MemberModifyForm.me?id=${sessionScope.sId }">회원 정보 수정</a>
+		<a href="MemberDeleteForm.me?id=${sessionScope.sId }">회원 탈퇴</a></div>
+		<a href="">내 쿠폰</a>
+		<a href="ProductOrderList.po?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1">내 주문관리</a>
+		<a href="LikeList.ca?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1">내 위시리스트</a>
 	</div>	
 </div>
-</div>	
+	
 <script>
 // Accordion 
 	function myAccFunc() {
@@ -160,15 +145,6 @@
 		  }
 		}
 	
-	function myAccFunc2() {
-		  var x = document.getElementById("orderAcc");
-		  if (x.className.indexOf("w3-show") == -1) {
-		    x.className += " w3-show";
-		  } else {
-		    x.className = x.className.replace(" w3-show", "");
-		  }
-		}
-
 // Click on the "Jeans" link on page load to open the accordion for demo purposes
 document.getElementById("myBtn").click();
 

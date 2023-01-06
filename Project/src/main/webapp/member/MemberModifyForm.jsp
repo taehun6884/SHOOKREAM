@@ -27,7 +27,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <body class="w3-content" style="max-width:95% ">
 
 <!-- Sidebar/menu -->
-<jsp:include page="../inc/side_for_myPage.jsp"/>
+<jsp:include page="../inc/side.jsp"/>
 
 <!-- Top menu on small screens -->
 <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
