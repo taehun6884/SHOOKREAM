@@ -358,12 +358,13 @@ function w3_close() {
 String cookie = request.getHeader("Cookie");
 if(cookie!=null){
 	Cookie cookies[] =request.getCookies();
-	
 	for(int i=0; i<cookies.length;i++){
-		if(cookies[i].getName().equals("product_name")){
+		if(cookies[i].getName().equals("product_img")){
+// 			cookies[i].getValue(); 
 			%>
-			<%=cookies[i].getValue() %>
+			<img src="upload/<%=cookies[i].getValue() %>" alt="없음">	
 			<%
+			
 		}
 	}
 }

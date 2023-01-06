@@ -42,7 +42,7 @@ public class ProductInfoProAction implements Action {
 		
 		String cp = request.getContextPath();
 		System.out.println("product.getProduct_name() : " + product.getProduct_name());
-		Cookie c1 = new Cookie("product_name",product.getProduct_name());
+		Cookie c1 = new Cookie("product_img",image.getImage_main_file());
 		c1.setMaxAge(600);
 		response.addCookie(c1);
 		//상품별 카테고리 가져오기
