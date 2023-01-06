@@ -2,6 +2,7 @@ package action;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -30,12 +31,20 @@ public class ProductInfoProAction implements Action {
 		System.out.println("product_idx = " + product_idx);
 		System.out.println(request.getParameter("product_idx"));
 		
+		
+
+		
+		
 		ProductInfoProService service = new ProductInfoProService();
 		ProductBean product = service.getProduct(product_idx);
 //		System.out.println(product);
 		imageBean image = service.getImage(product_idx);
 		
-		
+		String cp = request.getContextPath();
+		System.out.println("product.getProduct_name() : " + product.getProduct_name());
+		Cookie c1 = new Cookie("product_name",product.getProduct_name());
+		c1.setMaxAge(600);
+		response.addCookie(c1);
 		//상품별 카테고리 가져오기
 		List<String>categorylist =  service.getCategoryList(product.getProduct_name());
 		List<String> colorlist = service.ProductColorCategory(product.getProduct_name());
@@ -61,9 +70,11 @@ public class ProductInfoProAction implements Action {
 		request.setAttribute("image", image);
 		request.setAttribute("categorylist", categorylist);
 		request.setAttribute("colorlist", colorlist);
-		
+		request.setAttribute("c1", c1);
+		request.setAttribute("cp", cp);
 		// 상품 리뷰 출력 시작
-		
+		System.out.println(c1);
+		System.out.println(cp);
 		ReviewListService service3 = new ReviewListService();
 		// 리뷰 페이징 처리
 		int listLimit = 5; 

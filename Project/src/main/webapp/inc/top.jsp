@@ -2,6 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
+
+<head>
+<script src="https://kit.fontawesome.com/ca93809e69.js" crossorigin="anonymous"></script>
+</head>
+
+
+    
 <header class="w3-container w3-xlarge">
 	<p class="w3-left"></p> <!-- 카테고리명 페이지마다 추가하기 -->
 	<p class="w3-right">
@@ -10,8 +17,8 @@
 	<c:choose>
 		<c:when test="${not empty sessionScope.sId }">
 		<a href="CartList.ca?member_idx=${member_idx }&pageNum=1"><i class="fa fa-shopping-cart w3-margin-right"></i></a>
+		<i class="material-icons">cloud</i>
 		<i>
-		  <div class="w3-dropdown-click" id="logintvar">
 		  <button onclick="myFunction()" >
 		  	<img src="./images/login_image.png" width="20px" height="20px">
 		  </button>
@@ -29,12 +36,18 @@
 		    	</c:when>
 		    </c:choose>
 		     </div>
-		  </div>
 		</i>
 		</c:when>
 		<c:otherwise>
-		<div class="w3-dropdown-click" id="logintvar">
-		<div><a href="LoginMember.me">login</a> | <a href="MemberJoinForm.me">join</a></div>
+		<div class="w3-dropdown-click" id="logintvar" style="margin-right:34px;">
+		
+<span><i class="fa-solid fa-cart-shopping fa-xl" onclick="location.href='./CartList.ca'"></i></span>
+<span style="margin: 0 5px;"><i class="fa-regular fa-heart fa-xl" onclick="location.href=''"></i></span>
+<span><i class="fa-regular fa-user fa-xl" onclick="location.href='LoginMember.me'"></i></span>
+
+
+
+<!-- 		<div><a href="LoginMember.me">login</a> | <a href="MemberJoinForm.me">join</a></div> -->
 		</div>
 		</c:otherwise>
 	</c:choose>	

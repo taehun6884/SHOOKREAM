@@ -16,6 +16,7 @@ html {
 
 body {
 	margin: 0
+	
 }
 
 article, aside, details, figcaption, figure, footer, header, main, menu,
@@ -1770,3 +1771,34 @@ to {
 .w3-border-pale-blue, .w3-hover-border-pale-blue:hover {
 	border-color: #e7ffff !important
 }
+
+.back-to-top {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    right: 15px;
+    bottom: 15px;
+    z-index: 996;
+    background: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    transition: all 0.4s;
+}
+.align-items-center {
+    align-items: center!important;
+}
+.d-flex {
+    display: flex!important;
+}
+.back-to-top.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+ .reportbtn {
+ 	background: #FF0000;
+ }
+#cart{ margin: 10px;  padding: 0; }
+#heart{ margin: 10px;  padding: 0; }
+#user{ margin: 10px;  padding: 0; }

@@ -1522,6 +1522,29 @@ private ProductDAO() {}
 			
 			return deleteCount;
 		}
+		
+		public boolean reportcount(int idx) {
+			int declareplus = 0;
+			boolean reportplus = false;
+			
+			PreparedStatement pstmt = null;
+			
+			String sql = "UPDATE member SET member_dec=member_dec+1 WHERE member_idx=?";
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, idx);
+				declareplus=pstmt.executeUpdate();
+				if(declareplus>0) {
+					reportplus = true;
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			}
+			return reportplus;
+		}
 
 	
 }//DAO 끝

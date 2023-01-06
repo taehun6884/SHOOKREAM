@@ -314,7 +314,35 @@ function w3_close() {
   }
 </script>
 <!-- End Channel Plugin -->
+<%-- <h1>쿠키 : ${cookie.cp }</h1> --%>
+<%-- <c:choose> --%>
+<%--  <c:when test="${not empty cookie.name }"> --%>
+<!--  	<script> -->
 
+<!--  	</script> -->
+<%--  	<c:forEach var="c"  items="${cookie.name }"> --%>
+<%-- 	 	<c:if test="${c.name ne -1 }"> --%>
+<%-- 			<c:out value="${c.name }"></c:out> 	 --%>
+<%-- 	 	</c:if> --%>
+<%--  	</c:forEach> --%>
+<%--  </c:when> --%>
+
+<%-- </c:choose> --%>
+<h3>최근 본 상품 : </h3>
+<%
+String cookie = request.getHeader("Cookie");
+if(cookie!=null){
+	Cookie cookies[] =request.getCookies();
+	
+	for(int i=0; i<cookies.length;i++){
+		if(cookies[i].getName().equals("product_name")){
+			%>
+			<%=cookies[i].getValue() %>
+			<%
+		}
+	}
+}
+%>
 
 
 

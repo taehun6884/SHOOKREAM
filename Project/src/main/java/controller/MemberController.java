@@ -22,6 +22,7 @@ import action.MemberLoginMemberProAction;
 import action.MemberLogoutProAction;
 import action.MemberModifyFormAction;
 import action.MemberModifyProAction;
+import action.ReportProAction;
 import action.ReviewWriteProAction;
 import svc.LoginMemberService;
 import vo.ActionForward;
@@ -112,6 +113,13 @@ public class MemberController extends HttpServlet{
 		}else if(command.equals("/CheckEmailAddress.me")) { // 이메일 인증
 			action = new CheckEmailAddrProAction();
 			forward = action.execute(request, response);
+		}else if(command.equals("/ReportAddProAction.me")) { 
+			action = new ReportProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/ReportFormAction.me")) {
+			forward = new ActionForward();
+			forward.setPath("report/mail_form.jsp");
+			forward.setRedirect(false);
 		}
 		
 			

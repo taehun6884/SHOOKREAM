@@ -7,7 +7,7 @@
 <%
 pageContext.setAttribute("br", "<br/>");
 pageContext.setAttribute("cn", "\n");
-%> 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -257,8 +257,9 @@ margin-left: 270PX;
   <jsp:include page="../inc/top.jsp"/>
 	
 	 </div>
-	
+<%
 
+%>
   <!-- 섬네일 이미지 -->
   <div id = "sform">
 	<section id="image">

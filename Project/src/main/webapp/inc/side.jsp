@@ -7,7 +7,8 @@
 		});
 	});
 </script>
-<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
+<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar" >
+
   <div class="w3-container w3-display-container w3-padding-16">
     <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
     <h3 class="w3-wide" onclick="location.href='./'"><b>SHOOKREAM</b></h3>
@@ -46,5 +47,9 @@
 	   	<a href="FAQList.bo" class="w3-bar-item w3-button">자주묻는 질문</a>
    	</div>
   </div>
+  
+    <input type="button" class ="reportbtn" value="신고하기" onclick="location.href='./ReportFormAction.me?member_idx=${member_idx}&member_id=${sessionScope.sId }'">
+  <div id = "gotopbtn" style="cursor:pointer; height:300px;"class="back-to-top d-flex align-items-center justify-content-center active" onclick="window.scrollTo(0,0);">TOP</div> <!-- 홈페이 -->
+ 
   
 </nav>
