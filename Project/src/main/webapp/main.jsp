@@ -24,6 +24,7 @@
 
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+
 <script type="text/javascript">
 $(function() {
 	$('.post-wrapper').slick({
@@ -220,12 +221,17 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 function couponDown(coupon_content) {
 	
-	let url = "CouponMainList.po?member_idx="+${sessionScope.member_idx}+"&coupon_content="+coupon_content;  // 테스트용 파라미터임!
-	let name = "Coupon List";
-	let attr = "width=250, height=280, top=200, left=510"
-		
-	window.open(url, name, attr);
+	var member_idx = '<%=(String)session.getAttribute("sId")%>'
 	
+	if( member_idx == 'null'){
+		alert("로그인 후 이용 가능합니다.");
+		location.href="LoginMember.me";
+	} else {
+		url = "CouponMainList.po?member_idx="+member_idx+"&coupon_content="+coupon_content; 
+		let name = "Coupon List";
+		let attr = "width=280, height=280, top=200, left=510"
+		window.open(url, name, attr);
+	}
 }
 
 // Accordion 
