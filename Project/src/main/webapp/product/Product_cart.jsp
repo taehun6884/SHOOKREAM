@@ -121,9 +121,10 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	  <td class ="td_cart"><input type="checkbox" class ="cartCheckBox" id="cartCheckBox${status.index }" name ="cartCheckBox" checked="checked" value="${cart.cart_idx }" onclick="removeCheck(this)"></td> 
       <td><a href="ProductInfoForm.po?product_idx=${cart.product_idx }"><img src="upload/${cart.cart_product_image }"  alt="없음!" class="img-thumbnail" width="150" height="150" ></a></td>
       <td class ="td_cart">${cart.cart_product_name }<br>색상 : ${cart.cart_color }</td>
-	  <td class ="td_cart"><fmt:formatNumber value="${cart.cart_price }" pattern="#,###"></fmt:formatNumber>원</td>
-      <td class ="td_cart">할인금액 예정</td>
-      <td class ="td_cart">주문금액 예정</td>
+	  <td class ="td_cart" id="cart_price"><fmt:formatNumber value="${cart.cart_price }" pattern="#,###원"></fmt:formatNumber></td>
+      <td class ="td_cart" id="cart_discount_price"><fmt:formatNumber value="${cart.cart_price * (cart.cart_discount_price / 100)}" pattern="#,###원"></fmt:formatNumber></td>
+      <td class ="td_cart" id="cart_order_price" ><fmt:formatNumber value="${cart.cart_price - (cart.cart_price * (cart.cart_discount_price / 100))}" pattern="#,###원"></fmt:formatNumber></td> 
+<%--       <td class ="td_cart">${status.end }</td> --%>
       <td class ="td_cart">
       <input type="number" value="${cart.cart_count }" style="width: 35px">
       <br>
@@ -296,48 +297,34 @@ function w3_close() {
 <!-- 체크박스에 따른 금액변동 처리 -->
 <script type="text/javascript">
 
-// if($("#cartCheckBox").is(":checked") == true){
-// 	alert("true");
-// }
-
-
-
-// $("#cartCheckBox").click(function() {
-	
-// 	let check = $("#cartCheckBox").val();
-// 		$.ajax({
-// 				type: "get",
-// 				url: "CartMinusPro.ca",
-// 				data: {
-// 					cart_idx: check
-// 				},
-// 				dataType: "text",
-// 				success: function() {
-// 					alert("성공함");
-// 				}
-// 			});
-// });
 
 
 //페이지 로딩 시 체크된 상품을 배열로 넣음.
 $(function() {
-	let listArr = new Array();
-	let list = $("input[name='cartCheckBox']:checked");
-	for(var i=0; i<list.length; i++){
-		//체크된 상품이 있으면 배열에 넣음.
-		if(list[i].checked){
-			listArr.push(list[i].value);
-		}
-		//listArr에 들어간 상황
-	}
+	//<td> 의 값들은 .val이 아니라, html로 가져와야 함.
+	if(#cart_)
+	var check = $("#cart_end").html();
+	alert(check)
+// 	let listArr = new Array();
+// 	let list = $("input[name='cartCheckBox']:checked");
+// 	for(var i=0; i<list.length; i++){
+// 		//체크된 상품이 있으면 배열에 넣음.
+// 		if(list[i].checked){
+// 			listArr.push(list[i].value);
+// 		}
+		
+// 		//listArr에 들어간 상황
+// 	}
 	
+});
+//할인금액, 주문금액 계산
+$(function() {
 	
 });
 
-
 function removeCheck(cb) {
 // 	alert(cb.id);
-// 	let checkNum = cb.id.replace("cartCheckBox", ""); // id값의 index값을 가져옴
+// 	let cartCheckBox = cb.id.replace("cartCheckBox", ""); // id값의 index값을 가져옴
 	let checkNum = cb.value; // id값의 index값을 가져옴
 	alert(checkNum);
 // 	let checkNum2 = $("#checkNum").val();
@@ -348,6 +335,8 @@ function removeCheck(cb) {
 	}else{
 		alert("실패");
 	}
+	
+};
 	
 	//체크박스의 체크 여부를 판별
 // 	//onchange를 통해 변경된 idx 값 가져오기
@@ -365,7 +354,7 @@ function removeCheck(cb) {
 // 	 var product_idx = $("input[name='cartCheckBox']").val();
 // 	 alert(product_idx);
 
-}
+
 	
 
 
