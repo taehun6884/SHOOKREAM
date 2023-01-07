@@ -54,6 +54,10 @@ public class AdminController extends HttpServlet{
 		}else if(command.equals("/AdminProductOrderListDelete.ad")) { // 주문내역 삭제
 			action = new AdminOrderListDeleteProAction();
 			forward = action.execute(request, response);
+		}else if(command.equals("/AdminMemberCoupon.ad")) { //관리자 메인보드 -> 회원 및 쿠폰 관리
+			 forward = new ActionForward();
+			 forward.setPath("admin/admin_coupon.jsp");
+			 forward.setRedirect(false);
 		}
 			
 		if(forward != null) {
