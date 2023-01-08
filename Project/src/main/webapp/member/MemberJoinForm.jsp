@@ -5,7 +5,8 @@
 <html>
 <head>
 <title>SHOOKREAM</title>
-<script src="js/jquery-3.6.3.js"></script>
+<!-- <script src="js/jquery-3.6.3.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -144,9 +145,10 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 						<th scope="row">이메일</th>
 						<td>
 						<input type="text" name="email" id="email" placeholder="" required size="20px" style="line-height: 30px"> &nbsp;
-						<input type="button" class="btn btn-dark" id="checkEmail"  value="인증 메일 전송"><br>
-						<span style="color: gray;">("@"를 포함하여 이메일을 입력해주세요. ex) abcd@gmail.com)</span>
-						<input type="text" name="authCode" id="authCode" size="20px" style="line-height: 30px" placeholder="인증코드를 입력하세요" disabled="disabled"> 
+						<input type="button" class="btn btn-dark" id="checkEmail"  value="인증 메일 전송" onclick="alert('이메일 전송 완료!')"><br>
+						<span style="color: gray">("@"를 포함하여 이메일을 입력해주세요. ex) abcd@gmail.com)</span><br>
+						<input type="text" name="authCode" id="authCode" size="20px" style="line-height: 30px" placeholder="인증코드를 입력하세요" required="required"> 
+						<input type="button" class="btn btn-dark" id="checkEmail2"  value="인증 하기">
 						<span id="authEmailResult"></span>
 						</td>
 					</tr>
@@ -248,7 +250,7 @@ function checkPasswd(passwd) { // 패스워드 길이 체크
 }
 
 
-	/* 이메일 인증 */
+	/* 이메일 인증 1 */
 	$(function() {
 			$("#checkEmail").on("click", function() {
 				
@@ -259,31 +261,41 @@ function checkPasswd(passwd) { // 패스워드 길이 체크
 		               id: $("#id").val(),
 		               authCode: $("#authCode").val(),
 		               email: $("#email").val()
+		            }
+				                   
+		             
+		         });
+			});
+		});
+	
+	
+	/* 이메일 인증 2 */
+	$(function() {
+			$("#checkEmail2").on("click", function() {
+				
+				$.ajax({
+					type: "get",
+		            url: "CompareEmailAddress.me",
+		            data: {
+		               id: $("#id").val(),
+		               authCode: $("#authCode").val()
 		            },
-		            
-		            success: function(result) {
-		                //  리턴받은 결과("true", "false") 판별
-		                   $("#authEmailResult").html(result);
-		             }
+					success:function(result){
+						if(result == true){
+	                	  	 $("#authEmailResult").html("인증 성공!").css("color", "blue");
+	    	            } else {
+							 $("#authEmailResult").html("인증 실패!").css("color", "red");
+							 event.preventDefault(); // submit 기능 막기
+							           
+					}
+					}
+		             
 		         });
 			});
 		});
 		
 	
-		
-	
-// 	/* 인증번호 이메일 전송 */
-// 	$("#checkEmail").click(function(){
-// 	    var email = $(".mail_input").val(); // 입력한 이메일
-	    
-// 	    $.ajax({
-	        
-// 	        type:"GET",
-// 	        url:"mailCheck?email=" + email
-	                
-// 	    });
-// 	});
-	
+
 	
 
 
