@@ -5,7 +5,6 @@
 <html>
 <head>
 <title>SHOOKREAM</title>
-<script src="js/jquery-3.6.3.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -187,16 +186,16 @@ $(function() {
 <!-- 						<button type="button" class="btn btn-secondary" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">ID check</button> -->
 						<input type="hidden" name="isCheckId" value="idUncheck"/> <!-- 체크 여부 확인 -->			
 						<br>
-						<span style="color: gray;" >(영문소문자/숫자, 8~16자.)</span>
-						
+						<span style="color: gray;" >(영문 소문자/숫자/특수문자(-_.) 사용가능, 5~20자)</span> &nbsp;
+						<span id="checkIdSpan"></span>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">비밀번호</th>
 						<td>
-						<input type="password" name="pass" id ="pass"required size="20px" style="line-height: 30px" onkeyup="checkPasswd(this.value)"><span id="checkPasswdResult"></span><br>
-						<span style="color: gray;" >(영문 소문자/숫자/특수문자(-_.) 사용가능, 5~20자)</span> &nbsp;
-						<span id="checkIdSpan"></span>
+						<input type="password" name="pass" id ="pass" required size="20px" style="line-height: 30px" onkeyup="checkPasswd(this.value)">&nbsp; <span id="checkPasswdResult"></span><br>
+						<span style="color: gray;">(영문 대 소문자/숫자/특수문자(!@#$%) 중 2가지 이상 조합, 8~16자)</span>
+						
 						</td>
 					</tr>
 					<tr>
@@ -233,8 +232,7 @@ $(function() {
 					<tr>
 						<th scope="row">이메일</th>
 						<td>
-						<input type="text" name="email" id="email" placeholder="" required size="20px" style="line-height: 30px">&nbsp; 
-						<input type="button" class="btn btn-dark" id="checkEmail"  value="인증 메일 전송">&nbsp; <span id ="emailCheckResult"></span><br>
+						<input type="text" name="email" id="email" placeholder="" required size="20px" style="line-height: 30px">&nbsp; <span id ="emailCheckResult"></span><br>
 						<span style="color: gray;">("@"를 포함하여 이메일을 입력해주세요. ex) abcd@gmail.com)</span>
 						<input type="text" name="authCode" id="authCode" size="20px" style="line-height: 30px" placeholder="인증코드를 입력하세요" disabled="disabled"> 
 						<span id="authEmailResult"></span>
@@ -300,13 +298,24 @@ function fn_joinMember() {
 
 function fn_dbCheckId() {
 	var id = document.getElementById("id").value;
-	if(id.length == 0 || id == ""){
-		alert("아이디를 입력해주세요.");
-		joinForm.id.focus();
+// 	if(id.length == 0 || id == ""){
+// 		alert("아이디를 입력해주세요.");
+// 		joinForm.id.focus();
+// 	}
+// 	else 
+	if(id.length >= 5 && id.length <= 20){
+		window.open("dbCheckId.me?member_id="+id,"","width=500, height=200, left=600, top=300");
 	}else{
-		window.open("dbCheckId.me?member_id="+id,"","width=300, height=200, left=600, top=300");
-// 		window.open("http://localhost:8080/Project/dbCheckId.me?member_id="+id,"","width=500, height=300");
+		alert("5 ~ 20 문자로 입력해주세요.");
+		joinForm.id.focus();
 	}
+// 		if(id.length > 16 && id.length < 8) {
+// 		alert("8 ~ 16 문자로 입력해주세요.");
+// 		joinForm.id.focus();
+// 	}else{
+// 		window.open("dbCheckId.me?member_id="+id,"","width=500, height=200, left=600, top=300");
+// 		window.open("http://localhost:8080/Project/dbCheckId.me?member_id="+id,"","width=500, height=300");
+	
 }
 			
 function reCheckPasswd(pass2) {//재입력 확인 
@@ -335,19 +344,19 @@ function inputIdChk(){
 }
 
 
-function checkPasswd(passwd) { // 패스워드 길이 체크
-	let spanCheckPasswdResult = document.getElementById("checkPasswdResult");
+// function checkPasswd(passwd) { // 패스워드 길이 체크
+// 	let spanCheckPasswdResult = document.getElementById("checkPasswdResult");
 
-	if(passwd.length >= 8 && passwd.length <= 16) {
-		spanCheckPasswdResult.innerHTML = "사용 가능한 패스워드 입니다";
-		spanCheckPasswdResult.style.color = "BLUE";    		
-	} else {
-		spanCheckPasswdResult.innerHTML = "8 ~ 16자를 입력하세요";
-		spanCheckPasswdResult.style.color = "RED";
-		event.preventDefault(); // submit 기능 막기
+// 	if(passwd.length >= 8 && passwd.length <= 16) {
+// 		spanCheckPasswdResult.innerHTML = "사용 가능한 패스워드 입니다";
+// 		spanCheckPasswdResult.style.color = "BLUE";    		
+// 	} else {
+// 		spanCheckPasswdResult.innerHTML = "8 ~ 16자를 입력하세요";
+// 		spanCheckPasswdResult.style.color = "RED";
+// 		event.preventDefault(); // submit 기능 막기
 
-	}
-}
+// 	}
+// }
 
 
 	/* 이메일 인증 */
