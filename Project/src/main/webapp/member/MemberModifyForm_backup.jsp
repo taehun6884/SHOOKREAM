@@ -13,47 +13,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 <style type="text/css">
 #sform {
           display: inline-block;
           text-align: center;
         }
-        
- 	#dbCheckId {
-		display:inline;
-      box-sizing: border-box;
-}
-table.type03 {
-  border-collapse: collapse;
-  text-align: left;
-  line-height: 1.5;
-  border-top: 1px solid #ccc;
-  border-left: 3px solid #369;
-  margin-left:auto; 
-  margin-right:auto;
-}
-table.type03 th {
-  width: 147px;
-  padding: 10px;
-  font-weight: bold;
-  font-size : 17px;
-  vertical-align: top;
-  color: #153d73;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  height: 70px;
-  width: 300px;
-
-}
-table.type03 td {
-  height: 90px;
-  width: 700px;
-  padding: 10px;
-  vertical-align: top;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-}
 </style>
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
@@ -82,7 +46,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
-<!--     <p class="w3-left">SHOOKREAM</p> -->
+    <p class="w3-left">SHOOKREAM</p>
     <p class="w3-right">
       <i class="fa fa-shopping-cart w3-margin-right"></i>
       <i class="fa fa-search"></i>
@@ -92,79 +56,47 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   
   <!-- Footer -->
   <!-- 로그인 화면 폼 -->
-  <form action="MemberModifyPro.me" method="post" name="joinForm" style="margin-bottom: 300px">
-  			<input type="hidden" value = "${member.member_pass }" name="oldpass">
-  			<input type="hidden" value = "${member.member_address }" name="address">
-  			
-			<h1 style="text-align: center;">정보 수정</h1>
-<!-- 			<h6 style="color: gray;text-align: center;margin-bottom: 50px" >SHOOKREAM에 오신 것을 환영합니다.</h6> -->
-		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3>
-			
-			
-			<div>
-				<table class="type03">
-				<tr>
-						<th scope="row" >이름</th>
-						<td>
-						<input type="text" name="name" value="${member.member_name }" size="20px"style="line-height: 30px; border: none;" ><br>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">아이디</th>
-						<td>
-						<input type="text" name="id" id ="id" value="${member.member_id }" size="20px" style="line-height: 30px; border: none;" onkeydown="inputIdChk()" readonly="readonly"> &nbsp;
-						<br>
-						
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">신규 비밀번호</th>
-						<td>
-						<input type="password" name="newpass1" id ="pass" size="20px" placeholder="변경시에만 입력"  style="line-height: 30px" onkeyup="checkPasswd(this.value)"><span id="checkPasswdResult"></span><br>
-						<span style="color: gray;">(영문소문자/숫자/특수문자 중 2가지 이상 조합, 8~16자.)</span>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">신규 비밀번호 확인</th>
-						<td>
-						<input type="password" name="newpass2"  size="20px" style="line-height: 30px" placeholder="변경시에만 입력"  onkeyup="reCheckPasswd(this.value)"><span id ="recheckResult"></span><br>
-						<span style="color: gray;">(비밀번호 확인을 위해 동일하게 입력해주세요.)</span>
-						</td>
-					</tr>
-					
-					<tr>
-						<th scope="row">주소</th>
-						<td>
-						<div>현재 주소   [ ${member.member_address } ]</div><br>
-						<input type="text" name="address" id="address_kakao2"  size="30px" placeholder="변경시에만 입력" style="margin-bottom: 10px;line-height: 30px"> &nbsp;
-						<button id="address_kakao" class="btn btn-dark">주소찾기</button><br>
-						<input type="text" name="address_detail"  size="30px" style="line-height: 30px"  ><br>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">휴대전화</th>
-						<td>
-						<input type="text" name="phone" required size="20px" style="line-height: 30px" value="${member.member_phone }"><br>
-						<span style="color: gray;">("-"를 제외한 휴대전화를 입력해주세요. ex)01011111111 )</span>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">이메일</th>
-						<td>
-						<input type="text" name="email" id="email" value="${member.member_email }" readonly="readonly" size="20px" style="line-height: 30px; border: none;"> &nbsp;
-						<span id="authEmailResult"></span>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2" align="center"><button type="submit" class="btn btn-secondary btn-lg" >수정하기</button>
-						<button type="submit" class="btn btn-secondary btn-lg" >취소</button></td>
-					</tr>
-				</table>
-
-			</div>
-
-		</form>
-<!--   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
+  <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
+    <div id = "sform">
+        <h4>회원 정보</h4>
+        <p>Questions? Go ahead.</p>
+        <form action="MemberModifyPro.me" method="post" name="fr">
+          <table>
+          <tr>
+          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="name" name="name" value = "${member.member_name }" required></td>
+          </tr>
+          <tr>
+          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="id" name="id" value = "${member.member_id }" required></td>
+          </tr>
+          <tr> <!-- 기존 패스워드 -->
+          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="pass" name="oldpass" value = "${member.member_pass }" required></td>
+          </tr>
+          <tr> <!-- 새 패스워드 -->
+          <td width="300px"><input class="w3-input w3-border" type="password"  name="newpass1" placeholder="신규 비밀번호(변경시에만 입력)" onkeyup="checkPasswd(this.value)"><span id="checkPasswdResult"></span></td>
+          		
+          </tr>
+          <tr> <!-- 새 패스워드 확인 -->
+          <td width="300px"><input class="w3-input w3-border" type="password"  name="newpass2" placeholder="새 비밀번호 확인(변경시에만 입력)"  onkeyup="checkConfirmPasswd(this.value)"><span id="checkConfirmPasswdResult"></span></td>
+          		
+          </tr>
+          <tr>
+          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="address" name="address" value = "${member.member_address }" required></td>
+          </tr>
+          <tr>
+          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="email" name="email" value = "${member.member_email }" required></td>
+          </tr>
+          <tr>
+          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="phone" name="phone" value = "${member.member_phone }" required></td>
+          </tr>
+          <tr>
+          <td><button type="submit" class="w3-button w3-block w3-black">수정</button></td>
+          </tr>
+        </table>
+        </form>
+    </div>
+  </footer>
+ </div>	
+  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
 <!-- 로그인 화면 폼 -->
   <!-- End page content -->
 
@@ -281,22 +213,5 @@ function w3_close() {
 
 </script>
 <!-- End Channel Plugin -->
-
-
-<!-- 카카오 주소 API -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-window.onload = function(){
-    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
-        //카카오 지도 발생
-        new daum.Postcode({
-            oncomplete: function(data) { //선택시 입력값 세팅
-                document.getElementById("address_kakao2").value = data.address; // 주소 넣기
-                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
-            }
-        }).open();
-    });
-}
-</script>
 </body>
 </html>
