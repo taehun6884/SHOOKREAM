@@ -35,5 +35,19 @@ public class OrderProService {
 		return result;
 	}
 
+	public OrderBean selectProgress() {
+		OrderBean order = null;
+		
+		Connection con = JdbcUtil.getConnection();
+		
+		ProductDAO dao = ProductDAO.getInstance();
+		
+		dao.setConnection(con);
+		
+		order = dao.selectOrderProgress();
+		
+		return order;
+	}
+
 
 }
