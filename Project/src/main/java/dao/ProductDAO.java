@@ -69,7 +69,7 @@ private ProductDAO() {}
 			pstmt2.setString(3, product.getProduct_brand()); //brand
 			pstmt2.setString(4, product.getProduct_size()); // size
 			pstmt2.setInt(5, product.getProduct_price()); // price
-			pstmt2.setInt(6, 0); // release price(쿠폰적용가격)
+			pstmt2.setInt(6, product.getProduct_release_price()); // release price(쿠폰적용가격)
 			pstmt2.setInt(7, 0); // buy price(누적가격)
 			pstmt2.setInt(8, product.getProduct_amount()); // amount
 			pstmt2.setInt(9, 0); // sell_count
@@ -280,18 +280,19 @@ private ProductDAO() {}
 				}
 				System.out.println(cart_idx);
 		 //--------------------장바구니 등록--------------------------------		
-			sql = "INSERT INTO cart VALUES(?,?,?,now(),?,?,?,?,?,?,?)";	
+			sql = "INSERT INTO cart VALUES(?,?,?,now(),?,?,?,?,?,?,?,?)";	
 			pstmt2 = con.prepareStatement(sql);
 			pstmt2.setInt(1, cart_idx);
 			pstmt2.setInt(2, member_idx);	
 			pstmt2.setInt(3, product_idx);
 			pstmt2.setInt(4, cart.getCart_price()); 
-			pstmt2.setInt(5, cart.getCart_discount_price()); 
-			pstmt2.setInt(6, cart.getCart_count()); 
-			pstmt2.setString(7, cart.getCart_size()); 
-			pstmt2.setString(8, cart.getCart_color()); 
-			pstmt2.setString(9, cart.getCart_product_name()); 
-			pstmt2.setString(10, cart.getCart_product_image()); 
+			pstmt2.setInt(5, cart.getCart_discount()); 
+			pstmt2.setInt(6, cart.getCart_order_price()); 
+			pstmt2.setInt(7, cart.getCart_count()); 
+			pstmt2.setString(8, cart.getCart_size()); 
+			pstmt2.setString(9, cart.getCart_color()); 
+			pstmt2.setString(10, cart.getCart_product_name()); 
+			pstmt2.setString(11, cart.getCart_product_image()); 
 			
 			CartInsert = pstmt2.executeUpdate();
 			} catch (SQLException e) {
@@ -312,7 +313,7 @@ private ProductDAO() {}
 			 PreparedStatement pstmt =  null;
 			 ResultSet rs = null;
 				
-			 String sql ="SELECT c.cart_idx, c.cart_product_name, c.cart_product_image, c.cart_price, c.cart_discount_price, c.cart_color,c.cart_size, c.cart_count, c.member_idx, c.product_idx "
+			 String sql ="SELECT c.cart_idx, c.cart_product_name, c.cart_product_image, c.cart_price, c.cart_discount, c.cart_order_price, c.cart_color,c.cart_size, c.cart_count, c.member_idx, c.product_idx "
 			 		+ "FROM shookream.cart c join shookream.product p join shookream.image i join shookream.member m "
 			 		+ "on c.product_idx = p.product_idx and c.product_idx = i.product_idx and c.member_idx = m.member_idx "
 			 		+ "where m.member_idx=? "
@@ -332,7 +333,8 @@ private ProductDAO() {}
 					vo.setProduct_idx(rs.getInt("product_idx"));
 					vo.setCart_idx(rs.getInt("cart_idx"));
 					vo.setCart_price(rs.getInt("cart_price"));
-					vo.setCart_discount_price(rs.getInt("cart_discount_price"));
+					vo.setCart_discount(rs.getInt("cart_discount"));
+					vo.setCart_order_price(rs.getInt("cart_order_price"));
 					vo.setCart_count(rs.getInt("cart_count"));
 					vo.setCart_size(rs.getString("cart_size"));
 					vo.setCart_color(rs.getString("cart_color"));
@@ -390,7 +392,7 @@ private ProductDAO() {}
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql = "SELECT sum(p.product_price) "
+			String sql = "SELECT sum(c.cart_order_price) "
 					+ "FROM shookream.cart c join shookream.product p join shookream.member m "
 					+ "on c.product_idx = p.product_idx and c.member_idx = m.member_idx "
 					+ "where p.product_idx is not null and m.member_idx = ?";
@@ -404,8 +406,10 @@ private ProductDAO() {}
 				}
 				System.out.println(total);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
 			}
 			
 			
@@ -418,7 +422,7 @@ private ProductDAO() {}
 			int plusTotal = 0;
 			int member_idx = 0;
 			int product_idx = 0;
-			int product_price = 0;
+			int product_release_price = 0;
 			
 			PreparedStatement pstmt = null;
 			PreparedStatement pstmt2 = null;
@@ -427,7 +431,7 @@ private ProductDAO() {}
 			
 	
 			try {
-				String sql = "SELECT c.member_idx, p.product_price, p.product_idx "
+				String sql = "SELECT c.member_idx, p.product_release_price, p.product_idx "
 						+ "FROM shookream.cart c join shookream.product p join shookream.member m "
 						+ "on c.product_idx = p.product_idx and c.member_idx = m.member_idx "
 						+ "where m.member_idx is not null and c.cart_idx = ?";
@@ -438,14 +442,14 @@ private ProductDAO() {}
 				
 				if(rs.next()) {
 					member_idx = rs.getInt(1);
-					product_price = rs.getInt(2);
+					product_release_price = rs.getInt(2);
 					product_idx = rs.getInt(3);
 				}
 				System.out.println(member_idx + product_idx + cart_idx);
 				sql = "UPDATE shookream.cart c join shookream.product p join shookream.member m "
-						+ "ON c.product_idx = p.product_idx and c.member_idx = m.member_idx SET c.cart_price = c.cart_price + ? WHERE p.product_idx =? and m.member_idx = ? and c.cart_idx = ?";
+						+ "ON c.product_idx = p.product_idx and c.member_idx = m.member_idx SET c.cart_order_price = c.cart_order_price + ? WHERE p.product_idx =? and m.member_idx = ? and c.cart_idx = ?";
 				pstmt2 = con.prepareStatement(sql);
-				pstmt2.setInt(1, product_price);
+				pstmt2.setInt(1, product_release_price);
 				pstmt2.setInt(2, product_idx);
 				pstmt2.setInt(3, member_idx);
 				pstmt2.setInt(4, cart_idx);
@@ -468,7 +472,7 @@ private ProductDAO() {}
 			int minusTotal = 0;
 			int member_idx = 0;
 			int product_idx = 0;
-			int product_price = 0;
+			int product_release_price = 0;
 			
 			PreparedStatement pstmt = null;
 			PreparedStatement pstmt2 = null;
@@ -477,7 +481,7 @@ private ProductDAO() {}
 			
 	
 			try {
-				String sql = "SELECT c.member_idx, p.product_price, p.product_idx "
+				String sql = "SELECT c.member_idx, p.product_release_price, p.product_idx "
 						+ "FROM shookream.cart c join shookream.product p join shookream.member m "
 						+ "on c.product_idx = p.product_idx and c.member_idx = m.member_idx "
 						+ "where m.member_idx is not null and c.cart_idx = ?";
@@ -488,14 +492,14 @@ private ProductDAO() {}
 				
 				if(rs.next()) {
 					member_idx = rs.getInt(1);
-					product_price = rs.getInt(2);
+					product_release_price = rs.getInt(2);
 					product_idx = rs.getInt(3);
 				}
 				System.out.println(member_idx + product_idx + cart_idx);
 				sql = "UPDATE shookream.cart c join shookream.product p join shookream.member m "
-						+ "ON c.product_idx = p.product_idx and c.member_idx = m.member_idx SET c.cart_price = c.cart_price - ? WHERE p.product_idx =? and m.member_idx = ? and c.cart_idx = ?";
+						+ "ON c.product_idx = p.product_idx and c.member_idx = m.member_idx SET c.cart_order_price = c.cart_order_price - ? WHERE p.product_idx =? and m.member_idx = ? and c.cart_idx = ?";
 				pstmt2 = con.prepareStatement(sql);
-				pstmt2.setInt(1, product_price);
+				pstmt2.setInt(1, product_release_price);
 				pstmt2.setInt(2, product_idx);
 				pstmt2.setInt(3, member_idx);
 				pstmt2.setInt(4, cart_idx);
@@ -1454,6 +1458,33 @@ private ProductDAO() {}
 			}
 			
 			return listCount;
+		}
+
+		//-----------------장바구니 금액 +, - 후 포워딩을 위해 member_idx를 찾는 메서드-------------
+
+		public int selectMember(int cart_idx) {
+			int member_idx = 0;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql ="SELECT member_idx FROM cart WHERE cart_idx = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, cart_idx);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					member_idx = rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - selectMember");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return member_idx;
 		}
 
 

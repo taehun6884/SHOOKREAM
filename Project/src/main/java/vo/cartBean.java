@@ -7,7 +7,8 @@ public class cartBean {
 	private int product_idx; 
 	private int cart_idx; 
 	private int cart_price;//hidden
-	private int cart_discount_price; //hidden
+	private int cart_discount; //hidden
+	private int cart_order_price; //hidden
 	private int cart_count; //hidden
 	private String cart_size; //select
 	private String cart_color; //select
@@ -60,11 +61,17 @@ public class cartBean {
 	public void setCart_price(int cart_price) {
 		this.cart_price = cart_price;
 	}
-	public int getCart_discount_price() {
-		return cart_discount_price;
+	public int getCart_discount() {
+		return cart_discount;
 	}
-	public void setCart_discount_price(int cart_discount_price) {
-		this.cart_discount_price = cart_discount_price;
+	public void setCart_discount(int cart_discount_price) {
+		this.cart_discount = cart_discount_price;
+	}
+	public int getCart_order_price() {
+		return cart_order_price;
+	}
+	public void setCart_order_price(int cart_order_price) {
+		this.cart_order_price = cart_order_price;
 	}
 	public String getCart_product_name() {
 		return cart_product_name;
@@ -81,12 +88,12 @@ public class cartBean {
 	//-----------------toString--------------------
 	@Override
 	public String toString() {
-		return "cartBean [cart_idx=" + cart_idx + ", cart_price=" + cart_price + ", cart_discount_price="
-				+ cart_discount_price + ", cart_count=" + cart_count + ", cart_size=" + cart_size + ", cart_color="
+		return "cartBean [member_idx=" + member_idx + ", product_idx=" + product_idx + ", cart_idx=" + cart_idx
+				+ ", cart_price=" + cart_price + ", cart_discount=" + cart_discount + ", cart_order_price="
+				+ cart_order_price + ", cart_count=" + cart_count + ", cart_size=" + cart_size + ", cart_color="
 				+ cart_color + ", cart_product_name=" + cart_product_name + ", cart_product_image=" + cart_product_image
 				+ "]";
 	}
-
 
 
 

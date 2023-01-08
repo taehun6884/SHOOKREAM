@@ -272,12 +272,15 @@ margin-left: 270PX;
 	
 	<section id="detail" >
 	<form action="CartInsertPro.ca?product_idx=${param.product_idx }&member_idx=${member_idx}" method="post">
+	<!-- 장바구니에 담을 때 필요한 파라미터들 : 상품idx, 멤버idx, 상품가격, 할인율, 주문가격(할인된가격), 상품이름, 섬네일용 사진 -->
 		<input type="hidden" id="product_idx" value="${param.product_idx }">
 		<input type="hidden" id="member_idx" value="${member_idx }">
 		<input type="hidden" name ="cart_price" value="${product.product_price }">
-		<input type="hidden" name ="cart_discountprice" value="${product.product_discount_price }">
-		<input type="hidden" name ="cart_product_name" value="${product.product_name }">
+		<input type="hidden" name ="cart_discount" value="${product.product_discount_price }">
+   		<input type="hidden" id = "cart_order_price" name ="cart_order_price" value="">		
+      	<input type="hidden" name ="cart_product_name" value="${product.product_name }">
 		<input type="hidden" name ="cart_product_image" value="${image.image_main_file }">
+	
 		<!-- 상품 브랜드, 이름, 번호 -->
 		<div class="text" > 
 			<p>${product.product_brand}</p>
@@ -611,11 +614,21 @@ function iamport(){
     var commaReleasePrice = releasePrice.toLocaleString("en-US");
     var commaOriginPrice = originPrice.toLocaleString("en-US");
     document.querySelector('#discountResult').innerText = commaReleasePrice + '원'
-		 
+    //할인된 가격을 cart_discountprice 라는 id 값의 value에 넣음.
+    document.getElementById('cart_order_price').value = releasePrice;	 
 // 	    alert("로딩")
 	});
 
 
+</script>
+<script type="text/javascript">
+// function () {
+// 	var originPrice = ${product.product_price}
+// 	var discountRate = ${product.product_discount_price}
+//     var discounted = Math.round(originPrice * (discountRate / 100));	// 정수로 출력하기 위해 소수점 아래 반올림 처리
+//     var releasePrice = originPrice - discounted;
+// 	$('input[name=cart_order_price]').attr('value',releasePrice);
+// }
 </script>
 
 <script type="text/javascript">

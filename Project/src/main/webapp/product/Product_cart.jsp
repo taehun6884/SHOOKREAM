@@ -34,8 +34,9 @@
 }
 </style>
 <style type="text/css">
-#table, {
-     text-align: center;
+#table {	
+	margin-top: 150px
+   	text-align: center;
 }
 </style>
 <style>
@@ -67,6 +68,54 @@
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
+
+<style>
+    
+    .footer {
+    	padding: 0px;
+    }
+    
+    .top_circle {
+    	 
+	    border-radius: 50%;
+	    
+	    width: 100px;
+	    height: 100px;
+	    margin: 0px 7px;
+/* 	    padding-bottom: 24%; */
+	    
+	    position: relative;
+    }
+    
+    .top_circle_h {
+    	 position : absolute;
+    	 top: 20%;
+	    left : 19%;
+	    bottom :30%;
+	    
+	    font-size: 15px;
+	    text-align: center;
+	    font-weight: bold;
+    }
+    
+    #order_circle {
+    	background-color: #d2d2d2;
+    }
+    #cart_circle {
+    	background-color: #DCEBFF;
+    }
+    #com_circle {
+    	background-color: #d2d2d2;
+    }
+    
+    b {
+    font-size: 23px;
+    }
+    
+    #no_cart {
+    	padding: 50px 0px;
+    }
+    </style>
 </head>
 <body class="w3-content" style="max-width:1200px">
 <!-- Sidebar/menu -->
@@ -77,6 +126,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
 </header>
+
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
@@ -89,16 +139,28 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
-    <p class="w3-left">장바구니</p>
+<!--     <p class="w3-left">장바ㅊ구니</p> -->
     <p class="w3-right">
       <i class="fa fa-shopping-cart w3-margin-right"></i>
       <i class="fa fa-search"></i>
     </p>
 </header>
-   
-  <!-- Footer -->
-  <footer class="w3-padding-64 w3-small w3-center" id="footer">
-	<h3>장바구니</h3>
+
+  <header class="w3-container w3-xlarge" style="padding: 40px 50px;  z-index: -1">
+    <p class="w3-left">
+    <i class="fa-solid fa-bag-shopping" ></i>
+<!--     <i class="fa-solid fa-cart-shopping"></i> -->
+    &nbsp;장바구니</p>
+<!--     <div class="w3-right out-div"> -->
+	    <div class="top_circle w3-right" id="order_circle"><h3 class="top_circle_h"><b>03</b><br>주문완료</h3></div>
+	    <div class="top_circle w3-right" id="com_circle"><h3 class="top_circle_h"><b>02</b><br>주문/결제</h3></div>
+	    <div class="top_circle w3-right" id="cart_circle"><h3 class="top_circle_h"><b>01</b><br>장바구니</h3></div>
+<!--     <i id="cart_circle" class="fa-solid fa-circle"></i> -->
+<!--     </div> -->
+</header>
+   <hr size="30px">
+<!--   Footer -->
+<!--   <footer class="w3-padding-64 w3-small w3-center" id="footer"> -->
   <table class="table" border ="3">
   <thead  class="table-dark" >
     <tr>
@@ -122,8 +184,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <td><a href="ProductInfoForm.po?product_idx=${cart.product_idx }"><img src="upload/${cart.cart_product_image }"  alt="없음!" class="img-thumbnail" width="150" height="150" ></a></td>
       <td class ="td_cart">${cart.cart_product_name }<br>색상 : ${cart.cart_color }</td>
 	  <td class ="td_cart" id="cart_price"><fmt:formatNumber value="${cart.cart_price }" pattern="#,###원"></fmt:formatNumber></td>
-      <td class ="td_cart" id="cart_discount_price"><fmt:formatNumber value="${cart.cart_price * (cart.cart_discount_price / 100)}" pattern="#,###원"></fmt:formatNumber></td>
-      <td class ="td_cart" id="cart_order_price" ><fmt:formatNumber value="${cart.cart_price - (cart.cart_price * (cart.cart_discount_price / 100))}" pattern="#,###원"></fmt:formatNumber></td> 
+      <td class ="td_cart" id="cart_discount_price"><fmt:formatNumber value="${cart.cart_price * (cart.cart_discount / 100)}" pattern="#,###원"></fmt:formatNumber></td>
+      <td class ="td_cart" id="cart_order_price" ><fmt:formatNumber value="${cart.cart_order_price}" pattern="#,###원"></fmt:formatNumber></td> 
 <%--       <td class ="td_cart">${status.end }</td> --%>
       <td class ="td_cart">
       <input type="number" value="${cart.cart_count }" style="width: 35px">
@@ -138,10 +200,13 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     </c:forEach>
   </tbody>
 </table>
-	<div class="container px-4 text-center">
-	  <div class="row gx-5">
+	<div class="container px-4 text-center" id="totalResult">
+	  <div class="row gx-5" >
 	    <div class="col">
-<div class="p-3 border bg-light"><h4>총 금액 : <fmt:formatNumber value="${total }" pattern="#,###"></fmt:formatNumber> </h4></div>	    </div>
+			<div class="p-3 border bg-light" >
+			<h4>총 주문금액 : <fmt:formatNumber value="${total }" pattern="#,###"></fmt:formatNumber>원</h4>
+			</div>	    
+		</div>
 	    <div class="col">
 	      <div class="p-3 border bg-light">
 	      <button onclick="">구매하기</button>
@@ -188,7 +253,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--         <a href="#">4</a> -->
 <!--         <a href="#">5</a> -->
     </div>
-</footer>
+<!-- </footer> -->
   
 
 
@@ -300,11 +365,11 @@ function w3_close() {
 
 
 //페이지 로딩 시 체크된 상품을 배열로 넣음.
-$(function() {
+// $(function() {
 	//<td> 의 값들은 .val이 아니라, html로 가져와야 함.
-	if(#cart_)
-	var check = $("#cart_end").html();
-	alert(check)
+// 	if(#cart_)
+// 	var check = $("#cart_end").html();
+// 	alert(check)
 // 	let listArr = new Array();
 // 	let list = $("input[name='cartCheckBox']:checked");
 // 	for(var i=0; i<list.length; i++){
@@ -316,120 +381,47 @@ $(function() {
 // 		//listArr에 들어간 상황
 // 	}
 	
-});
-//할인금액, 주문금액 계산
-$(function() {
-	
-});
+// });
 
+
+//----------------------장바구니 체크박스 선택 여부에 따라 카트 금액 증가, 감소 작업 -------------------------
 function removeCheck(cb) {
 // 	alert(cb.id);
 // 	let cartCheckBox = cb.id.replace("cartCheckBox", ""); // id값의 index값을 가져옴
-	let checkNum = cb.value; // id값의 index값을 가져옴
-	alert(checkNum);
-// 	let checkNum2 = $("#checkNum").val();
-// 	alert(checkNum);//cartCheckbox0 / 1 / 2 
-// 	alert(checkNum.value);
-	if(checkNum == true){
-		alert("성공");
-	}else{
-		alert("실패");
+	let cart_idx = cb.value; // id값의 index값을 가져옴
+// 	alert(cart_idx);
+	
+	//체크박스 상태 판별(true이면 체크된 상태, false이면 체크가 풀린 상태)
+	let ischeck = cb.checked;
+	
+	if(ischeck == true){
+		$.ajax({
+			type: "get",
+			url: "CartPlusPro.ca",
+			data: {
+				cart_idx: cart_idx
+			},
+			dataType: "html",
+			success: function() {
+				 $("#totalResult").load(window.location.href + " #totalResult");
+			}
+		});
+	}else if(ischeck == false){
+		$.ajax({
+			type: "get",
+			url: "CartMinusPro.ca",
+			data: {
+				cart_idx: cart_idx
+			},
+			dataType: "html",
+			success: function() {
+				 $("#totalResult").load(window.location.href + " #totalResult");
+			}
+		});
 	}
 	
 };
 	
-	//체크박스의 체크 여부를 판별
-// 	//onchange를 통해 변경된 idx 값 가져오기
-	
-			
-// 	var product_idx = listArr[i].val();
-// 	alert(product_idx);
-			
-			
-			
-// 	for(int i=0; i<listArr.length; i++){
-		
-// 	}
-	
-// 	 var product_idx = $("input[name='cartCheckBox']").val();
-// 	 alert(product_idx);
-
-
-	
-
-
-//ajax 사용
-// $(document).ready(function() {
-// 	$("#cartCheckBox").click(function() {
-	
-		
-// 	});
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function setInfo() {
-
-// let totalPrice = 0;
-// let totalCount = 0;
-
-// $(".cartCheckBox").each(function(index, element){
-// 	if($(element).find(".productCheckbox").is(":checked") === true){	//체크여부
-// 		// 총 가격
-// 		totalPrice += parseInt($(element).find(".product_price").val());
-// 		// 총 갯수
-// 		totalCount += parseInt($(element).find(".product_amount").val());
-		
-// 		document.querySelector('#testResultBox').innerText = totalPrice
-		
-// 	}
-// });
-
-	
-// }
-
-// $(".cartCheckBox").on("change", function(){
-// 	setInfo($(".cartCheckBox"));
-// });
-
-
-
-
-
-
-
-//체크 여부에 따라 + - 처리
-// $(document).ready(function(){
-//     $("#cartCheckbox").change(function(){
-// 		let totalPrice = ${total};
-// 		let cartPrice = ("#cartPrice").val();
-//     	if($("#cartCheckbox").is(":checked")){
-// // 			totalPrice += $("#cartPrice").val();	
-// // 			alert("변경 후 값 : " + totalPrice);
-// 			alert("값 : " + cartPrice);
-// //             alert("체크박스 체크 선택!");
-//         }else{
-//             alert("체크박스 체크 해제!");
-//         }
-//     });
-// });
-
-
-
-
 </script>
 <script type="text/javascript">
 
