@@ -1768,5 +1768,29 @@ private ProductDAO() {}
 			
 			return deleteCount;
 		}
+
+
+		public OrderBean selectOrderProgress() { // 배송상태를 전달받기
+			OrderBean order = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT * FROM orderlist WHERE order_progress=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "order_progress");
+				
+				rs = pstmt.executeQuery();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			
+			return order;
+		}
 	
 }//DAO 끝
