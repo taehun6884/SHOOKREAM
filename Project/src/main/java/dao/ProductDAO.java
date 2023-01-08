@@ -1129,7 +1129,9 @@ private ProductDAO() {}
 					ResultSet rs  = null;
 					//--------------------이미지 이름 가져오기 작업--------------
 					try {
-						String sql = "SELECT i.image_main_file, i.image_real_file1, i.image_real_file2  FROM shookream.image i join shookream.product p  WHERE p.product_name = ?";
+						String sql = "SELECT i.image_main_file,i.image_real_file1,i.image_real_file2 FROM shookream.image i join shookream.product p "
+								+ "ON i.product_idx = p.product_idx "
+								+ "WHERE p.product_name = ?";
 
 						pstmt = con.prepareStatement(sql);
 						pstmt.setString(1, product_name);
