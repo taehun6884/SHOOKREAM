@@ -29,8 +29,8 @@ table.type03 {
   border-collapse: collapse;
   text-align: left;
   line-height: 1.5;
-  border-top: 1px solid #ccc;
-  border-left: 3px solid #369;
+  border-top: 1.5px solid #ccc;
+  border-left: 1.5px solid #ccc;
   margin-left:auto; 
   margin-right:auto;
 }
@@ -40,7 +40,7 @@ table.type03 th {
   font-weight: bold;
   font-size : 17px;
   vertical-align: top;
-  color: #153d73;
+  color: #153d73; 
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   height: 90px;
@@ -86,7 +86,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   	<form action="MemberJoinPro.me" method="post" name="joinForm" style="margin-bottom: 300px">
 			<h1 style="text-align: center;">회원가입</h1>
 			<h6 style="color: gray;text-align: center;margin-bottom: 50px" >SHOOKREAM에 오신 것을 환영합니다.</h6>
-		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3>
+<!-- 		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3> -->
 			
 			
 			<div>
@@ -147,13 +147,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 						<input type="text" name="email" id="email" placeholder="" required size="20px" style="line-height: 30px"> &nbsp;
 						<input type="button" class="btn btn-dark" id="checkEmail"  value="인증 메일 전송" onclick="alert('이메일 전송 완료!')"><br>
 						<span style="color: gray">("@"를 포함하여 이메일을 입력해주세요. ex) abcd@gmail.com)</span><br>
-						<input type="text" name="authCode" id="authCode" size="20px" style="line-height: 30px" placeholder="인증코드를 입력하세요" required="required"> 
-						<input type="button" class="btn btn-dark" id="checkEmail2"  value="인증 하기">
+						<input type="text" name="authCode" id="authCode" size="20px" style="line-height: 30px" required="required"> &nbsp;
+						<input type="button" class="btn btn-dark" id="checkEmail2"  value="인증 하기"><br>
+						<span style="color: gray">(인증코드 6자리를 입력하세요)</span> &nbsp;
 						<span id="authEmailResult"></span>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2" align="center"><button type="submit" class="btn btn-secondary btn-lg" onclick="fn_joinMember()" >회원가입</button></td>
+						<td colspan="2" align="center"><button type="submit" id=join_btn class="btn btn-dark" onclick="fn_joinMember()" >회원가입</button></td>
 					</tr>
 				</table>
 
@@ -281,13 +282,14 @@ function checkPasswd(passwd) { // 패스워드 길이 체크
 		               authCode: $("#authCode").val()
 		            },
 					success:function(result){
-						if(result == true){
+						if(result == "true"){
+							
 	                	  	 $("#authEmailResult").html("인증 성공!").css("color", "blue");
 	    	            } else {
 							 $("#authEmailResult").html("인증 실패!").css("color", "red");
-							 event.preventDefault(); // submit 기능 막기
-							           
-					}
+// 							 event.preventDefault(); // submit 기능 막기
+							 $('join_btn').prop('disabled', true);        
+						}
 					}
 		             
 		         });

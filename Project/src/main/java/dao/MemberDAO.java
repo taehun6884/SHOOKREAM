@@ -353,6 +353,9 @@ private MemberDAO() {}
 			}catch (Exception e) {
 				System.out.println("sql 구문 오류 - findID()");
 				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
 			}
 					
 			return id;
@@ -395,6 +398,8 @@ private MemberDAO() {}
 				}
 						return wish;
 			}
+			
+			
 			public int selectMemberIdx(String sId) {
 				int member_idx = 0;
 				

@@ -112,7 +112,13 @@ private ProductDAO() {}
 		} catch (SQLException e) {
 			System.out.println("상품등록 - 관리자");
 			e.printStackTrace();
-		} 
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt4);
+			JdbcUtil.close(pstmt3);
+			JdbcUtil.close(pstmt2);
+			JdbcUtil.close(pstmt);
+		}
 		return insertCount2;
 	}
 
@@ -163,6 +169,9 @@ private ProductDAO() {}
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
 			}
 			
 			return colorlist;
@@ -308,7 +317,7 @@ private ProductDAO() {}
 	//----------------장바 구니----------------------
 		public int CartInsert(int product_idx, int member_idx) {
 			int CartInsert = 0;
-			PreparedStatement pstmt1,pstmt2 = null;
+			PreparedStatement pstmt1 = null,pstmt2 = null;
 			ResultSet rs = null;
 			
 			try {
@@ -331,6 +340,10 @@ private ProductDAO() {}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt2);
+				JdbcUtil.close(pstmt1);
 			}
 			
 			return CartInsert;
@@ -433,6 +446,9 @@ private ProductDAO() {}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
 			}
 			
 			
@@ -1118,6 +1134,9 @@ private ProductDAO() {}
 			} catch (SQLException e) {
 				System.out.println("SQL 구문 오류 - selectImage");
 				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
 			}
 			return image;
 		}
@@ -1147,6 +1166,9 @@ private ProductDAO() {}
 					} catch (SQLException e) {
 						System.out.println("SQL 구문 오류 - selectImage");
 						e.printStackTrace();
+					} finally {
+						JdbcUtil.close(rs);
+						JdbcUtil.close(pstmt);
 					}
 					return imagelist;
 				}
@@ -1648,7 +1670,11 @@ private ProductDAO() {}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
 			}
+			
 			return Coupon_price;
 		}
 		
