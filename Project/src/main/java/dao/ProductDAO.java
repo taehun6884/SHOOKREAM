@@ -122,7 +122,7 @@ private ProductDAO() {}
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select distinct(product_size) from shookream.product where product_name=? order by product_size";
+		String sql = "select distinct(product_size) from product where product_name=? order by product_size";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -148,7 +148,7 @@ private ProductDAO() {}
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql = "select distinct(product_color) from shookream.product where product_name=?";
+			String sql = "select distinct(product_color) from product where product_name=?";
 			
 			try {
 				pstmt = con.prepareStatement(sql);
@@ -220,7 +220,7 @@ private ProductDAO() {}
        
        try {
           String sql = "SELECT c.coupon_content"
-                + " FROM shookream.member_coupon m join shookream.coupon c"
+                + " FROM member_coupon m join coupon c"
                 + " on m.coupon_idx = c.coupon_idx"
                 + " WHERE coupon_content LIKE ? AND member_idx=?";
           
@@ -263,11 +263,11 @@ private ProductDAO() {}
 		
 		try {
 			String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_date, p.product_amount, p.product_color, i.image_main_file "
-					+ "FROM shookream.product p join shookream.image i "
+					+ "FROM product p join image i "
 					+ "on p.product_idx = i.product_idx ORDER BY product_date desc";
 			
 //			String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_date, p.product_amount, p.product_color, i.image_main_file "
-//					+ "FROM shookream.product p join shookream.image i "
+//					+ "FROM product p join image i "
 //					+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY product_date desc";
 			
 			pstmt = con.prepareStatement(sql);
@@ -344,7 +344,7 @@ private ProductDAO() {}
 			 ResultSet rs = null;
 				
 			 String sql ="SELECT c.cart_idx,p.product_name, p.product_size, p.product_price,p.product_brand,i.image_main_file,m.member_id,p.product_idx "
-			 		+ "FROM shookream.cart c join shookream.product p join shookream.image i join shookream.member m "
+			 		+ "FROM cart c join product p join image i join member m "
 			 		+ "on c.product_idx = p.product_idx and c.product_idx = i.product_idx and c.member_idx = m.member_idx "
 			 		+ "where m.member_idx=? "
 			 		+ "LIMIT ?,?";
@@ -418,7 +418,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			String sql = "SELECT sum(p.product_price) "
-					+ "FROM shookream.cart c join shookream.product p join shookream.member m "
+					+ "FROM cart c join product p join member m "
 					+ "on c.product_idx = p.product_idx and c.member_idx = m.member_idx "
 					+ "where p.product_idx is not null and m.member_idx = ?";
 			
@@ -448,7 +448,7 @@ private ProductDAO() {}
 			
 			try {
 				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_discount_price, i.image_main_file "
-						+ "FROM shookream.product p join shookream.image i "
+						+ "FROM product p join image i "
 						+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY p.product_idx ASC";
 				
 				pstmt = con.prepareStatement(sql);
@@ -496,7 +496,7 @@ private ProductDAO() {}
 			
 			try {
 				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_date, p.product_discount_price, i.image_main_file "
-				+ "FROM shookream.product p join shookream.image i "
+				+ "FROM product p join image i "
 				+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY product_date desc";
 				
 				pstmt = con.prepareStatement(sql);
@@ -544,7 +544,7 @@ private ProductDAO() {}
 			
 			try {
 				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price,p.product_discount_price, i.image_main_file "
-						+ "FROM shookream.product p join shookream.image i "
+						+ "FROM product p join image i "
 						+ "on p.product_idx = i.product_idx "
 						+ "WHERE product_discount_price > 0 "
 						+ "GROUP BY product_name ORDER BY product_discount_price ASC";
@@ -597,7 +597,7 @@ private ProductDAO() {}
 			
 			try {
 				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_discount_price, i.image_main_file "
-						+ "FROM shookream.product p join shookream.image i "
+						+ "FROM product p join image i "
 						+ "on p.product_idx = i.product_idx "
 						+ "WHERE product_brand LIKE ? "
 						+ "GROUP BY product_name ORDER BY product_sell_count ASC";
@@ -654,7 +654,7 @@ private ProductDAO() {}
 			
 			try {
 				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, i.image_main_file "
-						+ "FROM shookream.product p join shookream.image i "
+						+ "FROM product p join image i "
 						+ "on p.product_idx = i.product_idx "
 						+ "WHERE product_brand LIKE ? OR product_name LIKE ?"
 						+ "GROUP BY product_name ORDER BY product_sell_count ASC";
@@ -744,6 +744,16 @@ private ProductDAO() {}
 					pstmt4.setInt(2,  vo.getOrder_product_sell_count()+1);
 					pstmt4.setInt(3, vo.getOrder_product_idx());
 					pstmt4.executeUpdate();
+					
+					sql="UPDATE member_coupon set isUse= ? WHERE coupon_idx =?";
+					pstmt4 = con.prepareStatement(sql);
+					pstmt4.setInt(1, vo.getOrder_isUse()+1);
+					pstmt4.setInt(2, vo.getOrder_coupon_idx());
+					pstmt4.executeUpdate();
+					
+					sql="DELETE FROM member_coupon WHERE isUse=1";
+					pstmt4 = con.prepareStatement(sql);
+					pstmt4.executeUpdate();
 				}
 				
 			
@@ -752,6 +762,7 @@ private ProductDAO() {}
 			
 			}finally {
 				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt4);
 				JdbcUtil.close(pstmt3);
 				JdbcUtil.close(pstmt2);
 				JdbcUtil.close(pstmt);
@@ -768,7 +779,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			String sql="SELECT i.image_main_file,m.member_id,o.order_price,o.order_category,o.order_progress,o.order_date,p.product_idx,p.product_size,p.product_color,o.order_idx "
-					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
+					+ "from orderlist o join product p join member m join image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx "
 					+ "where m.member_idx=? "
 					+ "LIMIT ?,?";
@@ -842,7 +853,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date,o.order_idx "
-					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
+					+ "from orderlist o join product p join member m join image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx";
 					
 			
@@ -1129,7 +1140,7 @@ private ProductDAO() {}
 					ResultSet rs  = null;
 					//--------------------이미지 이름 가져오기 작업--------------
 					try {
-						String sql = "SELECT i.image_main_file,i.image_real_file1,i.image_real_file2 FROM shookream.image i join shookream.product p "
+						String sql = "SELECT i.image_main_file,i.image_real_file1,i.image_real_file2 FROM image i join product p "
 								+ "ON i.product_idx = p.product_idx "
 								+ "WHERE p.product_name = ?";
 
@@ -1278,7 +1289,7 @@ private ProductDAO() {}
 			
 			String sql="SELECT w.wish_idx, i.image_main_file,m.member_id,p.product_price,p.product_name,"
 					+ "p.product_brand,p.product_size,p.product_color,p.product_idx "
-					+ "FROM shookream.wish w JOIN shookream.product p JOIN shookream.member m JOIN shookream.image i "
+					+ "FROM wish w JOIN product p JOIN member m JOIN image i "
 					+ "ON w.product_idx = p.product_idx AND w.member_idx = m.member_idx AND w.product_idx = i.product_idx "
 					+ "WHERE m.member_idx=? "
 					+ "LIMIT ?,?";
