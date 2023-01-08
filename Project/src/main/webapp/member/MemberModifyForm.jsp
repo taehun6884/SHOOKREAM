@@ -59,6 +59,110 @@ table.type03 td {
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<script type="text/javascript">
+var passwdStatus = false;
+var phoneStatus = false;
+
+$(function() {
+$("#pass").on("keyup", function() {
+	let pass = $("#pass").val();
+	
+	let lengthRegex = /^[A-Za-z0-9!@#$%]{8,16}$/; // 전체 규칙만 판별
+	
+	let engUpperRegex = /[A-Z]/; // 대문자
+	let engLowerRegex = /[a-z]/; // 소문자
+	let numRegex = /[0-9]/; // 숫자
+	let specRegex = /[!@#$%]/; // 특수문자
+	
+	
+		if(!lengthRegex.exec(pass)) {
+			$("#checkPasswdResult").html("사용 불가능한 패스워드").css("color", "red");
+			passwdStatus = false;
+			
+			if($("#pass").length > 0){
+				$("#newpass2").attr('required', 'required');
+			}
+		} else {
+	
+			let count = 0; // 각 항목별 포함 갯수를 카운팅 할 변수 선언
+			
+			if(engUpperRegex.exec(pass)) { count++ };
+			if(engLowerRegex.exec(pass)) { count++ };
+			if(numRegex.exec(pass)) { count++ };
+			if(specRegex.exec(pass)) { count++ };
+			
+			passwdStatus = true;
+			switch(count) {
+				case 4 : $("#checkPasswdResult").html("안전").css("color", "green"); break;
+				case 3 : $("#checkPasswdResult").html("보통").css("color", "orange"); break;
+				case 2 : $("#checkPasswdResult").html("위험").css("color", "gray"); break;
+				case 1 : 
+							$("#checkPasswdResult").html("사용 불가능한 패스워드").css("color", "red");
+							passwdStatus = false;
+			}
+			
+		}
+	
+});
+
+//휴대전화 확인
+	$("#phone").on("change", function() {
+		let phone = $("#phone").val();
+		
+		let regex =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+		if(!regex.exec(phone)) {
+			$("#phoneCheckResult").html("잘못된 휴대전화 형식입니다").css("color", "red");
+			phoneStatus = false;
+		}else {
+			$("#phoneCheckResult").html("올바른 휴대전화 형식입니다").css("color", "blue");
+			phoneStatus = true;
+			}
+		});
+	
+	
+	
+});	
+
+
+function reCheckPasswd(pass2) {//재입력 확인 
+	var pass = document.getElementById("pass").value;
+// 	var pass2 = document.getElementById("pass2").value;
+	let spanRecheckResult = document.getElementById("recheckResult");
+
+	if(pass == pass2){
+		spanRecheckResult.innerHTML = "동일한 패스워드 입니다";
+		spanRecheckResult.style.color = "BLUE";    		
+	}else{
+		spanRecheckResult.innerHTML = "일치하지 않는 패스워드 입니다";
+		spanRecheckResult.style.color = "RED";   
+		event.preventDefault(); // submit 기능 막기
+	}
+}
+
+function fn_modify() {
+	var mdForm = document.mdForm;
+	var pass = document.getElementById("pass").value;
+	var pass2 = document.getElementById("newpass2").value;
+	var phone = document.getElementById("phone").value;
+	
+	if(!pass){
+		passwdStatus = true;
+	} 
+	
+	if(!phone){
+		phoneStatus = true;
+	}
+	
+	if(passwdStatus == false) {
+		alert("패스워드를 확인해주세요!")
+		event.preventDefault(); // submit 기능 막기
+	}else if(phoneStatus == false) {
+		alert("휴대전화를 확인해주세요!")
+		event.preventDefault(); // submit 기능 막기
+	}
+}
+</script>
 </head>
 <body class="w3-content" style="max-width:95% ">
 
@@ -92,9 +196,10 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   
   <!-- Footer -->
   <!-- 로그인 화면 폼 -->
-  <form action="MemberModifyPro.me" method="post" name="joinForm" style="margin-bottom: 300px">
+  <form action="MemberModifyPro.me" method="post" name="mdForm" style="margin-bottom: 300px">
   			<input type="hidden" value = "${member.member_pass }" name="oldpass">
-  			<input type="hidden" value = "${member.member_address }" name="address">
+  			<input type="hidden" value = "${member.member_address }" name="oldaddress">
+  			<input type="hidden" value = "${member.member_phone }" name="oldphone">
   			
 			<h1 style="text-align: center;">정보 수정</h1>
 <!-- 			<h6 style="color: gray;text-align: center;margin-bottom: 50px" >SHOOKREAM에 오신 것을 환영합니다.</h6> -->
@@ -120,14 +225,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 					<tr>
 						<th scope="row">신규 비밀번호</th>
 						<td>
-						<input type="password" name="newpass1" id ="pass" size="20px" placeholder="변경시에만 입력"  style="line-height: 30px" onkeyup="checkPasswd(this.value)"><span id="checkPasswdResult"></span><br>
+						<input type="password" name="newpass1" id ="pass" size="20px" placeholder="변경시에만 입력"  style="line-height: 30px" >&nbsp;<span id="checkPasswdResult"></span><br>
 						<span style="color: gray;">(영문소문자/숫자/특수문자 중 2가지 이상 조합, 8~16자.)</span>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">신규 비밀번호 확인</th>
 						<td>
-						<input type="password" name="newpass2"  size="20px" style="line-height: 30px" placeholder="변경시에만 입력"  onkeyup="reCheckPasswd(this.value)"><span id ="recheckResult"></span><br>
+						<input type="password" name="newpass2"  id="newpass2" size="20px" style="line-height: 30px" placeholder="변경시에만 입력"  onkeyup="reCheckPasswd(this.value)">&nbsp;<span id ="recheckResult"></span><br>
 						<span style="color: gray;">(비밀번호 확인을 위해 동일하게 입력해주세요.)</span>
 						</td>
 					</tr>
@@ -135,7 +240,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 					<tr>
 						<th scope="row">주소</th>
 						<td>
-						<div>현재 주소   [ ${member.member_address } ]</div><br>
+						<div>${member.member_address }</div><br>
 						<input type="text" name="address" id="address_kakao2"  size="30px" placeholder="변경시에만 입력" style="margin-bottom: 10px;line-height: 30px"> &nbsp;
 						<button id="address_kakao" class="btn btn-dark">주소찾기</button><br>
 						<input type="text" name="address_detail"  size="30px" style="line-height: 30px"  ><br>
@@ -144,7 +249,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 					<tr>
 						<th scope="row">휴대전화</th>
 						<td>
-						<input type="text" name="phone" required size="20px" style="line-height: 30px" value="${member.member_phone }"><br>
+						<div>${member.member_phone }</div><br>
+						<input type="text" name="phone" id="phone" size="20px" style="line-height: 30px" placeholder="변경시에만 입력" >&nbsp; <span id ="phoneCheckResult"></span><br>
 						<span style="color: gray;">("-"를 제외한 휴대전화를 입력해주세요. ex)01011111111 )</span>
 						</td>
 					</tr>
@@ -156,8 +262,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2" align="center"><button type="submit" class="btn btn-secondary btn-lg" >수정하기</button>
-						<button type="submit" class="btn btn-secondary btn-lg" >취소</button></td>
+						<td colspan="2" align="center"><button type="submit" class="btn btn-secondary btn-lg" onclick="fn_modify()">수정하기</button>
+						<button type="submit" class="btn btn-secondary btn-lg" onclick="history.back()">취소</button></td>
 					</tr>
 				</table>
 

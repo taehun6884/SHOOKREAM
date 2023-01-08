@@ -135,7 +135,7 @@ $(function() {
 		$("#phone").on("change", function() {
 			let phone = $("#phone").val();
 			
-			let regex =/(01[016789])([1-9]{1}[0-9]{2,3})([0-9]{4})$/;
+			let regex =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
 			if(!regex.exec(phone)) {
 				$("#phoneCheckResult").html("잘못된 휴대전화 형식입니다").css("color", "red");
 				phoneStatus = false;
