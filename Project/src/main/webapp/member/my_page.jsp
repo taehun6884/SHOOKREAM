@@ -22,32 +22,60 @@
           display: inline-block;
           text-align: center;
         }
-        
-	#table {
-	     text-align: center;
-	}
 	
-	.myPage1 {
+	.myOrderState {
 		text-align: center;
 		margin-left: 5em;
+		padding-top: 10em;
 	}
 	
 	nav>ul>li {
 		float: center;
 		display: inline-block;
-		width: 150px;
+		width: 10%;
+	}
+	
+	#navCount {
+		font-size: 20px;
+		font-weight: bold;
+	}
+	
+	#myPageList {
+		padding-top: 100px;
+	}
+	
+	.grid-container {
+		display: grid;
+		grid-template-columns: auto auto auto ;
+		grid-template-rows: 120px 120px;
+
+	}
+	
+	.grid-item {
+		border: 1px solid;
+		padding: 20px;
+		font-size: 15px;
+		text-align: center;
 	}
 	
 	i {
-		text-align: center;
-		font-size:20px;
-	}
-	
-	#text1{
-		font-size:20px;
-		text-align:left;
+ 		text-align: center; 
+		font-size:15px;
 	}
 
+	h4 {
+		text-align: left;
+	}
+	
+	.aList {
+		text-decoration: none;
+		color: black;
+	}
+	
+	.aList:hover {
+		color: gray;
+	}
+	
 </style>
 <style>
     .paging {
@@ -61,7 +89,6 @@
 	    padding: 5px 8px;
         border: 1px solid #ccc;
        	color: #000; 
-
     }
 		
 	.w3-sidebar a {
@@ -75,44 +102,58 @@
 </head>
 <body class="w3-content" style="max-width:95%">
 <!-- Sidebar/menu -->
-<jsp:include page="../inc/side_for_myPage.jsp"/>
+<jsp:include page="../inc/side.jsp"/>
 <jsp:include page="../inc/top.jsp"/>
 <div class="w3-main" style="margin-left:250px">
 
-<div class="myPage1">
+<div class="myOrderState">
+	<h4>Delivery</h4><br><br>
 	<nav class="myPageNav">
 		<ul>
 			<li><i class='fas fa-money-check'><br><br>입금 확인중</i></li>
+			<li><i class='fas fa-angle-right'></i></li>
 			<li><i class='fas fa-clipboard-check'><br><br>결제완료</i></li>
+			<li><i class='fas fa-angle-right'></i></li>
 			<li><i class='fas fa-box'><br><br>상품 준비중</i></li>
+			<li><i class='fas fa-angle-right'></i></li>
 			<li><i class='fas fa-truck'><br><br>배송중</i></li>
+			<li><i class='fas fa-angle-right'></i></li>
 			<li><i class='fas fa-home'><br><br>배송 완료</i></li>
+		</ul>
+		<ul id="navCount">
+			<li>0</li>
+			<li></li>
+			<li>0</li>
+			<li></li>
+			<li>0</li>
+			<li></li>
+			<li>0</li>
+			<li></li>
+			<c:choose>
+				<c:when test="${delivery.order_process eq '배송완료'}">
+					<li>1</li>
+				</c:when>	
+				<c:otherwise>
+					<li>0</li>
+				</c:otherwise>
+			</c:choose>
 		</ul>
 	</nav>
 
 <hr>
-	<div>
-		<div id="text1">최근 주문 내역
-			<c:forEach var="order" items="${orderlist }">
-				<tr>
-					<td>${order.order_idx }</td>
-					<td><img src="upload/${order.order_main_image }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
-					<td>${order.order_member_id }</td>
-					<td>${order.order_product_price }</td>
-					<td>${order.order_category }</td>
-					<td>${order.order_product_size }</td>
-					<td>${order.order_product_color }</td>
-					<td><fmt:formatDate value="${order.order_date }" pattern="yyyy-MM-DD"/></td>
-				</tr>
-    		</c:forEach>
-    	</div>	
-	</div>
-	
+	<div id="myPageList">
+		<h4>MY PAGE</h4>
+		<div class="grid-container">
+			<div class="grid-item"><a href="MemberModifyForm.me?id=${sessionScope.sId }" class="aList"><br>회원 정보 수정</a></div>
+			<div class="grid-item"><a href="MemberDeleteForm.me?id=${sessionScope.sId }" class="aList"><br>회원 탈퇴</a></div>
+			<div class="grid-item"><a href="" class="aList"><br>내 쿠폰</a></div>
+			<div class="grid-item"><a href="ProductOrderList.po?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1" class="aList"><br>내 주문관리</a></div>
+			<div class="grid-item"><a href="LikeList.ca?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1" class="aList"><br>내 위시리스트</a></div>
+			<div class="grid-item"><br><i class='fas fa-frown' style='font-size:36px;color:red'></i></div>
+		</div>
+	</div>	
 </div>
-
-
-
-</div>	
+	
 <script>
 // Accordion 
 	function myAccFunc() {
@@ -133,15 +174,6 @@
 		  }
 		}
 	
-	function myAccFunc2() {
-		  var x = document.getElementById("orderAcc");
-		  if (x.className.indexOf("w3-show") == -1) {
-		    x.className += " w3-show";
-		  } else {
-		    x.className = x.className.replace(" w3-show", "");
-		  }
-		}
-
 // Click on the "Jeans" link on page load to open the accordion for demo purposes
 document.getElementById("myBtn").click();
 

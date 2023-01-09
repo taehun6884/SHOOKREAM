@@ -24,6 +24,7 @@ import action.MemberLogoutProAction;
 import action.MemberModifyFormAction;
 import action.MemberModifyProAction;
 import action.ReportProAction;
+import action.MyPageDeliveryAction;
 import action.ReviewWriteProAction;
 import svc.LoginMemberService;
 import vo.ActionForward;
@@ -124,6 +125,8 @@ public class MemberController extends HttpServlet{
 			forward.setRedirect(false);
 		}else if(command.equals("/ReportAddProAction.me")) { // 이메일 인증
 			action = new ReportProAction();
+		} else if(command.equals("/MemberMyPage.me")) { // 마이페이지 이동(배송상태 정보 조회)
+			action = new MyPageDeliveryAction();
 			forward = action.execute(request, response);
 		}
 		

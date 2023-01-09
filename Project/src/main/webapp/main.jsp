@@ -24,7 +24,8 @@
 
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-
+<script src="https://kit.fontawesome.com/498a54c4c7.js"
+	crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(function() {
 	$('.post-wrapper').slick({
@@ -68,7 +69,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 }
 
 #price {
-	margin-bottom:20px;
 }
 
 #product_price {
@@ -120,7 +120,6 @@ margin-top:10px;
   	<div><img src="images/jeans1.jpg" height="700" width="900"></div>
   	<div><img src="images/섬네일(슈펜).jpg" height="700" width="900"></div>
   	<div><img src="images/logo.png" height="700" width="900"></div>
-  
   </div>
 <!--   <div class="w3-container w3-text-grey" id="jeans"> -->
 <!--     <p>BEST</p> -->
@@ -166,7 +165,14 @@ margin-top:10px;
 								</c:otherwise>
 							</c:choose>
 							</div>
-							
+							<div id="etcInfo" style="font-size: small; padding-bottom: 20px;">
+								<span>
+									구매 ${productBestList.product_sell_count } &nbsp;
+								</span>
+								<span>
+									<i class="fa-solid fa-heart" style="color:pink;"></i> ${productBestList.product_wishcount }
+								</span>
+							</div>
 						</div>
 					</div>
 				</c:forEach>
@@ -212,7 +218,14 @@ margin-top:10px;
 								</c:otherwise>
 							</c:choose>
 							</div>
-							
+							<div id="etcInfo" style="font-size: small; padding-bottom: 20px;">
+								<span>
+									구매 ${productNewList.product_sell_count } &nbsp;
+								</span>
+								<span>
+									<i class="fa-solid fa-heart" style="color:pink;"></i> ${productNewList.product_wishcount }
+								</span>
+							</div>
 						</div>
 					</div>
 				</c:forEach>

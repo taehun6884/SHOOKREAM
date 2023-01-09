@@ -125,6 +125,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	</table>
    
 	  <table class="table">
+	  <input type="hidden" id="coupon_idx" >
 	  <thead>
 	    <tr>
 	      <th scope="col" colspan="6" style="font-size: x-large;">할인 혜택</th>
@@ -148,8 +149,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	   	<td colspan="6"><input type="checkbox">모두사용 하기 (이포인트 *원 보유) <button type="button" class="btn btn-dark btn-sm">포인트 조회</button></td>
 	   </tr>
 	   <tr>
-	   	<th colspan="2">할인된 가격</th>
-	   	<td colspan="6"><input type="text" id="totalprice">원</td>
+	   	<th colspan="2">가격</th>
+	   	<td colspan="6"><input type="text" id="totalprice" value="${product.product_price }">원</td>
 	   </tr>   
 	  </tbody>
 	</table>
@@ -240,16 +241,6 @@ function CouponCheck() {
 
 </script>
 <script src="../js/jquery-3.6.3.js"></script>
-<script type="text/javascript">
-$(function(){
-	$("#totalprice").on("change",function(){
-		
-		
-		
-	})
-
-});
-</script>
 <script>
 // Accordion 
 function myAccFunc() {
@@ -260,6 +251,15 @@ function myAccFunc() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
+
+function myAccFunc1() {
+	  var x = document.getElementById("cusAcc");
+	  if (x.className.indexOf("w3-show") == -1) {
+	    x.className += " w3-show";
+	  } else {
+	    x.className = x.className.replace(" w3-show", "");
+	  }
+	}
 
 // Click on the "Jeans" link on page load to open the accordion for demo purposes
 document.getElementById("myBtn").click();
@@ -325,7 +325,7 @@ function iamport(){
 		//가맹점 식별코드
 		IMP.init('imp77718215');
 		IMP.request_pay({
-		    pg : 'kakaopay',
+			pg : 'kakaopay',
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
 		    name : '${product.product_name}' , //결제창에서 보여질 이름
@@ -335,11 +335,11 @@ function iamport(){
 			console.log(rsp);
 		    if ( rsp.success ) {
 		    	var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
+		    	msg += '고유ID : ' + rsp.imp_uid;
 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
 		        msg += '결제 금액 : ' + rsp.paid_amount;
 		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		        location.href="ProductOrderPro.po?order_category=주문완료&order_progress=배송완료&member_idx=${member_idx}&product_idx=${product.product_idx}&product_amount=${product.product_amount}&product_sell_count=${product.product_sell_count}&product_price="+rsp.paid_amount;
+		        location.href="ProductOrderPro.po?order_category=주문완료&order_progress=배송완료&member_idx=${member_idx}&product_idx=${product.product_idx}&product_amount=${product.product_amount}&product_sell_count=${product.product_sell_count}&product_price="+rsp.paid_amount+"&coupon_idx="+$("#coupon_idx").val();
 		    } else {
 		    	 var msg = '결제에 실패하였습니다.';
 		         msg += '에러내용 : ' + rsp.error_msg;

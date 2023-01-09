@@ -24,7 +24,7 @@
   <tbody>
    <c:forEach var="coupon" items="${couponList }">
     <tr>
-      <th scope="row">${coupon.coupon_idx }</th>
+      <th scope="row" id="idx">${coupon.coupon_idx }</th>
       <td>${coupon.coupon_name }</td>
       <td id="price">${coupon.coupon_price }</td>
       <c:choose>
@@ -38,14 +38,16 @@
       <td>${coupon.coupon_start }</td>
       <td>${coupon.coupon_end }</td>
       <td>
-      <button type="button" class="btn btn-dark" id="useCoupon" value="${coupon.coupon_price}" onclick="useCoupon(${coupon.coupon_price})">적용하기</button>
+      <button type="button" class="btn btn-dark" id="useCoupon" value="${coupon.coupon_price}" onclick="useCoupon(${coupon.coupon_price},${coupon.coupon_idx})">적용하기</button>
     </tr>
      </c:forEach>
   </tbody>
 </table>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript">
-	function useCoupon(price) {
+	function useCoupon(price,idx) {
+		 window.opener.document.getElementById( "coupon_idx" ).value = idx;
+		 alert( window.opener.document.getElementById( "coupon_idx" ).value)
 		 window.opener.document.getElementById( "priceValue" ).value = price;
 		 window.opener.document.getElementById( "totalprice" ).value =Number(${param.product_price})-Number(price);	
 		 close();

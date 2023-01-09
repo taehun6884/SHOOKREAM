@@ -28,6 +28,7 @@ public class ProductInfoProAction implements Action {
 		
 		// 상품 상세 정보 조회에 필요한 상품 번호 가져오기
 		int product_idx = Integer.parseInt(request.getParameter("product_idx"));
+		String product_name = request.getParameter("product_name");
 		System.out.println("product_idx = " + product_idx);
 		System.out.println(request.getParameter("product_idx"));
 		
@@ -54,6 +55,10 @@ public class ProductInfoProAction implements Action {
 		List<String>categorylist =  service.getCategoryList(product.getProduct_name());
 		List<String> colorlist = service.ProductColorCategory(product.getProduct_name());
 		
+		//이미지 리스트 출력
+		List<imageBean> imagelist = service.imageList(product.getProduct_name());
+		System.out.println(imagelist);
+		
 		HttpSession session = request.getSession();
 //		int member_idx = Integer.parseInt(request.getParameter("member_idx"));
 		
@@ -79,6 +84,8 @@ public class ProductInfoProAction implements Action {
 		request.setAttribute("c1", c1);
 		request.setAttribute("c2", c2);
 		request.setAttribute("cp", cp);
+		request.setAttribute("imagelist", imagelist);
+		System.out.println(imagelist);
 		// 상품 리뷰 출력 시작
 		System.out.println(c1);
 		System.out.println(cp);

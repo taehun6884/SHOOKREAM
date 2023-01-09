@@ -17,14 +17,13 @@ private int product_sell_count; // 상품 판매수
 private String product_exp; // 상품 요약설명
 private String product_detail_exp; // 상품 상세설명
 private String product_color; // 상품 색상 카테고리
-private double product_discount_price; // 상품 할인율
+private int product_discount_price; // 상품 할인율
 private String product_img; // 메인 사진
 private String product_img2; // 추가 사진1
 private String product_img3; // 추가 사진2
 private Timestamp product_date; // 등록일
 private int product_wishcount; // 좋아요 누적수
 private int cart_idx; //카트 번호
-private int like_count; //좋아요 개수
 private int member_idx; // 좋아요 누른 회원
 private int wish_idx; // 좋아요 번호
 //------------getter, setter-------------------
@@ -101,10 +100,10 @@ public String getProduct_color() {
 public void setProduct_color(String product_color) {
 	this.product_color = product_color;
 }
-public double getProduct_discount_price() {
+public int getProduct_discount_price() {
 	return product_discount_price;
 }
-public void setProduct_discount_price(double product_discount_price) {
+public void setProduct_discount_price(int product_discount_price) {
 	this.product_discount_price = product_discount_price;
 }
 public String getProduct_img() {
@@ -137,12 +136,7 @@ public int getCart_idx() {
 public void setCart_idx(int cart_idx) {
 	this.cart_idx = cart_idx;
 }
-public int getLike_count() {
-	return like_count;
-}
-public void setLike_count(int like_count) {
-	this.like_count = like_count;
-}	
+	
 public int getProduct_wishcount() {
 	return product_wishcount;
 }
@@ -173,7 +167,7 @@ public String toString() {
 			+ product_exp + ", product_detail_exp=" + product_detail_exp + ", product_color=" + product_color
 			+ ", product_discount_price=" + product_discount_price + ", product_img=" + product_img + ", product_img2="
 			+ product_img2 + ", product_img3=" + product_img3 + ", product_date=" + product_date + ", cart_idx="
-			+ cart_idx + ", like_count=" + like_count + "]";
+			+ cart_idx + "]";
 }
 
 

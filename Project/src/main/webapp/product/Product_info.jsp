@@ -22,10 +22,41 @@ pageContext.setAttribute("cn", "\n");
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> 
+<script type="text/javascript">
+$('.center').slick({
+	  centerMode: true,
+	  centerPadding: '60px',
+	  slidesToShow: 3,
+	  responsive: [
+	    {
+	      breakpoint: 768,
+	      settings: {
+	        arrows: false,
+	        centerMode: true,
+	        centerPadding: '40px',
+	        slidesToShow: 3
+	      }
+	    },
+	    {
+	      breakpoint: 480,
+	      settings: {
+	        arrows: false,
+	        centerMode: true,
+	        centerPadding: '40px',
+	        slidesToShow: 1
+	      }
+	    }
+	  ]
+	});
+</script>
 <style type="text/css">
 #sform { 
 		  border:1px;
@@ -44,31 +75,42 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         
 #image{
 /* background-color: blue; */
-padding-left: 50;
-float: left;
+/* padding-left: 50; */
+/* float: left; */
 }
 
 #title{
 align-content: center;
 }
 
-#detail{border:1px;
+#detail{
+border:1px;
 font-family: "Montserrat", sans-serif;
 font-size:15px;
 float: right;
-margin-left: 20px;
+margin-right: 700px;
 text-align: left;
 }   
 .prod_name{
-font-size: 30px;
+font-size: 25px;
 font-weight: 900px;
 
 }
 .prod_title{
-font-size: 15px;
+font-size: 20px;
 font-weight: bold;
 
-}    
+}
+#discountResult{
+font-size: 20px;
+font-style: italic;
+white-space : nowrap
+}
+
+#product_price{
+font-size: 20px;
+font-style: italic;
+}
 
 #detail_table{
 border:1px;
@@ -86,7 +128,7 @@ margin-left: 270PX;
 }
 
 .reviewContent { 
-	width : 100%;
+	width : 900px;
 	height: 150px; 
 }
 
@@ -102,7 +144,6 @@ margin-left: 270PX;
 
 </style>
 
-<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript">
 
 // function btnWishFn() {
@@ -233,6 +274,8 @@ margin-left: 270PX;
 	}
 
 //찜하기 취소
+
+
 </script>
 </head>
 <body class="w3-content" style="max-width:95%">
@@ -265,49 +308,82 @@ margin-left: 270PX;
   <!-- 섬네일 이미지 -->
   <div id = "sform">
 	<section id="image">
-		<p>
-		<div class="title" align="left">
-			<img alt="shoes" src="./upload/${image.image_main_file}" width="450px" height="650px">
-		</div>
+	<div class="w3-content w3-display-container">
+<!-- 		  	<div><img src="./images/jeans.jpg"  class="mySlides" width="600px" height="650px"onclick="location.href=''"></div> -->
+<!-- 		  	<div><a href="CouponMainList.po?coupon_content=banner_1"><img src="./images/banner_1.jpg"  class="mySlides" width="450px" height="650px"></a></div> -->
+<!-- 		  	<div><img src="./images/jeans1.jpg" width="200px"  class="mySlides" height="650px"></div> -->
+<!-- 		  	<div><img src="./images/섬네일(슈펜).jpg" width="200px"  class="mySlides" height="650px"></div> -->
+<!-- 		  	<div><img src="./images/logo.png" width="200px"  class="mySlides" height="650px"></div> -->
+	<c:forEach var="image" items="${imagelist}">
+		<div><img src="upload/${image.image_main_file }"  class="mySlides" width="600px" height="650px"onclick="location.href=''"></div>
+		<div><img src="upload/${image.image_real_file1 }"  class="mySlides" width="600px" height="650px"onclick="location.href=''"></div>
+		<div><img src="upload/${image.image_real_file2 }"  class="mySlides" width="600px" height="650px"onclick="location.href=''"></div>
+	</c:forEach>
+
+		  	<button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+  			<button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+	</div>
 	</section>
+   </div>	
 	<!-- 상품 사진 옆 -->
+	
 	<section id="detail" >
+	<form action="CartInsertPro.ca?product_idx=${param.product_idx }&member_idx=${member_idx}" method="post">
+	<!-- 장바구니에 담을 때 필요한 파라미터들 : 상품idx, 멤버idx, 상품가격, 할인율, 주문가격(할인된가격), 상품이름, 섬네일용 사진 -->
+		<input type="hidden" id="product_idx" value="${param.product_idx }">
+		<input type="hidden" id="member_idx" value="${member_idx }">
+		<input type="hidden" name ="cart_price" value="${product.product_price }">
+		<input type="hidden" name ="cart_discount" value="${product.product_discount_price }">
+   		<input type="hidden" id = "cart_order_price" name ="cart_order_price" value="">		
+      	<input type="hidden" name ="cart_product_name" value="${product.product_name }">
+		<input type="hidden" name ="cart_product_image" value="${image.image_main_file }">
+	
+		<!-- 상품 브랜드, 이름, 번호 -->
 		<div class="text" > 
 			<p>${product.product_brand}</p>
 			<p class ="prod_name">${product.product_name }</p>
-			<p>상품번호 : ${product.product_idx }</p>			
+			<p>상품번호 : ${product.product_idx }</p>		
+			<hr>	
 		</div>
-		<div id="detail1">
-			<p class="prod_title">가격</p>
-			<p>${product.product_price }</p>
-			<hr>
-			<p class="prod_title">판매수</p>
-			<p>${product.product_sell_count }</p>
-			<hr>
-			<p class="prod_title">좋아요 </p>
-			<hr>
-			<p class="prod_title">구매후기(별점) </p>
-			<hr>
-			<p class="prod_title">색상</p>
-			<select name="product_color">
-				<option selected>색깔</option>
 
+	
+		<div id="detail1">
+			<p class="prod_title">상품금액</p>
+			<p id ="product_price"><fmt:formatNumber value="${product.product_price }" pattern="#,###원"></fmt:formatNumber></p>
+			<!-- 할인가격 표시 -->
+			<p class ="prod_title">판매가 (${product.product_discount_price}% 할인적용)</p> 
+			<p id ="discountResult"></p>
+			<p id ="nodiscountResult"></p>
+			
+			<hr>
+		<!-- 색상 -->
+			<p class="prod_title">색상</p>
+			<select name="cart_color" required="required">
+				<option selected>색상을 선택해주세요.</option>
 				<c:forEach var="color" items="${colorlist}">
-				<option value="color">${color }</option>
+				<option >${color }</option>
 				</c:forEach>
 			</select>
 			<hr>
 		</div>
+		
 		<div id="detail2" >
-			<p>사이즈</p>
-			<select name="product_size">
-				<option selected>사이즈</option>
+		<!-- 사이즈 -->
+			<p class ="prod_title">사이즈</p>
+			<select name="cart_size" required="required">
+				<option selected>사이즈를 선택해주세요.</option>
 				<c:forEach var="category" items="${categorylist}">
 				<option value="${category}">${category}</option>
 				</c:forEach>
 			</select>
 			<hr>
-			<input type="hidden" id="product_idx" value="${product.product_idx }">
+		<!-- 개수 -->
+			<p class ="prod_title">개수</p>
+			<span>
+				<span><input type="number" name="cart_count" value="1" max="${product.product_amount }" required="required" style="width: 50px"></span>
+			</span>
+			
+			<hr>
 		<span id="wishLoad">
 			<c:choose>
 				<c:when test="${wish.product_idx eq product.product_idx }">
@@ -322,28 +398,25 @@ margin-left: 270PX;
 				</c:otherwise>
 			</c:choose>
 		</span>	
-		
-		<input type="button" value="장바구니" onclick="location.href='CartInsertPro.ca?product_idx=${param.product_idx}&member_idx=${member_idx}'" class="btn btn-dark btn-sm">
-
-			<button onclick="location.href='OrderDetailForm.po?member_idx=${sessionScope.member_idx}&product_idx=${param.product_idx}'" class="btn btn-dark btn-sm">구매하기</button>
+		<input type="submit" value="장바구니" class="btn btn-dark btn-sm">
+		<input type="button" onclick="location.href='OrderDetailForm.po?member_idx=${sessionScope.member_idx}&product_idx=${param.product_idx}'" value="구매하기" class="btn btn-dark btn-sm">
 		</div>
+		</form>
+		
 	</section>
 
-  </div>
-  <Br>
-  <br>
-  <br>
+  
  	
-  <table id="detail_table">
-		<tr>
-			<td><img alt="shoes" src="./upload/${image.image_real_file1}" width="450px"></td>
-		</tr>	
+<!--   <table id="detail_table"> -->
+<!-- 		<tr> -->
+<%-- 			<td><img alt="shoes" src="./upload/${image.image_real_file1}" width="450px"></td> --%>
+<!-- 		</tr>	 -->
 		
-		<tr>
-			<td><img alt="shoes" src="./upload/${image.image_real_file2}" width="450px"></td>
-		</tr>
+<!-- 		<tr> -->
+<%-- 			<td><img alt="shoes" src="./upload/${image.image_real_file2}" width="450px"></td> --%>
+<!-- 		</tr> -->
 		
-	</table>
+<!-- 	</table> -->
 
 	<hr>	 <%-- 리뷰구역 --%> -->
 		<div id="reviewListArea">
@@ -372,7 +445,24 @@ margin-left: 270PX;
 						</c:if>		
 					</c:forEach>
 				</div>
-				
+				<section id="pageList" style="text-align:center">				
+			<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
+			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+				<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
+				<c:choose>
+					<c:when test="${pageNum eq i}">
+						${i }
+					</c:when>
+					<c:otherwise>
+						<a href="${i }">${i }</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+		</section>	
+		</div> 	
+	
+
+ main
     <!-- 
 <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
    -->
@@ -425,10 +515,27 @@ margin-left: 270PX;
 <!--     </div> -->
 <!--   </div> -->
 <!-- </div> -->
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+</script>
 
 <script>
-
-
 // Accordion 
 function myAccFunc() {
   var x = document.getElementById("demoAcc");
@@ -548,6 +655,44 @@ function iamport(){
 		    
 		});
 	}
+	
+	
+</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+	//상품가격의 값 가져오기.
+	var originPrice = ${product.product_price}
+	//할인율 값 가져오기. 
+	var discountRate = ${product.product_discount_price}
+ 	
+	//-----할인 연산결과에 따른 처리-----
+	//1. 할인가격
+    var discounted = Math.round(originPrice * (discountRate / 100));	// 정수로 출력하기 위해 소수점 아래 반올림 처리
+    //2. 할인된 가격 = 원래가격 - 할인가격
+    var releasePrice = originPrice - discounted;
+    //** 콤마 붙힌 가격 변수 ** 
+    var commaReleasePrice = releasePrice.toLocaleString("en-US");
+    var commaOriginPrice = originPrice.toLocaleString("en-US");
+    document.querySelector('#discountResult').innerText = commaReleasePrice + '원'
+    //할인된 가격을 cart_discountprice 라는 id 값의 value에 넣음.
+    document.getElementById('cart_order_price').value = releasePrice;	 
+// 	    alert("로딩")
+	});
+
+
+</script>
+<script type="text/javascript">
+// function () {
+// 	var originPrice = ${product.product_price}
+// 	var discountRate = ${product.product_discount_price}
+//     var discounted = Math.round(originPrice * (discountRate / 100));	// 정수로 출력하기 위해 소수점 아래 반올림 처리
+//     var releasePrice = originPrice - discounted;
+// 	$('input[name=cart_order_price]').attr('value',releasePrice);
+// }
+</script>
+
+<script type="text/javascript">
+      $.noConflict();
 </script>
 
 <script type="text/javascript">

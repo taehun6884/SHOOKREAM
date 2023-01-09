@@ -70,6 +70,7 @@ public class ProductInfoProService {
 			
 			categorylist = dao.ProductCategory(product_name);
 			
+			JdbcUtil.close(con);
 			return categorylist;
 		}
 		//상품별 사이즈 카테고리 가져오기
@@ -83,7 +84,23 @@ public class ProductInfoProService {
 			
 			colorlist = dao.ProductColorCategory(product_name);
 			
+			JdbcUtil.close(con);
 			return colorlist;
+		}
+		
+		public List<imageBean> imageList(String product_name){
+			List<imageBean> imagelist = null;
+			Connection con = JdbcUtil.getConnection();
+			
+			ProductDAO dao = ProductDAO.getInstance();
+			
+			dao.setConnection(con);	
+			
+			imagelist = dao.selectImageList(product_name);
+			
+			JdbcUtil.close(con);
+			
+			return imagelist;
 		}
 
 }
