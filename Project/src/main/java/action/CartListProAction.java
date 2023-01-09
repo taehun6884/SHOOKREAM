@@ -9,13 +9,14 @@ import svc.CartListProService;
 import vo.ActionForward;
 import vo.PageInfo;
 import vo.ProductBean;
+import vo.cartBean;
 
 public class CartListProAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
-		List<ProductBean> cartList = null;
+		List<cartBean> cartList = null;
 		
 		int member_idx = Integer.parseInt(request.getParameter("member_idx"));
 		// 페이징 처리를 위한 변수 선언
@@ -32,7 +33,9 @@ public class CartListProAction implements Action{
 		// 파라미터로 전달받은 검색어(keyword) 가져와서 변수에 저장
 
 			CartListProService service = new CartListProService();
-			List<ProductBean> cartlist = service.getCartlist(member_idx,startRow,listLimit);
+			List<cartBean> cartlist = service.getCartlist(member_idx,startRow,listLimit);
+			
+			//합계 가격
 			int total = service.CartTotalPrice(member_idx);
 			
 //			int total = service.CartTotalPrice(member_idx, product_idx);
