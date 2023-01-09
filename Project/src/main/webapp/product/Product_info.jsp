@@ -7,7 +7,7 @@
 <%
 pageContext.setAttribute("br", "<br/>");
 pageContext.setAttribute("cn", "\n");
-%> 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -302,8 +302,9 @@ margin-left: 270PX;
   <jsp:include page="../inc/top.jsp"/>
 	
 	 </div>
-	
+<%
 
+%>
   <!-- 섬네일 이미지 -->
   <div id = "sform">
 	<section id="image">
@@ -439,6 +440,7 @@ margin-left: 270PX;
 							</tr>
 						</table>
 						<c:if test="${sessionScope.sId eq 'admin' || param.member_idx eq review.member_idx }" >
+						<input id="delBtn" type="button"class="btn btn-dark btn-sm" value="신고하기" onclick="location.href='./ReportFormAction.me?member_idx=${member_idx}&member_id=${sessionScope.sId }'">
 							<input id="delBtn" type="button" value="리뷰 삭제하기" class="btn btn-dark btn-sm" onclick="location.href='ReviewDeletePro.po?product_idx=${review.product_idx }&member_idx=${sessionScope.member_idx }&review_idx=${review.review_idx}'">
 						</c:if>		
 					</c:forEach>

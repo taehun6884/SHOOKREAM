@@ -32,8 +32,10 @@ public class OrderProAction implements Action {
 			vo.setOrder_product_price(Integer.parseInt(request.getParameter("product_price")));
 			
 			if(request.getParameter("coupon_idx") != "") {
-			vo.setOrder_coupon_idx(Integer.parseInt(request.getParameter("coupon_idx")));
+				vo.setOrder_coupon_idx(Integer.parseInt(request.getParameter("coupon_idx")));
 			}
+			
+			
 			System.out.println(vo);
 			
 			OrderProService service = new OrderProService();
