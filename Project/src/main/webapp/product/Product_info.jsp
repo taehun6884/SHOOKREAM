@@ -336,7 +336,7 @@ margin-left: 270PX;
 			<hr>
 			<p class="prod_title">색상</p>
 			<select name="product_color">
-				<option selected>색깔</option>
+				<option value="" selected>색깔</option>
 
 				<c:forEach var="color" items="${colorlist}">
 				<option value="color">${color }</option>
@@ -347,7 +347,7 @@ margin-left: 270PX;
 		<div id="detail2" >
 			<p>사이즈</p>
 			<select name="product_size">
-				<option selected>사이즈</option>
+				<option value="" selected>사이즈</option>
 				<c:forEach var="category" items="${categorylist}">
 				<option value="${category}">${category}</option>
 				</c:forEach>
