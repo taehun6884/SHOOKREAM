@@ -130,7 +130,7 @@
 			<li>0</li>
 			<li></li>
 			<c:choose>
-				<c:when test="${delivery.order_process eq '배송완료'}">
+				<c:when test="${not empty order.order_progress}">
 					<li>1</li>
 				</c:when>	
 				<c:otherwise>
@@ -142,7 +142,7 @@
 
 <hr>
 	<div id="myPageList">
-		<h4>MY PAGE</h4>
+		<h4>My Page</h4>
 		<div class="grid-container">
 			<div class="grid-item"><a href="MemberModifyForm.me?id=${sessionScope.sId }" class="aList"><br>회원 정보 수정</a></div>
 			<div class="grid-item"><a href="MemberDeleteForm.me?id=${sessionScope.sId }" class="aList"><br>회원 탈퇴</a></div>
