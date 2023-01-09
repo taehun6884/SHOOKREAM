@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>    
 <script>
 	$(function() {
 		$("#customerBtn").click(function(){
@@ -12,7 +15,7 @@
 
   <div class="w3-container w3-display-container w3-padding-16">
     <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-    <h3 class="w3-wide" onclick="location.href='./'"><b>SHOOKREAM</b></h3>
+    <h3 class="w3-wide" onclick="location.href='./'" style="cursor: pointer;"><b>SHOOKREAM</b></h3>
   </div>
   
   <!-- 검색창 -->
