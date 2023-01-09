@@ -61,7 +61,7 @@ private ProductDAO() {}
 			
 			//----------------상품 등록----------------------
 
-			sql = "INSERT INTO product VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?)";
+			sql = "INSERT INTO product VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?)";
 			
 			pstmt2 = con.prepareStatement(sql);
 			pstmt2.setInt(1, idx); //idx
@@ -78,7 +78,6 @@ private ProductDAO() {}
 			pstmt2.setString(12, product.getProduct_color()); //색상
 			pstmt2.setDouble(13, product.getProduct_discount_price()); //할인율
 			pstmt2.setInt(14, 0); //상품 좋아요 수 누적
-			pstmt2.setInt(15, 0); //상품 찜목록 수 누적
 
 			
 			insertCount = pstmt2.executeUpdate();
