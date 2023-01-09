@@ -38,7 +38,7 @@ pageContext.setAttribute("cn", "\n");
 		</style>
 		
 	</head>
-	<body class="w3-content" style="max-width:1200px">
+	<body class="w3-content" style="max-width:95%">
 	
 	<!-- Sidebar/menu -->
 	<jsp:include page="../inc/side.jsp"/>
@@ -67,8 +67,8 @@ pageContext.setAttribute("cn", "\n");
 			Date:${board.notice_date } / View:${board.notice_readcount }
 			<hr>
 			<div id="no_content">${fn:replace(board.notice_content, cn, br) }</div><br><br>	
-
-			<a href="FAQList.bo?pageNum=${param.pageNum }"><button id="listBtn" class="btn btn-outline-secondary btn-sm">목록으로</button></a> <br><br>
+			<button onclick="history.back()" class="btn btn-dark btn-sm">뒤로가기</button><br><br>
+<%-- 			<a href="FAQList.bo?pageNum=${param.pageNum }"><button id="listBtn" class="btn btn-outline-secondary btn-sm">목록으로</button></a> <br><br> --%>
 
 		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
 	

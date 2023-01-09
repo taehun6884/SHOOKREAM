@@ -16,6 +16,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+<script src="https://kit.fontawesome.com/498a54c4c7.js"
+	crossorigin="anonymous"></script>
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
@@ -45,7 +47,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 }
 
 #price {
-	margin-bottom:20px;
 }
 
 #product_price {
@@ -60,7 +61,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 }
 </style>
 </head>
-<body class="w3-content" style="max-width:1200px">
+<body class="w3-content" style="max-width:95%">
 
 <!-- Sidebar/menu -->
 <jsp:include page="./inc/side.jsp"/>
@@ -132,6 +133,15 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 									<span><fmt:formatNumber value="${productList.product_price }" pattern="#,###" /></span>
 								</c:otherwise>
 							</c:choose>
+							</div>
+							
+							<div id="etcInfo" style="font-size: small; padding-bottom: 20px;">
+								<span>
+									구매 ${productList.product_sell_count } &nbsp;
+								</span>
+								<span>
+									<i class="fa-solid fa-heart" style="color:pink;"></i> ${productList.product_wishcount }
+								</span>
 							</div>
 						</div>
 					</div>

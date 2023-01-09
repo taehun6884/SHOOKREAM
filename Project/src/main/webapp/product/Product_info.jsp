@@ -1,8 +1,13 @@
 <%@page import="vo.ReviewBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri ="http://java.sun.com/jsp/jstl/functions" %>
+<%
+pageContext.setAttribute("br", "<br/>");
+pageContext.setAttribute("cn", "\n");
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,10 +22,41 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> 
+<script type="text/javascript">
+$('.center').slick({
+	  centerMode: true,
+	  centerPadding: '60px',
+	  slidesToShow: 3,
+	  responsive: [
+	    {
+	      breakpoint: 768,
+	      settings: {
+	        arrows: false,
+	        centerMode: true,
+	        centerPadding: '40px',
+	        slidesToShow: 3
+	      }
+	    },
+	    {
+	      breakpoint: 480,
+	      settings: {
+	        arrows: false,
+	        centerMode: true,
+	        centerPadding: '40px',
+	        slidesToShow: 1
+	      }
+	    }
+	  ]
+	});
+</script>
 <style type="text/css">
 #sform { 
 		  border:1px;
@@ -39,28 +75,29 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         
 #image{
 /* background-color: blue; */
-padding-left: 50;
-float: left;
+/* padding-left: 50; */
+/* float: left; */
 }
 
 #title{
 align-content: center;
 }
 
-#detail{border:1px;
+#detail{
+border:1px;
 font-family: "Montserrat", sans-serif;
 font-size:15px;
 float: right;
-margin-left: 20px;
+margin-right: 700px;
 text-align: left;
 }   
 .prod_name{
-font-size: 30px;
+font-size: 25px;
 font-weight: 900px;
 
 }
 .prod_title{
-font-size: 15px;
+font-size: 20px;
 font-weight: bold;
 
 }
@@ -91,17 +128,22 @@ margin-left: 270PX;
 }
 
 .reviewContent { 
-	width : 1000px;
+	width : 900px;
 	height: 150px; 
 }
 
-.reviewListArea {
-	padding: 20px;
+
+#imgSize {
+	width: 9em;
+	height: 9em;
+}
+
+#delBtn {
+	float: right;
 }
 
 </style>
 
-<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript">
 
 // function btnWishFn() {
@@ -232,9 +274,11 @@ margin-left: 270PX;
 	}
 
 //찜하기 취소
+
+
 </script>
 </head>
-<body class="w3-content" style="max-width:1200px">
+<body class="w3-content" style="max-width:95%">
 
 <!-- Sidebar/menu -->
 <jsp:include page="../inc/side.jsp"/>
@@ -263,11 +307,23 @@ margin-left: 270PX;
   <!-- 섬네일 이미지 -->
   <div id = "sform">
 	<section id="image">
-		<p>
-		<div class="title" align="left">
-			<img alt="shoes" src="./upload/${image.image_main_file}" width="450px" height="650px">
-		</div>
+	<div class="w3-content w3-display-container">
+<!-- 		  	<div><img src="./images/jeans.jpg"  class="mySlides" width="600px" height="650px"onclick="location.href=''"></div> -->
+<!-- 		  	<div><a href="CouponMainList.po?coupon_content=banner_1"><img src="./images/banner_1.jpg"  class="mySlides" width="450px" height="650px"></a></div> -->
+<!-- 		  	<div><img src="./images/jeans1.jpg" width="200px"  class="mySlides" height="650px"></div> -->
+<!-- 		  	<div><img src="./images/섬네일(슈펜).jpg" width="200px"  class="mySlides" height="650px"></div> -->
+<!-- 		  	<div><img src="./images/logo.png" width="200px"  class="mySlides" height="650px"></div> -->
+	<c:forEach var="image" items="${imagelist}">
+		<div><img src="upload/${image.image_main_file }"  class="mySlides" width="600px" height="650px"onclick="location.href=''"></div>
+		<div><img src="upload/${image.image_real_file1 }"  class="mySlides" width="600px" height="650px"onclick="location.href=''"></div>
+		<div><img src="upload/${image.image_real_file2 }"  class="mySlides" width="600px" height="650px"onclick="location.href=''"></div>
+	</c:forEach>
+
+		  	<button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+  			<button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+	</div>
 	</section>
+   </div>	
 	<!-- 상품 사진 옆 -->
 	
 	<section id="detail" >
@@ -288,7 +344,8 @@ margin-left: 270PX;
 			<p>상품번호 : ${product.product_idx }</p>		
 			<hr>	
 		</div>
-		<!-- 상품 선택(고객) -->
+
+	
 		<div id="detail1">
 			<p class="prod_title">상품금액</p>
 			<p id ="product_price"><fmt:formatNumber value="${product.product_price }" pattern="#,###원"></fmt:formatNumber></p>
@@ -340,58 +397,52 @@ margin-left: 270PX;
 			</c:choose>
 		</span>	
 		
-		<input type="submit" value="장바구니">
-		<button onclick="iamport()">구매하기</button>
+		<input type="submit" value="장바구니" class="btn btn-dark btn-sm">
+    <button onclick="location.href='OrderDetailForm.po?member_idx=${sessionScope.member_idx}&product_idx=${param.product_idx}'" class="btn btn-dark btn-sm">구매하기</button>
 		</div>
 	</form>
 	</section>
 
-  </div>
-  <Br>
-  <br>
-  <br>
+  
  	
-  <table id="detail_table">
-		<tr>
-			<td><img alt="shoes" src="./upload/${image.image_real_file1}" width="450px"></td>
-		</tr>	
+<!--   <table id="detail_table"> -->
+<!-- 		<tr> -->
+<%-- 			<td><img alt="shoes" src="./upload/${image.image_real_file1}" width="450px"></td> --%>
+<!-- 		</tr>	 -->
 		
-		<tr>
-			<td><img alt="shoes" src="./upload/${image.image_real_file2}" width="450px"></td>
-		</tr>
+<!-- 		<tr> -->
+<%-- 			<td><img alt="shoes" src="./upload/${image.image_real_file2}" width="450px"></td> --%>
+<!-- 		</tr> -->
 		
-	</table>
-	
-	<hr>	
-		<div class="reviewListArea" id="reviewListArea">
+<!-- 	</table> -->
+
+	<hr>	 <%-- 리뷰구역 --%> -->
+		<div id="reviewListArea">
 			<h3>Review</h3>
-			<div class="reviewContent">
 				<div>
-					<img src="../images/kakao_small.jpg" />
-					<table class="reviewContent">
-						<c:forEach var="review" items="${reviewList }">
-						<tr>
-							<td rowspan="2" width="30%">${review.review_img }</td>
-							<td width="60%">$review.review_content</td> 
-							<td>${review.re_order_detail }</td>
-							<td width="10%">${review.member_idx }<br>${review.review_date }</td> <%-- 리뷰 작성하는 멤버 --%>
-						</tr>
-						<tr>
-							<td rowspan="2">${review.review_content }</td>
-						</tr>
-						</c:forEach>
-					</table>
+					<c:forEach var="review" items="${reviewList }">
+						<table class="reviewContent">
+							<tr>
+								<td rowspan="7" width="20%"><img id="imgSize" src="./upload/${review.review_real_img }" width="100px" ></td>
+								<td style="text-align:left;" width="65%"><small>상세 사이즈 및 색상 : ${review.re_order_detail }</small></td>							
+								<td style="text-align:left;" width="15%">
+									<small>
+									작성일 : ${review.review_date } <br>
+ 									주문자 : ${review.member_idx }<br>
+ 									</small>
+								</td>					
+							</tr>
+							<tr></tr>
+							<tr>
+								<td colspan="4" style="text-align:left"><br>${fn:replace(review.review_content, cn, br) }</td>
+							</tr>
+						</table>
+						<c:if test="${sessionScope.sId eq 'admin' || param.member_idx eq review.member_idx }" >
+							<input id="delBtn" type="button" value="리뷰 삭제하기" class="btn btn-dark btn-sm" onclick="location.href='ReviewDeletePro.po?product_idx=${review.product_idx }&member_idx=${sessionScope.member_idx }&review_idx=${review.review_idx}'">
+						</c:if>		
+					</c:forEach>
 				</div>
-				<section id="pageList" style="text-align:center">
-			<c:choose>
-				<c:when test="${pageNum > 1}">
-					<input type="button" class="btn btn-outline-secondary btn-sm" value="이전" onclick="location.href=''">
-				</c:when>
-				<c:otherwise>
-					<input type="button" class="btn btn-outline-secondary btn-sm" value="이전">
-				</c:otherwise>
-			</c:choose>
-				
+				<section id="pageList" style="text-align:center">				
 			<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
 			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
@@ -404,18 +455,7 @@ margin-left: 270PX;
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
-	
-			<!-- 현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 [다음] 링크 동작 -->
-			<c:choose>
-				<c:when test="${pageNum < pageInfo.maxPage}">
-					<input type="button" value="다음" class="btn btn-outline-secondary btn-sm" onclick="location.href=''">
-				</c:when>
-				<c:otherwise>
-					<input type="button" class="btn btn-outline-secondary btn-sm" value="다음">
-				</c:otherwise>
-			</c:choose>
 		</section>	
-			</div>	
 		</div> 	
 	
 
@@ -472,10 +512,27 @@ margin-left: 270PX;
 <!--     </div> -->
 <!--   </div> -->
 <!-- </div> -->
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+</script>
 
 <script>
-
-
 // Accordion 
 function myAccFunc() {
   var x = document.getElementById("demoAcc");
@@ -629,6 +686,10 @@ function iamport(){
 //     var releasePrice = originPrice - discounted;
 // 	$('input[name=cart_order_price]').attr('value',releasePrice);
 // }
+</script>
+
+<script type="text/javascript">
+      $.noConflict();
 </script>
 
 <script type="text/javascript">

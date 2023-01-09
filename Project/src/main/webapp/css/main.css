@@ -62,9 +62,9 @@ b, strong {
 	font-weight: bolder
 }
 
-dfn {
-	font-style: italic
-}
+/* dfn { */
+/* 	font-style: italic */
+/* } */
 
 mark {
 	background: #ff0;
@@ -713,7 +713,7 @@ a {
 }
 
 .w3-content {
-	max-width: 980px
+	max-width: 95%;
 }
 
 .w3-auto {

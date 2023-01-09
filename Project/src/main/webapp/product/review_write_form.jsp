@@ -40,8 +40,7 @@
 		$(document).ready(function() {		
 			
 			$("#register").on("click", function() {
-				alert(product_idx, member_idx, product_size, product_color);
-				self.close();
+				
 			});
 		});		
 	});
@@ -85,7 +84,9 @@
 	<form action="ReviewWrite.me" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="member_idx" value="${param.member_idx }">
 		<input type="hidden" name="prodcut_idx" value="${param.product_idx }">
-		<input type="file" id="fileInsert" name="review_img" accept=".png, .jpeg, .jpg, .gif" onchange="readURL(this);"><br>
+		<input type="hidden" name="product_size" value="${param.product_size }">
+		<input type="hidden" name="product_color" value="${param.product_color }">
+		<input type="file" id="fileInsert" name="review_img" accept=".png, .jpeg, .jpg, .gif" onchange="readURL(this);" class="btn btn-dark btn-sm"><br>
 		<img id="preview"></img>
 		<hr>
 		<div >
@@ -95,8 +96,8 @@
 		</div>
 		<textarea placeholder="욕설 및 관련없는 내용은 관리자에 의해 삭제될 수 있습니다." name="content"></textarea><br>
 		<div id="reviewBtn">
-			<input type="submit" class="btn btn-outline-secondary btn-sm" id="register" value="글 등록하기">
-			<input type="button" class="btn btn-outline-secondary btn-sm" value="닫기" onclick="closeReview()">
+			<input type="submit" class="btn btn-dark btn-sm" id="register" value="글 등록하기">
+			<input type="button" class="btn btn-dark btn-sm" value="닫기" onclick="closeReview()">
 		</div>	
 	</form>
 </body>

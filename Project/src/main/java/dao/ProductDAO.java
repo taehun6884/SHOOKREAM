@@ -9,6 +9,8 @@ import java.util.List;
 import db.JdbcUtil;
 import java.util.List;
 import db.JdbcUtil;
+import vo.CouponBean;
+import vo.MemberCouponBean;
 import vo.OrderBean;
 import vo.ProductBean;
 import vo.ReviewBean;
@@ -121,7 +123,7 @@ private ProductDAO() {}
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select distinct(product_size) from shookream.product where product_name=? order by product_size";
+		String sql = "select distinct(product_size) from product where product_name=? order by product_size";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -147,7 +149,7 @@ private ProductDAO() {}
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql = "select distinct(product_color) from shookream.product where product_name=?";
+			String sql = "select distinct(product_color) from product where product_name=?";
 			
 			try {
 				pstmt = con.prepareStatement(sql);
@@ -210,6 +212,48 @@ private ProductDAO() {}
 		}
 		return product;
 	}
+	// 멤버 쿠폰 조회
+    public MemberCouponBean selectMemberCoupon(String coupon_content, int member_idx) {
+       MemberCouponBean member_coupon = null;
+       
+       ResultSet rs  = null;
+       PreparedStatement pstmt = null;
+       
+       try {
+          String sql = "SELECT c.coupon_content"
+                + " FROM member_coupon m join coupon c"
+                + " on m.coupon_idx = c.coupon_idx"
+                + " WHERE coupon_content LIKE ? AND member_idx=?";
+          
+          pstmt = con.prepareStatement(sql);
+          pstmt.setString(1, "%"+coupon_content+"%");
+          pstmt.setInt(2, member_idx);
+          System.out.println(pstmt);
+          rs = pstmt.executeQuery();
+          
+          if(rs.next()) {
+             member_coupon = new MemberCouponBean();
+//             member_coupon.setMember_idx(rs.getInt("member_idx"));
+//             member_coupon.setCoupon_idx(rs.getInt("coupon_idx"));
+//             member_coupon.setCoupon_price(rs.getInt("coupon_price"));
+//             member_coupon.setCoupon_name(rs.getString("coupon_name"));
+             member_coupon.setCoupon_content(rs.getString("coupon_content"));
+//             member_coupon.setCoupon_start(rs.getString("coupon_start"));
+//             member_coupon.setCoupon_end(rs.getString("coupon_end"));
+//             member_coupon.setCoupon_isUse(rs.getInt("isUse"));
+             
+             System.out.println("member_coupon : " + member_coupon);
+          }
+       } catch (SQLException e) {
+          System.out.println("SQL 구문 오류 - selectMemberCoupon()");
+          e.printStackTrace();
+       } finally {
+          JdbcUtil.close(rs);
+          JdbcUtil.close(pstmt);
+       }
+       
+       return member_coupon;
+    }
 
 	// 관리자 - 상품 목록 조회
 	public List<ProductBean> selectProductList() {
@@ -220,11 +264,11 @@ private ProductDAO() {}
 		
 		try {
 			String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_date, p.product_amount, p.product_color, i.image_main_file "
-					+ "FROM shookream.product p join shookream.image i "
+					+ "FROM product p join image i "
 					+ "on p.product_idx = i.product_idx ORDER BY product_date desc";
 			
 //			String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_date, p.product_amount, p.product_color, i.image_main_file "
-//					+ "FROM shookream.product p join shookream.image i "
+//					+ "FROM product p join image i "
 //					+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY product_date desc";
 			
 			pstmt = con.prepareStatement(sql);
@@ -392,7 +436,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			String sql = "SELECT sum(c.cart_order_price) "
-					+ "FROM shookream.cart c join shookream.product p join shookream.member m "
+					+ "FROM cart c join product p join member m "
 					+ "on c.product_idx = p.product_idx and c.member_idx = m.member_idx "
 					+ "where p.product_idx is not null and m.member_idx = ?";
 			
@@ -514,7 +558,31 @@ private ProductDAO() {}
 			return minusTotal;
 		}
 
-		
+		//-----------------장바구니 금액 +, - 후 포워딩을 위해 member_idx를 찾는 메서드-------------
+
+		public int selectMember(int cart_idx) {
+			int member_idx = 0;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql ="SELECT member_idx FROM cart WHERE cart_idx = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, cart_idx);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					member_idx = rs.getInt(1);
+				}
+      } catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - selectMember");
+      } finally{
+        JdbcUtil.close(rs);
+        JdbcUtil.close(pstmt);
+			}
+			
+			return member_idx;
+		}
 		
 
 		// 메인 - 메인화면 베스트 상품 목록 조회
@@ -526,7 +594,7 @@ private ProductDAO() {}
 			
 			try {
 				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_discount_price, i.image_main_file "
-						+ "FROM shookream.product p join shookream.image i "
+						+ "FROM product p join image i "
 						+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY p.product_idx ASC";
 				
 				pstmt = con.prepareStatement(sql);
@@ -574,7 +642,7 @@ private ProductDAO() {}
 			
 			try {
 				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_date, p.product_discount_price, i.image_main_file "
-				+ "FROM shookream.product p join shookream.image i "
+				+ "FROM product p join image i "
 				+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY product_date desc";
 				
 				pstmt = con.prepareStatement(sql);
@@ -622,7 +690,7 @@ private ProductDAO() {}
 			
 			try {
 				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price,p.product_discount_price, i.image_main_file "
-						+ "FROM shookream.product p join shookream.image i "
+						+ "FROM product p join image i "
 						+ "on p.product_idx = i.product_idx "
 						+ "WHERE product_discount_price > 0 "
 						+ "GROUP BY product_name ORDER BY product_discount_price ASC";
@@ -675,7 +743,7 @@ private ProductDAO() {}
 			
 			try {
 				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_discount_price, i.image_main_file "
-						+ "FROM shookream.product p join shookream.image i "
+						+ "FROM product p join image i "
 						+ "on p.product_idx = i.product_idx "
 						+ "WHERE product_brand LIKE ? "
 						+ "GROUP BY product_name ORDER BY product_sell_count ASC";
@@ -732,7 +800,7 @@ private ProductDAO() {}
 			
 			try {
 				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, i.image_main_file "
-						+ "FROM shookream.product p join shookream.image i "
+						+ "FROM product p join image i "
 						+ "on p.product_idx = i.product_idx "
 						+ "WHERE product_brand LIKE ? OR product_name LIKE ?"
 						+ "GROUP BY product_name ORDER BY product_sell_count ASC";
@@ -797,14 +865,15 @@ private ProductDAO() {}
 					 //존재하지 않을 경우 rs.next는 false , DB에서는 NULL이 표기된다.
 					idx = rs.getInt(1) + 1;
 				}
-				
-				sql = "INSERT INTO orderlist VALUES(?,now(),?,?,?,?)";
+				System.out.println(idx);
+				sql = "INSERT INTO orderlist VALUES(?,now(),?,?,?,?,?)";
 				pstmt2 = con.prepareStatement(sql);
 				pstmt2.setInt(1,idx );
-				pstmt2.setString(2,vo.getOrder_category());
-				pstmt2.setString(3, vo.getOrder_progress());
-				pstmt2.setInt(4, vo.getOrder_member_idx());
-				pstmt2.setInt(5, vo.getOrder_product_idx());
+				pstmt2.setInt(2, vo.getOrder_product_price());
+				pstmt2.setString(3,vo.getOrder_category());
+				pstmt2.setString(4, vo.getOrder_progress());
+				pstmt2.setInt(5, vo.getOrder_member_idx());
+				pstmt2.setInt(6, vo.getOrder_product_idx());
 				insertOrder=pstmt2.executeUpdate();
 				
 				if(insertOrder >0) {
@@ -821,6 +890,16 @@ private ProductDAO() {}
 					pstmt4.setInt(2,  vo.getOrder_product_sell_count()+1);
 					pstmt4.setInt(3, vo.getOrder_product_idx());
 					pstmt4.executeUpdate();
+					
+					sql="UPDATE member_coupon set isUse= ? WHERE coupon_idx =?";
+					pstmt4 = con.prepareStatement(sql);
+					pstmt4.setInt(1, vo.getOrder_isUse()+1);
+					pstmt4.setInt(2, vo.getOrder_coupon_idx());
+					pstmt4.executeUpdate();
+					
+					sql="DELETE FROM member_coupon WHERE isUse=1";
+					pstmt4 = con.prepareStatement(sql);
+					pstmt4.executeUpdate();
 				}
 				
 			
@@ -829,6 +908,7 @@ private ProductDAO() {}
 			
 			}finally {
 				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt4);
 				JdbcUtil.close(pstmt3);
 				JdbcUtil.close(pstmt2);
 				JdbcUtil.close(pstmt);
@@ -844,8 +924,8 @@ private ProductDAO() {}
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date,p.product_idx,p.product_size,p.product_color "
-					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
+			String sql="SELECT i.image_main_file,m.member_id,o.order_price,o.order_category,o.order_progress,o.order_date,p.product_idx,p.product_size,p.product_color,o.order_idx "
+					+ "from orderlist o join product p join member m join image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx "
 					+ "where m.member_idx=? "
 					+ "LIMIT ?,?";
@@ -861,13 +941,14 @@ private ProductDAO() {}
 					OrderBean vo = new OrderBean();
 					vo.setOrder_main_image(rs.getString("image_main_file"));
 					vo.setOrder_member_id(rs.getString("member_id"));
-					vo.setOrder_product_price(rs.getInt("product_price"));
+					vo.setOrder_product_price(rs.getInt("order_price"));
 					vo.setOrder_category(rs.getString("order_category"));
 					vo.setOrder_progress(rs.getString("order_progress"));
 					vo.setOrder_date(rs.getTimestamp("order_date"));
 					vo.setOrder_product_idx(rs.getInt("product_idx"));
 					vo.setOrder_product_size(rs.getString("product_size"));
 					vo.setOrder_product_color(rs.getString("product_color"));
+					vo.setOrder_idx(rs.getInt("order_idx"));
 					orderlist.add(vo);
 				}
 			} catch (SQLException e) {
@@ -918,7 +999,7 @@ private ProductDAO() {}
 			ResultSet rs = null;
 			
 			String sql="SELECT i.image_main_file,m.member_id,p.product_price,o.order_category,o.order_progress,o.order_date,o.order_idx "
-					+ "from shookream.orderlist o join shookream.product p join shookream.member m join shookream.image i "
+					+ "from orderlist o join product p join member m join image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx";
 					
 			
@@ -1198,7 +1279,36 @@ private ProductDAO() {}
 			return image;
 		}
 		
+		//--------- 이미지 정보 가져오는 메서드 -------------
+				public List<imageBean> selectImageList(String product_name ) {
+					List<imageBean> imagelist = null;
+					PreparedStatement pstmt = null;
+					ResultSet rs  = null;
+					//--------------------이미지 이름 가져오기 작업--------------
+					try {
+						String sql = "SELECT i.image_main_file,i.image_real_file1,i.image_real_file2 FROM image i join product p "
+								+ "ON i.product_idx = p.product_idx "
+								+ "WHERE p.product_name = ?";
 
+						pstmt = con.prepareStatement(sql);
+						pstmt.setString(1, product_name);
+						rs = pstmt.executeQuery();
+						
+						imagelist = new ArrayList<imageBean>();
+						while(rs.next()) {
+							imageBean image = new imageBean();
+							image.setImage_main_file(rs.getString("image_main_file")); //메인 이미지 가져오기
+							image.setImage_real_file1(rs.getString("image_real_file1")); //상세 이미지1 가져오기
+							image.setImage_real_file2(rs.getString("image_real_file2")); //상세 이미지2 가져오기
+							imagelist.add(image);
+						}
+						System.out.println(imagelist);
+					} catch (SQLException e) {
+						System.out.println("SQL 구문 오류 - selectImage");
+						e.printStackTrace();
+					}
+					return imagelist;
+				}
 
 		public boolean isDeleteOrder(int order_idx) {
 			int isDeleteOrderList = 0;
@@ -1325,7 +1435,7 @@ private ProductDAO() {}
 			
 			String sql="SELECT w.wish_idx, i.image_main_file,m.member_id,p.product_price,p.product_name,"
 					+ "p.product_brand,p.product_size,p.product_color,p.product_idx "
-					+ "FROM shookream.wish w JOIN shookream.product p JOIN shookream.member m JOIN shookream.image i "
+					+ "FROM wish w JOIN product p JOIN member m JOIN image i "
 					+ "ON w.product_idx = p.product_idx AND w.member_idx = m.member_idx AND w.product_idx = i.product_idx "
 					+ "WHERE m.member_idx=? "
 					+ "LIMIT ?,?";
@@ -1459,34 +1569,388 @@ private ProductDAO() {}
 			return listCount;
 		}
 
-		//-----------------장바구니 금액 +, - 후 포워딩을 위해 member_idx를 찾는 메서드-------------
+		
+		public int deleteBoard(int review_idx) {
+			int deleteCount = 0;
+			PreparedStatement pstmt = null;
+		
+			try {
+				String sql = "DELETE FROM review WHERE review_idx=?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, review_idx);
+				deleteCount = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(pstmt);
+			}
+			
+			return deleteCount;
+		}
 
-		public int selectMember(int cart_idx) {
-			int member_idx = 0;
+		
+		// 관리자 쿠폰 등록
+		public int insertCoupon(CouponBean coupon) {
+			int insertCount = 0;
+			
+			PreparedStatement pstmt = null, pstmt2 = null;
+			ResultSet rs = null;
+			
+			try {
+				int coupon_idx = 1; // 쿠폰 idx 처리
+				String sql = "SELECT MAX(coupon_idx) FROM coupon";
+				pstmt= con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					coupon_idx = rs.getInt(1) + 1;
+				} 
+				
+				sql = "INSERT INTO coupon VALUES(?,?,?,?,?,?,now())";
+				pstmt2= con.prepareStatement(sql);
+				
+				pstmt2.setInt(1, coupon_idx);
+				pstmt2.setString(2, coupon.getCoupon_name());
+				pstmt2.setInt(3, coupon.getCoupon_price());
+				pstmt2.setString(4, coupon.getCoupon_content());
+				pstmt2.setString(5, coupon.getCoupon_start());
+				pstmt2.setString(6, coupon.getCoupon_end());
+				System.out.println(pstmt2);
+				insertCount = pstmt2.executeUpdate();
+				
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류! - insertCoupon()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+        JdbcUtil.close(pstmt2);
+			}
+			return insertCount;
+		}
+
+		
+		// 관리자 쿠폰 조회
+		public List<CouponBean> selectCouponList() {
+			List<CouponBean> couponList = null;
+			
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
 			try {
-				String sql ="SELECT member_idx FROM cart WHERE cart_idx = ?";
+				String sql = "SELECT * FROM coupon";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, cart_idx);
 				rs = pstmt.executeQuery();
 				
-				if(rs.next()) {
-					member_idx = rs.getInt(1);
+				couponList = new ArrayList<CouponBean>();
+				
+				while(rs.next()) {
+					CouponBean coupon = new CouponBean();
+					coupon.setCoupon_idx(rs.getInt("coupon_idx"));
+					coupon.setCoupon_name(rs.getString("coupon_name"));
+					coupon.setCoupon_content(rs.getString("coupon_content"));
+					coupon.setCoupon_price(rs.getInt("coupon_price"));
+					coupon.setCoupon_start(rs.getString("coupon_start"));
+					coupon.setCoupon_end(rs.getString("coupon_end"));
+					coupon.setCoupon_date(rs.getDate("coupon_date"));
+					
+					couponList.add(coupon);
 				}
 			} catch (SQLException e) {
-				System.out.println("SQL 구문 오류 - selectMember");
+				System.out.println("sql구문 - selectCouponList 오류");
 				e.printStackTrace();
 			} finally {
 				JdbcUtil.close(rs);
 				JdbcUtil.close(pstmt);
 			}
 			
-			return member_idx;
+			return couponList;
+		}
+
+		
+		// 관리자 쿠폰 수정 폼에 필요한 상세정보
+		public CouponBean selectCoupon(int coupon_idx) {
+			CouponBean coupon = null;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT * FROM coupon WHERE coupon_idx=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, coupon_idx);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					coupon = new CouponBean();
+					coupon.setCoupon_idx(rs.getInt("coupon_idx"));
+					coupon.setCoupon_name(rs.getString("coupon_name"));
+					coupon.setCoupon_content(rs.getString("coupon_content"));
+					coupon.setCoupon_price(rs.getInt("coupon_price"));
+					coupon.setCoupon_start(rs.getString("coupon_start"));
+					coupon.setCoupon_end(rs.getString("coupon_end"));
+				}
+			} catch (SQLException e) {
+				System.out.println("SQL구문 오류 - selectCoupon()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			return coupon;
+		}
+		
+		// 사용자 쿠폰 조회
+		public List<CouponBean> selectUserCouponList(int member_idx) {
+			List<CouponBean> couponList = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT * FROM member_coupon where member_idx = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, member_idx);
+				rs = pstmt.executeQuery();
+				
+				couponList = new ArrayList<CouponBean>();
+				
+				while(rs.next()) {
+					CouponBean coupon = new CouponBean();
+					coupon.setCoupon_idx(rs.getInt("coupon_idx"));
+					coupon.setCoupon_name(rs.getString("coupon_name"));
+					coupon.setCoupon_price(rs.getInt("coupon_price"));
+					coupon.setCoupon_isUse(rs.getInt("isUse"));
+					coupon.setCoupon_start(rs.getString("coupon_start"));
+					coupon.setCoupon_end(rs.getString("coupon_end"));
+					couponList.add(coupon);
+				}
+			} catch (SQLException e) {
+				System.out.println("sql구문 - selectCouponList 오류");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return couponList;
 		}
 
 
+		// 쿠폰 수정 작업
+		public int updateCoupon(int coupon_idx, CouponBean coupon) {
+			int updatecount = 0;
+			
+			PreparedStatement pstmt =null;
+			
+			try {
+				String sql ="UPDATE coupon "
+						+ "SET coupon_name=?, coupon_price=?, coupon_content=?, coupon_start=? , coupon_end=? "
+						+ "WHERE coupon_idx =?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, coupon.getCoupon_name());
+				pstmt.setInt(2, coupon.getCoupon_price());
+				pstmt.setString(3, coupon.getCoupon_content());
+				pstmt.setString(4, coupon.getCoupon_start());
+				pstmt.setString(5, coupon.getCoupon_end());
+				pstmt.setInt(6, coupon_idx);
+				
+				updatecount = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				System.out.println("sql 구문오류 - updateCoupon");
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			} 
+			
+			return updatecount;
+		}
 
+		
+		// 관리자 쿠폰 삭제
+		public int deleteCoupon(int coupon_idx) {
+			int deleteCount = 0;
+			PreparedStatement pstmt = null;
+			
+			String sql = "DELETE FROM coupon WHERE coupon_idx=?";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, coupon_idx);
+				deleteCount = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				System.out.println("sql 구문오류 - deleteCoupon");
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			}
+			
+			return deleteCount;
+		}
+		
+		// 쿠폰 사용하기
+		public int CouponUsePrice(int idx) {
+			int Coupon_price = 0;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				String sql = "SELECT coupon_price FROM member_coupon where coupon_idx=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, idx);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					Coupon_price = rs.getInt(1);
+				}
+				System.out.println(Coupon_price);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return Coupon_price;
+		}
+		
+		// 메인 쿠폰 목록 조회
+		public List<CouponBean> selectCouponMainList(String coupon_content) {
+			ArrayList<CouponBean> couponList = null;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT coupon_name, coupon_price, coupon_start, coupon_end, coupon_content "
+						+ "FROM coupon WHERE coupon_content LIKE ? ORDER BY coupon_price ASC";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+coupon_content+"%");
+				
+				System.out.println(pstmt);
+				
+				rs = pstmt.executeQuery();
+				
+				couponList = new ArrayList<CouponBean>();
+				
+				while(rs.next()) {
+					CouponBean coupon = new CouponBean();
+					coupon.setCoupon_name(rs.getString("coupon_name"));
+					coupon.setCoupon_price(rs.getInt("coupon_price"));
+					coupon.setCoupon_start(rs.getString("coupon_start"));
+					coupon.setCoupon_end(rs.getString("coupon_end"));
+					coupon.setCoupon_content(rs.getString("coupon_content"));
+					
+					couponList.add(coupon);
+//					System.out.println(couponList);
+				}
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류 - selectCouponMainList()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			return couponList;
+
+		}
+
+		// 쿠폰 배너 다운
+		public int memberDownCoupon(int member_idx, String coupon_content) {
+			int insertCount = 0;
+			
+			PreparedStatement pstmt = null, pstmt2 = null;
+			ResultSet rs = null;
+			
+			try {
+				 int coupon_idx = 0;
+	              String coupon_name = "";
+	              int coupon_price = 0;
+	              String coupon_start = "";
+	              String coupon_end = "";
+				
+				String sql = "SELECT coupon_idx,coupon_name,coupon_price, coupon_start, coupon_end "
+						+ "FROM coupon WHERE coupon_content LIKE ?";
+				
+				pstmt= con.prepareStatement(sql);
+				pstmt.setString(1, "%"+coupon_content+"%");
+				rs = pstmt.executeQuery();
+//				System.out.println("쿠폰 다운 검색: " + pstmt);
+				
+				if(rs.next()) {
+					coupon_idx = rs.getInt(1);
+					coupon_name = rs.getString(2);
+					coupon_price = rs.getInt(3);
+					coupon_start = rs.getString(4);
+					coupon_end = rs.getString(5);
+				} 
+				
+				sql = "INSERT INTO member_coupon VALUES(?,?,?,?,0,?,?)";
+				pstmt2= con.prepareStatement(sql);
+				
+				pstmt2.setInt(1, member_idx);
+				pstmt2.setInt(2, coupon_idx);
+				pstmt2.setString(3, coupon_name);
+				pstmt2.setInt(4, coupon_price);
+				pstmt2.setString(5, coupon_start);
+				pstmt2.setString(6, coupon_end);
+//				System.out.println(pstmt2);
+				insertCount = pstmt2.executeUpdate();
+				
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류! - memberDownCoupon()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs); 
+				JdbcUtil.close(pstmt);
+				JdbcUtil.close(pstmt2);
+			}
+			return insertCount;
+		}
+		
+		public int OrderDeleteList(int order_idx) {
+			int deleteCount = 0;
+			boolean isDeleteProduct = false;
+			PreparedStatement pstmt = null;
+			
+			String sql = "DELETE FROM orderlist WHERE order_idx=?";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, order_idx);
+				deleteCount = pstmt.executeUpdate();
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(pstmt);
+			}
+			
+			return deleteCount;
+		}
+
+
+		public OrderBean selectOrderProgress() { // 배송상태를 전달받기
+			OrderBean order = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT * FROM orderlist WHERE order_progress=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "order_progress");
+				
+				rs = pstmt.executeQuery();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			
+			return order;
+		}
 	
 }//DAO 끝

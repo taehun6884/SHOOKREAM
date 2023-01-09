@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,7 +73,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </script>
 
 </head>
-<body class="w3-content" style="max-width:1200px">
+<body class="w3-content" style="max-width:95%">
 <!-- Sidebar/menu -->
 <jsp:include page="../inc/side.jsp"/>
 
@@ -127,9 +128,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <td>${order.order_category }</td>
       <td>${order.order_product_size }</td>
       <td>${order.order_product_color }</td>
-      <td>${order.order_date }</td>
-	  <td><input type="button" value="리뷰 작성하기" class="btn btn-dark" onclick="reviewForm(${order.order_product_idx },'${order.order_product_size },'${order.order_product_color }')">
-      <button type="button" class="btn btn-dark" >삭제</button></td>
+      <td><fmt:formatDate value="${order.order_date }" pattern="yyyy-MM-DD"/></td>
+	  <td><input type="button" value="리뷰 작성하기" class="btn btn-dark" onclick="reviewForm(${order.order_product_idx },'${order.order_product_size }','${order.order_product_color }')">
+      <button type="button" class="btn btn-dark" onclick="deleteOrder(${order.order_idx})">삭제</button></td>
     </tr>
     </c:forEach>
   </tbody>
@@ -138,7 +139,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="paging">
         <c:choose>
 			<c:when test="${param.pageNum > 1}">
-				<a href="CartList.ca?pageNum=${param.pageNum - 1 }&member_idx=${member_idx }">이전</a>
+				<a href="ProductOrderList.po?pageNum=${param.pageNum - 1 }&member_idx=${member_idx }">이전</a>
 			</c:when>
 			<c:otherwise>
 				<a href="javascript:void(0)">이전</a>
@@ -152,14 +153,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 					${i }
 				</c:when>
 				<c:otherwise>
-					<a href="CartList.ca?pageNum=${i }&member_idx=${member_idx }">${i }</a>
+					<a href="ProductOrderList.po?pageNum=${i }&member_idx=${member_idx }">${i }</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		
 		<c:choose>
 			<c:when test="${param.pageNum < pageInfo.maxPage}">
-				<a href="CartList.ca?pageNum=${param.pageNum + 1 }&member_idx=${member_idx }">다음</a>
+				<a href="ProductOrderList.po?pageNum=${param.pageNum + 1 }&member_idx=${member_idx }">다음</a>
 			</c:when>
 			<c:otherwise>
 				<a href="javascript:void(0)">다음</a>
@@ -189,11 +190,21 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     </div>
   </div>
 </div>
-
+</div>
 
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
 <script>
+//주문리스트 삭제
+function deleteOrder(idx){
+	let result =  confirm("삭제 하시겠습니까?");
+	if(result){
+		location.href="OrderDeletePro.po?order_idx="+idx+"&member_idx=${sessionScope.member_idx}&product_idx=${param.product_idx}";
+	}
+}
+
+
+
 // Accordion 
 function myAccFunc() {
   var x = document.getElementById("demoAcc");
