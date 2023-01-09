@@ -22,10 +22,6 @@
           display: inline-block;
           text-align: center;
         }
-        
-	#table {
-	     text-align: center;
-	}
 	
 	.myOrderState {
 		text-align: center;
@@ -44,18 +40,40 @@
 		font-weight: bold;
 	}
 	
-	i {
-		text-align: center;
-		font-size:15px;
+	#myPageList {
+		padding-top: 100px;
 	}
 	
-	#myPageList {
-		display: inline-block;
-		width: 10%;
+	.grid-container {
+		display: grid;
+		grid-template-columns: auto auto auto ;
+		grid-template-rows: 120px 120px;
+
+	}
+	
+	.grid-item {
+		border: 1px solid;
+		padding: 20px;
+		font-size: 15px;
+		text-align: center;
+	}
+	
+	i {
+ 		text-align: center; 
+		font-size:15px;
 	}
 
-	a {
-		decoration: none;
+	h4 {
+		text-align: left;
+	}
+	
+	.aList {
+		text-decoration: none;
+		color: black;
+	}
+	
+	.aList:hover {
+		color: gray;
 	}
 	
 </style>
@@ -71,7 +89,6 @@
 	    padding: 5px 8px;
         border: 1px solid #ccc;
        	color: #000; 
-
     }
 		
 	.w3-sidebar a {
@@ -90,6 +107,7 @@
 <div class="w3-main" style="margin-left:250px">
 
 <div class="myOrderState">
+	<h4>Delivery</h4><br><br>
 	<nav class="myPageNav">
 		<ul>
 			<li><i class='fas fa-money-check'><br><br>입금 확인중</i></li>
@@ -111,17 +129,28 @@
 			<li></li>
 			<li>0</li>
 			<li></li>
-			<li>1</li>
+			<c:choose>
+				<c:when test="${not empty order.order_progress}">
+					<li>1</li>
+				</c:when>	
+				<c:otherwise>
+					<li>0</li>
+				</c:otherwise>
+			</c:choose>
 		</ul>
 	</nav>
 
 <hr>
 	<div id="myPageList">
-		<a href="MemberModifyForm.me?id=${sessionScope.sId }">회원 정보 수정</a>
-		<a href="MemberDeleteForm.me?id=${sessionScope.sId }">회원 탈퇴</a></div>
-		<a href="">내 쿠폰</a>
-		<a href="ProductOrderList.po?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1">내 주문관리</a>
-		<a href="LikeList.ca?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1">내 위시리스트</a>
+		<h4>My Page</h4>
+		<div class="grid-container">
+			<div class="grid-item"><a href="MemberModifyForm.me?id=${sessionScope.sId }" class="aList"><br>회원 정보 수정</a></div>
+			<div class="grid-item"><a href="MemberDeleteForm.me?id=${sessionScope.sId }" class="aList"><br>회원 탈퇴</a></div>
+			<div class="grid-item"><a href="" class="aList"><br>내 쿠폰</a></div>
+			<div class="grid-item"><a href="ProductOrderList.po?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1" class="aList"><br>내 주문관리</a></div>
+			<div class="grid-item"><a href="LikeList.ca?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1" class="aList"><br>내 위시리스트</a></div>
+			<div class="grid-item"><br><i class='fas fa-frown' style='font-size:36px;color:red'></i></div>
+		</div>
 	</div>	
 </div>
 	

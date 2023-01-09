@@ -36,7 +36,7 @@ public class ProductModifyProAction implements Action {
 				product.setProduct_name(multi.getParameter("name"));
 				product.setProduct_brand(multi.getParameter("brand"));
 				product.setProduct_price(Integer.parseInt(multi.getParameter("price")));
-				product.setProduct_discount_price(Double.parseDouble(multi.getParameter("discount")));
+				product.setProduct_discount_price(Integer.parseInt(multi.getParameter("discount")));
 				product.setProduct_size(multi.getParameter("size"));
 				product.setProduct_amount(Integer.parseInt(multi.getParameter("amount")));
 				product.setProduct_color(multi.getParameter("color"));
@@ -127,7 +127,7 @@ public class ProductModifyProAction implements Action {
 					forward.setRedirect(false);
 				}
 				
-				return forward;
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

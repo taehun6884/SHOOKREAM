@@ -109,7 +109,7 @@ public class JdbcUtil {
 	public static void close(PreparedStatement pstmt) {
 		try {
 			if(pstmt != null) {
-			pstmt.close();
+				pstmt.close();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

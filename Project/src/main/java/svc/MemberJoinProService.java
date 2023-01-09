@@ -20,13 +20,13 @@ public class MemberJoinProService {
 		int insertCount = dao.insertMember(member);
 		
 		if(insertCount > 0) { // 성공 시
-//			int member_idx = member.getMember_idx();
-//			int insertCount2 = dao.insertWelcomCoupon();
+			int member_idx = member.getMember_idx();
+			int insertCount2 = dao.insertWelcomCoupon();
 			
-//				if(insertCount2 > 0) { // 회원가입 쿠폰 지급
+				if(insertCount2 > 0) { // 회원가입 쿠폰 지급
 					JdbcUtil.commit(con);
 					joinMember = true;
-//				}
+				}
 		} else { // 실패 시
 			JdbcUtil.rollback(con);
 		}
