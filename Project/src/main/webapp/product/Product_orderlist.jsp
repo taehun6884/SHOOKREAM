@@ -91,7 +91,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
   <!-- Push down content on small screens -->
 <!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
-  
+   <jsp:include page="../inc/top.jsp"/>
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
     <p class="w3-left">주문내역</p>

@@ -36,10 +36,13 @@ font-size: 70%;
 	<!-- 로그인 드롭다운 기능! -->	
 	<c:choose>
 		<c:when test="${not empty sessionScope.sId }">
-			<i class="fa-regular fa-heart fa-xl" onclick="location.href='LikeList.ca?id=${sessionScope.sId}&member_idx=${member_idx }&pageNum=1'" style="margin: 10px;"></i>
+			<div id="logintvar" style="margin-right:5px;">
+			<i class="fa-solid fa-heart fa-sm" onclick="location.href='LikeList.ca?id=${sessionScope.sId}&member_idx=${member_idx }&pageNum=1'" style="cursor: pointer;"></i>
+			<i class="fa-solid fa-cart-shopping fa-sm" onclick="location.href='CartList.ca?member_idx=${member_idx}&pageNum=1'" style="margin: 10px; cursor: pointer;"></i>
 		 <div class="w3-dropdown-click" id="logintvar">
-		 
+
 		 <i class="fa-solid fa-user fa-xl" onmouseover="myFunction()" onclick="location.href='MemberMyPage.me?id=${sessionScope.sId }&member_idx=${member_idx }'" style="margin: 10px;"></i>
+     
 		  <div id="Demo" class="w3-dropdown-content w3-bar-block w3-border">
 		    <a href="MemberLogout.me"  class="w3-bar-item w3-button">로그아웃</a>
 		    <a href="BoardList.bo" class="w3-bar-item w3-button">고객센터</a>
@@ -50,19 +53,18 @@ font-size: 70%;
 		    </c:choose>
 		    </div>
 		    </div>
+		    </div>
 		 <div style="float: right;">
-		<i class="fa-solid fa-cart-shopping fa-xl" onclick="location.href='CartList.ca?member_idx=${member_idx}&pageNum=1'" style="margin: 10px;"></i>
 	
 		</div>
 		</c:when>
 		<c:otherwise>
-		<div class="w3-dropdown-click" id="logintvar" style="margin-right:34px;">
+		<div id="logintvar" style="margin-right:5px;">
 		
-
 <!-- <span style="margin: 0 5px;"><i class="fa-regular fa-heart fa-xl" onclick="location.href='LikeList.ca'"></i></span> -->
-<span><i class="fa-regular fa-user fa-xl" onclick="location.href='LoginMember.me'"></i></span>
-
-
+			<span><i class="fa-solid fa-heart fa-sm" onclick="location.href='LoginMember.me'" style="cursor: pointer;"></i></span>
+			<span><i class="fa-solid fa-cart-shopping fa-sm" onclick="location.href='LoginMember.me'" style="margin: 10px; cursor: pointer;"></i></span>
+			<span><i class="fa-solid fa-user fa-sm" onclick="location.href='LoginMember.me'" style="cursor: pointer;"></i></span>
 
 <!-- 		<div><a href="LoginMember.me">login</a> | <a href="MemberJoinForm.me">join</a></div> -->
 		</div>

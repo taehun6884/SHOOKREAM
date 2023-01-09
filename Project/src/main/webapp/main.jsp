@@ -88,7 +88,7 @@ margin-top:10px;
 }
 </style>
 </head>
-<body class="w3-content" style="max-width:95% ">
+<body class="w3-content" style="max-width:95%; margin-top: 20px;">
 
 <!-- Sidebar/menu -->
 <jsp:include page="./inc/side.jsp"/>
@@ -113,13 +113,13 @@ margin-top:10px;
   <br>
 
   <!-- ./images header -->
-  <div class ="post-wrapper">
-  	<div><img src="images/jeans.jpg" height="700" width="900" onclick="location.href=''"></div>
+  <div class ="post-wrapper" style="margin-top: 18px;">
+  	<div><img src="images/banner_3.jpg" height="600" width="100%" onclick="location.href=''"></div>
 <!--   	<div><a href="CouponMainList.po?coupon_content=banner_1"><img src="images/banner_1.jpg" height="700" width="900"></a></div> -->
-  	<div><img id="banner_1" src="images/banner_1.jpg"  style="cursor: pointer;" height="700" width="900" onclick="couponDown(this.id)"></div>
-  	<div><img src="images/jeans1.jpg" height="700" width="900"></div>
-  	<div><img src="images/섬네일(슈펜).jpg" height="700" width="900"></div>
-  	<div><img src="images/logo.png" height="700" width="900"></div>
+  	<div><img id="banner_1" src="images/banner_4.png"  height="600" width="100%" style="cursor: pointer;" onclick="couponDown(this.id)"></div>
+  	<div><img src="images/banner_1.png" height="600" width="100%"></div>
+  	<div><img src="images/banner_4.png" height="600" width="100%"></div>
+  	<div><img src="images/logo.png" height="600" width="100%"></div>
   </div>
 <!--   <div class="w3-container w3-text-grey" id="jeans"> -->
 <!--     <p>BEST</p> -->
