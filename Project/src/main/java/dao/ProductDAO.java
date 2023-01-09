@@ -869,10 +869,11 @@ private ProductDAO() {}
 				sql = "INSERT INTO orderlist VALUES(?,now(),?,?,?,?,?)";
 				pstmt2 = con.prepareStatement(sql);
 				pstmt2.setInt(1,idx );
-				pstmt2.setString(2,vo.getOrder_category());
-				pstmt2.setString(3, vo.getOrder_progress());
-				pstmt2.setInt(4, vo.getOrder_member_idx());
-				pstmt2.setInt(5, vo.getOrder_product_idx());
+				pstmt2.setInt(2,vo.getOrder_product_price());
+				pstmt2.setString(3,vo.getOrder_category());
+				pstmt2.setString(4, vo.getOrder_progress());
+				pstmt2.setInt(5, vo.getOrder_member_idx());
+				pstmt2.setInt(6, vo.getOrder_product_idx());
 				insertOrder=pstmt2.executeUpdate();
 				
 				if(insertOrder >0) {
@@ -940,7 +941,7 @@ private ProductDAO() {}
 					OrderBean vo = new OrderBean();
 					vo.setOrder_main_image(rs.getString("image_main_file"));
 					vo.setOrder_member_id(rs.getString("member_id"));
-					vo.setOrder_product_price(rs.getInt("product_price"));
+					vo.setOrder_product_price(rs.getInt("order_price"));
 					vo.setOrder_category(rs.getString("order_category"));
 					vo.setOrder_progress(rs.getString("order_progress"));
 					vo.setOrder_date(rs.getTimestamp("order_date"));
