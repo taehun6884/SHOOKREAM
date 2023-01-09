@@ -27,7 +27,7 @@ public class AuthEmailProService {
 			JdbcUtil.close(con);
 			
 		}
-//		System.out.println(selectCode);
+		System.out.println(selectCode);
 		
 		return selectCode;
 	}

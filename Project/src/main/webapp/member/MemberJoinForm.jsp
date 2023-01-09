@@ -83,7 +83,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
   <!-- 회원가입 폼 -->
   
-  	<form action="MemberJoinPro.me" method="post" name="joinForm" style="margin-bottom: 300px">
+  	<form action="MemberJoinPro.me" method="post" id="joinForm" name="joinForm" style="margin-bottom: 300px">
 			<h1 style="text-align: center;">회원가입</h1>
 			<h6 style="color: gray;text-align: center;margin-bottom: 50px" >SHOOKREAM에 오신 것을 환영합니다.</h6>
 <!-- 		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3> -->
@@ -97,7 +97,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 						<input type="text" name="id" id ="id" required size="20px" style="line-height: 30px" onkeydown="inputIdChk()"> &nbsp;
 						<button class="btn btn-dark" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">ID Check</button>
 <!-- 						<button type="button" class="btn btn-secondary" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">ID check</button> -->
-						<input type="hidden" name="isCheckId" value="idUncheck"/> <!-- 체크 여부 확인 -->			
+<!-- 						<input type="hidden" name="isCheckId" value="idUncheck"/> 체크 여부 확인			 -->
 						<br>
 						<span style="color: gray;" >(영문소문자/숫자, 8~16자.)</span>
 						
@@ -147,14 +147,17 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 						<input type="text" name="email" id="email" placeholder="" required size="20px" style="line-height: 30px"> &nbsp;
 						<input type="button" class="btn btn-dark" id="checkEmail"  value="인증 메일 전송" onclick="alert('이메일 전송 완료!')"><br>
 						<span style="color: gray">("@"를 포함하여 이메일을 입력해주세요. ex) abcd@gmail.com)</span><br>
+						<div id ="authResult">
 						<input type="text" name="authCode" id="authCode" size="20px" style="line-height: 30px" required="required"> &nbsp;
 						<input type="button" class="btn btn-dark" id="checkEmail2"  value="인증 하기"><br>
 						<span style="color: gray">(인증코드 6자리를 입력하세요)</span> &nbsp;
 						<span id="authEmailResult"></span>
+						</div>
 						</td>
+						
 					</tr>
 					<tr>
-						<td colspan="2" align="center"><button type="submit" id=join_btn class="btn btn-dark" onclick="fn_joinMember()" >회원가입</button></td>
+						<td colspan="2" align="center"><button type="submit" id="join_btn" name ="join" class="btn btn-dark"  >회원가입</button></td>
 					</tr>
 				</table>
 
@@ -189,15 +192,20 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
 <script>
-
+// 	var isIdCheck = false;
+	var isEmailAuth = false;
+	
 function fn_joinMember() {
 	var joinForm = document.joinForm;
 	
 	if(joinForm.isCheckId.value != "idCheck"){
 		alert("ID 중복체크를 해주세요!")
 		event.preventDefault(); // submit 기능 막기
-	}
+	}	
+	
 }
+
+// window.opener.isIdCheck = true;
 
 function fn_dbCheckId() {
 	var id = document.getElementById("id").value;
@@ -253,6 +261,22 @@ function checkPasswd(passwd) { // 패스워드 길이 체크
 
 	/* 이메일 인증 1 */
 	$(function() {
+		$("#joinForm").submit(function() { // 폼 서브밋
+			// 아이디 체크, 이메일 인증 체크 
+// 			if($("") != "idCheck"){ //
+// 				alert("ID 중복체크를 해주세요!")
+// 				event.preventDefault(); // submit 기능 막기
+// 			}	
+		
+			// 이메일 인증 확인
+			if(!isEmailAuth) {
+				alert("Email 인증을 완료 해주세요!");
+				return false; // submit 취소
+			}
+			
+			return true; // submit 실행
+		});
+		
 			$("#checkEmail").on("click", function() {
 				
 				$.ajax({
@@ -267,12 +291,9 @@ function checkPasswd(passwd) { // 패스워드 길이 체크
 		             
 		         });
 			});
-		});
-	
-	
-	/* 이메일 인증 2 */
-	$(function() {
-			$("#checkEmail2").on("click", function() {
+			
+		/* 이메일 인증 2 */
+		$("#checkEmail2").on("click", function() {
 				
 				$.ajax({
 					type: "get",
@@ -281,21 +302,30 @@ function checkPasswd(passwd) { // 패스워드 길이 체크
 		               id: $("#id").val(),
 		               authCode: $("#authCode").val()
 		            },
+		            datatype: "html",
 					success:function(result){
-						if(result == "true"){
-							
+						const data = $.trim(result);
+						if(data =="true"){
+							alert("인증 성공");
 	                	  	 $("#authEmailResult").html("인증 성공!").css("color", "blue");
+	                	  	 $("#authResult").reload(window.location.href + " #authResult");
+	                	  	 isEmailAuth = true;
 	    	            } else {
+							alert("인증 실패");
 							 $("#authEmailResult").html("인증 실패!").css("color", "red");
 // 							 event.preventDefault(); // submit 기능 막기
-							 $('join_btn').prop('disabled', true);        
-						}
-					}
-		             
-		         });
+// 							 $('join_btn').prop('disabled', false);
+							 $("#authResult").reload(window.location.href + " #authResult");
+	                	  	 isEmailAuth = false;
+	    	            }//else
+					
+					}//success
+		         
+				});//ajax
 			});
 		});
-		
+	
+	
 	
 
 	

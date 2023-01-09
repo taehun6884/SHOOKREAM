@@ -31,28 +31,23 @@ public class CompareAddrProAction implements Action {
 		
 		AuthEmailProService service = new AuthEmailProService();
 		boolean authEmail = service.selectMember(authCode, id);
-//		System.out.println(authEmail);
+		System.out.println("결과 : " + authEmail);
 		
 		try {
-			if(authEmail = false) { // 인증코드가 불일치할 경우
+			if(authEmail == false) { // 인증코드가 불일치할 경우
+				System.out.println("불일치");
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
-				
-				out.println("<script>");
-				out.println("alert('인증 실패!')");
-				out.println("history.back()");
-				out.println("</script>");
-				
+				out.println("false");
+				forward = new ActionForward();
+				forward.setPath("MemberJoinForm.me");
+				forward.setRedirect(true);
 			} else { // 인증 코드가 일치 할 경우
-				
+				System.out.println("일치");
 				
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
-				
-				out.println("<script>");
-				out.println("alert('인증 성공! 회원가입을 완료해 주세요')");
-				out.println("history.back()");
-				out.println("</script>");
+				out.println("true");
 				
 			}
 			
@@ -61,8 +56,9 @@ public class CompareAddrProAction implements Action {
 			e.printStackTrace();
 		}
 		
-		String authResult = request.getParameter(authCode);
-		System.out.println("authResult : " + authResult);
+		
+//		String authResult = request.getParameter(authCode);
+//		System.out.println("authResult : " + authResult);
 		
 		return forward;
 		
