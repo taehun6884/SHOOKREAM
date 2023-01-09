@@ -142,7 +142,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	   </tr>
 	   <tr>
 		<th colspan="2">상품 할인쿠폰</th>
-		<td colspan="6" style="margin-left:500px;"><input type="text" id="priceValue">원 할인</td>
+		<td colspan="6" style="margin-left:500px;"><input type="text" id="priceValue" readonly="readonly">원 할인</td>
 	   </tr>
 	   <tr>
 	    <th colspan="2">이포인트</th>
@@ -150,7 +150,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	   </tr>
 	   <tr>
 	   	<th colspan="2">가격</th>
-	   	<td colspan="6"><input type="text" id="totalprice" value="${product.product_price }">원</td>
+	   	<td colspan="6"><input type="text" id="totalprice" value="${product.product_price }" readonly="readonly">원</td>
 	   </tr>   
 	  </tbody>
 	</table>

@@ -1,5 +1,6 @@
 package action;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -43,13 +44,57 @@ public class ProductInfoProAction implements Action {
 		
 		String cp = request.getContextPath();
 		System.out.println("product.getProduct_name() : " + product.getProduct_name());
-		Cookie c1 = new Cookie("product_img",image.getImage_main_file());
-		Cookie c2 = new Cookie("product_idx",request.getParameter("product_idx"));
-		c1.setMaxAge(600);
-		response.addCookie(c1);
-		response.addCookie(c2);
+//		Cookie c1 = new Cookie("product_img",image.getImage_main_file());
+//		Cookie c2 = new Cookie("product_idx",request.getParameter("product_idx"));
+//		Cookie c3 = new Cookie("product_img",image.getImage_main_file());
+//		Cookie c4 = new Cookie("product_idx",request.getParameter("product_idx"));
+//		c1.setMaxAge(600);
+//		response.addCookie(c1);
+//		response.addCookie(c2);
+//		response.addCookie(c3);
+//		response.addCookie(c4);
 		
-		System.out.println(c1.getValue() + ", " + c2.getValue());
+		
+		String product_img = image.getImage_main_file(); 
+		
+//		String productImgList = "";
+//		String productIdxList = "";
+		
+		boolean isExistCookie = false; //  product_img 쿠키 존재 여부 저장
+		
+		String strCookie = request.getHeader("Cookie");
+		if(strCookie!=null){
+			Cookie[] cookies = request.getCookies();
+		 	for(Cookie cookie : cookies) {
+		 		if(cookie.getName().equals("product_img")) { // 쿠키 존재하면
+		 			isExistCookie = true; // 존재 여부를 true
+		 			// 새 쿠키 저장
+		 			Cookie newCookie = new Cookie("product_img", cookie.getValue() + "/" + product_img);
+		 			newCookie.setMaxAge(60 * 60 * 24);
+		 			response.addCookie(newCookie);
+		 			
+		 			Cookie newCookie2 = new Cookie("product_idx", cookie.getValue() + "/" + product_idx);
+		 			newCookie.setMaxAge(60 * 60 * 24);
+		 			response.addCookie(newCookie2);
+		 		}
+		 	}
+		 	
+		 	if(!isExistCookie) { // product_img 쿠키 없으면
+		 		Cookie newCookie = new Cookie("product_img", product_img); // 새 쿠키 추가
+	 			newCookie.setMaxAge(60 * 60 * 24);
+	 			response.addCookie(newCookie);
+		 		
+	 			Cookie newCookie2 = new Cookie("product_idx", product_idx + "");
+	 			newCookie.setMaxAge(60 * 60 * 24);
+	 			response.addCookie(newCookie2);
+		 	}
+					
+		}
+		
+		
+		
+		
+//		System.out.println(c1.getValue() + ", " + c2.getValue());
 		
 		//상품별 카테고리 가져오기
 		List<String>categorylist =  service.getCategoryList(product.getProduct_name());
@@ -81,13 +126,15 @@ public class ProductInfoProAction implements Action {
 		request.setAttribute("image", image);
 		request.setAttribute("categorylist", categorylist);
 		request.setAttribute("colorlist", colorlist);
-		request.setAttribute("c1", c1);
-		request.setAttribute("c2", c2);
-		request.setAttribute("cp", cp);
+//		request.setAttribute("c1", c1);
+//		request.setAttribute("c2", c2);
+//		request.setAttribute("c3", c3);
+//		request.setAttribute("c4", c4);
+//		request.setAttribute("cp", cp);
 		request.setAttribute("imagelist", imagelist);
 		System.out.println(imagelist);
 		// 상품 리뷰 출력 시작
-		System.out.println(c1);
+//		System.out.println(c1);
 		System.out.println(cp);
 		ReviewListService service3 = new ReviewListService();
 		// 리뷰 페이징 처리
