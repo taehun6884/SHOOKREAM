@@ -29,6 +29,17 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+			<%
+			String sId = (String)session.getAttribute("sId");
+			String id = request.getParameter("id");
+			if(sId == null || !sId.equals("admin")) { %>
+				alert("잘못된 접근입니다!")
+				location.href=history.back();
+			<% 
+			} 
+			%>
+		</script>
     </head>
     <body class="sb-nav-fixed">
     <!-- TOP -->

@@ -18,7 +18,17 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="admin/css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+        <script type="text/javascript">
+			<%
+			String sId = (String)session.getAttribute("sId");
+			String id = request.getParameter("id");
+			if(sId == null || !sId.equals("admin")) { %>
+				alert("잘못된 접근입니다!")
+				location.href=history.back();
+			<% 
+			} 
+			%>
+		</script>        
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!-- 외부 jQuery 라이브러리 등록 -->
 		<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
