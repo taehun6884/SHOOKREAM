@@ -141,8 +141,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <header class="w3-container w3-xlarge">
 <!--     <p class="w3-left">장바ㅊ구니</p> -->
     <p class="w3-right">
-      <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i>
+<!--       <i class="fa fa-shopping-cart w3-margin-right"></i> -->
+<!--       <i class="fa fa-search"></i> -->
     </p>
 </header>
 

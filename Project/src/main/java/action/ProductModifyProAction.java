@@ -127,7 +127,7 @@ public class ProductModifyProAction implements Action {
 					forward.setRedirect(false);
 				}
 				
-				return forward;
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
