@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <script>
 	$(function() {
 		$("#customerBtn").click(function(){
@@ -7,14 +8,17 @@
 		});
 	});
 </script>
-<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
+<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar" >
+
   <div class="w3-container w3-display-container w3-padding-16">
     <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
     <h3 class="w3-wide" onclick="location.href='./'"><b>SHOOKREAM</b></h3>
   </div>
   
   <!-- 검색창 -->
+  	
   <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" action="BrandCG.MAIN">
+
       <div class="input-group">
           <input class="form-control" type="text" name="keyword" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
           <button class="btn btn-primary" id="btnNavbarSearch" type="submit" ><i class="fa fa-search"></i></button>
@@ -47,4 +51,37 @@
    	</div>
   </div>
   
+<%--     <input type="button" class ="reportbtn" value="신고하기" onclick="location.href='./ReportFormAction.me?member_idx=${member_idx}&member_id=${sessionScope.sId }'"> --%>
+  <div id = "gotopbtn"  style="cursor:pointer; height:50px; " class="back-to-top d-flex align-items-center justify-content-center active" onclick="window.scrollTo(0,0);">TOP</div> <!-- 홈페이 -->
+<!--  </nav> -->
+ <div class="recentlyview d-flex align-items-center justify-content-center active">
+ <h5>최근 본 상품 : </h5>
+<%
+String cookie = request.getHeader("Cookie");
+if(cookie!=null){
+	Cookie[] cookies =request.getCookies();
+
+		String product_img = getCookieValue(cookies, "product_img");
+		String product_idx = getCookieValue(cookies, "product_idx");
+		System.out.println("상품 번호 : " + product_idx);
+		
+		%>
+		<img src="upload/<%=product_img %>" width="100" height="100" alt="없음" onclick="location.href='ProductInfoForm.po?product_idx=<%=product_idx %>&member_idx=${member_idx }'">	
+		<%
+// 	}
+			
+}
+%>
+<%!
+public String getCookieValue(Cookie[] cookies, String cookieName) { 
+    for (Cookie cookie : cookies) { 
+         if(cookie.getName().equals(cookieName)){ 
+              return cookie.getValue(); 
+         }
+    }
+    return ""; 
+}
+
+%>
+  </div>
 </nav>

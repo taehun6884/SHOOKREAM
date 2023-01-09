@@ -23,6 +23,7 @@ import action.MemberLoginMemberProAction;
 import action.MemberLogoutProAction;
 import action.MemberModifyFormAction;
 import action.MemberModifyProAction;
+import action.ReportProAction;
 import action.MyPageDeliveryAction;
 import action.ReviewWriteProAction;
 import svc.LoginMemberService;
@@ -114,6 +115,16 @@ public class MemberController extends HttpServlet{
 		}else if(command.equals("/CheckEmailAddress.me")) { // 이메일 인증
 			action = new CheckAddrProAction();
 			forward = action.execute(request, response);
+		} else if(command.equals("/MemberMyPage.me")) {
+			forward = new ActionForward(); 
+			forward.setPath("member/my_page.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/ReportFormAction.me")) { //coupon 발급
+			forward = new ActionForward();
+			forward.setPath("report/mail_form.jsp");
+			forward.setRedirect(false);
+		}else if(command.equals("/ReportAddProAction.me")) { // 이메일 인증
+			action = new ReportProAction();
 		} else if(command.equals("/MemberMyPage.me")) { // 마이페이지 이동(배송상태 정보 조회)
 			action = new MyPageDeliveryAction();
 			forward = action.execute(request, response);

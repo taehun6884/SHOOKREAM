@@ -67,7 +67,7 @@ public class ProductController extends HttpServlet{
 		}else if(command.equals("/ProductDeletePro.po")) { //Product 삭제 pro
 			action = new ProductDeleteProAction();
 			forward= action.execute(request, response);
-		}else if(command.equals("/ProductOrderPro.po")) { //Product 삭제 pro
+		}else if(command.equals("/ProductOrderPro.po")) { //상품 결제 pro
 			action = new OrderProAction();
 			forward = action.execute(request, response);
 		}else if(command.equals("/ProductOrderList.po")) { //사용자 주문 상세 페이지
@@ -111,6 +111,7 @@ public class ProductController extends HttpServlet{
 			action = new CouponDownProAction();
 			forward = action.execute(request, response);
 		}
+			
 			
 		if(forward != null) {
 			if(forward.isRedirect()) {

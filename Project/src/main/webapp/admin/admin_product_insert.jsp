@@ -80,6 +80,9 @@
             <!-- 상품 등록 폼 -->
 			<form action="ProductInsertPro.po" method="post"
 				enctype="multipart/form-data">
+				<!-- 상품가격과 할인적용 가격에 ,를 붙이기에 hidden으로 파라미터 넘김 => 우선 할인적용 가격만 넘겨서 처리할 예정-->
+<!-- 				<input type="hidden" id = "price" name = "price"> -->
+				<input type="hidden" id ="product_release_price" name ="release_price" value="">
 				<table class="table">
 					<tr>
 						<td width="100px" align="left" class="table-secondary">상품명</td>
@@ -101,7 +104,7 @@
 					</tr>
 					<tr>
 						<td width="100px" align="left" class="table-secondary">상품 가격</td>
-						<td><input type="text" id="testPrice" name ="price" placeholder="원래 가격을 입력하세요"><span>&nbsp;원</span> 
+						<td><input type="text" id="testPrice" name ="price" placeholder="상품 가격을 입력하세요" ><span>&nbsp;원</span> 
 						</td>
 						
 					</tr>
@@ -236,7 +239,11 @@
 			        //판매가격 - 할인율 계산
 			        var releasePrice = originPrice - discounted;
 			        document.querySelector('#testResultBox02').innerText = releasePrice + '원'
+			        
 			    }
+			 	
+			    //할인된 가격을 cart_discountprice 라는 id 값의 value에 넣음.
+			    document.getElementById('product_release_price').value = releasePrice;	 
 			});
 		</script>
 		
