@@ -114,12 +114,12 @@ margin-top:10px;
 
   <!-- ./images header -->
   <div class ="post-wrapper" style="margin-top: 18px;">
-  	<div><img src="images/banner_3.jpg" height="600" width="100%" onclick="location.href=''"></div>
+  	<div><img src="images/banner(nike).jpg" height="600" width="100%" onclick="location.href=''"></div>
 <!--   	<div><a href="CouponMainList.po?coupon_content=banner_1"><img src="images/banner_1.jpg" height="700" width="900"></a></div> -->
-  	<div><img id="banner_1" src="images/banner_4.png"  height="600" width="100%" style="cursor: pointer;" onclick="couponDown(this.id)"></div>
-  	<div><img src="images/banner_1.png" height="600" width="100%"></div>
-  	<div><img src="images/banner_4.png" height="600" width="100%"></div>
-  	<div><img src="images/logo.png" height="600" width="100%"></div>
+  	<div><img src="images/banner(newbalance).png" height="600" width="100%"></div>
+  	<div><img src="images/banner(adidas).png" height="600" width="100%"></div>
+  	<div><img id="banner_1" src="images/banner_1.jpg"  height="600" width="100%" style="cursor: pointer;" onclick="couponDown(this.id)"></div>
+  	<div><img id="banner_2" src="images/banner_1.jpg" height="600" width="100%" style="cursor: pointer;" onclick="couponDown(this.id)"></div>
   </div>
 <!--   <div class="w3-container w3-text-grey" id="jeans"> -->
 <!--     <p>BEST</p> -->
