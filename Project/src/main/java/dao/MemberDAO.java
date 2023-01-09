@@ -832,6 +832,35 @@ private MemberDAO() {}
          }
 
 
+		public boolean isReviewExist() {
+			boolean reviewExist = false;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			ReviewBean review = new ReviewBean();
+			
+			try {
+				String sql = "SELECT * FROM review WHERE product_idx=? AND member_idx=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, review.getProduct_idx());
+				pstmt.setInt(2, review.getMember_idx());
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					reviewExist = true;
+				}
+			} catch (SQLException e) {
+				System.out.println("sql구문오류 - ReviewExist");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return reviewExist;
+		}
+
+         
 			
 
 }
