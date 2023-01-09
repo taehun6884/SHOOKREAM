@@ -50,7 +50,7 @@
 /*         background-color: #FFA7A7; */
     }
     </style>
-
+<script src="https://kit.fontawesome.com/ca93809e69.js" crossorigin="anonymous"></script> <!-- 폰트어썸 스크립트 -->
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
@@ -76,12 +76,22 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
   
   <!-- Top header -->
-  <header class="w3-container w3-xlarge">
-    <p class="w3-left">찜 목록</p>
-    <p class="w3-right">
-      <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i>
-    </p>
+   <header class="w3-container w3-xlarge" style="margin:10px">
+    <p class="w3-left" style="margin:10px" >찜 목록</p>
+ <i class="fa-regular fa-heart fa-xl" onclick="location.href='LikeList.ca?id=${sessionScope.sId}&member_idx=${member_idx }&pageNum=1'" style="margin:15px; float: right;"></i>
+ 
+		 <div class="w3-dropdown-click" id="logintvar" style="float:right;">
+		 
+		 <i class="fa-solid fa-user fa-xl" onmouseover="myFunction()" onclick="location.href='MemberMyPage.me?id=${sessionScope.sId }'" style="margin:15px;"></i>
+		  <div id="Demo" class="w3-dropdown-content w3-bar-block w3-border" >
+		    <a href="MemberLogout.me"  class="w3-bar-item w3-button">로그아웃</a>
+		    <a href="BoardList.bo" class="w3-bar-item w3-button">고객센터 </a>
+
+		    </div>
+		    </div>
+    <div style="float: right;">
+    <i class="fa-solid fa-cart-shopping fa-xl" onclick="location.href='CartList.ca?member_idx=${member_idx}&pageNum=1'" style="margin: 15px;"></i>
+    </div>
 </header>
    
   <!-- Footer -->
@@ -171,6 +181,17 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
+<script> 
+//드롭다운 기능
+   function myFunction() {
+     var x = document.getElementById("Demo");
+     if (x.className.indexOf("w3-show") == -1) { 
+       x.className += " w3-show";
+     } else {
+       x.className = x.className.replace(" w3-show", "");
+     }
+   }
+</script>
 <script>
 // Accordion 
 function myAccFunc() {
