@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.MainBestListAction;
 import action.MainBrandCGListAction;
+import action.MainKeywordListAction;
 import action.MainListAction;
 import action.MainNewListAction;
 import action.MainSaleListAction;
@@ -45,8 +46,11 @@ public class MainController extends HttpServlet{
 		}else if(command.equals("/New.MAIN")) { // Main -> New 카테고리
 			action = new MainNewListAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/BrandCG.MAIN")) { // Main -> 브랜드별 카테고리 + 검색
+		}else if(command.equals("/BrandCG.MAIN")) { // Main -> 브랜드별 카테고리
 			action = new MainBrandCGListAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/Keyword.MAIN")) { // Main -> 검색
+			action = new MainKeywordListAction();
 			forward = action.execute(request, response);
 		}
 	

@@ -113,14 +113,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--     <p>BEST</p> -->
 <!--   </div> -->
 	<div id="main_category">
-		<c:choose>
-			<c:when test="${not empty param.cg }">
-				<p>${param.cg }</p>
-			</c:when>
-			<c:otherwise>
 				<p>검색어 : ${param.keyword }</p>
-			</c:otherwise>
-		</c:choose>
 	</div>
   <!-- Product grid -->
   <div class="w3-row w3-grayscale">
@@ -175,7 +168,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	<div class="paging">
         <c:choose>
 			<c:when test="${param.pageNum > 1}">
-				<a href="BrandCG.MAIN?pageNum=${param.pageNum - 1 }&cg=${param.cg}">이전</a>
+				<a href="Keyword.MAIN?pageNum=${param.pageNum - 1 }&keyword=${param.keyword}">이전</a>
 			</c:when>
 			<c:otherwise>
 				<a href="javascript:void(0)">이전</a>
@@ -189,14 +182,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 					${i }
 				</c:when>
 				<c:otherwise>
-					<a href="BrandCG.MAIN?pageNum=${i }&cg=${param.cg}">${i }</a>
+					<a href="Keyword.MAIN?pageNum=${i }&keyword=${param.keyword}">${i }</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		
 		<c:choose>
 			<c:when test="${param.pageNum < pageInfo.maxPage}">
-				<a href="BrandCG.MAIN?pageNum=${param.pageNum + 1 }&cg=${param.cg}">다음</a>
+				<a href="Keyword.MAIN?pageNum=${param.pageNum + 1 }&keyword=${param.keyword}">다음</a>
 			</c:when>
 			<c:otherwise>
 				<a href="javascript:void(0)">다음</a>

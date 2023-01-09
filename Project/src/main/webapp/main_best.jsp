@@ -71,6 +71,29 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 	font-size: big; 
 	float: right;
 }
+
+ .paging {
+        text-align: center;
+    }
+ .paging a {
+        /*
+        display: inline-block 인라인 요소의 특징과 블록 요소의 특징을 모두 갖는다
+        크기를 가질 수 있으며 텍스트 정렬도 적용받는다
+        */
+        display: inline-block;
+        
+        font-weight: bold;
+        text-decoration: none;
+        padding: 5px 8px;
+        border: 1px solid #ccc;
+       	color: #000; 
+/*         background-color: #F5F5DC; */
+    }
+    /* 현재 페이징에 select 클래스를 적용한다*/
+    .paging a.select {
+/*         color: #fff; */
+/*         background-color: #FFA7A7; */
+    }
 </style>
 
 <script src="jquery/jquery-3.6.3.js"></script>
@@ -195,82 +218,39 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 		</div>
 
 
-
-					<!--       <div class="w3-container"> -->
-					<!--         <div class="w3-display-container"> -->
-					<%--           <img src="./upload/${productBestList[4].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-					<!--           <div class="w3-display-middle w3-display-hover"> -->
-					<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-					<!--           </div> -->
-					<!--         </div> -->
-					<%--         <p>${productBestList[4].product_name }<br><b>${productBestList[4].product_price }</b></p><!-- 5번째 그리드 --> --%>
-					<!--       </div> -->
-					<!--     </div> -->
-
-					<!--     <div class="w3-col l3 s6"> -->
-					<!--       <div class="w3-container"> -->
-					<!--         <div class="w3-display-container"> -->
-					<%--           <img src="./upload/${productBestList[1].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-					<!--           <div class="w3-display-middle w3-display-hover"> -->
-					<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-					<!--           </div> -->
-					<!--         </div> -->
-					<%--         <p>${productBestList[1].product_name }<br><b>${productBestList[1].product_price }</b></p><!-- 2번째 그리드 --> --%>
-					<!--       </div> -->
-					<!--       <div class="w3-container"> -->
-					<!--         <div class="w3-display-container"> -->
-					<%--           <img src="./upload/${productBestList[5].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-					<!--           <div class="w3-display-middle w3-display-hover"> -->
-					<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-					<!--           </div> -->
-					<!--         </div> -->
-					<%--         <p>${productBestList[5].product_name }<br><b>${productBestList[5].product_price }</b></p><!-- 6번째 그리드 --> --%>
-					<!--       </div> -->
-					<!--     </div> -->
-
-
-					<!--     <div class="w3-col l3 s6"> -->
-					<!--       <div class="w3-container"> -->
-					<!--         <div class="w3-display-container"> -->
-					<%--           <img src="./upload/${productBestList[2].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-					<!--           <div class="w3-display-middle w3-display-hover"> -->
-					<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-					<!--           </div> -->
-					<!--         </div> -->
-					<%--         <p>${productBestList[2].product_name }<br><b>${productBestList[2].product_price }</b></p><!-- 3번째 그리드 --> --%>
-					<!--       </div> -->
-					<!--       <div class="w3-container"> -->
-					<!--         <div class="w3-display-container"> -->
-					<%--           <img src="./upload/${productBestList[6].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-					<!--           <div class="w3-display-middle w3-display-hover"> -->
-					<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-					<!--           </div> -->
-					<!--         </div> -->
-					<%--         <p>${productBestList[6].product_name }<br><b>${productBestList[6].product_price}</b></p><!-- 7번째 그리드 --> --%>
-					<!--       </div> -->
-					<!--     </div> -->
-
-					<!--     <div class="w3-col l3 s6"> -->
-					<!--       <div class="w3-container"> -->
-					<!--         <div class="w3-display-container"> -->
-					<%--           <img src="./upload/${productBestList[3].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-					<!--           <div class="w3-display-middle w3-display-hover"> -->
-					<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-					<!--           </div> -->
-					<!--         </div> -->
-					<%--         <p>${productBestList[3].product_name }<br><b>${productBestList[3].product_price }</b></p><!-- 4번째 그리드 --> --%>
-					<!--       </div> -->
-					<!--       <div class="w3-container"> -->
-					<!--         <div class="w3-display-container"> -->
-					<%--           <img src="./upload/${productBestList[7].product_img }" class="img-thumbnail" alt="..." style="width:100%"> --%>
-					<!--           <div class="w3-display-middle w3-display-hover"> -->
-					<!--             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button> -->
-					<!--           </div> -->
-					<!--         </div> -->
-					<%--         <p>${productBestList[7].product_name }<br><b>${productBestList[7].product_price }</b></p><!-- 8번째 그리드 --> --%>
-
-		<!-- footer -->
-<%-- 		<jsp:include page="./inc/footer.jsp" /> --%>
+<!-- 페이징 처리 -->	
+	<div class="paging">
+        <c:choose>
+			<c:when test="${param.pageNum > 1}">
+				<a href="Best.MAIN?pageNum=${param.pageNum - 1 }">이전</a>
+			</c:when>
+			<c:otherwise>
+				<a href="javascript:void(0)">이전</a>
+			</c:otherwise>
+		</c:choose>
+		
+		<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+			<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
+			<c:choose>
+				<c:when test="${param.pageNum eq i}">
+					${i }
+				</c:when>
+				<c:otherwise>
+					<a href="Best.MAIN?pageNum=${i }">${i }</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		
+		<c:choose>
+			<c:when test="${param.pageNum < pageInfo.maxPage}">
+				<a href="Best.MAIN?pageNum=${param.pageNum + 1 }">다음</a>
+			</c:when>
+			<c:otherwise>
+				<a href="javascript:void(0)">다음</a>
+			</c:otherwise>
+		</c:choose>
+    </div>
+<!-- </footer> -->
 
 <script>
 // Accordion 
