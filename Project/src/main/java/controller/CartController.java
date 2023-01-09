@@ -54,8 +54,11 @@ public class CartController extends HttpServlet{
 		}else if(command.equals("/CartDeletePro.ca")) { //Cart 삭제 pro
 			action = new CartDeleteProAction();
 			forward = action.execute(request, response);
-		}
-		
+		}else if(command.equals("/CartDeletePro.ca")) { //Cart -> 구매페이지
+			action = new CartDeleteProAction();
+			forward = action.execute(request, response);
+	}
+	
 		//-----------------------------------------------
 		//찜목록
 		
