@@ -357,7 +357,7 @@ private ProductDAO() {}
 			 ResultSet rs = null;
 				
 			 String sql ="SELECT c.cart_idx, c.cart_product_name, c.cart_product_image, c.cart_price, c.cart_discount, c.cart_order_price, c.cart_color,c.cart_size, c.cart_count, c.member_idx, c.product_idx "
-			 		+ "FROM shookream.cart c join shookream.product p join shookream.image i join shookream.member m "
+			 		+ "FROM cart c join product p join image i join member m "
 			 		+ "on c.product_idx = p.product_idx and c.product_idx = i.product_idx and c.member_idx = m.member_idx "
 			 		+ "where m.member_idx=? "
 			 		+ "LIMIT ?,?";
@@ -475,7 +475,7 @@ private ProductDAO() {}
 	
 			try {
 				String sql = "SELECT c.member_idx, p.product_release_price, p.product_idx "
-						+ "FROM shookream.cart c join shookream.product p join shookream.member m "
+						+ "FROM cart c join product p join member m "
 						+ "on c.product_idx = p.product_idx and c.member_idx = m.member_idx "
 						+ "where m.member_idx is not null and c.cart_idx = ?";
 				
@@ -489,7 +489,7 @@ private ProductDAO() {}
 					product_idx = rs.getInt(3);
 				}
 				System.out.println(member_idx + product_idx + cart_idx);
-				sql = "UPDATE shookream.cart c join shookream.product p join shookream.member m "
+				sql = "UPDATE cart c join product p join member m "
 						+ "ON c.product_idx = p.product_idx and c.member_idx = m.member_idx SET c.cart_order_price = c.cart_order_price + ? WHERE p.product_idx =? and m.member_idx = ? and c.cart_idx = ?";
 				pstmt2 = con.prepareStatement(sql);
 				pstmt2.setInt(1, product_release_price);
@@ -525,7 +525,7 @@ private ProductDAO() {}
 	
 			try {
 				String sql = "SELECT c.member_idx, p.product_release_price, p.product_idx "
-						+ "FROM shookream.cart c join shookream.product p join shookream.member m "
+						+ "FROM cart c join product p join member m "
 						+ "on c.product_idx = p.product_idx and c.member_idx = m.member_idx "
 						+ "where m.member_idx is not null and c.cart_idx = ?";
 				
@@ -539,7 +539,7 @@ private ProductDAO() {}
 					product_idx = rs.getInt(3);
 				}
 				System.out.println(member_idx + product_idx + cart_idx);
-				sql = "UPDATE shookream.cart c join shookream.product p join shookream.member m "
+				sql = "UPDATE cart c join product p join member m "
 						+ "ON c.product_idx = p.product_idx and c.member_idx = m.member_idx SET c.cart_order_price = c.cart_order_price - ? WHERE p.product_idx =? and m.member_idx = ? and c.cart_idx = ?";
 				pstmt2 = con.prepareStatement(sql);
 				pstmt2.setInt(1, product_release_price);

@@ -365,6 +365,7 @@ margin-left: 270PX;
 			</select>
 			<hr>
 		</div>
+		
 		<div id="detail2" >
 		<!-- 사이즈 -->
 			<p class ="prod_title">사이즈</p>
@@ -396,11 +397,11 @@ margin-left: 270PX;
 				</c:otherwise>
 			</c:choose>
 		</span>	
-		
 		<input type="submit" value="장바구니" class="btn btn-dark btn-sm">
-    <button onclick="location.href='OrderDetailForm.po?member_idx=${sessionScope.member_idx}&product_idx=${param.product_idx}'" class="btn btn-dark btn-sm">구매하기</button>
+		<input type="button" onclick="location.href='OrderDetailForm.po?member_idx=${sessionScope.member_idx}&product_idx=${param.product_idx}'" value="구매하기" class="btn btn-dark btn-sm">
 		</div>
-	</form>
+		</form>
+		
 	</section>
 
   
