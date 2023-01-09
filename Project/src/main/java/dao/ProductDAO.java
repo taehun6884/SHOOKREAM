@@ -586,7 +586,7 @@ private ProductDAO() {}
 		
 
 		// 메인 - 메인화면 베스트 상품 목록 조회
-		public List<ProductBean> selectBestProductList() {
+		public List<ProductBean> selectBestProductList(int startRow, int listLimit) {
 			ArrayList<ProductBean> productBestList = null;
 			
 			PreparedStatement pstmt = null;
@@ -595,9 +595,11 @@ private ProductDAO() {}
 			try {
 				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_discount_price, i.image_main_file "
 						+ "FROM product p join image i "
-						+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY p.product_idx ASC";
+						+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY p.product_idx ASC LIMIT ?,?";
 				
 				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, listLimit);
 				rs = pstmt.executeQuery();
 				
 				productBestList = new ArrayList<ProductBean>();
@@ -634,7 +636,7 @@ private ProductDAO() {}
 
 		
 		// 메인 - 메인화면 최근 등록 상품 목록 조회
-		public List<ProductBean> selectNewProductList() {
+		public List<ProductBean> selectNewProductList(int startRow, int listLimit) {
 			ArrayList<ProductBean> productNewList = null;
 			
 			PreparedStatement pstmt = null;
@@ -643,9 +645,11 @@ private ProductDAO() {}
 			try {
 				String sql = "SELECT p.product_idx, p.product_brand, p.product_name, p.product_price, p.product_date, p.product_discount_price, i.image_main_file "
 				+ "FROM product p join image i "
-				+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY product_date desc";
+				+ "on p.product_idx = i.product_idx GROUP BY product_name ORDER BY product_date desc LIMIT ?,?";
 				
 				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, listLimit);
 				rs = pstmt.executeQuery();
 				
 				productNewList = new ArrayList<ProductBean>();
@@ -682,7 +686,7 @@ private ProductDAO() {}
 
 		
 		// 메인 - 메인화면 세일 상품 목록 조회
-		public List<ProductBean> selectSaleProductList() {
+		public List<ProductBean> selectSaleProductList(int startRow, int listLimit) {
 			ArrayList<ProductBean> productSaleList = null;
 			
 			PreparedStatement pstmt = null;
@@ -693,13 +697,15 @@ private ProductDAO() {}
 						+ "FROM product p join image i "
 						+ "on p.product_idx = i.product_idx "
 						+ "WHERE product_discount_price > 0 "
-						+ "GROUP BY product_name ORDER BY product_discount_price ASC";
+						+ "GROUP BY product_name ORDER BY product_discount_price ASC LIMIT ?,?";
 				
 //				String sql = "SELECT * FROM product "
 //						+ "WHERE product_discount_price IS NOT NULL "
 //						+ "ORDER BY product_discount_price";
 				
 				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, listLimit);
 				rs = pstmt.executeQuery();
 				
 				productSaleList = new ArrayList<ProductBean>();
@@ -735,7 +741,7 @@ private ProductDAO() {}
 		}
 
 		// 메인 - 카테고리별 상품 목록 조회
-		public List<ProductBean> selectCGProductList(String cg) {
+		public List<ProductBean> selectCGProductList(String cg,int startRow, int listLimit) {
 			ArrayList<ProductBean> productCGList = null;
 			
 			PreparedStatement pstmt = null;
@@ -746,7 +752,7 @@ private ProductDAO() {}
 						+ "FROM product p join image i "
 						+ "on p.product_idx = i.product_idx "
 						+ "WHERE product_brand LIKE ? "
-						+ "GROUP BY product_name ORDER BY product_sell_count ASC";
+						+ "GROUP BY product_name ORDER BY product_sell_count ASC LIMIT ?,?";
 				
 //				String sql = "SELECT * FROM product "
 //						+ "WHERE product_brand LIKE ? "
@@ -754,6 +760,8 @@ private ProductDAO() {}
 				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+cg+"%");
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, listLimit);
 				
 				rs = pstmt.executeQuery();
 				
@@ -792,7 +800,7 @@ private ProductDAO() {}
 
 		
 		// 메인 - 검색어 상품 목록 조회
-		public List<ProductBean> selectKeywordProductList(String keyword) {
+		public List<ProductBean> selectKeywordProductList(String keyword,int startRow, int listLimit) {
 			ArrayList<ProductBean> productSearchList = null;
 			
 			PreparedStatement pstmt = null;
@@ -803,7 +811,7 @@ private ProductDAO() {}
 						+ "FROM product p join image i "
 						+ "on p.product_idx = i.product_idx "
 						+ "WHERE product_brand LIKE ? OR product_name LIKE ?"
-						+ "GROUP BY product_name ORDER BY product_sell_count ASC";
+						+ "GROUP BY product_name ORDER BY product_sell_count ASC LIMIT ?,?";
 				
 //				String sql = "SELECT * FROM product "
 //						+ "WHERE product_brand LIKE ? "
@@ -812,6 +820,8 @@ private ProductDAO() {}
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+keyword+"%");
 				pstmt.setString(2, "%"+keyword+"%");
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, listLimit);
 				
 				rs = pstmt.executeQuery();
 				
@@ -1978,5 +1988,100 @@ private ProductDAO() {}
 			}
 			return order;
 		}
+
+
+  public int selectProductListCount() {
+	int listCount = 0;
+	
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
+	try {
+		String sql = "SELECT COUNT(product_idx) "
+							+ "FROM product ";
+//							+ "where member_idx = ?";
+		pstmt = con.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+		
+		if(rs.next()) {
+			listCount = rs.getInt(1);
+		}
+		
+	} catch (SQLException e) {
+		System.out.println("BoardDAO - selectProductListCount()");
+		e.printStackTrace();
+	} finally {
+		// DB 자원 반환
+		JdbcUtil.close(rs);
+		JdbcUtil.close(pstmt);
+	}
+	
+	return listCount;
+}
+
+
+	public int selectProductCgListCount(String cg) {
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT COUNT(product_idx) "
+								+ "FROM product "
+								+ "WHERE product_brand LIKE ?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+cg+"%");
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("BoardDAO - selectProductListCount()");
+			e.printStackTrace();
+		} finally {
+			// DB 자원 반환
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return listCount;
+	}
+
+
+	public int selectProductKeywordListCount(String keyword) {
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT COUNT(product_idx) "
+								+ "FROM product "
+								+ "WHERE product_brand LIKE ? OR product_name LIKE ?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setString(2, "%"+keyword+"%");
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("BoardDAO - selectProductListCount()");
+			e.printStackTrace();
+		} finally {
+			// DB 자원 반환
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return listCount;
+	}
 	
 }//DAO 끝

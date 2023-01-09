@@ -59,6 +59,29 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	font-size: big; 
 	float: right;
 }
+
+ .paging {
+        text-align: center;
+    }
+ .paging a {
+        /*
+        display: inline-block 인라인 요소의 특징과 블록 요소의 특징을 모두 갖는다
+        크기를 가질 수 있으며 텍스트 정렬도 적용받는다
+        */
+        display: inline-block;
+        
+        font-weight: bold;
+        text-decoration: none;
+        padding: 5px 8px;
+        border: 1px solid #ccc;
+       	color: #000; 
+/*         background-color: #F5F5DC; */
+    }
+    /* 현재 페이징에 select 클래스를 적용한다*/
+    .paging a.select {
+/*         color: #fff; */
+/*         background-color: #FFA7A7; */
+    }
 </style>
 </head>
 <body class="w3-content" style="max-width:95%">
@@ -142,7 +165,39 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     </div>
 </div>
 	
-  <!-- footer -->
+<!-- 페이징 처리 -->	
+	<div class="paging">
+        <c:choose>
+			<c:when test="${param.pageNum > 1}">
+				<a href="Sale.MAIN?pageNum=${param.pageNum - 1 }">이전</a>
+			</c:when>
+			<c:otherwise>
+				<a href="javascript:void(0)">이전</a>
+			</c:otherwise>
+		</c:choose>
+		
+		<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+			<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
+			<c:choose>
+				<c:when test="${param.pageNum eq i}">
+					${i }
+				</c:when>
+				<c:otherwise>
+					<a href="Sale.MAIN?pageNum=${i }">${i }</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		
+		<c:choose>
+			<c:when test="${param.pageNum < pageInfo.maxPage}">
+				<a href="Sale.MAIN?pageNum=${param.pageNum + 1 }">다음</a>
+			</c:when>
+			<c:otherwise>
+				<a href="javascript:void(0)">다음</a>
+			</c:otherwise>
+		</c:choose>
+    </div>
+<!-- </footer> -->
 <%--     <jsp:include page="./inc/footer.jsp"/> --%>
   
   
