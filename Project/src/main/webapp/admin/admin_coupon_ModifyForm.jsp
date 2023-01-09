@@ -48,6 +48,17 @@
 		
 		
 		</script>
+		<script type="text/javascript">
+			<%
+			String sId = (String)session.getAttribute("sId");
+			String id = request.getParameter("id");
+			if(sId == null || !sId.equals("admin")) { %>
+				alert("잘못된 접근입니다!")
+				location.href=history.back();
+			<% 
+			} 
+			%>
+		</script>
     </head>
     <body class="sb-nav-fixed">
     
