@@ -275,7 +275,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
 <script type="text/javascript">
-	function order() {
+	function orderDetail() {
 		
 	}
 
@@ -359,31 +359,7 @@ function w3_close() {
   });
 </script>
 
-<!-- 체크박스에 따른 금액변동 처리 -->
 <script type="text/javascript">
-
-
-
-//페이지 로딩 시 체크된 상품을 배열로 넣음.
-// $(function() {
-	//<td> 의 값들은 .val이 아니라, html로 가져와야 함.
-// 	if(#cart_)
-// 	var check = $("#cart_end").html();
-// 	alert(check)
-// 	let listArr = new Array();
-// 	let list = $("input[name='cartCheckBox']:checked");
-// 	for(var i=0; i<list.length; i++){
-// 		//체크된 상품이 있으면 배열에 넣음.
-// 		if(list[i].checked){
-// 			listArr.push(list[i].value);
-// 		}
-		
-// 		//listArr에 들어간 상황
-// 	}
-	
-// });
-
-
 //----------------------장바구니 체크박스 선택 여부에 따라 카트 금액 증가, 감소 작업 -------------------------
 function removeCheck(cb) {
 // 	alert(cb.id);
@@ -394,6 +370,7 @@ function removeCheck(cb) {
 	//체크박스 상태 판별(true이면 체크된 상태, false이면 체크가 풀린 상태)
 	let ischeck = cb.checked;
 	
+	//check가 true일 때
 	if(ischeck == true){
 		$.ajax({
 			type: "get",
@@ -406,6 +383,7 @@ function removeCheck(cb) {
 				 $("#totalResult").load(window.location.href + " #totalResult");
 			}
 		});
+	//check가 false일 때
 	}else if(ischeck == false){
 		$.ajax({
 			type: "get",
@@ -425,22 +403,12 @@ function removeCheck(cb) {
 </script>
 <script type="text/javascript">
 
+// 체크된 cart_idx 값을 넘기는 작업
 
- 	
-// 	//-----할인 연산결과에 따른 처리-----
-// 	//1. 할인가격
-//     var discounted = Math.round(originPrice * (discountRate / 100));	// 정수로 출력하기 위해 소수점 아래 반올림 처리
-//     //2. 할인된 가격 = 원래가격 - 할인가격
-//     var releasePrice = originPrice - discounted;
-//     //** 콤마 붙힌 가격 변수 ** 
-//     var commaReleasePrice = releasePrice.toLocaleString("en-US");
-//     var commaOriginPrice = originPrice.toLocaleString("en-US");
-//     var commaDiscounted = discounted.toLocaleString("en-US");
-//     //** 출력 ** 
-//     document.querySelector('#discount').innerText = commaDiscounted
-//     document.querySelector('#discountResult').innerText = commaReleasePrice
-		 
-// // 	    alert("로딩")
+function order_detail(idx) {
+	var isChecked = 
+}
+ 
 </script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
