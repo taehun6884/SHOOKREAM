@@ -113,7 +113,13 @@ private ProductDAO() {}
 		} catch (SQLException e) {
 			System.out.println("상품등록 - 관리자");
 			e.printStackTrace();
-		} 
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt4);
+			JdbcUtil.close(pstmt3);
+			JdbcUtil.close(pstmt2);
+			JdbcUtil.close(pstmt);
+		}
 		return insertCount2;
 	}
 
@@ -164,6 +170,9 @@ private ProductDAO() {}
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
 			}
 			
 			return colorlist;
@@ -1285,10 +1294,9 @@ private ProductDAO() {}
 			} catch (SQLException e) {
 				System.out.println("SQL 구문 오류 - selectImage");
 				e.printStackTrace();
-			}finally {
+			} finally {
 				JdbcUtil.close(rs);
 				JdbcUtil.close(pstmt);
-				
 			}
 			return image;
 		}
@@ -1320,6 +1328,9 @@ private ProductDAO() {}
 					} catch (SQLException e) {
 						System.out.println("SQL 구문 오류 - selectImage");
 						e.printStackTrace();
+					} finally {
+						JdbcUtil.close(rs);
+						JdbcUtil.close(pstmt);
 					}
 					return imagelist;
 				}
@@ -1822,7 +1833,11 @@ private ProductDAO() {}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
 			}
+			
 			return Coupon_price;
 		}
 		
@@ -1968,19 +1983,26 @@ private ProductDAO() {}
 			return deleteCount;
 		}
 	
-  public OrderBean selectOrderProgress() { // 배송상태를 전달받기
+		public OrderBean selectOrderProgress(int member_idx) { // 배송상태를 전달받기
 			OrderBean order = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
+			System.out.println("DAO : " + member_idx);
 			try {
-				String sql = "SELECT * FROM orderlist WHERE order_progress=?";
+				String sql = "SELECT order_progress FROM orderlist WHERE member_idx=?";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, "order_progress");
+				pstmt.setInt(1, member_idx);
 				
 				rs = pstmt.executeQuery();
+				System.out.println("DAO : " + rs);
+				if(rs.next()) {
+					order = new OrderBean();
+					order.setOrder_progress(rs.getString(1));
+				}
+				System.out.println("dao : " +order);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				System.out.println("SQL 구문 오류 - selectOrderProgress");
 				e.printStackTrace();
 			} finally {
 				JdbcUtil.close(rs);
@@ -1988,6 +2010,7 @@ private ProductDAO() {}
 			}
 			return order;
 		}
+
 
 
   public int selectProductListCount() {
@@ -2084,4 +2107,5 @@ private ProductDAO() {}
 		return listCount;
 	}
 	
+
 }//DAO 끝

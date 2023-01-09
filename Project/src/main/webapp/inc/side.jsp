@@ -60,17 +60,29 @@
  <div class="recentlyview d-flex align-items-center justify-content-center active">
  <h5>최근 본 상품 : </h5>
 <%
-String cookie = request.getHeader("Cookie");
-if(cookie!=null){
+String strCookie = request.getHeader("Cookie");
+if(strCookie!=null){
 	Cookie[] cookies =request.getCookies();
-
-		String product_img = getCookieValue(cookies, "product_img");
-		String product_idx = getCookieValue(cookies, "product_idx");
-		System.out.println("상품 번호 : " + product_idx);
+// 	for(Cookie cookie : cookies) {
+// 		System.out.println(cookie.getName() + " : " + cookie.getValue());
+// 	}
+		String product_img_list = getCookieValue(cookies, "product_img");
+		String product_idx_list = getCookieValue(cookies, "product_idx");
+// 		System.out.println("상품 번호 : " + product_idx + ", 이미지 : " + product_img);
 		
+		String[] arrProduct_img = product_img_list.split("/");
+		String[] arrProduct_idx = product_idx_list.split("/");
+
+		for(int i = 0; i < arrProduct_img.length; i++) {
+			String product_img = arrProduct_img[i];
+			String product_idx = arrProduct_idx[i];
+			
+			System.out.println(product_img + ", " + product_idx);
+			
 		%>
 		<img src="upload/<%=product_img %>" width="100" height="100" alt="없음" onclick="location.href='ProductInfoForm.po?product_idx=<%=product_idx %>&member_idx=${member_idx }'">	
 		<%
+		}
 // 	}
 			
 }
@@ -86,5 +98,7 @@ public String getCookieValue(Cookie[] cookies, String cookieName) {
 }
 
 %>
+
+
   </div>
 </nav>

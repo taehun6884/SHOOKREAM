@@ -26,6 +26,7 @@
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 <script src="https://kit.fontawesome.com/498a54c4c7.js"
 	crossorigin="anonymous"></script>
+<script src="../js/jquery-3.6.3.js"></script>	
 <script type="text/javascript">
 $(function() {
 	$('.post-wrapper').slick({

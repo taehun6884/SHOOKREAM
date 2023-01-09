@@ -8,6 +8,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+
 import db.JdbcUtil;
 import mail.GoogleMailAuthenticator;
 import vo.AuthBean;
@@ -62,51 +65,53 @@ private MemberDAO() {}
 		return isLogintUser;
 	}
 	// 로그인
-
-
+	
 	
 	// 회원가입
-	public int insertMember(MemberBean member) {
-		int insertCount = 0;
-		
-		PreparedStatement pstmt = null, pstmt2 = null;
-		ResultSet rs = null;
-		
-		try {
-			int member_idx = 1; // 회원 idx 처리
-			String sql = "SELECT MAX(member_idx) FROM member";
-			pstmt= con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
+		public int insertMember(MemberBean member) {
+			int insertCount = 0;
 			
-			if(rs.next()) {
-				member_idx = rs.getInt(1) + 1;
-			} 
+			PreparedStatement pstmt = null, pstmt2 = null;
+			ResultSet rs = null;
 			
-			sql = "INSERT INTO member VALUES(?,?,?,?,?,now(),?,?,?,?,'N')";
-			pstmt2= con.prepareStatement(sql);
-			
-			pstmt2.setInt(1, member_idx);
-			pstmt2.setString(2, member.getMember_id());
-			pstmt2.setString(3, member.getMember_name());
-			pstmt2.setString(4, member.getMember_pass());
-			pstmt2.setString(5, member.getMember_email());
-			pstmt2.setString(6, member.getMember_phone());
-			pstmt2.setInt(7, 0);
-			pstmt2.setInt(8, 0);
-			pstmt2.setString(9, member.getMember_address());
-			
-			insertCount = pstmt2.executeUpdate();
-			
-		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류! - insertMember()");
-			e.printStackTrace();
-		} finally {
-			JdbcUtil.close(rs);
-			JdbcUtil.close(pstmt);
-			JdbcUtil.close(pstmt2);
+			try {
+				int member_idx = 1; // 회원 idx 처리
+				String sql = "SELECT MAX(member_idx) FROM member";
+				pstmt= con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					member_idx = rs.getInt(1) + 1;
+				} 
+				
+				sql = "INSERT INTO member VALUES(?,?,?,?,?,now(),?,?,?,?,'Y')";
+				pstmt2= con.prepareStatement(sql);
+				
+				pstmt2.setInt(1, member_idx);
+				pstmt2.setString(2, member.getMember_id());
+				pstmt2.setString(3, member.getMember_name());
+				pstmt2.setString(4, member.getMember_pass());
+				pstmt2.setString(5, member.getMember_email());
+				pstmt2.setString(6, member.getMember_phone());
+				pstmt2.setInt(7, 0);
+				pstmt2.setInt(8, 0);
+				pstmt2.setString(9, member.getMember_address());
+				
+				insertCount = pstmt2.executeUpdate();
+				
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류! - insertMember()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+				JdbcUtil.close(pstmt2);
+			}
+			return insertCount;
 		}
-		return insertCount;
-	}
+	
+	
+
 	// 회원삭제
 	
 	public boolean isDeleteUser(String id, String pass) {
@@ -394,6 +399,9 @@ private MemberDAO() {}
 			}catch (Exception e) {
 				System.out.println("sql 구문 오류 - findID()");
 				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
 			}
 					
 			return id;
@@ -436,6 +444,8 @@ private MemberDAO() {}
 				}
 						return wish;
 			}
+			
+			
 			public int selectMemberIdx(String sId) {
 				int member_idx = 0;
 				
@@ -561,6 +571,98 @@ private MemberDAO() {}
 				return result;
 			}
 
+			// 이메일 인증 위해 auth 테이블에 insert
+			public boolean insertAuth(AuthBean auth) {
+				System.out.println("insertAuth dao");
+				boolean insertSuccess = false;
+				
+				PreparedStatement pstmt = null, pstmt2 = null, pstmt3 = null;
+				ResultSet rs = null; 
+			
+				// if문 -> id가 없으면 auth 테이블에 insert / 아이디 있으면 update
+				
+				try { // auth 테이블에서 id값 조회하기
+					String sql = "SELECT * FROM auth WHERE auth_id=?";
+					
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setString(1, auth.getAuth_id());
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) { // 일치하는 사람이 있으면 update
+						sql = "UPDATE auth SET auth_authCode =? WHERE auth_id=?";
+						pstmt2 = con.prepareStatement(sql);
+						
+						pstmt2.setString(1, auth.getAuth_authCode());
+						pstmt2.setString(2, auth.getAuth_id());
+						
+						pstmt2.executeUpdate();
+						insertSuccess = true;
+						
+					} else { // 일치하는 사람이 없으면 insert
+						sql = "INSERT INTO auth VALUES(?,?)";
+						pstmt3= con.prepareStatement(sql);
+						
+						pstmt3.setString(1, auth.getAuth_id());
+						pstmt3.setString(2, auth.getAuth_authCode());
+						
+						System.out.println(auth.getAuth_authCode());
+						
+						if(pstmt3.executeUpdate()>0) {
+							insertSuccess = true;
+							System.out.println(auth.getAuth_id());
+						}
+						
+					}
+				} catch (SQLException e) {
+					System.out.println("sql 구문 오류 - insertAuth()");
+					e.printStackTrace();
+				} finally {
+					JdbcUtil.close(rs);
+					JdbcUtil.close(pstmt3);
+					JdbcUtil.close(pstmt2);
+					JdbcUtil.close(pstmt);
+				}
+				
+				return insertSuccess;
+		}
+			
+			// 회원가입
+			// 메일 인증코드 비교 -> 일치 시 회원가입(insert)
+			// auth 테이블의 id, authCode와 입력한 값 비교해서 일치하면 회원가입 + auth 삭제
+			
+			// id 가 일치하는 회원 조회
+			public String selectMember(String auth_authCode, String auth_id) {
+				String findAuthCd = "";
+				
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+				
+				try {
+					String sql = "SELECT auth_authCode FROM auth WHERE auth_id=? AND auth_authCode=?";
+					pstmt= con.prepareStatement(sql);
+					pstmt.setString(1, auth_id);
+					pstmt.setString(2, auth_authCode);
+//					System.out.println(auth_authCode);
+//					System.out.println(auth_id);
+					rs = pstmt.executeQuery();
+					
+//					System.out.println(pstmt);
+					if(rs.next()){
+						findAuthCd = auth_authCode;
+						System.out.println("selectMember dao 리턴값" + findAuthCd);
+					}
+				} catch (SQLException e) {
+					System.out.println("sql 구문 오류 - selectMember()");
+					e.printStackTrace();
+				}finally {
+					JdbcUtil.close(rs);
+					JdbcUtil.close(pstmt);
+				}
+				
+				return findAuthCd;
+				
+			}
 			// 이메일 인증 위해 auth 테이블에 데이터 넣기
 						public boolean insertAuth(AuthBean auth) {
 							System.out.println("insertAuth dao");
@@ -672,7 +774,6 @@ private MemberDAO() {}
 						return AuthSuccess;
 				}
 
-
 			// 회원가입시 회원가입 쿠폰 지급
          public int insertWelcomCoupon() {
             int insertCount = 0;
@@ -729,6 +830,8 @@ private MemberDAO() {}
                }
             return insertCount;
          }
+
+
 			
 
 }
