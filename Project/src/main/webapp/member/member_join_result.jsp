@@ -56,14 +56,16 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- Footer -->
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
     <div id = "sform">
-        <h4>회원가입에 성공했습니다.</h4>
+        <h4>회원가입에 성공했습니다 💕</h4>
+        <br>
+        <h6>회원가입 감사 쿠폰이 발급되었습니다!</h6>
 
-		<button type="button" class="btn btn-secondary" onclick="location.href='LoginMember.me'">로그인</button>
+		<button type="button" class="btn btn-secondary" style="margin-top: 50px;" onclick="location.href='LoginMember.me'">로그인</button>
 
 	</div>
   </footer>
  </div>	
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+<!--   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
   <!-- End page content -->
 
 
