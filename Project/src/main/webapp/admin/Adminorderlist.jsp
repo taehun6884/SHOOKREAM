@@ -20,6 +20,17 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
         
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+			<%
+			String sId = (String)session.getAttribute("sId");
+			String id = request.getParameter("id");
+			if(sId == null || !sId.equals("admin")) { %>
+				alert("잘못된 접근입니다!")
+				location.href=history.back();
+			<% 
+			} 
+			%>
+		</script>        
 </head>
  <body class="sb-nav-fixed">
   	<!-- TOP -->
