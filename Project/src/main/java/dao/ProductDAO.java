@@ -1958,19 +1958,26 @@ private ProductDAO() {}
 			return deleteCount;
 		}
 	
-  public OrderBean selectOrderProgress() { // 배송상태를 전달받기
+		public OrderBean selectOrderProgress(int member_idx) { // 배송상태를 전달받기
 			OrderBean order = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
+			System.out.println("DAO : " + member_idx);
 			try {
-				String sql = "SELECT * FROM orderlist WHERE order_progress=?";
+				String sql = "SELECT order_progress FROM orderlist WHERE member_idx=?";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, "order_progress");
+				pstmt.setInt(1, member_idx);
 				
 				rs = pstmt.executeQuery();
+				System.out.println("DAO : " + rs);
+				if(rs.next()) {
+					order = new OrderBean();
+					order.setOrder_progress(rs.getString(1));
+				}
+				System.out.println("dao : " +order);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				System.out.println("SQL 구문 오류 - selectOrderProgress");
 				e.printStackTrace();
 			} finally {
 				JdbcUtil.close(rs);
@@ -1978,5 +1985,5 @@ private ProductDAO() {}
 			}
 			return order;
 		}
-	
+
 }//DAO 끝
