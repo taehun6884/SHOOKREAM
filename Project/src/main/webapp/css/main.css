@@ -1774,16 +1774,17 @@ to {
 
 .back-to-top {
     position: fixed;
-    visibility: hidden;
+/*     visibility: hidden; */
     opacity: 0;
-    right: 15px;
-    bottom: 15px;
+    right: 10px;
+    bottom: 150px;
     z-index: 996;
     background: #fff;
     width: 40px;
     height: 40px;
     border-radius: 4px;
     transition: all 0.4s;
+/*     margin-right: 10px; */
 }
 .align-items-center {
     align-items: center!important;
@@ -1799,6 +1800,8 @@ to {
  .reportbtn {
  	background: #FF0000;
  }
+
+ 
 #cart{ margin: 10px;  padding: 0; }
 #heart{ margin: 10px;  padding: 0; }
 #user{ margin: 10px;  padding: 0; }

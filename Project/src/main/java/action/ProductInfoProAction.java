@@ -43,8 +43,13 @@ public class ProductInfoProAction implements Action {
 		String cp = request.getContextPath();
 		System.out.println("product.getProduct_name() : " + product.getProduct_name());
 		Cookie c1 = new Cookie("product_img",image.getImage_main_file());
+		Cookie c2 = new Cookie("product_idx",request.getParameter("product_idx"));
 		c1.setMaxAge(600);
 		response.addCookie(c1);
+		response.addCookie(c2);
+		
+		System.out.println(c1.getValue() + ", " + c2.getValue());
+		
 		//상품별 카테고리 가져오기
 		List<String>categorylist =  service.getCategoryList(product.getProduct_name());
 		List<String> colorlist = service.ProductColorCategory(product.getProduct_name());
@@ -72,6 +77,7 @@ public class ProductInfoProAction implements Action {
 		request.setAttribute("categorylist", categorylist);
 		request.setAttribute("colorlist", colorlist);
 		request.setAttribute("c1", c1);
+		request.setAttribute("c2", c2);
 		request.setAttribute("cp", cp);
 		// 상품 리뷰 출력 시작
 		System.out.println(c1);

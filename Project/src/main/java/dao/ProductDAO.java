@@ -1073,6 +1073,10 @@ private ProductDAO() {}
 			} catch (SQLException e) {
 				System.out.println("SQL 구문 오류 - selectImage");
 				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+				
 			}
 			return image;
 		}

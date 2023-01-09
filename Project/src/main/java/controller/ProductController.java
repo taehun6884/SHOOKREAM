@@ -111,6 +111,7 @@ public class ProductController extends HttpServlet{
 			forward = action.execute(request, response);
 		}
 			
+			
 		if(forward != null) {
 			if(forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());
