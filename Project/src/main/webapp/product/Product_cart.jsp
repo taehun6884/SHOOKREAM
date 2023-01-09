@@ -161,6 +161,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
    <hr size="30px">
 <!--   Footer -->
 <!--   <footer class="w3-padding-64 w3-small w3-center" id="footer"> -->
+<form action="">
   <table class="table" border ="3">
   <thead  class="table-dark" >
     <tr>
@@ -176,7 +177,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     </tr>
   </thead>
   <tbody>
-    
+  	<!-- 카트 리스트가 없을 때 처리 -->
+    <c:if test="${cartlist eq null or empty cartlist}">
+			<tr>
+				<td colspan="6"><b>담긴 상품이 없습니다.</b></td>
+			</tr>
+		</c:if>
+	<!-- 카트 리스트가 있을 때 처리 -->
+	<c:if test="${cartlist ne null and not empty cartlist}">
     <c:forEach var="cart" items="${cartlist }" varStatus="status">
     <tr>
       <!-- 체크박스 -->
@@ -198,6 +206,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       </td>
     </tr>
     </c:forEach>
+    </c:if>
   </tbody>
 </table>
 	<div class="container px-4 text-center" id="totalResult">
@@ -209,13 +218,12 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 		</div>
 	    <div class="col">
 	      <div class="p-3 border bg-light">
-	      <button onclick="">구매하기</button>
-	      
-	      <button onclick="test()">test</button>
-	      </div>
+	      <input type="button" onclick="goOrder()" value="구매하기" >
+ 	      </div>
 	    </div>
 	  </div>
-</div>
+    </div>
+</form>
 <!-- 페이징 처리 -->	
 	<div class="paging">
         <c:choose>
@@ -274,13 +282,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
-<script type="text/javascript">
-	function orderDetail() {
-		
-	}
-
-
-</script>
 
 <script>
 // Accordion 
@@ -404,11 +405,43 @@ function removeCheck(cb) {
 <script type="text/javascript">
 
 // 체크된 cart_idx 값을 넘기는 작업
-
-function order_detail(idx) {
-	var isChecked = 
+function goOrder() {
+		var check = $('input[name=cartCheckBox]:checked');
+		var chk_arr = [];
+		$('input[name=cartCheckBox]:checked').each(function(i) {
+			chk_arr.push($(this).val());
+		});
+	
+		//체크된 상품 개수
+		for(var i =0; i<check.length; i++){
+			//체크된 상품 판별
+	// 		var checkVal = $('input[name=cartCheckBox]:checked').val();
+	// 		alert(checkVal);
+			alert(chk_arr[i]);
+		}	
+	
+	
+	
+	
+	
+	
+	
+	
 }
- 
+
+
+
+// $(document).ready(function(){
+// 	let listArr = new Array();
+//     let list = $("input[name='cartCheckBox']:checked");
+    
+//     for(var i = 0; i < list.length; i++){
+//         if(list[i].checked){
+//            listArr.push(list[i].value);
+//            alert("배열값 = "+ listArr);
+//         }
+//      }
+// }); 
 </script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
