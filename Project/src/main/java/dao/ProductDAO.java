@@ -113,7 +113,13 @@ private ProductDAO() {}
 		} catch (SQLException e) {
 			System.out.println("상품등록 - 관리자");
 			e.printStackTrace();
-		} 
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt4);
+			JdbcUtil.close(pstmt3);
+			JdbcUtil.close(pstmt2);
+			JdbcUtil.close(pstmt);
+		}
 		return insertCount2;
 	}
 
@@ -164,6 +170,9 @@ private ProductDAO() {}
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
 			}
 			
 			return colorlist;
@@ -1275,10 +1284,9 @@ private ProductDAO() {}
 			} catch (SQLException e) {
 				System.out.println("SQL 구문 오류 - selectImage");
 				e.printStackTrace();
-			}finally {
+			} finally {
 				JdbcUtil.close(rs);
 				JdbcUtil.close(pstmt);
-				
 			}
 			return image;
 		}
@@ -1310,6 +1318,9 @@ private ProductDAO() {}
 					} catch (SQLException e) {
 						System.out.println("SQL 구문 오류 - selectImage");
 						e.printStackTrace();
+					} finally {
+						JdbcUtil.close(rs);
+						JdbcUtil.close(pstmt);
 					}
 					return imagelist;
 				}
@@ -1812,7 +1823,11 @@ private ProductDAO() {}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
 			}
+			
 			return Coupon_price;
 		}
 		

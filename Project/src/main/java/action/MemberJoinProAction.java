@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import svc.AuthEmailProService;
 import svc.MemberJoinProService;
 import vo.ActionForward;
 import vo.MemberBean;
@@ -15,6 +16,8 @@ public class MemberJoinProAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
+		
+		
 		
 		MemberBean member = new MemberBean();
 		
@@ -32,7 +35,8 @@ public class MemberJoinProAction implements Action {
 		MemberJoinProService service = new MemberJoinProService();
 		boolean joinMember = service.joinMember(member);
 		
-		try {
+		
+			try {
 			if(!joinMember) { // 실패 시
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
@@ -50,6 +54,7 @@ public class MemberJoinProAction implements Action {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	
 		
 		return forward;

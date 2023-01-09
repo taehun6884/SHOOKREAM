@@ -5,6 +5,8 @@
 <html>
 <head>
 <title>SHOOKREAM</title>
+<!-- <script src="js/jquery-3.6.3.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -27,8 +29,8 @@ table.type03 {
   border-collapse: collapse;
   text-align: left;
   line-height: 1.5;
-  border-top: 1px solid #ccc;
-  border-left: 3px solid #369;
+  border-top: 1.5px solid #ccc;
+  border-left: 1.5px solid #ccc;
   margin-left:auto; 
   margin-right:auto;
 }
@@ -38,7 +40,7 @@ table.type03 th {
   font-weight: bold;
   font-size : 17px;
   vertical-align: top;
-  color: #153d73;
+  color: #153d73; 
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   height: 90px;
@@ -170,10 +172,10 @@ $(function() {
 
   <!-- 회원가입 폼 -->
   
-  	<form action="MemberJoinPro.me" method="post" name="joinForm" style="margin-bottom: 300px">
+  	<form action="MemberJoinPro.me" method="post" id="joinForm" name="joinForm" style="margin-bottom: 300px">
 			<h1 style="text-align: center;">회원가입</h1>
 			<h6 style="color: gray;text-align: center;margin-bottom: 50px" >SHOOKREAM에 오신 것을 환영합니다.</h6>
-		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3>
+<!-- 		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3> -->
 			
 			
 			<div>
@@ -184,7 +186,7 @@ $(function() {
 						<input type="text" name="id" id ="id" required size="20px" style="line-height: 30px" onkeydown="inputIdChk()" > &nbsp;
 						<button class="btn btn-dark" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">중복 확인</button>
 <!-- 						<button type="button" class="btn btn-secondary" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">ID check</button> -->
-						<input type="hidden" name="isCheckId" value="idUncheck"/> <!-- 체크 여부 확인 -->			
+<!-- 						<input type="hidden" name="isCheckId" value="idUncheck"/> 체크 여부 확인			 -->
 						<br>
 						<span style="color: gray;" >(영문 소문자/숫자/특수문자(-_.) 사용가능, 5~20자)</span> &nbsp;
 						<span id="checkIdSpan"></span>
@@ -232,14 +234,20 @@ $(function() {
 					<tr>
 						<th scope="row">이메일</th>
 						<td>
-						<input type="text" name="email" id="email" placeholder="" required size="20px" style="line-height: 30px">&nbsp; <span id ="emailCheckResult"></span><br>
-						<span style="color: gray;">("@"를 포함하여 이메일을 입력해주세요. ex) abcd@gmail.com)</span>
-						<input type="text" name="authCode" id="authCode" size="20px" style="line-height: 30px" placeholder="인증코드를 입력하세요" disabled="disabled"> 
+						<input type="text" name="email" id="email" placeholder="" required size="20px" style="line-height: 30px"> &nbsp;
+						<input type="button" class="btn btn-dark" id="checkEmail"  value="인증 메일 전송" onclick="alert('이메일 전송 완료!')"><br>
+						<span style="color: gray">("@"를 포함하여 이메일을 입력해주세요. ex) abcd@gmail.com)</span><br>
+						<div id ="authResult">
+						<input type="text" name="authCode" id="authCode" size="20px" style="line-height: 30px" required="required"> &nbsp;
+						<input type="button" class="btn btn-dark" id="checkEmail2"  value="인증 하기"><br>
+						<span style="color: gray">(인증코드 6자리를 입력하세요)</span> &nbsp;
 						<span id="authEmailResult"></span>
+						</div>
 						</td>
+						
 					</tr>
 					<tr>
-						<td colspan="2" align="center"><button type="submit" class="btn btn-secondary btn-lg" onclick="fn_joinMember()" >회원가입</button></td>
+						<td colspan="2" align="center"><button type="submit" id="join_btn" name ="join" class="btn btn-dark"  >회원가입</button></td>
 					</tr>
 				</table>
 
@@ -274,13 +282,17 @@ $(function() {
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
 <script>
-
+// 	var isIdCheck = false;
+	var isEmailAuth = false;
+	
 function fn_joinMember() {
 	var joinForm = document.joinForm;
 	
 	if(joinForm.isCheckId.value != "idCheck"){
 		alert("ID 중복체크를 해주세요!")
 		event.preventDefault(); // submit 기능 막기
+	}	
+	
 	} else if(idStatus == false) {
 		alert("ID를 확인해주세요!")
 		event.preventDefault(); // submit 기능 막기
@@ -295,6 +307,8 @@ function fn_joinMember() {
 		event.preventDefault(); // submit 기능 막기
 	}
 }
+
+// window.opener.isIdCheck = true;
 
 function fn_dbCheckId() {
 	var id = document.getElementById("id").value;
@@ -359,8 +373,24 @@ function inputIdChk(){
 // }
 
 
-	/* 이메일 인증 */
+	/* 이메일 인증 1 */
 	$(function() {
+		$("#joinForm").submit(function() { // 폼 서브밋
+			// 아이디 체크, 이메일 인증 체크 
+// 			if($("") != "idCheck"){ //
+// 				alert("ID 중복체크를 해주세요!")
+// 				event.preventDefault(); // submit 기능 막기
+// 			}	
+		
+			// 이메일 인증 확인
+			if(!isEmailAuth) {
+				alert("Email 인증을 완료 해주세요!");
+				return false; // submit 취소
+			}
+			
+			return true; // submit 실행
+		});
+		
 			$("#checkEmail").on("click", function() {
 				
 				$.ajax({
@@ -370,31 +400,48 @@ function inputIdChk(){
 		               id: $("#id").val(),
 		               authCode: $("#authCode").val(),
 		               email: $("#email").val()
-		            },
-		            
-		            success: function(result) {
-		                //  리턴받은 결과("true", "false") 판별
-		                   $("#authEmailResult").html(result);
-		             }
+		            }
+				                   
+		             
 		         });
 			});
+			
+		/* 이메일 인증 2 */
+		$("#checkEmail2").on("click", function() {
+				
+				$.ajax({
+					type: "get",
+		            url: "CompareEmailAddress.me",
+		            data: {
+		               id: $("#id").val(),
+		               authCode: $("#authCode").val()
+		            },
+		            datatype: "html",
+					success:function(result){
+						const data = $.trim(result);
+						if(data =="true"){
+							alert("인증 성공");
+	                	  	 $("#authEmailResult").html("인증 성공!").css("color", "blue");
+	                	  	 $("#authResult").reload(window.location.href + " #authResult");
+	                	  	 isEmailAuth = true;
+	    	            } else {
+							alert("인증 실패");
+							 $("#authEmailResult").html("인증 실패!").css("color", "red");
+// 							 event.preventDefault(); // submit 기능 막기
+// 							 $('join_btn').prop('disabled', false);
+							 $("#authResult").reload(window.location.href + " #authResult");
+	                	  	 isEmailAuth = false;
+	    	            }//else
+					
+					}//success
+		         
+				});//ajax
+			});
 		});
-		
 	
-		
 	
-// 	/* 인증번호 이메일 전송 */
-// 	$("#checkEmail").click(function(){
-// 	    var email = $(".mail_input").val(); // 입력한 이메일
-	    
-// 	    $.ajax({
-	        
-// 	        type:"GET",
-// 	        url:"mailCheck?email=" + email
-	                
-// 	    });
-// 	});
 	
+
 	
 
 

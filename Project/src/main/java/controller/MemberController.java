@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import action.CheckAddrProAction;
 import action.CheckEmailAddrProAction;
+import action.CompareAddrProAction;
 import action.FindMemberIdProAction;
 import action.FindMemberPassProAction;
 import action.MemberJoinProAction;
@@ -38,7 +39,7 @@ public class MemberController extends HttpServlet{
 		System.out.println("MemberController()");
 		
 		String command = request.getServletPath();
-		System.out.println("현재 주소 :"+command);
+		System.out.println(command);
 		
 		ActionForward forward = null;
 		Action action = null;
@@ -112,9 +113,15 @@ public class MemberController extends HttpServlet{
 		}else if(command.equals("/FindPwProAction.me")) { // 비번 찾기 pro
 			action = new FindMemberPassProAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/CheckEmailAddress.me")) { // 이메일 인증
+		}else if(command.equals("/CheckEmailAddress.me")) { // 이메일 인증1
 			action = new CheckAddrProAction();
 			forward = action.execute(request, response);
+		}else if(command.equals("/CompareEmailAddress.me")) { // 이메일 인증2
+			action = new CompareAddrProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/MemberMyPage.me")) {
+			forward = new ActionForward(); 
+			forward.setPath("member/my_page.jsp");
 		}else if(command.equals("/ReportFormAction.me")) { //coupon 발급
 			forward = new ActionForward();
 			forward.setPath("report/mail_form.jsp");
