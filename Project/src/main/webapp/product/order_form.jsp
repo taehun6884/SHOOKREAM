@@ -64,6 +64,9 @@
 	
 	}
 	
+	td {
+	vertical-align : baseline;
+	}
 	</style>
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
@@ -98,7 +101,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   
   <div style="padding: 100px 100px;">
   <header class="w3-container w3-xlarge">
-    <p class="w3-left">주문 상세 페이지</p>
+    <p class="w3-left">주문하기</p>
     <p class="w3-right">
     </p>
 </header>
@@ -132,7 +135,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	  </tbody>
 	</table>
    
-	  <table class="table" >
+	  <table class="table" style="border-collapse: separate; border-spacing: 0 13px;" >
 	  <input type="hidden" id="coupon_idx" >
 	  <thead>
 	    <tr>
@@ -141,11 +144,11 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	  </thead>
 	  <tbody>
 	   <tr>
-	    	<td colspan="8" style="vertical-align: middle;">
-	    	<span style="font: bold; font-size: large; text-align: center;">
+	    	<td colspan="8" style="vertical-align: baseline;">
+	    	<span style="font: bold; font-size: large; text-align: center; ">
 	    	사용 가능한 쿠폰(0장) 중 (0장)의 쿠폰이 적용되었습니다.
 	    	</span>
-	    	<span style=" padding-left: 20px; vertical-align: middle;" ><button type="button" class="btn btn-dark btn-sm" onclick="CouponCheck()">내가 보유한 쿠폰 보러가기</button></span>
+	    	<span style=" padding-left: 15px; vertical-align: middle; text-align: center;" ><button type="button" class="btn btn-dark btn-sm" onclick="CouponCheck()">내가 보유한 쿠폰 보러가기</button></span>
 	    	</td>
 	   </tr>
 	   <tr>
@@ -163,7 +166,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	  </tbody>
 	</table>
 	 
-	 <table class="table" id="delivery_table" >
+	 <table class="table" id="delivery_table" style="border-collapse: separate; border-spacing: 0 13px;">
 	  <thead>
 	    <tr>
 	      <th scope="col" colspan="8" style="font-size: x-large;">배송 정보</th>
@@ -184,7 +187,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 		<th colspan="2">배송지 선택</th>
 		<td colspan="6" style="margin-left:500px;">
 			<input type="radio" value="" name=""> 기본배송지
-			<input type="radio" value="새로운 배송지" name="">새로운 배송지
+			<input type="radio" value="새로운 배송지" name=""> 새로운 배송지
 		</td>
 	   </tr>
 	   <tr>
