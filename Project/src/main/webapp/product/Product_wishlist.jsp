@@ -103,7 +103,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <c:forEach var="wish" items="${wishlist }">
     <tr>
       <th scope="row">${wish.wish_idx }</th>
-      <td><img src="upload/${wish.product_img }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
+      <td><a href="ProductInfoForm.po?product_idx=${wish.product_idx }"><img src="upload/${wish.product_img }"  alt="없음!" class="img-thumbnail" width="150" height="150"></a></td>
       <td>${wish.product_name }</td>
       <td>${wish.product_brand }</td>
       <td>${wish.product_price }</td>

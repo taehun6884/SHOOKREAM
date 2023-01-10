@@ -53,7 +53,7 @@ public class CouponInsertProAction implements Action {
 				out.println("</script>");
 			} else { // 성공 시
 				forward = new ActionForward();
-				forward.setPath("admin/admin_product.jsp");
+				forward.setPath("admin/admin_coupon.jsp");
 				forward.setRedirect(false);
 			}
 		} catch (IOException e) {

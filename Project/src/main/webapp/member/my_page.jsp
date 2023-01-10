@@ -103,7 +103,11 @@
 <body class="w3-content" style="max-width:95%">
 <!-- Sidebar/menu -->
 <jsp:include page="../inc/side.jsp"/>
-<jsp:include page="../inc/top.jsp"/>
+<header class="w3-container w3-xlarge">
+  	<div class="w3-right">
+   <jsp:include page="../inc/top.jsp"/>
+  	</div>
+  	</header>
 <div class="w3-main" style="margin-left:250px">
 
 <div class="myOrderState">
@@ -153,7 +157,7 @@
 		</div>
 	</div>	
 </div>
-	
+</div>
 <script>
 // Accordion 
 	function myAccFunc() {

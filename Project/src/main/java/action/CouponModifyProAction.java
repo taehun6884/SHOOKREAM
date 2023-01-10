@@ -36,8 +36,8 @@ public class CouponModifyProAction implements Action {
 			coupon.setCoupon_start("0000-00-00");
 			coupon.setCoupon_end("0000-00-00");
 		} else {
-			coupon.setCoupon_start("coupon_start");
-			coupon.setCoupon_end("coupon_end");
+			coupon.setCoupon_start(coupon_start);
+			coupon.setCoupon_end(coupon_end);
 		}
 		
 //		System.out.println(coupon);

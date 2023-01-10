@@ -31,7 +31,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 #main_category{
 	text-align: center;
 	padding-top: 100px;
-	padding-bottom: 30px;
+	padding-bottom: 100px;
 	font-size: x-large;
 }
 
@@ -62,6 +62,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
  .paging {
         text-align: center;
+        margin: 100px;
     }
  .paging a {
         /*
@@ -99,7 +100,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
+<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
 
   <!-- Push down content on small screens -->
   <div class="w3-hide-large" style="margin-top:83px"></div>
@@ -114,7 +115,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--   </div> -->
 
 	<div id="main_category">
-		<p>SALE</p>
+		<p>Sale</p>
 	</div>
   <!-- Product grid -->
   <div class="w3-row w3-grayscale">
@@ -163,7 +164,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 					</div>
 				</c:forEach>
     </div>
-</div>
+
 	
 <!-- 페이징 처리 -->	
 	<div class="paging">
@@ -196,6 +197,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 				<a href="javascript:void(0)">다음</a>
 			</c:otherwise>
 		</c:choose>
+    </div>
     </div>
 <!-- </footer> -->
 <%--     <jsp:include page="./inc/footer.jsp"/> --%>

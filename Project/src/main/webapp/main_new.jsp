@@ -11,8 +11,7 @@
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
-<link rel="stylesheet" href="./css/main.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -32,7 +31,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 #main_category{
 	text-align: center;
 	padding-top: 100px;
-	padding-bottom: 30px;
+	padding-bottom: 100px;
 	font-size: x-large;
 }
 
@@ -63,6 +62,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
  .paging {
         text-align: center;
+        margin: 100px;
     }
  .paging a {
         /*
@@ -100,7 +100,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
+<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
 
   <!-- Push down content on small screens -->
   <div class="w3-hide-large" style="margin-top:83px"></div>
@@ -115,19 +115,17 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--   </div> -->
 
 	<div id="main_category">
-		<p>NEW</p>
+		<p>New</p>
 	</div>
-	
-	
   <!-- Product grid -->
   <div class="w3-row w3-grayscale">
-  <c:forEach var="productNewList" items="${productNewList }">
+     <c:forEach var="productNewList" items="${productNewList }">
    <div class="w3-col l3 s6">
       <div class="w3-container">
         <div class="w3-display-container">
           <img src="./upload/${productNewList.product_img }"  alt="..." style="width:100%">
-          <div class="w3-display-middle w3-display-hover">
-									<button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productNewList.product_idx }&member_idx=${sessionScope.member_idx }'">
+         <div class="w3-display-middle w3-display-hover">
+									<button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productSaleList.product_idx }&member_idx=${sessionScope.member_idx }'">
 										Buy now <i class="fa fa-shopping-cart" ></i>
 									</button>
 								</div>
@@ -166,8 +164,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 					</div>
 				</c:forEach>
     </div>
-</div>
-	<!-- 페이징 처리 -->	
+<!-- 페이징 처리 -->	
 	<div class="paging">
         <c:choose>
 			<c:when test="${param.pageNum > 1}">
@@ -199,8 +196,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 			</c:otherwise>
 		</c:choose>
     </div>
+</div>
+	
 <!-- </footer> -->
-  <!-- footer -->
 <%--     <jsp:include page="./inc/footer.jsp"/> --%>
   
   

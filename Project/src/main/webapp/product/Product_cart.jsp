@@ -15,6 +15,7 @@
 <!-- 네이버아이디로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://kit.fontawesome.com/ca93809e69.js" crossorigin="anonymous"></script>
 <!-- 구글 아이디 로그인 -->
 <meta name="google-signin-client_id" content="1047574308186-h6ehte2k4901kjn1u3g5vnonbf2g56on.apps.googleusercontent.com">
 
@@ -65,8 +66,8 @@
     </style>
 
 <style>
-.w3-sidebar a {font-family: "Roboto", sans-serif}
-body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+/* .w3-sidebar a {font-family: "Roboto", sans-serif} */
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;} 
 </style>
 
 <style>
@@ -132,21 +133,26 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
+<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
 
   <!-- Push down content on small screens -->
-<!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
-  
+  <div class="w3-hide-large" style="margin-top:83px"></div>
+  	
+  	<header class="w3-container w3-xlarge">
+  	<div class="w3-right">
+   <jsp:include page="../inc/top.jsp"/>
+  	</div>
+  	</header>
   <!-- Top header -->
-  <header class="w3-container w3-xlarge">
+<!--   <header class="w3-container w3-xlarge"> -->
 <!--     <p class="w3-left">장바ㅊ구니</p> -->
-    <p class="w3-right">
+<!--     <p class="w3-right"> -->
 <!--       <i class="fa fa-shopping-cart w3-margin-right"></i> -->
 <!--       <i class="fa fa-search"></i> -->
-    </p>
-</header>
+<!--     </p> -->
+<!-- </header> -->
 
-  <header class="w3-container w3-xlarge" style="padding: 40px 50px;  z-index: -1">
+  <header class="w3-container w3-xlarge" style="padding: 80px 50px;  z-index: -1">
     <p class="w3-left">
     <i class="fa-solid fa-bag-shopping" ></i>
 <!--     <i class="fa-solid fa-cart-shopping"></i> -->
@@ -253,6 +259,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--         <a href="#">4</a> -->
 <!--         <a href="#">5</a> -->
     </div>
+  </div>
 <!-- </footer> -->
   
 
