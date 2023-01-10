@@ -41,6 +41,10 @@ pageContext.setAttribute("cn", "\n");
 			float: center;
 		}
 		
+		#board_detail {
+			padding: 100px 250px 250px;
+		}
+		
 		</style>
 		
 	</head>
@@ -66,6 +70,8 @@ pageContext.setAttribute("cn", "\n");
 	  
 	  <!-- Top header -->
 	  <jsp:include page="../inc/top.jsp"/>
+	  
+	  <div id="board_detail">
 		<h2>Notice</h2>
 		<br><br>
 		<hr style="border:solid 1px;">	
@@ -74,8 +80,8 @@ pageContext.setAttribute("cn", "\n");
 			<hr>
 			<div id="no_content">${fn:replace(board.notice_content, cn, br) }</div><br><br>	
 			<button class="btn btn-sm btn-dark" onclick="history.back()">뒤로가기</button><br><br>
-		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
-	
+<!-- 		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
+	</div>
 	  <!-- End page content -->
 	</div>
 

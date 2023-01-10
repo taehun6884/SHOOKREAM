@@ -39,7 +39,7 @@ table.type03 th {
   font-weight: bold;
   font-size : 17px;
   vertical-align: top;
-  color: #153d73;
+  color: #828282;
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   height: 70px;
@@ -197,7 +197,7 @@ function fn_modify() {
   			<input type="hidden" value = "${member.member_address }" name="oldaddress">
   			<input type="hidden" value = "${member.member_phone }" name="oldphone">
   			
-			<h1 style="font-size: 25px; padding-left: 100px; margin-bottom: 20px;">정보 수정</h1>
+			<h1 style="font-size: 25px; padding-left: 180px; padding-top:30px; margin-bottom: 20px;">정보 수정</h1>
 <!-- 			<h6 style="color: gray;text-align: center;margin-bottom: 50px" >SHOOKREAM에 오신 것을 환영합니다.</h6> -->
 <!-- 		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3> -->
 			<div>

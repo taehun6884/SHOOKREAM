@@ -152,9 +152,6 @@ $(function() {
 </head>
 <body class="w3-content" style="max-width:95%">
 
-<!-- Top/menu -->
-<jsp:include page="../inc/top.jsp"/>
-
 <!-- Sidebar/menu -->
 <jsp:include page="../inc/side.jsp"/>
 
@@ -168,12 +165,21 @@ $(function() {
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
+<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
+	
+ <!-- Push down content on small screens -->
+ <div class="w3-hide-large" style="margin-top:83px"></div>
+ 
+ <!-- Top header -->
+ <div style="float: right;">
+ <jsp:include page="../inc/top.jsp"/>
+</div>
 
   <!-- 회원가입 폼 -->
   
-  	<form action="MemberJoinPro.me" method="post" id="joinForm" name="joinForm" style="margin-bottom: 300px">
-			<h1 style="text-align: center;">회원가입</h1>
+  <div style="padding: 50px 80px;">
+  	<form action="MemberJoinPro.me" method="post" id="joinForm" name="joinForm" style="margin-bottom: 150px">
+			<h1 style="text-align: center; padding-top: 60px;">회원가입</h1>
 			<h6 style="color: gray;text-align: center;margin-bottom: 50px" >SHOOKREAM에 오신 것을 환영합니다.</h6>
 <!-- 		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3> -->
 			
@@ -255,7 +261,7 @@ $(function() {
 			</div>
 
 		</form>
-
+</div>
 
   <br>
   <!-- Footer -->
