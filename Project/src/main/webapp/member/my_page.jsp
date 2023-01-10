@@ -164,12 +164,12 @@
 	<div id="myPageList">
 		<h4>My Page</h4>
 		<div class="grid-container">
-			<div class="grid-item"><a href="MemberModifyForm.me?id=${sessionScope.sId }" class="aList"><br>회원 정보 수정</a></div>
+			<div class="grid-item"><a href="MemberModifyCheck.me?id=${sessionScope.sId }" class="aList"><br>회원 정보 수정</a></div>
 			<div class="grid-item"><a href="MemberDeleteForm.me?id=${sessionScope.sId }" class="aList"><br>회원 탈퇴</a></div>
 			<div class="grid-item"><a href="CouponListMypage.po?member_idx=${sessionScope.member_idx }" class="aList"><br>쿠폰함</a></div>
 			<div class="grid-item"><a href="ProductOrderList.po?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1" class="aList"><br>주문관리</a></div>
 			<div class="grid-item"><a href="LikeList.ca?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1" class="aList"><br>위시리스트</a></div>
-			<div class="grid-item"><a href="" class="aList">리뷰 관리</a></div>
+			<div class="grid-item"><a href="MyReviewList.me?member_idx=${member_idx}" class="aList">리뷰 관리</a></div>
 		</div>
 	</div>	
 </div>
