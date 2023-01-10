@@ -163,6 +163,11 @@ function fn_modify() {
 	}
 }
 </script>
+<style>
+#Demo{
+font-size: 70%;
+}
+</style>
 </head>
 <body class="w3-content" style="max-width:95% ">
 
@@ -183,14 +188,28 @@ function fn_modify() {
 
   <!-- Push down content on small screens -->
 <!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
-  
+  <script src="https://kit.fontawesome.com/ca93809e69.js" crossorigin="anonymous"></script> <!-- 폰트어썸 스크립트 -->
   <!-- Top header -->
-  <header class="w3-container w3-xlarge">
-<!--     <p class="w3-left">SHOOKREAM</p> -->
-    <p class="w3-right">
-      <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i>
-    </p>
+  <header class="w3-container w3-xlarge" style="margin:10px">
+    <p class="w3-left" style="margin:10px" ></p>
+ <i class="fa-regular fa-heart fa-xl" onclick="location.href='LikeList.ca?id=${sessionScope.sId}&member_idx=${member_idx }&pageNum=1'" style="margin:15px; float: right;"></i>
+ 
+		 <div class="w3-dropdown-click" id="logintvar" style="float:right;">
+		 
+		 <i class="fa-solid fa-user fa-xl" onmouseover="myFunction()" onclick="location.href='MemberMyPage.me?id=${sessionScope.sId }'" style="margin:15px;"></i>
+		  <div id="Demo" class="w3-dropdown-content w3-bar-block w3-border" >
+		    <a href="MemberLogout.me"  class="w3-bar-item w3-button">로그아웃</a>
+		    <a href="BoardList.bo" class="w3-bar-item w3-button">고객센터 </a>
+ <c:choose>
+		    	<c:when test="${sessionScope.sId eq 'admin' }">
+		    		<a href="Admin.ad?id=${sessionScope.sId }" class="w3-bar-item w3-button">관리자 페이지</a>
+		    	</c:when>
+		    </c:choose>
+		    </div>
+		    </div>
+    <div style="float: right;">
+    <i class="fa-solid fa-cart-shopping fa-xl" onclick="location.href='CartList.ca?member_idx=${member_idx}&pageNum=1'" style="margin: 15px;"></i>
+    </div>
 </header>
 
   
@@ -325,6 +344,17 @@ function w3_close() {
   document.getElementById("mySidebar").style.display = "none";
   document.getElementById("myOverlay").style.display = "none";
 }
+</script>
+<script>
+//드롭다운 기능
+   function myFunction() {
+     var x = document.getElementById("Demo");
+     if (x.className.indexOf("w3-show") == -1) { 
+       x.className += " w3-show";
+     } else {
+       x.className = x.className.replace(" w3-show", "");
+     }
+   }
 </script>
 <!-- Channel Plugin Scripts -->
 <script>
