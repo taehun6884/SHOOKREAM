@@ -65,7 +65,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <b>${member }</b>
         <h5>입니다.</h5><br>
 		<button type="button" class="w3-button w3-block w3-black" onclick="location.href='LoginMember.me'">로그인</button><br>
-		<button type="button" class="w3-button w3-block w3-black" onclick="location.href='FindMemberPassForm.me'">비밀번호 찾기</button>
+		<button type="button" class="w3-button w3-block w3-black" onclick="location.href='FindPwForm.me'">비밀번호 찾기</button>
 
 	</div>
   </footer>

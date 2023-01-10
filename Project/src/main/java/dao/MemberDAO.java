@@ -571,61 +571,6 @@ private MemberDAO() {}
 				return result;
 			}
 
-			// 이메일 인증 위해 auth 테이블에 insert
-			public boolean insertAuth(AuthBean auth) {
-				System.out.println("insertAuth dao");
-				boolean insertSuccess = false;
-				
-				PreparedStatement pstmt = null, pstmt2 = null, pstmt3 = null;
-				ResultSet rs = null; 
-			
-				// if문 -> id가 없으면 auth 테이블에 insert / 아이디 있으면 update
-				
-				try { // auth 테이블에서 id값 조회하기
-					String sql = "SELECT * FROM auth WHERE auth_id=?";
-					
-					pstmt = con.prepareStatement(sql);
-					
-					pstmt.setString(1, auth.getAuth_id());
-					rs = pstmt.executeQuery();
-					
-					if(rs.next()) { // 일치하는 사람이 있으면 update
-						sql = "UPDATE auth SET auth_authCode =? WHERE auth_id=?";
-						pstmt2 = con.prepareStatement(sql);
-						
-						pstmt2.setString(1, auth.getAuth_authCode());
-						pstmt2.setString(2, auth.getAuth_id());
-						
-						pstmt2.executeUpdate();
-						insertSuccess = true;
-						
-					} else { // 일치하는 사람이 없으면 insert
-						sql = "INSERT INTO auth VALUES(?,?)";
-						pstmt3= con.prepareStatement(sql);
-						
-						pstmt3.setString(1, auth.getAuth_id());
-						pstmt3.setString(2, auth.getAuth_authCode());
-						
-						System.out.println(auth.getAuth_authCode());
-						
-						if(pstmt3.executeUpdate()>0) {
-							insertSuccess = true;
-							System.out.println(auth.getAuth_id());
-						}
-						
-					}
-				} catch (SQLException e) {
-					System.out.println("sql 구문 오류 - insertAuth()");
-					e.printStackTrace();
-				} finally {
-					JdbcUtil.close(rs);
-					JdbcUtil.close(pstmt3);
-					JdbcUtil.close(pstmt2);
-					JdbcUtil.close(pstmt);
-				}
-				
-				return insertSuccess;
-		}
 			
 			// 회원가입
 			// 메일 인증코드 비교 -> 일치 시 회원가입(insert)
