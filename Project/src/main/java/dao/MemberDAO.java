@@ -503,7 +503,7 @@ private MemberDAO() {}
 					pstmt2.setString(6, review.getReview_real_img());
 					pstmt2.setString(7, review.getRe_order_detail());
 					
-					System.out.println("리뷰 > DAO 확인 : " + pstmt2);
+//					System.out.println("리뷰 > DAO 확인 : " + pstmt2);
 					
 					insertCount = pstmt2.executeUpdate();
 					} catch (SQLException e) {
@@ -832,12 +832,10 @@ private MemberDAO() {}
          }
 
 
-		public boolean isReviewExist() {
+		public boolean isReviewExist(ReviewBean review) {
 			boolean reviewExist = false;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			
-			ReviewBean review = new ReviewBean();
 			
 			try {
 				String sql = "SELECT * FROM review WHERE product_idx=? AND member_idx=?";
@@ -849,6 +847,7 @@ private MemberDAO() {}
 				if(rs.next()) {
 					reviewExist = true;
 				}
+//				System.out.println("dao리뷰값: " + reviewExist);
 			} catch (SQLException e) {
 				System.out.println("sql구문오류 - ReviewExist");
 				e.printStackTrace();
