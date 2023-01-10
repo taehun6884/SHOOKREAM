@@ -119,9 +119,6 @@ public class MemberController extends HttpServlet{
 		}else if(command.equals("/CompareEmailAddress.me")) { // 이메일 인증2
 			action = new CompareAddrProAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/MemberMyPage.me")) {
-			forward = new ActionForward(); 
-			forward.setPath("member/my_page.jsp");
 		}else if(command.equals("/ReportFormAction.me")) { //coupon 발급
 			forward = new ActionForward();
 			forward.setPath("report/mail_form.jsp");
