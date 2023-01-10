@@ -10,13 +10,13 @@ import vo.ActionForward;
 import vo.PageInfo;
 import vo.ProductBean;
 
-public class MainSaleListAction implements Action {
+public class MainKeywordListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
-
-		ProductListService service = new ProductListService();
+		
+		String keyword = request.getParameter("keyword");
 
 		// 페이징 처리를 위한 변수 선언
 		int listLimit = 16; // 한 페이지에서 표시할 게시물 목록을 10개로 제한
@@ -27,38 +27,32 @@ public class MainSaleListAction implements Action {
 		}
 
 		int startRow = (pageNum - 1) * listLimit; // 조회 시작 행번호 계산
-		// 할인된 상품 리스트 가져오기
-		List<ProductBean> productSaleList = service.getProdoctSaleList(startRow, listLimit);
-		request.setAttribute("productSaleList", productSaleList);
-
-		int listCount = service.getProductListCount();
-		// System.out.println("총 게시물 수 : " + listCount);
-
-		// 2. 한 페이지에서 표시할 페이지 목록 갯수 설정
+		
+		
+		ProductListService service = new ProductListService();
+		List<ProductBean> productList = service.getProdoctSearchList(keyword,startRow, listLimit);
+		request.setAttribute("productList", productList);
+		int listCount = service.getProductKeywordListCount(keyword);
+		
 		int pageListLimit = 10; // 한 페이지에서 표시할 페이지 목록을 3개로 제한
-
-		// 3. 전체 페이지 목록 수 계산
-		int maxPage = listCount / listLimit + (listCount % listLimit == 0 ? 0 : 1);
-
-		// 4. 시작 페이지 번호 계산
+		
+		int maxPage = listCount / listLimit 
+						+ (listCount % listLimit == 0 ? 0 : 1);
+		
 		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-
-		// 5. 끝 페이지 번호 계산
+		
 		int endPage = startPage + pageListLimit - 1;
-
-		// 6. 만약, 끝 페이지 번호(endPage)가 전체(최대) 페이지 번호(maxPage) 보다
-		// 클 경우, 끝 페이지 번호를 최대 페이지 번호로 교체
-		if (endPage > maxPage) {
+		
+		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
-
-		// PageInfo 객체 생성 후 페이징 처리 정보 저장
+			
 		PageInfo pageInfo = new PageInfo(listCount, pageListLimit, maxPage, startPage, endPage);
 		request.setAttribute("pageInfo", pageInfo);
-		forward = new ActionForward();
-		forward.setPath("main_sale.jsp");
-		forward.setRedirect(false);
 
+		forward = new ActionForward();
+		forward.setPath("main_keyword.jsp?keyword=" + keyword);
+		forward.setRedirect(false);
 		return forward;
 	}
 

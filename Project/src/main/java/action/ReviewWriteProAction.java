@@ -27,7 +27,7 @@ public class ReviewWriteProAction implements Action {
 		try {
 			String uploadPath = "upload"; 
 			String realPath = request.getServletContext().getRealPath(uploadPath); 
-			System.out.println("실제 업로드 경로 : " + realPath);		
+			System.out.println("실제 업로드 경로 : " + realPath);	
 
 			int fileSize = 1024 * 1024 * 10;
 			
@@ -47,12 +47,12 @@ public class ReviewWriteProAction implements Action {
 			review.setReview_idx(1); // null값 넘어옴 > 수정해야함
 			review.setProduct_idx(Integer.parseInt(multi.getParameter("prodcut_idx")));
 			review.setMember_idx(Integer.parseInt(multi.getParameter("member_idx")));
-			review.setReview_img(multi.getOriginalFileName("review_img")); //살리기
-			review.setReview_real_img(multi.getFilesystemName("review_img")); //살리기
+			review.setReview_img(multi.getOriginalFileName("review_img")); 
+			review.setReview_real_img(multi.getFilesystemName("review_img")); 
 			review.setReview_content(multi.getParameter("content"));
 			review.setRe_order_detail(multi.getParameter("product_size")+","+multi.getParameter("product_color"));
 			
-			System.out.println("리뷰 작성 : " + review);
+//			System.out.println("리뷰 작성 : " + review);
 			
 			ReviewWriteProService service = new ReviewWriteProService();
 			boolean isReviewSuccess = service.insertReview(review);
@@ -64,12 +64,13 @@ public class ReviewWriteProAction implements Action {
 			request.setAttribute("categorylist", categorylist);
 			request.setAttribute("colorlist", colorlist );
 
-//			ReviewWriteProService service2 = new ReviewWriteProService();
-//			boolean reviewExist = service2.isReviewExist();
+			ReviewWriteProService service2 = new ReviewWriteProService();
+			boolean reviewExist = service2.isReviewExist(review);
 			
 			
 			response.setContentType("text/html; charset=UTF-8");
 			
+//			System.out.println("리뷰 존재 여부: " + reviewExist);
 			
 			PrintWriter out = response.getWriter();
 			if(!isReviewSuccess) { // 실패 시
@@ -85,18 +86,19 @@ public class ReviewWriteProAction implements Action {
 				out.println("alert('리뷰작성 실패')");
 				out.println("history.back()");
 				out.println("</script>");
+				
 			} else { 
-//				if(reviewExist) {
-//					out.println("<script>");
-//					out.println("alert('이미 작성하신 리뷰가 존재합니다.')");
-//					out.println("history.back()");
-//					out.println("</script>");
-//				} else {
+				if(reviewExist) {
 					out.println("<script>");
-					// out.println("alert('작성이 등록되었습니다!')");
-					out.println("window.close()");
-					out.println("</script>");					
-//				}
+					out.println("alert('이미 작성하신 리뷰가 존재합니다.')");
+					out.println("history.back()");
+					out.println("</script>");
+				} 
+				out.println("<script>");
+				// out.println("alert('작성이 등록되었습니다!')");
+				out.println("window.close()");
+				out.println("</script>");					
+				
 				
 			}
 		} catch (IOException e) {

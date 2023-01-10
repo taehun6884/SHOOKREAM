@@ -10,9 +10,8 @@ public class isSendAuthService {
 
 	public boolean isAuthUser(AuthBean auth) {
 		boolean isRightAuth = false;
-		
-		
 		Connection con = JdbcUtil.getConnection();
+		
 		MemberDAO dao = MemberDAO.getInstance();
 		dao.setConnection(con);
 		
@@ -21,12 +20,12 @@ public class isSendAuthService {
 		if(isRightAuth) {
 			JdbcUtil.commit(con);
 			isRightAuth = true;
-		}else {
+		} else {
 			JdbcUtil.rollback(con);
 			isRightAuth = false;
 			
 		}
-		JdbcUtil.close(con);
+			JdbcUtil.close(con);
 		
 		return isRightAuth;
 	}

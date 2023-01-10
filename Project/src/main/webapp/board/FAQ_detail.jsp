@@ -21,6 +21,7 @@ pageContext.setAttribute("cn", "\n");
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+		
 		<style>
 		.w3-sidebar a {font-family: "Roboto", sans-serif}
 		body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
@@ -53,10 +54,10 @@ pageContext.setAttribute("cn", "\n");
 	<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 	
 	<!-- !PAGE CONTENT! -->
-	<div class="w3-main" style="margin-left:250px">
+	<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
 	
 	  <!-- Push down content on small screens -->
-	  <div class="w3-hide-large" style="margin-top:83px"></div>
+	  <div class="w3-hide-large" style="margin-top:83px;"></div>
 	  
 	  <!-- Top header -->
 	  <jsp:include page="../inc/top.jsp"/>

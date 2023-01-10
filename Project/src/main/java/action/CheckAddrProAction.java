@@ -31,20 +31,12 @@ public class CheckAddrProAction implements Action {
 		String email = request.getParameter("email");
 		System.out.println(email); // 이메일 잘 받아왔는지 확인
 		
-		AuthBean auth = new AuthBean();
-		auth.setAuth_id(id);
-		auth.setAuth_authCode(authCode);
 		
-		isSendAuthService service = new isSendAuthService();
-		boolean isRightAuth = service.isAuthUser(auth);
 		
-		System.out.println("isRightAuth" + isRightAuth);
 		
 		/* 인증 코드 난수 생성 */
 		StringBuilder authCd = new  StringBuilder();
 		
-		if(isRightAuth) {
-			
 			String[] ch = {
 				"0","1","2","3","4","5","6","7","8","9"
 			};
@@ -56,9 +48,21 @@ public class CheckAddrProAction implements Action {
 				authCd.append(ch[num]);
 				
 			}
+			
+
+			AuthBean auth = new AuthBean();
+			auth.setAuth_id(id);
+			auth.setAuth_authCode(authCd.toString());
+			
+			isSendAuthService service = new isSendAuthService();
+			boolean isRightAuth = service.isAuthUser(auth);
+			
 			System.out.println(authCd.toString());
 			
-		}
+		
+		
+			
+			System.out.println("isRightAuth" + isRightAuth);
 		
 			String content = "회원가입창으로 돌아가 인증번호를 입력해 주세요.";
 			content += "<hr>";
@@ -88,7 +92,7 @@ public class CheckAddrProAction implements Action {
 			} catch (MessagingException e) {
 				e.printStackTrace();
 			}
-			
+	
 		return forward;
 	}
 

@@ -60,22 +60,22 @@ public class ReviewWriteProService {
 		return categorylist;
 	}
 
-//	public boolean isReviewExist() { // 리뷰 존재여부 판단
-//		boolean reviewExist = false;
-//		
-//		Connection con = JdbcUtil.getConnection();
-//		
-//		MemberDAO dao = MemberDAO.getInstance();
-//		
-//		dao.setConnection(con);	
-//		
-//		boolean isReviewExist = dao.isReviewExist();
-//		
-//		if(isReviewExist) {
-//			reviewExist = true;
-//		}
-//		
-//		return reviewExist;
-//	}
+	public boolean isReviewExist(ReviewBean review) { // 리뷰 존재여부 판단
+		boolean reviewExist = false;
+		
+		Connection con = JdbcUtil.getConnection();
+		
+		MemberDAO dao = MemberDAO.getInstance();
+		
+		dao.setConnection(con);	
+		
+		boolean isReviewExist = dao.isReviewExist(review);
+		
+		if(isReviewExist) {
+			reviewExist = true;
+		}
+		
+		return reviewExist;
+	}
 	
 }

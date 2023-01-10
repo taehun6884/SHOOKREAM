@@ -15,9 +15,10 @@
 <!-- 네이버아이디로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://kit.fontawesome.com/ca93809e69.js" crossorigin="anonymous"></script>
 <!-- 구글 아이디 로그인 -->
 <meta name="google-signin-client_id" content="1047574308186-h6ehte2k4901kjn1u3g5vnonbf2g56on.apps.googleusercontent.com">
-
+<script src="https://kit.fontawesome.com/ca93809e69.js" crossorigin="anonymous"></script> <!-- 폰트어썸 스크립트 -->
 <style type="text/css">
 #sform {
           display: inline-block;
@@ -65,8 +66,8 @@
     </style>
 
 <style>
-.w3-sidebar a {font-family: "Roboto", sans-serif}
-body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+/* .w3-sidebar a {font-family: "Roboto", sans-serif} */
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;} 
 </style>
 
 <style>
@@ -116,6 +117,11 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     	padding: 50px 0px;
     }
     </style>
+    <style>
+#Demo{
+font-size: 70%;
+}
+</style>
 </head>
 <body class="w3-content" style="max-width:95%">
 <!-- Sidebar/menu -->
@@ -132,21 +138,50 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
+<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
 
   <!-- Push down content on small screens -->
-<!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
-  
+  <div class="w3-hide-large" style="margin-top:83px"></div>
+  	
+  	<header class="w3-container w3-xlarge">
+  	<div class="w3-right">
+   <jsp:include page="../inc/top.jsp"/>
+  	</div>
+  	</header>
   <!-- Top header -->
-  <header class="w3-container w3-xlarge">
-<!--     <p class="w3-left">장바ㅊ구니</p> -->
-    <p class="w3-right">
-<!--       <i class="fa fa-shopping-cart w3-margin-right"></i> -->
-<!--       <i class="fa fa-search"></i> -->
-    </p>
+
+<!--   <header class="w3-container w3-xlarge"> -->
+
+ <header class="w3-container w3-xlarge" style="margin:10px">
+    <p class="w3-left" style="margin:10px" >주문내역</p>
+ <i class="fa-regular fa-heart fa-xl" onclick="location.href='LikeList.ca?id=${sessionScope.sId}&member_idx=${member_idx }&pageNum=1'" style="margin:15px; float: right;"></i>
+ 
+		 <div class="w3-dropdown-click" id="logintvar" style="float:right;">
+		 
+		 <i class="fa-solid fa-user fa-xl" onmouseover="myFunction()" onclick="location.href='MemberMyPage.me?id=${sessionScope.sId }'" style="margin:15px;"></i>
+		  <div id="Demo" class="w3-dropdown-content w3-bar-block w3-border" >
+		    <a href="MemberLogout.me"  class="w3-bar-item w3-button">로그아웃</a>
+		    <a href="BoardList.bo" class="w3-bar-item w3-button">고객센터 </a>
+ 		<c:choose>
+		    	<c:when test="${sessionScope.sId eq 'admin' }">
+		    		<a href="Admin.ad?id=${sessionScope.sId }" class="w3-bar-item w3-button">관리자 페이지</a>
+		    	</c:when>
+		    </c:choose>
+		    </div>
+		    </div>
+    <div style="float: right;">
+    <i class="fa-solid fa-cart-shopping fa-xl" onclick="location.href='CartList.ca?member_idx=${member_idx}&pageNum=1'" style="margin: 15px;"></i>
+    </div>
 </header>
 
-  <header class="w3-container w3-xlarge" style="padding: 40px 50px;  z-index: -1">
+<!--     <p class="w3-left">장바ㅊ구니</p> -->
+<!--     <p class="w3-right"> -->
+<!--       <i class="fa fa-shopping-cart w3-margin-right"></i> -->
+<!--       <i class="fa fa-search"></i> -->
+<!--     </p> -->
+<!-- </header> -->
+
+  <header class="w3-container w3-xlarge" style="padding: 80px 50px;  z-index: -1">
     <p class="w3-left">
     <i class="fa-solid fa-bag-shopping" ></i>
 <!--     <i class="fa-solid fa-cart-shopping"></i> -->
@@ -253,6 +288,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--         <a href="#">4</a> -->
 <!--         <a href="#">5</a> -->
     </div>
+  </div>
 <!-- </footer> -->
   
 
@@ -476,6 +512,17 @@ function iamport(){
 	}
 
 	
+</script>
+<script>
+//드롭다운 기능
+   function myFunction() {
+     var x = document.getElementById("Demo");
+     if (x.className.indexOf("w3-show") == -1) { 
+       x.className += " w3-show";
+     } else {
+       x.className = x.className.replace(" w3-show", "");
+     }
+   }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>

@@ -26,7 +26,7 @@
 	.myOrderState {
 		text-align: center;
 		margin-left: 5em;
-		padding-top: 10em;
+ 		padding-top: 10em; 
 	}
 	
 	nav>ul>li {
@@ -79,7 +79,7 @@
 </style>
 <style>
     .paging {
-        text-align: center;
+    	align: center;
     }
     
     .paging a {
@@ -99,11 +99,48 @@
 		font-family: "Montserrat", sans-serif;
 	}
 </style>
+    <style>
+#Demo{
+font-size: 70%;
+}
+</style>
 </head>
 <body class="w3-content" style="max-width:95%">
 <!-- Sidebar/menu -->
+
 <jsp:include page="../inc/side.jsp"/>
-<jsp:include page="../inc/top.jsp"/>
+
+<header class="w3-container w3-xlarge">
+  	<div class="w3-right">
+   <jsp:include page="../inc/top.jsp"/>
+  	</div>
+  	</header>
+
+ <script src="https://kit.fontawesome.com/ca93809e69.js" crossorigin="anonymous"></script> <!-- 폰트어썸 스크립트 -->
+<!--  Top Menu -->
+<header class="w3-container w3-xlarge" style="margin:10px">
+    <p class="w3-left" style="margin:10px" >주문내역</p>
+ <i class="fa-regular fa-heart fa-xl" onclick="location.href='LikeList.ca?id=${sessionScope.sId}&member_idx=${member_idx }&pageNum=1'" style="margin:15px; float: right;"></i>
+ 
+		 <div class="w3-dropdown-click" id="logintvar" style="float:right;">
+		 
+		 <i class="fa-solid fa-user fa-xl" onmouseover="myFunction()" onclick="location.href='MemberMyPage.me?id=${sessionScope.sId }'" style="margin:15px;"></i>
+		  <div id="Demo" class="w3-dropdown-content w3-bar-block w3-border" >
+		    <a href="MemberLogout.me"  class="w3-bar-item w3-button">로그아웃</a>
+		    <a href="BoardList.bo" class="w3-bar-item w3-button">고객센터 </a>
+<c:choose>
+		    	<c:when test="${sessionScope.sId eq 'admin' }">
+		    		<a href="Admin.ad?id=${sessionScope.sId }" class="w3-bar-item w3-button">관리자 페이지</a>
+		    	</c:when>
+		    </c:choose>
+		    </div>
+		    </div>
+    <div style="float: right;">
+    <i class="fa-solid fa-cart-shopping fa-xl" onclick="location.href='CartList.ca?member_idx=${member_idx}&pageNum=1'" style="margin: 15px;"></i>
+    </div>
+</header>
+
+
 <div class="w3-main" style="margin-left:250px">
 
 <div class="myOrderState">
@@ -149,11 +186,31 @@
 			<div class="grid-item"><a href="" class="aList"><br>내 쿠폰</a></div>
 			<div class="grid-item"><a href="ProductOrderList.po?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1" class="aList"><br>내 주문관리</a></div>
 			<div class="grid-item"><a href="LikeList.ca?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1" class="aList"><br>내 위시리스트</a></div>
-			<div class="grid-item"><br><i class='fas fa-frown' style='font-size:36px;color:red'></i></div>
+			<div class="grid-item"><a href="" class="aList">내가 쓴 리뷰</a></div>
 		</div>
 	</div>	
 </div>
-	
+
+</div>
+
+
+<br><br><br><br><br><br>
+<!-- footer -->
+    <jsp:include page="/inc/footer.jsp"/>	
+
+	<script>
+//드롭다운 기능
+   function myFunction() {
+     var x = document.getElementById("Demo");
+     if (x.className.indexOf("w3-show") == -1) { 
+       x.className += " w3-show";
+     } else {
+       x.className = x.className.replace(" w3-show", "");
+     }
+   }
+</script>
+
+
 <script>
 // Accordion 
 	function myAccFunc() {
