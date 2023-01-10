@@ -26,7 +26,7 @@
 	.myOrderState {
 		text-align: center;
 		margin-left: 5em;
-		padding-top: 10em;
+ 		padding-top: 10em; 
 	}
 	
 	nav>ul>li {
@@ -79,7 +79,7 @@
 </style>
 <style>
     .paging {
-        text-align: center;
+    	align: center;
     }
     
     .paging a {
@@ -102,9 +102,9 @@
 </head>
 <body class="w3-content" style="max-width:95%">
 <!-- Sidebar/menu -->
-<jsp:include page="../inc/side.jsp"/>
-<jsp:include page="../inc/top.jsp"/>
-<div class="w3-main" style="margin-left:250px">
+<jsp:include page="/inc/side.jsp"/>
+<!-- Top header -->
+ <jsp:include page="/inc/top.jsp"/>
 
 <div class="myOrderState">
 	<h4>Delivery</h4><br><br>
@@ -149,11 +149,13 @@
 			<div class="grid-item"><a href="" class="aList"><br>내 쿠폰</a></div>
 			<div class="grid-item"><a href="ProductOrderList.po?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1" class="aList"><br>내 주문관리</a></div>
 			<div class="grid-item"><a href="LikeList.ca?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1" class="aList"><br>내 위시리스트</a></div>
-			<div class="grid-item"><br><i class='fas fa-frown' style='font-size:36px;color:red'></i></div>
+			<div class="grid-item"><a href="" class="aList">내가 쓴 리뷰</a></div>
 		</div>
 	</div>	
 </div>
-	
+<br><br><br><br><br><br>
+<!-- footer -->
+    <jsp:include page="/inc/footer.jsp"/>	
 <script>
 // Accordion 
 	function myAccFunc() {
