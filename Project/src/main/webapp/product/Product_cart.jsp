@@ -109,7 +109,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     	background-color: #d2d2d2;
     }
     
-    b {
+  .cb {
     font-size: 23px;
     }
     
@@ -159,9 +159,9 @@ font-size: 70%;
 <!--     <i class="fa-solid fa-cart-shopping"></i> -->
     &nbsp;장바구니</p>
 <!--     <div class="w3-right out-div"> -->
-	    <div class="top_circle w3-right" id="order_circle"><h3 class="top_circle_h"><b>03</b><br>주문완료</h3></div>
-	    <div class="top_circle w3-right" id="com_circle"><h3 class="top_circle_h"><b>02</b><br>주문/결제</h3></div>
-	    <div class="top_circle w3-right" id="cart_circle"><h3 class="top_circle_h"><b>01</b><br>장바구니</h3></div>
+	    <div class="top_circle w3-right" id="order_circle"><h3 class="top_circle_h"><b class="cb">03</b><br>주문완료</h3></div>
+	    <div class="top_circle w3-right" id="com_circle"><h3 class="top_circle_h"><b class="cb">02</b><br>주문/결제</h3></div>
+	    <div class="top_circle w3-right" id="cart_circle"><h3 class="top_circle_h"><b class="cb">01</b><br>장바구니</h3></div>
 <!--     <i id="cart_circle" class="fa-solid fa-circle"></i> -->
 <!--     </div> -->
 </header>
