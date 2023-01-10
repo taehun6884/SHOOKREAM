@@ -23,23 +23,20 @@
   </thead>
   <tbody>
    <c:forEach var="coupon" items="${couponList }">
+     <c:choose>
+      	<c:when test="${coupon.coupon_isUse eq 0 }">
     <tr>
       <th scope="row" id="idx">${coupon.coupon_idx }</th>
       <td>${coupon.coupon_name }</td>
       <td id="price">${coupon.coupon_price }</td>
-      <c:choose>
-      	<c:when test="${coupon.coupon_isUse eq 0 }">
-      	  <td>사용가능</td>
-      	</c:when>
-    	<c:otherwise>
-    		<td>사용 불가</td>
-    	</c:otherwise>
-      </c:choose>
+      <td>사용 가능</td>
       <td>${coupon.coupon_start }</td>
       <td>${coupon.coupon_end }</td>
       <td>
       <button type="button" class="btn btn-dark" id="useCoupon" value="${coupon.coupon_price}" onclick="useCoupon(${coupon.coupon_price},${coupon.coupon_idx})">적용하기</button>
     </tr>
+    	</c:when>
+      </c:choose>
      </c:forEach>
   </tbody>
 </table>

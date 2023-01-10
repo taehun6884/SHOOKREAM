@@ -8,6 +8,30 @@
 		});
 	});
 </script>
+<script>
+$(document).ready(function() {
+
+	// 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+	var floatPosition = parseInt($("#floatMenu").css('top'));
+	// 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
+
+	$(window).scroll(function() {
+		// 현재 스크롤 위치를 가져온다.
+		var scrollTop = $(window).scrollTop();
+		var newPosition = scrollTop + floatPosition + "px";
+
+		/* 애니메이션 없이 바로 따라감
+		 $("#floatMenu").css('top', newPosition);
+		 */
+
+		$("#floatMenu").stop().animate({
+			"top" : newPosition
+		}, 500);
+
+	}).scroll();
+
+});
+</script>
 <nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar" >
 
   <div class="w3-container w3-display-container w3-padding-16">
@@ -54,8 +78,10 @@
 <%--     <input type="button" class ="reportbtn" value="신고하기" onclick="location.href='./ReportFormAction.me?member_idx=${member_idx}&member_id=${sessionScope.sId }'"> --%>
   <div id = "gotopbtn"  style="cursor:pointer; height:50px; " class="back-to-top d-flex align-items-center justify-content-center active" onclick="window.scrollTo(0,0);">TOP</div> <!-- 홈페이 -->
 <!--  </nav> -->
- <div class="recentlyview d-flex align-items-center justify-content-center active">
- <h5>최근 본 상품 : </h5>
+ <div style="height:300px; margin-left:100px; float:right;" id="floatMenu" >
+ 
+
+ <h5>최근 본 상품</h5>
 <%
 String strCookie = request.getHeader("Cookie");
 if(strCookie!=null){
@@ -69,10 +95,12 @@ if(strCookie!=null){
 		
 		String[] arrProduct_img = product_img_list.split("/");
 		String[] arrProduct_idx = product_idx_list.split("/");
-
-		for(int i = 0; i < arrProduct_img.length; i++) {
-			String product_img = arrProduct_img[i];
-			String product_idx = arrProduct_idx[i];
+		
+		int idx = arrProduct_idx.length;
+		
+		for(int i = 1; i <= 3; i++) {
+			String product_img = arrProduct_img[idx - i];
+			String product_idx = arrProduct_idx[idx - i];
 			
 			System.out.println(product_img + ", " + product_idx);
 			

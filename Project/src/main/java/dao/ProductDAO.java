@@ -897,9 +897,9 @@ private ProductDAO() {}
 					pstmt4.setInt(2, vo.getOrder_coupon_idx());
 					pstmt4.executeUpdate();
 					
-					sql="DELETE FROM member_coupon WHERE isUse=1";
-					pstmt4 = con.prepareStatement(sql);
-					pstmt4.executeUpdate();
+//					sql="DELETE FROM member_coupon WHERE isUse=1";
+//					pstmt4 = con.prepareStatement(sql);
+//					pstmt4.executeUpdate();
 				}
 				
 			

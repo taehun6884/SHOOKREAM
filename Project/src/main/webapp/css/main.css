@@ -1800,6 +1800,16 @@ to {
  .reportbtn {
  	background: #FF0000;
  }
+#floatMenu {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	left: 50px;
+	top: 10px;
+	background-color: #606060;
+	color: #fff;
+	margin-right:100px;
+}
 
  
 #cart{ margin: 10px;  padding: 0; }
