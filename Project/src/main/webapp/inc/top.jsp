@@ -36,7 +36,7 @@ font-size: 70%;
 	<!-- 로그인 드롭다운 기능! -->	
 	<c:choose>
 		<c:when test="${not empty sessionScope.sId }">
-			<div id="logintvar" style="margin-right:35px;">
+			<div id="logintvar" style="padding-right: 35px;">
 			<i class="fa-solid fa-heart fa-sm" onclick="location.href='LikeList.ca?id=${sessionScope.sId}&member_idx=${member_idx }&pageNum=1'" style="cursor: pointer;"></i>
 			<i class="fa-solid fa-cart-shopping fa-sm" onclick="location.href='CartList.ca?member_idx=${member_idx}&pageNum=1'" style="margin: 10px; cursor: pointer;"></i>
 		 <div class="w3-dropdown-click" id="logintvar">
@@ -72,3 +72,15 @@ font-size: 70%;
 	</p>
 	
 </header>
+
+
+<script>
+	function myFunction() {
+	  var x = document.getElementById("Demo");
+	  if (x.className.indexOf("w3-show") == -1) { 
+	    x.className += " w3-show";
+	  } else {
+	    x.className = x.className.replace(" w3-show", "");
+	  }
+	}
+</script>

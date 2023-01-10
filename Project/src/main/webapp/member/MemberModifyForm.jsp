@@ -29,7 +29,7 @@ table.type03 {
   text-align: left;
   line-height: 1.5;
   border-top: 1px solid #ccc;
-  border-left: 3px solid #369;
+  border-left: 3px solid gray;
   margin-left:auto; 
   margin-right:auto;
 }
@@ -163,11 +163,6 @@ function fn_modify() {
 	}
 }
 </script>
-<style>
-#Demo{
-font-size: 70%;
-}
-</style>
 </head>
 <body class="w3-content" style="max-width:95% ">
 
@@ -184,47 +179,27 @@ font-size: 70%;
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
-
-  <!-- Push down content on small screens -->
-<!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
-  <script src="https://kit.fontawesome.com/ca93809e69.js" crossorigin="anonymous"></script> <!-- 폰트어썸 스크립트 -->
-  <!-- Top header -->
-  <header class="w3-container w3-xlarge" style="margin:10px">
-    <p class="w3-left" style="margin:10px" ></p>
- <i class="fa-regular fa-heart fa-xl" onclick="location.href='LikeList.ca?id=${sessionScope.sId}&member_idx=${member_idx }&pageNum=1'" style="margin:15px; float: right;"></i>
+<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
+	
+ <!-- Push down content on small screens -->
+ <div class="w3-hide-large" style="margin-top:83px"></div>
  
-		 <div class="w3-dropdown-click" id="logintvar" style="float:right;">
-		 
-		 <i class="fa-solid fa-user fa-xl" onmouseover="myFunction()" onclick="location.href='MemberMyPage.me?id=${sessionScope.sId }'" style="margin:15px;"></i>
-		  <div id="Demo" class="w3-dropdown-content w3-bar-block w3-border" >
-		    <a href="MemberLogout.me"  class="w3-bar-item w3-button">로그아웃</a>
-		    <a href="BoardList.bo" class="w3-bar-item w3-button">고객센터 </a>
- <c:choose>
-		    	<c:when test="${sessionScope.sId eq 'admin' }">
-		    		<a href="Admin.ad?id=${sessionScope.sId }" class="w3-bar-item w3-button">관리자 페이지</a>
-		    	</c:when>
-		    </c:choose>
-		    </div>
-		    </div>
-    <div style="float: right;">
-    <i class="fa-solid fa-cart-shopping fa-xl" onclick="location.href='CartList.ca?member_idx=${member_idx}&pageNum=1'" style="margin: 15px;"></i>
-    </div>
-</header>
-
+ <!-- Top header -->
+ <div style="float: right;">
+ <jsp:include page="../inc/top.jsp"/>
+</div>
   
   <!-- Footer -->
   <!-- 로그인 화면 폼 -->
+  <div style="padding: 80px;">
   <form action="MemberModifyPro.me" method="post" name="mdForm" style="margin-bottom: 300px">
   			<input type="hidden" value = "${member.member_pass }" name="oldpass">
   			<input type="hidden" value = "${member.member_address }" name="oldaddress">
   			<input type="hidden" value = "${member.member_phone }" name="oldphone">
   			
-			<h1 style="text-align: center;">정보 수정</h1>
+			<h1 style="font-size: 25px; padding-left: 100px; margin-bottom: 20px;">정보 수정</h1>
 <!-- 			<h6 style="color: gray;text-align: center;margin-bottom: 50px" >SHOOKREAM에 오신 것을 환영합니다.</h6> -->
-		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3>
-			
-			
+<!-- 		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3> -->
 			<div>
 				<table class="type03">
 				<tr>
@@ -289,6 +264,9 @@ font-size: 70%;
 			</div>
 
 		</form>
+		
+		</div>
+		</div>
 <!--   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
 <!-- 로그인 화면 폼 -->
   <!-- End page content -->
@@ -344,17 +322,6 @@ function w3_close() {
   document.getElementById("mySidebar").style.display = "none";
   document.getElementById("myOverlay").style.display = "none";
 }
-</script>
-<script>
-//드롭다운 기능
-   function myFunction() {
-     var x = document.getElementById("Demo");
-     if (x.className.indexOf("w3-show") == -1) { 
-       x.className += " w3-show";
-     } else {
-       x.className = x.className.replace(" w3-show", "");
-     }
-   }
 </script>
 <!-- Channel Plugin Scripts -->
 <script>
