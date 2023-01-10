@@ -99,6 +99,11 @@
 		font-family: "Montserrat", sans-serif;
 	}
 </style>
+    <style>
+#Demo{
+font-size: 70%;
+}
+</style>
 </head>
 <body class="w3-content" style="max-width:95%">
 <!-- Sidebar/menu -->
@@ -115,7 +120,11 @@
 		  <div id="Demo" class="w3-dropdown-content w3-bar-block w3-border" >
 		    <a href="MemberLogout.me"  class="w3-bar-item w3-button">로그아웃</a>
 		    <a href="BoardList.bo" class="w3-bar-item w3-button">고객센터 </a>
-
+<c:choose>
+		    	<c:when test="${sessionScope.sId eq 'admin' }">
+		    		<a href="Admin.ad?id=${sessionScope.sId }" class="w3-bar-item w3-button">관리자 페이지</a>
+		    	</c:when>
+		    </c:choose>
 		    </div>
 		    </div>
     <div style="float: right;">
