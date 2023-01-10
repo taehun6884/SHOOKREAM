@@ -26,7 +26,7 @@
 	.myOrderState {
 		text-align: center;
 		margin-left: 5em;
-		padding-top: 10em;
+ 		padding-top: 10em; 
 	}
 	
 	nav>ul>li {
@@ -79,7 +79,7 @@
 </style>
 <style>
     .paging {
-        text-align: center;
+    	align: center;
     }
     
     .paging a {
@@ -107,6 +107,7 @@ font-size: 70%;
 </head>
 <body class="w3-content" style="max-width:95%">
 <!-- Sidebar/menu -->
+
 <jsp:include page="../inc/side.jsp"/>
  <script src="https://kit.fontawesome.com/ca93809e69.js" crossorigin="anonymous"></script> <!-- 폰트어썸 스크립트 -->
 <!--  Top Menu -->
@@ -131,8 +132,6 @@ font-size: 70%;
     <i class="fa-solid fa-cart-shopping fa-xl" onclick="location.href='CartList.ca?member_idx=${member_idx}&pageNum=1'" style="margin: 15px;"></i>
     </div>
 </header>
-
-
 
 <div class="w3-main" style="margin-left:250px">
 
@@ -179,10 +178,15 @@ font-size: 70%;
 			<div class="grid-item"><a href="" class="aList"><br>내 쿠폰</a></div>
 			<div class="grid-item"><a href="ProductOrderList.po?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1" class="aList"><br>내 주문관리</a></div>
 			<div class="grid-item"><a href="LikeList.ca?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1" class="aList"><br>내 위시리스트</a></div>
-			<div class="grid-item"><br><i class='fas fa-frown' style='font-size:36px;color:red'></i></div>
+			<div class="grid-item"><a href="" class="aList">내가 쓴 리뷰</a></div>
 		</div>
 	</div>	
 </div>
+
+<br><br><br><br><br><br>
+<!-- footer -->
+    <jsp:include page="/inc/footer.jsp"/>	
+
 	<script>
 //드롭다운 기능
    function myFunction() {
@@ -194,6 +198,7 @@ font-size: 70%;
      }
    }
 </script>
+
 <script>
 // Accordion 
 	function myAccFunc() {
