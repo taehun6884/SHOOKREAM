@@ -230,13 +230,13 @@ font-size: 70%;
 				<tr>
 						<th scope="row" >이름</th>
 						<td>
-						<input type="text" name="name" value="${member.member_name }" size="20px"style="line-height: 30px; border: none;" ><br>
+						<input type="text" name="name" value="${member.member_name }" size="20px"style="line-height: 30px; border: none;" readonly="readonly"><br>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">아이디</th>
 						<td>
-						<input type="text" name="id" id ="id" value="${member.member_id }" size="20px" style="line-height: 30px; border: none;" onkeydown="inputIdChk()" readonly="readonly"> &nbsp;
+						<input type="text" name="id" id ="id" value="${member.member_id }" size="20px" style="line-height: 30px; border: none;" readonly="readonly" onkeydown="inputIdChk()" readonly="readonly"> &nbsp;
 						<br>
 						
 						</td>

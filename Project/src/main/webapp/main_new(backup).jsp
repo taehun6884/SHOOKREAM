@@ -11,7 +11,8 @@
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+<link rel="stylesheet" href="./css/main.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -31,7 +32,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 #main_category{
 	text-align: center;
 	padding-top: 100px;
-	padding-bottom: 100px;
+	padding-bottom: 30px;
 	font-size: x-large;
 }
 
@@ -62,7 +63,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
  .paging {
         text-align: center;
-        margin: 100px;
     }
  .paging a {
         /*
@@ -100,7 +100,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
+<div class="w3-main" style="margin-left:250px">
 
   <!-- Push down content on small screens -->
   <div class="w3-hide-large" style="margin-top:83px"></div>
@@ -109,65 +109,69 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <jsp:include page="./inc/top.jsp"/>
 
   
+
 <!--   <div class="w3-container w3-text-grey" id="jeans"> -->
 <!--     <p>BEST</p> -->
 <!--   </div> -->
 
 	<div id="main_category">
-		<p>Best</p>
+		<p>NEW</p>
 	</div>
+	
+	
   <!-- Product grid -->
   <div class="w3-row w3-grayscale">
-     <c:forEach var="productBestList" items="${productBestList }">
+  <c:forEach var="productNewList" items="${productNewList }">
    <div class="w3-col l3 s6">
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productBestList.product_img }"  alt="..." style="width:100%">
-         <div class="w3-display-middle w3-display-hover">
-									<button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productSaleList.product_idx }&member_idx=${sessionScope.member_idx }'">
+          <img src="./upload/${productNewList.product_img }"  alt="..." style="width:100%">
+          <div class="w3-display-middle w3-display-hover">
+									<button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productNewList.product_idx }&member_idx=${sessionScope.member_idx }'">
 										Buy now <i class="fa fa-shopping-cart" ></i>
 									</button>
 								</div>
-								<input type="hidden" id="product_idx${productBestList.product_idx }"
-									value="${productBestList.product_idx }">
+								<input type="hidden" id="product_idx${productNewList.product_idx }"
+									value="${productNewList.product_idx }">
 							</div>
-							<p id="product_brand" >${productBestList.product_brand }</p>
-							<p id="product_name" >${productBestList.product_name }<br></p>
+							<p id="product_brand" >${productNewList.product_brand }</p>
+							<p id="product_name" >${productNewList.product_name }<br></p>
 							
 							<div id="price">
 							<c:choose>
-								<c:when test="${productBestList.product_discount_price gt 0}">
+								<c:when test="${productNewList.product_discount_price gt 0}">
 									<span>
 <%-- 									<c:set var="discounted_price" value="${productBestList.product_price - (productBestList.product_price * productBestList.product_discount_price) }"/> --%>
 <%-- 									<c:out value="${discounted_price}" /> --%>
-										<fmt:formatNumber value="${productBestList.product_price - (productBestList.product_price * (productBestList.product_discount_price/100)) }" pattern="#,###" />
+										<fmt:formatNumber value="${productNewList.product_price - (productNewList.product_price * (productNewList.product_discount_price/100)) }" pattern="#,###" />
 									</span>
 									<span id="product_price">
-									<fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></span>
-									<span id="product_discount_price" ><fmt:formatNumber value="${productBestList.product_discount_price }" pattern="" />%</span>
+									<fmt:formatNumber value="${productNewList.product_price }" pattern="#,###" /></span>
+									<span id="product_discount_price" ><fmt:formatNumber value="${productNewList.product_discount_price }" pattern="" />%</span>
 								</c:when>
 								<c:otherwise>
-									<span><fmt:formatNumber value="${productBestList.product_price }" pattern="#,###" /></span>
+									<span><fmt:formatNumber value="${productNewList.product_price }" pattern="#,###" /></span>
 								</c:otherwise>
 							</c:choose>
 							</div>
 							<div id="etcInfo" style="font-size: small; padding-bottom: 20px;">
 								<span>
-									구매 ${productBestList.product_sell_count } &nbsp;
+									구매 ${productNewList.product_sell_count } &nbsp;
 								</span>
 								<span>
-									<i class="fa-solid fa-heart" style="color:pink;"></i> ${productBestList.product_wishcount }
+									<i class="fa-solid fa-heart" style="color:pink;"></i> ${productNewList.product_wishcount }
 								</span>
 							</div>
 						</div>
 					</div>
 				</c:forEach>
     </div>
-<!-- 페이징 처리 -->	
+</div>
+	<!-- 페이징 처리 -->	
 	<div class="paging">
         <c:choose>
 			<c:when test="${param.pageNum > 1}">
-				<a href="Best.MAIN?pageNum=${param.pageNum - 1 }">이전</a>
+				<a href="New.MAIN?pageNum=${param.pageNum - 1 }">이전</a>
 			</c:when>
 			<c:otherwise>
 				<a href="javascript:void(0)">이전</a>
@@ -181,23 +185,22 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 					${i }
 				</c:when>
 				<c:otherwise>
-					<a href="Best.MAIN?pageNum=${i }">${i }</a>
+					<a href="New.MAIN?pageNum=${i }">${i }</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		
 		<c:choose>
 			<c:when test="${param.pageNum < pageInfo.maxPage}">
-				<a href="Best.MAIN?pageNum=${param.pageNum + 1 }">다음</a>
+				<a href="New.MAIN?pageNum=${param.pageNum + 1 }">다음</a>
 			</c:when>
 			<c:otherwise>
 				<a href="javascript:void(0)">다음</a>
 			</c:otherwise>
 		</c:choose>
     </div>
-</div>
-	
 <!-- </footer> -->
+  <!-- footer -->
 <%--     <jsp:include page="./inc/footer.jsp"/> --%>
   
   

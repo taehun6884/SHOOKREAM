@@ -109,6 +109,13 @@ font-size: 70%;
 <!-- Sidebar/menu -->
 
 <jsp:include page="../inc/side.jsp"/>
+
+<header class="w3-container w3-xlarge">
+  	<div class="w3-right">
+   <jsp:include page="../inc/top.jsp"/>
+  	</div>
+  	</header>
+
  <script src="https://kit.fontawesome.com/ca93809e69.js" crossorigin="anonymous"></script> <!-- 폰트어썸 스크립트 -->
 <!--  Top Menu -->
 <header class="w3-container w3-xlarge" style="margin:10px">
@@ -132,6 +139,7 @@ font-size: 70%;
     <i class="fa-solid fa-cart-shopping fa-xl" onclick="location.href='CartList.ca?member_idx=${member_idx}&pageNum=1'" style="margin: 15px;"></i>
     </div>
 </header>
+
 
 <div class="w3-main" style="margin-left:250px">
 
@@ -183,6 +191,9 @@ font-size: 70%;
 	</div>	
 </div>
 
+</div>
+
+
 <br><br><br><br><br><br>
 <!-- footer -->
     <jsp:include page="/inc/footer.jsp"/>	
@@ -198,6 +209,7 @@ font-size: 70%;
      }
    }
 </script>
+
 
 <script>
 // Accordion 

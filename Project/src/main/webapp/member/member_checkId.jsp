@@ -25,7 +25,7 @@
 			openJoinfrm.dbCheckId.style.opacity=0.6;
 			openJoinfrm.dbCheckId.style.cursor="default";
 // 			window.opener.isIdCheck = false;
-			alert(window.opener.isIdCheck.value);
+// 			alert(window.opener.isIdCheck.value);
 			window.close();
 		}
 	}
