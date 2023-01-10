@@ -49,5 +49,23 @@ public class OrderListProService {
 		return listCount;
 	}
 
+	
+
+	public OrderBean selectProgress(int member_idx) {
+//		System.out.println("service 의 idx : " + member_idx);
+		OrderBean order = null;
+		
+		Connection con = JdbcUtil.getConnection();
+		
+		ProductDAO dao = ProductDAO.getInstance();
+		
+		dao.setConnection(con);
+		
+		order = dao.selectOrderProgress(member_idx);
+//		System.out.println("proservice order 확인 : " + order);
+		
+		return order;
+	}
+
 
 }

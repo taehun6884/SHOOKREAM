@@ -17,6 +17,7 @@ import action.CouponListProAction;
 import action.CouponMainListProAction;
 import action.CouponModifyFormAction;
 import action.CouponModifyProAction;
+import action.MPCouponListProAction;
 import action.MemberCouponListProAction;
 import action.OrderDeleteProAction;
 import action.OrderDetailProAtion;
@@ -109,6 +110,9 @@ public class ProductController extends HttpServlet{
 			forward = action.execute(request, response);
 		}else if(command.equals("/CouponDownPro.po")) { //coupon 발급
 			action = new CouponDownProAction();
+			forward = action.execute(request, response);
+		}else if(command.equals("/CouponListMypage.po")) { // 회원 쿠폰 리스트(마이페이지)
+			action = new MPCouponListProAction();
 			forward = action.execute(request, response);
 		}
 			

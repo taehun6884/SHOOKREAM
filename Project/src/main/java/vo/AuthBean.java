@@ -1,5 +1,7 @@
 package vo;
 
+import java.util.Objects;
+
 public class AuthBean {
 
 	private String auth_id;
@@ -20,9 +22,10 @@ public class AuthBean {
 	public String toString() {
 		return "AuthBean [auth_id=" + auth_id + ", auth_authCode=" + auth_authCode + "]";
 	}
-	
-	
-
+	@Override
+	public int hashCode() {
+		return Objects.hash(auth_authCode, auth_id);
+	}
 	
 	
 	

@@ -14,9 +14,10 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 		<style>
-		.w3-sidebar a {font-family: "Roboto", sans-serif}
-		body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+		.w3-sidebar a {font-family: "Noto Sans KR", sans-serif}
+		body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 		</style>
 		
 		<style type="text/css">
@@ -29,7 +30,9 @@
 			text-align: left;
 		}
 	
-		
+		#border_content {
+		padding: 130px;
+	}
 		</style>
 	</head>
 	<body class="w3-content" style="max-width:95%">
@@ -47,14 +50,17 @@
 	<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 	
 	<!-- !PAGE CONTENT! -->
-	<div class="w3-main" style="margin-left:250px">
+	<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
 	
 	  <!-- Push down content on small screens -->
 	  <div class="w3-hide-large" style="margin-top:83px"></div>
 	  
 	  <!-- Top header -->
 	  <jsp:include page="../inc/top.jsp"/>
-			<h3>자주묻는 질문</h3>
+	  
+	  
+	  <div id="border_content">
+			<h3 style="padding: 20px;">자주묻는 질문</h3>
 			<hr style="border:solid 2px black;">
 			<table class="table">
 			  <c:choose>
@@ -88,7 +94,7 @@
 			</table>
 			<c:choose>
 		    	<c:when test="${sessionScope.sId eq 'admin' }">
-		    		<a href="AdminBoard.ad" class="w3-bar-item btn btn-dark btn-sm" style="float:right">게시판 관리하러가기</a>
+		    		<a href="AdminBoard.ad" class="w3-bar-item btn btn-dark btn-sm" style="float:right">게시판 관리</a>
 		    	</c:when>
 		    </c:choose>
 		<section id="buttonArea" style="text-align:center">
@@ -132,8 +138,8 @@
 			</c:choose>
 		</section>	
 		<br><br>
-		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
-	
+<!-- 		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
+	</div>
 	  <!-- End page content -->
 	</div>
 		 

@@ -328,7 +328,7 @@ margin-left: 270PX;
 	<!-- 상품 사진 옆 -->
 	
 	<section id="detail" >
-	<form action="CartInsertPro.ca?product_idx=${param.product_idx }&member_idx=${member_idx}" method="post">
+	<form action="CartInsertPro.ca?product_idx=${param.product_idx }&member_idx=${member_idx}" name="fr" method="post">
 	<!-- 장바구니에 담을 때 필요한 파라미터들 : 상품idx, 멤버idx, 상품가격, 할인율, 주문가격(할인된가격), 상품이름, 섬네일용 사진 -->
 		<input type="hidden" id="product_idx" value="${param.product_idx }">
 		<input type="hidden" id="member_idx" value="${member_idx }">
@@ -359,7 +359,7 @@ margin-left: 270PX;
 		<!-- 색상 -->
 			<p class="prod_title">색상</p>
 			<select name="cart_color" required="required">
-				<option selected>색상을 선택해주세요.</option>
+				<option value="" selected>색상을 선택해주세요.</option>
 				<c:forEach var="color" items="${colorlist}">
 				<option >${color }</option>
 				</c:forEach>
@@ -371,7 +371,7 @@ margin-left: 270PX;
 		<!-- 사이즈 -->
 			<p class ="prod_title">사이즈</p>
 			<select name="cart_size" required="required">
-				<option selected>사이즈를 선택해주세요.</option>
+				<option value="" selected>사이즈를 선택해주세요.</option>
 				<c:forEach var="category" items="${categorylist}">
 				<option value="${category}">${category}</option>
 				</c:forEach>
@@ -399,7 +399,7 @@ margin-left: 270PX;
 			</c:choose>
 		</span>	
 		<input type="submit" value="장바구니" class="btn btn-dark btn-sm">
-		<input type="button" onclick="location.href='OrderDetailForm.po?member_idx=${sessionScope.member_idx}&product_idx=${param.product_idx}'" value="구매하기" class="btn btn-dark btn-sm">
+		<input type="button" onclick="valueCheck()" value="구매하기" class="btn btn-dark btn-sm">
 		</div>
 		</form>
 		
@@ -516,6 +516,26 @@ margin-left: 270PX;
 <!--   </div> -->
 <!-- </div> -->
 <script>
+function valueCheck(){
+	var color = document.fr.cart_color.value;
+	var size = document.fr.cart_size.value;
+	
+	if(color==""){
+		alert("색상을 선택 해주세여");
+		return false;
+	}else if(size == ""){
+		alert("사이즈를 선택 해주세요");
+		return false;
+	}
+	
+	location.href="OrderDetailForm.po?member_idx=${sessionScope.member_idx}&product_idx=${param.product_idx}";
+	
+	
+}
+
+
+
+
 var slideIndex = 1;
 showDivs(slideIndex);
 
