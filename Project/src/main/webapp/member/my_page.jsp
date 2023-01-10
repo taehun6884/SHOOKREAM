@@ -169,7 +169,7 @@
 			<div class="grid-item"><a href="CouponListMypage.po?member_idx=${sessionScope.member_idx }" class="aList"><br>쿠폰함</a></div>
 			<div class="grid-item"><a href="ProductOrderList.po?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1" class="aList"><br>주문관리</a></div>
 			<div class="grid-item"><a href="LikeList.ca?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1" class="aList"><br>위시리스트</a></div>
-			<div class="grid-item"><br><i class='fas fa-frown' style='font-size:36px;color:red'></i></div>
+			<div class="grid-item"><a href="" class="aList">리뷰 관리</a></div>
 		</div>
 	</div>	
 </div>
