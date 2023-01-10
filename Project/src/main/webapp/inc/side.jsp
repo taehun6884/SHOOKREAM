@@ -94,26 +94,29 @@ if(strCookie!=null){
 // 	}
 		String product_img_list = getCookieValue(cookies, "product_img");
 		String product_idx_list = getCookieValue(cookies, "product_idx");
+// 	if(product_img_list != ""){
+		
 // 		System.out.println("상품 번호 : " + product_idx + ", 이미지 : " + product_img);
 		
 		String[] arrProduct_img = product_img_list.split("/");
 		String[] arrProduct_idx = product_idx_list.split("/");
 		
-		int idx = arrProduct_idx.length;
+		int idx = arrProduct_idx.length; 
+		System.out.println("idx : " + idx);
 		
-		for(int i = 1; i <= 3; i++) {
+		for(int i = 1; i <=idx; i++) {
 			String product_img = arrProduct_img[idx - i];
 			String product_idx = arrProduct_idx[idx - i];
 			
 			System.out.println(product_img + ", " + product_idx);
-			
+			//5 6
 		%>
 		<img src="upload/<%=product_img %>" width="100" height="100" alt="없음" onclick="location.href='ProductInfoForm.po?product_idx=<%=product_idx %>&member_idx=${member_idx }'">	
 		<%
-		}
-// 	}
+		}//for문
 			
-}
+// 	}//안 if
+}//
 %>
 <%!
 public String getCookieValue(Cookie[] cookies, String cookieName) { 
