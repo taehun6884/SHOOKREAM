@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,26 +101,28 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- Footer -->
   <table class="table">
   <thead  class="table-dark" >
-    <tr>
-      <th scope="col" colspan="6" style="text-align: center">주문 내역</th>
+   <tr>
+      <th scope="col" class ="th_cart"colspan="2" style="text-align: center;">상품명</th>
+<!--       <th scope="col">상품명</th> -->	
+      <th scope="col"  class ="th_cart">상품금액</th>
+      <th scope="col"  class ="th_cart">할인금액</th>
+      <th scope="col"  class ="th_cart">주문금액</th>
+      <th scope="col"  class ="th_cart">수량</th>
+      <th scope="col"  class ="th_cart">배송정보</th>
     </tr>
   </thead>
   <tbody>
-	     <tr>
-     		 <th>상품</th>
-     		 <th>상품이름</th>
-     		 <th>상품가격</th>
-     		 <th>수량</th>
-     		 <th>할인</th>
-     		 <th>할인 금액</th>
-    	</tr>
-	    <tr>
-	      <td><img src="upload/${image.image_main_file }"  alt="없음!" class="img-thumbnail" width="100" height="100"></td>
-	      <td>${product.product_name }</td>
-	      <td>${product.product_price }</td>
-	      <td>1</td>
-	      <td>${product.product_discount_price }</td>
-	      <td>${product.product_price }</td>
+	  <tr>
+      <td><a href="ProductInfoForm.po?product_idx=${product.product_idx }"><img src="upload/${image.image_main_file}"  alt="없음!" class="img-thumbnail" width="150" height="150" ></a></td>
+      <td class ="td_cart">${product.product_name }<br>색상 : ${product.product_color }</td>
+	  <td class ="td_cart" id="cart_price"><fmt:formatNumber value="${product.product_price }" pattern="#,###원"></fmt:formatNumber></td>
+      <td class ="td_cart" id="cart_discount_price"><fmt:formatNumber value="${product.product_price * (product.product_discount_price / 100)}" pattern="#,###원"></fmt:formatNumber></td>
+      <td class ="td_cart" id="cart_order_price" ><fmt:formatNumber value="${product.product_release_price}" pattern="#,###원"></fmt:formatNumber></td> 
+<%--       <td class ="td_cart">${status.end }</td> --%>
+      <td class ="td_cart">
+      <input type="number" value="1" style="width: 35px">
+      </td>
+      <td class ="td_cart">무료배송</td>
 	    </tr>
 	  </tbody>
 	</table>
@@ -150,7 +153,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	   </tr>
 	   <tr>
 	   	<th colspan="2">가격</th>
-	   	<td colspan="6"><input type="text" id="totalprice" value="${product.product_price }" readonly="readonly">원</td>
+	   	<td colspan="6"><input type="text" id="totalprice" value="${product.product_release_price }" readonly="readonly">원</td>
 	   </tr>   
 	  </tbody>
 	</table>
@@ -232,7 +235,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <script type="text/javascript">
 // alert(typeof(${product.product_price }));
 function CouponCheck() {
-	let url = "CouponListForm.po?member_idx="+${sessionScope.member_idx}+"&product_price="+${product.product_price };  // 테스트용 파라미터임!
+	let url = "CouponListForm.po?member_idx="+${sessionScope.member_idx}+"&product_price="+${product.product_release_price };  // 테스트용 파라미터임!
 	let name = "Coupon List";
 	let attr = "width=900, height=600, top=200, left=510"
 
@@ -335,10 +338,8 @@ function iamport(){
 			console.log(rsp);
 		    if ( rsp.success ) {
 		    	var msg = '결제가 완료되었습니다.';
-		    	msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		    	msg += '상품 : ' + rsp.imp_name;
 		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
 		        location.href="ProductOrderPro.po?order_category=주문완료&order_progress=배송완료&member_idx=${member_idx}&product_idx=${product.product_idx}&product_amount=${product.product_amount}&product_sell_count=${product.product_sell_count}&product_price="+rsp.paid_amount+"&coupon_idx="+$("#coupon_idx").val();
 		    } else {
 		    	 var msg = '결제에 실패하였습니다.';
