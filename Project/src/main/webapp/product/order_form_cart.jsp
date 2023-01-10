@@ -124,7 +124,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 <!-- Top menu on small screens -->
 <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-  <div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
+  <div class="w3-bar-item w3-padding-24 w3-wide">SHOOKREAM</div>
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
 </header>
 
@@ -133,25 +133,21 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
+<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
 
   <!-- Push down content on small screens -->
-<!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
-  
+  <div class="w3-hide-large" style="margin-top:83px"></div>
+  	
   <!-- Top header -->
-  <header class="w3-container w3-xlarge">
-<!--     <p class="w3-left">장바ㅊ구니</p> -->
-    <p class="w3-right">
-<!--       <i class="fa fa-shopping-cart w3-margin-right"></i> -->
-<!--       <i class="fa fa-search"></i> -->
-    </p>
-</header>
+ <div style="float: right;">
+ <jsp:include page="../inc/top.jsp"/>
+</div>
 
-  <header class="w3-container w3-xlarge" style="padding: 40px 50px;  z-index: -1">
+  <header class="w3-container w3-xlarge" style="padding: 80px 50px;  z-index: -1">
     <p class="w3-left">
     <i class="fa-solid fa-bag-shopping" ></i>
 <!--     <i class="fa-solid fa-cart-shopping"></i> -->
-    &nbsp;구매페이지</p>
+    &nbsp;주문 / 결제</p>
 <!--     <div class="w3-right out-div"> -->
 	    <div class="top_circle w3-right" id="order_circle"><h3 class="top_circle_h"><b>03</b><br>주문완료</h3></div>
 	    <div class="top_circle w3-right" id="com_circle"><h3 class="top_circle_h"><b>02</b><br>주문/결제</h3></div>
@@ -159,10 +155,10 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--     <i id="cart_circle" class="fa-solid fa-circle"></i> -->
 <!--     </div> -->
 </header>
-   <hr size="30px">
+   <hr size="25px">
 <!--   Footer -->
 <!--   <footer class="w3-padding-64 w3-small w3-center" id="footer"> -->
-<form action="">
+<form action="" style="padding: 0px 40px;">
   <table class="table" border ="3">
   <thead  class="table-dark" >
     <tr>
@@ -254,6 +250,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--         <a href="#">4</a> -->
 <!--         <a href="#">5</a> -->
     </div>
+   </div>
 <!-- </footer> -->
   
 
