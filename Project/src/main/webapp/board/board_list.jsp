@@ -32,6 +32,10 @@
 		text-align: left;
 	}
 	
+	
+	#border_content {
+		padding: 130px;
+	}
 </style>
 </head>
 	<body class="w3-content" style="max-width:95%">
@@ -56,8 +60,10 @@
 	  
 	  <!-- Top header -->
 	  <jsp:include page="../inc/top.jsp"/>
-	
-			<h3>공지사항</h3>
+		
+		
+		<div id="border_content">
+			<h3 style="padding: 20px;">공지사항</h3>
 			<hr style="border:solid 2px black;">
 			<table class="table">
 			  <c:choose>
@@ -91,7 +97,7 @@
 			</table>
 			<c:choose>
 		    	<c:when test="${sessionScope.sId eq 'admin' }">
-		    		<a href="AdminBoard.ad" class="w3-bar-item btn btn-dark btn-sm" style="float:right">게시판 관리하러가기</a>
+		    		<a href="AdminBoard.ad" class="w3-bar-item btn btn-dark btn-sm" style="float:right">게시판 관리</a>
 		    	</c:when>
 		    </c:choose>
 		<section id="buttonArea" style="text-align:center">
@@ -134,9 +140,9 @@
 				</c:otherwise>
 			</c:choose>
 		</section>	
-
+</div>
 		
-		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+<!-- 		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
 	
 	  <!-- End page content -->
 	</div>

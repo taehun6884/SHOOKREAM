@@ -85,7 +85,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     }
 </style>
 </head>
-<body class="w3-content" style="max-width:95%">
+<body class="w3-content" style="max-width:95%;">
 
 <!-- Sidebar/menu -->
 <jsp:include page="./inc/side.jsp"/>
@@ -106,7 +106,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <div class="w3-hide-large" style="margin-top:83px"></div>
   
   <!-- Top header -->
+  <div>
   <jsp:include page="./inc/top.jsp"/>
+  </div>
 
   
 <!--   <div class="w3-container w3-text-grey" id="jeans"> -->

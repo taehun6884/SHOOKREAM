@@ -114,7 +114,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--     <p>BEST</p> -->
 <!--   </div> -->
 	<div id="main_category">
+			<c:choose>
+				<c:when test="${productList eq null}">
+					<p style="font-size: 17px;">'<span style="color: blue;">${param.keyword }</span>' 에 대한 검색결과가 없습니다.</p>
+				</c:when>
+				<c:otherwise>
 				<p style="font-size: 17px;">'<span style="color: blue;">${param.keyword }</span>' 에 대한 검색결과</p>
+				</c:otherwise>
+			</c:choose>
 	</div>
   <!-- Product grid -->
   <div class="w3-row w3-grayscale">

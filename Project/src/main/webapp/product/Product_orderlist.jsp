@@ -79,29 +79,36 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 <!-- Top menu on small screens -->
 <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-  <div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
+  <div class="w3-bar-item w3-padding-24 w3-wide">SHOOKREAM</div>
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
 </header>
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
 
-  <!-- Push down content on small screens -->
-<!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
-   <jsp:include page="../inc/top.jsp"/>
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
+
+ <!-- Push down content on small screens -->
+ <div class="w3-hide-large" style="margin-top:83px"></div>
+ 
+ <!-- Top header -->
+ <div style="float: right;">
+ <jsp:include page="../inc/top.jsp"/>
+</div>
+	
   <!-- Top header -->
+  
+  <div style="padding: 80px;">
   <header class="w3-container w3-xlarge">
     <p class="w3-left">주문내역</p>
     <p class="w3-right">
-     <jsp:include page="../inc/top.jsp"/>
     </p>
 </header>
    
   <!-- Footer -->
-  <footer class="w3-padding-64 w3-small w3-center" id="footer">
+  <footer class="w3-padding-64 w3-small w3-center" id="footer" >
   <form action="ReviewWrite.me" method="post">
   <table class="table">
   <thead  class="table-dark" >
@@ -172,7 +179,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--         <a href="#">5</a> -->
     </div>
 </footer>
-  
+  </div>
 <!-- 로그인 화면 폼 -->
   <!-- End page content -->
 
