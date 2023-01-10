@@ -130,6 +130,7 @@ public class CartListProService {
 
 		return minusTotal;
 	}
+
 	
 	
 }

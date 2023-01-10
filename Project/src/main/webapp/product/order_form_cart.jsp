@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>장바구니</title>
+<title>구매페이지</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -24,7 +24,7 @@
           text-align: center;
         }
 .td_cart{
-	font-size: 14px;
+	font-size: 13px;
 	text-align: center;
 	vertical-align : middle;
 }
@@ -36,6 +36,7 @@
 </style>
 <style type="text/css">
 #table {	
+	margin-top: 150px
    	text-align: center;
 }
 </style>
@@ -102,10 +103,10 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     	background-color: #d2d2d2;
     }
     #cart_circle {
-    	background-color: #DCEBFF;
+    	background-color: #d2d2d2;
     }
     #com_circle {
-    	background-color: #d2d2d2;
+    	background-color: #DCEBFF;
     }
     
     b {
@@ -150,7 +151,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <p class="w3-left">
     <i class="fa-solid fa-bag-shopping" ></i>
 <!--     <i class="fa-solid fa-cart-shopping"></i> -->
-    &nbsp;장바구니</p>
+    &nbsp;구매페이지</p>
 <!--     <div class="w3-right out-div"> -->
 	    <div class="top_circle w3-right" id="order_circle"><h3 class="top_circle_h"><b>03</b><br>주문완료</h3></div>
 	    <div class="top_circle w3-right" id="com_circle"><h3 class="top_circle_h"><b>02</b><br>주문/결제</h3></div>
@@ -162,10 +163,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--   Footer -->
 <!--   <footer class="w3-padding-64 w3-small w3-center" id="footer"> -->
 <form action="">
-  <table class="table" border ="3" style="margin-top: 100px" >
+  <table class="table" border ="3">
   <thead  class="table-dark" >
     <tr>
-      <th scope="col" class ="th_cart">선택</th>
       <th scope="col" class ="th_cart"colspan="2">상품명</th>
 <!--       <th scope="col">상품명</th> -->	
       <th scope="col"  class ="th_cart">상품금액</th>
@@ -173,43 +173,33 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <th scope="col"  class ="th_cart">주문금액</th>
       <th scope="col"  class ="th_cart">수량</th>
       <th scope="col"  class ="th_cart">배송정보</th>
-      <th scope="col"  class ="th_cart">삭제</th>
     </tr>
   </thead>
   <tbody>
   	<!-- 카트 리스트가 없을 때 처리 -->
-    <c:if test="${cartlist eq null or empty cartlist}">
-			<tr>
-				<td colspan="8" style="text-align: center;"><b>담긴 상품이 없습니다.</b></td>
-			</tr>
-	</c:if>
+<%--     <c:if test="${cartlist eq null or empty cartlist}"> --%>
+<!-- 			<tr> -->
+<!-- 				<td><h3>담긴 상품이 없습니다.</h3></td> -->
+<!-- 			</tr> -->
+<%-- 		</c:if> --%>
 	<!-- 카트 리스트가 있을 때 처리 -->
-	<c:if test="${cartlist ne null and not empty cartlist}">
-    <c:forEach var="cart" items="${cartlist }" varStatus="status">
+<%-- 	<c:if test="${cartlist ne null and not empty cartlist}"> --%>
+    <c:forEach var="cart" items="${cartOrder }" varStatus="status">
     <tr>
-	<!-- 구매페이지로 가기 위해 member_idx hidden 처리 -->
-
-	  	
-      <!-- 체크박스 -->
-	  <td class ="td_cart"><input type="checkbox" class ="cartCheckBox" id="cartCheckBox${status.index }" name ="cartCheckBox" checked="checked" value="${cart.cart_idx }" onclick="removeCheck(this)"></td> 
       <td><a href="ProductInfoForm.po?product_idx=${cart.product_idx }"><img src="upload/${cart.cart_product_image }"  alt="없음!" class="img-thumbnail" width="150" height="150" ></a></td>
       <td class ="td_cart">${cart.cart_product_name }<br>색상 : ${cart.cart_color }</td>
 	  <td class ="td_cart" id="cart_price"><fmt:formatNumber value="${cart.cart_price }" pattern="#,###원"></fmt:formatNumber></td>
       <td class ="td_cart" id="cart_discount_price"><fmt:formatNumber value="${cart.cart_price * (cart.cart_discount / 100)}" pattern="#,###원"></fmt:formatNumber></td>
       <td class ="td_cart" id="cart_order_price" ><fmt:formatNumber value="${cart.cart_order_price}" pattern="#,###원"></fmt:formatNumber></td> 
-<%--       <td class ="td_cart">${status.end }</td> --%>
       <td class ="td_cart">
       <input type="number" value="${cart.cart_count }" style="width: 35px">
       <br>
       <button>변경</button>
       </td>
       <td class ="td_cart">무료배송</td>
-      <td class ="td_cart">
-      <button type="button" class="btn btn-dark" onclick="location.href='CartDeletePro.ca?cart_idx=${cart.cart_idx }'">삭제</button>
-      </td>
     </tr>
     </c:forEach>
-    </c:if>
+<%--     </c:if> --%>
   </tbody>
 </table>
 	<div class="container px-4 text-center" id="totalResult">
@@ -415,9 +405,12 @@ function goOrder() {
 			chk_arr.push($(this).val());
 		});
 // 	
-		
-		alert("구매페이지로 이동합니다.");
-		location.href = "CartOrderDetailProAction.ca?cart_idx=" + chk_arr + "&member_idx=" + ${sessionScope.member_idx};
+		//체크된 상품 개수만큼 반복
+		for(var i =0; i<chk_arr.length; i++){
+                 alert("배열값 = "+ chk_arr);
+			
+		}
+		location.href = "CartOrderDetailProAtion.ca?cart_idx=" + chk_arr + "&member_idx=" + ${sessionScope.member_idx};
 
 		
 	
