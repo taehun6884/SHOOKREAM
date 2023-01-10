@@ -30,7 +30,7 @@
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
 </head>
-<body class="w3-content" style="max-width:1200px">
+<body class="w3-content" style="max-width:95%">
 <!-- Sidebar/menu -->
 <jsp:include page="../inc/side.jsp"/>
 
@@ -81,7 +81,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </tr>
           <tr>
           	<td>
-          		<button type="button" class="w3-button w3-block w3-black" onclick="location.href='FindMemberIdForm.me'">아이디 찾기</button>
+          		<button type="button" class="w3-button w3-block w3-black" onclick="location.href='FindMemberIdForm.me'">아이디 / 비밀번호 찾기</button>
           	</td>
           </tr>
         </table>

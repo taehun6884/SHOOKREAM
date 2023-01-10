@@ -56,13 +56,13 @@
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
 </head>
-<body class="w3-content" style="max-width:1200px">
+<body class="w3-content" style="max-width:95%">
 <!-- Sidebar/menu -->
 <jsp:include page="../inc/side.jsp"/>
 
 <!-- Top menu on small screens -->
 <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-  <div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
+  <div class="w3-bar-item w3-padding-24 w3-wide">SHOOKREAM</div>
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
 </header>
 
@@ -70,22 +70,36 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
+<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
 
-  <!-- Push down content on small screens -->
-<!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
-  
-  <!-- Top header -->
+ <!-- Push down content on small screens -->
+ <div class="w3-hide-large" style="margin-top:83px"></div>
+ 
+ <!-- Top header -->
+ <div style="float: right;">
+ <jsp:include page="../inc/top.jsp"/>
+</div>
+
+<div style="padding: 80px;">
   <header class="w3-container w3-xlarge">
-    <p class="w3-left">찜 목록</p>
+    <p class="w3-left">위시리스트</p>
     <p class="w3-right">
-      <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i>
+<!--       <i class="fa fa-shopping-cart w3-margin-right"></i> -->
+<!--       <i class="fa fa-search"></i> -->
     </p>
 </header>
    
   <!-- Footer -->
   <footer class="w3-padding-64 w3-small w3-center" id="footer">
+  <c:choose>
+  	<c:when test="${wishlist eq null}">
+  		<hr>
+  		<div id="no_cart">
+<!--   		<i class="fa-solid fa-cart-plus"></i> -->
+  		<h4>위시리스트에 담긴 상품이 없습니다.</h4>
+  		</div>
+  	</c:when>
+  	<c:otherwise>
   <table class="table">
   <thead  class="table-dark" >
     <tr>
@@ -103,7 +117,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <c:forEach var="wish" items="${wishlist }">
     <tr>
       <th scope="row">${wish.wish_idx }</th>
-      <td><img src="upload/${wish.product_img }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
+      <td><a href="ProductInfoForm.po?product_idx=${wish.product_idx }"><img src="upload/${wish.product_img }"  alt="없음!" class="img-thumbnail" width="150" height="150"></a></td>
       <td>${wish.product_name }</td>
       <td>${wish.product_brand }</td>
       <td>${wish.product_price }</td>
@@ -150,8 +164,10 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--         <a href="#">4</a> -->
 <!--         <a href="#">5</a> -->
     </div>
+    </c:otherwise>
+  </c:choose>
 </footer>
-  
+  </div>
 
 
 
@@ -167,7 +183,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     </div>
   </div>
 </div>
-
+</div>
 
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->

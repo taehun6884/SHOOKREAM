@@ -4,7 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>회원가입</title>
+<title>SHOOKREAM</title>
+<!-- <script src="js/jquery-3.6.3.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -27,8 +29,8 @@ table.type03 {
   border-collapse: collapse;
   text-align: left;
   line-height: 1.5;
-  border-top: 1px solid #ccc;
-  border-left: 3px solid #369;
+  border-top: 1.5px solid #ccc;
+  border-left: 1.5px solid #ccc;
   margin-left:auto; 
   margin-right:auto;
 }
@@ -38,7 +40,7 @@ table.type03 th {
   font-weight: bold;
   font-size : 17px;
   vertical-align: top;
-  color: #153d73;
+  color: #153d73; 
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   height: 90px;
@@ -53,13 +55,12 @@ table.type03 td {
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
 }
-
-
 </style>
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
+
 
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript">
@@ -136,7 +137,7 @@ $(function() {
 		$("#phone").on("change", function() {
 			let phone = $("#phone").val();
 			
-			let regex =/(01[016789])([1-9]{1}[0-9]{2,3})([0-9]{4})$/;
+			let regex =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
 			if(!regex.exec(phone)) {
 				$("#phoneCheckResult").html("잘못된 휴대전화 형식입니다").css("color", "red");
 				phoneStatus = false;
@@ -149,7 +150,7 @@ $(function() {
 		
 </script>
 </head>
-<body class="w3-content" style="max-width:1200px">
+<body class="w3-content" style="max-width:95%">
 
 <!-- Top/menu -->
 <jsp:include page="../inc/top.jsp"/>
@@ -171,10 +172,10 @@ $(function() {
 
   <!-- 회원가입 폼 -->
   
-  	<form action="MemberJoinPro.me" method="post" name="joinForm" style="margin-bottom: 300px">
+  	<form action="MemberJoinPro.me" method="post" id="joinForm" name="joinForm" style="margin-bottom: 300px">
 			<h1 style="text-align: center;">회원가입</h1>
 			<h6 style="color: gray;text-align: center;margin-bottom: 50px" >SHOOKREAM에 오신 것을 환영합니다.</h6>
-		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3>
+<!-- 		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3> -->
 			
 			
 			<div>
@@ -185,11 +186,10 @@ $(function() {
 						<input type="text" name="id" id ="id" required size="20px" style="line-height: 30px" onkeydown="inputIdChk()" > &nbsp;
 						<button class="btn btn-dark" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">중복 확인</button>
 <!-- 						<button type="button" class="btn btn-secondary" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">ID check</button> -->
-						<input type="hidden" name="isCheckId" value="idUncheck"/> <!-- 체크 여부 확인 -->			
+<!-- 						<input type="hidden" name="isCheckId" value="idUncheck"/> 체크 여부 확인			 -->
 						<br>
 						<span style="color: gray;" >(영문 소문자/숫자/특수문자(-_.) 사용가능, 5~20자)</span> &nbsp;
 						<span id="checkIdSpan"></span>
-						
 						</td>
 					</tr>
 					<tr>
@@ -197,6 +197,7 @@ $(function() {
 						<td>
 						<input type="password" name="pass" id ="pass" required size="20px" style="line-height: 30px" onkeyup="checkPasswd(this.value)">&nbsp; <span id="checkPasswdResult"></span><br>
 						<span style="color: gray;">(영문 대 소문자/숫자/특수문자(!@#$%) 중 2가지 이상 조합, 8~16자)</span>
+						
 						</td>
 					</tr>
 					<tr>
@@ -211,6 +212,7 @@ $(function() {
 						<td>
 						<input type="text" name="name" required size="20px"style="line-height: 30px" ><br>
 						<span style="color: gray;">(성함을 입력해주세요.)</span>
+					
 						
 						</td>
 					</tr>
@@ -233,17 +235,20 @@ $(function() {
 					<tr>
 						<th scope="row">이메일</th>
 						<td>
-
-						<input type="text" name="email" id="email" placeholder="" required size="20px" style="line-height: 30px">&nbsp; <span id ="emailCheckResult"></span><br>
-
-						<span style="color: gray;">("@"를 포함하여 이메일을 입력해주세요. ex) abcd@gmail.com)</span>
-						<input type="text" name="authCode" id="authCode" size="20px" style="line-height: 30px" placeholder="인증코드를 입력하세요">
-						<a href="MemberAuthAction.me" id="checkEmail">인증하려면 클릭하세요</a>
+						<input type="text" name="email" id="email" placeholder="" required size="20px" style="line-height: 30px"> &nbsp;
+						<input type="button" class="btn btn-dark" id="checkEmail"  value="인증 메일 전송" onclick="alert('이메일 전송 완료!')"><br>
+						<span style="color: gray">("@"를 포함하여 이메일을 입력해주세요. ex) abcd@gmail.com)</span><br>
+						<div id ="authResult">
+						<input type="text" name="authCode" id="authCode" size="20px" style="line-height: 30px" required="required"> &nbsp;
+						<input type="button" class="btn btn-dark" id="checkEmail2"  value="인증 하기"><br>
+						<span style="color: gray">(인증코드 6자리를 입력하세요)</span> &nbsp;
+						<span id="authEmailResult"></span>
+						</div>
 						</td>
 						
 					</tr>
 					<tr>
-						<td colspan="2" align="center"><button type="submit" class="btn btn-secondary btn-lg" onclick="fn_joinMember()" >회원가입</button></td>
+						<td colspan="2" align="center"><button type="submit" id="join_btn" name ="join" class="btn btn-dark"  >회원가입</button></td>
 					</tr>
 				</table>
 
@@ -277,14 +282,17 @@ $(function() {
 <c:set var="contextPath" value="<%= request.getContextPath()%>"/>
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
-<script>
-
+<script type="text/javascript">
+// 	var isIdCheck = false;
+	var isEmailAuth = false;
+	
 function fn_joinMember() {
 	var joinForm = document.joinForm;
 	
 	if(joinForm.isCheckId.value != "idCheck"){
 		alert("ID 중복체크를 해주세요!")
 		event.preventDefault(); // submit 기능 막기
+	
 	} else if(idStatus == false) {
 		alert("ID를 확인해주세요!")
 		event.preventDefault(); // submit 기능 막기
@@ -299,6 +307,8 @@ function fn_joinMember() {
 		event.preventDefault(); // submit 기능 막기
 	}
 }
+
+// window.opener.isIdCheck = true;
 
 function fn_dbCheckId() {
 	var id = document.getElementById("id").value;
@@ -321,20 +331,7 @@ function fn_dbCheckId() {
 // 		window.open("http://localhost:8080/Project/dbCheckId.me?member_id="+id,"","width=500, height=300");
 	
 }
-
-// function checkIdLength(){ //id 길이 확인
-// // 	let id = document.getElementById("id").value;
-// 	let id = document.joinForm.id.value;
-// 	let checkIdLengthResult = document.getElementById("checkIdLengthResult");
-	
-// 	if(id.length > 16 && id.length < 8){
-// 		checkIdLengthResult.innerHTML = "8 ~ 16 문자로 입력해주세요";
-// 		checkIdLengthResult.style.color = "RED"; 
-// 		event.preventDefault(); // submit 기능 막기
-// 	} 
-// }
-
-
+			
 function reCheckPasswd(pass2) {//재입력 확인 
 	var pass = document.getElementById("pass").value;
 // 	var pass2 = document.getElementById("pass2").value;
@@ -356,8 +353,8 @@ function inputIdChk(){
 	var dbCheckId = document.joinForm.dbCheckId;
 	document.joinForm.isCheckId.value = "idUncheck";
 	dbCheckId.disabled=false;
-	joinForm.dbCheckId.style.opacity=1;
-	joinForm.dbCheckId.style.cursor="pointer";
+	openJoinfrm.dbCheckId.style.opacity=1;
+	openJoinfrm.dbCheckId.style.cursor="pointer";
 }
 
 
@@ -376,30 +373,84 @@ function inputIdChk(){
 // }
 
 
-
-
+	/* 이메일 인증 1 */
 	$(function() {
-		$("#checkEmail").on("click", function() {
-			
-			$.ajax({
-				type: "get",
-	            url: "CheckEmailAddress.me",
-	            data: {
-	               id: $("#id").val(),
-	               authCode: $("#authCode").val()
-	            },
-	            
-	            success: function(result) {
-	                //  리턴받은 결과("true", "false") 판별
-	                if(result == "true") { // 아이디 존재(중복)
-	                   $("#checkEmailAddress").html("인증이 완료된 아이디").css("color", "blue");
-	                } else {
-	                   $("#checkEmailAddress").html("인증되지 않은 아이디").css("color", "red");
-	                }
-	             }
-	         });
+		$("#joinForm").submit(function() { // 폼 서브밋
+			// 아이디 체크, 이메일 인증 체크 
+// 			if($("") != "idCheck"){ //
+// 				alert("ID 중복체크를 해주세요!")
+// 				event.preventDefault(); // submit 기능 막기
+// 			}	
+		
+			// 이메일 인증 확인
+			if(!isEmailAuth) { 
+				
+				alert(isEmailAuth); 
+				alert("Email 인증을 완료 해주세요!");
+				event.preventDefault(); // submit 기능 막기
+				
+				return false; // submit 취소
+			}
+				alert(isEmailAuth); 
+				alert("Email 인증 성공!");
+				return true; // submit 실행
 		});
-	});
+		
+			$("#checkEmail").on("click", function() {
+				
+				$.ajax({
+					type: "get",
+		            url: "CheckEmailAddress.me",
+		            data: {
+		               id: $("#id").val(),
+		               authCode: $("#authCode").val(),
+		               email: $("#email").val()
+		            }
+				                   
+		         });
+			});
+			
+		/* 이메일 인증 2 */
+		$("#checkEmail2").on("click", function() {
+				
+				$.ajax({
+					type: "get",
+		            url: "CompareEmailAddress.me",
+		            data: {
+		               id: $("#id").val(),
+		               authCode: $("#authCode").val()
+		            },
+		            datatype: "html",
+					success:function(data){
+						const isSuccess = $.trim(data);
+						alert(isSuccess);
+						if(isSuccess == "true"){ 
+							
+							alert("인증 성공");
+	                	  	 $("#authEmailResult").html("인증 성공!").css("color", "blue");
+// 	                	  	 $("#authResult").reload(window.location.href + " #authResult");
+	                	  	 isEmailAuth = true;
+	                	  	 alert(isEmailAuth);
+	    	            } else {
+							alert("인증 실패");
+							 $("#authEmailResult").html("인증 실패!").css("color", "red");
+// 							 event.preventDefault(); // submit 기능 막기
+// 							 $('join_btn').prop('disabled', false);
+// 							 $("#authResult").reload(window.location.href + " #authResult");
+	                	  	 isEmailAuth = false;
+	                	  	alert(isEmailAuth);
+	    	            }//else
+					
+					}//success
+		         
+				});//ajax
+			});
+		});
+	
+	
+	
+
+	
 
 
 // Accordion 
@@ -494,5 +545,8 @@ window.onload = function(){
     });
 }
 </script>
+
+
+
 </body>
 </html>

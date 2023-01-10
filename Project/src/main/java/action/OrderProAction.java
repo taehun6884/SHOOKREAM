@@ -29,6 +29,12 @@ public class OrderProAction implements Action {
 			vo.setOrder_product_idx(Integer.parseInt(request.getParameter("product_idx")));
 			vo.setOrder_product_sell_count(Integer.parseInt(request.getParameter("product_sell_count")));
 			vo.setOrder_product_amount(Integer.parseInt(request.getParameter("product_amount")));
+			vo.setOrder_product_price(Integer.parseInt(request.getParameter("product_price")));
+			
+			if(request.getParameter("coupon_idx") != "") {
+				vo.setOrder_coupon_idx(Integer.parseInt(request.getParameter("coupon_idx")));
+			}
+			
 			
 			System.out.println(vo);
 			
@@ -48,7 +54,7 @@ public class OrderProAction implements Action {
 				}
 			}else {
 				forward = new ActionForward();
-				forward.setPath("./ProductOrderList.po?member_idx="+vo.getOrder_member_idx()+"&product_idx"+vo.getOrder_product_idx());
+				forward.setPath("./ProductOrderList.po?member_idx="+vo.getOrder_member_idx());
 				forward.setRedirect(true);
 			}
 		

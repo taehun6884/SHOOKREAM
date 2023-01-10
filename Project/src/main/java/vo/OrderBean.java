@@ -17,10 +17,23 @@ private int order_product_sell_count;
 private int order_product_amount;
 private String order_product_size;
 private String order_product_color;
+private int order_coupon_idx;
+private int order_isUse;
 
 
 
-
+public int getOrder_isUse() {
+	return order_isUse;
+}
+public void setOrder_isUse(int order_isUse) {
+	this.order_isUse = order_isUse;
+}
+public int getOrder_coupon_idx() {
+	return order_coupon_idx;
+}
+public void setOrder_coupon_idx(int order_coupon_idx) {
+	this.order_coupon_idx = order_coupon_idx;
+}
 public String getOrder_product_size() {
 	return order_product_size;
 }
@@ -106,8 +119,11 @@ public String toString() {
 			+ order_product_idx + ", order_main_image=" + order_main_image + ", order_member_id=" + order_member_id
 			+ ", order_product_price=" + order_product_price + ", order_product_sell_count=" + order_product_sell_count
 			+ ", order_product_amount=" + order_product_amount + ", order_product_size=" + order_product_size
-			+ ", order_product_color=" + order_product_color + "]";
+			+ ", order_product_color=" + order_product_color + ", order_coupon_idx=" + order_coupon_idx
+			+ ", order_isUse=" + order_isUse + "]";
 }
+
+
 
 
 

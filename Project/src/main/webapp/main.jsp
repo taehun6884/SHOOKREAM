@@ -24,6 +24,9 @@
 
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+<script src="https://kit.fontawesome.com/498a54c4c7.js"
+	crossorigin="anonymous"></script>
+<script src="../js/jquery-3.6.3.js"></script>	
 <script type="text/javascript">
 $(function() {
 	$('.post-wrapper').slick({
@@ -67,7 +70,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 }
 
 #price {
-	margin-bottom:20px;
 }
 
 #product_price {
@@ -79,10 +81,15 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	color: red; 
 	font-size: big; 
 	float: right;
+
+}
+
+body{
+margin-top:10px;
 }
 </style>
 </head>
-<body class="w3-content" style="max-width:1200px" >
+<body class="w3-content" style="max-width:95%; margin-top: 20px;">
 
 <!-- Sidebar/menu -->
 <jsp:include page="./inc/side.jsp"/>
@@ -107,12 +114,13 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <br>
 
   <!-- ./images header -->
-  <div class ="post-wrapper">
-  	<div><img src="images/jeans.jpg" height="700" width="900"></div>
-  	<div><img src="images/jeans1.jpg" height="700" width="900"></div>
-  	<div><img src="images/섬네일(슈펜).jpg" height="700" width="900"></div>
-  	<div><img src="images/logo.png" height="700" width="900"></div>
-  
+  <div class ="post-wrapper" style="margin-top: 18px;">
+  	<div><img src="images/banner(nike).jpg" height="600" width="100%" onclick="location.href=''"></div>
+<!--   	<div><a href="CouponMainList.po?coupon_content=banner_1"><img src="images/banner_1.jpg" height="700" width="900"></a></div> -->
+  	<div><img src="images/banner(newbalance).png" height="600" width="100%"></div>
+  	<div><img src="images/banner(adidas).png" height="600" width="100%"></div>
+  	<div><img id="banner_1" src="images/banner_1.jpg"  height="600" width="100%" style="cursor: pointer;" onclick="couponDown(this.id)"></div>
+  	<div><img id="banner_2" src="images/banner_1.jpg" height="600" width="100%" style="cursor: pointer;" onclick="couponDown(this.id)"></div>
   </div>
 <!--   <div class="w3-container w3-text-grey" id="jeans"> -->
 <!--     <p>BEST</p> -->
@@ -158,7 +166,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 								</c:otherwise>
 							</c:choose>
 							</div>
-							
+							<div id="etcInfo" style="font-size: small; padding-bottom: 20px;">
+								<span>
+									구매 ${productBestList.product_sell_count } &nbsp;
+								</span>
+								<span>
+									<i class="fa-solid fa-heart" style="color:pink;"></i> ${productBestList.product_wishcount }
+								</span>
+							</div>
 						</div>
 					</div>
 				</c:forEach>
@@ -204,7 +219,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 								</c:otherwise>
 							</c:choose>
 							</div>
-							
+							<div id="etcInfo" style="font-size: small; padding-bottom: 20px;">
+								<span>
+									구매 ${productNewList.product_sell_count } &nbsp;
+								</span>
+								<span>
+									<i class="fa-solid fa-heart" style="color:pink;"></i> ${productNewList.product_wishcount }
+								</span>
+							</div>
 						</div>
 					</div>
 				</c:forEach>
@@ -214,6 +236,23 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- footer -->
 <%--     <jsp:include page="./inc/footer.jsp"/> --%>
 <script>
+
+
+function couponDown(coupon_content) {
+	
+	var member_idx = '<%=(String)session.getAttribute("sId")%>'
+	
+	if( member_idx == 'null'){
+		alert("로그인 후 이용 가능합니다.");
+		location.href="LoginMember.me";
+	} else {
+		url = "CouponMainList.po?member_idx="+member_idx+"&coupon_content="+coupon_content; 
+		let name = "Coupon List";
+		let attr = "width=280, height=280, top=200, left=510"
+		window.open(url, name, attr);
+	}
+}
+
 // Accordion 
 function myAccFunc() {
   var x = document.getElementById("demoAcc");

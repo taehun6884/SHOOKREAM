@@ -5,8 +5,8 @@
 		auth="Container"
 		type="javax.sql.DataSource"
 		driverClassName="com.mysql.cj.jdbc.Driver"
- 		url="jdbc:mysql://localhost:3306/shookream"
- 		username="root"
+ 		url="jdbc:mysql://db.itwillbs.dev:3306/class5_220823_team3"
+ 		username="class5_220823_team3"
  		password="1234"
  		maxTotal="100"
  	/>

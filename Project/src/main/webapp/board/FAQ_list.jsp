@@ -14,9 +14,10 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 		<style>
-		.w3-sidebar a {font-family: "Roboto", sans-serif}
-		body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+		.w3-sidebar a {font-family: "Noto Sans KR", sans-serif}
+		body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 		</style>
 		
 		<style type="text/css">
@@ -29,10 +30,12 @@
 			text-align: left;
 		}
 	
-		
+		#border_content {
+		padding: 130px;
+	}
 		</style>
 	</head>
-	<body class="w3-content" style="max-width:1200px">
+	<body class="w3-content" style="max-width:95%">
 	
 	<!-- Sidebar/menu -->
 	<jsp:include page="../inc/side.jsp"/>
@@ -47,24 +50,18 @@
 	<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 	
 	<!-- !PAGE CONTENT! -->
-	<div class="w3-main" style="margin-left:250px">
+	<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
 	
 	  <!-- Push down content on small screens -->
 	  <div class="w3-hide-large" style="margin-top:83px"></div>
 	  
 	  <!-- Top header -->
 	  <jsp:include page="../inc/top.jsp"/>
-			<h3>자주묻는 질문</h3>
+	  
+	  
+	  <div id="border_content">
+			<h3 style="padding: 20px;">자주묻는 질문</h3>
 			<hr style="border:solid 2px black;">
-			<select id="collectView" class="btn btn-sm dropdown-toggle" name="notice_category"> <%-- 카테고리 모아보기 --%>
-				<option selected>카테고리별 모아보기</option>
-				<option>교환/반품</option>
-				<option>회원정보</option>
-				<option>배송</option>
-				<option>주문/결제</option>
-				<option>서비스</option>
-			</select>
-			
 			<table class="table">
 			  <c:choose>
 					<c:when test="${empty param.pageNum }">
@@ -95,20 +92,25 @@
 			  </tbody>
 			 </c:forEach> 
 			</table>
+			<c:choose>
+		    	<c:when test="${sessionScope.sId eq 'admin' }">
+		    		<a href="AdminBoard.ad" class="w3-bar-item btn btn-dark btn-sm" style="float:right">게시판 관리</a>
+		    	</c:when>
+		    </c:choose>
 		<section id="buttonArea" style="text-align:center">
 			<form action="BoardList.bo">
 				<input type="text" name="keyword">
-				<input type="submit" value="검색">
+				<input type="submit" value="검색" class="btn btn-dark btn-sm">
 			</form>
 		</section>
 		<br>
 		<section id="pageList" style="text-align:center">
 			<c:choose>
 				<c:when test="${pageNum > 1}">
-					<input type="button" class="btn btn-outline-secondary btn-sm" value="이전" onclick="location.href='BoardList.bo?pageNum=${pageNum - 1}'">
+					<input type="button" class="btn btn-dark btn-sm" value="이전" onclick="location.href='BoardList.bo?pageNum=${pageNum - 1}'">
 				</c:when>
 				<c:otherwise>
-					<input type="button" class="btn btn-outline-secondary btn-sm" value="이전">
+					<input type="button" class="btn btn-dark btn-sm" value="이전">
 				</c:otherwise>
 			</c:choose>
 				
@@ -128,16 +130,16 @@
 			<!-- 현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 [다음] 링크 동작 -->
 			<c:choose>
 				<c:when test="${pageNum < pageInfo.maxPage}">
-					<input type="button" value="다음" class="btn btn-outline-secondary btn-sm" onclick="location.href='FAQList.bo?pageNum=${pageNum + 1}'">
+					<input type="button" value="다음" class="btn btn-dark btn-sm" onclick="location.href='FAQList.bo?pageNum=${pageNum + 1}'">
 				</c:when>
 				<c:otherwise>
-					<input type="button" class="btn btn-outline-secondary btn-sm" value="다음">
+					<input type="button" class="btn btn-dark btn-sm" value="다음">
 				</c:otherwise>
 			</c:choose>
 		</section>	
-		
-		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
-	
+		<br><br>
+<!-- 		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
+	</div>
 	  <!-- End page content -->
 	</div>
 		 

@@ -12,7 +12,7 @@
 	function sendCheckValue() {
 		var openJoinfrm = opener.document.joinForm;
 		var chResult = document.getElementsByClassName("chResult");
-		
+// 		var window.opener.isIdCheck = false;
 		if (document.checkIdForm.chResult.value=="N") { // 중복된 id 가 있음에도 '사용하기' 버튼 눌렀을 때
 			alert("다른 아이디를 입력해주세요.");
 			openJoinfrm.id.focus();
@@ -24,7 +24,8 @@
 			openJoinfrm.dbCheckId.disabled=true;
 			openJoinfrm.dbCheckId.style.opacity=0.6;
 			openJoinfrm.dbCheckId.style.cursor="default";
-			
+// 			window.opener.isIdCheck = false;
+// 			alert(window.opener.isIdCheck.value);
 			window.close();
 		}
 	}

@@ -34,6 +34,4 @@ public class OrderProService {
 		
 		return result;
 	}
-
-
 }

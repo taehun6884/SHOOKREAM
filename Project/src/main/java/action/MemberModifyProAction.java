@@ -23,9 +23,9 @@ public class MemberModifyProAction implements Action {
 		member.setMember_name(request.getParameter("name"));
 		member.setMember_id(request.getParameter("id"));
 //		member.setMember_pass(request.getParameter("oldpass"));
-		member.setMember_address(request.getParameter("address"));
+//		member.setMember_address(request.getParameter("address"));
 		member.setMember_email(request.getParameter("email"));
-		member.setMember_phone(request.getParameter("phone"));
+//		member.setMember_phone(request.getParameter("phone"));
 		String newpass1 = request.getParameter("newpass1");
 		String newpass2 = request.getParameter("newpass2");
 		
@@ -34,10 +34,28 @@ public class MemberModifyProAction implements Action {
 //		System.out.println(request.getParameter("name"));
 //		System.out.println(newpass1);
 		
-		if(newpass1.equals(newpass2)) {
-			member.setMember_pass(request.getParameter("newpass1"));
-		} else {
+//		if(newpass1.equals(newpass2)) {
+//			member.setMember_pass(request.getParameter("newpass1"));
+//		} else {
+//			member.setMember_pass(request.getParameter("oldpass"));
+//		}
+		
+		if(newpass1.equals("") && newpass2.equals("")) {
 			member.setMember_pass(request.getParameter("oldpass"));
+		}else {
+			member.setMember_pass(request.getParameter("newpass1"));
+		}
+		
+		if(request.getParameter("address").equals("")) {
+			member.setMember_address(request.getParameter("oldaddress"));
+		} else {
+			member.setMember_address(request.getParameter("address") + " " + request.getParameter("address_detail"));
+		}
+		
+		if(request.getParameter("phone").equals("")) {
+			member.setMember_phone(request.getParameter("oldphone"));
+		} else {
+			member.setMember_phone(request.getParameter("phone"));
 		}
 		
 		ModifyMemberService service = new ModifyMemberService();

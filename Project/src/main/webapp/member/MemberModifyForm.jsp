@@ -13,18 +13,158 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 <style type="text/css">
 #sform {
           display: inline-block;
           text-align: center;
         }
+        
+ 	#dbCheckId {
+		display:inline;
+      box-sizing: border-box;
+}
+table.type03 {
+  border-collapse: collapse;
+  text-align: left;
+  line-height: 1.5;
+  border-top: 1px solid #ccc;
+  border-left: 3px solid gray;
+  margin-left:auto; 
+  margin-right:auto;
+}
+table.type03 th {
+  width: 147px;
+  padding: 10px;
+  font-weight: bold;
+  font-size : 17px;
+  vertical-align: top;
+  color: #153d73;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  height: 70px;
+  width: 300px;
+
+}
+table.type03 td {
+  height: 90px;
+  width: 700px;
+  padding: 10px;
+  vertical-align: top;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
 </style>
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<script type="text/javascript">
+var passwdStatus = false;
+var phoneStatus = false;
+
+$(function() {
+$("#pass").on("keyup", function() {
+	let pass = $("#pass").val();
+	
+	let lengthRegex = /^[A-Za-z0-9!@#$%]{8,16}$/; // 전체 규칙만 판별
+	
+	let engUpperRegex = /[A-Z]/; // 대문자
+	let engLowerRegex = /[a-z]/; // 소문자
+	let numRegex = /[0-9]/; // 숫자
+	let specRegex = /[!@#$%]/; // 특수문자
+	
+	
+		if(!lengthRegex.exec(pass)) {
+			$("#checkPasswdResult").html("사용 불가능한 패스워드").css("color", "red");
+			passwdStatus = false;
+			
+			if($("#pass").length > 0){
+				$("#newpass2").attr('required', 'required');
+			}
+		} else {
+	
+			let count = 0; // 각 항목별 포함 갯수를 카운팅 할 변수 선언
+			
+			if(engUpperRegex.exec(pass)) { count++ };
+			if(engLowerRegex.exec(pass)) { count++ };
+			if(numRegex.exec(pass)) { count++ };
+			if(specRegex.exec(pass)) { count++ };
+			
+			passwdStatus = true;
+			switch(count) {
+				case 4 : $("#checkPasswdResult").html("안전").css("color", "green"); break;
+				case 3 : $("#checkPasswdResult").html("보통").css("color", "orange"); break;
+				case 2 : $("#checkPasswdResult").html("위험").css("color", "gray"); break;
+				case 1 : 
+							$("#checkPasswdResult").html("사용 불가능한 패스워드").css("color", "red");
+							passwdStatus = false;
+			}
+			
+		}
+	
+});
+
+//휴대전화 확인
+	$("#phone").on("change", function() {
+		let phone = $("#phone").val();
+		
+		let regex =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+		if(!regex.exec(phone)) {
+			$("#phoneCheckResult").html("잘못된 휴대전화 형식입니다").css("color", "red");
+			phoneStatus = false;
+		}else {
+			$("#phoneCheckResult").html("올바른 휴대전화 형식입니다").css("color", "blue");
+			phoneStatus = true;
+			}
+		});
+	
+	
+	
+});	
+
+
+function reCheckPasswd(pass2) {//재입력 확인 
+	var pass = document.getElementById("pass").value;
+// 	var pass2 = document.getElementById("pass2").value;
+	let spanRecheckResult = document.getElementById("recheckResult");
+
+	if(pass == pass2){
+		spanRecheckResult.innerHTML = "동일한 패스워드 입니다";
+		spanRecheckResult.style.color = "BLUE";    		
+	}else{
+		spanRecheckResult.innerHTML = "일치하지 않는 패스워드 입니다";
+		spanRecheckResult.style.color = "RED";   
+		event.preventDefault(); // submit 기능 막기
+	}
+}
+
+function fn_modify() {
+	var mdForm = document.mdForm;
+	var pass = document.getElementById("pass").value;
+	var pass2 = document.getElementById("newpass2").value;
+	var phone = document.getElementById("phone").value;
+	
+	if(!pass){
+		passwdStatus = true;
+	} 
+	
+	if(!phone){
+		phoneStatus = true;
+	}
+	
+	if(passwdStatus == false) {
+		alert("패스워드를 확인해주세요!")
+		event.preventDefault(); // submit 기능 막기
+	}else if(phoneStatus == false) {
+		alert("휴대전화를 확인해주세요!")
+		event.preventDefault(); // submit 기능 막기
+	}
+}
+</script>
 </head>
-<body class="w3-content" style="max-width:1200px">
+<body class="w3-content" style="max-width:95% ">
 
 <!-- Sidebar/menu -->
 <jsp:include page="../inc/side.jsp"/>
@@ -39,64 +179,95 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
-
-  <!-- Push down content on small screens -->
-<!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
-  
-  <!-- Top header -->
-  <header class="w3-container w3-xlarge">
-    <p class="w3-left">SHOOKREAM</p>
-    <p class="w3-right">
-      <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i>
-    </p>
-</header>
-
+<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
+	
+ <!-- Push down content on small screens -->
+ <div class="w3-hide-large" style="margin-top:83px"></div>
+ 
+ <!-- Top header -->
+ <div style="float: right;">
+ <jsp:include page="../inc/top.jsp"/>
+</div>
   
   <!-- Footer -->
   <!-- 로그인 화면 폼 -->
-  <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
-    <div id = "sform">
-        <h4>회원 정보</h4>
-        <p>Questions? Go ahead.</p>
-        <form action="MemberModifyPro.me" method="post" name="fr">
-          <table>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="name" name="name" value = "${member.member_name }" required></td>
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="id" name="id" value = "${member.member_id }" required></td>
-          </tr>
-          <tr> <!-- 기존 패스워드 -->
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="pass" name="oldpass" value = "${member.member_pass }" required></td>
-          </tr>
-          <tr> <!-- 새 패스워드 -->
-          <td width="300px"><input class="w3-input w3-border" type="password"  name="newpass1" placeholder="신규 비밀번호(변경시에만 입력)" onkeyup="checkPasswd(this.value)"><span id="checkPasswdResult"></span></td>
-          		
-          </tr>
-          <tr> <!-- 새 패스워드 확인 -->
-          <td width="300px"><input class="w3-input w3-border" type="password"  name="newpass2" placeholder="새 비밀번호 확인(변경시에만 입력)"  onkeyup="checkConfirmPasswd(this.value)"><span id="checkConfirmPasswdResult"></span></td>
-          		
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="address" name="address" value = "${member.member_address }" required></td>
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="email" name="email" value = "${member.member_email }" required></td>
-          </tr>
-          <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="phone" name="phone" value = "${member.member_phone }" required></td>
-          </tr>
-          <tr>
-          <td><button type="submit" class="w3-button w3-block w3-black">수정</button></td>
-          </tr>
-        </table>
-        </form>
-    </div>
-  </footer>
- </div>	
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+  <div style="padding: 80px;">
+  <form action="MemberModifyPro.me" method="post" name="mdForm" style="margin-bottom: 300px">
+  			<input type="hidden" value = "${member.member_pass }" name="oldpass">
+  			<input type="hidden" value = "${member.member_address }" name="oldaddress">
+  			<input type="hidden" value = "${member.member_phone }" name="oldphone">
+  			
+			<h1 style="font-size: 25px; padding-left: 100px; margin-bottom: 20px;">정보 수정</h1>
+<!-- 			<h6 style="color: gray;text-align: center;margin-bottom: 50px" >SHOOKREAM에 오신 것을 환영합니다.</h6> -->
+<!-- 		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3> -->
+			<div>
+				<table class="type03">
+				<tr>
+						<th scope="row" >이름</th>
+						<td>
+						<input type="text" name="name" value="${member.member_name }" size="20px"style="line-height: 30px; border: none;" readonly="readonly"><br>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">아이디</th>
+						<td>
+						<input type="text" name="id" id ="id" value="${member.member_id }" size="20px" style="line-height: 30px; border: none;" readonly="readonly" onkeydown="inputIdChk()" readonly="readonly"> &nbsp;
+						<br>
+						
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">신규 비밀번호</th>
+						<td>
+						<input type="password" name="newpass1" id ="pass" size="20px" placeholder="변경시에만 입력"  style="line-height: 30px" >&nbsp;<span id="checkPasswdResult"></span><br>
+						<span style="color: gray;">(영문소문자/숫자/특수문자 중 2가지 이상 조합, 8~16자.)</span>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">신규 비밀번호 확인</th>
+						<td>
+						<input type="password" name="newpass2"  id="newpass2" size="20px" style="line-height: 30px" placeholder="변경시에만 입력"  onkeyup="reCheckPasswd(this.value)">&nbsp;<span id ="recheckResult"></span><br>
+						<span style="color: gray;">(비밀번호 확인을 위해 동일하게 입력해주세요.)</span>
+						</td>
+					</tr>
+					
+					<tr>
+						<th scope="row">주소</th>
+						<td>
+						<div>${member.member_address }</div><br>
+						<input type="text" name="address" id="address_kakao2"  size="30px" placeholder="변경시에만 입력" style="margin-bottom: 10px;line-height: 30px"> &nbsp;
+						<button id="address_kakao" class="btn btn-dark">주소찾기</button><br>
+						<input type="text" name="address_detail"  size="30px" style="line-height: 30px"  ><br>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">휴대전화</th>
+						<td>
+						<div>${member.member_phone }</div><br>
+						<input type="text" name="phone" id="phone" size="20px" style="line-height: 30px" placeholder="변경시에만 입력" >&nbsp; <span id ="phoneCheckResult"></span><br>
+						<span style="color: gray;">("-"를 제외한 휴대전화를 입력해주세요. ex)01011111111 )</span>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">이메일</th>
+						<td>
+						<input type="text" name="email" id="email" value="${member.member_email }" readonly="readonly" size="20px" style="line-height: 30px; border: none;"> &nbsp;
+						<span id="authEmailResult"></span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center"><button type="submit" class="btn btn-secondary btn-lg" onclick="fn_modify()">수정하기</button>
+						<button type="submit" class="btn btn-secondary btn-lg" onclick="history.back()">취소</button></td>
+					</tr>
+				</table>
+
+			</div>
+
+		</form>
+		
+		</div>
+		</div>
+<!--   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
 <!-- 로그인 화면 폼 -->
   <!-- End page content -->
 
@@ -213,5 +384,22 @@ function w3_close() {
 
 </script>
 <!-- End Channel Plugin -->
+
+
+<!-- 카카오 주소 API -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+window.onload = function(){
+    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+        //카카오 지도 발생
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("address_kakao2").value = data.address; // 주소 넣기
+                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+            }
+        }).open();
+    });
+}
+</script>
 </body>
 </html>

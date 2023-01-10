@@ -7,6 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+<style>
+	body, div {
+		font-family: "Noto Sans KR", sans-serif;
+	}
+</style>
 <title>Review</title>
 <script>
 	var product_idx;
@@ -40,8 +46,7 @@
 		$(document).ready(function() {		
 			
 			$("#register").on("click", function() {
-				alert(product_idx, member_idx, product_size, product_color);
-				self.close();
+				
 			});
 		});		
 	});
@@ -85,6 +90,8 @@
 	<form action="ReviewWrite.me" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="member_idx" value="${param.member_idx }">
 		<input type="hidden" name="prodcut_idx" value="${param.product_idx }">
+		<input type="hidden" name="product_size" value="${param.product_size }">
+		<input type="hidden" name="product_color" value="${param.product_color }">
 		<input type="file" id="fileInsert" name="review_img" accept=".png, .jpeg, .jpg, .gif" onchange="readURL(this);"><br>
 		<img id="preview"></img>
 		<hr>
@@ -95,8 +102,8 @@
 		</div>
 		<textarea placeholder="욕설 및 관련없는 내용은 관리자에 의해 삭제될 수 있습니다." name="content"></textarea><br>
 		<div id="reviewBtn">
-			<input type="submit" class="btn btn-outline-secondary btn-sm" id="register" value="글 등록하기">
-			<input type="button" class="btn btn-outline-secondary btn-sm" value="닫기" onclick="closeReview()">
+			<input type="submit" class="btn btn-dark btn-sm" id="register" value="글 등록하기">
+			<input type="button" class="btn btn-dark btn-sm" value="닫기" onclick="closeReview()">
 		</div>	
 	</form>
 </body>

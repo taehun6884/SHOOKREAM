@@ -15,9 +15,10 @@
 <!-- 네이버아이디로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://kit.fontawesome.com/ca93809e69.js" crossorigin="anonymous"></script>
 <!-- 구글 아이디 로그인 -->
 <meta name="google-signin-client_id" content="1047574308186-h6ehte2k4901kjn1u3g5vnonbf2g56on.apps.googleusercontent.com">
-
+<script src="https://kit.fontawesome.com/ca93809e69.js" crossorigin="anonymous"></script> <!-- 폰트어썸 스크립트 -->
 <style type="text/css">
 #sform {
           display: inline-block;
@@ -31,11 +32,11 @@
 
 .th_cart{
 	font-size: 16px;
+	text-align: center;
 }
 </style>
 <style type="text/css">
 #table {	
-	margin-top: 150px
    	text-align: center;
 }
 </style>
@@ -65,8 +66,8 @@
     </style>
 
 <style>
-.w3-sidebar a {font-family: "Roboto", sans-serif}
-body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+/* .w3-sidebar a {font-family: "Roboto", sans-serif} */
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;} 
 </style>
 
 <style>
@@ -116,8 +117,13 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     	padding: 50px 0px;
     }
     </style>
+    <style>
+#Demo{
+font-size: 70%;
+}
+</style>
 </head>
-<body class="w3-content" style="max-width:1200px">
+<body class="w3-content" style="max-width:95%">
 <!-- Sidebar/menu -->
 <jsp:include page="../inc/side.jsp"/>
 
@@ -132,21 +138,50 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
+<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
 
   <!-- Push down content on small screens -->
-<!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
-  
+  <div class="w3-hide-large" style="margin-top:83px"></div>
+  	
+  	<header class="w3-container w3-xlarge">
+  	<div class="w3-right">
+   <jsp:include page="../inc/top.jsp"/>
+  	</div>
+  	</header>
   <!-- Top header -->
-  <header class="w3-container w3-xlarge">
-<!--     <p class="w3-left">장바ㅊ구니</p> -->
-    <p class="w3-right">
-      <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i>
-    </p>
+
+<!--   <header class="w3-container w3-xlarge"> -->
+
+ <header class="w3-container w3-xlarge" style="margin:10px">
+    <p class="w3-left" style="margin:10px" >주문내역</p>
+ <i class="fa-regular fa-heart fa-xl" onclick="location.href='LikeList.ca?id=${sessionScope.sId}&member_idx=${member_idx }&pageNum=1'" style="margin:15px; float: right;"></i>
+ 
+		 <div class="w3-dropdown-click" id="logintvar" style="float:right;">
+		 
+		 <i class="fa-solid fa-user fa-xl" onmouseover="myFunction()" onclick="location.href='MemberMyPage.me?id=${sessionScope.sId }'" style="margin:15px;"></i>
+		  <div id="Demo" class="w3-dropdown-content w3-bar-block w3-border" >
+		    <a href="MemberLogout.me"  class="w3-bar-item w3-button">로그아웃</a>
+		    <a href="BoardList.bo" class="w3-bar-item w3-button">고객센터 </a>
+ 		<c:choose>
+		    	<c:when test="${sessionScope.sId eq 'admin' }">
+		    		<a href="Admin.ad?id=${sessionScope.sId }" class="w3-bar-item w3-button">관리자 페이지</a>
+		    	</c:when>
+		    </c:choose>
+		    </div>
+		    </div>
+    <div style="float: right;">
+    <i class="fa-solid fa-cart-shopping fa-xl" onclick="location.href='CartList.ca?member_idx=${member_idx}&pageNum=1'" style="margin: 15px;"></i>
+    </div>
 </header>
 
-  <header class="w3-container w3-xlarge" style="padding: 40px 50px;  z-index: -1">
+<!--     <p class="w3-left">장바ㅊ구니</p> -->
+<!--     <p class="w3-right"> -->
+<!--       <i class="fa fa-shopping-cart w3-margin-right"></i> -->
+<!--       <i class="fa fa-search"></i> -->
+<!--     </p> -->
+<!-- </header> -->
+
+  <header class="w3-container w3-xlarge" style="padding: 80px 50px;  z-index: -1">
     <p class="w3-left">
     <i class="fa-solid fa-bag-shopping" ></i>
 <!--     <i class="fa-solid fa-cart-shopping"></i> -->
@@ -161,7 +196,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
    <hr size="30px">
 <!--   Footer -->
 <!--   <footer class="w3-padding-64 w3-small w3-center" id="footer"> -->
-  <table class="table" border ="3">
+<form action="">
+  <table class="table" border ="3" style="margin-top: 100px" >
   <thead  class="table-dark" >
     <tr>
       <th scope="col" class ="th_cart">선택</th>
@@ -176,9 +212,19 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     </tr>
   </thead>
   <tbody>
-    
+  	<!-- 카트 리스트가 없을 때 처리 -->
+    <c:if test="${cartlist eq null or empty cartlist}">
+			<tr>
+				<td colspan="8" style="text-align: center;"><b>담긴 상품이 없습니다.</b></td>
+			</tr>
+	</c:if>
+	<!-- 카트 리스트가 있을 때 처리 -->
+	<c:if test="${cartlist ne null and not empty cartlist}">
     <c:forEach var="cart" items="${cartlist }" varStatus="status">
     <tr>
+	<!-- 구매페이지로 가기 위해 member_idx hidden 처리 -->
+
+	  	
       <!-- 체크박스 -->
 	  <td class ="td_cart"><input type="checkbox" class ="cartCheckBox" id="cartCheckBox${status.index }" name ="cartCheckBox" checked="checked" value="${cart.cart_idx }" onclick="removeCheck(this)"></td> 
       <td><a href="ProductInfoForm.po?product_idx=${cart.product_idx }"><img src="upload/${cart.cart_product_image }"  alt="없음!" class="img-thumbnail" width="150" height="150" ></a></td>
@@ -198,6 +244,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       </td>
     </tr>
     </c:forEach>
+    </c:if>
   </tbody>
 </table>
 	<div class="container px-4 text-center" id="totalResult">
@@ -209,13 +256,12 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 		</div>
 	    <div class="col">
 	      <div class="p-3 border bg-light">
-	      <button onclick="">구매하기</button>
-	      
-	      <button onclick="test()">test</button>
-	      </div>
+	      <input type="button" onclick="goOrder()" value="주문하기" >
+ 	      </div>
 	    </div>
 	  </div>
-</div>
+    </div>
+</form>
 <!-- 페이징 처리 -->	
 	<div class="paging">
         <c:choose>
@@ -253,6 +299,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <!--         <a href="#">4</a> -->
 <!--         <a href="#">5</a> -->
     </div>
+  </div>
 <!-- </footer> -->
   
 
@@ -274,13 +321,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
-<script type="text/javascript">
-	function order() {
-		
-	}
-
-
-</script>
 
 <script>
 // Accordion 
@@ -359,31 +399,7 @@ function w3_close() {
   });
 </script>
 
-<!-- 체크박스에 따른 금액변동 처리 -->
 <script type="text/javascript">
-
-
-
-//페이지 로딩 시 체크된 상품을 배열로 넣음.
-// $(function() {
-	//<td> 의 값들은 .val이 아니라, html로 가져와야 함.
-// 	if(#cart_)
-// 	var check = $("#cart_end").html();
-// 	alert(check)
-// 	let listArr = new Array();
-// 	let list = $("input[name='cartCheckBox']:checked");
-// 	for(var i=0; i<list.length; i++){
-// 		//체크된 상품이 있으면 배열에 넣음.
-// 		if(list[i].checked){
-// 			listArr.push(list[i].value);
-// 		}
-		
-// 		//listArr에 들어간 상황
-// 	}
-	
-// });
-
-
 //----------------------장바구니 체크박스 선택 여부에 따라 카트 금액 증가, 감소 작업 -------------------------
 function removeCheck(cb) {
 // 	alert(cb.id);
@@ -394,6 +410,7 @@ function removeCheck(cb) {
 	//체크박스 상태 판별(true이면 체크된 상태, false이면 체크가 풀린 상태)
 	let ischeck = cb.checked;
 	
+	//check가 true일 때
 	if(ischeck == true){
 		$.ajax({
 			type: "get",
@@ -406,6 +423,7 @@ function removeCheck(cb) {
 				 $("#totalResult").load(window.location.href + " #totalResult");
 			}
 		});
+	//check가 false일 때
 	}else if(ischeck == false){
 		$.ajax({
 			type: "get",
@@ -425,22 +443,36 @@ function removeCheck(cb) {
 </script>
 <script type="text/javascript">
 
+// 체크된 cart_idx 값을 넘기는 작업
+function goOrder() {
+		var check = $('input[name=cartCheckBox]:checked');
+		let chk_arr = new Array();
+		$('input[name=cartCheckBox]:checked').each(function(i) {
+			chk_arr.push($(this).val());
+		});
+// 	
+		
+		alert("구매페이지로 이동합니다.");
+		location.href = "CartOrderDetailProAction.ca?cart_idx=" + chk_arr + "&member_idx=" + ${sessionScope.member_idx};
 
- 	
-// 	//-----할인 연산결과에 따른 처리-----
-// 	//1. 할인가격
-//     var discounted = Math.round(originPrice * (discountRate / 100));	// 정수로 출력하기 위해 소수점 아래 반올림 처리
-//     //2. 할인된 가격 = 원래가격 - 할인가격
-//     var releasePrice = originPrice - discounted;
-//     //** 콤마 붙힌 가격 변수 ** 
-//     var commaReleasePrice = releasePrice.toLocaleString("en-US");
-//     var commaOriginPrice = originPrice.toLocaleString("en-US");
-//     var commaDiscounted = discounted.toLocaleString("en-US");
-//     //** 출력 ** 
-//     document.querySelector('#discount').innerText = commaDiscounted
-//     document.querySelector('#discountResult').innerText = commaReleasePrice
-		 
-// // 	    alert("로딩")
+		
+	
+	
+}
+
+
+
+// $(document).ready(function(){
+// 	let listArr = new Array();
+//     let list = $("input[name='cartCheckBox']:checked");
+    
+//     for(var i = 0; i < list.length; i++){
+//         if(list[i].checked){
+//            listArr.push(list[i].value);
+//            alert("배열값 = "+ listArr);
+//         }
+//      }
+// }); 
 </script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -476,6 +508,17 @@ function iamport(){
 	}
 
 	
+</script>
+<script>
+//드롭다운 기능
+   function myFunction() {
+     var x = document.getElementById("Demo");
+     if (x.className.indexOf("w3-show") == -1) { 
+       x.className += " w3-show";
+     } else {
+       x.className = x.className.replace(" w3-show", "");
+     }
+   }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>

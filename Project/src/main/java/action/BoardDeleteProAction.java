@@ -34,7 +34,7 @@ public class BoardDeleteProAction implements Action {
 			} else {
 				
 				forward = new ActionForward();
-				forward.setPath("AdminNoticeManage.ad?pageNum" + request.getParameter("pageNum"));
+				forward.setPath("AdminNoticeManage.ad?pageNum=" + request.getParameter("pageNum"));
 				forward.setRedirect(true);
 			}
 		} catch (IOException e) {

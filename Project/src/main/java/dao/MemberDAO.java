@@ -1,5 +1,4 @@
 package dao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,9 +9,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 
 import db.JdbcUtil;
 import mail.GoogleMailAuthenticator;
+import vo.AuthBean;
 import vo.MemberBean;
 import vo.ReviewBean;
 import vo.WishBean;
@@ -64,52 +65,54 @@ private MemberDAO() {}
 		return isLogintUser;
 	}
 	// 로그인
-
-
+	
 	
 	// 회원가입
-	public int insertMember(MemberBean member) {
-		int insertCount = 0;
-		
-		PreparedStatement pstmt = null, pstmt2 = null;
-		ResultSet rs = null;
-		
-		try {
-			int member_idx = 1; // 회원 idx 처리
-			String sql = "SELECT MAX(member_idx) FROM member";
-			pstmt= con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
+		public int insertMember(MemberBean member) {
+			int insertCount = 0;
 			
-			if(rs.next()) {
-				member_idx = rs.getInt(1) + 1;
-			} 
+			PreparedStatement pstmt = null, pstmt2 = null;
+			ResultSet rs = null;
 			
-			sql = "INSERT INTO member VALUES(?,?,?,?,?,now(),?,?,?,?,'N')";
-			pstmt2= con.prepareStatement(sql);
-			
-			pstmt2.setInt(1, member_idx);
-			pstmt2.setString(2, member.getMember_id());
-			pstmt2.setString(3, member.getMember_name());
-			pstmt2.setString(4, member.getMember_pass());
-			pstmt2.setString(5, member.getMember_email());
-			pstmt2.setString(6, member.getMember_phone());
-			pstmt2.setInt(7, 0);
-			pstmt2.setInt(8, 0);
-			pstmt2.setString(9, member.getMember_address());
-			
-			insertCount = pstmt2.executeUpdate();
-			
-		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류! - insertMember()");
-			e.printStackTrace();
-		} finally {
-			JdbcUtil.close(rs);
-			JdbcUtil.close(pstmt);
-			JdbcUtil.close(pstmt2);
+			try {
+				int member_idx = 1; // 회원 idx 처리
+				String sql = "SELECT MAX(member_idx) FROM member";
+				pstmt= con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					member_idx = rs.getInt(1) + 1;
+				} 
+				
+				sql = "INSERT INTO member VALUES(?,?,?,?,?,now(),?,?,?,?,'Y')";
+				pstmt2= con.prepareStatement(sql);
+				
+				pstmt2.setInt(1, member_idx);
+				pstmt2.setString(2, member.getMember_id());
+				pstmt2.setString(3, member.getMember_name());
+				pstmt2.setString(4, member.getMember_pass());
+				pstmt2.setString(5, member.getMember_email());
+				pstmt2.setString(6, member.getMember_phone());
+				pstmt2.setInt(7, 0);
+				pstmt2.setInt(8, 0);
+				pstmt2.setString(9, member.getMember_address());
+				
+				insertCount = pstmt2.executeUpdate();
+				
+			} catch (SQLException e) {
+				System.out.println("SQL 구문 오류! - insertMember()");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+				JdbcUtil.close(pstmt2);
+			}
+			return insertCount;
 		}
-		return insertCount;
-	}
-	// 회원가입
+	
+	
+
+	// 회원삭제
 	
 	public boolean isDeleteUser(String id, String pass) {
 		int deleteCount = 0;
@@ -270,8 +273,39 @@ private MemberDAO() {}
 		
 		return vo; 
 	} // 회원 목록 끝
-
-
+	
+	public MemberBean getInfo(int idx) {
+		MemberBean vo = null;
+		ResultSet rs  = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "SELECT * FROM member WHERE member_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new MemberBean();
+				vo.setMember_idx(rs.getInt("member_idx"));
+				vo.setMember_name(rs.getString("member_name"));
+				vo.setMember_id(rs.getString("member_id"));
+				vo.setMember_pass(rs.getString("member_pass"));
+				vo.setMember_address(rs.getString("member_address"));
+				vo.setMember_email(rs.getString("member_email"));
+				vo.setMember_phone(rs.getString("member_phone"));
+				System.out.println(vo);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		
+		return vo; 
+	} // 회원 목록 끝
 
 	// ID 중복 체크를 위한 회원 ID 조회
 	public int selectAllId(String id) {
@@ -365,6 +399,9 @@ private MemberDAO() {}
 			}catch (Exception e) {
 				System.out.println("sql 구문 오류 - findID()");
 				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
 			}
 					
 			return id;
@@ -407,6 +444,8 @@ private MemberDAO() {}
 				}
 						return wish;
 			}
+			
+			
 			public int selectMemberIdx(String sId) {
 				int member_idx = 0;
 				
@@ -464,7 +503,7 @@ private MemberDAO() {}
 					pstmt2.setString(6, review.getReview_real_img());
 					pstmt2.setString(7, review.getRe_order_detail());
 					
-					System.out.println("리뷰 > DAO 확인 : " + pstmt2);
+//					System.out.println("리뷰 > DAO 확인 : " + pstmt2);
 					
 					insertCount = pstmt2.executeUpdate();
 					} catch (SQLException e) {
@@ -507,7 +546,7 @@ private MemberDAO() {}
 				return isRightUser;
 			}
 
-
+			// 임시비번 -> 비번 수정
 			public boolean updatePass(MemberBean member, StringBuilder imsiPw) {
 				boolean result = false;
 				
@@ -531,8 +570,241 @@ private MemberDAO() {}
 				
 				return result;
 			}
+
 			
+			// 회원가입
+			// 메일 인증코드 비교 -> 일치 시 회원가입(insert)
+			// auth 테이블의 id, authCode와 입력한 값 비교해서 일치하면 회원가입 + auth 삭제
 			
+			// id 가 일치하는 회원 조회
+			public String selectMember(String auth_authCode, String auth_id) {
+				String findAuthCd = "";
+				
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+				
+				try {
+					String sql = "SELECT auth_authCode FROM auth WHERE auth_id=? AND auth_authCode=?";
+					pstmt= con.prepareStatement(sql);
+					pstmt.setString(1, auth_id);
+					pstmt.setString(2, auth_authCode);
+//					System.out.println(auth_authCode);
+//					System.out.println(auth_id);
+					rs = pstmt.executeQuery();
+					
+//					System.out.println(pstmt);
+					if(rs.next()){
+						findAuthCd = auth_authCode;
+						System.out.println("selectMember dao 리턴값" + findAuthCd);
+					}
+				} catch (SQLException e) {
+					System.out.println("sql 구문 오류 - selectMember()");
+					e.printStackTrace();
+				}finally {
+					JdbcUtil.close(rs);
+					JdbcUtil.close(pstmt);
+				}
+				
+				return findAuthCd;
+				
+			}
+			// 이메일 인증 위해 auth 테이블에 데이터 넣기
+						public boolean insertAuth(AuthBean auth) {
+							System.out.println("insertAuth dao");
+							boolean insertSuccess = false;
+							
+							PreparedStatement pstmt = null, pstmt2 = null, pstmt3 = null;
+							ResultSet rs = null; 
+						
+							// if문 -> id가 없으면
+							// auth 테이블에 삽입
+							// 아이디 있으면 update
+							
+							try { // auth 테이블에서 id값 조회하기
+								String sql = "SELECT * FROM auth WHERE auth_id=?";
+								pstmt = con.prepareStatement(sql);
+								
+								pstmt.setString(1, auth.getAuth_id());
+								rs = pstmt.executeQuery();
+								
+								if(rs.next()) { // 일치하는 사람이 있으면 update
+									sql = "UPDATE auth SET auth_authCode = ? WHERE auth_id=?";
+									pstmt2 = con.prepareStatement(sql);
+									
+									pstmt2.setString(1, auth.getAuth_authCode());
+									pstmt2.setString(2, auth.getAuth_id());
+									
+									pstmt2.executeUpdate();
+									insertSuccess = true;
+									
+								} else { // 일치하는 사람이 없으면 insert
+									sql = "INSERT INTO auth VALUES(?,?)";
+									pstmt3= con.prepareStatement(sql);
+									
+									pstmt3.setString(1, auth.getAuth_id());
+									pstmt3.setString(2, auth.getAuth_authCode());
+									
+									if(pstmt3.executeUpdate()>0) {
+										insertSuccess = true;
+										System.out.println(auth.getAuth_id());
+										
+									}
+									
+								}
+							} catch (SQLException e) {
+								System.out.println("sql 구문 오류 - insertAuth()");
+								e.printStackTrace();
+							} finally {
+								JdbcUtil.close(rs);
+								JdbcUtil.close(pstmt3);
+								JdbcUtil.close(pstmt2);
+								JdbcUtil.close(pstmt);
+							}
+							
+						
+							return insertSuccess;
+					}
+						
+				// 2-1. 이메일 인증
+						
+					 
+					public boolean compareAuth(AuthBean auth) {
+						System.out.println("compareAuth - dao");
+						boolean AuthSuccess = false;
+						
+						PreparedStatement pstmt = null, pstmt2 = null, pstmt3 = null;
+						ResultSet rs = null; 
+					
+						// if문 -> auth_authCode와 입력한 인증번호가 같으면
+						// member 테이블의 authStatus 'N' -> 'Y'로 바꾸기
+						// 인증번호가 다르면 alert '인증번호가 일치하지 않습니다!'
+						
+						try { // auth 테이블에서 id값 조회하기
+							String sql = "SELECT * FROM auth WHERE auth_id=?";
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, auth.getAuth_id());
+							rs = pstmt.executeQuery();
+							
+							if(rs.next()) { // 일치하는 사람이 있으면 update
+								sql = "UPDATE auth SET auth_authCode = ? WHERE auth_id=?";
+								pstmt2 = con.prepareStatement(sql);
+								
+								pstmt2.setString(1, auth.getAuth_authCode());
+								pstmt2.setString(2, auth.getAuth_id());
+								
+								pstmt2.executeUpdate();
+								AuthSuccess = true;
+								
+							} else { // 일치하는 사람이 없으면 insert
+								sql = "INSERT INTO auth VALUES(?,?)";
+								pstmt3= con.prepareStatement(sql);
+								
+								pstmt3.setString(1, auth.getAuth_id());
+								pstmt3.setString(2, auth.getAuth_authCode());
+								
+								if(pstmt3.executeUpdate()>0) {
+									AuthSuccess = true;
+									System.out.println(auth.getAuth_id());
+									
+								}
+								
+							}
+						} catch (SQLException e) {
+							System.out.println("sql 구문 오류 - insertAuth()");
+							e.printStackTrace();
+						} 
+						
+					
+						return AuthSuccess;
+				}
+
+			// 회원가입시 회원가입 쿠폰 지급
+         public int insertWelcomCoupon() {
+            int insertCount = 0;
+            
+            PreparedStatement pstmt=null, pstmt2=null, pstmt3=null;
+            ResultSet rs = null, rs2 = null;
+            
+            try {
+               int member_idx = 1; // 회원 idx 처리
+               String sql = "SELECT MAX(member_idx) FROM member";
+               pstmt= con.prepareStatement(sql);
+               rs = pstmt.executeQuery();
+               
+               if(rs.next()) {
+                  member_idx = rs.getInt(1) + 1;
+               } 
+//               System.out.println(member_idx);
+               
+               // coupon 조회
+               int coupon_idx = 0;
+               String coupon_name = "";
+               int coupon_price = 0;
+               
+               sql = "SELECT coupon_idx,coupon_name,coupon_price FROM coupon where coupon_name = '회원가입 감사 쿠폰'";
+               pstmt2 = con.prepareStatement(sql);
+               rs2 = pstmt2.executeQuery(); 
+               
+               if(rs2.next()) { 
+                  coupon_idx = rs2.getInt(1);
+                  coupon_name = rs2.getString(2);
+                  coupon_price = rs2.getInt(3);
+               }
+               System.out.println(coupon_idx);
+               // member_coupon insert 작업
+               sql = "INSERT INTO member_coupon VALUES(?,?,?,?,0,now(),date_add(now(),interval 30 day))";
+               pstmt3 = con.prepareStatement(sql);
+
+               pstmt3.setInt(1, member_idx);
+               pstmt3.setInt(2, coupon_idx);
+               pstmt3.setString(3, coupon_name);
+               pstmt3.setInt(4, coupon_price);
+               
+//               System.out.println(pstmt3);
+               
+               insertCount = pstmt3.executeUpdate();
+               } catch (SQLException e) {
+                  System.out.println("SQL 구문 오류! - insertWelcomCoupon()");
+                  e.printStackTrace();
+               } finally {
+                  JdbcUtil.close(rs);
+                  JdbcUtil.close(pstmt);
+                  JdbcUtil.close(pstmt2);
+                  JdbcUtil.close(pstmt3);
+               }
+            return insertCount;
+         }
+
+
+		public boolean isReviewExist(ReviewBean review) {
+			boolean reviewExist = false;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT * FROM review WHERE product_idx=? AND member_idx=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, review.getProduct_idx());
+				pstmt.setInt(2, review.getMember_idx());
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					reviewExist = true;
+				}
+//				System.out.println("dao리뷰값: " + reviewExist);
+			} catch (SQLException e) {
+				System.out.println("sql구문오류 - ReviewExist");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return reviewExist;
+		}
+
+         
 			
 
 }

@@ -14,6 +14,7 @@ import action.CartDeleteProAction;
 import action.CartInsertProAction;
 import action.CartListProAction;
 import action.CartMinusProAction;
+import action.CartOrderDetailProAction;
 import action.CartPlusProAction;
 import action.LikeDeleteProAction;
 import action.LikeInsertProAction;
@@ -54,8 +55,11 @@ public class CartController extends HttpServlet{
 		}else if(command.equals("/CartDeletePro.ca")) { //Cart 삭제 pro
 			action = new CartDeleteProAction();
 			forward = action.execute(request, response);
-		}
-		
+		}else if(command.equals("/CartOrderDetailProAction.ca")) { //Cart -> 구매페이지
+			action = new CartOrderDetailProAction();
+			forward = action.execute(request, response);
+	}
+	
 		//-----------------------------------------------
 		//찜목록
 		
