@@ -60,7 +60,7 @@ public class ReviewWriteProService {
 		return categorylist;
 	}
 
-	public boolean isReviewExist() { // 리뷰 존재여부 판단
+	public boolean isReviewExist(ReviewBean review) { // 리뷰 존재여부 판단
 		boolean reviewExist = false;
 		
 		Connection con = JdbcUtil.getConnection();
@@ -69,7 +69,7 @@ public class ReviewWriteProService {
 		
 		dao.setConnection(con);	
 		
-		boolean isReviewExist = dao.isReviewExist();
+		boolean isReviewExist = dao.isReviewExist(review);
 		
 		if(isReviewExist) {
 			reviewExist = true;
