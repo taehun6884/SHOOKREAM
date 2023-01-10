@@ -15,9 +15,6 @@ public class CheckEmailAddrProAction implements Action {
 		String id = request.getParameter("id");
 		System.out.println("id = " + id);
 		
-		
-		
-		
 		return forward;
 	}
 

@@ -97,6 +97,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
   <!-- Push down content on small screens -->
 <!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
+
 <%--  <jsp:include page="../inc/top.jsp"/>  --%>
 <!--   Top header -->
   <header class="w3-container w3-xlarge" style="margin:10px">
@@ -119,6 +120,15 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <div style="float: right;">
     <i class="fa-solid fa-cart-shopping fa-xl" onclick="location.href='CartList.ca?member_idx=${member_idx}&pageNum=1'" style="margin: 15px;"></i>
     </div>
+
+   // <jsp:include page="../inc/top.jsp"/>
+ // <!-- Top header -->
+ // <header class="w3-container w3-xlarge">
+  //  <p class="w3-left">주문내역</p>
+   // <p class="w3-right">
+  //   <jsp:include page="../inc/top.jsp"/>
+ //   </p>
+
 </header>
    
   <!-- Footer -->
@@ -214,6 +224,18 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
+
+<script>
+//드롭다운 기능
+	function myFunction() {
+	  var x = document.getElementById("Demo");
+	  if (x.className.indexOf("w3-show") == -1) { 
+	    x.className += " w3-show";
+	  } else {
+	    x.className = x.className.replace(" w3-show", "");
+	  }
+	}
+</script>
 <script>
 //드롭다운 기능
    function myFunction() {

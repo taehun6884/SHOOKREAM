@@ -63,8 +63,14 @@ public class ReviewWriteProAction implements Action {
 			
 			request.setAttribute("categorylist", categorylist);
 			request.setAttribute("colorlist", colorlist );
+
+			ReviewWriteProService service2 = new ReviewWriteProService();
+			boolean reviewExist = service2.isReviewExist();
+			
 			
 			response.setContentType("text/html; charset=UTF-8");
+			
+			System.out.println("리뷰 존재 여부: " + reviewExist);
 			
 			PrintWriter out = response.getWriter();
 			if(!isReviewSuccess) { // 실패 시
@@ -81,10 +87,18 @@ public class ReviewWriteProAction implements Action {
 				out.println("history.back()");
 				out.println("</script>");
 			} else { 
-				out.println("<script>");
-				// out.println("alert('작성이 등록되었습니다!')");
-				out.println("window.close()");
-				out.println("</script>");
+				if(reviewExist) {
+					out.println("<script>");
+					out.println("alert('이미 작성하신 리뷰가 존재합니다.')");
+					out.println("history.back()");
+					out.println("</script>");
+				} else {
+					out.println("<script>");
+					// out.println("alert('작성이 등록되었습니다!')");
+					out.println("window.close()");
+					out.println("</script>");					
+				}
+				
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -7,6 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+<style>
+	body, div {
+		font-family: "Noto Sans KR", sans-serif;
+	}
+</style>
 <title>Review</title>
 <script>
 	var product_idx;
@@ -86,7 +92,7 @@
 		<input type="hidden" name="prodcut_idx" value="${param.product_idx }">
 		<input type="hidden" name="product_size" value="${param.product_size }">
 		<input type="hidden" name="product_color" value="${param.product_color }">
-		<input type="file" id="fileInsert" name="review_img" accept=".png, .jpeg, .jpg, .gif" onchange="readURL(this);" class="btn btn-dark btn-sm"><br>
+		<input type="file" id="fileInsert" name="review_img" accept=".png, .jpeg, .jpg, .gif" onchange="readURL(this);"><br>
 		<img id="preview"></img>
 		<hr>
 		<div >
