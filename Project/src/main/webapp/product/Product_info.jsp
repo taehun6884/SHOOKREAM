@@ -389,7 +389,7 @@ margin-left: 270PX;
 		<!-- 개수 -->
 			<p class ="prod_title">개수</p>
 			<span>
-				<span><input type="number" name="cart_count" value="1" max="${product.product_amount }" required="required" style="width: 50px"></span>
+				<span><input type="number" name="cart_count" value="1" max="${product.product_amount+1 }" required="required" style="width: 50px"></span>
 			</span>
 			
 			<hr>
@@ -407,7 +407,7 @@ margin-left: 270PX;
 				</c:otherwise>
 			</c:choose>
 		</span>	
-		<input type="submit" value="장바구니" class="btn btn-dark btn-sm">
+		<input type="submit" onclick = "valueCheck2()" value="장바구니" class="btn btn-dark btn-sm">
 		<input type="button" onclick="valueCheck()" value="구매하기" class="btn btn-dark btn-sm">
 		</div>
 		</form>
@@ -540,8 +540,6 @@ function valueCheck(){
 	
 	
 }
-
-
 
 
 var slideIndex = 1;
