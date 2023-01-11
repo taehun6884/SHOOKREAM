@@ -21,6 +21,7 @@
           display: inline-block;
           text-align: center;
         }
+        
 </style>
 <style>
 .w3-sidebar a {font-family: "Noto Sans KR", sans-serif}

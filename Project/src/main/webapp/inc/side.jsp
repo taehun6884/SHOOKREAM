@@ -66,7 +66,7 @@ $(document).ready(function() {
       <a href="BrandCG.MAIN?cg=뉴발란스" class="w3-bar-item w3-button">뉴발란스 &nbsp;<i class="fa fa-caret-right w3-margin-right"></i></a>
       <a href="BrandCG.MAIN?cg=컨버스" class="w3-bar-item w3-button">컨버스 &nbsp;<i class="fa fa-caret-right w3-margin-right"></i></a>
       <a href="BrandCG.MAIN?cg=아디다스" class="w3-bar-item w3-button">아디다스 &nbsp;<i class="fa fa-caret-right w3-margin-right"></i></a>
-      <a href="BrandCG.MAIN?cg=슈펜" class="w3-bar-item w3-button">슈펜 &nbsp;<i class="fa fa-caret-right w3-margin-right"></i></a>
+      <a href="BrandCG.MAIN?cg=반스" class="w3-bar-item w3-button">반스 &nbsp;<i class="fa fa-caret-right w3-margin-right"></i></a>
     </div>
     <hr>
     <a onclick="myAccFunc1()" class="w3-button w3-block w3-white w3-left-align" id="customerBtn">
