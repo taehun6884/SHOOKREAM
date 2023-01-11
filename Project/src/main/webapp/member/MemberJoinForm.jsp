@@ -282,7 +282,7 @@ $(function() {
 						
 					</tr>
 					<tr>
-						<td colspan="2" align="center"><button type="submit" id="join_btn" name ="join" class="btn btn-dark"  >회원가입</button></td>
+						<td colspan="2" align="center"><button type="submit" id="join_btn" name ="join" class="btn btn-dark"  onclick="fn_joinMember()">회원가입</button></td>
 					</tr>
 				</table>
 
