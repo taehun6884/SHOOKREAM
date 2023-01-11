@@ -118,7 +118,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
     <tr>
       <th scope="row">${review.review_idx }</th>
 <%--       <td><a href="ProductInfoForm.po?product_idx=${review.product_idx }"><img src="upload/${.product_img }"  alt="없음!" class="img-thumbnail" width="150" height="150"></a></td> --%>
-      <td>${review.product_idx }</td>
+      <td>${review.re_product_name }</td>
       <td>${review.re_order_detail }</td>
       <td>${review.review_date }</td>
       <td><button type="button" class="btn btn-dark" onclick="location.href='ReviewDeletePro.po?product_idx=${review.product_idx }&member_idx=${sessionScope.member_idx }&review_idx=${review.review_idx}'">삭제</button></td>
@@ -166,6 +166,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
     </c:otherwise>
   </c:choose>
 </footer>
+ <footer>
+  	<jsp:include page="../inc/footer.jsp"/>
+  </footer>
   </div>
 
 

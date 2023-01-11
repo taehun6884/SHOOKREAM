@@ -180,6 +180,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 <!--         <a href="#">5</a> -->
     </div>
 </footer>
+ <footer>
+  	<jsp:include page="../inc/footer.jsp"/>
+  </footer>
   </div>
 <!-- 로그인 화면 폼 -->
   <!-- End page content -->

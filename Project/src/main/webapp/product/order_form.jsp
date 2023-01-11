@@ -217,7 +217,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 	    </div>
 	    
 	   </div> 
-	    
+ <footer>
+  	<jsp:include page="../inc/footer.jsp"/>
+  </footer>
 <!-- Newsletter Modal -->
 <div id="newsletter" class="w3-modal">
   <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
