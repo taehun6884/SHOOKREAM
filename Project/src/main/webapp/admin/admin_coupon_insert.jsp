@@ -59,6 +59,14 @@
 		
 		
 		</script>
+		
+<style type="text/css">
+.table-secondary{
+	font-weight: bold;
+	width: 20px;
+}
+
+</style>
     </head>
     <body class="sb-nav-fixed">
     
@@ -82,13 +90,13 @@
 			<form action="CouponInsertPro.po" method="post">
 				<table class="table">
 					<tr>
-						<td width="50px" align="left" class="table-secondary">쿠폰명</td>
+						<td width="20px" align="left" class="table-secondary">쿠폰명</td>
 						<td width="100px"><input class="w3-input w3-border"
 							type="text" placeholder="Coupon Name" name="coupon_name" required ></td>
 					</tr>
 					
 					<tr>
-						<td width="50px" align="left" class="table-secondary">쿠폰 내용</td>
+						<td width="20px" align="left" class="table-secondary">쿠폰 내용</td>
 						<td><textarea class="w3-input w3-border" style="resize: none"
 								rows="5" cols="40" placeholder="Coupon summary" name="coupon_content"
 								required="required"></textarea></td>
@@ -96,7 +104,7 @@
 					</tr>
 					
 					<tr>
-						<td width="50px" align="left" class="table-secondary">할인 가격</td>
+						<td width="20px" align="left" class="table-secondary">할인 가격</td>
 						<td><input type="text" id="testPrice" name ="coupon_price" placeholder="할인 가격을 입력하세요"><span>&nbsp;원</span> 
 						</td>
 						
@@ -106,11 +114,11 @@
 				
 						
 					<tr>
-						<td width="150px" align="left" class="table-secondary">쿠폰 시작일</td>
+						<td width="20px" align="left" class="table-secondary">쿠폰 시작일</td>
 						<td><input type="date" name="coupon_start"></td>
 					</tr>
 					<tr>
-						<td width="150px" align="left" class="table-secondary">쿠폰 만료일</td>
+						<td width="20px" align="left" class="table-secondary">쿠폰 만료일</td>
 						<td><input type="date" name="coupon_end"></td>
 					</tr>
 					

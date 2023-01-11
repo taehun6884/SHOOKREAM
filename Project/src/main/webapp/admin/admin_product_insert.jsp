@@ -54,11 +54,17 @@
 				alert(discount);
 			});
 		});
-		
-		
-		
 		</script>
+<style type="text/css">
+.table-secondary{
+	font-weight: bold;
+}
+
+</style>
+
+
     </head>
+    
     <body class="sb-nav-fixed">
     
     <!-- TOP -->
@@ -69,7 +75,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">상품 등록</h1>
+                        <h1 class="mt-4" >상품 등록</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active"></li>
                         </ol>
@@ -184,15 +190,15 @@
 
 					<tr>
 						<td width="100px" align="left" class="table-secondary">메인 이미지</td>
-						<td><input type="file" name="file"></td>
+						<td><input type="file" name="file" required="required"></td>
 					</tr>
 					<tr>
 						<td width="100px" align="left" class="table-secondary">제품 이미지1</td>
-						<td><input type="file" name="file2"></td>
+						<td><input type="file" name="file2" required="required"></td>
 					</tr>
 					<tr>
 						<td width="100px" align="left" class="table-secondary">제품 이미지2</td>
-						<td><input type="file" name="file3"></td>
+						<td><input type="file" name="file3" required="required"></td>
 					</tr>
 
 					<tr>

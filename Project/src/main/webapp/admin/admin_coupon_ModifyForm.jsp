@@ -59,6 +59,14 @@
 			} 
 			%>
 		</script>
+		
+<style type="text/css">
+.table-secondary{
+	font-weight: bold;
+	width: 20px
+}
+
+</style>
     </head>
     <body class="sb-nav-fixed">
     
