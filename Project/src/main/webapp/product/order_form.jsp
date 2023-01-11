@@ -349,7 +349,7 @@ function iamport(){
 			console.log(rsp);
 		    if ( rsp.success ) {
 		    	var msg = '결제가 완료되었습니다.';
-		    	msg += '상품 : ' + rsp.imp_name;
+		    	msg += '상품 : ' + '${prodcut.product_name }';
 		        msg += '결제 금액 : ' + rsp.paid_amount;
 		        location.href="ProductOrderPro.po?order_category=주문완료&order_progress=배송완료&member_idx=${member_idx}&product_idx=${product.product_idx}&product_amount=${product.product_amount}&product_sell_count=${product.product_sell_count}&product_price="+rsp.paid_amount+"&coupon_idx="+$("#coupon_idx").val();
 		    } else {

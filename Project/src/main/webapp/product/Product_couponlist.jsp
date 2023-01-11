@@ -50,7 +50,6 @@
 <script type="text/javascript">
 	function useCoupon(price,idx) {
 		 window.opener.document.getElementById( "coupon_idx" ).value = idx;
-		 alert( window.opener.document.getElementById( "coupon_idx" ).value)
 		 window.opener.document.getElementById( "priceValue" ).value = price;
 		 window.opener.document.getElementById( "totalprice" ).value =Number(${param.product_price})-Number(price);	
 		 close();

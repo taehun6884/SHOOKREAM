@@ -38,23 +38,20 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
-
-  <!-- Push down content on small screens -->
-<!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
-  
-  <!-- Top header -->
-  <header class="w3-container w3-xlarge">
-    <p class="w3-left"></p>
-    <p class="w3-right">
-      <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i>
-    </p>
-</header>
+<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
+	
+ <!-- Push down content on small screens -->
+ <div class="w3-hide-large" style="margin-top:83px"></div>
+ 
+ <!-- Top header -->
+ <div style="float: right;">
+ <jsp:include page="../inc/top.jsp"/>
+</div>
 
   
   <!-- Footer -->
-  <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
+ <div style="padding-top: 200px;">
+  <footer class="w3-padding-64 w3-small w3-center" id="footer" >
     <div id = "sform">
         <h4>회원가입에 성공했습니다 💕</h4>
         <br>
@@ -65,6 +62,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 	</div>
   </footer>
  </div>	
+ </div>
+ 
 <!--   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
   <!-- End page content -->
 
