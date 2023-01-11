@@ -437,7 +437,7 @@ margin-left: 270PX;
 <!-- 	</table> -->
 
 	<hr>	 <%-- 리뷰구역 --%> -->
-		<div id="reviewListArea">
+		<div id="reviewListArea" style="z-index:1;">
 			<h3>Review</h3>
 				<div>
 					<c:forEach var="review" items="${reviewList }">
@@ -477,12 +477,12 @@ margin-left: 270PX;
 				</c:choose>
 			</c:forEach>
 		</section>	
+     <footer style="z-index:-1;">
+  	<jsp:include page="../inc/footer.jsp"/>
+  </footer>
 		</div> 	
 	
 
-    <!-- 
-<footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
-   -->
 <%-- 	<img src="./upload/${product.product_img }" class="img-thumbnail" alt="..." width="150" height="150"> --%>
 <!--  	<table border="1"> -->
 <!-- 	 	<tr> -->
