@@ -40,7 +40,7 @@ table.type03 th {
   font-weight: bold;
   font-size : 17px;
   vertical-align: top;
-  color: #153d73; 
+  color: #828282; 
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   height: 90px;
