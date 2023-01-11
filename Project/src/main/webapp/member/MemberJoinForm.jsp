@@ -186,7 +186,7 @@ $(function() {
 						<input type="text" name="id" id ="id" required size="20px" style="line-height: 30px" onkeydown="inputIdChk()" > &nbsp;
 						<button class="btn btn-dark" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">중복 확인</button>
 <!-- 						<button type="button" class="btn btn-secondary" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">ID check</button> -->
-						<input type="hidden" name="isCheckId" value="idUncheck"/> <!-- 체크 여부 확인 -->			
+<!-- 						<input type="hidden" name="isCheckId" value="idUncheck"/> 체크 여부 확인			 -->
 						<br>
 						<span style="color: gray;" >(영문 소문자/숫자/특수문자(-_.) 사용가능, 5~20자)</span> &nbsp;
 						<span id="checkIdSpan"></span>
@@ -212,6 +212,7 @@ $(function() {
 						<td>
 						<input type="text" name="name" required size="20px"style="line-height: 30px" ><br>
 						<span style="color: gray;">(성함을 입력해주세요.)</span>
+					
 						
 						</td>
 					</tr>
@@ -281,7 +282,7 @@ $(function() {
 <c:set var="contextPath" value="<%= request.getContextPath()%>"/>
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
-<script>
+<script type="text/javascript">
 // 	var isIdCheck = false;
 	var isEmailAuth = false;
 	
@@ -291,6 +292,7 @@ function fn_joinMember() {
 	if(joinForm.isCheckId.value != "idCheck"){
 		alert("ID 중복체크를 해주세요!")
 		event.preventDefault(); // submit 기능 막기
+	
 	} else if(idStatus == false) {
 		alert("ID를 확인해주세요!")
 		event.preventDefault(); // submit 기능 막기
@@ -381,12 +383,17 @@ function inputIdChk(){
 // 			}	
 		
 			// 이메일 인증 확인
-			if(!isEmailAuth) {
+			if(!isEmailAuth) { 
+				
+				alert(isEmailAuth); 
 				alert("Email 인증을 완료 해주세요!");
+				event.preventDefault(); // submit 기능 막기
+				
 				return false; // submit 취소
 			}
-			
-			return true; // submit 실행
+				alert(isEmailAuth); 
+				alert("Email 인증 성공!");
+				return true; // submit 실행
 		});
 		
 			$("#checkEmail").on("click", function() {
@@ -400,7 +407,6 @@ function inputIdChk(){
 		               email: $("#email").val()
 		            }
 				                   
-		             
 		         });
 			});
 			
@@ -415,20 +421,24 @@ function inputIdChk(){
 		               authCode: $("#authCode").val()
 		            },
 		            datatype: "html",
-					success:function(result){
-						const data = $.trim(result);
-						if(data =="true"){
+					success:function(data){
+						const isSuccess = $.trim(data);
+						alert(isSuccess);
+						if(isSuccess == "true"){ 
+							
 							alert("인증 성공");
 	                	  	 $("#authEmailResult").html("인증 성공!").css("color", "blue");
-	                	  	 $("#authResult").reload(window.location.href + " #authResult");
+// 	                	  	 $("#authResult").reload(window.location.href + " #authResult");
 	                	  	 isEmailAuth = true;
+	                	  	 alert(isEmailAuth);
 	    	            } else {
 							alert("인증 실패");
 							 $("#authEmailResult").html("인증 실패!").css("color", "red");
 // 							 event.preventDefault(); // submit 기능 막기
 // 							 $('join_btn').prop('disabled', false);
-							 $("#authResult").reload(window.location.href + " #authResult");
+// 							 $("#authResult").reload(window.location.href + " #authResult");
 	                	  	 isEmailAuth = false;
+	                	  	alert(isEmailAuth);
 	    	            }//else
 					
 					}//success

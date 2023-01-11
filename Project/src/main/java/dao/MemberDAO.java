@@ -571,8 +571,6 @@ private MemberDAO() {}
 				return result;
 			}
 
-			// 이메일 인증 위해 auth 테이블에 insert
-		
 			
 			// 회원가입
 			// 메일 인증코드 비교 -> 일치 시 회원가입(insert)

@@ -1,11 +1,16 @@
 package dao;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
+
 import db.JdbcUtil;
 import java.util.List;
 import db.JdbcUtil;
@@ -368,8 +373,8 @@ private ProductDAO() {}
 			 String sql ="SELECT c.cart_idx, c.cart_product_name, c.cart_product_image, c.cart_price, c.cart_discount, c.cart_order_price, c.cart_color,c.cart_size, c.cart_count, c.member_idx, c.product_idx "
 			 		+ "FROM cart c join product p join image i join member m "
 			 		+ "on c.product_idx = p.product_idx and c.product_idx = i.product_idx and c.member_idx = m.member_idx "
-			 		+ "where m.member_idx=? "
-			 		+ "LIMIT ?,?";
+			 		+ "where m.member_idx=? AND c.cart_order_price > 0 "
+			 		+ "LIMIT ?,? ";
 			 
 			 try {
 				pstmt = con.prepareStatement(sql);
@@ -400,6 +405,59 @@ private ProductDAO() {}
 				JdbcUtil.close(rs);
 				JdbcUtil.close(pstmt);
 			}
+			return cartlist;
+		}//
+		
+		
+		//장바구니-> 구매 이동 시 리스트 출력
+		public List<cartBean> getCartList(int member_idx, String cart_idx) {
+			List<cartBean> cartlist = null;
+			PreparedStatement pstmt =  null;
+			ResultSet rs = null;
+			String[] cart_idx2 = cart_idx.split(","); //1,2,3,4 ... 으로 넘어오는 값을 콤마 제거
+//			System.out.println("cart_idx2:" + cart_idx2);
+			//			char[] cart_idxArr = cart_idx2.toCharArray();
+			//cart_idx를 사용하기 위해 배열로 넣는 작업
+			try {
+				cartlist =  new ArrayList<cartBean>();
+				
+				for(int i=0; i<cart_idx2.length; i++) {
+//					System.out.print(cart_idx2[i]);
+//				//콤마를 제거한 cart_idx2 값을 배열로 넣음.
+////				System.out.println("member_idx :" + member_idx);
+////				System.out.println("cart_idxArr :" + cart_idxArr[0]);
+//						
+					String sql = "SELECT * FROM cart WHERE member_idx = ? AND cart_idx =?";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setInt(1, member_idx);
+					pstmt.setString(2, cart_idx2[i]);//'1'
+					rs = pstmt.executeQuery();
+					
+					while(rs.next()) {
+						System.out.println("조회함");
+						cartBean vo = new cartBean();
+						vo.setMember_idx(rs.getInt("member_idx"));
+						vo.setProduct_idx(rs.getInt("product_idx"));
+						vo.setCart_idx(rs.getInt("cart_idx"));
+						vo.setCart_price(rs.getInt("cart_price"));
+						vo.setCart_discount(rs.getInt("cart_discount"));
+						vo.setCart_order_price(rs.getInt("cart_order_price"));
+						vo.setCart_count(rs.getInt("cart_count"));
+						vo.setCart_size(rs.getString("cart_size"));
+						vo.setCart_color(rs.getString("cart_color"));
+						vo.setCart_product_name(rs.getString("cart_product_name"));
+						vo.setCart_product_image(rs.getString("cart_product_image"));
+						cartlist.add(vo);
+						System.out.println("DAO cartList: " + cartlist);
+					}//while끝
+				}//for 끝
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}//finally 끝
+//			
 			return cartlist;
 		}//
 		

@@ -66,7 +66,7 @@ public class CheckAddrProAction implements Action {
 		
 			String content = "회원가입창으로 돌아가 인증번호를 입력해 주세요.";
 			content += "<hr>";
-			content += authCd.toString();
+			content += "<b>"+authCd.toString() +"</b>";
 		
 			
 			String mailServer = "smtp.gmail.com"; // 메일 서버 지정하기

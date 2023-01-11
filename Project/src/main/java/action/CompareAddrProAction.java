@@ -32,22 +32,23 @@ public class CompareAddrProAction implements Action {
 		AuthEmailProService service = new AuthEmailProService();
 		boolean authEmail = service.selectMember(authCode, id);
 		System.out.println("결과 : " + authEmail);
+		request.setAttribute("authEmail", authEmail);
 		
 		try {
-			if(authEmail == false) { // 인증코드가 불일치할 경우
+			if(!authEmail) { // 인증코드가 불일치할 경우
 				System.out.println("불일치");
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
-				out.println("false");
-				forward = new ActionForward();
-				forward.setPath("MemberJoinForm.me");
-				forward.setRedirect(true);
+				out.println(authEmail);
+//				forward = new ActionForward();
+//				forward.setPath("MemberJoinForm.me");
+//				forward.setRedirect(true);
 			} else { // 인증 코드가 일치 할 경우
 				System.out.println("일치");
 				
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
-				out.println("true");
+				out.println(authEmail);
 				
 			}
 			

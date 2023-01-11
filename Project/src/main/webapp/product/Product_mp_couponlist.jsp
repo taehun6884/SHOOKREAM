@@ -82,7 +82,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 <div style="padding: 80px;">
   <header class="w3-container w3-xlarge">
-    <p class="w3-left">위시리스트</p>
+    <p class="w3-left">쿠폰함</p>
     <p class="w3-right">
 <!--       <i class="fa fa-shopping-cart w3-margin-right"></i> -->
 <!--       <i class="fa fa-search"></i> -->
@@ -92,80 +92,52 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- Footer -->
   <footer class="w3-padding-64 w3-small w3-center" id="footer">
   <c:choose>
-  	<c:when test="${wishlist eq null}">
+  	<c:when test="${couponList eq null}">
   		<hr>
   		<div id="no_cart">
 <!--   		<i class="fa-solid fa-cart-plus"></i> -->
-  		<h4>위시리스트에 담긴 상품이 없습니다.</h4>
+  		<h4>발급된 쿠폰이 없습니다.</h4>
   		</div>
   	</c:when>
   	<c:otherwise>
+  
   <table class="table">
   <thead  class="table-dark" >
     <tr>
       <th scope="col">#</th>
-      <th scope="col">image</th>
-      <th scope="col">name</th>
-      <th scope="col">brand</th>
-      <th scope="col">price</th>
-      <th scope="col">size</th>
-      <th scope="col">delete</th>
+      <th scope="col">쿠폰명</th>
+      <th scope="col">할인 가격</th>
+      <th scope="col">사용 여부</th>
+      <th scope="col">시작일</th>
+      <th scope="col">만료일</th>
     </tr>
   </thead>
   <tbody>
     
-    <c:forEach var="wish" items="${wishlist }">
+    <c:forEach var="coupon" items="${couponList }">
     <tr>
-      <th scope="row">${wish.wish_idx }</th>
-      <td><a href="ProductInfoForm.po?product_idx=${wish.product_idx }"><img src="upload/${wish.product_img }"  alt="없음!" class="img-thumbnail" width="150" height="150"></a></td>
-      <td>${wish.product_name }</td>
-      <td>${wish.product_brand }</td>
-      <td>${wish.product_price }</td>
-      <td>${wish.product_size }</td>
-      <td><button type="button" class="btn btn-dark" onclick="location.href='LikeDeletePro.ca?member_idx=${sessionScope.member_idx}&product_idx=${wish.product_idx }'">삭제</button></td>
+      <th scope="row">${coupon.coupon_idx }</th>
+      <td>${coupon.coupon_name }</td>
+      <td>${coupon.coupon_price }</td>
+      <c:choose>
+      	<c:when test="${coupon.coupon_isUse eq 0 }">
+      	  <td>사용 가능</td>
+      	</c:when>
+    	<c:otherwise>
+    		<td>사용 완료</td>
+    	</c:otherwise>
+      </c:choose>
+      <td>${coupon.coupon_start }</td>
+      <td>${coupon.coupon_end }</td>
+<%--       <td><button type="button" class="btn btn-dark" onclick="location.href='LikeDeletePro.ca?member_idx=${sessionScope.member_idx}&product_idx=${wish.product_idx }'">삭제</button></td> --%>
     </tr>
     </c:forEach>
   </tbody>
 </table>
-<!-- 페이징 처리 -->	
-	<div class="paging">
-        <c:choose>
-			<c:when test="${param.pageNum > 1}">
-				<a href="CartList.ca?pageNum=${param.pageNum - 1 }&member_idx=${member_idx }">이전</a>
-			</c:when>
-			<c:otherwise>
-				<a href="javascript:void(0)">이전</a>
-			</c:otherwise>
-		</c:choose>
-		
-		<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
-			<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
-			<c:choose>
-				<c:when test="${param.pageNum eq i}">
-					${i }
-				</c:when>
-				<c:otherwise>
-					<a href="LikeList.ca?pageNum=${i }&member_idx=${member_idx }">${i }</a>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-		
-		<c:choose>
-			<c:when test="${param.pageNum < pageInfo.maxPage}">
-				<a href="LikeList.ca?pageNum=${param.pageNum + 1 }&member_idx=${member_idx }">다음</a>
-			</c:when>
-			<c:otherwise>
-				<a href="javascript:void(0)">다음</a>
-			</c:otherwise>
-		</c:choose>
-<!--         <a class="select" href="#">1</a> -->
-<!--         <a href="#">2</a> -->
-<!--         <a href="#">3</a> -->
-<!--         <a href="#">4</a> -->
-<!--         <a href="#">5</a> -->
-    </div>
-    </c:otherwise>
+</c:otherwise>
   </c:choose>
+
+
 </footer>
   </div>
 

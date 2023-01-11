@@ -81,7 +81,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
           </tr>
           <tr>
           	<td>
-          		<button type="button" class="w3-button w3-block w3-black" onclick="location.href='FindMemberIdForm.me'">아이디 찾기</button>
+          		<button type="button" class="w3-button w3-block w3-black" onclick="location.href='FindMemberIdForm.me'">아이디 / 비밀번호 찾기</button>
           	</td>
           </tr>
         </table>
