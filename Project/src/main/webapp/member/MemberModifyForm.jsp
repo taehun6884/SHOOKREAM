@@ -111,7 +111,7 @@ $("#pass").on("keyup", function() {
 	$("#phone").on("change", function() {
 		let phone = $("#phone").val();
 		
-		let regex =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+		let regex =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})[0-9]{3,4}[0-9]{4}$/;
 		if(!regex.exec(phone)) {
 			$("#phoneCheckResult").html("잘못된 휴대전화 형식입니다").css("color", "red");
 			phoneStatus = false;
@@ -137,6 +137,7 @@ function reCheckPasswd(pass2) {//재입력 확인
 	}else{
 		spanRecheckResult.innerHTML = "일치하지 않는 패스워드 입니다";
 		spanRecheckResult.style.color = "RED";   
+		passwdStatus = false;
 		event.preventDefault(); // submit 기능 막기
 	}
 }

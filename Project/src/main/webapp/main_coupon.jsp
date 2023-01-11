@@ -116,7 +116,7 @@ function downCoupon(){
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px;">
+<div class="w3-main" style="margin-left: 25px;">
 
   <!-- Push down content on small screens -->
   <div class="w3-hide-large" ></div>
