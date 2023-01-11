@@ -137,7 +137,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
       <td>${order.order_product_color }</td>
       <td><fmt:formatDate value="${order.order_date }" pattern="yyyy-MM-DD"/></td>
 	  <td><input type="button" value="리뷰 작성하기" class="btn btn-dark" onclick="reviewForm(${order.order_product_idx },'${order.order_product_size }','${order.order_product_color }')">
-      <button type="button" class="btn btn-dark" onclick="deleteOrder(${order.order_idx})">삭제</button></td>
+<%--       <button type="button" class="btn btn-dark" onclick="deleteOrder(${order.order_idx})">삭제</button></td> --%>
     </tr>
     </c:forEach>
   </tbody>

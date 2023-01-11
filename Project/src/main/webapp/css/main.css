@@ -19,9 +19,18 @@ body {
 	
 }
 
-article, aside, details, figcaption, figure, footer, header, main, menu,
+article, aside, details, figcaption, figure, header, main, menu,
 	nav, section {
 	display: block
+}
+
+.footerClass {
+	height: 100px;
+	clear:both;
+}
+
+footer {
+	
 }
 
 summary {
@@ -1351,7 +1360,7 @@ to {
 
 .w3-padding-64 {
 	padding-top: 64px !important;
-	padding-bottom: 64px !important
+	padding-bottom: 5% !important
 }
 
 .w3-padding-top-64 {

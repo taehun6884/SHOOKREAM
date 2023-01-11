@@ -39,13 +39,13 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">상품 및 주문 관리</h1>
+                        <h1 class="mt-4" style="padding: 45px; font-size: 25px; font-weight: bolder;">상품 및 주문 관리</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active"></li>
                         </ol>
-                        <div class="row">
+                        <div class="row" style="padding: 20px 45px;">
                             <div class="col-xl-3 col-md-6">
-                                <div class="card text-white mb-4" style="background-color: #828282">
+                                <div class="card text-white mb-4" style="background-color: #787878">
                                     <div class="card-body" onclick="location.href='ProductInsertForm.po'">상품 등록</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="ProductInsertForm.po">View Details</a>
@@ -54,7 +54,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
-                                <div class="card text-white mb-4" style="background-color: #828282">
+                                <div class="card text-white mb-4" style="background-color: #787878">
                                     <div class="card-body" onclick="location.href='ProductList.po'">상품 조회</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="ProductList.po">View Details</a>
@@ -64,7 +64,7 @@
                             </div>
                            
                            <div class="col-xl-3 col-md-6">
-                                <div class="card text-white mb-4" style="background-color: #a0a0a0">
+                                <div class="card text-white mb-4" style="background-color: #787878">
                                     <div class="card-body">주문 관리</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="AdminProductOrderList.ad">View Details</a>

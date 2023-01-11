@@ -40,7 +40,7 @@ table.type03 th {
   font-weight: bold;
   font-size : 17px;
   vertical-align: top;
-  color: #153d73; 
+  color: #828282; 
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   height: 90px;
@@ -118,20 +118,20 @@ $(function() {
 		}
 	});
 	
-		// 이메일 확인
-		$("#email").on("change", function() {
-			let email = $("#email").val();
+// 		이메일 확인
+// 		$("#email").on("change", function() {
+// 			let email = $("#email").val();
 			
-// 			let regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-			let regex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-			if(!regex.exec(email)) {
-				$("#emailCheckResult").html("잘못된 이메일 형식입니다").css("color", "red");
-				emailStatus = false;
-			} else {
-				$("#emailCheckResult").html("올바른 이메일 형식입니다").css("color", "blue");
-				emailStatus = true;
-			}
-		});
+// // 			let regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+// 			let regex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+// 			if(!regex.exec(email)) {
+// 				$("#emailCheckResult").html("잘못된 이메일 형식입니다").css("color", "red");
+// 				emailStatus = false;
+// 			} else {
+// 				$("#emailCheckResult").html("올바른 이메일 형식입니다").css("color", "blue");
+// 				emailStatus = true;
+// 			}
+// 		});
 		
 		// 휴대전화 확인
 		$("#phone").on("change", function() {
@@ -146,6 +146,20 @@ $(function() {
 				phoneStatus = true;
 				}
 			});
+		
+		$("#domain").on("change", function() {
+			$("#email2").val($(this).val());
+			
+			if($(this).val() == "") {
+				$("#email2").prop("readonly", false);
+				$("#email2").css("background-color", "white");
+				$("#email2").focus();
+			} else {
+				$("#email2").prop("readonly", true);
+				$("#email2").css("background-color", "lightgray");
+			}
+		});
+		
 		});
 		
 </script>
@@ -192,7 +206,7 @@ $(function() {
 						<input type="text" name="id" id ="id" required size="20px" style="line-height: 30px" onkeydown="inputIdChk()" > &nbsp;
 						<button class="btn btn-dark" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">중복 확인</button>
 <!-- 						<button type="button" class="btn btn-secondary" name="dbCheckId" id="dbCheckId" onclick="fn_dbCheckId()">ID check</button> -->
-<!-- 						<input type="hidden" name="isCheckId" value="idUncheck"/> 체크 여부 확인			 -->
+						<input type="hidden" name="isCheckId" value="idUncheck"/>		
 						<br>
 						<span style="color: gray;" >(영문 소문자/숫자/특수문자(-_.) 사용가능, 5~20자)</span> &nbsp;
 						<span id="checkIdSpan"></span>
@@ -241,9 +255,23 @@ $(function() {
 					<tr>
 						<th scope="row">이메일</th>
 						<td>
-						<input type="text" name="email" id="email" placeholder="" required size="20px" style="line-height: 30px"> &nbsp;
+						<input type="text" name="email1" id="email1" placeholder="" required size="15px" style="line-height: 30px"> @
+						<input type="text" name="email2" id="email2" placeholder="" required size="15px" style="line-height: 30px">
+						<select name="selectDomain" id="domain"  style="padding: .4em .5em; ">
+						<option value="">직접입력</option>	
+						<option value="naver.com">naver.com</option>
+						<option value="gmail.com">gmail.com</option>
+						<option value="daum.net">daum.net</option>
+						<option value="nate.com">nate.com</option>
+						</select> &nbsp;
 						<input type="button" class="btn btn-dark" id="checkEmail"  value="인증 메일 전송" onclick="alert('이메일 전송 완료!')"><br>
 						<span style="color: gray">("@"를 포함하여 이메일을 입력해주세요. ex) abcd@gmail.com)</span><br>
+						
+<!-- 						<input type="text" name="email" id="email" placeholder="" required size="20px" style="line-height: 30px"> &nbsp; -->
+<!-- 						<input type="button" class="btn btn-dark" id="checkEmail"  value="인증 메일 전송" onclick="alert('이메일 전송 완료!')"><br> -->
+<!-- 						<span style="color: gray">("@"를 포함하여 이메일을 입력해주세요. ex) abcd@gmail.com)</span><br> -->
+						
+						
 						<div id ="authResult">
 						<input type="text" name="authCode" id="authCode" size="20px" style="line-height: 30px" required="required"> &nbsp;
 						<input type="button" class="btn btn-dark" id="checkEmail2"  value="인증 하기"><br>
@@ -254,7 +282,7 @@ $(function() {
 						
 					</tr>
 					<tr>
-						<td colspan="2" align="center"><button type="submit" id="join_btn" name ="join" class="btn btn-dark"  >회원가입</button></td>
+						<td colspan="2" align="center"><button type="submit" id="join_btn" name ="join" class="btn btn-dark"  onclick="fn_joinMember()">회원가입</button></td>
 					</tr>
 				</table>
 
@@ -308,10 +336,12 @@ function fn_joinMember() {
 	}else if(phoneStatus == false) {
 		alert("휴대전화를 확인해주세요!")
 		event.preventDefault(); // submit 기능 막기
-	}else if(emailStatus == false) {
-		alert("이메일을 확인해주세요!")
-		event.preventDefault(); // submit 기능 막기
 	}
+	
+// 	else if(emailStatus == false) {
+// 		alert("이메일을 확인해주세요!")
+// 		event.preventDefault(); // submit 기능 막기
+// 	}
 }
 
 // window.opener.isIdCheck = true;
@@ -410,7 +440,8 @@ function inputIdChk(){
 		            data: {
 		               id: $("#id").val(),
 		               authCode: $("#authCode").val(),
-		               email: $("#email").val()
+		               email1: $("#email1").val(),
+		               email2: $("#email2").val()
 		            }
 				                   
 		         });

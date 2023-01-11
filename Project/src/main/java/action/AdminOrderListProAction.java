@@ -22,7 +22,7 @@ public class AdminOrderListProAction implements Action {
 		request.setAttribute("Adminorderlist", Adminorderlist);
 		
 		forward = new ActionForward();
-		forward.setPath("admin/Adminorderlist.jsp");
+		forward.setPath("admin/admin_order_list.jsp");
 		forward.setRedirect(false);
 		return forward;
 	}

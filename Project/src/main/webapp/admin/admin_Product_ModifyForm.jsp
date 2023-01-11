@@ -61,6 +61,13 @@
 			});
 		});
 		</script>
+		
+<style type="text/css">
+.table-secondary{
+	font-weight: bold;
+}
+
+</style>
 
     </head>
     <body class="sb-nav-fixed">
@@ -161,9 +168,12 @@
 						<td width="100px" align="left" class="table-secondary">상품색상</td>
 						<td width="300px"><select name="color">
 								<option value="" style="color: red">기존 색상 : ${product.product_color}</option>
-								<option value="red">red</option>
-								<option value="blue">blue</option>
-								<option value="grey">grey</option>
+								<option value="black">BLACK</option>
+								<option value="white">WHITE</option>
+								<option value="navy">NAVY</option>
+								<option value="red">RED</option>
+								<option value="blue">BLUE</option>
+								<option value="gray">GRAY</option>
 						</select></td>
 					</tr>
 

@@ -90,6 +90,7 @@
                                     <tbody>
                                       <c:forEach var="orderlist" items="${Adminorderlist }">
 										<tr>
+										<td>${orderlist.order_idx }</td>
 										 <td><img src="upload/${orderlist.order_main_image }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
 									      <td>${orderlist.order_member_id }</td>
 									      <td>${orderlist.order_product_price }</td>
