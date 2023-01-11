@@ -550,14 +550,12 @@ private MemberDAO() {}
 				boolean result = false;
 				
 				PreparedStatement pstmt = null;
-				
 				try {
 					String sql="UPDATE member SET member_pass=? WHERE member_id=?";
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, imsiPw.toString());
 					pstmt.setString(2, member.getMember_id());
 					int resultCount = pstmt.executeUpdate();
-					
 					if(resultCount > 0) {
 						result = true;
 						
