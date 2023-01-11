@@ -85,6 +85,7 @@ $(document).ready(function() {
  
 
  <h5>최근 본 상품</h5>
+
 <%-- <% --%>
 // String strCookie = request.getHeader("Cookie");
 // if(strCookie!=null){
@@ -99,6 +100,7 @@ $(document).ready(function() {
 // 		String[] arrProduct_img = product_img_list.split("/");
 // 		String[] arrProduct_idx = product_idx_list.split("/");
 		
+
 // 		int idx = arrProduct_idx.length;
 		
 // 		for(int i = 1; i <= 3; i++) {
