@@ -79,7 +79,6 @@
                             					<input type="hidden" name="pageNum" value=${param.pageNum }>
 										      	<input type="button" value="수정"  class="btn btn-outline-secondary btn-sm" onclick="location.href='BoardModifyForm.bo?notice_idx=${board.notice_idx }&pageNum=${param.pageNum}'" >
 												<a href="BoardDeletePro.bo?notice_idx=${board.notice_idx }&pageNum=${param.pageNum}"><input type="button" value="삭제" class="btn btn-outline-secondary btn-sm"></a>
-<!--		<input type="button" value="고정글" class="btn btn-outline-secondary btn-sm" onclick=""> -->
 										    </th>
                                         </tr>
                                      </c:forEach>   

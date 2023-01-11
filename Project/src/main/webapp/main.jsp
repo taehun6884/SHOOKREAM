@@ -57,6 +57,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 	padding-top: 120px;
 	padding-bottom: 60px;
 	font-size: x-large;
+	clear:both;
 }
 
 #product_brand {
@@ -87,6 +88,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 
 body{
 margin-top:10px;
+}
+
+footer {
+/* 	height: 300px; */
+	width: 100%;
+	clear: both;
+	padding-top: 20px;
+
 }
 </style>
 </head>
@@ -133,7 +142,7 @@ margin-top:10px;
 	
 	
   <!-- Product grid -->
-<div class="w3-row w3-grayscale">
+<div class="w3-row w3-grayscale" style="clear:both;">
 		<c:forEach var="productBestList" items="${productBestList }" begin="0" end="7" step="1">
 			<div class="w3-col l3 s6">
 				<div class="w3-container">
@@ -188,7 +197,7 @@ margin-top:10px;
 	<!-- Product grid -->
   <div class="w3-row w3-grayscale">
   <c:forEach var="productNewList" items="${productNewList }" begin="0" end="7" step="1">
-   <div class="w3-col l3 s6">
+   <div class="w3-col l3 s6" style="z-index:1;">
       <div class="w3-container">
         <div class="w3-display-container">
           <img src="./upload/${productNewList.product_img }"  alt="..." style="width:100%">
@@ -232,10 +241,14 @@ margin-top:10px;
 					</div>
 				</c:forEach>
    	 </div>
-   	 
+   	 <div>
+		<footer style="z-index:-1;">
+	    	<jsp:include page="./inc/footer.jsp"/>
+		</footer>
+	</div>	
    	 </div>
-  <!-- footer -->
-<%--     <jsp:include page="./inc/footer.jsp"/> --%>
+
+ 
 <script>
 
 
