@@ -16,6 +16,7 @@ public class CartDeleteProAction implements Action {
 		
 		ActionForward forward = null;
 		int idx = Integer.parseInt(request.getParameter("cart_idx"));
+		int member_idx = Integer.parseInt(request.getParameter("member_idx"));
 		CartDeleteProService service = new CartDeleteProService();
 		System.out.println(idx);
 		boolean isDeleteSuccess = service.isDeleteSuccess(idx);
@@ -35,7 +36,7 @@ public class CartDeleteProAction implements Action {
 			} else { // 삭제 성공 시
 				
 				forward = new ActionForward();
-				forward.setPath("./");
+				forward.setPath("./CartList.ca?member_idx=" + member_idx + "&pageNum=1");
 				forward.setRedirect(true);
 				
 					

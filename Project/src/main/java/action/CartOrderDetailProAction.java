@@ -24,12 +24,15 @@ public class CartOrderDetailProAction implements Action {
 		
 		//주문페이지로 넘기는 카트 리스트 뽑기(카트 빈에 담기)
 		CartOrderDetailProService service = new CartOrderDetailProService();
-		
+		//리스트
 		List<cartBean> cartOrder = service.getCartOrderlist(member_idx, cart_idx);
 		
 		request.setAttribute("cartOrder", cartOrder);
 		System.out.println("cartOrder : " + cartOrder);
-		
+		//총 금액
+		int total = service.CartTotalPrice(member_idx);
+		request.setAttribute("total", total);
+
 		
 		forward = new ActionForward();
 		forward.setPath("product/order_form_cart.jsp");
