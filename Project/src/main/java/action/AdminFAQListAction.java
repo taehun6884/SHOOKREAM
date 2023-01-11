@@ -61,7 +61,7 @@ public class AdminFAQListAction implements Action {
 //		System.out.println(boardList);
 	
 		forward = new ActionForward();
-		forward.setPath("admin/admin_FAQ_manage.jsp");
+		forward.setPath("admin/admin_FAQ_manage.jsp?pageNum=" + pageNum);
 		forward.setRedirect(false);			
 
 		

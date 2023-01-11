@@ -144,16 +144,10 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 	  </thead>
 	  <tbody>
 	   <tr>
-	    	<td colspan="8" style="vertical-align: baseline;">
-	    	<span style="font: bold; font-size: large; text-align: center; ">
-	    	사용 가능한 쿠폰(0장) 중 (0장)의 쿠폰이 적용되었습니다.
-	    	</span>
-	    	<span style=" padding-left: 15px; vertical-align: middle; text-align: center;" ><button type="button" class="btn btn-dark btn-sm" onclick="CouponCheck()">내가 보유한 쿠폰 보러가기</button></span>
-	    	</td>
-	   </tr>
-	   <tr>
 		<th colspan="2">상품 할인쿠폰</th>
-		<td colspan="6" style="margin-left:500px;"><input type="text" id="priceValue" readonly="readonly">원 할인</td>
+		<td colspan="6" style="margin-left:500px;"><input type="text" id="priceValue" readonly="readonly">원 할인 
+	   	<button type="button" class="btn btn-dark btn-sm" onclick="CouponCheck()">내가 보유한 쿠폰 보러가기</button>
+	   	</td>
 	   </tr>
 	   <tr>
 	    <th colspan="2">이포인트</th>
@@ -349,7 +343,6 @@ function iamport(){
 			console.log(rsp);
 		    if ( rsp.success ) {
 		    	var msg = '결제가 완료되었습니다.';
-		    	msg += '상품 : ' + '${prodcut.product_name }';
 		        msg += '결제 금액 : ' + rsp.paid_amount;
 		        location.href="ProductOrderPro.po?order_category=주문완료&order_progress=배송완료&member_idx=${member_idx}&product_idx=${product.product_idx}&product_amount=${product.product_amount}&product_sell_count=${product.product_sell_count}&product_price="+rsp.paid_amount+"&coupon_idx="+$("#coupon_idx").val();
 		    } else {

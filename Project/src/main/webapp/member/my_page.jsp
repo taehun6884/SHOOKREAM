@@ -50,6 +50,7 @@
 		display: grid;
 		grid-template-columns: auto auto auto ;
 		grid-template-rows: 120px 120px;
+		border-color: gray;****8888
 
 	}
 	
