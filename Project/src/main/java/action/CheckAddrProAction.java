@@ -28,8 +28,8 @@ public class CheckAddrProAction implements Action {
 		
 		String id = request.getParameter("id");
 		String authCode = request.getParameter("authCode");
-		String email = request.getParameter("email");
-		System.out.println(email); // 이메일 잘 받아왔는지 확인
+		String email = request.getParameter("email1") + "@" + request.getParameter("email2");
+//		System.out.println(email); // 이메일 잘 받아왔는지 확인
 		
 		
 		

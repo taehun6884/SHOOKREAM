@@ -22,11 +22,13 @@ public class MemberJoinProAction implements Action {
 		MemberBean member = new MemberBean();
 		
 		String address = request.getParameter("address") + " " + request.getParameter("address_detail");
+		String email = request.getParameter("email1")+"@"+request.getParameter("email2");
+		System.out.println("join email : " + email);
 		
 		member.setMember_id(request.getParameter("id"));
 		member.setMember_name(request.getParameter("name"));
 		member.setMember_pass(request.getParameter("pass"));
-		member.setMember_email(request.getParameter("email"));
+		member.setMember_email(email);
 		member.setMember_address(address);
 		member.setMember_phone(request.getParameter("phone"));
 //		System.out.println("address " + address);

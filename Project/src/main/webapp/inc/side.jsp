@@ -86,44 +86,44 @@ $(document).ready(function() {
 
  <h5>최근 본 상품</h5>
 <%-- <% --%>
-// String strCookie = request.getHeader("Cookie");
-// if(strCookie!=null){
-// 	Cookie[] cookies =request.getCookies();
-// // 	for(Cookie cookie : cookies) {
-// // 		System.out.println(cookie.getName() + " : " + cookie.getValue());
-// // 	}
-// 		String product_img_list = getCookieValue(cookies, "product_img");
-// 		String product_idx_list = getCookieValue(cookies, "product_idx");
-// // 		System.out.println("상품 번호 : " + product_idx + ", 이미지 : " + product_img);
+<!-- // String strCookie = request.getHeader("Cookie"); -->
+<!-- // if(strCookie!=null){ -->
+<!-- // 	Cookie[] cookies =request.getCookies(); -->
+<!-- // // 	for(Cookie cookie : cookies) { -->
+<!-- // // 		System.out.println(cookie.getName() + " : " + cookie.getValue()); -->
+<!-- // // 	} -->
+<!-- // 		String product_img_list = getCookieValue(cookies, "product_img"); -->
+<!-- // 		String product_idx_list = getCookieValue(cookies, "product_idx"); -->
+<!-- // // 		System.out.println("상품 번호 : " + product_idx + ", 이미지 : " + product_img); -->
 		
-// 		String[] arrProduct_img = product_img_list.split("/");
-// 		String[] arrProduct_idx = product_idx_list.split("/");
+<!-- // 		String[] arrProduct_img = product_img_list.split("/"); -->
+<!-- // 		String[] arrProduct_idx = product_idx_list.split("/"); -->
 		
-// 		int idx = arrProduct_idx.length;
+<!-- // 		int idx = arrProduct_idx.length; -->
 		
-// 		for(int i = 1; i <= 3; i++) {
-// 			String product_img = arrProduct_img[idx - i];
-// 			String product_idx = arrProduct_idx[idx - i];
+<!-- // 		for(int i = 1; i <= 3; i++) { -->
+<!-- // 			String product_img = arrProduct_img[idx - i]; -->
+<!-- // 			String product_idx = arrProduct_idx[idx - i]; -->
 			
-// 			System.out.println(product_img + ", " + product_idx);
+<!-- // 			System.out.println(product_img + ", " + product_idx); -->
 			
-<%-- 		%> --%>
-<%-- 		<img src="upload/<%=product_img %>" width="100" height="100" alt="없음" onclick="location.href='ProductInfoForm.po?product_idx=<%=product_idx %>&member_idx=${member_idx }'">	 --%>
-<%-- 		<% --%>
-// 		}
-// // 	}
+<%-- <%-- 		%> --%> --%>
+<%-- <%-- 		<img src="upload/<%=product_img %>" width="100" height="100" alt="없음" onclick="location.href='ProductInfoForm.po?product_idx=<%=product_idx %>&member_idx=${member_idx }'">	 --%> --%>
+<%-- <%-- 		<% --%> --%>
+<!-- // 		} -->
+<!-- // // 	} -->
 			
-// }
-<%-- %> --%>
-<%-- <%! --%>
-// public String getCookieValue(Cookie[] cookies, String cookieName) { 
-//     for (Cookie cookie : cookies) { 
-//          if(cookie.getName().equals(cookieName)){ 
-//               return cookie.getValue(); 
-//          }
-//     }
-//     return ""; 
-// }
+<!-- // } -->
+<%-- <%-- %> --%> --%>
+<%-- <%-- <%! --%> --%>
+<!-- // public String getCookieValue(Cookie[] cookies, String cookieName) {  -->
+<!-- //     for (Cookie cookie : cookies) {  -->
+<!-- //          if(cookie.getName().equals(cookieName)){  -->
+<!-- //               return cookie.getValue();  -->
+<!-- //          } -->
+<!-- //     } -->
+<!-- //     return "";  -->
+<!-- // } -->
 
 <%-- %> --%>
 
