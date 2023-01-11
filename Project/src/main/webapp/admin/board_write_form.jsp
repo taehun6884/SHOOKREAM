@@ -73,21 +73,21 @@
 <!-- 					  	<input type="hidden" name="notice_type" value="Notice"> -->
 						<div class="mb-3">
 							<label for="exampleFormControlInput1" class="form-label">Subject</label>
-						  	<input type="text" class="form-control" name="notice_subject" placeholder="제목을 입력하세요">
+						  	<input type="text" class="form-control" name="notice_subject" placeholder="제목을 입력하세요" required>
 						</div>
 						<label for="exampleFormControlInput1" class="form-label">Type</label>
-						<select class="form-select" aria-label="Default select example" name="notice_type" onchange="categoryChange(this)">
+						<select class="form-select" aria-label="Default select example" name="notice_type" required onchange="categoryChange(this)">
 						  <option selected>게시판 종류를 선택해 주세요</option>
 						  <option value="Notice">공지사항</option>
 						  <option value="FAQ">자주묻는 질문</option>
 						</select>
 						<label for="exampleFormControlInput1" class="form-label">Category</label>
-						<select class="form-select" aria-label="Default select example" name="notice_category" id="category" onchange="selectChange(this.value)">
+						<select class="form-select" aria-label="Default select example" required name="notice_category" id="category" onchange="selectChange(this.value)">
 						  <option>카테고리를 선택해주세요</option>
 						</select>
 						<div class="mb-3">
 						  <label for="exampleFormControlTextarea1" class="form-label">Content</label><br>
-						  <textarea class="form-control" id="notice_content" name="notice_content" rows="15"></textarea>
+						  <textarea class="form-control" id="notice_content" name="notice_content" rows="15" required></textarea>
 						</div>
 						<section id="commandCell">
 							<input type="submit" value="등록" class="btn btn-secondary">&nbsp;&nbsp;

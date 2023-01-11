@@ -75,11 +75,8 @@
                                             <th>${board.notice_subject }</th>
                                             <th>${board.notice_date }</th>
                                             <th>
-                                            	<input type="hidden" name="notice_idx" value=${board.notice_idx }>
-                            					<input type="hidden" name="pageNum" value=${param.pageNum }>
 										      	<a href="BoardModifyForm.bo?notice_idx=${board.notice_idx }&pageNum=${param.pageNum}"><input type="button" value="수정"  class="btn btn-outline-secondary btn-sm" ></a>
-												<a href="BoardDeletePro.bo?notice_idx=${board.notice_idx }&pageNum=${param.pageNum}"><input type="button" value="삭제" class="btn btn-outline-secondary btn-sm"></a>
-<!--		<input type="button" value="고정글" class="btn btn-outline-secondary btn-sm" onclick=""> -->
+												<a href="BoardDeletePro.bo?notice_idx=${board.notice_idx }&pageNum=${param.pageNum}&board_type=${board.notice_type }"><input type="button" value="삭제" class="btn btn-outline-secondary btn-sm"></a>
 										    </th>
                                         </tr>
                                      </c:forEach>   
