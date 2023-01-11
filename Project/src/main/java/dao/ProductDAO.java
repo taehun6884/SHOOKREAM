@@ -205,7 +205,7 @@ private ProductDAO() {}
 				product.setProduct_price(rs.getInt("product_price"));
 				product.setProduct_size(rs.getString("product_size"));
 				product.setProduct_release_price(rs.getInt("product_release_price"));
-				product.setProduct_buy_price(rs.getInt("product_buy_price"));
+//				product.setProduct_buy_price(rs.getInt("product_buy_price"));
 				product.setProduct_amount(rs.getInt("product_amount"));
 				product.setProduct_sell_count(rs.getInt("product_sell_count"));
 				product.setProduct_exp(rs.getString("product_exp"));
