@@ -61,7 +61,7 @@ public class CartInsertProAction implements Action {
 			}
 			
 			forward = new ActionForward();
-			forward.setPath("./");
+			forward.setPath("./CartList.ca?member_idx=" + member_idx + "&pageNum=1");
 			forward.setRedirect(true);
 		}
 		

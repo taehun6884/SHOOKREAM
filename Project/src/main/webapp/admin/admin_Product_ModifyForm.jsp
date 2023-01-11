@@ -106,7 +106,7 @@
 								<option value="뉴발란스">뉴발란스</option>
 								<option value="컨버스">컨버스</option>
 								<option value="아디다스">아디다스</option>
-								<option value="슈펜">슈펜</option>
+								<option value="반스">반스</option>
 						</select>
 						
 						</td>
