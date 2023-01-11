@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
-
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <!-- 네이버아이디로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -26,8 +26,8 @@
         }
 </style>
 <style>
-.w3-sidebar a {font-family: "Roboto", sans-serif}
-body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+.w3-sidebar a {font-family: "Noto Sans KR", sans-serif}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 </style>
 </head>
 <body class="w3-content" style="max-width:95%">
@@ -36,7 +36,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 <!-- Top menu on small screens -->
 <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-  <div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
+  <div class="w3-bar-item w3-padding-24 w3-wide">SHOOKREAM</div>
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
 </header>
 
@@ -44,32 +44,35 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
-
-  <!-- Push down content on small screens -->
-<!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
+	<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
+	
+ <!-- Push down content on small screens -->
+ <div class="w3-hide-large" style="margin-top:83px"></div>
+ 
+<!-- Top header -->
+ <div style="float: right;">
+	  <jsp:include page="../inc/top.jsp"/>
+	</div>
   
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
-    <p class="w3-left">제목</p>
+<!--     <p class="w3-left">제목</p> -->
     <p class="w3-right">
-      <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i>
     </p>
 </header>
    
   <!-- Footer -->
   <!-- 로그인 화면 폼 -->
-  <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
+  <footer class="w3-padding-64 w3-small w3-center" id="footer">
     <div id = "sform">
-        <h4>로그인</h4>
+        <h4 style="padding: 30px;">로그인</h4>
         <form action="LoginMemberPro.me" method="post">
           <table>
           <tr>
-          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="id" name="id" required></td>
+          <td width="300px"><input class="w3-input w3-border" type="text" placeholder="아이디" name="id" required></td>
           </tr>
           <tr>
-          <td width="300px"><input class="w3-input w3-border" type="password" placeholder="pass" name="pass" required></td>
+          <td width="300px"><input class="w3-input w3-border" type="password" placeholder="비밀번호" name="pass" required></td>
           </tr>
           <tr>
           <td><button type="submit" class="w3-button w3-block w3-black">로그인</button></td>
@@ -89,7 +92,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     </div>
   </footer>
  </div>	
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+<!--   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
 <!-- 로그인 화면 폼 -->
   <!-- End page content -->
 

@@ -100,7 +100,7 @@ img {
 }
 
 code, kbd, pre, samp {
-	font-family: monospace, monospace;
+	font-family: Noto Sans KR, Noto Sans KR;
 	font-size: 1em
 }
 
@@ -184,7 +184,7 @@ textarea {
 }
 /* End extract */
 html, body {
-	font-family: Verdana, sans-serif;
+	font-family: Noto Sans KR, sans-serif;
 	font-size: 15px;
 	line-height: 1.5
 }
@@ -230,11 +230,11 @@ h6 {
 }
 
 .w3-monospace {
-	font-family: monospace
+	font-family: Noto Sans KR
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: "Segoe UI", Arial, sans-serif;
+	font-family: "Noto Sans KR", Arial, sans-serif;
 	font-weight: 400;
 	margin: 10px 0
 }
@@ -986,7 +986,7 @@ a {
 }
 
 .w3-code, .w3-codespan {
-	font-family: Consolas, "courier new";
+	font-family: Noto Sans KR, "courier new";
 	font-size: 16px
 }
 

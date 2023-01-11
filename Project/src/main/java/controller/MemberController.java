@@ -26,6 +26,7 @@ import action.MemberModifyFormAction;
 import action.MemberModifyProAction;
 import action.ReportProAction;
 import action.MyPageDeliveryAction;
+import action.MyReviewListAction;
 import action.ReviewWriteProAction;
 import svc.LoginMemberService;
 import vo.ActionForward;
@@ -64,6 +65,10 @@ public class MemberController extends HttpServlet{
 		}else if(command.equals("/MemberList.me")) { //회원 목록
 			action = new MemberListAction();
 			forward = action.execute(request, response);
+		} else if(command.equals("/MemberModifyCheck.me")) { // 회원정보 수정 전 비밀번호 입력
+			forward = new ActionForward();
+			forward.setPath("member/member_password_modify_form.jsp");
+			forward.setRedirect(false);
 		}else if(command.equals("/MemberModifyForm.me")) { //회원 정보 수정 창
 			action = new MemberModifyFormAction();
 			forward = action.execute(request, response);
@@ -119,9 +124,6 @@ public class MemberController extends HttpServlet{
 		}else if(command.equals("/CompareEmailAddress.me")) { // 이메일 인증2
 			action = new CompareAddrProAction();
 			forward = action.execute(request, response);
-		}else if(command.equals("/MemberMyPage.me")) {
-			forward = new ActionForward(); 
-			forward.setPath("member/my_page.jsp");
 		}else if(command.equals("/ReportFormAction.me")) { //coupon 발급
 			forward = new ActionForward();
 			forward.setPath("report/mail_form.jsp");
@@ -130,6 +132,9 @@ public class MemberController extends HttpServlet{
 			action = new ReportProAction();
 		} else if(command.equals("/MemberMyPage.me")) { // 마이페이지 이동(배송상태 정보 조회)
 			action = new MyPageDeliveryAction();
+			forward = action.execute(request, response);	
+		} else if(command.equals("/MyReviewList.me")) { // 내 리뷰 관리창
+			action = new MyReviewListAction();
 			forward = action.execute(request, response);	
 		}
 		

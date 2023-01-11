@@ -5,8 +5,14 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <title>ID Check</title>
+<style type="text/css">
+	* {
+		font-family: "Noto Sans KR", sans-serif;
+	}
+</style>
 <script type="text/javascript">
 
 	function sendCheckValue() {

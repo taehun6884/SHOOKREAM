@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>로그인</title>
+<title>SHOOKREAM</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -29,7 +29,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 
 <!-- Top menu on small screens -->
 <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-  <div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
+  <div class="w3-bar-item w3-padding-24 w3-wide">SHOOKREAM</div>
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
 </header>
 
@@ -37,42 +37,47 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
-
-  <!-- Push down content on small screens -->
-<!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
+	<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
+	
+ <!-- Push down content on small screens -->
+ <div class="w3-hide-large" style="margin-top:83px"></div>
+ 
+ <!-- Top header -->
+ <div style="float: right;">
+	  <jsp:include page="../inc/top.jsp"/>
+	</div>
   
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
-    <p class="w3-left">제목</p>
+<!--     <p class="w3-left">제목</p> -->
     <p class="w3-right">
-      <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i>
     </p>
 </header>
 
   
   <!-- Footer -->
   <!-- 로그인 화면 폼 -->
-  <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
-    <div id = "sform">
-        <h4>장바구니 삭제</h4>
-        <p>Questions? Go ahead.</p>
-        <form action="CartDeletePro.me" method="post">
-        <input type="hidden" value ="${param.cart_idx }" name="cart_idx">
+<!--   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer"> -->
+<div style="text-align: center; padding: 100px;">
+    <div id = "sform" >
+        <h4>회원정보 수정</h4>
+        <p>개인정보 보호를 위해 비밀번호를 입력하세요</p>
+        <form action="MemberModifyForm.me?id=${sessionScope.sId }" method="post">
+        <input type="hidden" value ="${param.id }" name="id">
           <table>
           <tr>
-          <td width="300px"><input class="w3-input w3-border" type="password" placeholder="pass" name="pass" required></td>
+          <td width="300px"><input class="w3-input w3-border" type="password" placeholder="비밀번호를 입력하세요" name="pass" required></td>
           </tr>
           <tr>
-          <td><button type="submit" class="w3-button w3-block w3-black" onclick ="location.href='CartDeletePro.ca?cart_idx=${param.cart_idx}'">삭제</button></td>
+          <td><button type="submit" class="w3-button w3-block w3-black">비밀번호 확인</button></td>
 		  </tr> 	        
         </table>
         </form>
     </div>
-  </footer>
+   </div> 
+<!--   </footer> -->
  </div>	
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+<!--   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
 <!-- 로그인 화면 폼 -->
   <!-- End page content -->
 
@@ -94,7 +99,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
 <script>
-// Accordion : 사이드메뉴 토글 기능
+// Accordion 
 function myAccFunc() {
   var x = document.getElementById("demoAcc");
   if (x.className.indexOf("w3-show") == -1) {
