@@ -40,49 +40,54 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
-
-  <!-- Push down content on small screens -->
-<!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
+	<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
+	
+ <!-- Push down content on small screens -->
+ <div class="w3-hide-large" style="margin-top:83px"></div>
+ 
+<!-- Top header -->
+ <div style="float: right;">
+	  <jsp:include page="../inc/top.jsp"/>
+	</div>
   
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
-    <p class="w3-left">SHOOKREAM</p>
+<!--     <p class="w3-left">제목</p> -->
     <p class="w3-right">
-      <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i>
     </p>
 </header>
    
   <!-- Footer -->
   <!-- 로그인 화면 폼 -->
-  <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
+  <footer class="w3-padding-64 w3-small w3-center" id="footer">
     <div id = "sform">
-        <h4>아이디 찾기</h4>
-        <form method="post" action="FindIdFormAction.me">
+        <h4 style="padding-top: 30px;">아이디 찾기</h4>
+        <form method="post" action="FindIdFormAction.me" >
         <p align="center"><a href="LoginMember.me">[돌아가기]</a></p>
-          <table class=table>
-				<tr>
+          <table>
+				<tr style="">
 					<th class="active">이름</th>
-					<td><input type="text" name="member_name" id="member_name" placeholder="이름을 입력해주세요." required></td>
+					<td width="230px"><input class="w3-input w3-border" type="text" name="member_name" id="member_name" placeholder="이름을 입력해주세요." required></td>
 				</tr>
 				<tr>
 					<th class="active">이메일 주소</th>
-					<td><input type="text" name="member_email" id="member_email" placeholder="이메일을 입력해주세요." required></td>
+					<td width="230px"><input class="w3-input w3-border" type="text" name="member_email" id="member_email" placeholder="이메일을 입력해주세요." required></td>
 				</tr>
 				<tr>
-					<td colspan="2">
+					<td colspan="2" width="230px">
 						<input type="submit" value="아이디찾기" class="w3-button w3-block w3-black" >
 					</td>
 				</tr>
 			</table>
         </form>
-				<input type="button" value="비밀번호찾기" class="w3-button w3-block w3-black" onclick="location.href='./FindPwForm.me'"><br>
+        		<div style="margin-bottom: 10px;"></div>
+				<input style="margin-bottom: 2px;" type="button" value="비밀번호찾기" class="w3-button w3-block w3-black" onclick="location.href='./FindPwForm.me'">
 				<input type="button" value="회원가입" class="w3-button w3-block w3-black" onclick="location.href='./MemberJoinForm.me'">
+				
     </div>
   </footer>
  </div>	
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+<!--   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
 <!-- 아이디/비번찾기 화면 폼 -->
   <!-- End page content -->
 
