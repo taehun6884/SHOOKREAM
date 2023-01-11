@@ -84,7 +84,7 @@ private MemberDAO() {}
 					member_idx = rs.getInt(1) + 1;
 				} 
 				
-				sql = "INSERT INTO member VALUES(?,?,?,?,?,now(),?,?,?,?,'Y')";
+				sql = "INSERT INTO member VALUES(?,?,?,?,?,?,now(),?,?,'Y')";
 				pstmt2= con.prepareStatement(sql);
 				
 				pstmt2.setInt(1, member_idx);
@@ -94,8 +94,7 @@ private MemberDAO() {}
 				pstmt2.setString(5, member.getMember_email());
 				pstmt2.setString(6, member.getMember_phone());
 				pstmt2.setInt(7, 0);
-				pstmt2.setInt(8, 0);
-				pstmt2.setString(9, member.getMember_address());
+				pstmt2.setString(8, member.getMember_address());
 				
 				insertCount = pstmt2.executeUpdate();
 				
