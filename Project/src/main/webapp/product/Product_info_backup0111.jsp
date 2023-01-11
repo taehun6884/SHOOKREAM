@@ -24,10 +24,9 @@ pageContext.setAttribute("cn", "\n");
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <style>
-.w3-sidebar a {font-family: "Noto Sans KR", sans-serif}
-body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
+.w3-sidebar a {font-family: "Roboto", sans-serif}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> 
@@ -63,7 +62,7 @@ $('.center').slick({
 		  border:1px;
 		  display: inline-block;
           text-align: center;
-        margin-left: 100px;
+          margin-left: 270PX;
           
         }
 
@@ -89,7 +88,7 @@ border:1px;
 font-family: "Montserrat", sans-serif;
 font-size:15px;
 float: right;
-margin-right: 450px;
+margin-right: 700px;
 text-align: left;
 }   
 .prod_name{
@@ -143,13 +142,6 @@ margin-left: 270PX;
 	float: right;
 }
 
-#product_content {
-	padding: 50px;
-}
-
-#reviewListArea {
-	padding: 100px 50px;
-}
 </style>
 
 <script type="text/javascript">
@@ -301,7 +293,7 @@ margin-left: 270PX;
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
+<div class="w3-main" style="margin-left:300px">
 
   <!-- Push down content on small screens -->
   <div class="w3-hide-large" style="margin-top:83px"></div>
@@ -309,12 +301,11 @@ margin-left: 270PX;
   <!-- Top header -->
   <jsp:include page="../inc/top.jsp"/>
 	
-	
+	 </div>
 <%
 
 %>
   <!-- 섬네일 이미지 -->
-  <div id="product_content">
   <div id = "sform">
 	<section id="image">
 	<div class="w3-content w3-display-container">
@@ -351,7 +342,7 @@ margin-left: 270PX;
 		<div class="text" > 
 			<p>${product.product_brand}</p>
 			<p class ="prod_name">${product.product_name }</p>
-<%-- 			<p>상품번호 : ${product.product_idx }</p>		 --%>
+			<p>상품번호 : ${product.product_idx }</p>		
 			<hr>	
 		</div>
 
@@ -397,12 +388,12 @@ margin-left: 270PX;
 			<c:choose>
 				<c:when test="${wish.product_idx eq product.product_idx }">
 					<span class="wishBtn">
-						<img onclick="deleteWish()" id="afterHeart" alt="" src="images/after_heart.png" id="btnWishAfterImage" style="width: 30px; height: 30px; cursor: pointer;"/>
+						<img onclick="deleteWish()" id="afterHeart" alt="" src="images/after_heart.png" id="btnWishAfterImage" style="width: 30px; height: 30px;"/>
 					</span>
 				</c:when>
 				<c:otherwise>
 					<span class="wishBtn">
-						<img id="beforeHeart" onclick="addWish()" alt="" src="images/before_heart.png" id="btnWishBeforImage" style="width: 30px; height: 30px; cursor: pointer;"/>
+						<img id="beforeHeart" onclick="addWish()" alt="" src="images/before_heart.png" id="btnWishBeforImage" style="width: 30px; height: 30px;"/>
 					</span>
 				</c:otherwise>
 			</c:choose>
@@ -413,8 +404,8 @@ margin-left: 270PX;
 		</form>
 		
 	</section>
- </div>
- </div> 
+
+  
  	
 <!--   <table id="detail_table"> -->
 <!-- 		<tr> -->
@@ -471,6 +462,7 @@ margin-left: 270PX;
 		</div> 	
 	
 
+ main
     <!-- 
 <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
    -->

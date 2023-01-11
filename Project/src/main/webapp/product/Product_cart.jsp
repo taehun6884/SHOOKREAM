@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <!-- 네이버아이디로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -67,7 +68,7 @@
 
 <style>
 /* .w3-sidebar a {font-family: "Roboto", sans-serif} */
-body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;} 
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;} 
 </style>
 
 <style>
@@ -109,7 +110,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     	background-color: #d2d2d2;
     }
     
-    b {
+  .cb {
     font-size: 23px;
     }
     
@@ -129,7 +130,7 @@ font-size: 70%;
 
 <!-- Top menu on small screens -->
 <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-  <div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
+  <div class="w3-bar-item w3-padding-24 w3-wide">SHOOKREAM</div>
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
 </header>
 
@@ -143,43 +144,15 @@ font-size: 70%;
   <!-- Push down content on small screens -->
   <div class="w3-hide-large" style="margin-top:83px"></div>
   	
-  	<header class="w3-container w3-xlarge">
-  	<div class="w3-right">
-   <jsp:include page="../inc/top.jsp"/>
-  	</div>
-  	</header>
   <!-- Top header -->
+ <div style="float: right;">
+ <jsp:include page="../inc/top.jsp"/>
+</div>
 
 <!--   <header class="w3-container w3-xlarge"> -->
 
- <header class="w3-container w3-xlarge" style="margin:10px">
-    <p class="w3-left" style="margin:10px" >주문내역</p>
- <i class="fa-regular fa-heart fa-xl" onclick="location.href='LikeList.ca?id=${sessionScope.sId}&member_idx=${member_idx }&pageNum=1'" style="margin:15px; float: right;"></i>
- 
-		 <div class="w3-dropdown-click" id="logintvar" style="float:right;">
-		 
-		 <i class="fa-solid fa-user fa-xl" onmouseover="myFunction()" onclick="location.href='MemberMyPage.me?id=${sessionScope.sId }'" style="margin:15px;"></i>
-		  <div id="Demo" class="w3-dropdown-content w3-bar-block w3-border" >
-		    <a href="MemberLogout.me"  class="w3-bar-item w3-button">로그아웃</a>
-		    <a href="BoardList.bo" class="w3-bar-item w3-button">고객센터 </a>
- 		<c:choose>
-		    	<c:when test="${sessionScope.sId eq 'admin' }">
-		    		<a href="Admin.ad?id=${sessionScope.sId }" class="w3-bar-item w3-button">관리자 페이지</a>
-		    	</c:when>
-		    </c:choose>
-		    </div>
-		    </div>
-    <div style="float: right;">
-    <i class="fa-solid fa-cart-shopping fa-xl" onclick="location.href='CartList.ca?member_idx=${member_idx}&pageNum=1'" style="margin: 15px;"></i>
-    </div>
-</header>
 
-<!--     <p class="w3-left">장바ㅊ구니</p> -->
-<!--     <p class="w3-right"> -->
-<!--       <i class="fa fa-shopping-cart w3-margin-right"></i> -->
-<!--       <i class="fa fa-search"></i> -->
-<!--     </p> -->
-<!-- </header> -->
+
 
   <header class="w3-container w3-xlarge" style="padding: 80px 50px;  z-index: -1">
     <p class="w3-left">
@@ -187,17 +160,17 @@ font-size: 70%;
 <!--     <i class="fa-solid fa-cart-shopping"></i> -->
     &nbsp;장바구니</p>
 <!--     <div class="w3-right out-div"> -->
-	    <div class="top_circle w3-right" id="order_circle"><h3 class="top_circle_h"><b>03</b><br>주문완료</h3></div>
-	    <div class="top_circle w3-right" id="com_circle"><h3 class="top_circle_h"><b>02</b><br>주문/결제</h3></div>
-	    <div class="top_circle w3-right" id="cart_circle"><h3 class="top_circle_h"><b>01</b><br>장바구니</h3></div>
+	    <div class="top_circle w3-right" id="order_circle"><h3 class="top_circle_h"><b class="cb">03</b><br>주문완료</h3></div>
+	    <div class="top_circle w3-right" id="com_circle"><h3 class="top_circle_h"><b class="cb">02</b><br>주문/결제</h3></div>
+	    <div class="top_circle w3-right" id="cart_circle"><h3 class="top_circle_h"><b class="cb">01</b><br>장바구니</h3></div>
 <!--     <i id="cart_circle" class="fa-solid fa-circle"></i> -->
 <!--     </div> -->
 </header>
-   <hr size="30px">
+   <hr size="25px">
 <!--   Footer -->
 <!--   <footer class="w3-padding-64 w3-small w3-center" id="footer"> -->
-<form action="">
-  <table class="table" border ="3" style="margin-top: 100px" >
+<form action="" style="padding: 0px 40px;">
+  <table class="table" border ="3" >
   <thead  class="table-dark" >
     <tr>
       <th scope="col" class ="th_cart">선택</th>
