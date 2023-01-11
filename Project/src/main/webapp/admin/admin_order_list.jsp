@@ -96,7 +96,7 @@
 									      <td>${orderlist.order_product_price }</td>
 									      <td>${orderlist.order_category }</td>
 									      <td>${orderlist.order_progress }</td>
-									      <td>${orderlist.order_date }</td>
+									      <td><fmt:formatDate value="${orderlist.order_date }" pattern ="yyyy-MM-dd"/></td>
 										<td>
 <!-- 										<button type="button" class="btn btn-light" onclick="location.href=''">수정</button> -->
 										<button type="button" class="btn btn-light" onclick="location.href='AdminProductOrderListDelete.ad?order_idx=${orderlist.order_idx}'">삭제</button>

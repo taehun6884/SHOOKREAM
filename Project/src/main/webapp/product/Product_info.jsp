@@ -407,13 +407,14 @@ margin-left: 270PX;
 				</c:otherwise>
 			</c:choose>
 			<!-- 재고에 따른 처리 -->
+<%-- 			${product.product_amount } --%>
 			<c:choose>
 				<c:when test="${product.product_amount gt 0}">
 					<input type="submit" value="장바구니" class="btn btn-dark btn-sm">
 					<input type="button" onclick="valueCheck()" value="구매하기" class="btn btn-dark btn-sm">
 				</c:when>
-				<c:when test="${product.product_amount lt 0 }">
-					죄송합니다. 현재 재고가 없는 제품입니다.
+				<c:when test="${product.product_amount le 0 }">
+					현재 재고가 없는 제품입니다.
 				</c:when>
 			</c:choose>
 		</span>	
