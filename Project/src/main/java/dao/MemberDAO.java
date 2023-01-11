@@ -84,7 +84,7 @@ private MemberDAO() {}
 					member_idx = rs.getInt(1) + 1;
 				} 
 				
-				sql = "INSERT INTO member VALUES(?,?,?,?,?,now(),?,?,?,?,'Y')";
+				sql = "INSERT INTO member VALUES(?,?,?,?,?,?,now(),?,?,'Y')";
 				pstmt2= con.prepareStatement(sql);
 				
 				pstmt2.setInt(1, member_idx);
@@ -94,8 +94,7 @@ private MemberDAO() {}
 				pstmt2.setString(5, member.getMember_email());
 				pstmt2.setString(6, member.getMember_phone());
 				pstmt2.setInt(7, 0);
-				pstmt2.setInt(8, 0);
-				pstmt2.setString(9, member.getMember_address());
+				pstmt2.setString(8, member.getMember_address());
 				
 				insertCount = pstmt2.executeUpdate();
 				
@@ -802,6 +801,48 @@ private MemberDAO() {}
 			}
 			
 			return reviewExist;
+		}
+
+
+		public List<ReviewBean> selectMyReviewList(int startRow, int listLimit, int member_idx) { // 마이 페이지 내 리뷰 출력
+			List<ReviewBean> myReviewList = null;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ReviewBean review = new ReviewBean();
+			try {
+				String sql = "SELECT * FROM review WHERE member_idx=? ORDER BY review_idx DESC LIMIT ?,? ";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, member_idx);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, listLimit);
+				rs = pstmt.executeQuery();
+				System.out.println("productDao-review: "+member_idx);
+				myReviewList = new ArrayList<ReviewBean>();
+				while(rs.next()) {
+					review = new ReviewBean();
+					review.setReview_idx(rs.getInt("review_idx"));
+					review.setProduct_idx(rs.getInt("product_idx"));
+					review.setMember_idx(rs.getInt("member_idx"));
+					review.setReview_content(rs.getString("review_content"));
+					review.setReview_img(rs.getString("review_img"));
+					review.setReview_real_img(rs.getString("review_real_img"));
+					review.setReview_date(rs.getDate("review_date"));
+					review.setRe_order_detail(rs.getString("re_order_detail"));
+					
+					myReviewList.add(review);
+
+					System.out.println("reviewList확인 : " + myReviewList);
+				}
+			} catch (SQLException e) {
+				System.out.println("sql구문 - reviewList 오류");
+				e.printStackTrace();
+			} finally {
+				JdbcUtil.close(rs);
+				JdbcUtil.close(pstmt);
+			}
+			
+			return myReviewList;
 		}
 
          

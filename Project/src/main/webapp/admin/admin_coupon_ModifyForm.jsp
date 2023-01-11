@@ -18,11 +18,15 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="admin/css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!-- 외부 jQuery 라이브러리 등록 -->
 		<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-		
+		<style type="text/css">
+			* {
+				font-family: "Noto Sans KR", sans-serif;
+			}
+		</style>
 		<script type="text/javascript">
 		//할인 버튼에 따른 처리
 		$(function() {
@@ -59,6 +63,14 @@
 			} 
 			%>
 		</script>
+		
+<style type="text/css">
+.table-secondary{
+	font-weight: bold;
+	width: 20px
+}
+
+</style>
     </head>
     <body class="sb-nav-fixed">
     

@@ -37,6 +37,9 @@ pageContext.setAttribute("cn", "\n");
 			height: auto;
 		}	
 			
+		#board_detail {
+			padding: 100px 250px 250px;
+		}	
 		</style>
 		
 	</head>
@@ -62,6 +65,8 @@ pageContext.setAttribute("cn", "\n");
 	  
 	  <!-- Top header -->
 	  <jsp:include page="../inc/top.jsp"/>
+	  
+	  <div id="board_detail">
 		<h2>Notice</h2>
 		<br><br>
 		<hr style="border:solid 1px;">	
@@ -72,8 +77,8 @@ pageContext.setAttribute("cn", "\n");
 			<button onclick="history.back()" class="btn btn-dark btn-sm">뒤로가기</button><br><br>
 <%-- 			<a href="FAQList.bo?pageNum=${param.pageNum }"><button id="listBtn" class="btn btn-outline-secondary btn-sm">목록으로</button></a> <br><br> --%>
 
-		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
-	
+<!-- 		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
+	</div>
 	  <!-- End page content -->
 	</div>
 

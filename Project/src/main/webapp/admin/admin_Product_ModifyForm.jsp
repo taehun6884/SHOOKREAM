@@ -17,7 +17,7 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="admin/css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!-- 외부 jQuery 라이브러리 등록 -->
 
@@ -33,7 +33,11 @@
 			} 
 			%>
 		</script>		
-
+		<style type="text/css">
+			* {
+				font-family: "Noto Sans KR", sans-serif;
+			}
+		</style>
    		<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript">
 		//할인 버튼에 따른 처리
@@ -57,6 +61,13 @@
 			});
 		});
 		</script>
+		
+<style type="text/css">
+.table-secondary{
+	font-weight: bold;
+}
+
+</style>
 
     </head>
     <body class="sb-nav-fixed">
@@ -157,9 +168,12 @@
 						<td width="100px" align="left" class="table-secondary">상품색상</td>
 						<td width="300px"><select name="color">
 								<option value="" style="color: red">기존 색상 : ${product.product_color}</option>
-								<option value="red">red</option>
-								<option value="blue">blue</option>
-								<option value="grey">grey</option>
+								<option value="black">BLACK</option>
+								<option value="white">WHITE</option>
+								<option value="navy">NAVY</option>
+								<option value="red">RED</option>
+								<option value="blue">BLUE</option>
+								<option value="gray">GRAY</option>
 						</select></td>
 					</tr>
 

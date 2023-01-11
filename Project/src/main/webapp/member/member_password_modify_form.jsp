@@ -1,20 +1,15 @@
-
-<%@page import="dao.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.net.URLEncoder" %>
-<%@ page import="java.security.SecureRandom" %>
-<%@ page import="java.math.BigInteger" %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>비밀번호 찾기</title>
+<title>SHOOKREAM</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <style type="text/css">
 #sform {
@@ -24,10 +19,11 @@
 </style>
 <style>
 .w3-sidebar a {font-family: "Noto Sans KR", sans-serif}
-body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Snas KR", sans-serif;}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 </style>
 </head>
 <body class="w3-content" style="max-width:95%">
+
 <!-- Sidebar/menu -->
 <jsp:include page="../inc/side.jsp"/>
 
@@ -46,7 +42,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Snas KR", sans-serif;}
  <!-- Push down content on small screens -->
  <div class="w3-hide-large" style="margin-top:83px"></div>
  
-<!-- Top header -->
+ <!-- Top header -->
  <div style="float: right;">
 	  <jsp:include page="../inc/top.jsp"/>
 	</div>
@@ -57,36 +53,32 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Snas KR", sans-serif;}
     <p class="w3-right">
     </p>
 </header>
-   
+
+  
   <!-- Footer -->
   <!-- 로그인 화면 폼 -->
-  <footer class="w3-padding-64 w3-small w3-center" id="footer">
-    <div id = "sform">
-        <h4 style="padding-top: 30px;">비밀번호 찾기</h4>
-        <form method="post" action="FindPwProAction.me">
-        <p align="center"><a href="LoginMember.me">[돌아가기]</a></p>
-          <table class=table>
-				<tr>
-					<th class="active">아이디</th>
-					<td width="230px"><input class="w3-input w3-border" type="text" name="member_id" id="member_id" required></td>
-				</tr>
-				<tr>
-					<th class="active">이름</th>
-					<td width="230px"><input class="w3-input w3-border" type="text" name="member_name" id="member_name" required></td>
-				</tr>
-				<tr>
-					<th class="active">이메일 주소</th>
-					<td width="230px"><input class="w3-input w3-border" type="text" name="member_email" id="member_email" required></td>
-				</tr>
-				
-			</table>
-						<input type="submit" value="임시비밀번호 전송" class="w3-button w3-block w3-black">
+<!--   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer"> -->
+<div style="text-align: center; padding: 100px;">
+    <div id = "sform" >
+        <h4>회원정보 수정</h4>
+        <p>개인정보 보호를 위해 비밀번호를 입력하세요</p>
+        <form action="MemberModifyForm.me?id=${sessionScope.sId }" method="post">
+        <input type="hidden" value ="${param.id }" name="id">
+          <table>
+          <tr>
+          <td width="300px"><input class="w3-input w3-border" type="password" placeholder="비밀번호를 입력하세요" name="pass" required></td>
+          </tr>
+          <tr>
+          <td><button type="submit" class="w3-button w3-block w3-black">비밀번호 확인</button></td>
+		  </tr> 	        
+        </table>
         </form>
     </div>
-  </footer>
+   </div> 
+<!--   </footer> -->
  </div>	
 <!--   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
-<!-- 아이디/비번찾기 화면 폼 -->
+<!-- 로그인 화면 폼 -->
   <!-- End page content -->
 
 
@@ -141,29 +133,47 @@ function w3_close() {
   document.getElementById("myOverlay").style.display = "none";
 }
 </script>
-
-<!-- 아이디/비번찾기 유효성 검사 -->
-<script type="text/javascript">
-fuction findIDCheck(){
-	let member_name = document.getElementById("member_name").value;
-	member_name = member_name.trim();
-		if(member_name.length < 2){
-			alert("이름 2글자 이상 입력해주세요.");
-			return false;
-		}
-	let member_email = document.getElementById("member_email").value;
-	member_email = member_email.trim();
-		if(member_name.length < 4){
-			alert("이메일 5글자 이상 입력해주세요.");
-			return false;
-		}
-		return true;
-} // findIDCheck() 끝
+<!-- Channel Plugin Scripts -->
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "552ea0bb-d4a5-4c70-8ba7-463b7682c434"
+  });
 </script>
-
- 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
- 
-  
+<!-- End Channel Plugin -->
 </body>
 </html>

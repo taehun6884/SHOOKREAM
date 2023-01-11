@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <style type="text/css">
 #sform {
           display: inline-block;
@@ -28,8 +29,8 @@ table.type03 {
   border-collapse: collapse;
   text-align: left;
   line-height: 1.5;
-  border-top: 1px solid #ccc;
-  border-left: 3px solid gray;
+  border-top: 1.5px solid #ccc;
+  border-left: 1.5px solid #ccc;
   margin-left:auto; 
   margin-right:auto;
 }
@@ -39,10 +40,10 @@ table.type03 th {
   font-weight: bold;
   font-size : 17px;
   vertical-align: top;
-  color: #153d73;
+  color: #828282; 
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
-  height: 70px;
+  height: 90px;
   width: 300px;
 
 }
@@ -56,8 +57,8 @@ table.type03 td {
 }
 </style>
 <style>
-.w3-sidebar a {font-family: "Roboto", sans-serif}
-body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+.w3-sidebar a {font-family: "Noto Sans KR", sans-serif}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script type="text/javascript">
@@ -197,7 +198,8 @@ function fn_modify() {
   			<input type="hidden" value = "${member.member_address }" name="oldaddress">
   			<input type="hidden" value = "${member.member_phone }" name="oldphone">
   			
-			<h1 style="font-size: 25px; padding-left: 100px; margin-bottom: 20px;">정보 수정</h1>
+			<h1 style="text-align: center; padding: 60px; font-size: 25px;">회원 정보 수정</h1>
+			<h6></h6>
 <!-- 			<h6 style="color: gray;text-align: center;margin-bottom: 50px" >SHOOKREAM에 오신 것을 환영합니다.</h6> -->
 <!-- 		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3> -->
 			<div>

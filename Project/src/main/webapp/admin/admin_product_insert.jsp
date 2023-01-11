@@ -18,6 +18,7 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="admin/css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
         <script type="text/javascript">
 			<%
 			String sId = (String)session.getAttribute("sId");
@@ -28,7 +29,12 @@
 			<% 
 			} 
 			%>
-		</script>        
+		</script>  
+		<style type="text/css">
+			* {
+				font-family: "Noto Sans KR", sans-serif;
+			}
+		</style>      
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!-- 외부 jQuery 라이브러리 등록 -->
 		<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -54,11 +60,17 @@
 				alert(discount);
 			});
 		});
-		
-		
-		
 		</script>
+<style type="text/css">
+.table-secondary{
+	font-weight: bold;
+}
+
+</style>
+
+
     </head>
+    
     <body class="sb-nav-fixed">
     
     <!-- TOP -->
@@ -69,7 +81,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">상품 등록</h1>
+                        <h1 class="mt-4" >상품 등록</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active"></li>
                         </ol>
@@ -92,7 +104,7 @@
 					<tr>
 						<td width="100px" align="left" class="table-secondary">상품 브랜드</td>
 						<td width="300px">
-						<select name="brand" >
+						<select name="brand" id ="product_brand">
 								<option value="" selected>브랜드를 선택하세요</option>
 								<option value="나이키">나이키</option>
 								<option value="뉴발란스">뉴발란스</option>
@@ -141,7 +153,8 @@
 
 						<td width="100px" align="left" class="table-secondary">상품 사이즈</td>
 						<td width="300px">
-						<select name="size">
+						<select name="size" id ="product_size">
+								<option value="" selected>사이즈를 선택해주세요.</option>
 								<option value="220">220</option>
 								<option value="230">230</option>
 								<option value="240">240</option>
@@ -158,11 +171,15 @@
 					</tr>
 
 					<tr>
-						<td width="100px" align="left" class="table-secondary">상품색상</td>
-						<td width="300px"><select name="color">
-								<option value="red">red</option>
-								<option value="blue">blue</option>
-								<option value="grey">grey</option>
+						<td width="100px" align="left" class="table-secondary">상품 색상</td>
+						<td width="300px"><select name="color" id ="product_color">
+								<option value="" selected>색상을 선택해주세요.</option>
+								<option value="black">BLACK</option>
+								<option value="white">WHITE</option>
+								<option value="navy">NAVY</option>
+								<option value="red">RED</option>
+								<option value="blue">BLUE</option>
+								<option value="gray">GRAY</option>
 						</select></td>
 					</tr>
 
@@ -184,20 +201,20 @@
 
 					<tr>
 						<td width="100px" align="left" class="table-secondary">메인 이미지</td>
-						<td><input type="file" name="file"></td>
+						<td><input type="file" name="file" required="required"></td>
 					</tr>
 					<tr>
 						<td width="100px" align="left" class="table-secondary">제품 이미지1</td>
-						<td><input type="file" name="file2"></td>
+						<td><input type="file" name="file2" required="required"></td>
 					</tr>
 					<tr>
 						<td width="100px" align="left" class="table-secondary">제품 이미지2</td>
-						<td><input type="file" name="file3"></td>
+						<td><input type="file" name="file3" required="required"></td>
 					</tr>
 
 					<tr>
 						<td colspan="2"><button type="submit"
-								class="w3-button w3-block w3-black">등록하기</button></td>
+								class="w3-button w3-block w3-black" onclick="valueCheck(this)">등록하기</button></td>
 					</tr>
 				</table>
 			</form>
@@ -246,7 +263,38 @@
 			    document.getElementById('product_release_price').value = releasePrice;	 
 			});
 		</script>
+		<script type="text/javascript">
 		
+		//색상, 사이즈 미선택 시 못넘어가게 하는 구문
+		function valueCheck(e){
+			var product_brand = $("#product_brand").val();
+			var product_color = $("#product_color").val();
+			var product_size = $("#product_size").val();
+// 			alert(product_brand);
+// 			alert(product_color);
+// 			alert(product_size);
+			
+			
+			if(product_brand ==""){
+				alert("브랜드를 선택 해주세요")
+				e.preventDefault();
+// 				return false;
+			}else if(product_size == ""){
+				alert("사이즈를 선택 해주세요");
+				e.preventDefault();
+// 				return false;
+			}else if(product_color =""){
+				alert("색상을 선택 해주세요");
+				e.preventDefault();
+// 				return false;
+			}
+				
+			return true;
+			
+
+		}// valueCheck 끝
+		
+		</script>
 	<!-- 숫자 에 "," 처리를 위한 함수 -->
         <script type="text/javascript">
 		    function comma(str) {

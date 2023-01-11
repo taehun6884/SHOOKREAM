@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
-
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <style type="text/css">
 #sform {
           display: inline-block;
@@ -22,8 +22,8 @@
         }
 </style>
 <style>
-.w3-sidebar a {font-family: "Roboto", sans-serif}
-body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+.w3-sidebar a {font-family: "Noto Sans KR", sans-serif}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 </style>
 </head>
 <body class="w3-content" style="max-width:95%">
@@ -41,36 +41,38 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
-
-  <!-- Push down content on small screens -->
-<!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
+	<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
+	
+ <!-- Push down content on small screens -->
+ <div class="w3-hide-large" style="margin-top:83px"></div>
+ 
+<!-- Top header -->
+ <div style="float: right;">
+	  <jsp:include page="../inc/top.jsp"/>
+	</div>
   
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
-    <p class="w3-left"></p>
+<!--     <p class="w3-left">제목</p> -->
     <p class="w3-right">
-      <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i>
     </p>
 </header>
 
   
   <!-- Footer -->
-  <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
+  <footer class="w3-padding-64 w3-small w3-center" id="footer">
     <div id = "sform">
-        <h3>아이디 찾기 결과</h3><br>
-        
-        <h5>회원님의 아이디는</h5>
-        <b>${member }</b>
-        <h5>입니다.</h5><br>
-		<button type="button" class="w3-button w3-block w3-black" onclick="location.href='LoginMember.me'">로그인</button><br>
+    	
+         <h4 style="padding-top: 30px;">아이디 찾기 결과</h4>
+        <div style="padding-bottom: 10px;"></div>
+        <h5>회원님의 아이디는 <b>${member }</b> 입니다.</h5>
+        <div style="padding-bottom: 50px;"></div>
+		<button style="margin-bottom: 2px; width: 300px;" type="button" class="w3-button w3-block w3-black" onclick="location.href='LoginMember.me'">로그인</button>
 		<button type="button" class="w3-button w3-block w3-black" onclick="location.href='FindPwForm.me'">비밀번호 찾기</button>
-
 	</div>
   </footer>
  </div>	
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+<!--   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
   <!-- End page content -->
 
 

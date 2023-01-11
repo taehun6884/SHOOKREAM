@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <!-- 네이버아이디로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -64,10 +64,13 @@
 	
 	}
 	
+	td {
+	vertical-align : baseline;
+	}
 	</style>
 <style>
-.w3-sidebar a {font-family: "Roboto", sans-serif}
-body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+.w3-sidebar a {font-family: "Noto Sans KR", sans-serif}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 </style>
 </head>
 <body class="w3-content" style="max-width:95%">
@@ -76,7 +79,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 <!-- Top menu on small screens -->
 <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-  <div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
+  <div class="w3-bar-item w3-padding-24 w3-wide">SHOOKREAM</div>
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
 </header>
 
@@ -84,17 +87,22 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px">
-
-  <!-- Push down content on small screens -->
-<!--   <div class="w3-hide-large" style="margin-top:83px"></div> -->
+<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
+	
+ <!-- Push down content on small screens -->
+ <div class="w3-hide-large" style="margin-top:83px"></div>
+ 
+ <!-- Top header -->
+ <div style="float: right;">
+ <jsp:include page="../inc/top.jsp"/>
+</div>
   
   <!-- Top header -->
+  
+  <div style="padding: 100px 100px;">
   <header class="w3-container w3-xlarge">
-    <p class="w3-left">주문 상세 페이지</p>
+    <p class="w3-left">주문하기</p>
     <p class="w3-right">
-      <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i>
     </p>
 </header>
    
@@ -127,7 +135,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	  </tbody>
 	</table>
    
-	  <table class="table">
+	  <table class="table" style="border-collapse: separate; border-spacing: 0 13px;" >
 	  <input type="hidden" id="coupon_idx" >
 	  <thead>
 	    <tr>
@@ -136,11 +144,11 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	  </thead>
 	  <tbody>
 	   <tr>
-	    	<td colspan="8">
-	    	<p style="font: bold; font-size: large; text-align: center;">
+	    	<td colspan="8" style="vertical-align: baseline;">
+	    	<span style="font: bold; font-size: large; text-align: center; ">
 	    	사용 가능한 쿠폰(0장) 중 (0장)의 쿠폰이 적용되었습니다.
-	    	</p>
-	    	<button type="button" class="btn btn-dark btn-sm" style="  margin:auto; display:block;" onclick="CouponCheck()">내가 보유한 쿠폰 보러가기</button>
+	    	</span>
+	    	<span style=" padding-left: 15px; vertical-align: middle; text-align: center;" ><button type="button" class="btn btn-dark btn-sm" onclick="CouponCheck()">내가 보유한 쿠폰 보러가기</button></span>
 	    	</td>
 	   </tr>
 	   <tr>
@@ -158,7 +166,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	  </tbody>
 	</table>
 	 
-	 <table class="table" id="delivery_table">
+	 <table class="table" id="delivery_table" style="border-collapse: separate; border-spacing: 0 13px;">
 	  <thead>
 	    <tr>
 	      <th scope="col" colspan="8" style="font-size: x-large;">배송 정보</th>
@@ -179,7 +187,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 		<th colspan="2">배송지 선택</th>
 		<td colspan="6" style="margin-left:500px;">
 			<input type="radio" value="" name=""> 기본배송지
-			<input type="radio" value="새로운 배송지" name="">새로운 배송지
+			<input type="radio" value="새로운 배송지" name=""> 새로운 배송지
 		</td>
 	   </tr>
 	   <tr>
@@ -213,6 +221,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 	</table>
 	 <button type="button" style="margin:auto; display:block;" class="btn btn-dark btn-sm" onclick="iamport()">구매하기</button>
 	    </div>
+	    
+	   </div> 
+	    
 <!-- Newsletter Modal -->
 <div id="newsletter" class="w3-modal">
   <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
@@ -338,7 +349,7 @@ function iamport(){
 			console.log(rsp);
 		    if ( rsp.success ) {
 		    	var msg = '결제가 완료되었습니다.';
-		    	msg += '상품 : ' + rsp.imp_name;
+		    	msg += '상품 : ' + '${prodcut.product_name }';
 		        msg += '결제 금액 : ' + rsp.paid_amount;
 		        location.href="ProductOrderPro.po?order_category=주문완료&order_progress=배송완료&member_idx=${member_idx}&product_idx=${product.product_idx}&product_amount=${product.product_amount}&product_sell_count=${product.product_sell_count}&product_price="+rsp.paid_amount+"&coupon_idx="+$("#coupon_idx").val();
 		    } else {

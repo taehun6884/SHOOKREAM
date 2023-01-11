@@ -27,8 +27,6 @@ public class MyPageDeliveryAction implements Action {
 		forward.setPath("member/my_page.jsp");
 		forward.setRedirect(false);
 		
-		
-		
 		return forward;
 	}
 

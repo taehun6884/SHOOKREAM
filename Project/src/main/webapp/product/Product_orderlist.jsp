@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <!-- 네이버아이디로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -52,11 +53,11 @@
     }
     </style>
 <style>
-.w3-sidebar a {font-family: "Roboto", sans-serif}
-body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+.w3-sidebar a {font-family: "Noto Sans KR", sans-serif}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 </style>
 <script>
-	// 리뷰작성 폼 팝업 <<<<<url 파라미터 변경하기!>>>>
+	// 리뷰작성 폼 팝업 
 	function reviewForm(idx,size,color) {
 		let url = "ReviewWriteForm.me?member_idx=${sessionScope.member_idx}&product_idx="+idx+"&product_size="+size+"&product_color="+color;  // 테스트용 파라미터임!
 		let name = "review form";
@@ -136,7 +137,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <td>${order.order_product_color }</td>
       <td><fmt:formatDate value="${order.order_date }" pattern="yyyy-MM-DD"/></td>
 	  <td><input type="button" value="리뷰 작성하기" class="btn btn-dark" onclick="reviewForm(${order.order_product_idx },'${order.order_product_size }','${order.order_product_color }')">
-      <button type="button" class="btn btn-dark" onclick="deleteOrder(${order.order_idx})">삭제</button></td>
+<%--       <button type="button" class="btn btn-dark" onclick="deleteOrder(${order.order_idx})">삭제</button></td> --%>
     </tr>
     </c:forEach>
   </tbody>
