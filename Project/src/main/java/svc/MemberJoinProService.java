@@ -20,8 +20,8 @@ public class MemberJoinProService {
 		int insertCount = dao.insertMember(member);
 		
 		if(insertCount > 0) { // 성공 시
-			int member_idx = member.getMember_idx();
-			int insertCount2 = dao.insertWelcomCoupon();
+			int member_idx = dao.selectMemberidxCoupon();
+			int insertCount2 = dao.insertWelcomCoupon(member_idx);
 			
 				if(insertCount2 > 0) { // 회원가입 쿠폰 지급
 					JdbcUtil.commit(con);

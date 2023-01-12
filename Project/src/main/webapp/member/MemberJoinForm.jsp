@@ -137,7 +137,7 @@ $(function() {
 		$("#phone").on("change", function() {
 			let phone = $("#phone").val();
 			
-			let regex =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+			let regex =/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})[0-9]{3,4}[0-9]{4}$/;
 			if(!regex.exec(phone)) {
 				$("#phoneCheckResult").html("잘못된 휴대전화 형식입니다").css("color", "red");
 				phoneStatus = false;
@@ -421,13 +421,13 @@ function inputIdChk(){
 			// 이메일 인증 확인
 			if(!isEmailAuth) { 
 				
-				alert(isEmailAuth); 
+// 				alert(isEmailAuth); 
 				alert("Email 인증을 완료 해주세요!");
 				event.preventDefault(); // submit 기능 막기
 				
 				return false; // submit 취소
 			}
-				alert(isEmailAuth); 
+// 				alert(isEmailAuth); 
 				alert("Email 인증 성공!");
 				return true; // submit 실행
 		});
@@ -460,14 +460,14 @@ function inputIdChk(){
 		            datatype: "html",
 					success:function(data){
 						const isSuccess = $.trim(data);
-						alert(isSuccess);
+// 						alert(isSuccess);
 						if(isSuccess == "true"){ 
 							
 							alert("인증 성공");
 	                	  	 $("#authEmailResult").html("인증 성공!").css("color", "blue");
 // 	                	  	 $("#authResult").reload(window.location.href + " #authResult");
 	                	  	 isEmailAuth = true;
-	                	  	 alert(isEmailAuth);
+// 	                	  	 alert(isEmailAuth);
 	    	            } else {
 							alert("인증 실패");
 							 $("#authEmailResult").html("인증 실패!").css("color", "red");
@@ -475,7 +475,7 @@ function inputIdChk(){
 // 							 $('join_btn').prop('disabled', false);
 // 							 $("#authResult").reload(window.location.href + " #authResult");
 	                	  	 isEmailAuth = false;
-	                	  	alert(isEmailAuth);
+// 	                	  	alert(isEmailAuth);
 	    	            }//else
 					
 					}//success

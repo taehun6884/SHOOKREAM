@@ -51,6 +51,7 @@ private ProductDAO() {}
 		PreparedStatement pstmt3 = null;
 		PreparedStatement pstmt4 = null;
 		ResultSet rs = null;
+		ResultSet rs2 = null;
 		
 		try {
 			//----------------idx 작업------------------
@@ -94,12 +95,12 @@ private ProductDAO() {}
 				sql = "SELECT MAX(image_idx) FROM image";
 				int idx2 = 1; // 새 글 번호
 				pstmt3 = con.prepareStatement(sql);
-				rs = pstmt3.executeQuery();
+				rs2 = pstmt3.executeQuery();
 				
 				if(rs.next()) { 
 					 //true -> 조회결과가 있을 경우 (= 게시물이 하나라도 존재할 경우)
 					 //존재하지 않을 경우 rs.next는 false , DB에서는 NULL이 표기된다.
-					idx2 = rs.getInt(1) + 1;
+					idx2 = rs2.getInt(1) + 1;
 				}
 				
 				sql = "INSERT INTO image (image_idx, product_idx, image_main_file, image_real_file1, image_real_file2) VALUES(?,?,?,?,?)";
@@ -118,6 +119,7 @@ private ProductDAO() {}
 			System.out.println("상품등록 - 관리자");
 			e.printStackTrace();
 		} finally {
+			JdbcUtil.close(rs2);
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt4);
 			JdbcUtil.close(pstmt3);
@@ -932,7 +934,7 @@ private ProductDAO() {}
 		public int insertOrder(OrderBean vo) {
 			int insertOrder = 0;
 			PreparedStatement pstmt = null,pstmt2 = null,pstmt3 = null,pstmt4=null;
-			ResultSet rs = null,rs2=null;
+			ResultSet rs = null;
 			
 			try {
 				String sql = "SELECT MAX(order_idx) FROM orderlist";
@@ -1946,43 +1948,54 @@ private ProductDAO() {}
 		public int memberDownCoupon(int member_idx, String coupon_content) {
 			int insertCount = 0;
 			
-			PreparedStatement pstmt = null, pstmt2 = null;
-			ResultSet rs = null;
+			 PreparedStatement pstmt=null, pstmt2=null, pstmt3=null;
+            ResultSet rs = null, rs2 = null;
 			
 			try {
-				 int coupon_idx = 0;
-	              String coupon_name = "";
-	              int coupon_price = 0;
-	              String coupon_start = "";
-	              String coupon_end = "";
 				
-				String sql = "SELECT coupon_idx,coupon_name,coupon_price, coupon_start, coupon_end "
+			   int member_coupon_idx = 1; //  idx 처리
+               String sql = "SELECT MAX(member_coupon_idx) FROM member_coupon";
+               pstmt= con.prepareStatement(sql);
+               rs = pstmt.executeQuery();
+               
+               if(rs.next()) {
+            	   member_coupon_idx = rs.getInt(1) + 1;
+               } 
+			
+			 int coupon_idx = 0;
+              String coupon_name = "";
+              int coupon_price = 0;
+              String coupon_start = "";
+              String coupon_end = "";
+				
+				sql = "SELECT coupon_idx,coupon_name,coupon_price, coupon_start, coupon_end "
 						+ "FROM coupon WHERE coupon_content LIKE ?";
 				
-				pstmt= con.prepareStatement(sql);
-				pstmt.setString(1, "%"+coupon_content+"%");
-				rs = pstmt.executeQuery();
+				pstmt2= con.prepareStatement(sql);
+				pstmt2.setString(1, "%"+coupon_content+"%");
+				rs2 = pstmt2.executeQuery();
 //				System.out.println("쿠폰 다운 검색: " + pstmt);
 				
-				if(rs.next()) {
-					coupon_idx = rs.getInt(1);
-					coupon_name = rs.getString(2);
-					coupon_price = rs.getInt(3);
-					coupon_start = rs.getString(4);
-					coupon_end = rs.getString(5);
+				if(rs2.next()) {
+					coupon_idx = rs2.getInt(1);
+					coupon_name = rs2.getString(2);
+					coupon_price = rs2.getInt(3);
+					coupon_start = rs2.getString(4);
+					coupon_end = rs2.getString(5);
 				} 
 				
-				sql = "INSERT INTO member_coupon VALUES(?,?,?,?,0,?,?)";
-				pstmt2= con.prepareStatement(sql);
+				sql = "INSERT INTO member_coupon VALUES(?,?,?,?,?,0,?,?)";
+				pstmt3= con.prepareStatement(sql);
 				
-				pstmt2.setInt(1, member_idx);
-				pstmt2.setInt(2, coupon_idx);
-				pstmt2.setString(3, coupon_name);
-				pstmt2.setInt(4, coupon_price);
-				pstmt2.setString(5, coupon_start);
-				pstmt2.setString(6, coupon_end);
+				pstmt3.setInt(1, member_coupon_idx);
+				pstmt3.setInt(2, member_idx);
+				pstmt3.setInt(3, coupon_idx);
+				pstmt3.setString(4, coupon_name);
+				pstmt3.setInt(5, coupon_price);
+				pstmt3.setString(6, coupon_start);
+				pstmt3.setString(7, coupon_end);
 //				System.out.println(pstmt2);
-				insertCount = pstmt2.executeUpdate();
+				insertCount = pstmt3.executeUpdate();
 				
 			} catch (SQLException e) {
 				System.out.println("SQL 구문 오류! - memberDownCoupon()");

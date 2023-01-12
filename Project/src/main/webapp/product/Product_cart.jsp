@@ -207,13 +207,11 @@ font-size: 70%;
       <td class ="td_cart" id="cart_order_price" ><fmt:formatNumber value="${cart.cart_order_price}" pattern="#,###원"></fmt:formatNumber></td> 
 <%--       <td class ="td_cart">${status.end }</td> --%>
       <td class ="td_cart">
-      <input type="number" value="${cart.cart_count }" style="width: 35px">
-      <br>
-      <button>변경</button>
+      <input type="number" value="${cart.cart_count }" style="width: 35px" readonly="readonly">
       </td>
       <td class ="td_cart">무료배송</td>
       <td class ="td_cart">
-      <button type="button" class="btn btn-dark" onclick="location.href='CartDeletePro.ca?cart_idx=${cart.cart_idx }'">삭제</button>
+      <button type="button" class="btn btn-dark" onclick="location.href='CartDeletePro.ca?cart_idx=${cart.cart_idx }&member_idx=${cart.member_idx }'">삭제</button>
       </td>
     </tr>
     </c:forEach>
@@ -273,7 +271,9 @@ font-size: 70%;
 <!--         <a href="#">5</a> -->
     </div>
   </div>
-<!-- </footer> -->
+ <footer>
+  	<jsp:include page="../inc/footer.jsp"/>
+  </footer>
   
 
 

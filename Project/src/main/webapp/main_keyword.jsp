@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>SHOKREAM</title>
+<title>SHOOKREAM</title>
 <meta charset="UTF-8">
 <!-- 네이버 아이디 로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
@@ -206,8 +206,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 		</c:choose>
     </div>
    </div>
-<!-- </footer> -->
-<%--     <jsp:include page="./inc/footer.jsp"/> --%>
+<!--  <footer> -->
+<%--   	<jsp:include page="../inc/footer.jsp"/> --%>
+<!--   </footer> -->
   
   
 

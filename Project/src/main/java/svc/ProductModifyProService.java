@@ -25,6 +25,9 @@ public class ProductModifyProService {
 			JdbcUtil.rollback(con);
 			isUpdateSuccess = false;
 		}
+		
+		JdbcUtil.close(con);
+
 		return isUpdateSuccess;
 	}
 	

@@ -106,8 +106,8 @@
 										<td>${product.product_name }</td>
 										<td><img src="./upload/${product.product_img }" class="img-thumbnail" alt="..." width="150" height="150"></td>
 										<td>${product.product_brand }</td>
-										<td>${product.product_price }</td>
-										<td>${product.product_amount }</td>
+										<td><fmt:formatNumber value="${product.product_price }" pattern="#,###원"></fmt:formatNumber> </td>
+										<td><fmt:formatNumber value="${product.product_amount }" pattern="#개"></fmt:formatNumber></td>
 										<td><fmt:formatDate value="${product.product_date}" pattern="yyyy-MM-dd"/></td>
 										<td>
 										

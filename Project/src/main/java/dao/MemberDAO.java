@@ -358,7 +358,7 @@ private MemberDAO() {}
 						member.setMember_phone(rs.getString("member_phone")); // 휴대폰 번호
 						member.setMember_address(rs.getString("member_address")); // 주소
 						member.setMember_dec(rs.getInt("member_dec")); // 신고횟수
-						member.setMember_point(rs.getInt("member_point")); // 적립금
+//						member.setMember_point(rs.getInt("member_point")); // 적립금
 						
 						memberList.add(member);
 						//확인작업
@@ -550,14 +550,12 @@ private MemberDAO() {}
 				boolean result = false;
 				
 				PreparedStatement pstmt = null;
-				
 				try {
 					String sql="UPDATE member SET member_pass=? WHERE member_id=?";
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, imsiPw.toString());
 					pstmt.setString(2, member.getMember_id());
 					int resultCount = pstmt.executeUpdate();
-					
 					if(resultCount > 0) {
 						result = true;
 						
@@ -721,21 +719,52 @@ private MemberDAO() {}
 						return AuthSuccess;
 				}
 
+					
+					
+			// 쿠폰 발급 위한 member_idx 조회
+			public int selectMemberidxCoupon() {
+				int member_idx = 0;
+				
+			 PreparedStatement pstmt=null;
+	            ResultSet rs = null;
+	            
+	            try {
+	               String sql = "SELECT MAX(member_idx) FROM member";
+	               pstmt= con.prepareStatement(sql);
+	               rs = pstmt.executeQuery();
+	               
+	               if(rs.next()) {
+	                  member_idx = rs.getInt(1);
+	               } 
+	               
+	               System.out.println("couponmemberidx : " + member_idx);
+	               
+	               } catch (SQLException e) {
+	                  System.out.println("SQL 구문 오류! - selectMemberidxCoupon()");
+	                  e.printStackTrace();
+	               } finally {
+	                  JdbcUtil.close(rs);
+	                  JdbcUtil.close(pstmt);
+	               }
+	            
+				return member_idx;
+			}
+
 			// 회원가입시 회원가입 쿠폰 지급
-         public int insertWelcomCoupon() {
+         public int insertWelcomCoupon(int member_idx) {
             int insertCount = 0;
             
             PreparedStatement pstmt=null, pstmt2=null, pstmt3=null;
             ResultSet rs = null, rs2 = null;
             
             try {
-               int member_idx = 1; // 회원 idx 처리
-               String sql = "SELECT MAX(member_idx) FROM member";
+               int member_coupon_idx = 1; //  idx 처리
+               String sql = "SELECT MAX(member_coupon_idx) FROM member_coupon";
                pstmt= con.prepareStatement(sql);
                rs = pstmt.executeQuery();
                
                if(rs.next()) {
-                  member_idx = rs.getInt(1) + 1;
+            	   member_coupon_idx = rs.getInt(1) + 1;
                } 
 //               System.out.println(member_idx);
                
@@ -755,15 +784,16 @@ private MemberDAO() {}
                }
                System.out.println(coupon_idx);
                // member_coupon insert 작업
-               sql = "INSERT INTO member_coupon VALUES(?,?,?,?,0,now(),date_add(now(),interval 30 day))";
+               sql = "INSERT INTO member_coupon VALUES(?,?,?,?,?,0,now(),date_add(now(),interval 30 day))";
                pstmt3 = con.prepareStatement(sql);
 
-               pstmt3.setInt(1, member_idx);
-               pstmt3.setInt(2, coupon_idx);
-               pstmt3.setString(3, coupon_name);
-               pstmt3.setInt(4, coupon_price);
+               pstmt3.setInt(1, member_coupon_idx);
+               pstmt3.setInt(2, member_idx);
+               pstmt3.setInt(3, coupon_idx);
+               pstmt3.setString(4, coupon_name);
+               pstmt3.setInt(5, coupon_price);
                
-//               System.out.println(pstmt3);
+               System.out.println("member_coupon insert 작업" + pstmt3);
                
                insertCount = pstmt3.executeUpdate();
                } catch (SQLException e) {
@@ -848,6 +878,7 @@ private MemberDAO() {}
 			return myReviewList;
 		}
 
+		
          
 			
 

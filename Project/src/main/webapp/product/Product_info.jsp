@@ -272,7 +272,7 @@ margin-left: 270PX;
 		
 						alert("찜한 상품에 추가되었습니다!");
 						
-						$(".wishBtn").html('<img id="afterHeart" alt="" src="images/after_heart.png" id="btnWishAfterImage" onclick="deleteWish()" style="width: 30px; height: 30px;"/>');
+						$(".wishBtn").html('<img id="afterHeart" alt="" src="images/after_heart.png" id="btnWishAfterImage" onclick="deleteWish()" style="width: 30px; height: 30px; cursor: pointer;"/>');
 				}, 
 				error: function(xhr, textStatus, errorThrown) {
 					alert("찜하기 실패"); 
@@ -402,7 +402,7 @@ margin-left: 270PX;
 				</c:when>
 				<c:otherwise>
 					<span class="wishBtn">
-						<img id="beforeHeart" onclick="addWish()" alt="" src="images/before_heart.png" id="btnWishBeforImage" style="width: 30px; height: 30px; cursor: pointer;"/>
+						<img id="beforeHeart" onclick="addWish()" alt="" src="images/before_heart.png" id="btnWishBeforImage" style="width: 30px; height: 30px; cursor: pointer;"/>&nbsp;
 					</span>
 				</c:otherwise>
 			</c:choose>
@@ -412,6 +412,7 @@ margin-left: 270PX;
 					<input type="submit" value="장바구니" class="btn btn-dark btn-sm">
 					<input type="button" onclick="valueCheck()" value="구매하기" class="btn btn-dark btn-sm">
 				</c:when>
+
 				<c:when test="${product.product_amount le 0}">
 					현재 재고가 없는 제품입니다.
 				</c:when>
@@ -436,7 +437,7 @@ margin-left: 270PX;
 <!-- 	</table> -->
 
 	<hr>	 <%-- 리뷰구역 --%> -->
-		<div id="reviewListArea">
+		<div id="reviewListArea" style="z-index:1;">
 			<h3>Review</h3>
 				<div>
 					<c:forEach var="review" items="${reviewList }">
@@ -476,12 +477,12 @@ margin-left: 270PX;
 				</c:choose>
 			</c:forEach>
 		</section>	
+     <footer style="z-index:-1;">
+  	<jsp:include page="../inc/footer.jsp"/>
+  </footer>
 		</div> 	
 	
 
-    <!-- 
-<footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
-   -->
 <%-- 	<img src="./upload/${product.product_img }" class="img-thumbnail" alt="..." width="150" height="150"> --%>
 <!--  	<table border="1"> -->
 <!-- 	 	<tr> -->

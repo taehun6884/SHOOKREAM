@@ -262,7 +262,7 @@ function couponDown(coupon_content) {
 	} else {
 		url = "CouponMainList.po?member_idx="+member_idx+"&coupon_content="+coupon_content; 
 		let name = "Coupon List";
-		let attr = "width=280, height=280, top=200, left=510"
+		let attr = "width=350px, height=400px, top=200, left=510"
 		window.open(url, name, attr);
 	}
 }

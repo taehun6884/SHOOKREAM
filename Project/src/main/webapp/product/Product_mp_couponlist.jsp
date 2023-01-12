@@ -140,6 +140,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 
 
 </footer>
+ <footer>
+  	<jsp:include page="../inc/footer.jsp"/>
+  </footer>
   </div>
 
 
