@@ -21,6 +21,7 @@
           display: inline-block;
           text-align: center;
         }
+        
 </style>
 <style>
 .w3-sidebar a {font-family: "Noto Sans KR", sans-serif}
@@ -83,6 +84,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Snas KR", sans-serif;}
 						<input type="submit" value="임시비밀번호 전송" class="w3-button w3-block w3-black">
         </form>
     </div>
+  </footer>
+   <footer>
+  	<jsp:include page="../inc/footer.jsp"/>
   </footer>
  </div>	
 <!--   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->

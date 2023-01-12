@@ -83,6 +83,9 @@ pageContext.setAttribute("cn", "\n");
 <!-- 		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
 	</div>
 	  <!-- End page content -->
+	  <footer>
+	  	<jsp:include page="../inc/footer.jsp"></jsp:include>
+	  </footer>
 	</div>
 
 <script>

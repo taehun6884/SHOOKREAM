@@ -15,9 +15,11 @@ public class BoardDeleteProAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
 		
+		String notice_type = request.getParameter("notice_type");
 		int notice_idx = Integer.parseInt(request.getParameter("notice_idx"));
-		
+		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 //		System.out.println("DeleteProAction - notice_idx = " + request.getParameter("notice_idx"));
+		System.out.println("DeleteProAction - pageNum = " + request.getParameter("pageNum"));
 		
 		BoardDeleteProService service = new BoardDeleteProService();
 		
@@ -32,10 +34,16 @@ public class BoardDeleteProAction implements Action {
 				out.println("history.back()");
 				out.println("</script>");
 			} else {
+				if(notice_type == "Notice") {
+					forward = new ActionForward();
+					forward.setPath("AdminNoticeManage.ad?pageNum=" + pageNum);
+					forward.setRedirect(true);
+				} else {
+					forward = new ActionForward();
+					forward.setPath("AdminFAQManage.ad?pageNum=" + pageNum);
+					forward.setRedirect(true);
+				}
 				
-				forward = new ActionForward();
-				forward.setPath("AdminNoticeManage.ad?pageNum=" + request.getParameter("pageNum"));
-				forward.setRedirect(true);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

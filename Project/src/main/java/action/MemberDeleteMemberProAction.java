@@ -39,11 +39,11 @@ public class MemberDeleteMemberProAction implements Action {
 						
 						
 						} else { // 삭제 성공 시
-							
+							HttpSession session = request.getSession();
+							session.invalidate();
 							forward = new ActionForward();
-							forward.setPath("./MemberList.me");
+							forward.setPath("./main.MAIN");
 							forward.setRedirect(true);
-							
 								
 							}
 							

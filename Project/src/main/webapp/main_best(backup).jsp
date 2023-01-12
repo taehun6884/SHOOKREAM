@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>SHOKREAM</title>
+<title>SHOOKREAM</title>
 <meta charset="UTF-8">
 <!-- 네이버 아이디 로그인 -->
 <script type="text/javascript"

@@ -51,6 +51,7 @@ private ProductDAO() {}
 		PreparedStatement pstmt3 = null;
 		PreparedStatement pstmt4 = null;
 		ResultSet rs = null;
+		ResultSet rs2 = null;
 		
 		try {
 			//----------------idx 작업------------------
@@ -68,7 +69,7 @@ private ProductDAO() {}
 			
 			//----------------상품 등록----------------------
 
-			sql = "INSERT INTO product VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?)";
+			sql = "INSERT INTO product VALUES(?,?,?,?,?,?,?,?,?,?,?,?,now(),?)";
 			
 			pstmt2 = con.prepareStatement(sql);
 			pstmt2.setInt(1, idx); //idx
@@ -77,14 +78,13 @@ private ProductDAO() {}
 			pstmt2.setString(4, product.getProduct_size()); // size
 			pstmt2.setInt(5, product.getProduct_price()); // price
 			pstmt2.setInt(6, product.getProduct_release_price()); // release price(쿠폰적용가격)
-			pstmt2.setInt(7, 0); // buy price(누적가격)
-			pstmt2.setInt(8, product.getProduct_amount()); // amount
-			pstmt2.setInt(9, 0); // sell_count
-			pstmt2.setString(10, product.getProduct_exp()); //요약 설명
-			pstmt2.setString(11, product.getProduct_detail_exp()); //상세 설명
-			pstmt2.setString(12, product.getProduct_color()); //색상
-			pstmt2.setDouble(13, product.getProduct_discount_price()); //할인율
-			pstmt2.setInt(14, 0); //상품 좋아요 수 누적
+			pstmt2.setInt(7, product.getProduct_amount()); // amount
+			pstmt2.setInt(8, 0); // sell_count
+			pstmt2.setString(9, product.getProduct_exp()); //요약 설명
+			pstmt2.setString(10, product.getProduct_detail_exp()); //상세 설명
+			pstmt2.setString(11, product.getProduct_color()); //색상
+			pstmt2.setDouble(12, product.getProduct_discount_price()); //할인율
+			pstmt2.setInt(13, 0); //상품 좋아요 수 누적
 
 			
 			insertCount = pstmt2.executeUpdate();
@@ -95,12 +95,12 @@ private ProductDAO() {}
 				sql = "SELECT MAX(image_idx) FROM image";
 				int idx2 = 1; // 새 글 번호
 				pstmt3 = con.prepareStatement(sql);
-				rs = pstmt3.executeQuery();
+				rs2 = pstmt3.executeQuery();
 				
 				if(rs.next()) { 
 					 //true -> 조회결과가 있을 경우 (= 게시물이 하나라도 존재할 경우)
 					 //존재하지 않을 경우 rs.next는 false , DB에서는 NULL이 표기된다.
-					idx2 = rs.getInt(1) + 1;
+					idx2 = rs2.getInt(1) + 1;
 				}
 				
 				sql = "INSERT INTO image (image_idx, product_idx, image_main_file, image_real_file1, image_real_file2) VALUES(?,?,?,?,?)";
@@ -119,6 +119,7 @@ private ProductDAO() {}
 			System.out.println("상품등록 - 관리자");
 			e.printStackTrace();
 		} finally {
+			JdbcUtil.close(rs2);
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt4);
 			JdbcUtil.close(pstmt3);
@@ -206,7 +207,7 @@ private ProductDAO() {}
 				product.setProduct_price(rs.getInt("product_price"));
 				product.setProduct_size(rs.getString("product_size"));
 				product.setProduct_release_price(rs.getInt("product_release_price"));
-				product.setProduct_buy_price(rs.getInt("product_buy_price"));
+//				product.setProduct_buy_price(rs.getInt("product_buy_price"));
 				product.setProduct_amount(rs.getInt("product_amount"));
 				product.setProduct_sell_count(rs.getInt("product_sell_count"));
 				product.setProduct_exp(rs.getString("product_exp"));
@@ -933,7 +934,7 @@ private ProductDAO() {}
 		public int insertOrder(OrderBean vo) {
 			int insertOrder = 0;
 			PreparedStatement pstmt = null,pstmt2 = null,pstmt3 = null,pstmt4=null;
-			ResultSet rs = null,rs2=null;
+			ResultSet rs = null;
 			
 			try {
 				String sql = "SELECT MAX(order_idx) FROM orderlist";
@@ -965,9 +966,9 @@ private ProductDAO() {}
 					pstmt3.setInt(3, vo.getOrder_product_idx());
 					insertOrder=pstmt3.executeUpdate();
 					
-					sql="UPDATE product SET product_amount = ?,product_sell_count=? WHERE product_idx=?";
+					sql="UPDATE product SET product_amount = ?- 1,product_sell_count=? WHERE product_idx=?";
 					pstmt4 = con.prepareStatement(sql);
-					pstmt4.setInt(1,  vo.getOrder_product_amount()-1);
+					pstmt4.setInt(1,  vo.getOrder_product_amount());
 					pstmt4.setInt(2,  vo.getOrder_product_sell_count()+1);
 					pstmt4.setInt(3, vo.getOrder_product_idx());
 					pstmt4.executeUpdate();
@@ -1344,14 +1345,11 @@ private ProductDAO() {}
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, product_idx);
 				rs = pstmt.executeQuery();
-				
-				
 				if(rs.next()) {
 					image = new imageBean();
 					image.setImage_main_file(rs.getString("image_main_file")); //메인 이미지 가져오기
 					image.setImage_real_file1(rs.getString("image_real_file1")); //상세 이미지1 가져오기
 					image.setImage_real_file2(rs.getString("image_real_file2")); //상세 이미지2 가져오기
-
 				}
 			} catch (SQLException e) {
 				System.out.println("SQL 구문 오류 - selectImage");

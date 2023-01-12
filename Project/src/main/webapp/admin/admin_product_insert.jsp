@@ -14,53 +14,56 @@
 <!--         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" /> -->
 <!--         <meta name="description" content="" /> -->
 <!--         <meta name="author" content="" /> -->
-        <title>상품등록 페이지</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="admin/css/styles.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-        <script type="text/javascript">
-			<%
-			String sId = (String)session.getAttribute("sId");
-			String id = request.getParameter("id");
-			if(sId == null || !sId.equals("admin")) { %>
-				alert("잘못된 접근입니다!")
-				location.href=history.back();
-			<% 
-			} 
-			%>
-		</script>  
-		<style type="text/css">
-			* {
-				font-family: "Noto Sans KR", sans-serif;
-			}
-		</style>      
-        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- 외부 jQuery 라이브러리 등록 -->
-		<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<title>상품등록 페이지</title>
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<link href="admin/css/styles.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+ <script type="text/javascript">
+	<%
+		String sId = (String)session.getAttribute("sId");
+		String id = request.getParameter("id");
+		if(sId == null || !sId.equals("admin")) { %>
+		alert("잘못된 접근입니다!")
+		location.href=history.back();
+	<% 
+		} 
+	%>
+</script>  
+<style type="text/css">
+	* {
+		font-family: "Noto Sans KR", sans-serif;
+	}
+</style>      
+      <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+      <!-- 외부 jQuery 라이브러리 등록 -->
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+//할인 버튼에 따른 처리
+$(function() {
+	$('input:radio[id="saleRadio1"]').on("click", function() {
+		$('#testRate').attr('readonly', true);
+	});
+	$('input:radio[id="saleRadio2"]').on("click", function() {
+		$('#testRate').attr('readonly', false);
+	});
+	
+	
+});
+
+//할인율 숫자만 입력
+$(function() {
+	$('input:number[id="discount"]').on("change", function() {
+		var discount = $('#testRate').val();
 		
-		<script type="text/javascript">
-		//할인 버튼에 따른 처리
-		$(function() {
-			$('input:radio[id="saleRadio1"]').on("click", function() {
-				$('#testRate').attr('readonly', true);
-			});
-			$('input:radio[id="saleRadio2"]').on("click", function() {
-				$('#testRate').attr('readonly', false);
-			});
-			
-			
-		});
-		
-		//할인율 숫자만 입력
-		$(function() {
-			$('input:number[id="discount"]').on("change", function() {
-				var discount = $('#testRate').val();
-				
-				alert(discount);
-			});
-		});
-		</script>
+		alert(discount);
+	});
+});
+</script>
+
+
+
 <style type="text/css">
 .table-secondary{
 	font-weight: bold;
@@ -69,9 +72,9 @@
 </style>
 
 
-    </head>
+</head>
     
-    <body class="sb-nav-fixed">
+<body class="sb-nav-fixed">
     
     <!-- TOP -->
        <jsp:include page="./inc2/top.jsp"></jsp:include>
@@ -90,8 +93,7 @@
                 	 
           
             <!-- 상품 등록 폼 -->
-			<form action="ProductInsertPro.po" method="post"
-				enctype="multipart/form-data">
+			<form action="ProductInsertPro.po" method="post" id="product_insert"enctype="multipart/form-data">
 				<!-- 상품가격과 할인적용 가격에 ,를 붙이기에 hidden으로 파라미터 넘김 => 우선 할인적용 가격만 넘겨서 처리할 예정-->
 <!-- 				<input type="hidden" id = "price" name = "price"> -->
 				<input type="hidden" id ="product_release_price" name ="release_price" value="">
@@ -104,13 +106,13 @@
 					<tr>
 						<td width="100px" align="left" class="table-secondary">상품 브랜드</td>
 						<td width="300px">
-						<select name="brand" >
+						<select name="brand" id ="product_brand">
 								<option value="" selected>브랜드를 선택하세요</option>
 								<option value="나이키">나이키</option>
 								<option value="뉴발란스">뉴발란스</option>
 								<option value="컨버스">컨버스</option>
 								<option value="아디다스">아디다스</option>
-								<option value="슈펜">슈펜</option>
+								<option value="반스">반스</option>
 						</select>
 						</td>
 					</tr>
@@ -153,7 +155,8 @@
 
 						<td width="100px" align="left" class="table-secondary">상품 사이즈</td>
 						<td width="300px">
-						<select name="size">
+						<select name="size" id ="product_size">
+								<option value="" selected>사이즈를 선택해주세요.</option>
 								<option value="220">220</option>
 								<option value="230">230</option>
 								<option value="240">240</option>
@@ -170,11 +173,15 @@
 					</tr>
 
 					<tr>
-						<td width="100px" align="left" class="table-secondary">상품색상</td>
-						<td width="300px"><select name="color">
-								<option value="red">red</option>
-								<option value="blue">blue</option>
-								<option value="grey">grey</option>
+						<td width="100px" align="left" class="table-secondary">상품 색상</td>
+						<td width="300px"><select name="color" id ="product_color">
+								<option value="" selected>색상을 선택해주세요.</option>
+								<option value="black">BLACK</option>
+								<option value="white">WHITE</option>
+								<option value="navy">NAVY</option>
+								<option value="red">RED</option>
+								<option value="blue">BLUE</option>
+								<option value="gray">GRAY</option>
 						</select></td>
 					</tr>
 
@@ -209,7 +216,7 @@
 
 					<tr>
 						<td colspan="2"><button type="submit"
-								class="w3-button w3-block w3-black">등록하기</button></td>
+								class="w3-button w3-block w3-black" onclick="valueCheck(this)">등록하기</button></td>
 					</tr>
 				</table>
 			</form>
@@ -251,14 +258,73 @@
 			        //판매가격 - 할인율 계산
 			        var releasePrice = originPrice - discounted;
 			        document.querySelector('#testResultBox02').innerText = releasePrice + '원'
+			    //할인된 가격을 cart_discountprice 라는 id 값의 value에 넣음.
+				    document.getElementById('product_release_price').value = releasePrice;	 
 			        
 			    }
 			 	
-			    //할인된 가격을 cart_discountprice 라는 id 값의 value에 넣음.
-			    document.getElementById('product_release_price').value = releasePrice;	 
 			});
 		</script>
 		
+	
+		<!-- SELECT 박스 값 변경에 따라 TRUE, FALSE 처리 -->
+		<script type="text/javascript">
+		var BrandStatus = false;
+		var SizeStatus = false;
+		var ColorStatus = false;
+
+		$(function() {
+			$("#product_brand").on("change", function() {
+				var BrandVal = $("#product_brand").val();
+				if(BrandVal == ""){
+		            BrandStatus = false;
+		         }else{
+		            BrandStatus = true;
+		         }
+			});//brand 판별 끝
+		});//함수 끝
+		
+		$(function() {
+			$("#product_size").on("change", function() {
+				var SizeVal = $("#product_size").val();
+				if(SizeVal == "") {
+					SizeStatus = false;
+				}else{
+					SizeStatus = true;
+				}
+			});//size 판별 끝
+		});//함수 끝
+			
+		$(function() {
+			$("#product_color").on("change", function() {
+				var ColorVal = $("#product_color").val();
+				if(ColorVal == "") {
+					ColorStatus = false;
+				}else{
+					ColorStatus = true;
+				}
+
+			});//color 판별 끝
+		});	//함수 끝
+		
+	
+		//색상, 사이즈 미선택 시 못넘어가게 하는 구문
+		function valueCheck(){
+			if(BrandStatus == false){
+				alert("브랜드를 선택 해주세요")
+				event.preventDefault(); // submit 기능 막기
+			}else if(SizeStatus == false){
+				alert("사이즈를 선택 해주세요");
+				event.preventDefault(); // submit 기능 막기
+			}else if(ColorStatus == false){
+				alert("색상을 선택 해주세요");
+				event.preventDefault(); // submit 기능 막기
+			}
+			
+
+		}// valueCheck 끝
+		
+		</script>
 	<!-- 숫자 에 "," 처리를 위한 함수 -->
         <script type="text/javascript">
 		    function comma(str) {

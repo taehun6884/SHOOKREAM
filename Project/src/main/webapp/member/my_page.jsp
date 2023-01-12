@@ -44,12 +44,14 @@
 	
 	#myPageList {
 		padding-top: 100px;
+		padding-bottom: 50px;
 	}
 	
 	.grid-container {
 		display: grid;
 		grid-template-columns: auto auto auto ;
 		grid-template-rows: 120px 120px;
+		border-color: gray;****8888
 
 	}
 	
@@ -170,10 +172,13 @@
 			<div class="grid-item"><a href="CouponListMypage.po?member_idx=${sessionScope.member_idx }" class="aList"><br>쿠폰함</a></div>
 			<div class="grid-item"><a href="ProductOrderList.po?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1" class="aList"><br>주문관리</a></div>
 			<div class="grid-item"><a href="LikeList.ca?id=${sessionScope.sId }&member_idx=${member_idx}&pageNum=1" class="aList"><br>위시리스트</a></div>
-			<div class="grid-item"><a href="MyReviewList.me?member_idx=${member_idx}" class="aList">리뷰 관리</a></div>
+			<div class="grid-item"><a href="MyReviewList.me?member_idx=${member_idx}" class="aList"><br>리뷰 관리</a></div>
 		</div>
 	</div>	
 </div>
+<footer>
+	<jsp:include page="../inc/footer.jsp"/>
+</footer>
 </div>
 <script>
 	function myFunction() {

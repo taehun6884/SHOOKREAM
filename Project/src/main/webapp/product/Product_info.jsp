@@ -389,7 +389,7 @@ margin-left: 270PX;
 		<!-- 개수 -->
 			<p class ="prod_title">개수</p>
 			<span>
-				<span><input type="number" name="cart_count" value="1" max="${product.product_amount }" required="required" style="width: 50px"></span>
+				<span><input type="number" name="cart_count" value="1" max="${product.product_amount+1 }" required="required" style="width: 50px"></span>
 			</span>
 			
 			<hr>
@@ -402,13 +402,22 @@ margin-left: 270PX;
 				</c:when>
 				<c:otherwise>
 					<span class="wishBtn">
-						<img id="beforeHeart" onclick="addWish()" alt="" src="images/before_heart.png" id="btnWishBeforImage" style="width: 30px; height: 30px; cursor: pointer;"/>
+						<img id="beforeHeart" onclick="addWish()" alt="" src="images/before_heart.png" id="btnWishBeforImage" style="width: 30px; height: 30px; cursor: pointer;"/>&nbsp;
 					</span>
 				</c:otherwise>
 			</c:choose>
+			<!-- 재고에 따른 처리 -->
+			<c:choose>
+				<c:when test="${product.product_amount gt 0}">
+					<input type="submit" value="장바구니" class="btn btn-dark btn-sm">
+					<input type="button" onclick="valueCheck()" value="구매하기" class="btn btn-dark btn-sm">
+				</c:when>
+
+				<c:when test="${product.product_amount le 0}">
+					현재 재고가 없는 제품입니다.
+				</c:when>
+			</c:choose>
 		</span>	
-		<input type="submit" value="장바구니" class="btn btn-dark btn-sm">
-		<input type="button" onclick="valueCheck()" value="구매하기" class="btn btn-dark btn-sm">
 		</div>
 		</form>
 		
@@ -428,7 +437,7 @@ margin-left: 270PX;
 <!-- 	</table> -->
 
 	<hr>	 <%-- 리뷰구역 --%> -->
-		<div id="reviewListArea">
+		<div id="reviewListArea" style="z-index:1;">
 			<h3>Review</h3>
 				<div>
 					<c:forEach var="review" items="${reviewList }">
@@ -468,12 +477,12 @@ margin-left: 270PX;
 				</c:choose>
 			</c:forEach>
 		</section>	
+     <footer style="z-index:-1;">
+  	<jsp:include page="../inc/footer.jsp"/>
+  </footer>
 		</div> 	
 	
 
-    <!-- 
-<footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
-   -->
 <%-- 	<img src="./upload/${product.product_img }" class="img-thumbnail" alt="..." width="150" height="150"> --%>
 <!--  	<table border="1"> -->
 <!-- 	 	<tr> -->
@@ -540,8 +549,6 @@ function valueCheck(){
 	
 	
 }
-
-
 
 
 var slideIndex = 1;

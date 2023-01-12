@@ -204,7 +204,7 @@ function fn_modify() {
 <!-- 			<h6 style="color: gray;text-align: center;margin-bottom: 50px" >SHOOKREAM에 오신 것을 환영합니다.</h6> -->
 <!-- 		    <h3 class="w3-wide" ><b>SHOOKREAM</b></h3> -->
 			<div>
-				<table class="type03">
+				<table class="type03" style='vertical-align: middle'>
 				<tr>
 						<th scope="row" >이름</th>
 						<td>
@@ -270,6 +270,9 @@ function fn_modify() {
 		
 		</div>
 		</div>
+		 <footer>
+		  	<jsp:include page="../inc/footer.jsp"/>
+		  </footer>
 <!--   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
 <!-- 로그인 화면 폼 -->
   <!-- End page content -->

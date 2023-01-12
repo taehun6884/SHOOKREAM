@@ -17,8 +17,6 @@ public class MemberJoinProAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
 		
-		
-		
 		MemberBean member = new MemberBean();
 		
 		String address = request.getParameter("address") + " " + request.getParameter("address_detail");

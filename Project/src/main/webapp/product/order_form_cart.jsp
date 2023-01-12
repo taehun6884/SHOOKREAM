@@ -188,9 +188,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <td class ="td_cart" id="cart_discount_price"><fmt:formatNumber value="${cart.cart_price * (cart.cart_discount / 100)}" pattern="#,###원"></fmt:formatNumber></td>
       <td class ="td_cart" id="cart_order_price" ><fmt:formatNumber value="${cart.cart_order_price}" pattern="#,###원"></fmt:formatNumber></td> 
       <td class ="td_cart">
-      <input type="number" value="${cart.cart_count }" style="width: 35px">
-      <br>
-      <button>변경</button>
+      <input type="number" value="${cart.cart_count }" style="width: 35px" readonly="readonly">
       </td>
       <td class ="td_cart">무료배송</td>
     </tr>
@@ -252,7 +250,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     </div>
    </div>
 <!-- </footer> -->
-  
+ <footer>
+  	<jsp:include page="../inc/footer.jsp"/>
+  </footer> 
 
 
 
