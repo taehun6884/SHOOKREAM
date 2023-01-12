@@ -71,7 +71,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
+<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px; margin-bottom:0px;">
 
  <!-- Push down content on small screens -->
  <div class="w3-hide-large" style="margin-top:83px"></div>
@@ -91,15 +91,15 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 </header>
    
   <!-- Footer -->
-  <footer class="w3-padding-64 w3-small w3-center" id="footer">
+  <div class="w3-padding-64 w3-small w3-center">
   <c:choose>
-  	<c:when test="${reviewList eq null}">
+  	<c:when test="${reviewList eq null or empty reviewList}">
   		<hr>
   		<div id="no_cart">
 <!--   		<i class="fa-solid fa-cart-plus"></i> -->
   		<h6>작성하신 리뷰가 하나도 없습니다! <i class='far fa-flushed'></i></h6>
   		</div>
-  		<%=request.getAttribute("reviewList") %>
+
   	</c:when>
   	<c:otherwise>
   <table class="table">
@@ -165,26 +165,11 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
     </div>
     </c:otherwise>
   </c:choose>
-</footer>
- <footer>
+</div>
+  </div>
+ <footer style="padding-bottom:0;">
   	<jsp:include page="../inc/footer.jsp"/>
   </footer>
-  </div>
-
-
-
-<!-- Newsletter Modal -->
-<div id="newsletter" class="w3-modal">
-  <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
-    <div class="w3-container w3-white w3-center">
-      <i onclick="document.getElementById('newsletter').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
-      <h2 class="w3-wide">NEWSLETTER</h2>
-      <p>Join our mailing list to receive updates on new arrivals and special offers.</p>
-      <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
-      <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('newsletter').style.display='none'">Subscribe</button>
-    </div>
-  </div>
-</div>
 </div>
 
 <!-- ------------------------------------------------------------------------------------------------------------>

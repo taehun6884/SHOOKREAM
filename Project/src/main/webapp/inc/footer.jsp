@@ -9,19 +9,24 @@
 	}
 	
 	.footerContent {
-		padding-left: 10px;
+/* 		padding-left: 10px; */
 	}
 	
 	h4 {
 		display: inline-block;
 	}
+	
+	footer {
+		background-color: #FBFBFB;
+		height: 250px;
+	}
 
 </style>
 
-<footer class="w3-light-grey" >
+<footer>
     <div class="footerArea"> 
       <div class="footerContent">
-        <h4 style="font-family: 'Bebas Neue';">(주)SHOOKREAM</h4><br>
+        <h4 style="font-family: 'Bebas Neue';">SHOOKREAM</h4><br>
         <p><i class="fa fa-fw fa-map-marker"></i>부산광역시 부산진구 부전동 동천로 109 삼한골드게이트 7층</p>
         <p><i class="fa fa-fw fa-phone"></i>0518030909</p>
         <p><i class="fa fa-fw fa-envelope"></i>shookream@shookream.com</p>
@@ -32,4 +37,4 @@
         <i class="fa fa-twitter w3-hover-opacity w3-large"></i>
       </div> 
     </div>
-  </footer>
+</footer>

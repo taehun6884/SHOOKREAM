@@ -58,8 +58,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 </style>
 <script>
 	// 리뷰작성 폼 팝업 
-	function reviewForm(idx,size,color) {
-		let url = "ReviewWriteForm.me?member_idx=${sessionScope.member_idx}&product_idx="+idx+"&product_size="+size+"&product_color="+color;  // 테스트용 파라미터임!
+	function reviewForm(re_idx,re_size,re_color,re_name) {
+		let url = "ReviewWriteForm.me?member_idx=${sessionScope.member_idx}&product_idx="+re_idx+"&product_size="+re_size+"&product_color="+re_color+"&product_name="+re_name;  // 테스트용 파라미터임!
 		let name = "review form";
 		let attr = "width=600, height=600, top=200, left=510"
 		
@@ -108,19 +108,20 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
     </p>
 </header>
    
-  <!-- Footer -->
-  <footer class="w3-padding-64 w3-small w3-center" id="footer" >
+
+  <div class="w3-padding-64 w3-small w3-center">
   <form action="ReviewWrite.me" method="post">
   <table class="table">
   <thead  class="table-dark" >
     <tr>
       <th scope="col">#</th>
       <th scope="col">image</th>
-      <th scope="col">name</th>
-      <th scope="col">price</th>
-      <th scope="col">category</th>
+      <th scope="col">product name</th>
       <th scope="col">size</th>
       <th scope="col">color</th>
+      <th scope="col">price</th>
+      <th scope="col">order status</th>
+<!--       <th scope="col">id</th> -->
       <th scope="col">date</th>
       <th scope="col" colspan="2">manage</th>
     </tr>
@@ -130,13 +131,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
     <tr>
       <td>${order.order_idx }</td>
       <td><img src="upload/${order.order_main_image }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
-      <td>${order.order_member_id }</td>
-      <td>${order.order_product_price }</td>
-      <td>${order.order_category }</td>
+      <td>${order.order_product_name }</td>
       <td>${order.order_product_size }</td>
       <td>${order.order_product_color }</td>
+      <td>${order.order_product_price }</td>
+      <td>${order.order_category }</td>
+<%--       <td>${order.order_member_id }</td> --%>
       <td><fmt:formatDate value="${order.order_date }" pattern="yyyy-MM-DD"/></td>
-	  <td><input type="button" value="리뷰 작성하기" class="btn btn-dark" onclick="reviewForm(${order.order_product_idx },'${order.order_product_size }','${order.order_product_color }')">
+	  <td><input type="button" value="리뷰 작성하기" class="btn btn-dark" onclick="reviewForm(${order.order_product_idx },'${order.order_product_size }','${order.order_product_color }','${order.order_product_name }')">
 <%--       <button type="button" class="btn btn-dark" onclick="deleteOrder(${order.order_idx})">삭제</button></td> --%>
     </tr>
     </c:forEach>
@@ -179,27 +181,16 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 <!--         <a href="#">4</a> -->
 <!--         <a href="#">5</a> -->
     </div>
-</footer>
- <footer>
-  	<jsp:include page="../inc/footer.jsp"/>
-  </footer>
+</div>
+
   </div>
 <!-- 로그인 화면 폼 -->
   <!-- End page content -->
 
 
-<!-- Newsletter Modal -->
-<div id="newsletter" class="w3-modal">
-  <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
-    <div class="w3-container w3-white w3-center">
-      <i onclick="document.getElementById('newsletter').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
-      <h2 class="w3-wide">NEWSLETTER</h2>
-      <p>Join our mailing list to receive updates on new arrivals and special offers.</p>
-      <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
-      <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('newsletter').style.display='none'">Subscribe</button>
-    </div>
-  </div>
-</div>
+ <footer>
+  	<jsp:include page="../inc/footer.jsp"/>
+  </footer>
 </div>
 
 <!-- ------------------------------------------------------------------------------------------------------------>
@@ -218,12 +209,12 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 </script>
 <script>
 //주문리스트 삭제
-function deleteOrder(idx){
-	let result =  confirm("삭제 하시겠습니까?");
-	if(result){
-		location.href="OrderDeletePro.po?order_idx="+idx+"&member_idx=${sessionScope.member_idx}&product_idx=${param.product_idx}";
-	}
-}
+// function deleteOrder(idx){
+// 	let result =  confirm("삭제 하시겠습니까?");
+// 	if(result){
+// 		location.href="OrderDeletePro.po?order_idx="+idx+"&member_idx=${sessionScope.member_idx}&product_idx=${param.product_idx}";
+// 	}
+// }
 
 
 

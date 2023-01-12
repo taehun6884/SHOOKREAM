@@ -11,11 +11,19 @@ public class ReviewBean {
 	private String review_real_img; // 리뷰 실제 이미지 파일
 	private Date review_date; // 리뷰 작성일
 	private String re_order_detail; // 리뷰 - 구매 상세(사이즈, 색상)
-	
+	private String re_product_name;
 	// 이미지??? && 작성일
+	
+	
 	
 	public int getReview_idx() {
 		return review_idx;
+	}
+	public String getRe_product_name() {
+		return re_product_name;
+	}
+	public void setRe_product_name(String re_product_name) {
+		this.re_product_name = re_product_name;
 	}
 	public void setReview_idx(int review_idx) {
 		this.review_idx = review_idx;
@@ -62,16 +70,13 @@ public class ReviewBean {
 	public void setRe_order_detail(String order_detail) {
 		this.re_order_detail = order_detail;
 	}
-	
 	@Override
 	public String toString() {
 		return "ReviewBean [review_idx=" + review_idx + ", product_idx=" + product_idx + ", member_idx=" + member_idx
-				+ ", review_content=" + review_content + ", review_img=" + review_img + ", review_date=" + review_date
-				+ ", re_order_detail=" + re_order_detail + "]";
+				+ ", review_content=" + review_content + ", review_img=" + review_img + ", review_real_img="
+				+ review_real_img + ", review_date=" + review_date + ", re_order_detail=" + re_order_detail
+				+ ", re_product_name=" + re_product_name + "]";
 	}
-	
-
-	
 	
 	
 }

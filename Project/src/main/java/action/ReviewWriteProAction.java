@@ -43,15 +43,13 @@ public class ReviewWriteProAction implements Action {
          
          ReviewBean review = new ReviewBean();
          
-//         review.setReview_content(multi.getParameter("review_content")); Integer.parseInt(multi.getParameter("review_idx"))
-         review.setReview_idx(1); // null값 넘어옴 > 수정해야함
          review.setProduct_idx(Integer.parseInt(multi.getParameter("prodcut_idx")));
          review.setMember_idx(Integer.parseInt(multi.getParameter("member_idx")));
          review.setReview_img(multi.getOriginalFileName("review_img")); 
          review.setReview_real_img(multi.getFilesystemName("review_img")); 
          review.setReview_content(multi.getParameter("content"));
          review.setRe_order_detail(multi.getParameter("product_size")+","+multi.getParameter("product_color"));
-         
+         review.setRe_product_name(multi.getParameter("product_name"));
 //         System.out.println("리뷰 작성 : " + review);
          
          ReviewWriteProService service = new ReviewWriteProService();
