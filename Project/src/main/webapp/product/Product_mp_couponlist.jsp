@@ -91,7 +91,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 </header>
    
   <!-- Footer -->
-  <footer class="w3-padding-64 w3-small w3-center" id="footer">
+  <div class="w3-padding-64 w3-small w3-center">
   <c:choose>
   	<c:when test="${couponList eq null}">
   		<hr>
@@ -139,11 +139,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
   </c:choose>
 
 
-</footer>
- <footer>
-  	<jsp:include page="../inc/footer.jsp"/>
-  </footer>
+</div>
   </div>
+ 
 
 
 
@@ -159,8 +157,10 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
     </div>
   </div>
 </div>
+<footer>
+  	<jsp:include page="../inc/footer.jsp"/>
+  </footer>
 </div>
-
 <!-- ------------------------------------------------------------------------------------------------------------>
 <!-- 자바스크립트 부분 -->
 <script>
