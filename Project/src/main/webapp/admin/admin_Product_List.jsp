@@ -45,6 +45,7 @@
 		<style type="text/css">
 			* {
 				font-family: "Noto Sans KR", sans-serif;
+				
 			}
 		</style>
 </head>
@@ -81,7 +82,7 @@
                                         <tr>
                                             <th>번호</th>
                                             <th>상품명</th>
-                                            <th>이미지</th>
+                                            <th width="150px">이미지</th>
                                             <th>브랜드</th>
                                             <th>가격</th>
                                             <th>재고</th>
@@ -102,8 +103,8 @@
                                     <tbody>
                                       <c:forEach var="product" items="${productList }">
 										<tr>
-										<td>${product.product_idx }</td>
-										<td>${product.product_name }</td>
+										<td >${product.product_idx }</td>
+										<td>${product.product_name } <br>(색상 : ${product.product_color })</td>
 										<td><img src="./upload/${product.product_img }" class="img-thumbnail" alt="..." width="150" height="150"></td>
 										<td>${product.product_brand }</td>
 										<td><fmt:formatNumber value="${product.product_price }" pattern="#,###원"></fmt:formatNumber> </td>
