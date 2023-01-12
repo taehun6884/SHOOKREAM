@@ -241,7 +241,7 @@ margin-left: 270PX;
 			dataType: "html", 
 			success: function(data) { 
 	//					$("#btnWishAfterImage").attr("src", "images/before_heart.png");
-					alert("찜한 상품에서 삭제했습니다!");
+					alert("찜한 상품에서 삭제되었습니다!");
 	//					$('#wishLoad').load(location.href+' #wishLoad')
 					$(".wishBtn").html('<img id="beforeHeart" alt="" src="images/before_heart.png" id="btnWishBeforImage" onclick="addWish()" style="width: 30px; height: 30px;"/>');
 			}, 
@@ -276,7 +276,7 @@ margin-left: 270PX;
 		
 						alert("찜한 상품에 추가되었습니다!");
 						
-						$(".wishBtn").html('<img id="afterHeart" alt="" src="images/after_heart.png" id="btnWishAfterImage" onclick="deleteWish()" style="width: 30px; height: 30px;"/>');
+						$(".wishBtn").html('<img id="afterHeart" alt="" src="images/after_heart.png" id="btnWishAfterImage" onclick="deleteWish()" style="width: 30px; height: 30px; cursor: pointer;"/>');
 				}, 
 				error: function(xhr, textStatus, errorThrown) {
 					alert("찜하기 실패"); 

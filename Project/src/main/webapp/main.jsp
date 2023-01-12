@@ -125,12 +125,12 @@ footer {
 
   <!-- ./images header -->
   <div class ="post-wrapper" style="margin-top: 18px;">
-  	<div><img src="images/banner(nike).jpg" height="600" width="100%" onclick="location.href=''"></div>
+  	<div><img src="images/banner(nike).jpg" height="600" width="100%" onclick="location.href='BrandCG.MAIN?cg=나이키'" style="cursor: pointer;"></div>
 <!--   	<div><a href="CouponMainList.po?coupon_content=banner_1"><img src="images/banner_1.jpg" height="700" width="900"></a></div> -->
-  	<div><img src="images/banner(newbalance).png" height="600" width="100%"></div>
-  	<div><img src="images/banner(adidas).png" height="600" width="100%"></div>
+  	<div><img src="images/banner(newbalance).png" height="600" width="100%" onclick="location.href='BrandCG.MAIN?cg=뉴발란스'" style="cursor: pointer;"></div>
+  	<div><img src="images/banner(adidas).png" height="600" width="100%" onclick="location.href='BrandCG.MAIN?cg=아디다스'" style="cursor: pointer;"></div>
   	<div><img id="banner_1" src="images/banner_1.jpg"  height="600" width="100%" style="cursor: pointer;" onclick="couponDown(this.id)"></div>
-  	<div><img id="banner_2" src="images/banner_1.jpg" height="600" width="100%" style="cursor: pointer;" onclick="couponDown(this.id)"></div>
+  	<div><img id="banner_2" src="images/banner_2-001 (4).jpg" height="600" width="100%" style="cursor: pointer;" onclick="couponDown(this.id)"></div>
   </div>
 <!--   <div class="w3-container w3-text-grey" id="jeans"> -->
 <!--     <p>BEST</p> -->
@@ -262,7 +262,7 @@ function couponDown(coupon_content) {
 	} else {
 		url = "CouponMainList.po?member_idx="+member_idx+"&coupon_content="+coupon_content; 
 		let name = "Coupon List";
-		let attr = "width=250, height=280, top=200, left=510"
+		let attr = "width=350px, height=400px, top=200, left=510"
 		window.open(url, name, attr);
 	}
 }

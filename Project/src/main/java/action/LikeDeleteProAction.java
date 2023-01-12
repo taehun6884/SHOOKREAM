@@ -34,6 +34,10 @@ public class LikeDeleteProAction implements Action {
 				out.println("</script>");
 				
 				System.out.println("idDeleteSuccess? : " + isSuccess);
+				
+				forward = new ActionForward();
+				forward.setPath("./LikeList.ca?member_idx=" + member_idx + "&pageNum=1");
+				forward.setRedirect(true);
 			} else {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();

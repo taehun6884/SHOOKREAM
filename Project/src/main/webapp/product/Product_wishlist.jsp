@@ -93,11 +93,11 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
   <!-- Footer -->
   <div class="w3-padding-64 w3-small w3-center">
   <c:choose>
-  	<c:when test="${wishlist eq null}">
+  	<c:when test="${wishlist eq null or empty wishlist}">
   		<hr>
-  		<div id="no_cart">
+  		<div id="no_cart" style="padding: 50px;">
 <!--   		<i class="fa-solid fa-cart-plus"></i> -->
-  		<h4>위시리스트에 담긴 상품이 없습니다.</h4>
+  		<h5>위시리스트에 담긴 상품이 없습니다.</h5>
   		</div>
   	</c:when>
   	<c:otherwise>
@@ -167,9 +167,13 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
     </div>
     </c:otherwise>
   </c:choose>
+
 </div>
 </div>
-<footer>
+
+
+ <footer>
+
   	<jsp:include page="../inc/footer.jsp"/>
 </footer>
 

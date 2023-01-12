@@ -51,6 +51,7 @@ private ProductDAO() {}
 		PreparedStatement pstmt3 = null;
 		PreparedStatement pstmt4 = null;
 		ResultSet rs = null;
+		ResultSet rs2 = null;
 		
 		try {
 			//----------------idx 작업------------------
@@ -94,12 +95,12 @@ private ProductDAO() {}
 				sql = "SELECT MAX(image_idx) FROM image";
 				int idx2 = 1; // 새 글 번호
 				pstmt3 = con.prepareStatement(sql);
-				rs = pstmt3.executeQuery();
+				rs2 = pstmt3.executeQuery();
 				
 				if(rs.next()) { 
 					 //true -> 조회결과가 있을 경우 (= 게시물이 하나라도 존재할 경우)
 					 //존재하지 않을 경우 rs.next는 false , DB에서는 NULL이 표기된다.
-					idx2 = rs.getInt(1) + 1;
+					idx2 = rs2.getInt(1) + 1;
 				}
 				
 				sql = "INSERT INTO image (image_idx, product_idx, image_main_file, image_real_file1, image_real_file2) VALUES(?,?,?,?,?)";
@@ -118,6 +119,7 @@ private ProductDAO() {}
 			System.out.println("상품등록 - 관리자");
 			e.printStackTrace();
 		} finally {
+			JdbcUtil.close(rs2);
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt4);
 			JdbcUtil.close(pstmt3);
@@ -932,7 +934,7 @@ private ProductDAO() {}
 		public int insertOrder(OrderBean vo) {
 			int insertOrder = 0;
 			PreparedStatement pstmt = null,pstmt2 = null,pstmt3 = null,pstmt4=null;
-			ResultSet rs = null,rs2=null;
+			ResultSet rs = null;
 			
 			try {
 				String sql = "SELECT MAX(order_idx) FROM orderlist";
@@ -1248,45 +1250,48 @@ private ProductDAO() {}
 			return deleteCount;
 		}
 		//-------------------------상품수정 쿼리-------------------------------
-		public int updateProduct(int idx, ProductBean product) {
+		public int updateProduct(int idx, ProductBean product, imageBean image) {
 			int updateProduct = 0;
-//			int updateImage = 0;
+			int updateImage = 0;
 			
 			PreparedStatement pstmt =null;
+			PreparedStatement pstmt2 =null;
 			
 			System.out.println(product);
 			
 			try {
 				String sql ="UPDATE product "
-						+ "SET product_name=?,  product_brand=?,  product_price=?, product_size=? , product_amount=?, product_color=?,  product_exp=?,  product_detail_exp=?,  product_discount_price=? "
+						+ "SET product_name=?,  product_brand=?,  product_price=?, product_release_price=?, product_size=? , product_amount=?, product_color=?,  product_exp=?,  product_detail_exp=?,  product_discount_price=? "
 						+ "WHERE product_idx =?";
 				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, product.getProduct_name());
 				pstmt.setString(2, product.getProduct_brand());
 				pstmt.setInt(3, product.getProduct_price());
-				pstmt.setString(4, product.getProduct_size());
-				pstmt.setInt(5, product.getProduct_amount());
-				pstmt.setString(6, product.getProduct_color());
-				pstmt.setString(7, product.getProduct_exp());
-				pstmt.setString(8, product.getProduct_detail_exp());
-				pstmt.setDouble(9, product.getProduct_discount_price());
-				pstmt.setInt(10, idx);
+				pstmt.setInt(4, product.getProduct_release_price());
+				pstmt.setString(5, product.getProduct_size());
+				pstmt.setInt(6, product.getProduct_amount());
+				pstmt.setString(7, product.getProduct_color());
+				pstmt.setString(8, product.getProduct_exp());
+				pstmt.setString(9, product.getProduct_detail_exp());
+				pstmt.setDouble(10, product.getProduct_discount_price());
+				pstmt.setInt(11, idx);
 				updateProduct = pstmt.executeUpdate();
 				
-//				if(updateProduct > 0) {
-//					//--------------이미지 테이블 업데이트 작업--------------------
-//					sql = "UPDATE image SET image_main_file =?, image_real_file1 =?, image_real_file2 =? WHERE product_idx = ?";
-//					
-//					pstmt2 = con.prepareStatement(sql);
-//					pstmt2.setString(1, image.getImage_main_file());
-//					pstmt2.setString(2, image.getImage_real_file1());
-//					pstmt2.setString(3, image.getImage_real_file2());
-//					pstmt2.setInt(4, idx);
-//					updateImage = pstmt2.executeUpdate();
-//					
-//				}
+				if(updateProduct > 0 && image.getImage_main_file() == null && image.getImage_real_file1() == null && image.getImage_real_file2() == null) { //이미지 파일이 널 스트링이면 이미지 업데이트 작업 X
 				
+				}else if(updateProduct > 0 && image.getImage_main_file() != null && image.getImage_real_file1() != null && image.getImage_real_file2() != null){
+					//--------------이미지 테이블 업데이트 작업--------------------
+					sql = "UPDATE image SET image_main_file =?, image_real_file1 =?, image_real_file2 =? WHERE product_idx = ?";
+					
+					pstmt2 = con.prepareStatement(sql);
+					pstmt2.setString(1, image.getImage_main_file());
+					pstmt2.setString(2, image.getImage_real_file1());
+					pstmt2.setString(3, image.getImage_real_file2());
+					pstmt2.setInt(4, idx);
+					updateImage = pstmt2.executeUpdate();
+					
+				}
 			} catch (SQLException e) {
 				System.out.println("sql 구문오류 - updateProduct");
 				e.printStackTrace();
@@ -1295,7 +1300,7 @@ private ProductDAO() {}
 			} 
 		
 		return updateProduct;
-}
+}//상품 수정 끝
 		public ProductBean getProduct(int idx) {
 			ProductBean bean = null;
 			PreparedStatement pstmt = null;

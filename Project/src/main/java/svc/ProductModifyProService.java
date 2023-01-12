@@ -9,14 +9,14 @@ import vo.imageBean;
 
 public class ProductModifyProService {
 
-	public boolean modifyProduct(int idx, ProductBean product) {
+	public boolean modifyProduct(int idx, ProductBean product, imageBean image) {
 		boolean isUpdateSuccess = false;
 
 		Connection con = JdbcUtil.getConnection();
 		ProductDAO dao = ProductDAO.getInstance();
 		dao.setConnection(con);
 		
-		int updateCount = dao.updateProduct(idx, product);
+		int updateCount = dao.updateProduct(idx, product, image);
 		
 		if(updateCount > 0) {
 			JdbcUtil.commit(con);
@@ -25,6 +25,9 @@ public class ProductModifyProService {
 			JdbcUtil.rollback(con);
 			isUpdateSuccess = false;
 		}
+		
+		JdbcUtil.close(con);
+
 		return isUpdateSuccess;
 	}
 	

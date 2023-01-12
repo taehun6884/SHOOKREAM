@@ -68,12 +68,12 @@
                                     <thead>
                                         <tr>
                                             <th>번호</th>
-                                            <th>상품명</th>
                                             <th>이미지</th>
-                                            <th>브랜드</th>
+                                            <th>주문ID</th>
                                             <th>가격</th>
-                                            <th>재고</th>
-                                            <th>등록일</th>
+                                            <th>주문상태</th>
+                                            <th>배송상태</th>
+                                            <th>주문일자</th>
                                             <th>수정</th>
                                         </tr>
                                     </thead>
@@ -93,7 +93,7 @@
 										<td>${orderlist.order_idx }</td>
 										 <td><img src="upload/${orderlist.order_main_image }"  alt="없음!" class="img-thumbnail" width="150" height="150"></td>
 									      <td>${orderlist.order_member_id }</td>
-									      <td>${orderlist.order_product_price }</td>
+									      <td><fmt:formatNumber value="${orderlist.order_product_price }" pattern="#,###원"></fmt:formatNumber></td>
 									      <td>${orderlist.order_category }</td>
 									      <td>${orderlist.order_progress }</td>
 									      <td><fmt:formatDate value="${orderlist.order_date }" pattern ="yyyy-MM-dd"/></td>
