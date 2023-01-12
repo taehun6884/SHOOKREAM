@@ -63,7 +63,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
    
   <!-- Footer -->
   <!-- 로그인 화면 폼 -->
-  <footer class="w3-padding-64 w3-small w3-center" id="footer">
+  <div class="w3-padding-64 w3-small w3-center" >
     <div id = "sform">
         <h4 style="padding: 30px;">로그인</h4>
         <form action="LoginMemberPro.me" method="post">
@@ -90,7 +90,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
         </table>
         </form>
     </div>
-  </footer>
+  </div>
   <footer>
   	<jsp:include page="../inc/footer.jsp"/>
   </footer>

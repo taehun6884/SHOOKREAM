@@ -18,8 +18,8 @@ pageContext.setAttribute("cn", "\n");
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?familyMontserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
@@ -70,7 +70,7 @@ $('.center').slick({
 #reviewListArea { 
           text-align: center;
           margin-left: 270PX;
-          
+          width: 90%;
         }        
  
         
@@ -129,10 +129,14 @@ margin-left: 270PX;
 }
 
 .reviewContent { 
-	width : 900px;
+	width : 90%;
 	height: 150px; 
+	padding-bottom: 10px;
 }
 
+#reAll {
+	padding-bottom: 50px;
+}
 
 #imgSize {
 	width: 9em;
@@ -439,12 +443,12 @@ margin-left: 270PX;
 	<hr>	 <%-- 리뷰구역 --%> -->
 		<div id="reviewListArea" style="z-index:1;">
 			<h3>Review</h3>
-				<div>
+				<div id="reAll">
 					<c:forEach var="review" items="${reviewList }">
 						<table class="reviewContent">
 							<tr>
 								<td rowspan="7" width="20%"><img id="imgSize" src="./upload/${review.review_real_img }" width="100px" ></td>
-								<td style="text-align:left;" width="65%"><small>상세 사이즈 및 색상 : ${review.re_order_detail }</small></td>							
+								<td colspan=""style="text-align:left;" width="65%"><small>상세 사이즈 및 색상 : ${review.re_order_detail }</small></td>							
 								<td style="text-align:left;" width="15%">
 									<small>
 									작성일 : ${review.review_date } <br>
@@ -457,10 +461,19 @@ margin-left: 270PX;
 								<td colspan="4" style="text-align:left"><br>${fn:replace(review.review_content, cn, br) }</td>
 							</tr>
 						</table>
-						<c:if test="${sessionScope.sId eq 'admin' || param.member_idx eq review.member_idx }" >
-						<input id="delBtn" type="button"class="btn btn-dark btn-sm" value="신고하기" onclick="location.href='./ReportFormAction.me?member_idx=${member_idx}&member_id=${sessionScope.sId }'">
-							<input id="delBtn" type="button" value="리뷰 삭제하기" class="btn btn-dark btn-sm" onclick="location.href='ReviewDeletePro.po?product_idx=${review.product_idx }&member_idx=${sessionScope.member_idx }&review_idx=${review.review_idx}'">
-						</c:if>		
+						<div style="padding-right: 10px;">
+						<c:choose>
+							<c:when test="${sessionScope.sId eq 'admin' }">
+								<input id="delBtn" type="button" value="리뷰 삭제하기" class="btn btn-dark btn-sm" onclick="location.href='ReviewDeletePro.po?product_idx=${review.product_idx }&member_idx=${sessionScope.member_idx }&review_idx=${review.review_idx}'">								
+							</c:when>
+							<c:when test="${param.member_idx ne null && param.member_idx ne review.member_idx }">
+								<input id="delBtn" type="button"class="btn btn-dark btn-sm" value="신고하기" onclick="location.href='./ReportFormAction.me?member_idx=${member_idx}&member_id=${sessionScope.sId }'">
+							</c:when>	
+							<c:when test="${param.member_idx eq review.member_idx }" >
+								<input id="delBtn" type="button" value="리뷰 삭제하기" class="btn btn-dark btn-sm" onclick="location.href='ReviewDeletePro.po?product_idx=${review.product_idx }&member_idx=${sessionScope.member_idx }&review_idx=${review.review_idx}'">
+							</c:when>
+						</c:choose>
+						</div>		
 					</c:forEach>
 				</div>
 				<section id="pageList" style="text-align:center">				
@@ -477,10 +490,10 @@ margin-left: 270PX;
 				</c:choose>
 			</c:forEach>
 		</section>	
-     <footer style="z-index:-1;">
-  	<jsp:include page="../inc/footer.jsp"/>
-  </footer>
 		</div> 	
+     <footer style="z-index:-1; text-align:left; width:100%; padding-left:250px">
+  		<jsp:include page="../inc/footer.jsp"/>
+  	 </footer>
 	
 
 <%-- 	<img src="./upload/${product.product_img }" class="img-thumbnail" alt="..." width="150" height="150"> --%>

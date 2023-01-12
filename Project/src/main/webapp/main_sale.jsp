@@ -199,11 +199,10 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 			</c:otherwise>
 		</c:choose>
     </div>
-<!--  <footer> -->
-<%--   	<jsp:include page="../inc/footer.jsp"/> --%>
-<!--   </footer> -->
+	 <footer>
+	  	<jsp:include page="/inc/footer.jsp"/>
+	  </footer>
     </div>
-  
 
 <script>
 // Accordion 
@@ -305,6 +304,7 @@ function w3_close() {
     alert(naver_id_login.getProfileData('email'));
   }
 </script>
+
 <!-- End Channel Plugin -->
 </body>
 </html>

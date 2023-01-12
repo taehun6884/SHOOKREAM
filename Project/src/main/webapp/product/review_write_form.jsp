@@ -92,6 +92,8 @@
 		<input type="hidden" name="prodcut_idx" value="${param.product_idx }">
 		<input type="hidden" name="product_size" value="${param.product_size }">
 		<input type="hidden" name="product_color" value="${param.product_color }">
+		<input type="hidden" name="product_name" value="${param.product_name }">
+		
 		<input type="file" id="fileInsert" name="review_img" accept=".png, .jpeg, .jpg, .gif" onchange="readURL(this);"><br>
 		<img id="preview"></img>
 		<hr>

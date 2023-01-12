@@ -1004,7 +1004,7 @@ private ProductDAO() {}
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql="SELECT i.image_main_file,m.member_id,o.order_price,o.order_category,o.order_progress,o.order_date,p.product_idx,p.product_size,p.product_color,o.order_idx "
+			String sql="SELECT i.image_main_file,m.member_id,o.order_price,o.order_category,o.order_progress,o.order_date,p.product_idx,p.product_size,p.product_color,o.order_idx,p.product_name "
 					+ "from orderlist o join product p join member m join image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx "
 					+ "where m.member_idx=? "
@@ -1029,6 +1029,7 @@ private ProductDAO() {}
 					vo.setOrder_product_size(rs.getString("product_size"));
 					vo.setOrder_product_color(rs.getString("product_color"));
 					vo.setOrder_idx(rs.getInt("order_idx"));
+					vo.setOrder_product_name(rs.getString("product_name"));
 					orderlist.add(vo);
 				}
 			} catch (SQLException e) {

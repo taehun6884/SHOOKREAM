@@ -269,10 +269,10 @@ function fn_modify() {
 		</form>
 		
 		</div>
-		</div>
 		 <footer>
 		  	<jsp:include page="../inc/footer.jsp"/>
 		  </footer>
+		</div>
 <!--   <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div> -->
 <!-- 로그인 화면 폼 -->
   <!-- End page content -->
