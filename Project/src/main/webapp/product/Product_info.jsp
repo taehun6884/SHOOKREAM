@@ -272,7 +272,7 @@ margin-left: 270PX;
 		
 						alert("찜한 상품에 추가되었습니다!");
 						
-						$(".wishBtn").html('<img id="afterHeart" alt="" src="images/after_heart.png" id="btnWishAfterImage" onclick="deleteWish()" style="width: 30px; height: 30px;"/>');
+						$(".wishBtn").html('<img id="afterHeart" alt="" src="images/after_heart.png" id="btnWishAfterImage" onclick="deleteWish()" style="width: 30px; height: 30px; cursor: pointer;"/>');
 				}, 
 				error: function(xhr, textStatus, errorThrown) {
 					alert("찜하기 실패"); 
