@@ -29,7 +29,8 @@ public class ReportProAction implements Action {
 		int idx = Integer.parseInt(request.getParameter("idx"));
 		String id = request.getParameter("sId");
 		String title = request.getParameter("title");
-		String content = request.getParameter("content");
+//		String content = request.getParameter("content");
+		String content = "신고자: " + id + "<br>제목: " + title + "<br>내용: " + request.getParameter("content");
 				
 		ReportService service = new ReportService();
 		service.reportadd(idx);
