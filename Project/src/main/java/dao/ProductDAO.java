@@ -1277,7 +1277,9 @@ private ProductDAO() {}
 				pstmt.setInt(11, idx);
 				updateProduct = pstmt.executeUpdate();
 				
-				if(updateProduct > 0) {
+				if(updateProduct > 0 && image.getImage_main_file() == null && image.getImage_real_file1() == null && image.getImage_real_file2() == null) { //이미지 파일이 널 스트링이면 이미지 업데이트 작업 X
+				
+				}else if(updateProduct > 0 && image.getImage_main_file() != null && image.getImage_real_file1() != null && image.getImage_real_file2() != null){
 					//--------------이미지 테이블 업데이트 작업--------------------
 					sql = "UPDATE image SET image_main_file =?, image_real_file1 =?, image_real_file2 =? WHERE product_idx = ?";
 					
@@ -1289,7 +1291,6 @@ private ProductDAO() {}
 					updateImage = pstmt2.executeUpdate();
 					
 				}
-				
 			} catch (SQLException e) {
 				System.out.println("sql 구문오류 - updateProduct");
 				e.printStackTrace();

@@ -54,7 +54,13 @@ public class ProductModifyProAction implements Action {
 				image.setImage_real_file1(multi.getOriginalFileName("file2"));
 				image.setImage_real_file2(multi.getOriginalFileName("file3"));
 //				
-//				if(image.getImage_main_file() == null) {//선택한 파일이 없을 때
+				
+//				if(multi.getOriginalFileName("file") == "") {
+//					image.setImage_main_file(multi.getParameter("main_file"));
+//					image.setImage_real_file1(multi.getParameter("real_file1"));
+//					image.setImage_real_file2(multi.getParameter("real_file2"));
+//				}
+				//				if(image.getImage_main_file() == null) {//선택한 파일이 없을 때
 //					//원래 파일의 파라미터를 넘김
 //					image.setImage_main_file(multi.getParameter("origin_file"));
 //					
