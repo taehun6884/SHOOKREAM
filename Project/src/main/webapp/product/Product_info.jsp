@@ -414,7 +414,7 @@ margin-left: 270PX;
 			<c:choose>
 				<c:when test="${product.product_amount gt 0}">
 					<input type="submit" value="장바구니" class="btn btn-dark btn-sm">
-					<input type="button" onclick="valueCheck()" value="구매하기" class="btn btn-dark btn-sm">
+					<input type="button" onclick="valueCheck(${sessionScope.member_idx})" value="구매하기" class="btn btn-dark btn-sm">
 				</c:when>
 
 				<c:when test="${product.product_amount le 0}">
@@ -556,7 +556,7 @@ margin-left: 270PX;
 <!--   </div> -->
 <!-- </div> -->
 <script>
-function valueCheck(){
+function valueCheck(member){
 	var color = document.fr.cart_color.value;
 	var size = document.fr.cart_size.value;
 	
@@ -565,6 +565,9 @@ function valueCheck(){
 		return false;
 	}else if(size == ""){
 		alert("사이즈를 선택 해주세요");
+		return false;
+	}else if(member == null){
+		alert("로그인 필수 입니다");
 		return false;
 	}
 	
