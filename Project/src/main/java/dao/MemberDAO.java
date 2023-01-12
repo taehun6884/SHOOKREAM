@@ -358,7 +358,7 @@ private MemberDAO() {}
 						member.setMember_phone(rs.getString("member_phone")); // 휴대폰 번호
 						member.setMember_address(rs.getString("member_address")); // 주소
 						member.setMember_dec(rs.getInt("member_dec")); // 신고횟수
-						member.setMember_point(rs.getInt("member_point")); // 적립금
+//						member.setMember_point(rs.getInt("member_point")); // 적립금
 						
 						memberList.add(member);
 						//확인작업
