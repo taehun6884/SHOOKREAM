@@ -116,7 +116,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 <!--   </div> -->
 	<div id="main_category">
 			<c:choose>
-				<c:when test="${productList eq null}">
+				<c:when test="${productList eq null or empty productList}">
 					<p style="font-size: 17px;">'<span style="color: blue;">${param.keyword }</span>' 에 대한 검색결과가 없습니다.</p>
 				</c:when>
 				<c:otherwise>
@@ -174,6 +174,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 </div>
 	
 <!-- 페이징 처리 -->	
+
 	<div class="paging">
         <c:choose>
 			<c:when test="${param.pageNum > 1}">
