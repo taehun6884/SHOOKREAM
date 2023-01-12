@@ -14,8 +14,9 @@ public class ProductModifyService {
 		ProductBean product = null;
 		Connection con = JdbcUtil.getConnection();
 		ProductDAO dao = ProductDAO.getInstance();
-		product = dao.selectProduct(idx);
 		dao.setConnection(con);
+		product = dao.selectProduct(idx);
+		JdbcUtil.close(con);
 		
 		return product;
 	}
@@ -24,8 +25,9 @@ public class ProductModifyService {
 		imageBean image = null;
 		Connection con = JdbcUtil.getConnection();
 		ProductDAO dao = ProductDAO.getInstance();
-		image = dao.selectImage(idx);
 		dao.setConnection(con);
+		image = dao.selectImage(idx);
+		JdbcUtil.close(con);
 		
 		return image;
 	}

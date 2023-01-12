@@ -18,8 +18,8 @@ public class ProductDeleteProService {
 	
 	dao.setConnection(con);
 	
-	
 	int deleteCount = dao.deleteProduct(product_idx);
+	
 	if(deleteCount > 0 ) { // 삭제 성공 시 
 		JdbcUtil.commit(con);
 		isDeleteProduct = true;
@@ -40,6 +40,7 @@ public class ProductDeleteProService {
 		image = dao.selectImage(idx);
 		dao.setConnection(con);
 		
+		JdbcUtil.close(con);
 		return image;
 	}
 	
