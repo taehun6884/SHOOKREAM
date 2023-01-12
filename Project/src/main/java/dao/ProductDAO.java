@@ -766,7 +766,7 @@ private ProductDAO() {}
 						+ "FROM product p join image i "
 						+ "on p.product_idx = i.product_idx "
 						+ "WHERE product_discount_price > 0 "
-						+ "GROUP BY product_name ORDER BY product_discount_price ASC LIMIT ?,?";
+						+ "GROUP BY product_name ORDER BY product_discount_price DESC LIMIT ?,?";
 				
 //				String sql = "SELECT * FROM product "
 //						+ "WHERE product_discount_price IS NOT NULL "
