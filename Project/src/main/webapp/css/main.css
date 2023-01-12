@@ -1814,14 +1814,15 @@ to {
  	background: #FF0000;
  }
 #floatMenu {
-	position: absolute;
-	width: 200px;
+	position: fixed;
+	width: 100px;
 	height: 200px;
-	left: 50px;
+	right: 0px;
 	top: 10px;
 	background-color: #606060;
 	color: #fff;
-	margin-right:100px;
+	margin:100px 0 150px;
+	
 }
 
  

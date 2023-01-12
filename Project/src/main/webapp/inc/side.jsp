@@ -4,37 +4,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>    
-<script>
-	$(function() {
-		$("#customerBtn").click(function(){
-			$("#cusList").toggle();	
-		});
-	});
-</script>
-<script>
-$(document).ready(function() {
 
-	// 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
-	var floatPosition = parseInt($("#floatMenu").css('top'));
-	// 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
-
-	$(window).scroll(function() {
-		// 현재 스크롤 위치를 가져온다.
-		var scrollTop = $(window).scrollTop();
-		var newPosition = scrollTop + floatPosition + "px";
-
-		/* 애니메이션 없이 바로 따라감
-		 $("#floatMenu").css('top', newPosition);
-		 */
-
-		$("#floatMenu").stop().animate({
-			"top" : newPosition
-		}, 500);
-
-	}).scroll();
-
-});
-</script>
 <nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar" >
 
   <div class="w3-container w3-display-container w3-padding-16">
@@ -81,55 +51,55 @@ $(document).ready(function() {
 <%--     <input type="button" class ="reportbtn" value="신고하기" onclick="location.href='./ReportFormAction.me?member_idx=${member_idx}&member_id=${sessionScope.sId }'"> --%>
   <div id = "gotopbtn"  style="cursor:pointer; height:50px; " class="back-to-top d-flex align-items-center justify-content-center active" onclick="window.scrollTo(0,0);">TOP</div> <!-- 홈페이 -->
 <!--  </nav> -->
- <div style="height:300px; margin-left:100px; float:right;" id="floatMenu" >
+ <div style="height:300px; margin-right:100px;" id="floatMenu" >
  
 
  <h5>최근 본 상품</h5>
 
-<%-- <% --%>
-//  String strCookie = request.getHeader("Cookie");
-//  if(strCookie!=null){ 
-//  	Cookie[] cookies =request.getCookies();
-//  	for(Cookie cookie : cookies) { 
-// 		System.out.println(cookie.getName() + " : " + cookie.getValue()); 
-//  	} 
-// 		String product_img_list = getCookieValue(cookies, "product_img"); 
-//  		String product_idx_list = getCookieValue(cookies, "product_idx"); 
-// //  		System.out.println("상품 번호 : " + product_idx + ", 이미지 : " + product_img); 
+<%
+ String strCookie = request.getHeader("Cookie");
+ if(strCookie!=null){ 
+ 	Cookie[] cookies =request.getCookies();
+ 	
+ 	for(Cookie cookie : cookies) { 
+		System.out.println(cookie.getName() + " : " + cookie.getValue()); 
+ 	} 
+		String product_img_list = getCookieValue(cookies, "product_img"); 
+ 		String product_idx_list = getCookieValue(cookies, "product_idx"); 
+//  		System.out.println("상품 번호 : " + product_idx + ", 이미지 : " + product_img); 
 		
-// 		String[] arrProduct_img = product_img_list.split("/"); 
-// 		String[] arrProduct_idx = product_idx_list.split("/"); 
+		String[] arrProduct_img = product_img_list.split("/"); 
+		String[] arrProduct_idx = product_idx_list.split("/"); 
 		
 
 
-// 		int idx = arrProduct_idx.length;
+		int idx = arrProduct_idx.length;
 
 		
-// 		for(int i = 1; i <=3; i++) { 
-// 			String product_img = arrProduct_img[idx - i]; 
-//  			String product_idx = arrProduct_idx[idx - i]; 
+		for(int i = 1; i <idx; i++) { 
+			String product_img = arrProduct_img[idx - i]; 
+ 			String product_idx = arrProduct_idx[idx - i]; 
+//  			System.out.println(product_img + ", " + product_idx); -->
 			
-// //  			System.out.println(product_img + ", " + product_idx); -->
-			
-<%--  		%>  --%>
-<%-- 		<img src="upload/<%=product_img %>" width="100" height="100" alt="없음" onclick="location.href='ProductInfoForm.po?product_idx=<%=product_idx %>&member_idx=${member_idx }'">	 --%>
-<%-- 		<% --%>
-// 	} 
-//  	} 
+ 		%>  
+		<img src="upload/<%=product_img %>" width="100" height="100" alt="없음" onclick="location.href='ProductInfoForm.po?product_idx=<%=product_idx %>&member_idx=${member_idx }'">	
+		<%
+	} 
+ 	} 
 			
 // // } 
-<%--  %>  --%>
-<%-- <%! --%>
-// public String getCookieValue(Cookie[] cookies, String cookieName) { 
-//      for (Cookie cookie : cookies) {  
-//          if(cookie.getName().equals(cookieName)){ 
-//                return cookie.getValue();  
-//           } 
-//     } 
-//     return "";
-// } 
+  %> 
+<%!
+public String getCookieValue(Cookie[] cookies, String cookieName) { 
+     for (Cookie cookie : cookies) {  
+         if(cookie.getName().equals(cookieName)){ 
+               return cookie.getValue();  
+          } 
+    } 
+    return "";
+} 
 
-<%--  %>  --%>
+  %> 
 
 
   </div>
