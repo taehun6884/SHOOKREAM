@@ -37,6 +37,7 @@ public class ProductModifyProAction implements Action {
 				product.setProduct_brand(multi.getParameter("brand"));
 				product.setProduct_price(Integer.parseInt(multi.getParameter("price")));
 				product.setProduct_discount_price(Integer.parseInt(multi.getParameter("discount")));
+				product.setProduct_release_price(Integer.parseInt(multi.getParameter("release_price")));
 				product.setProduct_size(multi.getParameter("size"));
 				product.setProduct_amount(Integer.parseInt(multi.getParameter("amount")));
 				product.setProduct_color(multi.getParameter("color"));

@@ -1259,20 +1259,21 @@ private ProductDAO() {}
 			
 			try {
 				String sql ="UPDATE product "
-						+ "SET product_name=?,  product_brand=?,  product_price=?, product_size=? , product_amount=?, product_color=?,  product_exp=?,  product_detail_exp=?,  product_discount_price=? "
+						+ "SET product_name=?,  product_brand=?,  product_price=?, product_release_price=?, product_size=? , product_amount=?, product_color=?,  product_exp=?,  product_detail_exp=?,  product_discount_price=? "
 						+ "WHERE product_idx =?";
 				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, product.getProduct_name());
 				pstmt.setString(2, product.getProduct_brand());
 				pstmt.setInt(3, product.getProduct_price());
-				pstmt.setString(4, product.getProduct_size());
-				pstmt.setInt(5, product.getProduct_amount());
-				pstmt.setString(6, product.getProduct_color());
-				pstmt.setString(7, product.getProduct_exp());
-				pstmt.setString(8, product.getProduct_detail_exp());
-				pstmt.setDouble(9, product.getProduct_discount_price());
-				pstmt.setInt(10, idx);
+				pstmt.setInt(4, product.getProduct_release_price());
+				pstmt.setString(5, product.getProduct_size());
+				pstmt.setInt(6, product.getProduct_amount());
+				pstmt.setString(7, product.getProduct_color());
+				pstmt.setString(8, product.getProduct_exp());
+				pstmt.setString(9, product.getProduct_detail_exp());
+				pstmt.setDouble(10, product.getProduct_discount_price());
+				pstmt.setInt(11, idx);
 				updateProduct = pstmt.executeUpdate();
 				
 //				if(updateProduct > 0) {
