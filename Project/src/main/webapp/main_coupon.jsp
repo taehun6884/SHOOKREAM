@@ -164,11 +164,9 @@ function downCoupon(){
 					</div>
 				</c:forEach>
 			</div>
+  
    	 </div>
   <!-- footer -->
-<!--    <footer> -->
-<%--   	<jsp:include page="../inc/footer.jsp"/> --%>
-<!--   </footer> -->
 <script>
 // Accordion 
 function myAccFunc() {

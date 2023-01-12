@@ -19,9 +19,17 @@ private String order_product_size;
 private String order_product_color;
 private int order_coupon_idx;
 private int order_isUse;
+private String order_product_name;
 
 
 
+
+public String getOrder_product_name() {
+	return order_product_name;
+}
+public void setOrder_product_name(String order_product_name) {
+	this.order_product_name = order_product_name;
+}
 public int getOrder_isUse() {
 	return order_isUse;
 }
@@ -120,11 +128,7 @@ public String toString() {
 			+ ", order_product_price=" + order_product_price + ", order_product_sell_count=" + order_product_sell_count
 			+ ", order_product_amount=" + order_product_amount + ", order_product_size=" + order_product_size
 			+ ", order_product_color=" + order_product_color + ", order_coupon_idx=" + order_coupon_idx
-			+ ", order_isUse=" + order_isUse + "]";
+			+ ", order_isUse=" + order_isUse + ", order_product_name=" + order_product_name + "]";
 }
-
-
-
-
 
 }

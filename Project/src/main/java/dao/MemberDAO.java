@@ -491,7 +491,7 @@ private MemberDAO() {}
 						review_idx = rs.getInt(1) + 1; // 기존 게시물 번호 중 가장 큰 번호(= 조회 결과) + 1
 					}
 					
-					sql = "INSERT INTO review VALUES(?,?,?,?,?,?,now(),?)";
+					sql = "INSERT INTO review VALUES(?,?,?,?,?,?,now(),?,?)";
 					pstmt2 = con.prepareStatement(sql);
 
 					pstmt2.setInt(1, review_idx);
@@ -501,6 +501,7 @@ private MemberDAO() {}
 					pstmt2.setString(5, review.getReview_img());
 					pstmt2.setString(6, review.getReview_real_img());
 					pstmt2.setString(7, review.getRe_order_detail());
+					pstmt2.setString(8, review.getRe_product_name()); // 수정 해야함ㅜ 
 					
 //					System.out.println("리뷰 > DAO 확인 : " + pstmt2);
 					
@@ -862,6 +863,7 @@ private MemberDAO() {}
 					review.setReview_real_img(rs.getString("review_real_img"));
 					review.setReview_date(rs.getDate("review_date"));
 					review.setRe_order_detail(rs.getString("re_order_detail"));
+					review.setRe_product_name(rs.getString("re_product_name"));
 					
 					myReviewList.add(review);
 

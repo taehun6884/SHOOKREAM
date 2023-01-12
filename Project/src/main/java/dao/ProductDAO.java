@@ -1006,7 +1006,7 @@ private ProductDAO() {}
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql="SELECT i.image_main_file,m.member_id,o.order_price,o.order_category,o.order_progress,o.order_date,p.product_idx,p.product_size,p.product_color,o.order_idx "
+			String sql="SELECT i.image_main_file,m.member_id,o.order_price,o.order_category,o.order_progress,o.order_date,p.product_idx,p.product_size,p.product_color,o.order_idx,p.product_name "
 					+ "from orderlist o join product p join member m join image i "
 					+ "on o.product_idx = p.product_idx and o.member_idx = m.member_idx and o.product_idx = i.product_idx "
 					+ "where m.member_idx=? "
@@ -1031,6 +1031,7 @@ private ProductDAO() {}
 					vo.setOrder_product_size(rs.getString("product_size"));
 					vo.setOrder_product_color(rs.getString("product_color"));
 					vo.setOrder_idx(rs.getInt("order_idx"));
+					vo.setOrder_product_name(rs.getString("product_name"));
 					orderlist.add(vo);
 				}
 			} catch (SQLException e) {
@@ -1249,45 +1250,48 @@ private ProductDAO() {}
 			return deleteCount;
 		}
 		//-------------------------상품수정 쿼리-------------------------------
-		public int updateProduct(int idx, ProductBean product) {
+		public int updateProduct(int idx, ProductBean product, imageBean image) {
 			int updateProduct = 0;
-//			int updateImage = 0;
+			int updateImage = 0;
 			
 			PreparedStatement pstmt =null;
+			PreparedStatement pstmt2 =null;
 			
 			System.out.println(product);
 			
 			try {
 				String sql ="UPDATE product "
-						+ "SET product_name=?,  product_brand=?,  product_price=?, product_size=? , product_amount=?, product_color=?,  product_exp=?,  product_detail_exp=?,  product_discount_price=? "
+						+ "SET product_name=?,  product_brand=?,  product_price=?, product_release_price=?, product_size=? , product_amount=?, product_color=?,  product_exp=?,  product_detail_exp=?,  product_discount_price=? "
 						+ "WHERE product_idx =?";
 				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, product.getProduct_name());
 				pstmt.setString(2, product.getProduct_brand());
 				pstmt.setInt(3, product.getProduct_price());
-				pstmt.setString(4, product.getProduct_size());
-				pstmt.setInt(5, product.getProduct_amount());
-				pstmt.setString(6, product.getProduct_color());
-				pstmt.setString(7, product.getProduct_exp());
-				pstmt.setString(8, product.getProduct_detail_exp());
-				pstmt.setDouble(9, product.getProduct_discount_price());
-				pstmt.setInt(10, idx);
+				pstmt.setInt(4, product.getProduct_release_price());
+				pstmt.setString(5, product.getProduct_size());
+				pstmt.setInt(6, product.getProduct_amount());
+				pstmt.setString(7, product.getProduct_color());
+				pstmt.setString(8, product.getProduct_exp());
+				pstmt.setString(9, product.getProduct_detail_exp());
+				pstmt.setDouble(10, product.getProduct_discount_price());
+				pstmt.setInt(11, idx);
 				updateProduct = pstmt.executeUpdate();
 				
-//				if(updateProduct > 0) {
-//					//--------------이미지 테이블 업데이트 작업--------------------
-//					sql = "UPDATE image SET image_main_file =?, image_real_file1 =?, image_real_file2 =? WHERE product_idx = ?";
-//					
-//					pstmt2 = con.prepareStatement(sql);
-//					pstmt2.setString(1, image.getImage_main_file());
-//					pstmt2.setString(2, image.getImage_real_file1());
-//					pstmt2.setString(3, image.getImage_real_file2());
-//					pstmt2.setInt(4, idx);
-//					updateImage = pstmt2.executeUpdate();
-//					
-//				}
+				if(updateProduct > 0 && image.getImage_main_file() == null && image.getImage_real_file1() == null && image.getImage_real_file2() == null) { //이미지 파일이 널 스트링이면 이미지 업데이트 작업 X
 				
+				}else if(updateProduct > 0 && image.getImage_main_file() != null && image.getImage_real_file1() != null && image.getImage_real_file2() != null){
+					//--------------이미지 테이블 업데이트 작업--------------------
+					sql = "UPDATE image SET image_main_file =?, image_real_file1 =?, image_real_file2 =? WHERE product_idx = ?";
+					
+					pstmt2 = con.prepareStatement(sql);
+					pstmt2.setString(1, image.getImage_main_file());
+					pstmt2.setString(2, image.getImage_real_file1());
+					pstmt2.setString(3, image.getImage_real_file2());
+					pstmt2.setInt(4, idx);
+					updateImage = pstmt2.executeUpdate();
+					
+				}
 			} catch (SQLException e) {
 				System.out.println("sql 구문오류 - updateProduct");
 				e.printStackTrace();
@@ -1296,7 +1300,7 @@ private ProductDAO() {}
 			} 
 		
 		return updateProduct;
-}
+}//상품 수정 끝
 		public ProductBean getProduct(int idx) {
 			ProductBean bean = null;
 			PreparedStatement pstmt = null;

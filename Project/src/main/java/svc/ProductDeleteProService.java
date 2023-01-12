@@ -37,8 +37,8 @@ public class ProductDeleteProService {
 		imageBean image = null;
 		Connection con = JdbcUtil.getConnection();
 		ProductDAO dao = ProductDAO.getInstance();
-		image = dao.selectImage(idx);
 		dao.setConnection(con);
+		image = dao.selectImage(idx);
 		
 		JdbcUtil.close(con);
 		return image;
