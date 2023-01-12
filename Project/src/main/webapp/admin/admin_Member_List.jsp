@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html lang="en">
     <head>
@@ -82,7 +83,6 @@
                                             <th>이름</th>
                                             <th>주소</th>
                                             <th>전화번호</th>
-                                            <th>적립금</th>
                                             <th>가입일자</th>
                                             <th>수정</th>
                                         </tr>
@@ -105,7 +105,6 @@
 											<td>${member.member_name }</td>
 											<td>${member.member_address }</td>
 											<td>${member.member_phone }</td>
-											<td>${member.member_point }</td>
 											<td>${member.member_date }</td>
 											<td>
 											<input type ="button" value ="수정" onclick="location.href='MemberModifyForm.me?id=${member.member_id}&pass=${member.member_pass }'">

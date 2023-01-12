@@ -51,6 +51,7 @@ private ProductDAO() {}
 		PreparedStatement pstmt3 = null;
 		PreparedStatement pstmt4 = null;
 		ResultSet rs = null;
+		ResultSet rs2 = null;
 		
 		try {
 			//----------------idx 작업------------------
@@ -94,12 +95,12 @@ private ProductDAO() {}
 				sql = "SELECT MAX(image_idx) FROM image";
 				int idx2 = 1; // 새 글 번호
 				pstmt3 = con.prepareStatement(sql);
-				rs = pstmt3.executeQuery();
+				rs2 = pstmt3.executeQuery();
 				
 				if(rs.next()) { 
 					 //true -> 조회결과가 있을 경우 (= 게시물이 하나라도 존재할 경우)
 					 //존재하지 않을 경우 rs.next는 false , DB에서는 NULL이 표기된다.
-					idx2 = rs.getInt(1) + 1;
+					idx2 = rs2.getInt(1) + 1;
 				}
 				
 				sql = "INSERT INTO image (image_idx, product_idx, image_main_file, image_real_file1, image_real_file2) VALUES(?,?,?,?,?)";
@@ -118,6 +119,7 @@ private ProductDAO() {}
 			System.out.println("상품등록 - 관리자");
 			e.printStackTrace();
 		} finally {
+			JdbcUtil.close(rs2);
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt4);
 			JdbcUtil.close(pstmt3);
@@ -932,7 +934,7 @@ private ProductDAO() {}
 		public int insertOrder(OrderBean vo) {
 			int insertOrder = 0;
 			PreparedStatement pstmt = null,pstmt2 = null,pstmt3 = null,pstmt4=null;
-			ResultSet rs = null,rs2=null;
+			ResultSet rs = null;
 			
 			try {
 				String sql = "SELECT MAX(order_idx) FROM orderlist";
