@@ -216,10 +216,10 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 	 <button type="button" style="margin:auto; display:block;" class="btn btn-dark btn-sm" onclick="iamport()">구매하기</button>
 	    </div>
 	    
+	 <footer>
+	  	<jsp:include page="../inc/footer.jsp"/>
+	  </footer>
 	   </div> 
- <footer>
-  	<jsp:include page="../inc/footer.jsp"/>
-  </footer>
 <!-- Newsletter Modal -->
 <div id="newsletter" class="w3-modal">
   <div class="w3-modal-content w3-animate-zoom" style="padding:32px">

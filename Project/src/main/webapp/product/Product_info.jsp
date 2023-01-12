@@ -443,11 +443,21 @@ margin-left: 270PX;
 	<hr>	 <%-- 리뷰구역 --%> -->
 		<div id="reviewListArea" style="z-index:1;">
 			<h3>Review</h3>
+			<hr>
 				<div id="reAll">
 					<c:forEach var="review" items="${reviewList }">
 						<table class="reviewContent">
 							<tr>
-								<td rowspan="7" width="20%"><img id="imgSize" src="./upload/${review.review_real_img }" width="100px" ></td>
+								<c:choose>
+									<c:when test="${not empty review.review_real_img  }">
+										<td rowspan="7" width="20%">
+										<img id="imgSize" src="./upload/${review.review_real_img }"width="100px" ></td>
+									</c:when>
+									<c:otherwise>
+										<td rowspan="7" width="20%">
+										<img id="imgSize" src="./images/shookream.png" width="100px" ></td>
+									</c:otherwise>
+								</c:choose>
 								<td colspan=""style="text-align:left;" width="65%"><small>상세 사이즈 및 색상 : ${review.re_order_detail }</small></td>							
 								<td style="text-align:left;" width="15%">
 									<small>
@@ -476,7 +486,7 @@ margin-left: 270PX;
 						</div>		
 					</c:forEach>
 				</div>
-				<section id="pageList" style="text-align:center">				
+<%--				<section id="pageList" style="text-align:center">				
 			<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
 			<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 				<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
@@ -489,11 +499,11 @@ margin-left: 270PX;
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
-		</section>	
+		</section>	--%>
 		</div> 	
      <footer style="z-index:-1; text-align:left; width:100%; padding-left:250px">
   		<jsp:include page="../inc/footer.jsp"/>
-  	 </footer>
+  	 </footer> 
 	
 
 <%-- 	<img src="./upload/${product.product_img }" class="img-thumbnail" alt="..." width="150" height="150"> --%>
