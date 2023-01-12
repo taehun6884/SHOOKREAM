@@ -237,7 +237,7 @@ margin-left: 270PX;
 			dataType: "html", 
 			success: function(data) { 
 	//					$("#btnWishAfterImage").attr("src", "images/before_heart.png");
-					alert("찜한 상품에서 삭제했습니다!");
+					alert("찜한 상품에서 삭제되었습니다!");
 	//					$('#wishLoad').load(location.href+' #wishLoad')
 					$(".wishBtn").html('<img id="beforeHeart" alt="" src="images/before_heart.png" id="btnWishBeforImage" onclick="addWish()" style="width: 30px; height: 30px;"/>');
 			}, 
