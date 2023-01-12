@@ -164,9 +164,7 @@ function downCoupon(){
 					</div>
 				</c:forEach>
 			</div>
-  <footer>
-  	<jsp:include page="/inc/footer.jsp"/>
-  </footer>
+  
    	 </div>
   <!-- footer -->
 <script>
