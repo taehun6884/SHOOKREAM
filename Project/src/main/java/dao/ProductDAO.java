@@ -1249,11 +1249,12 @@ private ProductDAO() {}
 			return deleteCount;
 		}
 		//-------------------------상품수정 쿼리-------------------------------
-		public int updateProduct(int idx, ProductBean product) {
+		public int updateProduct(int idx, ProductBean product, imageBean image) {
 			int updateProduct = 0;
-//			int updateImage = 0;
+			int updateImage = 0;
 			
 			PreparedStatement pstmt =null;
+			PreparedStatement pstmt2 =null;
 			
 			System.out.println(product);
 			
@@ -1276,18 +1277,18 @@ private ProductDAO() {}
 				pstmt.setInt(11, idx);
 				updateProduct = pstmt.executeUpdate();
 				
-//				if(updateProduct > 0) {
-//					//--------------이미지 테이블 업데이트 작업--------------------
-//					sql = "UPDATE image SET image_main_file =?, image_real_file1 =?, image_real_file2 =? WHERE product_idx = ?";
-//					
-//					pstmt2 = con.prepareStatement(sql);
-//					pstmt2.setString(1, image.getImage_main_file());
-//					pstmt2.setString(2, image.getImage_real_file1());
-//					pstmt2.setString(3, image.getImage_real_file2());
-//					pstmt2.setInt(4, idx);
-//					updateImage = pstmt2.executeUpdate();
-//					
-//				}
+				if(updateProduct > 0) {
+					//--------------이미지 테이블 업데이트 작업--------------------
+					sql = "UPDATE image SET image_main_file =?, image_real_file1 =?, image_real_file2 =? WHERE product_idx = ?";
+					
+					pstmt2 = con.prepareStatement(sql);
+					pstmt2.setString(1, image.getImage_main_file());
+					pstmt2.setString(2, image.getImage_real_file1());
+					pstmt2.setString(3, image.getImage_real_file2());
+					pstmt2.setInt(4, idx);
+					updateImage = pstmt2.executeUpdate();
+					
+				}
 				
 			} catch (SQLException e) {
 				System.out.println("sql 구문오류 - updateProduct");
@@ -1297,7 +1298,7 @@ private ProductDAO() {}
 			} 
 		
 		return updateProduct;
-}
+}//상품 수정 끝
 		public ProductBean getProduct(int idx) {
 			ProductBean bean = null;
 			PreparedStatement pstmt = null;

@@ -46,13 +46,13 @@ public class ProductModifyProAction implements Action {
 				System.out.println(product);//확인용
 				
 				
-//				imageBean image = new imageBean();
+				imageBean image = new imageBean();
 //				
 //				
 //				//새로운 파일이 선택됬는지 여부 확인
-//				image.setImage_main_file(multi.getOriginalFileName("file"));
-//				image.setImage_real_file1(multi.getOriginalFileName("file2"));
-//				image.setImage_real_file2(multi.getOriginalFileName("file3"));
+				image.setImage_main_file(multi.getOriginalFileName("file"));
+				image.setImage_real_file1(multi.getOriginalFileName("file2"));
+				image.setImage_real_file2(multi.getOriginalFileName("file3"));
 //				
 //				if(image.getImage_main_file() == null) {//선택한 파일이 없을 때
 //					//원래 파일의 파라미터를 넘김
@@ -108,7 +108,7 @@ public class ProductModifyProAction implements Action {
 				ProductModifyProService service = new ProductModifyProService();
 				boolean isUpdateSuccess = false;
 				//1. 상품 업데이트
-				isUpdateSuccess = service.modifyProduct(idx, product);
+				isUpdateSuccess = service.modifyProduct(idx, product, image);
 				
 				if(!isUpdateSuccess) {
 					
