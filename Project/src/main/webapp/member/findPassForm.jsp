@@ -72,10 +72,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Snas KR", sans-serif;}
 					<td width="230px"><input class="w3-input w3-border" type="text" name="member_id" id="member_id" required></td>
 				</tr>
 				<tr>
-					<th class="active">이름</th>
-					<td width="230px"><input class="w3-input w3-border" type="text" name="member_name" id="member_name" required></td>
-				</tr>
-				<tr>
 					<th class="active">이메일 주소</th>
 					<td width="230px"><input class="w3-input w3-border" type="text" name="member_email" id="member_email" required></td>
 				</tr>
