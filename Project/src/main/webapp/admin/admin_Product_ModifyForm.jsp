@@ -41,6 +41,14 @@
    		<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript">
 		//할인 버튼에 따른 처리
+
+		$(function() {
+			if($('#saleRadio2').is(':checked') == true){
+				$('#testRate').attr('readonly', false);
+
+			}
+		});
+		
 		$(function() {
 			$('input:radio[id="saleRadio1"]').on("click", function() {
 				$('#testRate').attr('readonly', true);
@@ -120,10 +128,30 @@
 					
 						
 					<tr>
+					<!-- 할인율이 0 보다 클 때 할인선택이 체크되어있어야 함. -->
+					<c:if test="${product.product_discount_price gt 0}">
 						<td width="100px" align="left" class="table-secondary">할인율</td>
 						<td>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" name="saleRadio" id="saleRadio1" >
+							<label class="form-check-label" for="flexRadioDefault2">할인 미선택</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="saleRadio" id="saleRadio2"  checked="checked"> 
+							<label class="form-check-label" for="flexRadioDefault1">할인 적용 
+							<input type="number" id="testRate" name ="discount" value ="${product.product_discount_price }" size = "1" min = "0" max ="100" style = "text-align:center;" readonly="readonly"> <!-- 할인율 입력칸 -->
+							<span>%</span>
+							<button type="button" id="testCalBtn">&nbsp;계산하기&nbsp;</button>
+							</label>
+						</div>
+						</td>
+					</c:if>
+					<!-- 할인율이 0 보다 작을 때 할인 미선택이 체크되어있어야 함. -->
+					<c:if test="${product.product_discount_price le 0}">
+						<td width="100px" align="left" class="table-secondary">할인율</td>
+						<td>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="saleRadio" id="saleRadio1" checked="checked">
 							<label class="form-check-label" for="flexRadioDefault2">할인 미선택</label>
 						</div>
 						<div class="form-check">
@@ -134,8 +162,9 @@
 							<button type="button" id="testCalBtn">&nbsp;계산하기&nbsp;</button>
 							</label>
 						</div>
-						
 						</td>
+					</c:if>
+						
 						<td>
 						</td>
 						
