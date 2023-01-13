@@ -76,7 +76,7 @@
 		int idx = arrProduct_idx.length;
 
 		
-		for(int i = 1; i <idx; i++) { 
+		for(int i = 1; i <4; i++) { 
 			String product_img = arrProduct_img[idx - i]; 
  			String product_idx = arrProduct_idx[idx - i]; 
 //  			System.out.println(product_img + ", " + product_idx); -->
