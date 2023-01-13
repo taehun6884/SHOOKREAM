@@ -147,7 +147,7 @@ footer {
 			<div class="w3-col l3 s6">
 				<div class="w3-container">
 							<div class="w3-display-container">
-								<img src="./upload/${productBestList.product_img }" alt="..." style="width: 100%">
+								<img src="./upload/${productBestList.product_img }" alt="..." style="width: 500px; height: 400px;">
 								<div class="w3-display-middle w3-display-hover">
 									<button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productBestList.product_idx }&member_idx=${sessionScope.member_idx }'">
 										Buy now <i class="fa fa-shopping-cart" ></i>
@@ -200,7 +200,7 @@ footer {
    <div class="w3-col l3 s6" style="z-index:1;">
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="./upload/${productNewList.product_img }"  alt="..." style="width:100%">
+          <img src="./upload/${productNewList.product_img }"  alt="..." style="width: 500px; height: 400px;">
           <div class="w3-display-middle w3-display-hover">
 									<button class="w3-button w3-black" onclick="location.href='ProductInfoForm.po?product_idx=${productNewList.product_idx }&member_idx=${sessionScope.member_idx }'">
 										Buy now <i class="fa fa-shopping-cart" ></i>

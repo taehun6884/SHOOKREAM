@@ -379,7 +379,7 @@ function reCheckPasswd(pass2) {//재입력 확인
 	}else{
 		spanRecheckResult.innerHTML = "일치하지 않는 패스워드 입니다";
 		spanRecheckResult.style.color = "RED";  
-		passwdStatus = false;
+// 		passwdStatus = false;
 		event.preventDefault(); // submit 기능 막기
 	}
 }
