@@ -66,8 +66,8 @@
     </style>
 
 <style>
-.w3-sidebar a {font-family: "Roboto", sans-serif}
-body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+/* .w3-sidebar a {font-family: "Roboto", sans-serif} */
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;} 
 </style>
 
 <style>
@@ -173,13 +173,13 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   </thead>
   <tbody>
   	<!-- 카트 리스트가 없을 때 처리 -->
-<%--     <c:if test="${cartlist eq null or empty cartlist}"> --%>
-<!-- 			<tr> -->
-<!-- 				<td><h3>담긴 상품이 없습니다.</h3></td> -->
-<!-- 			</tr> -->
-<%-- 		</c:if> --%>
-	<!-- 카트 리스트가 있을 때 처리 -->
-<%-- 	<c:if test="${cartlist ne null and not empty cartlist}"> --%>
+    <c:if test="${total le 0 }">
+			<tr>
+				<td colspan="8" style="text-align: center"><h3 >구매 할 상품이 없습니다.</h3></td>
+			</tr>
+		</c:if>
+	<!-- 카트 리스트가 없을 때 처리 -->
+	<c:if test="${total gt 0}">
     <c:forEach var="cart" items="${cartOrder }" varStatus="status">
     <tr>
       <td><a href="ProductInfoForm.po?product_idx=${cart.product_idx }"><img src="upload/${cart.cart_product_image }"  alt="없음!" class="img-thumbnail" width="150" height="150" ></a></td>
@@ -193,7 +193,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <td class ="td_cart">무료배송</td>
     </tr>
     </c:forEach>
-<%--     </c:if> --%>
+    </c:if>
   </tbody>
 </table>
 	<div class="container px-4 text-center" id="totalResult">

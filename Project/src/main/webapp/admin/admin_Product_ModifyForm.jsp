@@ -99,6 +99,8 @@
             <!-- 상품 등록 폼 -->
 			<form action="ProductModifyPro.po?product_idx=${product.product_idx}" method="post"
 				enctype="multipart/form-data">
+				<input type="hidden" id ="product_release_price" name ="release_price" value="">
+				
 				<table class="table">
 					<tr>
 						<td width="100px" align="left" class="table-secondary">상품명</td>
@@ -109,7 +111,7 @@
 						<td width="100px" align="left" class="table-secondary">상품 브랜드</td>
 						<td width="300px">
 						<select name="brand" >
-								<option value="" selected style="color: red">기존 브랜드 : ${product.product_brand }</option>
+								<option value="${product.product_brand }" selected style="color: red">기존 브랜드 : ${product.product_brand }</option>
 								<option value="나이키">나이키</option>
 								<option value="뉴발란스">뉴발란스</option>
 								<option value="컨버스">컨버스</option>
@@ -177,7 +179,7 @@
 						<td width="100px" align="left" class="table-secondary">상품 사이즈</td>
 						<td width="300px">
 						<select name="size">
-								<option value ="" selected="selected" style="color: red">기존 사이즈 : ${product.product_size }</option>
+								<option value ="${product.product_size }" selected="selected" style="color: red">기존 사이즈 : ${product.product_size }</option>
 								<option value="220">220</option>
 								<option value="230">230</option>
 								<option value="240">240</option>
@@ -196,7 +198,7 @@
 					<tr>
 						<td width="100px" align="left" class="table-secondary">상품색상</td>
 						<td width="300px"><select name="color">
-								<option value="" style="color: red">기존 색상 : ${product.product_color}</option>
+								<option value="${product.product_color}" style="color: red">기존 색상 : ${product.product_color}</option>
 								<option value="black">BLACK</option>
 								<option value="white">WHITE</option>
 								<option value="navy">NAVY</option>
@@ -277,6 +279,8 @@
 			        //판매가격 - 할인율 계산
 			        var releasePrice = originPrice - discounted;
 			        document.querySelector('#testResultBox02').innerText = releasePrice + '원'
+			        //할인된 가격을 cart_discountprice 라는 id 값의 value에 넣음.
+	                document.getElementById('product_release_price').value = releasePrice;    
 			    }
 			});
 		</script>
