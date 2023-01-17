@@ -15,7 +15,6 @@ html {
 }
 
 body {
-	margin: 0
 	
 }
 
@@ -24,13 +23,24 @@ article, aside, details, figcaption, figure, header, main, menu,
 	display: block
 }
 
+.w3-main {
+	 height: auto;
+	  min-height: 100%;
+	  padding-bottom: 600px;
+	  
+}
+
 .footerClass {
-	height: 100px;
+	height: 200px;
 	clear:both;
 }
 
 footer {
-	
+	 position : relative;
+	  transform : translateY(-100%);
+		background-color: gray;
+		height: 600px;
+		padding-top: 50px;
 }
 
 summary {
@@ -195,7 +205,8 @@ textarea {
 html, body {
 	font-family: Noto Sans KR, sans-serif;
 	font-size: 15px;
-	line-height: 1.5
+	line-height: 1.5;
+	
 }
 
 html {
@@ -722,11 +733,13 @@ a {
 
 .w3-content, .w3-auto {
 	margin-left: auto;
-	margin-right: auto
+	margin-right: auto;
+/* 	margin-right: 20px; */
 }
 
 .w3-content {
 	max-width: 95%;
+	
 }
 
 .w3-auto {

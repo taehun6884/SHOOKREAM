@@ -73,7 +73,7 @@
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 </style>
 </head>
-<body class="w3-content" style="max-width:95%">
+<body class="w3-content" style="max-width:95%;  margin-top: 20px;">
 <!-- Sidebar/menu -->
 <jsp:include page="../inc/side.jsp"/>
 
@@ -87,7 +87,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Sans KR", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
+<div class="w3-main" style="margin-left:250px;">
 	
  <!-- Push down content on small screens -->
  <div class="w3-hide-large" style="margin-top:83px"></div>

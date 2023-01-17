@@ -9,7 +9,7 @@
 	}
 	
 	.footerContent {
-/* 		padding-left: 10px; */
+	padding-left: 100px; 
 	}
 	
 	h4 {
@@ -17,8 +17,15 @@
 	}
 	
 	footer {
-		background-color: #FBFBFB;
-		height: 250px;
+/* 		  position : relative; */
+/* 		  transform : translateY(-100%); */
+/* 		background-color: #FBFBFB; */
+		height: 400px;
+		padding-top: 50px;
+		margin-top: 50px;
+	background-color: #f8f8f8;
+	margin-left: 22px;
+/* 		margin-top: 100px; */
 	}
 
 </style>

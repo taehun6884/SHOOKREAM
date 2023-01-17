@@ -193,8 +193,8 @@ function fn_modify() {
   
   <!-- Footer -->
   <!-- 로그인 화면 폼 -->
-  <div style="padding: 80px;">
-  <form action="MemberModifyPro.me" method="post" name="mdForm" style="margin-bottom: 300px">
+  <div style="padding: 50px 80px;">
+  <form action="MemberModifyPro.me" method="post" name="mdForm" style="margin-bottom: 150px">
   			<input type="hidden" value = "${member.member_pass }" name="oldpass">
   			<input type="hidden" value = "${member.member_address }" name="oldaddress">
   			<input type="hidden" value = "${member.member_phone }" name="oldphone">
@@ -239,7 +239,7 @@ function fn_modify() {
 						<td>
 						<div>${member.member_address }</div><br>
 						<input type="text" name="address" id="address_kakao2"  size="30px" placeholder="변경시에만 입력" style="margin-bottom: 10px;line-height: 30px"> &nbsp;
-						<button id="address_kakao" class="btn btn-dark">주소찾기</button><br>
+						<button id="address_kakao" class="btn btn-dark" type="button">주소찾기</button><br>
 						<input type="text" name="address_detail"  size="30px" style="line-height: 30px"  ><br>
 						</td>
 					</tr>
@@ -260,7 +260,7 @@ function fn_modify() {
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><button type="submit" class="btn btn-secondary btn-lg" onclick="fn_modify()">수정하기</button>
-						<button type="submit" class="btn btn-secondary btn-lg" onclick="history.back()">취소</button></td>
+						<button type="button" class="btn btn-secondary btn-lg" onclick="location.href='MemberMyPage.me?id=${member.member_id}&member_idx=${member.member_idx }'">취소</button></td>
 					</tr>
 				</table>
 

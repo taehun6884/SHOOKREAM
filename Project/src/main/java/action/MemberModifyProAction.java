@@ -61,34 +61,31 @@ public class MemberModifyProAction implements Action {
 		ModifyMemberService service = new ModifyMemberService();
 		
 		boolean updateMember = service.updateMember(member); 
+		
+		int member_idx = service.selectMemberIdx(request.getParameter("id"));
 
+		try {
 		if(updateMember) {
 			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out;
-			try {
-				out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('회원 수정 성공!');");
-				out.println("</script>");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('정보를 수정했습니다!')");
+			out.println("</script>");	
 			
 			forward = new ActionForward();
-			forward.setPath("./");
+			forward.setPath("MemberMyPage.me?member_id="+member.getMember_id()+"&member_idx="+member_idx);
 			forward.setRedirect(true);
 		} else{
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out;
-				try {
-					out = response.getWriter();
-					out.println("<script>");
-					out.println("alert('회원 수정 실패!');");
-					out.println("history.back()");
-					out.println("</script>");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('정보 수정을 실패했습니다!')");
+			out.println("history.back()");
+			out.println("</script>");	
+		}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return forward;
 		

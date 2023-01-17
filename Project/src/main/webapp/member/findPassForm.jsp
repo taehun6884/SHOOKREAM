@@ -28,7 +28,7 @@
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Snas KR", sans-serif;}
 </style>
 </head>
-<body class="w3-content" style="max-width:95%">
+<body class="w3-content" style="max-width:95%;  margin-top: 20px;">
 <!-- Sidebar/menu -->
 <jsp:include page="../inc/side.jsp"/>
 
@@ -42,7 +42,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Snas KR", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-	<div class="w3-main" style="margin-left:250px;margin-top: 20px;margin-right: 17px;">
+	<div class="w3-main" style="margin-left:250px;">
 	
  <!-- Push down content on small screens -->
  <div class="w3-hide-large" style="margin-top:83px"></div>
@@ -61,7 +61,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Snas KR", sans-serif;}
    
   <!-- Footer -->
   <!-- 로그인 화면 폼 -->
-  <footer class="w3-padding-64 w3-small w3-center" id="footer">
+  <div class="w3-padding-64 w3-small w3-center" id="footer">
     <div id = "sform">
         <h4 style="padding-top: 30px;">비밀번호 찾기</h4>
         <form method="post" action="FindPwProAction.me">
@@ -80,7 +80,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Noto Snas KR", sans-serif;}
 						<input type="submit" value="임시비밀번호 전송" class="w3-button w3-block w3-black">
         </form>
     </div>
-  </footer>
+  </div>
    <footer>
   	<jsp:include page="../inc/footer.jsp"/>
   </footer>
