@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 <script src="https://kit.fontawesome.com/498a54c4c7.js"
 	crossorigin="anonymous"></script>
-<script src="../js/jquery-3.6.3.js"></script>	
+<!-- <script src="../js/jquery-3.6.3.js"></script>	 -->
 <script type="text/javascript">
 $(function() {
 	$('.post-wrapper').slick({
@@ -115,6 +115,7 @@ footer {
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:250px">
+	
 
   <!-- Push down content on small screens -->
   <div class="w3-hide-large" style="margin-top:83px"></div>
@@ -136,7 +137,8 @@ footer {
 <!--     <p>BEST</p> -->
 <!--   </div> -->
 
-	<div id="main_category">
+
+<div id="main_category">
 		<p>BEST</p>
 	</div>
 	
@@ -195,7 +197,7 @@ footer {
 		<p>NEW</p>
 	</div>
 	<!-- Product grid -->
-  <div class="w3-row w3-grayscale">
+  <div class="w3-row w3-grayscale" style="clear:both;">
   <c:forEach var="productNewList" items="${productNewList }" begin="0" end="7" step="1">
    <div class="w3-col l3 s6" style="z-index:1;">
       <div class="w3-container">
@@ -241,12 +243,13 @@ footer {
 					</div>
 				</c:forEach>
    	 </div>
-   	 <div>
-		<footer style="z-index:-1;">
+   	 <div style="margin-top: 400px;">
+		<footer>
 	    	<jsp:include page="./inc/footer.jsp"/>
 		</footer>
-	</div>	
    	 </div>
+   	 </div>
+   	 
 
  
 <script>

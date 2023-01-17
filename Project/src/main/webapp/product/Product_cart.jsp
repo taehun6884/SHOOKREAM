@@ -270,10 +270,10 @@ font-size: 70%;
 <!--         <a href="#">4</a> -->
 <!--         <a href="#">5</a> -->
     </div>
-  </div>
  <footer>
   	<jsp:include page="../inc/footer.jsp"/>
   </footer>
+  </div>
   
 
 

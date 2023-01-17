@@ -71,4 +71,18 @@ public class ModifyMemberService {
 		}
 		return isRightUser;
 	}
+  
+  public int selectMemberIdx(String sId) {
+	  int member_idx = 0;
+	  
+	  Connection con = JdbcUtil.getConnection();
+	  
+	  MemberDAO dao = MemberDAO.getInstance();
+	  
+	  dao.setConnection(con);
+	  
+	  member_idx = dao.selectMemberIdx(sId);
+	  
+	  return member_idx;
+  }
 }
