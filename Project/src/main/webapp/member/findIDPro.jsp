@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h3> ~~ 아이디/비밀번호 찾기 결과 ~~ </h3>
+	<h3> 아이디/비밀번호 찾기 결과 </h3>
 	<%
 		String name = request.getParameter("member_name").trim();
 		String email = request.getParameter("member_email").trim();

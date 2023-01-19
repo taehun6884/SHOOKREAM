@@ -38,7 +38,7 @@
 </script>
 
 </head>
-<body>
+<body style="text-align: center; margin: 15px;">
 <c:set var="member_id" value="${param.member_id}"/>
 
 <b><font size="4" color="gray">ID 중복 확인</font></b>
